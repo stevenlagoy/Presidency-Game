@@ -22,9 +22,9 @@ democrats = [
   "Democratic National Comittee"
   [-100,-100],
   [],
-  character,
-  character,
-  character
+  None, # chairperson character
+  None, # candidate character
+  None # candidate character
   ]
   
 republicans = [
@@ -35,7 +35,7 @@ republicans = [
   "Republican National Comittee",
   [100,100],
   [],
-  character,
-  character,
-  character
+  None, # chairperson character
+  None, # candidate character
+  None # candidate character
   ]

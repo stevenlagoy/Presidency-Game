@@ -1,4 +1,6 @@
+import sys
 import tkinter as tk
+from tkinter.font import Font
 import ctypes as ct
 import random as rand
 import math as math
@@ -148,8 +150,19 @@ thus, the displayed probability and the actual probability will be different
 
 '''
 
+SAVEFILE = "saves.txt" # constant directory of save file
+
+''' would like to have a list of all the standard fonts here
+class fonts:
+  TITLE_FONT = Font(
+    family = 'Georgia',
+    size = 32,
+    weight = 'bold',
+  )
+'''
+  
 def get_curr_screen_geometry():
-  # this finds the size of current active screen even when there are multiple monitors
+  # find the size (in pixels) of current active screen even when there are multiple monitors
   # returns geometry: Tk geometry string [width]x[height]+[left]+[top]
 
   root = tk.Tk()
@@ -162,6 +175,8 @@ def get_curr_screen_geometry():
   return geometry
 
 def dark_title_bar(window):
+  # make a window have a dark windows topbar
+  # takes an instance of Tk window
   window.update()
   set_window_attribute = ct.windll.dwmapi.DwmSetWindowAttribute
   get_parent = ct.windll.user32.GetParent
@@ -169,8 +184,18 @@ def dark_title_bar(window):
   value = 2
   value = ct.c_int(value)
   set_window_attribute(hwnd, 20, ct.byref(value), 4)
+  # only works sometimes????
 
-def menu():
+def clearWindow(root):
+  # clear a Tk window
+  for frame in root.winfo_children():
+    if frame.widgetName == 'frame':
+      frame.pack_forget()
+
+def on_closing():
+  sys.exit(0)
+
+def createWindow():
   root = tk.Tk()
   root.title("Race for the Presidency")
   root.state("zoomed")
@@ -179,11 +204,41 @@ def menu():
   root.iconbitmap("icon.ico")
   root.resizable(False, False)
 
-  button = tk.Button(text="Press", command=None)
-  button.pack()
-  greeting = tk.Label(text="Hello world")
-  greeting.pack()
+  # create all the frames - this might be moved elsewhere later
+  menu = tk.Frame(root)
+  saveslist = tk.Frame(root)
+  newgame = tk.Frame(root)
+
+  titleText = tk.Label(menu, text = "Race for the Presidency", font = Font(family = 'Georgia', size = 32, weight = 'bold'))
+  titleText.pack()
+
+  newSaveButton = tk.Button(menu, text = "New Game", command = lambda: openFrame(root, newgame))
+  newSaveButton.pack()
+
+  continueButton = tk.Button(menu, text = "Continue", command = lambda: openFrame(root, saveslist))
+  continueButton.pack()
+  
+  saveslist = tk.Listbox(saveslist)
+  saveslist.insert(1, "Save 1")
+  saveslist.insert(2, "Save 2")
+  saveslist.insert(3, "Save 3")
+  saveslist.pack()
+
+  openSaveButton = tk.Button(saveslist, text = "Open Save")
+  openSaveButton.pack()
+
+  openFrame(root, menu)
+
+  root.protocol("WM_DELETE_WINDOW", on_closing) # stops the whole program when the tk window is closed
   root.mainloop()
+
+  return root
+
+def openFrame(root, frame_to_open):
+  # open the menu frame
+  # takes the active Tk window
+  clearWindow(root)
+  frame_to_open.pack()
 
 def rollDice(numDice, sides = 7):
   diceTotal = 0
@@ -192,26 +247,29 @@ def rollDice(numDice, sides = 7):
   return diceTotal
 
 def save(savename):
+  # append the current game to "saves.txt"
+  # takes the name of the save as a string
   '''need to save:
     characters
     states?
     primaries?
     event history
   '''
-  file = open("saves.txt","a")
-  file.write("SAVE" + str(savename) + "|")
-  file.write("TIME" + str(int(time.time())) + "|")
-  file.write("PLAY" + str([char.name for char in Character.instances if char.is_player is True][0]) + "|")
-  # find character with CH1
-  for character in Character.instances:
+  file = open(SAVEFILE,"a") # open save file in append mode
+  file.write("SAVE" + str(savename) + "|") # write the name of the save
+  file.write("TIME" + str(int(time.time())) + "|") # write the time when saved
+  file.write("PLAY" + str([char.name for char in Character.instances if char.is_player is True][0]) + "|") # write the name of the character
+  for character in Character.instances: # write the rest of the characters
     file.write(character.__repr__() + "|")
-  file.write("\n")
-  file.close()
+  file.write("\n") # end line
+  file.close() # close the file
+  # this should eventually be encrypted and scrambled
+  # could make a unique file extension to keep the save files in - requires OS instuctions for opening file
 
 def opensaves():
-  file = open("saves.txt","r")
+  file = open(SAVEFILE,"r") # open save file in read mode
   recent_saves = [saveline for saveline in file.read().split("\n") if saveline != ""] # sort out blank lines
-  file.close()
+  file.close() # close file: all relevant save info is now in recent_saves list
   printsaves(recent_saves, 3)
   slot = input("\nInput desired save slot or press enter to create a new save:")
   if slot == "":
@@ -232,14 +290,14 @@ def opensaves():
     return False
   
 def printsaves(recent_saves, number):
+  # print the info about a given set of saves
+  # takes a list of properly-formatted save strings, and the number of saves to read
   i = 1
-  for save in recent_saves[:-(number+1):-1]:
-    print(str(i) + "- " + save.split("|")[0][4:])
-    print("   Last saved: " + time.ctime(int(save.split("|")[1][4:])))
-    # find player in the savestring and print name
-    player = [player for player in save.split("|") if player.startswith("CH1")][0]
-    playername = player[player.index("NA")+2:player.split("NA")[1].index("-")+len(player.split("NA")[0])+2] # this is really bad but it works
-    # find the location of the NA tag and print everything between it and the next "-"
+  for save in recent_saves[:-(number+1):-1]: # iterate backwards through the list of saves between [0] and provided index + 1
+    print(str(i) + "- " + save.split("|")[0][4:]) # print the number of the save and its name (which begins with the fourth character in the string) should change this later
+    print("   Last saved: " + time.ctime(int(save.split("|")[1][4:]))) # print the date that the save was made
+    player = [player for player in save.split("|") if player.startswith("CH1")][0] # find player in the savestring and print name
+    playername = player[player.index("NA")+2:player.split("NA")[1].index("-")+len(player.split("NA")[0])+2] # find the location of the NA tag and print everything between it and the next "-"
     print("   Player Name: " + playername)
     i += 1
 
@@ -249,19 +307,20 @@ def reset():
     
 def main():
 
-  menu()
-  
+  window = createWindow()
+
   turns = 0
   saveSlot = 0
   traits = []
   experiences = []
   
   reset()
+  # open saves
   savename = opensaves()
-  if savename:
-    Character(is_player = True)
-    player = Character.instances[0]
-    for i in range(50):
+  if savename: # opened successfully
+    Character(is_player = True) # make a new player character
+    player = Character.instances[0] # create a pointer to the player character instance
+    for i in range(50): # make n more characters
       Character()
   
   player = Character.instances[0]
