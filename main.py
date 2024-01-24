@@ -1,4 +1,5 @@
 import sys
+import os
 import tkinter as tk
 from tkinter.font import Font
 import ctypes as ct
@@ -150,7 +151,7 @@ thus, the displayed probability and the actual probability will be different
 
 '''
 
-SAVEFILE = "saves.txt" # constant directory of save file
+SAVEDIR = "C:\\Users\\LaGoySM\\Downloads\\Documents\\Race for the Presidency\\savegames\\" # constant directory of saves folder
 
 ''' would like to have a list of all the standard fonts here
 class fonts:
@@ -205,29 +206,61 @@ def createWindow():
   root.resizable(False, False)
 
   # create all the frames - this might be moved elsewhere later
-  menu = tk.Frame(root)
-  saveslist = tk.Frame(root)
-  newgame = tk.Frame(root)
 
-  titleText = tk.Label(menu, text = "Race for the Presidency", font = Font(family = 'Georgia', size = 32, weight = 'bold'))
-  titleText.pack()
+  # menu frame
+  menu_frame = tk.Frame(root)
 
-  newSaveButton = tk.Button(menu, text = "New Game", command = lambda: openFrame(root, newgame))
-  newSaveButton.pack()
+  title_text = tk.Label(menu_frame, text = "Race for the Presidency", font = Font(family = 'Georgia', size = 32, weight = 'bold'))
+  title_text.pack()
 
-  continueButton = tk.Button(menu, text = "Continue", command = lambda: openFrame(root, saveslist))
-  continueButton.pack()
+  new_save_button = tk.Button(menu_frame, text = "New Game", command = lambda: openFrame(root, new_game_frame))
+  new_save_button.pack()
+
+  continue_button = tk.Button(menu_frame, text = "Continue", command = lambda: openFrame(root, open_save_frame))
+  continue_button.pack()
+
+  tutorial_button = tk.Button(menu_frame, text = "Tutorial")
+  tutorial_button.pack()
+
+  about_button = tk.Button(menu_frame, text = "About")
+  about_button.pack()
+
+  close_game_button = tk.Button(menu_frame, text = "Close Game", command = lambda: root.destroy())
+  close_game_button.pack()
   
-  saveslist = tk.Listbox(saveslist)
-  saveslist.insert(1, "Save 1")
-  saveslist.insert(2, "Save 2")
-  saveslist.insert(3, "Save 3")
-  saveslist.pack()
+  # open save frame
+  open_save_frame = tk.Frame(root)
 
-  openSaveButton = tk.Button(saveslist, text = "Open Save")
-  openSaveButton.pack()
+  save_info_label = tk.Label(open_save_frame, text = "Save Name:\nSave Date:", width = 25, height = 2, anchor = "w", justify = "left")
+  save_info_label.pack()
 
-  openFrame(root, menu)
+  saves_list = tk.Listbox(open_save_frame)
+  count = 1
+  for file in os.listdir(SAVEDIR):
+    saves_list.insert(count, str(file).split(".")[0]) # insert the name of the files (minus the extension) at the next open index
+  
+  # this has to be a lambda i think... there might be a better way
+  # get some info about the file and set the label's text accordingly - i hate to call the function twice but i'm not sure how to use the returned values otherwise
+  saves_list.bind('<<ListboxSelect>>', lambda x: save_info_label.config(text =
+                                                                        "Save Name: " + get_save_info(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt")[0] +
+                                                                        "\nSave Date: " + get_save_info(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt")[1]
+                                                                        ))
+  saves_list.pack()
+
+  open_save_button = tk.Button(open_save_frame, text = "Open Save", command = lambda: open_save(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt"))
+  open_save_button.pack()
+
+  saves_list_back_button = tk.Button(open_save_frame, text = "Back", command = lambda: openFrame(root, menu_frame))
+  saves_list_back_button.pack()
+
+  # new game frame
+  new_game_frame = tk.Frame(root)
+
+  new_game_back_button = tk.Button(new_game_frame, text = "Back", command = lambda: openFrame(root, menu_frame))
+  new_game_back_button.pack()
+
+  # set up window
+  openFrame(root, menu_frame)
 
   root.protocol("WM_DELETE_WINDOW", on_closing) # stops the whole program when the tk window is closed
   root.mainloop()
@@ -240,11 +273,18 @@ def openFrame(root, frame_to_open):
   clearWindow(root)
   frame_to_open.pack()
 
-def rollDice(numDice, sides = 7):
+def rollDice(numDice, sides = 6):
   diceTotal = 0
   for i in range(numDice):
     diceTotal += rand.randint(1,sides)
   return diceTotal
+
+def get_save_info(path):
+  # returns a small amount of information about a save game
+  # [name, date]
+
+  file = open(path, "r") # open save file in read mode
+  return [file.readline()[:-1], file.readline()[:-1]]
 
 def save(savename):
   # append the current game to "saves.txt"
@@ -254,52 +294,38 @@ def save(savename):
     states?
     primaries?
     event history
+  
+  saves should be titled the same as the player character's name, plus the date-time it was saved at
+  the save screen should have a checkbox to remove old saves, checking it will remove saves other than the three backups
+  the name and date of the save is also included within the file itself, incase the filename gets changed somehow
   '''
-  file = open(SAVEFILE,"a") # open save file in append mode
-  file.write("SAVE" + str(savename) + "|") # write the name of the save
-  file.write("TIME" + str(int(time.time())) + "|") # write the time when saved
-  file.write("PLAY" + str([char.name for char in Character.instances if char.is_player is True][0]) + "|") # write the name of the character
+
+  file = open(SAVEDIR + savename, "a") # create save file in append mode
+  file.write("SAVE" + str(savename) + "\n") # write the name of the save
+  file.write("TIME" + str(int(time.time())) + "\n") # write the time when saved
+  file.write("PLAY" + str([char.name for char in Character.instances if char.is_player is True][0]) + "\n") # write the name of the character
   for character in Character.instances: # write the rest of the characters
-    file.write(character.__repr__() + "|")
+    file.write(character.__repr__() + "\n")
   file.write("\n") # end line
   file.close() # close the file
   # this should eventually be encrypted and scrambled
   # could make a unique file extension to keep the save files in - requires OS instuctions for opening file
 
-def opensaves():
-  file = open(SAVEFILE,"r") # open save file in read mode
-  recent_saves = [saveline for saveline in file.read().split("\n") if saveline != ""] # sort out blank lines
-  file.close() # close file: all relevant save info is now in recent_saves list
-  printsaves(recent_saves, 3)
-  slot = input("\nInput desired save slot or press enter to create a new save:")
-  if slot == "":
-    savename = ""
-    while savename == "":
-      savename = input("Input a name for your save:")
-      if "|" in savename:
-        print("Your savename may not contain |")
-        savename = ""
-    return savename # create a new save
-  else:
-    try:
-      savestring = recent_saves[int(slot)-1]
-      [Character(string = char) for char in savestring.split("|") if char.startswith("CH")]
-    except TypeError:
-      print("You must input a number to select a save slot")
-      opensaves()
-    return False
-  
-def printsaves(recent_saves, number):
-  # print the info about a given set of saves
-  # takes a list of properly-formatted save strings, and the number of saves to read
-  i = 1
-  for save in recent_saves[:-(number+1):-1]: # iterate backwards through the list of saves between [0] and provided index + 1
-    print(str(i) + "- " + save.split("|")[0][4:]) # print the number of the save and its name (which begins with the fourth character in the string) should change this later
-    print("   Last saved: " + time.ctime(int(save.split("|")[1][4:]))) # print the date that the save was made
-    player = [player for player in save.split("|") if player.startswith("CH1")][0] # find player in the savestring and print name
-    playername = player[player.index("NA")+2:player.split("NA")[1].index("-")+len(player.split("NA")[0])+2] # find the location of the NA tag and print everything between it and the next "-"
-    print("   Player Name: " + playername)
-    i += 1
+def open_save(path):
+  # opens a single save
+  # takes the path to a single file
+  save_data = ""
+  try:
+    file = open(path, "r") # open file in read mode
+    for line in file.readlines():
+      save_data += line if line != "\n" else "" # sort out blank lines
+    file.close() # close the file
+  except FileNotFoundError:
+    pass
+
+  print(save_data)
+
+  # this is where the complicated part goes where it creates all the characters and states and everything based on what's in the file
 
 def reset():
   Character.instances = []
@@ -308,25 +334,8 @@ def reset():
 def main():
 
   window = createWindow()
-
-  turns = 0
-  saveSlot = 0
-  traits = []
-  experiences = []
   
   reset()
-  # open saves
-  savename = opensaves()
-  if savename: # opened successfully
-    Character(is_player = True) # make a new player character
-    player = Character.instances[0] # create a pointer to the player character instance
-    for i in range(50): # make n more characters
-      Character()
-  
-  player = Character.instances[0]
-  print(player.name)
-  
-  save(savename)
 
   print("Finished")
 
