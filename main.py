@@ -151,7 +151,7 @@ thus, the displayed probability and the actual probability will be different
 
 '''
 
-SAVEDIR = "C:\\Users\\LaGoySM\\Downloads\\Documents\\Race for the Presidency\\savegames\\" # constant directory of saves folder
+SAVEDIR = "C:\\Users\\LaGoySM\\Downloads\\Documents\\Presidency Game\\savegames\\" # constant directory of saves folder
 
 ''' would like to have a list of all the standard fonts here
 class fonts:
