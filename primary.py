@@ -17,7 +17,6 @@
       during caucuses:
 '''
 
-
 class Primary:
   instances = []
   def __init__(self, name, ptype, delegates, fee, bonus, cards, string = None):
@@ -54,5 +53,12 @@ primaries = [
   ["New England","P",65,25,30,1]
   ]
 
+Primary.instances = []
 for primary_ in primaries:
   Primary(primary_[0],primary_[1],primary_[2],primary_[3],primary_[4],primary_[5])
+
+'''
+there are primaries or caucuses in all 50 states, DC, and 5 territories for the republicans, and the same plus "Democrats Abroad" for the democrats
+samoa, dems abroad, northern marianas, puerto rico, DC, guam, virgin islands
+Virgin islands, DC, guam, Northern marianas, samoa, puerto rico
+'''
