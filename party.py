@@ -26,7 +26,7 @@ democrats = [
   None, # candidate character
   None # candidate character
   ]
-  
+
 republicans = [
   "Republican Party",
   "Republicans",

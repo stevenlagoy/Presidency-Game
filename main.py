@@ -1,6 +1,7 @@
 import sys
 import os
 import tkinter as tk
+from PIL import ImageTk, Image
 from tkinter.font import Font
 import ctypes as ct
 import random as rand
@@ -8,8 +9,9 @@ import math as math
 import json as json
 import time as time
 from character import Character
-from state import State
+from state import State # generates all states
 from primary import Primary
+from bloc import Bloc, blocs # generates all blocs
 
 '''how the game works:
   the player will be introduced to other prospective candidates based on their alignments.
@@ -242,9 +244,9 @@ def createWindow():
   # this has to be a lambda i think... there might be a better way
   # get some info about the file and set the label's text accordingly - i hate to call the function twice but i'm not sure how to use the returned values otherwise
   saves_list.bind('<<ListboxSelect>>', lambda x: save_info_label.config(text =
-                                                                        "Save Name: " + get_save_info(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt")[0] +
-                                                                        "\nSave Date: " + get_save_info(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt")[1]
-                                                                        ))
+    "Save Name: " + get_save_info(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt")[0] +
+    "\nSave Date: " + get_save_info(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt")[1]
+    ))
   saves_list.pack()
 
   open_save_button = tk.Button(open_save_frame, text = "Open Save", command = lambda: open_save(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt"))
@@ -258,6 +260,32 @@ def createWindow():
 
   new_game_back_button = tk.Button(new_game_frame, text = "Back", command = lambda: openFrame(root, menu_frame))
   new_game_back_button.pack()
+
+  start_game_button = tk.Button(new_game_frame, text = "Announce Candidacy", command = lambda: openFrame(root, character_view_frame))
+  start_game_button.pack()
+
+  # character view frame
+  character_view_frame = tk.Frame(root)
+
+  image1 = Image.open("empty_portrait.png")
+  test = ImageTk.PhotoImage(image1)
+  portrait_label = tk.Label(character_view_frame, image = test)
+  portrait_label.image = test
+  portrait_label.place(x=100, y=100)
+  portrait_label.pack()
+
+
+  settings_button = tk.Button(character_view_frame, text = "Settings")
+  settings_button.pack()
+
+  # party view frame
+  party_view_frame = tk.Frame(root)
+
+  # geography view frame
+  geography_view_frame = tk.Frame(root)
+
+  # blocs view frame
+  blocs_view_frame = tk.Frame(root)
 
   # set up window
   openFrame(root, menu_frame)
@@ -329,9 +357,10 @@ def open_save(path):
 
 def reset():
   Character.instances = []
-  Primary.instances = []
-    
+
 def main():
+
+  reset()
 
   window = createWindow()
   
