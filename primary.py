@@ -3,18 +3,6 @@
   - open / closed
   - primary / caucus
 
-  how primaries work:
-      there are several rounds
-      each one, people make groups based on which candidate they support (or undecided)
-      people argue in favor of their candidate
-      after the rounds, the number of people supporting a candidate determines the state delegates won there
-    
-    actions that characters can take-
-      in between caususes:
-        donate and accept funds
-        align with another character
-        promote/attack a character
-      during caucuses:
 '''
 
 class Primary:

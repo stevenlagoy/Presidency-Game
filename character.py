@@ -295,55 +295,6 @@ class Character:
   def __eq__(self, other): # returns true if the comparators are both Character instances and the name, alignments, and skills are the same
     return False if not isinstance(other, Character) else self.name == other.name and self.alignments == other.alignments and self.skills == other.skills
 
-'''skills:
-  each experience will have skills that they benefit:
-  several levels for each experience level, locked by education
-  executive:
-    small business owner
-    CEO
-    
-    mayor
-    governor
-    
-    military serviceman
-    military general
-    
-    vice president
-    past president
-    
-  legislative:
-    business decision board
-    county board
-    
-    state senator
-    congressman
-    
-  judicial:
-    police officer
-    police chief
-    
-    lawyer
-    prosecutor
-    
-    local judge
-    federal judge
-    
-    party leader
-    speaker of the house
-    
-  player generation will be a series of selection or minigames
-  players will have a set amount of points to distribute into each category
-  name costs no points
-  age costs points following -(((x-55)^2)/20)+100
-  origin costs points according to state population
-  education costs points according to (12(x-1))
-  alignment does not cost???
-  experience is tbd
-  skills are generated - no point cost
-  aptitude is based on skills - no point cost
-  conviction is generated - no point cost
-'''
-
 namesM = [
   # the 50 most common male first names in the US
   "James",
