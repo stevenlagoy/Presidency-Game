@@ -108,6 +108,11 @@ blocs = {
     ]
 }
 
+Bloc.instances = []
+for group in blocs:
+    for trait in blocs.get(group):
+      Bloc(trait[0], trait[1])
+
 '''
 voting blocs
 
