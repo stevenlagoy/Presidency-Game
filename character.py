@@ -66,7 +66,7 @@ class Character:
     self.setNameInput()
     
     # check if player wants to use a historical character
-    for character in historicalCharacters:
+    for character in historical_characters:
       if self.name == character[0]:
         if input("This name is associated with a historical character. Would you like to continue with the predetermined stats? (Y/N):").upper() == "Y":
           return None # this is where the rest of the profile will be generated for the player
