@@ -26,71 +26,9 @@ class State:
             f"universities={repr(self.universities)})"
         )
 
-
-# how to dynamically change populations... could come up with a function of some kind and have users select a year
-# or just set them to a fixed value - 2020 Census
-
-'''
-states = [
-  "ST-NAAlabama-ABAL-PO5024279",
-  "ST-NAAlaska-ABAK-PO733391",
-  "ST-NAArizona-ABAZ-PO7151502",
-  "ST-NAArkansas-ABAK-PO3011524",
-  "ST-NAAmerican Samoa-ABAS-PO46189",
-  "ST-NACalifornia-ABCA-PO39538223",
-  "ST-NAColorado-ABCO-PO5773714",
-  "ST-NAConnecticut-ABCT-PO3605944",
-  "ST-NADelaware-ABDE-PO989948",
-  "ST-NADistrict Of Columbia-ABDC-PO689545",
-  "ST-NAFlorida-ABFL-PO21538187",
-  "ST-NAGeorgia-ABGA-PO10711908",
-  "ST-NAGuam-ABGU-PO169231",
-  "ST-NAHawaii-ABHI-PO1455271", 
-  "ST-NAIdaho-ABID-PO1839106",
-  "ST-NAIllinois-ABIL-PO12812508",
-  "ST-NAIndiana-ABIN-PO6785528",
-  "ST-NAIowa-ABIA-PO3190369",
-  "ST-NAKansas-ABKS-PO2937880",
-  "ST-NAKentucky-ABKY-PO4505836",
-  "ST-NALouisiana-ABLA-PO4657757",
-  "ST-NAMaine-ABME-PO1362359",
-  "ST-NAMaryland-ABMD-PO6177331",
-  "ST-NAMassachusetts-ABMA-PO7029917",
-  "ST-NAMichigan-ABMI-PO10077331",
-  "ST-NAMinnesota-ABMN-PO5706494",
-  "ST-NAMississippi-ABMS-PO2961279",
-  "ST-NAMissouri-ABMO-PO6154913",
-  "ST-NAMontana-ABMT-PO1084225",
-  "ST-NANebraska-ABNE-PO1961504",
-  "ST-NANevada-ABNV-PO3104614",
-  "ST-NANew Hampshire-ABNH-PO1377529",
-  "ST-NANew Jersey-ABNJ-PO9288994",
-  "ST-NANew Mexico-ABNM-PO2117522",
-  "ST-NANew York-ABNY-PO20201249",
-  "ST-NANorth Carolina-ABNC-PO10439388",
-  "ST-NANorth Dakota-ABND-PO779094",
-  "ST-NANorthern Mariana Islands-ABMP-PO49587",
-  "ST-NAOhio-ABOH-PO11799448", 
-  "ST-NAOklahoma-ABOK-PO3959353",
-  "ST-NAOregon-ABOR-PO4237256",
-  "ST-NAPennsylvania-ABPA-PO13002700",
-  "ST-NAPuerto Rico-ABPR-PO3271564",
-  "ST-NARhode Island-ABRI-PO1097379",
-  "ST-NASouth Carolina-ABSC-PO5118425",
-  "ST-NASouth Dakota-ABSD-PO886667",
-  "ST-NATennessee-ABTN-PO6910840",
-  "ST-NATexas-ABTX-PO29145505",
-  "ST-NAUtah-ABUT-PO3271616",
-  "ST-NAVermont-ABVT-PO642077",
-  "ST-NAVirginia-ABVA-PO8631393",
-  "ST-NAVirgin Islands-ABVI-PO87146",
-  "ST-NAWashington-ABWA-PO7705281",
-  "ST-NAWest Virginia-ABWV-PO1793716",
-  "ST-NAWisconsin-ABWI-PO5893718",
-  "ST-NAWyoming-ABWY-PO576851"
-]
-'''
 states = [ # note: this list was generated with the help of AI. There may be innaccuracies.
+  # populations are based on the 2020 United States Census
+  # selected universities for each state generally are those with an enrollment of 20,000 or higher
   {
     "name" : "Alabama",
     "population" : 5024279,
@@ -107,21 +45,21 @@ states = [ # note: this list was generated with the help of AI. There may be inn
   },
   {
     "name": "Arizona",
-    "population": 7378494,
+    "population": 7151502,
     "largest_cities": ["Phoenix", "Tucson", "Mesa", "Chandler", "Glendale"],
     "abbreviation": "AZ",
     "universities": ["University of Arizona", "Arizona State University", "University of Phoenix"]
   },
   {
     "name": "American Samoa",
-    "population": 55197,
+    "population": 46189,
     "largest_cities": ["Pago Pago", "Tafuna", "Nu'uuli", "Ili'ili", "Aua"],
     "abbreviation": "AS",
     "universities": ["American Samoa Community College"]
   },
   {
     "name": "Arkansas",
-    "population": 3038999,
+    "population": 3011524,
     "largest_cities": ["Little Rock", "Fort Smith", "Fayetteville", "Springdale", "Jonesboro"],
     "abbreviation": "AR",
     "universities": ["University of Arkansas", "Arkansas State University"]
@@ -142,14 +80,14 @@ states = [ # note: this list was generated with the help of AI. There may be inn
   },
   {
     "name": "Connecticut",
-    "population": 3565287,
+    "population": 3605944,
     "largest_cities": ["Hartford", "Bridgeport", "New Haven", "Stamford", "Waterbury"],
     "abbreviation": "CT",
     "universities": ["Yale University", "University of Connecticut", "Quinnipiac University"]
   },
   {
     "name": "Delaware",
-    "population": 982895,
+    "population": 989948,
     "largest_cities": ["Dover", "Wilmington", "Newark", "Middletown", "Smyrna"],
     "abbreviation": "DE",
     "universities": ["University of Delaware", "Delaware State University"]
@@ -163,21 +101,21 @@ states = [ # note: this list was generated with the help of AI. There may be inn
   },
   {
     "name": "Florida",
-    "population": 21477737,
+    "population": 21538187,
     "largest_cities": ["Tallahassee", "Jacksonville", "Miami", "Tampa", "Orlando", "St. Petersburg"],
     "abbreviation": "FL",
     "universities": ["University of Florida", "University of Central Florida", "Florida State University", "University of Miami", "Florida International University"]
   },
   {
     "name": "Georgia",
-    "population": 10736059,
+    "population": 10711908,
     "largest_cities": ["Atlanta", "Augusta", "Columbus", "Macon", "Savannah"],
     "abbreviation": "GA",
     "universities": ["University of Georgia", "Georgia Institute of Technology", "Emory University"]
   },
   {
     "name": "Guam",
-    "population": 168775,
+    "population": 169231,
     "largest_cities": ["Hagåtña", "Dededo", "Yigo", "Tamuning", "Mangilao", "Barrigada"],
     "abbreviation": "GU",
     "universities": ["University of Guam"]
@@ -191,49 +129,49 @@ states = [ # note: this list was generated with the help of AI. There may be inn
   },
   {
     "name": "Idaho",
-    "population": 1826156,
+    "population": 1839106,
     "largest_cities": ["Boise", "Meridian", "Nampa", "Idaho Falls", "Pocatello"],
     "abbreviation": "ID",
     "universities": ["Boise State University", "University of Idaho", "Idaho State University"]
   },
   {
     "name": "Illinois",
-    "population": 12659682,
+    "population": 12812508,
     "largest_cities": ["Springfield", "Chicago", "Aurora", "Rockford", "Joliet", "Naperville"],
     "abbreviation": "IL",
     "universities": ["University of Illinois Urbana-Champaign", "Northwestern University", "University of Chicago"]
   },
   {
     "name": "Indiana",
-    "population": 6732219,
+    "population": 6785528,
     "largest_cities": ["Indianapolis", "Fort Wayne", "Evansville", "South Bend", "Carmel"],
     "abbreviation": "IN",
     "universities": ["Indiana University Bloomington", "Purdue University", "University of Notre Dame"]
   },
   {
     "name": "Iowa",
-    "population": 3163561,
+    "population": 3190369,
     "largest_cities": ["Des Moines", "Cedar Rapids", "Davenport", "Sioux City", "Iowa City"],
     "abbreviation": "IA",
     "universities": ["University of Iowa", "Iowa State University", "University of Northern Iowa", "Ashford University", "Kaplan University"]
   },
   {
     "name": "Kansas",
-    "population": 2913314,
+    "population": 2937880,
     "largest_cities": ["Topeka", "Wichita", "Overland Park", "Kansas City", "Olathe"],
     "abbreviation": "KS",
     "universities": ["University of Kansas", "Kansas State University", "Wichita State University"]
   },
   {
     "name": "Kentucky",
-    "population": 4499692,
+    "population": 4505836,
     "largest_cities": ["Frankfort", "Louisville", "Lexington", "Bowling Green", "Owensboro", "Covington"],
     "abbreviation": "KY",
     "universities": ["University of Kentucky", "University of Louisville", "Western Kentucky University"]
   },
   {
     "name": "Louisiana",
-    "population": 4645184,
+    "population": 4657757,
     "largest_cities": ["Baton Rouge", "New Orleans", "Shreveport", "Lafayette", "Lake Charles"],
     "abbreviation": "LA",
     "universities": ["Louisiana State University", "Tulane University", "University of Louisiana at Lafayette"]
@@ -247,28 +185,28 @@ states = [ # note: this list was generated with the help of AI. There may be inn
   },
   {
     "name": "Maryland",
-    "population": 6045680,
+    "population": 6177224,
     "largest_cities": ["Annapolis", "Baltimore", "Columbia", "Germantown", "Silver Spring", "Frederick"],
     "abbreviation": "MD",
     "universities": ["University of Maryland, College Park", "Johns Hopkins University", "University of Maryland, Baltimore County"]
   },
   {
     "name": "Massachusetts",
-    "population": 6892503,
+    "population": 7029917,
     "largest_cities": ["Boston", "Worcester", "Springfield", "Cambridge", "Lowell"],
     "abbreviation": "MA",
     "universities": ["Harvard University", "Massachusetts Institute of Technology (MIT)", "Boston University"]
   },
   {
     "name": "Michigan",
-    "population": 10045029,
+    "population": 10077331,
     "largest_cities": ["Lansing", "Detroit", "Grand Rapids", "Warren", "Sterling Heights", "Ann Arbor"],
     "abbreviation": "MI",
     "universities": ["University of Michigan, Ann Arbor", "Michigan State University", "Wayne State University"]
   },
   {
     "name": "Minnesota",
-    "population": 5709752,
+    "population": 5706494,
     "largest_cities": ["Saint Paul", "Minneapolis", "Rochester", "Duluth", "Bloomington"],
     "abbreviation": "MN",
     "universities": ["University of Minnesota, Twin Cities", "Minnesota State University, Mankato", "St. Olaf College"]
@@ -282,14 +220,14 @@ states = [ # note: this list was generated with the help of AI. There may be inn
   },
   {
     "name": "Missouri",
-    "population": 6151548,
+    "population": 6154913,
     "largest_cities": ["Jefferson City", "Kansas City", "St. Louis", "Springfield", "Columbia", "Independence"],
     "abbreviation": "MO",
     "universities": ["University of Missouri, Columbia", "Washington University in St. Louis", "Missouri State University"]
   },
   {
     "name": "Montana",
-    "population": 1086759,
+    "population": 1084225,
     "largest_cities": ["Helena", "Billings", "Missoula", "Great Falls", "Bozeman", "Butte"],
     "abbreviation": "MT",
     "universities": ["University of Montana", "Montana State University", "Montana Tech"]
@@ -303,14 +241,14 @@ states = [ # note: this list was generated with the help of AI. There may be inn
   },
   {
     "name": "Nevada",
-    "population": 3108462,
+    "population": 3104614,
     "largest_cities": ["Carson City", "Las Vegas", "Henderson", "Reno", "North Las Vegas", "Sparks"],
     "abbreviation": "NV",
     "universities": ["University of Nevada, Las Vegas (UNLV)", "University of Nevada, Reno", "Nevada State College"]
   },
   {
     "name": "New Hampshire",
-    "population": 1371246,
+    "population": 1377529,
     "largest_cities": ["Concord", "Manchester", "Nashua", "Derry", "Dover"],
     "abbreviation": "NH",
     "universities": ["Dartmouth College", "University of New Hampshire", "Southern New Hampshire University"]
@@ -331,28 +269,28 @@ states = [ # note: this list was generated with the help of AI. There may be inn
   },
   {
     "name": "New York",
-    "population": 19453561,
+    "population": 20201249,
     "largest_cities": ["Albany", "New York City", "Buffalo", "Rochester", "Yonkers", "Syracuse"],
     "abbreviation": "NY",
     "universities": ["Columbia University", "New York University (NYU)", "Cornell University"]
   },
   {
     "name": "North Carolina",
-    "population": 10611862,
+    "population": 10439388,
     "largest_cities": ["Raleigh", "Charlotte", "Greensboro", "Durham", "Winston-Salem"],
     "abbreviation": "NC",
     "universities": ["University of North Carolina at Chapel Hill", "Duke University", "North Carolina State University"]
   },
   {
     "name": "North Dakota",
-    "population": 761723,
+    "population": 779094,
     "largest_cities": ["Bismarck", "Fargo", "Grand Forks", "Minot", "West Fargo"],
     "abbreviation": "ND",
     "universities": ["University of North Dakota", "North Dakota State University", "Minot State University"]
   },
   {
     "name": "Northern Mariana Islands",
-    "population": 56882,
+    "population": 49587,
     "largest_cities": ["Saipan", "Tinian", "Rota"],
     "abbreviation": "MP",
     "universities": ["Northern Marianas College"]
@@ -373,21 +311,21 @@ states = [ # note: this list was generated with the help of AI. There may be inn
   },
   {
     "name": "Oregon",
-    "population": 4217737,
+    "population": 4237256,
     "largest_cities": ["Salem", "Portland", "Eugene", "Gresham", "Hillsboro"],
     "abbreviation": "OR",
     "universities": ["University of Oregon", "Oregon State University", "Portland State University"]
   },
   {
     "name": "Pennsylvania",
-    "population": 12820878,
+    "population": 13002700,
     "largest_cities": ["Harrisburg", "Philadelphia", "Pittsburgh", "Allentown", "Erie", "Reading"],
     "abbreviation": "PA",
     "universities": ["University of Pennsylvania", "Penn State University", "Carnegie Mellon University"]
   },
   {
     "name": "Puerto Rico",
-    "population": 3193694,
+    "population": 3285874,
     "largest_cities": ["San Juan", "Bayamón", "Carolina", "Ponce", "Caguas"],
     "abbreviation": "PR",
     "universities": ["University of Puerto Rico", "Sistema Universitario Ana G. Mendez", "Inter American University of Puerto Rico"]
@@ -401,14 +339,14 @@ states = [ # note: this list was generated with the help of AI. There may be inn
   },
   {
     "name": "South Carolina",
-    "population": 5148714,
+    "population": 5118425,
     "largest_cities": ["Columbia", "Charleston", "North Charleston", "Mount Pleasant", "Rock Hill"],
     "abbreviation": "SC",
     "universities": ["University of South Carolina", "Clemson University", "College of Charleston"]
   },
   {
     "name": "South Dakota",
-    "population": 884659,
+    "population": 886667,
     "largest_cities": ["Pierre", "Sioux Falls", "Rapid City", "Aberdeen", "Brookings", "Watertown"],
     "abbreviation": "SD",
     "universities": ["University of South Dakota", "South Dakota State University", "Dakota State University"]
@@ -443,14 +381,14 @@ states = [ # note: this list was generated with the help of AI. There may be inn
   },
   {
     "name": "Virginia",
-    "population": 8626207,
+    "population": 8631393,
     "largest_cities": ["Richmond", "Virginia Beach", "Norfolk", "Chesapeake", "Arlington"],
     "abbreviation": "VA",
     "universities": ["University of Virginia", "Virginia Tech", "George Mason University", "Liberty University"]
   },
   {
     "name": "U.S. Virgin Islands",
-    "population": 106977,
+    "population": 106290,
     "largest_cities": ["Charlotte Amalie", "Anna's Retreat", "St. Croix", "Frederiksted", "Christiansted"],
     "abbreviation": "VI",
     "universities": ["University of the Virgin Islands"]
@@ -464,14 +402,14 @@ states = [ # note: this list was generated with the help of AI. There may be inn
   },
   {
     "name": "West Virginia",
-    "population": 1778070,
+    "population": 1793716,
     "largest_cities": ["Charleston", "Huntington", "Parkersburg", "Morgantown", "Wheeling"],
     "abbreviation": "WV",
     "universities": ["West Virginia University", "Marshall University", "West Liberty University"]
   },
   {
     "name": "Wisconsin",
-    "population": 5851754,
+    "population": 5893718,
     "largest_cities": ["Madison", "Milwaukee", "Green Bay", "Kenosha", "Racine"],
     "abbreviation": "WI",
     "universities": ["University of Wisconsin-Madison", "Marquette University", "University of Wisconsin-Milwaukee"]
