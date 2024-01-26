@@ -426,6 +426,3 @@ states = [ # note: this list was generated with the help of AI. There may be inn
 State.instances = []
 for state in states:
   State(state.get("name"), state.get("population"), state.get("largest_cities"), state.get("abbreviation"), state.get("universities"))
-
-print([state.__repr__ for state in State.instances])
-print(len(State.instances))

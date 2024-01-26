@@ -17,15 +17,6 @@ from bloc import Bloc, blocs # generates all blocs
 
 SAVEDIR = "C:\\Users\\LaGoySM\\Downloads\\Documents\\Presidency Game\\savegames\\" # constant directory of saves folder
 
-''' would like to have a list of all the standard fonts here
-class fonts:
-  TITLE_FONT = Font(
-    family = 'Georgia',
-    size = 32,
-    weight = 'bold',
-  )
-'''
-  
 def get_curr_screen_geometry():
   # find the size (in pixels) of current active screen even when there are multiple monitors
   # returns geometry: Tk geometry string [width]x[height]+[left]+[top]
@@ -55,33 +46,38 @@ def createWindow():
   root = tk.Tk()
   root.title("Race for the Presidency")
   root.state("zoomed")
-  root.configure(background="#101010")
+  root.configure(background="#808080")
   dark_title_bar(root)
   root.iconbitmap("gfx\\icon.ico")
   root.resizable(False, False)
 
+  # fonts
+  buttonfont = Font(family = "Yu Gothic Semibold", size = 16)
+
   # create all the frames - this might be moved elsewhere later
 
   # menu frame
-  menu_frame = tk.Frame(root)
+  menu_frame = tk.Frame(root, bg = "#808080")
 
-  title_text = tk.Label(menu_frame, text = "Race for the Presidency", font = Font(family = 'Georgia', size = 32, weight = 'bold'))
-  title_text.pack()
+  titlecard = ImageTk.PhotoImage(Image.open("gfx/title_card.png"))
+  title_label = tk.Label(menu_frame, image = titlecard)
+  title_label.image = titlecard
+  title_label.pack(pady = 10)
 
-  new_save_button = tk.Button(menu_frame, text = "New Game", command = lambda: openFrame(root, new_game_frame))
-  new_save_button.pack()
+  new_save_button = tk.Button(menu_frame, font = buttonfont, text = "New Game", command = lambda: openFrame(root, new_game_frame))
+  new_save_button.pack(padx = 10, pady = 10)
 
-  continue_button = tk.Button(menu_frame, text = "Continue", command = lambda: openFrame(root, open_save_frame))
-  continue_button.pack()
+  continue_button = tk.Button(menu_frame, font = buttonfont, text = "Continue", command = lambda: openFrame(root, open_save_frame))
+  continue_button.pack(padx = 10, pady = 10)
 
-  tutorial_button = tk.Button(menu_frame, text = "Tutorial")
-  tutorial_button.pack()
+  tutorial_button = tk.Button(menu_frame, font = buttonfont, text = "Tutorial")
+  tutorial_button.pack(padx = 10, pady = 10)
 
-  about_button = tk.Button(menu_frame, text = "About")
-  about_button.pack()
+  about_button = tk.Button(menu_frame, font = buttonfont, text = "About")
+  about_button.pack(padx = 10, pady = 10)
 
-  close_game_button = tk.Button(menu_frame, text = "Close Game", command = lambda: root.destroy())
-  close_game_button.pack()
+  close_game_button = tk.Button(menu_frame, font = buttonfont, text = "Close Game", command = lambda: root.destroy())
+  close_game_button.pack(padx = 10, pady = 10)
   
   # open save frame
   open_save_frame = tk.Frame(root)
@@ -144,9 +140,8 @@ def createWindow():
   character_view_frame.bind("<<ShowFrame>>", lambda x : view_switcher_frame.pack(side = "bottom", fill = "x"))
 
   image1 = Image.open("gfx\\empty_portrait.png")
-  test = ImageTk.PhotoImage(image1)
-  portrait_label = tk.Label(character_view_frame, image = test)
-  portrait_label.image = test
+  portrait_label = tk.Label(character_view_frame, image = ImageTk.PhotoImage(image1))
+  portrait_label.image = ImageTk.PhotoImage(image1)
   portrait_label.place(x=100, y=100)
   portrait_label.pack()
 
