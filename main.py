@@ -1,6 +1,8 @@
 import sys
 import os
 import tkinter as tk
+from tkinter import *
+from tkinter import ttk
 from PIL import ImageTk, Image
 from tkinter.font import Font
 import ctypes as ct
@@ -30,7 +32,7 @@ def get_curr_screen_geometry():
 
   root = tk.Tk()
   root.update_idletasks()
-  root.attributes('-fullscreen',True)
+  root.attributes('-fullscreen', True)
   root.state('iconic')
   geometry = root.winfo_geometry()
   root.destroy()
@@ -49,22 +51,13 @@ def dark_title_bar(window):
   set_window_attribute(hwnd, 20, ct.byref(value), 4)
   # only works sometimes????
 
-def clearWindow(root):
-  # clear a Tk window
-  for frame in root.winfo_children():
-    if frame.widgetName == 'frame':
-      frame.pack_forget()
-
-def on_closing():
-  sys.exit(0)
-
 def createWindow():
   root = tk.Tk()
   root.title("Race for the Presidency")
   root.state("zoomed")
   root.configure(background="#101010")
   dark_title_bar(root)
-  root.iconbitmap("icon.ico")
+  root.iconbitmap("gfx\\icon.ico")
   root.resizable(False, False)
 
   # create all the frames - this might be moved elsewhere later
@@ -124,28 +117,50 @@ def createWindow():
   start_game_button = tk.Button(new_game_frame, text = "Announce Candidacy", command = lambda: openFrame(root, character_view_frame))
   start_game_button.pack()
 
+  # view switcher frame
+  view_switcher_frame = tk.Frame(root, width = root.winfo_width(), height = 200, bg = "green")
+  view_switcher_frame.pack_propagate(False)
+
+  character_view_button = tk.Button(view_switcher_frame, text = "Character View", command = lambda: openFrame(root, character_view_frame))
+  character_view_button.pack(side = "left")
+
+  party_view_button = tk.Button(view_switcher_frame, text = "Party View", command = lambda: openFrame(root, party_view_frame))
+  party_view_button.pack(side = "left")
+
+  race_view_button = tk.Button(view_switcher_frame, text = "Race View", command = ...)
+  race_view_button.pack(side = "left")
+
+  map_view_button = tk.Button(view_switcher_frame, text = "Map View", command = lambda: openFrame(root, map_view_frame))
+  map_view_button.pack(side = "left")
+
+  blocs_view_button = tk.Button(view_switcher_frame, text = "Blocs View", command = lambda: openFrame(root, blocs_view_frame))
+  blocs_view_button.pack(side = "left")
+
+  settings_button = tk.Button(view_switcher_frame, text = "Settings")
+  settings_button.pack(side = "left")
+
   # character view frame
   character_view_frame = tk.Frame(root)
+  character_view_frame.bind("<<ShowFrame>>", lambda x : view_switcher_frame.pack(side = "bottom", fill = "x"))
 
-  image1 = Image.open("empty_portrait.png")
+  image1 = Image.open("gfx\\empty_portrait.png")
   test = ImageTk.PhotoImage(image1)
   portrait_label = tk.Label(character_view_frame, image = test)
   portrait_label.image = test
   portrait_label.place(x=100, y=100)
   portrait_label.pack()
 
-
-  settings_button = tk.Button(character_view_frame, text = "Settings")
-  settings_button.pack()
-
   # party view frame
   party_view_frame = tk.Frame(root)
+  party_view_frame.bind("<<ShowFrame>>", lambda x : view_switcher_frame.pack(side = "bottom", fill = "x"))
 
-  # geography view frame
-  geography_view_frame = tk.Frame(root)
+  # map view frame
+  map_view_frame = tk.Frame(root)
+  map_view_frame.bind("<<ShowFrame>>", lambda x : view_switcher_frame.pack(side = "bottom", fill = "x"))
 
   # blocs view frame
   blocs_view_frame = tk.Frame(root)
+  blocs_view_frame.bind("<<ShowFrame>>", lambda x : view_switcher_frame.pack(side = "bottom", fill = "x"))
 
   # set up window
   openFrame(root, menu_frame)
@@ -155,11 +170,21 @@ def createWindow():
 
   return root
 
+def on_closing():
+  sys.exit(0)
+
 def openFrame(root, frame_to_open):
   # open the menu frame
   # takes the active Tk window
   clearWindow(root)
+  frame_to_open.event_generate("<<ShowFrame>>")
   frame_to_open.pack()
+
+def clearWindow(root):
+  # clear a Tk window
+  for frame in root.winfo_children():
+    if frame.widgetName == 'frame':
+      frame.pack_forget()
 
 def rollDice(numDice, sides = 6):
   diceTotal = 0
