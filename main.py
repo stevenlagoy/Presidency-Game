@@ -2,6 +2,7 @@ import sys
 import os
 import tkinter as tk
 from tkinter import *
+from tkinter import messagebox
 from tkinter import ttk
 from PIL import ImageTk, Image
 from tkinter.font import Font
@@ -45,50 +46,56 @@ def dark_title_bar(window):
 def createWindow():
   root = tk.Tk()
   root.title("Race for the Presidency")
-  root.state("zoomed")
+  root.attributes("-fullscreen", True)
+  root.state("iconic")
   root.configure(background="#808080")
-  dark_title_bar(root)
+  #dark_title_bar(root)
   root.iconbitmap("gfx\\icon.ico")
   root.resizable(False, False)
+  root.pack_propagate(0)
 
   # fonts
   buttonfont = Font(family = "Yu Gothic Semibold", size = 16)
 
-  # create all the frames - this might be moved elsewhere later
+  # menu frame ----------------------------------------------------------------------------------------------------------------------------------------
+  menu_frame = tk.Frame(root, bg = "#808080", highlightbackground = "black", highlightthickness = 4)
 
-  # menu frame
-  menu_frame = tk.Frame(root, bg = "#808080")
+  bgimg = ImageTk.PhotoImage(Image.open("gfx\\loadscreens\\mount_rushmore.png"))
+  background = tk.Label(root, image = bgimg)
+  background.place(x = 0, y = 0)
+  background.lower()
 
-  titlecard = ImageTk.PhotoImage(Image.open("gfx/title_card.png"))
+  titlecard = ImageTk.PhotoImage(Image.open("gfx/title_card.png").resize((606,300)))
   title_label = tk.Label(menu_frame, image = titlecard)
   title_label.image = titlecard
-  title_label.pack(pady = 10)
+  title_label.grid(row = 0, column = 0, pady = 10)
 
-  new_save_button = tk.Button(menu_frame, font = buttonfont, text = "New Game", command = lambda: openFrame(root, new_game_frame))
-  new_save_button.pack(padx = 10, pady = 10)
+  new_save_button = tk.Button(menu_frame, font = buttonfont, text = "New Game", width = 50, command = lambda: openFrame(root, new_game_frame, "new_game_frame"))
+  new_save_button.grid(row = 1, column = 0, padx = 10, pady = 10)
 
-  continue_button = tk.Button(menu_frame, font = buttonfont, text = "Continue", command = lambda: openFrame(root, open_save_frame))
-  continue_button.pack(padx = 10, pady = 10)
+  continue_button = tk.Button(menu_frame, font = buttonfont, text = "Continue", width = 50, command = lambda: openFrame(root, open_save_frame, "open_save_frame"))
+  continue_button.grid(row = 2, column = 0, padx = 10, pady = 10)
 
-  tutorial_button = tk.Button(menu_frame, font = buttonfont, text = "Tutorial")
-  tutorial_button.pack(padx = 10, pady = 10)
+  tutorial_button = tk.Button(menu_frame, font = buttonfont, text = "Tutorial", width = 50)
+  tutorial_button.grid(row = 3, column = 0, padx = 10, pady = 10)
 
-  about_button = tk.Button(menu_frame, font = buttonfont, text = "About")
-  about_button.pack(padx = 10, pady = 10)
+  about_button = tk.Button(menu_frame, font = buttonfont, text = "About", width = 50)
+  about_button.grid(row = 4, column = 0, padx = 10, pady = 10)
 
-  close_game_button = tk.Button(menu_frame, font = buttonfont, text = "Close Game", command = lambda: root.destroy())
-  close_game_button.pack(padx = 10, pady = 10)
+  close_game_button = tk.Button(menu_frame, font = buttonfont, text = "Exit Game", width = 50, command = lambda : check_exit_game(root))
+  close_game_button.grid(row = 5, column = 0, padx = 10, pady = 10)
   
-  # open save frame
+  # open save frame ----------------------------------------------------------------------------------------------------------------------------------------
   open_save_frame = tk.Frame(root)
 
-  save_info_label = tk.Label(open_save_frame, text = "Save Name:\nSave Date:", width = 25, height = 2, anchor = "w", justify = "left")
-  save_info_label.pack()
+  save_list_info_label = tk.Label(open_save_frame, text = "Name\t\t\tDate\t\t\tProgress", justify = "left", anchor = "w", width = 80, height = 0)
+  save_list_info_label.grid(row = 0, column = 0)
 
-  saves_list = tk.Listbox(open_save_frame)
+  saves_list = tk.Listbox(open_save_frame, width = 100)
   count = 1
   for file in os.listdir(SAVEDIR):
-    saves_list.insert(count, str(file).split(".")[0]) # insert the name of the files (minus the extension) at the next open index
+    saves_list.insert(count, str(file).split(".")[0] + "       " + get_save_info(SAVEDIR + str(file))[1])
+  # i want the date and "progress" to be printed in the list as well... this poses an interesting problem, since they need to line up, and the saves may have a very long name
   
   # this has to be a lambda i think... there might be a better way
   # get some info about the file and set the label's text accordingly - i hate to call the function twice but i'm not sure how to use the returned values otherwise
@@ -96,24 +103,27 @@ def createWindow():
     "Save Name: " + get_save_info(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt")[0] +
     "\nSave Date: " + get_save_info(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt")[1]
     ))
-  saves_list.pack()
+  saves_list.grid(row = 1, column = 0)
+
+  save_info_label = tk.Label(open_save_frame, text = "Save Name:\nSave Date:", width = 25, height = 2, anchor = "w", justify = "left")
+  save_info_label.grid(row = 2, column = 0)
 
   open_save_button = tk.Button(open_save_frame, text = "Open Save", command = lambda: open_save(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt"))
-  open_save_button.pack()
+  open_save_button.grid(row = 3, column = 0)
 
-  saves_list_back_button = tk.Button(open_save_frame, text = "Back", command = lambda: openFrame(root, menu_frame))
-  saves_list_back_button.pack()
+  saves_list_back_button = tk.Button(open_save_frame, text = "Back", command = lambda: openFrame(root, menu_frame, "menu_frame"))
+  saves_list_back_button.grid(row = 4, column = 0)
 
-  # new game frame
+  # new game frame ----------------------------------------------------------------------------------------------------------------------------------------
   new_game_frame = tk.Frame(root)
 
-  new_game_back_button = tk.Button(new_game_frame, text = "Back", command = lambda: openFrame(root, menu_frame))
+  new_game_back_button = tk.Button(new_game_frame, text = "Back", command = lambda: openFrame(root, menu_frame, "menu_frame"))
   new_game_back_button.pack()
 
   start_game_button = tk.Button(new_game_frame, text = "Announce Candidacy", command = lambda: openFrame(root, character_view_frame))
   start_game_button.pack()
 
-  # view switcher frame
+  # view switcher frame ----------------------------------------------------------------------------------------------------------------------------------------
   view_switcher_frame = tk.Frame(root, width = root.winfo_width(), height = 200, bg = "green")
   view_switcher_frame.pack_propagate(False)
 
@@ -135,7 +145,7 @@ def createWindow():
   settings_button = tk.Button(view_switcher_frame, text = "Settings")
   settings_button.pack(side = "left")
 
-  # character view frame
+  # character view frame ----------------------------------------------------------------------------------------------------------------------------------------
   character_view_frame = tk.Frame(root)
   character_view_frame.bind("<<ShowFrame>>", lambda x : view_switcher_frame.pack(side = "bottom", fill = "x"))
 
@@ -157,29 +167,38 @@ def createWindow():
   blocs_view_frame = tk.Frame(root)
   blocs_view_frame.bind("<<ShowFrame>>", lambda x : view_switcher_frame.pack(side = "bottom", fill = "x"))
 
-  # set up window
-  openFrame(root, menu_frame)
+  # set up window ----------------------------------------------------------------------------------------------------------------------------------------
+  openFrame(root, menu_frame, "menu_frame")
 
   root.protocol("WM_DELETE_WINDOW", on_closing) # stops the whole program when the tk window is closed
   root.mainloop()
 
   return root
 
+def check_exit_game(root):
+  MsgBox = messagebox.askyesno("Exit Game", "Exit to Desktop?\n(Unsaved data will be lost)", icon = 'warning')
+  if MsgBox:
+    root.destroy()
+
 def on_closing():
   sys.exit(0)
 
-def openFrame(root, frame_to_open):
+def openFrame(root, frame_to_open, frame_name = ""):
   # open the menu frame
   # takes the active Tk window
   clearWindow(root)
+  if frame_name == "menu_frame":
+    frame_to_open.place(x = 100, y = 400)
+  else:
+    frame_to_open.grid(row = 0, column = 0)
   frame_to_open.event_generate("<<ShowFrame>>")
-  frame_to_open.pack()
 
 def clearWindow(root):
   # clear a Tk window
   for frame in root.winfo_children():
     if frame.widgetName == 'frame':
       frame.pack_forget()
+      frame.grid_forget()
 
 def rollDice(numDice, sides = 6):
   diceTotal = 0
