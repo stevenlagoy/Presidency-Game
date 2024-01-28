@@ -21,7 +21,8 @@ parties = [
     "abbreviation" : "D",
     "governing body" : "Democratic National Committee",
     "color" : "blue",
-    "symbol" : "donkey"
+    "symbol" : "donkey",
+    "icon" : "democrat_logo.png"
   },
   {
     "name" : "Republican Party",
@@ -29,7 +30,8 @@ parties = [
     "abbreviation" : "R",
     "governing body" : "Republican National Committee",
     "color" : "red",
-    "symbol" : "elephant"
+    "symbol" : "elephant",
+    "icon" : "republican_logo.png"
   },
   {
     "name" : "Progressive Party",
@@ -37,7 +39,8 @@ parties = [
     "abbreviation" : "P",
     "governing body" : "",
     "color" : "red",
-    "symbol" : "bull moose"
+    "symbol" : "bull moose",
+    "icon" : "progressive_logo.png"
   },
   {
     "name" : "Democratic-Republican Party",
@@ -45,7 +48,8 @@ parties = [
     "abbreviation" : "D-R",
     "governing body" : "",
     "color" : "red, white, blue",
-    "symbol" : ""
+    "symbol" : "",
+    "icon" : "democratic_republican_cockade.png"
   },
   {
     "name" : "Federalist Party",
@@ -53,7 +57,8 @@ parties = [
     "abbreviation" : "F",
     "governing body" : "",
     "color" : "black, white",
-    "symbol" : ""
+    "symbol" : "",
+    "icon" : "federalist_cockade.png"
   },
   {
     "name" : "Green Party",
@@ -61,7 +66,8 @@ parties = [
     "abbreviation" : "G",
     "governing body" : "Green National Committee",
     "color" : "green",
-    "symbol" : "Sunflower"
+    "symbol" : "Sunflower",
+    "icon" : "green_logo.png"
   },
   {
     "name" : "Liberatarian Party",
@@ -69,7 +75,8 @@ parties = [
     "abbreviation" : "L",
     "governing body" : "Liberatarian National Committee",
     "color" : "yellow",
-    "symbol" : "hedgehog" # the official symbol is the Statue of Liberty - the hedgehog is used unofficially by many party members
+    "symbol" : "hedgehog", # the official symbol is the Statue of Liberty - the hedgehog is used unofficially by many party members
+    "icon" : "democratic_republican_cockade.png"
   },
   {
     "name" : "Whig Party",
@@ -77,7 +84,8 @@ parties = [
     "abbreviation" : "W",
     "governing body" : "",
     "color" : "blue, buff",
-    "symbol" : "owl" # the owl is only used contemporarily by the Modern Whig Institute
+    "symbol" : "owl", # the owl is only used contemporarily by the Modern Whig Institute
+    "icon" : "whig_logo.png"
   },
   {
     "name" : "People's Party",
@@ -85,7 +93,8 @@ parties = [
     "abbreviation" : "P",
     "governing body" : "",
     "color" : "red",
-    "symbol" : ""
+    "symbol" : "",
+    "icon" : "populist_logo.png"
   },
   {
     "name" : "Socialist Party",
@@ -93,7 +102,8 @@ parties = [
     "abbreviation" : "S",
     "governing body" : "",
     "color" : "red",
-    "symbol" : ""
+    "symbol" : "",
+    "icon" : "socialist_logo.png"
   },
   {
     "name" : "Centrist",
@@ -101,6 +111,7 @@ parties = [
     "abbreviation" : "", # no abbreviation
     "governing body" : "", # no governing body
     "color" : "gray",
-    "symbol" : "balances"
+    "symbol" : "balances",
+    "icon" : "centrist_icon.png"
   }
 ]
