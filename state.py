@@ -27,8 +27,11 @@ class State:
         )
 
 states = [ # note: this list was generated with the help of AI. There may be innaccuracies.
-  # populations are based on the 2020 United States Census
-  # selected universities for each state generally are those with an enrollment of 20,000 or higher
+  # name : The name of the state, minus "State of" or "Commonwealth of" - what the state is commonly known as
+  # population : The population of the state, in persons, as of the 2020 United States Census
+  # largest_cities : A list of the five (or six if the capital would not have been included) largest cities in each state. The first city in the list is the capital.
+  # abbreviation : The USPS abbreviation of the state
+  # universities : A list of some of the largest or most influential universities in each state, generally those with an enrollment of at least 20,000
   {
     "name" : "Alabama",
     "population" : 5024279,
