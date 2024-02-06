@@ -79,7 +79,8 @@ states = [ # note: this list was generated with the help of AI. There may be inn
     "population": 5773714,
     "largest_cities": ["Denver", "Colorado Springs", "Aurora", "Fort Collins", "Lakewood"],
     "abbreviation": "CO",
-    "universities": ["University of Colorado Boulder", "Colorado State University", "University of Denver"]
+    "universities": ["University of Colorado Boulder", "Colorado State University", "University of Denver"],
+    "bellwether" : True # 82% bellwether since 1980
   },
   {
     "name": "Connecticut",
@@ -107,7 +108,8 @@ states = [ # note: this list was generated with the help of AI. There may be inn
     "population": 21538187,
     "largest_cities": ["Tallahassee", "Jacksonville", "Miami", "Tampa", "Orlando", "St. Petersburg"],
     "abbreviation": "FL",
-    "universities": ["University of Florida", "University of Central Florida", "Florida State University", "University of Miami", "Florida International University"]
+    "universities": ["University of Florida", "University of Central Florida", "Florida State University", "University of Miami", "Florida International University"],
+    "bellwether" : True # 82% bellwether since 1980
   },
   {
     "name": "Georgia",
@@ -247,14 +249,16 @@ states = [ # note: this list was generated with the help of AI. There may be inn
     "population": 3104614,
     "largest_cities": ["Carson City", "Las Vegas", "Henderson", "Reno", "North Las Vegas", "Sparks"],
     "abbreviation": "NV",
-    "universities": ["University of Nevada, Las Vegas (UNLV)", "University of Nevada, Reno", "Nevada State College"]
+    "universities": ["University of Nevada, Las Vegas (UNLV)", "University of Nevada, Reno", "Nevada State College"],
+    "bellwether" : True # % 91 bellwether since 1980
   },
   {
     "name": "New Hampshire",
     "population": 1377529,
     "largest_cities": ["Concord", "Manchester", "Nashua", "Derry", "Dover"],
     "abbreviation": "NH",
-    "universities": ["Dartmouth College", "University of New Hampshire", "Southern New Hampshire University"]
+    "universities": ["Dartmouth College", "University of New Hampshire", "Southern New Hampshire University"],
+    "bellwether" : True # 82% bellwether since 1980
   },
   {
     "name": "New Jersey",
@@ -268,7 +272,8 @@ states = [ # note: this list was generated with the help of AI. There may be inn
     "population": 2117522,
     "largest_cities": ["Santa Fe", "Albuquerque", "Las Cruces", "Rio Rancho", "Roswell"],
     "abbreviation": "NM",
-    "universities": ["University of New Mexico", "New Mexico State University", "New Mexico Institute of Mining and Technology"]
+    "universities": ["University of New Mexico", "New Mexico State University", "New Mexico Institute of Mining and Technology"],
+    "bellwether" : True # 82% bellwether since 1980
   },
   {
     "name": "New York",
@@ -303,7 +308,8 @@ states = [ # note: this list was generated with the help of AI. There may be inn
     "population": 11799448,
     "largest_cities": ["Columbus", "Cleveland", "Cincinnati", "Toledo", "Akron"],
     "abbreviation": "OH",
-    "universities": ["Ohio State University", "University of Cincinnati", "Case Western Reserve University"]
+    "universities": ["Ohio State University", "University of Cincinnati", "Case Western Reserve University"],
+    "bellwether" : True # 91% bellwether since 1980
   },
   {
     "name": "Oklahoma",
@@ -324,7 +330,8 @@ states = [ # note: this list was generated with the help of AI. There may be inn
     "population": 13002700,
     "largest_cities": ["Harrisburg", "Philadelphia", "Pittsburgh", "Allentown", "Erie", "Reading"],
     "abbreviation": "PA",
-    "universities": ["University of Pennsylvania", "Penn State University", "Carnegie Mellon University"]
+    "universities": ["University of Pennsylvania", "Penn State University", "Carnegie Mellon University"],
+    "bellwether" : True # 82% bellwether since 1980
   },
   {
     "name": "Puerto Rico",
