@@ -125,4 +125,6 @@ each new possibility of a relationship introduces a new dimension, so the total 
 a 2D array would already have 64^2 cells to complete
 
 could assume that relationships are equal to the national average by default, and add a separate list of larger outliers
+
+additionally, this information has to be tracked to all 50+ states and territories, which have differing percentages
 '''
