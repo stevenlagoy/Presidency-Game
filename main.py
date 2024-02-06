@@ -13,7 +13,7 @@ import json as json
 import time as time
 from character import Character
 from state import State # generates all states
-from primary import Primary
+from convention import Primary
 from bloc import Bloc, blocs # generates all blocs
 
 SAVEDIR = "C:\\Users\\LaGoySM\\Downloads\\Documents\\Presidency Game\\savegames\\" # constant directory of saves folder

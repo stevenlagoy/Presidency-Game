@@ -1,10 +1,3 @@
-'''primaries:
-  attributes:
-  - open / closed
-  - primary / caucus
-
-'''
-
 class Convention:
   instances = []
   def __init__(self):
@@ -17,10 +10,7 @@ class Primary(Convention):
   instances = []
   def __init__(self, type):
     self.__class__.instances.append(self)
-    self.type = type # open or closed
-    # closed primaries are open only to registered party members
-    # semi-open primaries are open to anyone who is not a member of the other party ("cross-voting")
-    # open primaries are open to all voters
+    self.type = type
 
 class Caucus(Convention):
   instances = []
@@ -33,33 +23,6 @@ samoa, dems abroad, northern marianas, puerto rico, DC, guam, virgin islands
 Virgin islands, DC, guam, Northern marianas, samoa, puerto rico
 '''
 
-republican_primaries = [
-  {
-    "state": "Iowa",
-    "location": "Midwest",
-    "delegates": 40,
-    "date": "February 3, 2024"
-  },
-  {
-    "state": "New Hampshire",
-    "location": "East",
-    "delegates": 22,
-    "date": "February 11, 2024"
-  },
-  {
-    "state": "South Carolina",
-    "location": "South",
-    "delegates": 50,
-    "date": "February 20, 2024"
-  },
-  {
-    "state": "Nevada",
-    "location": "West",
-    "delegates": 30,
-    "date": "February 22, 2024"
-  }
-]
-
 '''
 dates:
   states often attempt to "front-load" their primaries: have them as early as possible, to make their delegates have as much influence as possible
@@ -71,6 +34,7 @@ REPUBLICANS
   The excepted states from 16c1 can have their processes no earlier than one month before the next earliest state
   all primaries/caucuses occur before the second saturday in June OR less than 45 days before the national convention
   all primaries/caucuses before march 15 are always proportional based on number of statewide votes and number of votes for each candidate, though states can choose a threshold that a candidate must pass (if its <20%) to recieve any votes, AND can choose a threshold (>50%) after which ALL delegates go to one candidate 
+  national conventions must be scheduled before December 1 of the year before the election, with the delegate counts and proportionality rules
 
   META 
   should the dates and delegates be generated for each game, or kept constant? need to figure out what parties are in power in each state too
