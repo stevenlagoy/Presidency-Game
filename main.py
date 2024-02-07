@@ -15,6 +15,8 @@ from character import Character
 from state import State # generates all states
 from convention import Primary
 from bloc import Bloc, blocs # generates all blocs
+from localization.EN_descriptions import EN_descriptions
+from localization.EN_system_text import EN_system_text
 
 SAVEDIR = "C:\\Users\\LaGoySM\\Downloads\\Documents\\Presidency Game\\savegames\\" # constant directory of saves folder
 
@@ -45,7 +47,7 @@ def dark_title_bar(window):
 
 def createWindow():
   root = tk.Tk()
-  root.title("Race for the Presidency")
+  root.title(EN_system_text.get("title"))
   root.attributes("-fullscreen", True)
   root.state("iconic")
   root.configure(background="#808080")
@@ -70,19 +72,19 @@ def createWindow():
   title_label.image = titlecard
   title_label.grid(row = 0, column = 0, pady = 10)
 
-  new_save_button = tk.Button(menu_frame, font = buttonfont, text = "New Game", width = 50, command = lambda: openFrame(root, new_game_frame, "new_game_frame"))
+  new_save_button = tk.Button(menu_frame, font = buttonfont, text = EN_system_text.get("new_game_text"), width = 50, command = lambda: openFrame(root, new_game_frame, "new_game_frame"))
   new_save_button.grid(row = 1, column = 0, padx = 10, pady = 10)
 
-  continue_button = tk.Button(menu_frame, font = buttonfont, text = "Continue", width = 50, command = lambda: openFrame(root, open_save_frame, "open_save_frame"))
+  continue_button = tk.Button(menu_frame, font = buttonfont, text = EN_system_text.get("continue_game_text"), width = 50, command = lambda: openFrame(root, open_save_frame, "open_save_frame"))
   continue_button.grid(row = 2, column = 0, padx = 10, pady = 10)
 
-  tutorial_button = tk.Button(menu_frame, font = buttonfont, text = "Tutorial", width = 50)
+  tutorial_button = tk.Button(menu_frame, font = buttonfont, text = EN_system_text.get("tutorial_text"), width = 50)
   tutorial_button.grid(row = 3, column = 0, padx = 10, pady = 10)
 
-  about_button = tk.Button(menu_frame, font = buttonfont, text = "About", width = 50)
+  about_button = tk.Button(menu_frame, font = buttonfont, text = EN_system_text.get("about_text"), width = 50)
   about_button.grid(row = 4, column = 0, padx = 10, pady = 10)
 
-  close_game_button = tk.Button(menu_frame, font = buttonfont, text = "Exit Game", width = 50, command = lambda : check_exit_game(root))
+  close_game_button = tk.Button(menu_frame, font = buttonfont, text = EN_system_text.get("close_game_text"), width = 50, command = lambda : check_exit_game(root))
   close_game_button.grid(row = 5, column = 0, padx = 10, pady = 10)
   
   # open save frame ----------------------------------------------------------------------------------------------------------------------------------------
@@ -108,16 +110,16 @@ def createWindow():
   save_info_label = tk.Label(open_save_frame, text = "Save Name:\nSave Date:", width = 25, height = 2, anchor = "w", justify = "left")
   save_info_label.grid(row = 2, column = 0)
 
-  open_save_button = tk.Button(open_save_frame, text = "Open Save", command = lambda: open_save(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt"))
+  open_save_button = tk.Button(open_save_frame, text = EN_system_text.get("open_game_text"), command = lambda: open_save(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt"))
   open_save_button.grid(row = 3, column = 0)
 
-  saves_list_back_button = tk.Button(open_save_frame, text = "Back", command = lambda: openFrame(root, menu_frame, "menu_frame"))
+  saves_list_back_button = tk.Button(open_save_frame, text = EN_system_text.get("back_text"), command = lambda: openFrame(root, menu_frame, "menu_frame"))
   saves_list_back_button.grid(row = 4, column = 0)
 
   # new game frame ----------------------------------------------------------------------------------------------------------------------------------------
   new_game_frame = tk.Frame(root)
 
-  new_game_back_button = tk.Button(new_game_frame, text = "Back", command = lambda: openFrame(root, menu_frame, "menu_frame"))
+  new_game_back_button = tk.Button(new_game_frame, text = EN_system_text.get("back_text"), command = lambda: openFrame(root, menu_frame, "menu_frame"))
   new_game_back_button.pack()
 
   start_game_button = tk.Button(new_game_frame, text = "Announce Candidacy", command = lambda: openFrame(root, character_view_frame))
