@@ -3,7 +3,7 @@ class Bloc:
     instances = []
     def __init__(self, name, percentage_of_voters):
         self.__class__.instances.append(self)
-        
+                
         self.name = name
         self.percentage_of_voters = round((percentage_of_voters / 100), 6)
         self.num_voting_members = int(round((self.percentage_of_voters * num_voters), 0))
@@ -111,7 +111,7 @@ blocs = {
 Bloc.instances = []
 for group in blocs:
     for trait in blocs.get(group):
-      Bloc(trait[0], trait[1])
+        Bloc(trait[0], trait[1])
 
 '''
 voting blocs
