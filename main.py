@@ -11,6 +11,7 @@ import random as rand
 import math as math
 import json as json
 import time as time
+
 from character import Character
 from state import State # generates all states
 from convention import Primary
@@ -253,6 +254,22 @@ def open_save(path):
 def reset():
     Character.instances = []
 
+def update_probability(actual, nominal, outcome, weighted, target):
+    # takes the actual probability of a 'winning' outcome (determined by the roll function)
+    # takes the nominal probability of a 'winning' outcome (what is shown to the user)
+    # takes the outcome of the previous roll, 0 for a 'losing' outcome and 1 for a 'winning' outcome
+    # takes the current gloabl weighted probability, wich is influenced by all past outcomes
+    # takes the target probability for the weighted - what value the weighted probability is intended to approach
+    
+    deviation = outcome - weighted # the difference between the outcome and the expected value
+    ...
+
+def roll_probability(nominal, modifier):
+    additive = nominal * modifier
+    scale = 1 - nominal
+    scaled_additive = additive * scale
+    weighted = nominal + scaled_additive
+
 def main():
 
     reset()
@@ -260,7 +277,7 @@ def main():
     window = createWindow()
     
     reset()
-
+    
     print("Finished")
 
 if __name__ == "__main__":
