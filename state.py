@@ -2,20 +2,14 @@ class State:
     instances = [] # list of pointers to all class instances
     def __init__(self, name, population, largest_cities, abbreviation, universities, string = None):
         self.__class__.instances.append(self) # add self-pointer to list of instances of class
-        if string is not None:
-            attributes = string.split("-")
-            tags = [tag[:2] for tag in attributes]
-            self.name = attributes[tags.index("NA")][2:]
-            self.abb = attributes[tags.index("AB")][2:]
-            self.population = int(attributes[tags.index("PO")][2:])
 
-        else:
-            self.name = name
-            self.population = population
-            self.largest_cities = largest_cities
-            self.capital = largest_cities[0]
-            self.abbreviation = abbreviation
-            self.universities = universities
+        self.name = name
+        self.population = population
+        self.largest_cities = largest_cities
+        self.capital = largest_cities[0]
+        self.abbreviation = abbreviation
+        self.universities = universities
+        self.demographics = {}
         
     def __repr__(self):
                 return (
@@ -433,6 +427,6 @@ states = [ # note: this list was generated with the help of AI. There may be inn
     }
 ]
 
-State.instances = []
+State.instances = [] # clears state instances when the file is imported
 for state in states:
     State(state.get("name"), state.get("population"), state.get("largest_cities"), state.get("abbreviation"), state.get("universities"))
