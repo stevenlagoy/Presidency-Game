@@ -3,64 +3,84 @@ import math as math
 from state import State
 
 class Character:
-    instances = [] # list containing all instances of character class
-    def __init__(self, string = None, is_player = False):
+    instances = []
+    def __init__(self, buildstring: str = None, given_name: str = None, middle_name: str = None, family_name: str = None, nameform: tup[int] = (0, 1, 2)):
         self.__class__.instances.append(self)
-        if string is not None: # if a character build string is passed
-            attributes = string.split("-")
-            tags = [tag[:2] for tag in attributes]
-            self.is_player = int(attributes[tags.index("CH")][2:]) == 1
-            self.name = attributes[tags.index("NA")][2:]
-            self.delegates = attributes[tags.index("DE")][2:]
-            self.cash = attributes[tags.index("CA")][2:]
-            self.age = attributes[tags.index("AG")][2:]
-            self.presentation = attributes[tags.index("PR")][2:]
-            self.origin = [state for state in State.instances if state.name == str(attributes[tags.index("OR")][2:])][0]
-            self.education = attributes[tags.index("ED")][2:]
-            self.alignments = attributes[tags.index("AL")][2:]
-            self.experiences = attributes[tags.index("EX")][2:]
-            self.skills = [int(attributes[tags.index("SK")][2:5]),int(attributes[tags.index("SK")][5:8]),int(attributes[tags.index("SK")][8:11])]
-            self.aptitude = sum(self.skills)
-            self.conviction = attributes[tags.index("CO")][2:]
-            self.ageMod = 0
 
-        elif is_player is True: # if constructing a player character without a buildstring
-            self.is_player = True
-            self.delegates = 0 # number of delegates voting for the player
-            self.cash = 0 # amount of cash held by the player
-            self.name = "" # name of the player
-            self.presentation = None
-            self.age = 0 # age of the player
-            self.origin = None # state object which represents the player's homestate
-            self.education = 0 # education level of the player
-            self.alignments = [1000,1000] # alignment on a 2-axis grid of the player
-            self.experience = [] # past experience of the player
-            self.skills = [0,0,0] # executive, legislative, judicial skill of the player - TODO could be a tuple
-            self.aptitude = 0 # sum of all the skills
-            self.conviction = 0 # conviction / stagnation of the player's politics
-            self.ageMod = 0
+        self._given_name: str = given_name if given_name is not None else gen_given_name(self)
+        self._middle_name: str = middle_name if middle_name is not None else gen_middle_name(self)
+        self._family_name: str = family_name if family_name is not None else gen_family_name(self)
+        self._nameform: tup = nameform
+        self.full_name: str = get_name(self)
+        self.demographics: IDK = None
+        self.age: int = 0 # the age in years of the character
+        self.presentation: Presentation = None
+
+        def gen_given_name(self):
+            pass
+            '''
+            different demographic blocs affect the possible names
+            presentation, heritage / ethnicity, generation, religion are considered
+            each overlapping area has a weighted list for the most common names for those people
+            '''
+
+        def gen_middle_name(self):
+            pass
+            # determine if seveal middle names
+            # determine if middle name is an initial
         
-            self.genProfileInput()
+        def gen_last_name(self):
+            pass
+        
+        def get_name(self):
+            names: list[str] = [self._given_name, self._middle_name, self._family_name]
+            nameform = self._nameform
+            return " ".join(names[nameform[0]], names[nameform[1]], names[nameform[2]])
+        
+        '''
+        possibilities for names:
+        Firstname Lastname
+        Firstname Middlename Lastname
+        Firstname Minitial Lastname    also sometimes names can just be a single letter without being initials, like Harry S Truman
+        Familyname Givenname
+        Firstname Lastname Jr/Sr
+        Firstname Lastname Number
+        Firstinitial Middlename Lastname
+        Also titles like Mr. Ms. Mrs. Dr.   maybe these shouldn't be tracked...
+        should maiden names be tracked? this could be relevant for divorces
+
+        perhaps users select a format for their name:
+        Given Middle Family
+        Family Given
+        These name categories may include several words, abbreviations, etc or may be blank
+        
+        Given Middle Family: John Quincy Adams
+        Given Family: George Washington
+        Given Middle(initial) Family: Ulysses S. Grant
+        Given Middle(initials) Family: George H. W. Bush
+        '''
             
-        elif is_player is False: # if constructing a nonplayer character without a buildstring
-            self.is_player = False
-            self.delegates = 0 # number of delegates voting for the character
-            self.cash = 0 # amound of cash held by the character
-            self.name = "" # name of the character
-            self.presentation = None
-            self.age = 0 # age of the character
-            self.origin = None
-            self.education = 0 # education level of the character
-            self.alignments = [1000,1000] # alignment on a 2-axis grid of the character
-            self.experience = [] # past experience of the character
-            self.skills = [0,0,0] # executive, legislative, judicial skill of the character - TODO could be a tuple
-            self.aptitude = 0 # sum of all the skills
-            self.conviction = 0 # conviction / stagnation of the character's politics
-            self.ageMod = 0
-        
-            self.genProfile()
 
-    def genProfileInput(self):
+class Candidate(Character):
+    instances = [] # list containing all instances of candidate class
+    def __init__(self, buildstring: str = None, is_player: bool = False):
+        self.__class__.instances.append(self)
+        Character.instances.append(self)
+        
+        self.delegates: int = 0 # number of delegates voting for the candidate
+        self.cash: int = 0 # amound of cash held
+        self.origin: State = None
+        self.education: int = 0 # education level
+        self.alignments: tup[int] = (1000,1000) # alignment on a 2-axis grid
+        self.experience: list[] = [] # past experience
+        self.skills: tup[int] = (0,0,0) # executive, legislative, judicial skill of the character - TODO could be a tuple
+        self.aptitude: int = 0 # sum of all the skills
+        self.conviction: int = 0 # conviction / stagnation of the character's politics
+        self.ageMod: float = 0
+        
+        self.genProfile()
+
+    def genProfileInput(self) -> None:
         # get player name
         self.setNameInput()
         
@@ -294,216 +314,186 @@ class Character:
     def __eq__(self, other): # returns true if the comparators are both Character instances and the name, alignments, and skills are the same
         return False if not isinstance(other, Character) else self.name == other.name and self.alignments == other.alignments and self.skills == other.skills
 
-namesM = [
-    # the 50 most common male first names in the US
-    "James",
-    "Robert",
-    "John",
-    "Michael",
-    "David",
-    "William",
-    "Richard",
-    "Joseph",
-    "Thomas",
-    "Christopher",
-    "Charles",
-    "Daniel",
-    "Matthew",
-    "Anthony",
-    "Mark",
-    "Donald",
-    "Steven",
-    "Andrew",
-    "Paul",
-    "Joshua",
-    "Kenneth",
-    "Kevin",
-    "Brian",
-    "George",
-    "Timothy",
-    "Ronald",
-    "Jason",
-    "Edward",
-    "Jeffrey",
-    "Ryan",
-    "Jacob",
-    "Gary",
-    "Nicholas",
-    "Eric",
-    "Johnathan",
-    "Stephen",
-    "Larry",
-    "Justin",
-    "Scott",
-    "Brandon",
-    "Benjamin",
-    "Samuel",
-    "Gregory",
-    "Alexander",
-    "Patrick",
-    "Frank",
-    "Raymond",
-    "Jack",
-    "Dennis",
-    "Jerry"
+class Player(Candidate):
+    instances = []
+    def __init__(self):
+        self.__class__.instances.append(self)
+        super().__class__.instances.append(self)
+
+white_american_names = [ # namecensus.com/last-names/common-white-surnames/
+    "Smith",
+    "Johnson",
+    "Miller",
+    "Brown",
+    "Jones",
+    "Williams",
+    "Davis",
+    "Anderson",
+    "Wilson",
+    "Martin",
+    "Taylor",
+    "Moore",
+    "Thompson",
+    "White",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
 ]
 
-namesF = [
-    # the 50 most common female first names in the US
-    "Mary",
-    "Patricia",
-    "Jennifer",
-    "Linda",
-    "Elizabeth",
-    "Barbara",
-    "Susan",
-    "Jessica",
-    "Sarah",
-    "Karen",
-    "Lisa",
-    "Nancy",
-    "Beatrice",
-    "Sandra",
-    "Margaret",
-    "Ashley",
-    "Kimberly",
-    "Emily",
-    "Donna",
-    "Michelle",
-    "Carol",
-    "Amanda",
-    "Melissa",
-    "Deborah",
-    "Stephanie",
-    "Dorothy",
-    "Rebecca",
-    "Sharon",
-    "Laura",
-    "Cynthia",
-    "Amy",
-    "Kathleen",
-    "Angela",
-    "Shirley",
-    "Brenda",
-    "Emma",
-    "Anna",
-    "Pamela",
-    "Nicole",
-    "Samantha",
-    "Katherine",
-    "Christine",
-    "Helen",
-    "Debra",
-    "Rachel",
-    "Carolyn",
-    "Janet",
-    "Maria",
-    "Catherine",
-    "Heather"
-]
-    
-surnames = [
-    # the 100 most common last names in the US
-    "SMITH",
-    "JOHNSON",
-    "WILLIAMS",
-    "BROWN",
-    "JONES",
-    "GARCIA",
-    "MILLER",
-    "DAVIS",
-    "RODRIGUEZ",
-    "MARTINEZ",
-    "HERNANDEZ",
-    "LOPEZ",
-    "GONZALES",
-    "WILSON",
-    "ANDERSON",
-    "THOMAS",
-    "TAYLOR",
-    "MOORE",
-    "JACKSON",
-    "MARTIN",
-    "LEE",
-    "PEREZ",
-    "THOMPSON",
-    "WHITE",
-    "HARRIS",
-    "SANCHEZ",
-    "CLARK",
-    "RAMIREZ",
-    "LEWIS",
-    "ROBINSON",
-    "WALKER",
-    "YOUNG"
-    "ALLEN",
-    "KING",
-    "WRIGHT",
-    "SCOTT",
-    "TORRES",
-    "NGUYEN",
-    "HILL",
-    "FLORES",
-    "GREEN",
-    "ADAMS",
-    "NELSON",
-    "BAKER",
-    "HALL",
-    "RIVERA",
-    "CAMPBELL",
-    "MITCHELL",
-    "CARTER",
-    "ROBERTS",
-    "GOMEZ",
-    "PHILLIPS",
-    "EVANS",
-    "TURNER",
-    "DIAZ",
-    "PARKER",
-    "CRUZ",
-    "EDWARDS",
-    "COLLINS",
-    "REYES",
-    "STEWART",
-    "MORRIS",
-    "MORALES",
-    "MURPHY",
-    "COOK",
-    "ROGERS",
-    "GUTIERREZ",
-    "ORITZ",
-    "MORGAN",
-    "COOPER",
-    "PETERSON",
-    "BAILEY",
-    "REED",
-    "KELLY",
-    "HOWARD",
-    "RAMOS",
-    "KIM",
-    "COX",
-    "WARD",
-    "RICHARDSON",
-    "WATSON",
-    "BROOKS",
-    "CHAVEZ",
-    "WOOD",
-    "JAMES",
-    "BENNET",
-    "GRAY",
-    "MENDOZA",
-    "RUIZ",
-    "HUGHES",
-    "PRICE",
-    "ALVAREZ",
-    "CASTILLO",
-    "SANDERS",
-    "PATEL",
-    "MYERS",
-    "LONG",
-    "ROSS",
-    "FOSTER",
-    "JIMENEZ"
+african_american_names = [ # from www.momjunction.com/articles/ghetto-baby-names-for-girls-and-boys_00398172/#african-american-boy-names and https://namecensus.com/last-names/common-black-surnames/
+    "Williams",
+    "Johnson",
+    "Smith",
+    "Jones",
+    "Brown",
+    "Jackson",
+    "Davis",
+    "Thomas",
+    "Harris",
+    "Robinson",
+    "Taylor",
+    "Wilson",
+    "Moore",
+    "White",
+    "Lewis",
+    "Walker",
+    "Green",
+    "Thompson",
+    "Washington",
+    "Anderson",
+    "Scott",
+    "Carter",
+    "Wright",
+    "Hill",
+    "Allen",
+    "Miller",
+    "Mitchell",
+    "Young",
+    "Lee",
+    "Martin",
+    "Clark",
+    "King",
+    "Edwards",
+    "Turner",
+    "Coleman",
+    "James",
+    "Evans",
+    "",
+    "Ahmod",
+    "Asaad",
+    "Autry",
+    "Booker",
+    "Busta",
+    "Calvin",
+    "Caleb",
+    "Cleavon",
+    "Craig",
+    "Dajon",
+    "Daran",
+    "Elijah",
+    "Elroy",
+    "Farrell",
+    "Furnell",
+    "Gabriel",
+    "Guyton",
+    "Hampton",
+    "Herold",
+    "Isiah",
+    "Izaak",
+    "Jamal",
+    "Jaylen",
+    "Joshua",
+    "Karlus",
+    "Kaseko",
+    "Kwamie",
+    "Latrell",
+    "Lavar",
+    "Leshawn",
+    "Lloyd",
+    "Luther",
+    "Malik",
+    "Major",
+    "Nathan",
+    "Noah",
+    "Brian",
+    "Owen",
+    "Perry",
+    "Parvez",
+    "Pierre",
+    "Qasim",
+    "Roshaun",
+    "Warren",
+    "Xavier",
+    "Yogi",
+    "Zephan",
+    "",
+    "Akilah",
+    "Amani",
+    "Brianna",
+    "Braelin",
+    "Capria",
+    "Cedrica",
+    "Destiny",
+    "Dallas",
+    "Dazzline",
+    "Edith",
+    "Ezra",
+    "Fatema",
+    "Fayth",
+    "Gabrielle",
+    "Gail",
+    "Haben",
+    "Hazzell",
+    "Hannah",
+    "Hanita",
+    "Indigo",
+    "Imani",
+    "Ida",
+    "Jashanna",
+    "Jada",
+    "Kalisha",
+    "Kimani",
+    "Lafyette",
+    "Lashonda",
+    "Latanya",
+    "Latasha",
+    "Latonya",
+    "Latricia",
+    "Liana",
+    "Makayla",
+    "Marquita",
+    "Merryll",
+    "Nakala",
+    "Navaeh",
+    "Orlena",
+    "Patriciana",
+    "Rhianna",
+    "Shania",
+    "Shanika",
+    "Shanique",
+    "Shanita",
+    "Talisa",
+    "Sheniqua",
+    "Talisha",
+    "Tia",
+    "Umbrosia",
+    "Yolanda",
+    "Zari"
 ]
     
 historical_characters = [
@@ -582,13 +572,13 @@ historical_characters = [
 ]
 
 list = [
-    ["George WASHINGTON",57,"Virginia",3,[10,10],95],
-    ["Thomas JEFFERSON",57,"Virginia"],
-    ["Abraham LINCOLN",52,"Illinois",4,[],80],
-    ["Theodore ROOSEVELT",42,"New York",6,[],75],
-    ["Woodrow WILSON",56,"New Jersey",8,[],50],
-    ["Franklin D ROOSEVELT",51,"New York",6,[],65],
-    ["John F KENNEDY",43,"Massachusetts",6,[],60]
+    ["George Washington",57,"Virginia",3,[10,10],95],
+    ["Thomas Jefferson",57,"Virginia"],
+    ["Abraham Lincoln",52,"Illinois",4,[],80],
+    ["Theodore Roosevelt",42,"New York",6,[],75],
+    ["Woodrow Wilson",56,"New Jersey",8,[],50],
+    ["Franklin D. Roosevelt",51,"New York",6,[],65],
+    ["John F. Kennedy",43,"Massachusetts",6,[],60]
 ]
 
 def sLen(value,length): # standardize length
