@@ -10,30 +10,38 @@ class Character:
         self._given_name: str = given_name if given_name is not None else gen_given_name(self)
         self._middle_name: str = middle_name if middle_name is not None else gen_middle_name(self)
         self._family_name: str = family_name if family_name is not None else gen_family_name(self)
+        # could maybe have a full or government name as well as preferred name fields
         self._nameform: tup = nameform
-        self.full_name: str = get_name(self)
+        self.full_name: dict = get_name(self)
         self.demographics: IDK = None
         self.age: int = 0 # the age in years of the character
         self.presentation: Presentation = None
-
-        def gen_given_name(self):
+        
+        def gen_given_name(self) -> str:
             pass
             '''
             different demographic blocs affect the possible names
             presentation, heritage / ethnicity, generation, religion are considered
             each overlapping area has a weighted list for the most common names for those people
+
+            determine if it's a compound first name like Jo Anne or John Paul
+            compounds are sometimes hyphenated
+            sometimes first names are used as an initial
             '''
 
-        def gen_middle_name(self):
-            pass
+        def gen_middle_name(self) -> str:
+            if rand.randint(0,4) == 0: # one-in-five candidates will use their middle name(s) or initial(s)
+                for i in range(rand.randint(1,2)): # the number of middle names to be used
+                    pass
+            return ""
             # determine if seveal middle names
             # determine if middle name is an initial
         
-        def gen_last_name(self):
+        def gen_last_name(self) -> str:
             pass
         
         def get_name(self):
-            names: list[str] = [self._given_name, self._middle_name, self._family_name]
+            names: tup[str] = (self._given_name, self._middle_name, self._family_name)
             nameform = self._nameform
             return " ".join(names[nameform[0]], names[nameform[1]], names[nameform[2]])
         
@@ -58,8 +66,8 @@ class Character:
         Given Family: George Washington
         Given Middle(initial) Family: Ulysses S. Grant
         Given Middle(initials) Family: George H. W. Bush
+        Given(initial) Middle(initial) Family: H. G. Wells
         '''
-            
 
 class Candidate(Character):
     instances = [] # list containing all instances of candidate class
@@ -68,8 +76,8 @@ class Candidate(Character):
         Character.instances.append(self)
         
         self.delegates: int = 0 # number of delegates voting for the candidate
-        self.cash: int = 0 # amound of cash held
-        self.origin: State = None
+        self.cash: int = 0 # amount of cash held
+        self.origin: State = None # the city of origin
         self.education: int = 0 # education level
         self.alignments: tup[int] = (1000,1000) # alignment on a 2-axis grid
         self.experience: list[] = [] # past experience
@@ -288,10 +296,6 @@ class Candidate(Character):
         self.conviction = rand.randint(0,100)
         return self.conviction
     
-    def printProfile(self):
-        #print(name + " is a " + profile[0] + " from " + profile[1] + " representing the " + profile[2] + " Party.")
-        pass
-    
     def __str__(self): # overload str()
         return self.name
     
@@ -318,7 +322,8 @@ class Player(Candidate):
     instances = []
     def __init__(self):
         self.__class__.instances.append(self)
-        super().__class__.instances.append(self)
+        Candidate.instances.append(self)
+        Character.instances.append(self)
 
 white_american_names = [ # namecensus.com/last-names/common-white-surnames/
     "Smith",
