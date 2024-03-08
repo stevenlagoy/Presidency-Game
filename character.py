@@ -3,7 +3,7 @@ import math as math
 from state import State
 
 class Character:
-    instances = []
+    instances: list[Character] = []
     def __init__(self, buildstring: str = None, given_name: str = None, middle_name: str = None, family_name: str = None, nameform: tup[int] = (0, 1, 2)):
         self.__class__.instances.append(self)
 
@@ -190,7 +190,7 @@ class Candidate(Character):
         self.ageMod = \
                 None if self.age < 35 else \
                 (-(((self.age-55)**2)/20)+100) if self.age >= 35 and self.age <= 75 else \
-                ((-(12*self.age)/15)+140) if self.age >= 76 and self.age <= 100 else \
+                ((-(4*self.age)/5)+140) if self.age > 75 and self.age <= 100 else \
                 None
         return self.age
     
