@@ -325,6 +325,20 @@ class Player(Candidate):
         Candidate.instances.append(self)
         Character.instances.append(self)
 
+        self.family = {
+            "ancestors" : [],
+            "grandparents" : [],
+            "parents" : [],
+            "piblings" : [],
+            "siblings" : [],
+            "cousins" : [],
+            "children" : [],
+            "niblings" : [],
+            "grandchildren" : [],
+            "descendents" : [],
+            "spouses" : []
+        }
+
 white_american_names = [ # namecensus.com/last-names/common-white-surnames/
     "Smith",
     "Johnson",
