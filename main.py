@@ -251,9 +251,6 @@ def open_save(path):
 
     # this is where the complicated part goes where it creates all the characters and states and everything based on what's in the file
 
-def reset():
-    Character.instances = []
-
 def update_probability(actual, nominal, outcome, weighted, target):
     # takes the actual probability of a 'winning' outcome (determined by the roll function)
     # takes the nominal probability of a 'winning' outcome (what is shown to the user)
@@ -269,6 +266,10 @@ def roll_probability(nominal, modifier):
     scale = 1 - nominal
     scaled_additive = additive * scale
     weighted = nominal + scaled_additive
+
+def reset() -> None:
+    open("\\".join(__file__.split("\\")[:-1]) + "\\log.txt", "w").close() # wipe the log file by opening in write mode and closing
+    Character.instances = []
 
 def main():
 

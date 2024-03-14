@@ -1,21 +1,24 @@
 import random as rand
 import math as math
+from os import listdir
+from typing import Union, List, Tuple, NoReturn, Dict
+from engine import error_log
 from state import State
 
 class Character:
-    instances: list[Character] = []
-    def __init__(self, buildstring: str = None, given_name: str = None, middle_name: str = None, family_name: str = None, nameform: tup[int] = (0, 1, 2)):
+    instances: List = []
+    def __init__(self, buildstring: str = None, given_name: str = None, middle_name: str = None, family_name: str = None, nameform: Tuple[int] = (0, 1, 2)):
         self.__class__.instances.append(self)
 
         self._given_name: str = given_name if given_name is not None else gen_given_name(self)
         self._middle_name: str = middle_name if middle_name is not None else gen_middle_name(self)
         self._family_name: str = family_name if family_name is not None else gen_family_name(self)
         # could maybe have a full or government name as well as preferred name fields
-        self._nameform: tup = nameform
+        self._nameform: Tuple[int] = nameform
         self.full_name: dict = get_name(self)
-        self.demographics: IDK = None
+        self.demographics = None
         self.age: int = 0 # the age in years of the character
-        self.presentation: Presentation = None
+        self.presentation: str = None
         
         def gen_given_name(self) -> str:
             pass
@@ -37,11 +40,11 @@ class Character:
             # determine if seveal middle names
             # determine if middle name is an initial
         
-        def gen_last_name(self) -> str:
-            pass
+        def gen_family_name(self) -> str:
+            return ""
         
         def get_name(self):
-            names: tup[str] = (self._given_name, self._middle_name, self._family_name)
+            names: Tuple[str] = (self._given_name, self._middle_name, self._family_name)
             nameform = self._nameform
             return " ".join(names[nameform[0]], names[nameform[1]], names[nameform[2]])
         
@@ -79,9 +82,9 @@ class Candidate(Character):
         self.cash: int = 0 # amount of cash held
         self.origin: State = None # the city of origin
         self.education: int = 0 # education level
-        self.alignments: tup[int] = (1000,1000) # alignment on a 2-axis grid
-        self.experience: list[] = [] # past experience
-        self.skills: tup[int] = (0,0,0) # executive, legislative, judicial skill of the character - TODO could be a tuple
+        self.alignments: Tuple[int] = (1000,1000) # alignment on a 2-axis grid
+        self.experience: List = [] # past experience
+        self.skills: Tuple[int] = (0,0,0) # executive, legislative, judicial skill of the character - TODO could be a tuple
         self.aptitude: int = 0 # sum of all the skills
         self.conviction: int = 0 # conviction / stagnation of the character's politics
         self.ageMod: float = 0
@@ -147,16 +150,16 @@ class Candidate(Character):
             
     def genName(self):
         if self.presentation == "M":
-            forename = rand.choice(namesM)
+            forename = rand.choice(names["names_given_white"])
             if rand.randint(0,2) == 0: # one-third of people will have a middle initial
-                minitial = rand.choice(namesM)[0]
+                minitial = rand.choice(names["names_middle_white"])[0]
                 forename += " " + minitial
         elif self.presentation == "F":
-            forename = rand.choice(namesF)
+            forename = rand.choice(names["names_given_white"])
             if rand.randint(0,2) == 0: # one-third of people will have a middle initial
-                minitial = rand.choice(namesF)[0]
+                minitial = rand.choice(names["names_given_white"])[0]
                 forename += " " + minitial
-        surname = rand.choice(surnames)
+        surname = rand.choice(names["names_given_white"])
         self.name = forename + " " + surname
         return self.name
                 
@@ -300,20 +303,7 @@ class Candidate(Character):
         return self.name
     
     def __repr__(self): # overload for representation func - creates buildstrings
-        return (
-            "CH" + str(int(self.is_player)) +
-            "-NA" + str(self.name) +
-            "-DE" + str(self.delegates) +
-            "-CA" + str(self.cash) +
-            "-AG" + str(self.age) +
-            "-PR" + str(self.presentation) +
-            "-OR" + str(self.origin.name) +
-            "-ED" + str(self.education) +
-            "-EX" +
-            "-AL" + str(sLen(self.alignments[0],4)) + str(sLen(self.alignments[1],4)) +
-            "-SK" + str(sLen(self.skills[0],3)) + str(sLen(self.skills[1],3)) + str(sLen(self.skills[2],3)) + 
-            "-CO" + str(self.conviction)
-        )
+        ...
         
     def __eq__(self, other): # returns true if the comparators are both Character instances and the name, alignments, and skills are the same
         return False if not isinstance(other, Character) else self.name == other.name and self.alignments == other.alignments and self.skills == other.skills
@@ -339,182 +329,31 @@ class Player(Candidate):
             "spouses" : []
         }
 
-white_american_names = [ # namecensus.com/last-names/common-white-surnames/
-    "Smith",
-    "Johnson",
-    "Miller",
-    "Brown",
-    "Jones",
-    "Williams",
-    "Davis",
-    "Anderson",
-    "Wilson",
-    "Martin",
-    "Taylor",
-    "Moore",
-    "Thompson",
-    "White",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    ""
-]
-
-african_american_names = [ # from www.momjunction.com/articles/ghetto-baby-names-for-girls-and-boys_00398172/#african-american-boy-names and https://namecensus.com/last-names/common-black-surnames/
-    "Williams",
-    "Johnson",
-    "Smith",
-    "Jones",
-    "Brown",
-    "Jackson",
-    "Davis",
-    "Thomas",
-    "Harris",
-    "Robinson",
-    "Taylor",
-    "Wilson",
-    "Moore",
-    "White",
-    "Lewis",
-    "Walker",
-    "Green",
-    "Thompson",
-    "Washington",
-    "Anderson",
-    "Scott",
-    "Carter",
-    "Wright",
-    "Hill",
-    "Allen",
-    "Miller",
-    "Mitchell",
-    "Young",
-    "Lee",
-    "Martin",
-    "Clark",
-    "King",
-    "Edwards",
-    "Turner",
-    "Coleman",
-    "James",
-    "Evans",
-    "",
-    "Ahmod",
-    "Asaad",
-    "Autry",
-    "Booker",
-    "Busta",
-    "Calvin",
-    "Caleb",
-    "Cleavon",
-    "Craig",
-    "Dajon",
-    "Daran",
-    "Elijah",
-    "Elroy",
-    "Farrell",
-    "Furnell",
-    "Gabriel",
-    "Guyton",
-    "Hampton",
-    "Herold",
-    "Isiah",
-    "Izaak",
-    "Jamal",
-    "Jaylen",
-    "Joshua",
-    "Karlus",
-    "Kaseko",
-    "Kwamie",
-    "Latrell",
-    "Lavar",
-    "Leshawn",
-    "Lloyd",
-    "Luther",
-    "Malik",
-    "Major",
-    "Nathan",
-    "Noah",
-    "Brian",
-    "Owen",
-    "Perry",
-    "Parvez",
-    "Pierre",
-    "Qasim",
-    "Roshaun",
-    "Warren",
-    "Xavier",
-    "Yogi",
-    "Zephan",
-    "",
-    "Akilah",
-    "Amani",
-    "Brianna",
-    "Braelin",
-    "Capria",
-    "Cedrica",
-    "Destiny",
-    "Dallas",
-    "Dazzline",
-    "Edith",
-    "Ezra",
-    "Fatema",
-    "Fayth",
-    "Gabrielle",
-    "Gail",
-    "Haben",
-    "Hazzell",
-    "Hannah",
-    "Hanita",
-    "Indigo",
-    "Imani",
-    "Ida",
-    "Jashanna",
-    "Jada",
-    "Kalisha",
-    "Kimani",
-    "Lafyette",
-    "Lashonda",
-    "Latanya",
-    "Latasha",
-    "Latonya",
-    "Latricia",
-    "Liana",
-    "Makayla",
-    "Marquita",
-    "Merryll",
-    "Nakala",
-    "Navaeh",
-    "Orlena",
-    "Patriciana",
-    "Rhianna",
-    "Shania",
-    "Shanika",
-    "Shanique",
-    "Shanita",
-    "Talisa",
-    "Sheniqua",
-    "Talisha",
-    "Tia",
-    "Umbrosia",
-    "Yolanda",
-    "Zari"
-]
+def read_names(file_name: str) -> Union[List[str], None]:
+    ''' Reads a passed names file and returns the read names as a list. Raises exception if the file is not found or is improperly formatted. '''
     
+    # open the file and read the contents
+    try:
+        default_path: str = "\\".join(__file__.split("\\")[:-1]) + "\\names\\"
+        contents: List[str] = []
+        file = open(default_path + file_name, "r")
+        contents = file.read().split("\n")
+    except FileNotFoundError: # log and return None if file does not exist
+        error_log("Failed to open file \"" + file_name + ".txt\" in read_names() in \"character.py\". Path to file is invalid, or file does not exist.")
+        return None
+    
+    try:
+        contents = contents[contents.index("&&&")+1:] # sort out unwanted lines
+    except ValueError: # log and return if file is improperly formatted
+        error_log("Failed to read file \"" + file_name + ".txt\" in read_names() in \"character.py\" File is not properly formatted (include \"&&&\" line to mark start of readable content in file).")
+        return None
+    return contents
+
+names: Dict = {}
+for file in listdir("\\".join(__file__.split("\\")[:-1]) + "\\names\\"):
+    names[file.split(".")[0]] = read_names(file)
+print(names)
+
 historical_characters = [
     {
             'name': 'George Washington',
@@ -589,19 +428,3 @@ historical_characters = [
         'party' : 'Centrist' # average ideology
     }
 ]
-
-list = [
-    ["George Washington",57,"Virginia",3,[10,10],95],
-    ["Thomas Jefferson",57,"Virginia"],
-    ["Abraham Lincoln",52,"Illinois",4,[],80],
-    ["Theodore Roosevelt",42,"New York",6,[],75],
-    ["Woodrow Wilson",56,"New Jersey",8,[],50],
-    ["Franklin D. Roosevelt",51,"New York",6,[],65],
-    ["John F. Kennedy",43,"Massachusetts",6,[],60]
-]
-
-def sLen(value,length): # standardize length
-    value = str(value)
-    while len(value) < length:
-        value = "0" + value
-    return value
