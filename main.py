@@ -21,7 +21,7 @@ from localization.EN_system_text import EN_system_text
 
 SAVEDIR = "C:\\Users\\LaGoySM\\Downloads\\Documents\\Presidency Game\\savegames\\" # constant directory of saves folder
 
-def get_curr_screen_geometry():
+def get_curr_screen_geometry() -> str:
     # find the size (in pixels) of current active screen even when there are multiple monitors
     # returns geometry: Tk geometry string [width]x[height]+[left]+[top]
 
@@ -34,9 +34,8 @@ def get_curr_screen_geometry():
     print(geometry)
     return geometry
 
-def dark_title_bar(window):
-    # make a window have a dark windows topbar
-    # takes an instance of Tk window
+def dark_title_bar(window: Tk) -> None:
+    ''' Makes a window have a standard Windows dark topbar. Takes Tk window instance. '''
     window.update()
     set_window_attribute = ct.windll.dwmapi.DwmSetWindowAttribute
     get_parent = ct.windll.user32.GetParent
@@ -46,8 +45,9 @@ def dark_title_bar(window):
     set_window_attribute(hwnd, 20, ct.byref(value), 4)
     # only works sometimes????
 
-def createWindow():
+def createWindow() -> Tk:
     root = tk.Tk()
+    from fonts import fonts
     root.title(EN_system_text.get("title"))
     root.attributes("-fullscreen", True)
     root.state("iconic")
@@ -57,14 +57,10 @@ def createWindow():
     root.resizable(False, False)
     root.pack_propagate(0)
 
-    # fonts
-    buttonfont = Font(family = "Yu Gothic Semibold", size = 16)
-
     # menu frame ----------------------------------------------------------------------------------------------------------------------------------------
     menu_frame = tk.Frame(root, bg = "#808080", highlightbackground = "black", highlightthickness = 4)
 
-    bgimg = ImageTk.PhotoImage(Image.open("gfx\\loadscreens\\mount_rushmore.png"))
-    background = tk.Label(root, image = bgimg)
+    background = tk.Label(root, image = ImageTk.PhotoImage(Image.open("gfx\\loadscreens\\mount_rushmore.png")))
     background.place(x = 0, y = 0)
     background.lower()
 
@@ -73,19 +69,19 @@ def createWindow():
     title_label.image = titlecard
     title_label.grid(row = 0, column = 0, pady = 10)
 
-    new_save_button = tk.Button(menu_frame, font = buttonfont, text = EN_system_text.get("new_game_text"), width = 50, command = lambda: openFrame(root, new_game_frame, "new_game_frame"))
+    new_save_button = tk.Button(menu_frame, font = fonts.button, text = EN_system_text.get("new_game_text"), width = 50, command = lambda: openFrame(root, new_game_frame, "new_game_frame"))
     new_save_button.grid(row = 1, column = 0, padx = 10, pady = 10)
 
-    continue_button = tk.Button(menu_frame, font = buttonfont, text = EN_system_text.get("continue_game_text"), width = 50, command = lambda: openFrame(root, open_save_frame, "open_save_frame"))
+    continue_button = tk.Button(menu_frame, font = fonts.button, text = EN_system_text.get("continue_game_text"), width = 50, command = lambda: openFrame(root, open_save_frame, "open_save_frame"))
     continue_button.grid(row = 2, column = 0, padx = 10, pady = 10)
 
-    tutorial_button = tk.Button(menu_frame, font = buttonfont, text = EN_system_text.get("tutorial_text"), width = 50)
+    tutorial_button = tk.Button(menu_frame, font = fonts.button, text = EN_system_text.get("tutorial_text"), width = 50)
     tutorial_button.grid(row = 3, column = 0, padx = 10, pady = 10)
 
-    about_button = tk.Button(menu_frame, font = buttonfont, text = EN_system_text.get("about_text"), width = 50)
+    about_button = tk.Button(menu_frame, font = fonts.button, text = EN_system_text.get("about_text"), width = 50)
     about_button.grid(row = 4, column = 0, padx = 10, pady = 10)
 
-    close_game_button = tk.Button(menu_frame, font = buttonfont, text = EN_system_text.get("close_game_text"), width = 50, command = lambda : check_exit_game(root))
+    close_game_button = tk.Button(menu_frame, font = fonts.button, text = EN_system_text.get("close_game_text"), width = 50, command = lambda : check_exit_game(root))
     close_game_button.grid(row = 5, column = 0, padx = 10, pady = 10)
     
     # open save frame ----------------------------------------------------------------------------------------------------------------------------------------
@@ -174,8 +170,7 @@ def createWindow():
     openFrame(root, menu_frame, "menu_frame")
 
     root.protocol("WM_DELETE_WINDOW", on_closing) # stops the whole program when the tk window is closed
-    root.mainloop()
-
+    
     return root
 
 def check_exit_game(root):
@@ -268,15 +263,19 @@ def roll_probability(nominal, modifier):
     weighted = nominal + scaled_additive
 
 def reset() -> None:
-    open("\\".join(__file__.split("\\")[:-1]) + "\\log.txt", "w").close() # wipe the log file by opening in write mode and closing
+    ''' Prepares files for a new instance of the game. Clears class instance lists and the log file. '''
+    open("log.txt", "w").close() # wipe the log file by opening in write mode and closing
     Character.instances = []
 
-def main():
+def main() -> None:
+    ''' main.py '''
 
     reset()
 
-    window = createWindow()
+    root = createWindow()
     
+    root.mainloop()
+
     reset()
     
     print("Finished")
