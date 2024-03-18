@@ -1,76 +1,123 @@
 import random as rand
 import math as math
 from os import listdir
-from typing import Union, List, Tuple, NoReturn, Dict
-from engine import error_log
+from typing import List, Tuple, NoReturn, Dict
+from engine import error_log, percentage_roll
 from state import State
+
+# read the names file and create a local dictionary
+def read_names(file_name: str) -> List[str] | None:
+    ''' Reads a passed names file and returns the read names as a list. Raises exception if the file is not found or is improperly formatted. '''
+    
+    # open the file and read the contents
+    try:
+        default_path: str = "\\".join(__file__.split("\\")[:-1]) + "\\names\\"
+        contents: List[str] = []
+        file = open(default_path + file_name, "r")
+        contents = file.read().split("\n")
+    except FileNotFoundError: # log and return None if file does not exist
+        error_log("Failed to open file \"" + file_name + ".txt\" in read_names() in \"character.py\". Path to file is invalid, or file does not exist.")
+        return None
+    
+    # check that the file is properly formatted and readable
+    try:
+        contents = contents[contents.index("&&&")+1:] # sort out unwanted lines
+    except ValueError: # log and return if file is improperly formatted
+        error_log("Failed to read file \"" + file_name + ".txt\" in read_names() in \"character.py\" File is not properly formatted (include \"&&&\" line to mark start of readable content in file).")
+        return None
+    
+    return contents
+
+names: Dict = {}
+for file in listdir("names\\"):
+    names[file.split(".")[0]] = read_names(file)
 
 class Character:
     instances: List = []
-    def __init__(self, buildstring: str = None, given_name: str = None, middle_name: str = None, family_name: str = None, nameform: Tuple[int] = (0, 1, 2)):
+    def __init__(self, buildstring: str = None, *, given_name: str = None, middle_name: str = None, family_name: str = None, nameform: Tuple[int] = (0, 1, 2)):
         self.__class__.instances.append(self)
 
-        self._given_name: str = given_name if given_name is not None else gen_given_name(self)
-        self._middle_name: str = middle_name if middle_name is not None else gen_middle_name(self)
-        self._family_name: str = family_name if family_name is not None else gen_family_name(self)
+        self._given_name: str = given_name if given_name else self.gen_given_name() # sets the given name to the passed name OR generates one
+        self._middle_name: str = middle_name if middle_name else self.gen_middle_name() # sets the middle name to the passed name OR generates one
+        self._family_name: str = family_name if family_name else self.gen_family_name() # sets the family name to the passed name OR generates one
         # could maybe have a full or government name as well as preferred name fields
         self._nameform: Tuple[int] = nameform
-        self.full_name: dict = get_name(self)
+        #self.full_name: dict = self.get_name(self)
         self.demographics = None
         self.age: int = 0 # the age in years of the character
         self.presentation: str = None
-        
-        def gen_given_name(self) -> str:
-            pass
-            '''
-            different demographic blocs affect the possible names
-            presentation, heritage / ethnicity, generation, religion are considered
-            each overlapping area has a weighted list for the most common names for those people
 
-            determine if it's a compound first name like Jo Anne or John Paul
-            compounds are sometimes hyphenated
-            sometimes first names are used as an initial
-            '''
-
-        def gen_middle_name(self) -> str:
-            if rand.randint(0,4) == 0: # one-in-five candidates will use their middle name(s) or initial(s)
-                for i in range(rand.randint(1,2)): # the number of middle names to be used
-                    pass
-            return ""
-            # determine if seveal middle names
-            # determine if middle name is an initial
-        
-        def gen_family_name(self) -> str:
-            return ""
-        
-        def get_name(self):
-            names: Tuple[str] = (self._given_name, self._middle_name, self._family_name)
-            nameform = self._nameform
-            return " ".join(names[nameform[0]], names[nameform[1]], names[nameform[2]])
-        
+    def gen_given_name(self) -> str:
+        ''' Generate the character's given (first) name. '''
+        given_name: str = ""
+        given_name += rand.choice(names.get("names_given"))
         '''
-        possibilities for names:
-        Firstname Lastname
-        Firstname Middlename Lastname
-        Firstname Minitial Lastname    also sometimes names can just be a single letter without being initials, like Harry S Truman
-        Familyname Givenname
-        Firstname Lastname Jr/Sr
-        Firstname Lastname Number
-        Firstinitial Middlename Lastname
-        Also titles like Mr. Ms. Mrs. Dr.   maybe these shouldn't be tracked...
-        should maiden names be tracked? this could be relevant for divorces
+        different demographic blocs affect the possible names
+        presentation, heritage / ethnicity, generation, religion are considered
+        each overlapping area has a weighted list for the most common names for those people
 
-        perhaps users select a format for their name:
-        Given Middle Family
-        Family Given
-        These name categories may include several words, abbreviations, etc or may be blank
-        
-        Given Middle Family: John Quincy Adams
-        Given Family: George Washington
-        Given Middle(initial) Family: Ulysses S. Grant
-        Given Middle(initials) Family: George H. W. Bush
-        Given(initial) Middle(initial) Family: H. G. Wells
+        determine if it's a compound first name like Jo Anne or John Paul
+        compounds are sometimes hyphenated
+        sometimes first names are used as an initial
         '''
+        return given_name
+
+    def gen_middle_name(self) -> str:
+        ''' Generate the character's middle name. '''
+        middle_name: str = ""
+        if percentage_roll(0.8): # 80% of characters will have at least one middle name
+            middle_name += rand.choice(names.get("names_given"))
+            if percentage_roll(0.125): # 10% of people will have two middle names
+                middle_name += " " + rand.choice(names.get("names_given"))
+        return middle_name
+    '''
+    about 30% of presidents are known by their middle name or initial
+    38% of government officials use a middle initial as of 2014 www.nytimes.com/2014/07/13/fashion/theyre-dropping-like-middle-initials.html
+    '''
+
+    def gen_family_name(self) -> str:
+        ''' Generate the character's family (last) name. '''
+        last_name: str = ""
+        last_name += rand.choice(names.get("names_family"))
+        return last_name
+    
+    def get_name(self) -> str:
+        ''' Return the name of a character according to their nameform. '''
+        names: Tuple[str] = (self._given_name, self._middle_name, self._family_name)
+        nameform = self._nameform
+        return " ".join(names[nameform[0]], names[nameform[1]], names[nameform[2]])
+    
+    def __repr__() -> str:
+        ''' Return a string representation of the character which can be used as a buildstring. '''
+        return f""
+
+    def __eq__(self, other) -> bool:
+        ''' Returns true if all the datafields between two characters have the same value. Returns false otherwise. '''
+        return False
+
+    '''
+    possibilities for names:
+    Firstname Lastname
+    Firstname Middlename Lastname
+    Firstname Minitial Lastname    also sometimes names can just be a single letter without being initials, like Harry S Truman
+    Familyname Givenname
+    Firstname Lastname Jr/Sr
+    Firstname Lastname Number
+    Firstinitial Middlename Lastname
+    Also titles like Mr. Ms. Mrs. Dr.   maybe these shouldn't be tracked...
+    should maiden names be tracked? this could be relevant for divorces
+
+    perhaps users select a format for their name:
+    Given Middle Family
+    Family Given
+    These name categories may include several words, abbreviations, etc or may be blank
+    
+    Given Middle Family: John Quincy Adams
+    Given Family: George Washington
+    Given Middle(initial) Family: Ulysses S. Grant
+    Given Middle(initials) Family: George H. W. Bush
+    Given(initial) Middle(initial) Family: H. G. Wells
+    '''
 
 class Candidate(Character):
     instances = [] # list containing all instances of candidate class
@@ -329,31 +376,6 @@ class Player(Candidate):
             "spouses" : []
         }
 
-def read_names(file_name: str) -> Union[List[str], None]:
-    ''' Reads a passed names file and returns the read names as a list. Raises exception if the file is not found or is improperly formatted. '''
-    
-    # open the file and read the contents
-    try:
-        default_path: str = "\\".join(__file__.split("\\")[:-1]) + "\\names\\"
-        contents: List[str] = []
-        file = open(default_path + file_name, "r")
-        contents = file.read().split("\n")
-    except FileNotFoundError: # log and return None if file does not exist
-        error_log("Failed to open file \"" + file_name + ".txt\" in read_names() in \"character.py\". Path to file is invalid, or file does not exist.")
-        return None
-    
-    try:
-        contents = contents[contents.index("&&&")+1:] # sort out unwanted lines
-    except ValueError: # log and return if file is improperly formatted
-        error_log("Failed to read file \"" + file_name + ".txt\" in read_names() in \"character.py\" File is not properly formatted (include \"&&&\" line to mark start of readable content in file).")
-        return None
-    return contents
-
-names: Dict = {}
-for file in listdir("\\".join(__file__.split("\\")[:-1]) + "\\names\\"):
-    names[file.split(".")[0]] = read_names(file)
-print(names)
-
 historical_characters = [
     {
             'name': 'George Washington',
@@ -426,5 +448,5 @@ historical_characters = [
         'age' : 55, # average age
         'state' : 'Ohio', # average state
         'party' : 'Centrist' # average ideology
-    }
+    },
 ]

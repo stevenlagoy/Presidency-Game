@@ -2,17 +2,3 @@ names_family_white
 List of most common last/family names among white Americans
 
 &&&
-Smith
-Johnson
-Miller
-Brown
-Jones
-Williams
-Davis
-Anderson
-Wilson
-Martin
-Taylor
-Moore
-Thompson
-White

@@ -12,7 +12,7 @@ def get_timestamp() -> str:
     ''' Returns the current date and time as a string. To be used for logging applications. '''
     return datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-def percentage_roll(chance: int, affirmValue: bool = True) -> bool:
+def percentage_roll(chance: float, affirmValue: bool = True) -> bool:
     ''' Returns boolean randomly based on the passed percentage chance. An affirmative roll will return affirmValue. '''
 
     if chance >= 1: return affirmValue # if the chance is 100% or greater, always True
