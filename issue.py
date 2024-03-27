@@ -201,8 +201,8 @@ https://www.washingtonpost.com/politics/interactive/2023/presidential-candidates
 
 # to be honest i have no clue how to group these - many issues contain each other
 issues = [
-        {
-                "name" : "Retirement Age",
-                "desc" : ""
-        }
+    {
+        "name" : "Retirement Age",
+        "desc" : ""
+    }
 ]

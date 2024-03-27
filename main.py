@@ -19,7 +19,7 @@ from bloc import Bloc, blocs # generates all blocs
 from localization.EN_descriptions import EN_descriptions
 from localization.EN_system_text import EN_system_text
 
-SAVEDIR = "C:\\Users\\LaGoySM\\Downloads\\Documents\\Presidency Game\\savegames\\" # constant directory of saves folder
+SAVEDIR: str = "C:\\Users\\LaGoySM\\Downloads\\Documents\\Presidency Game\\savegames\\" # constant directory of saves folder
 
 def get_curr_screen_geometry() -> str:
     # find the size (in pixels) of current active screen even when there are multiple monitors
