@@ -378,70 +378,70 @@ class Player(Candidate):
 
 historical_characters = [
     {
-            'name': 'George Washington',
-            'age': 57,
-            'state': 'Virginia',
-            'party': 'None'
+        'name': 'George Washington',
+        'age': 57,
+        'state': 'Virginia',
+        'party': 'None'
     },
     {
-            'name': 'John Adams',
-            'age': 61,
-            'state': 'Massachusetts',
-            'party': 'Federalist'
+        'name': 'John Adams',
+        'age': 61,
+        'state': 'Massachusetts',
+        'party': 'Federalist'
     },
     {
-            'name': 'Thomas Jefferson',
-            'age': 57,
-            'state': 'Virginia',
-            'party': 'Democratic-Republican'
+        'name': 'Thomas Jefferson',
+        'age': 57,
+        'state': 'Virginia',
+        'party': 'Democratic-Republican'
     },
     {
-            'name': 'Andrew Jackson',
-            'age': 61,
-            'state': 'Tennessee',
-            'party': 'Democrat'
+        'name': 'Andrew Jackson',
+        'age': 61,
+        'state': 'Tennessee',
+        'party': 'Democrat'
     },
     {
-            'name': 'Abraham Lincoln',
-            'age': 52,
-            'state': 'Illinois',
-            'party': 'Republican'
+        'name': 'Abraham Lincoln',
+        'age': 52,
+        'state': 'Illinois',
+        'party': 'Republican'
     },
     {
-            'name': 'Ulysses S. Grant',
-            'age': 46,
-            'state': 'Ohio',
-            'party': 'Republican'
+        'name': 'Ulysses S. Grant',
+        'age': 46,
+        'state': 'Ohio',
+        'party': 'Republican'
     },
     {
-            'name': 'Theodore Roosevelt',
-            'age': 42,
-            'state': 'New York',
-            'party': 'Republican'
+        'name': 'Theodore Roosevelt',
+        'age': 42,
+        'state': 'New York',
+        'party': 'Republican'
     },
     {
-            'name': 'Woodrow Wilson',
-            'age': 56,
-            'state': 'New Jersey',
-            'party': 'Democrat'
+        'name': 'Woodrow Wilson',
+        'age': 56,
+        'state': 'New Jersey',
+        'party': 'Democrat'
     },
     {
-            'name': 'Franklin D. Roosevelt',
-            'age': 51,
-            'state': 'New York',
-            'party': 'Democrat'
+        'name': 'Franklin D. Roosevelt',
+        'age': 51,
+        'state': 'New York',
+        'party': 'Democrat'
     },
     {
-            'name': 'Dwight D. Eisenhower',
-            'age': 62,
-            'state': 'Kansas',
-            'party': 'Republican'
+        'name': 'Dwight D. Eisenhower',
+        'age': 62,
+        'state': 'Kansas',
+        'party': 'Republican'
     },
     {
-            'name': 'John F. Kennedy',
-            'age': 43,
-            'state': 'Massachusetts',
-            'party': 'Democrat'
+        'name': 'John F. Kennedy',
+        'age': 43,
+        'state': 'Massachusetts',
+        'party': 'Democrat'
     },
     { # easter egg character
         'name' : 'Yelnick McWawa',
