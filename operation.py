@@ -1,5 +1,7 @@
+from typing import List
+
 class Operation:
-    instances = []
+    instances: List = []
     def __init__(self, operator, agents):
         self.__class__.instances.append(self)
         self.operator = operator # character object associated as the primary character for this operation
