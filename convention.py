@@ -1,22 +1,261 @@
+from typing import List, Dict
+
 class Convention:
-    instances = []
+    instances: List = []
     def __init__(self):
         self.__class__.instances.append(self)
             
-    def __repr__(self):
+    def __repr__(self) -> str:
         return None
 
 class Primary(Convention):
-    instances = []
-    def __init__(self, type):
+    instances: List = []
+    def __init__(self, *, type):
         self.__class__.instances.append(self)
         self.type = type
+        super().__init__()
 
 class Caucus(Convention):
-    instances = []
-    def __init__(self):
+    instances: List = []
+    def __init__(self, *, type):
         self.__class__.instances.append(self)
+        self.type = type
+        super().__init__()
 
+conventions: List[Dict] = [
+    {
+        "state" : "Connecticut",
+        "class" : "primary",
+        "type" : "closed",
+    },
+    {
+        "state" : "Delaware",
+        "class" : "primary",
+        "type" : "closed",
+    },
+    {
+        "state" : "Florida",
+        "class" : "primary",
+        "type" : "closed",
+    },
+    {
+        "state" : "Kansas",
+        "class" : "primary",
+        "type" : "closed",
+    },
+    {
+        "state" : "Kentucky",
+        "class" : "primary",
+        "type" : "closed",
+    },
+    {
+        "state" : "Louisiana",
+        "class" : "primary",
+        "type" : "closed",
+    },
+    {
+        "state" : "Maryland",
+        "class" : "primary",
+        "type" : "closed",
+    },
+    {
+        "state" : "Nebraska",
+        "class" : "primary",
+        "type" : "closed",
+    },
+    {
+        "state" : "Nevada",
+        "class" : "primary",
+        "type" : "closed",
+    },
+    {
+        "state" : "New Mexico",
+        "class" : "primary",
+        "type" : "closed",
+    },
+    {
+        "state" : "New York",
+        "class" : "primary",
+        "type" : "closed",
+    },
+    {
+        "state" : "Pennsylvania",
+        "class" : "primary",
+        "type" : "closed",
+    },
+    {
+        "state" : "Wyoming",
+        "class" : "primary",
+        "type" : "closed",
+    },
+    {
+        "state" : "District of Columbia",
+        "class" : "primary",
+        "type" : "closed",
+    },
+    #----------------------------------------------------------------------------------------------
+    {
+        "state" : "Alaska",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "Arizona",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "California",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "Colorado",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "Illinois",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "Iowa",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "Kansas",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "Maine",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "New Hampshire",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "New Jersey",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "North Carolina",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "Ohio",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "Oregon",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "Rhode Island",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "Utah",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "West Virginia",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    {
+        "state" : "Massachusetts",
+        "class" : "primary",
+        "type" : "semi-closed",
+    },
+    #----------------------------------------------------------------------------------------------
+    {
+        "state" : "Alabama",
+        "class" : "primary",
+        "type" : "open",
+    },
+    {
+        "state" : "Arkansas",
+        "class" : "primary",
+        "type" : "open",
+    },
+    {
+        "state" : "Georgia",
+        "class" : "primary",
+        "type" : "open",
+    },
+    {
+        "state" : "Hawaii",
+        "class" : "primary",
+        "type" : "open",
+    },
+    {
+        "state" : "Michigan",
+        "class" : "primary",
+        "type" : "open",
+    },
+    {
+        "state" : "Minnesota",
+        "class" : "primary",
+        "type" : "open",
+    },
+    {
+        "state" : "Missouri",
+        "class" : "primary",
+        "type" : "open",
+    },
+    {
+        "state" : "Montana",
+        "class" : "primary",
+        "type" : "open",
+    },
+    {
+        "state" : "North Dakota",
+        "class" : "primary",
+        "type" : "open",
+    },
+    {
+        "state" : "South Carolina",
+        "class" : "primary",
+        "type" : "open",
+    },
+    {
+        "state" : "Texas",
+        "class" : "primary",
+        "type" : "open",
+    },
+    {
+        "state" : "Vermont",
+        "class" : "primary",
+        "type" : "open",
+    },
+    {
+        "state" : "Virginia",
+        "class" : "primary",
+        "type" : "open",
+    },
+    {
+        "state" : "Wisconsin",
+        "class" : "primary",
+        "type" : "open",
+    },
+    {
+        "state" : "Puerto Rico",
+        "class" : "primary",
+        "type" : "open",
+    },
+]
 '''
 there are primaries or caucuses in all 50 states, DC, and 5 territories for the republicans, and the same plus "Democrats Abroad" for the democrats
 samoa, dems abroad, northern marianas, puerto rico, DC, guam, virgin islands

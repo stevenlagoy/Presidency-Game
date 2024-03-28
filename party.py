@@ -1,6 +1,8 @@
+from typing import List, Dict
+
 class Party:
     instances = []
-    def __init__(self, name, adjective, abbreviation, governing_body, color_code, symbol, icon_address):
+    def __init__(self, *, name, adjective, abbreviation, governing_body, color_code, symbol, icon_address):
         self.__class__.instances.append(self)
         self.name = name
         self.adjective = adjective
@@ -15,7 +17,7 @@ class Party:
         self.conventions = [] # list of primaries and caucuses held by the party
         
 
-parties = [
+parties: List[Dict] = [
     {
         "name" : "Democratic Party",
         "adjective" : "Democrats",
@@ -119,11 +121,11 @@ parties = [
 
 for party in parties:
     Party(
-        party.get("name"),
-        party.get("adjective"),
-        party.get("abbreviation"),
-        party.get("governing body"),
-        party.get("color"),
-        party.get("symbol"),
-        party.get("icon")
+        name= party.get("name"),
+        adjective= party.get("adjective"),
+        abbreviation= party.get("abbreviation"),
+        governing_body= party.get("governing body"),
+        color_code= party.get("color"),
+        symbol= party.get("symbol"),
+        icon_address= party.get("icon")
     )

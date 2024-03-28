@@ -1,5 +1,7 @@
+from typing import List
+
 class Issue:
-    instances = []
+    instances: List = []
     def __init__(self, name, desc = "", levels = []):
         self.__class__.instances.append(self)
                 
