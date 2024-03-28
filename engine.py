@@ -19,3 +19,7 @@ def percentage_roll(chance: float, affirmValue: bool = True) -> bool:
     elif chance <= 0: return not affirmValue # if the chance is 0% or less, always False
     else:
         return affirmValue if rand.uniform(0, 1) <= chance else not affirmValue
+    
+def reset() -> None:
+    ''' Prepares files for a new instance of the game. Clears class instance lists and the log file. '''
+    open("log.txt", "w").close() # wipe the log file by opening in write mode and closing
