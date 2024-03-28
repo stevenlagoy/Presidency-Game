@@ -47,165 +47,181 @@ def dark_title_bar(window: Tk) -> None:
     set_window_attribute(hwnd, 20, ct.byref(value), 4)
     # only works sometimes????
 
-def create_window() -> Tk:
-    root = tk.Tk()
-    root.title(EN_system_text.get("title"))
-    root.attributes("-fullscreen", True)
-    root.state("iconic")
-    root.configure(background="#808080")
-    #dark_title_bar(root)
-    root.iconbitmap("gfx\\icon.ico")
-    root.resizable(False, False)
-    root.pack_propagate(0)
+class rootWindow(tk.Tk):
+    def __init__(self):
+        tk.Tk.__init__(self)
+        self.title(EN_system_text.get("title"))
+        self.attributes("-fullscreen", True)
+        self.state("iconic")
+        self.configure(background="#808080")
+        #dark_title_bar(root)
+        self.iconbitmap("gfx\\icon.ico")
+        self.resizable(False, False)
+        self.pack_propagate(0)
+        self.protocol("WM_DELETE_WINDOW", on_closing) # stops the whole program when the tk window is closed
 
-    root.protocol("WM_DELETE_WINDOW", on_closing) # stops the whole program when the tk window is closed
+        # create a container to hold the frames
+        container: Frame = tk.Frame(self)
+        container.pack(side = "top", fill = "both", expand = True)
     
-    return root
+        # dictionary for the frames
+        self.frames: Dict[Frame] = {}
 
-def create_all_frames(root: Tk) -> None:
-    menu_createframe(root)
-    openSave_createframe(root)
-    newGame_createframe(root)
-    viewSwitcher_createframe(root)
-    characterView_createframe(root)
-    partyView_createframe(root)
-    mapView_createframe(root)
-    blocsView_createframe(root)
+        # create the frames and add to dictionary
+        for F in (menu_frame, openSave_frame, newGame_frame):
+            frame = F(container, self)
+            self.frames[F] = frame
+            frame.grid(row = 0, column = 0, sticky = "nsew")
 
-def menu_createframe(root: Tk) -> Frame:
+        self.show_frame(menu_frame)
+    
+    def show_frame(self, cont):
+        frame = self.frames[cont]
+        frame.tkraise()
+
+class menu_frame(tk.Frame):
     '''Creates the menu frame.'''
-    from fonts import fonts
+    def __init__(self, parent: Tk, controller: Tk):
+        from fonts import fonts
+        tk.Frame.__init__(self, parent, bg = "#808080", highlightbackground = "black", highlightthickness = 4)
 
-    menu_frame = tk.Frame(root, bg = "#808080", highlightbackground = "black", highlightthickness = 4)
+        background = tk.Label(self, image = ImageTk.PhotoImage(Image.open("gfx\\loadscreens\\mount_rushmore.png")))
+        background.place(x = 0, y = 0)
+        background.lower()
 
-    background = tk.Label(root, image = ImageTk.PhotoImage(Image.open("gfx\\loadscreens\\mount_rushmore.png")))
-    background.place(x = 0, y = 0)
-    background.lower()
+        titlecard = ImageTk.PhotoImage(Image.open("gfx/title_card.png").resize((606,300)))
+        title_label = tk.Label(self, image = titlecard)
+        title_label.image = titlecard
+        title_label.grid(row = 0, column = 0, pady = 10)
 
-    titlecard = ImageTk.PhotoImage(Image.open("gfx/title_card.png").resize((606,300)))
-    title_label = tk.Label(menu_frame, image = titlecard)
-    title_label.image = titlecard
-    title_label.grid(row = 0, column = 0, pady = 10)
+        new_save_button = tk.Button(self, font = fonts.button, text = EN_system_text.get("new_game_text"), width = 50,
+            command = lambda: controller.show_frame())
+        new_save_button.grid(row = 1, column = 0, padx = 10, pady = 10)
 
-    new_save_button = tk.Button(menu_frame, font = fonts.button, text = EN_system_text.get("new_game_text"), width = 50, command = lambda: openFrame(root, newGame_frame, "new_game_frame"))
-    new_save_button.grid(row = 1, column = 0, padx = 10, pady = 10)
+        continue_button = tk.Button(self, font = fonts.button, text = EN_system_text.get("continue_game_text"), width = 50,
+            command = lambda: controller.show_frame())
+        continue_button.grid(row = 2, column = 0, padx = 10, pady = 10)
 
-    continue_button = tk.Button(menu_frame, font = fonts.button, text = EN_system_text.get("continue_game_text"), width = 50, command = lambda: openFrame(root, openSave_frame, "open_save_frame"))
-    continue_button.grid(row = 2, column = 0, padx = 10, pady = 10)
+        tutorial_button = tk.Button(self, font = fonts.button, text = EN_system_text.get("tutorial_text"), width = 50)
+        tutorial_button.grid(row = 3, column = 0, padx = 10, pady = 10)
 
-    tutorial_button = tk.Button(menu_frame, font = fonts.button, text = EN_system_text.get("tutorial_text"), width = 50)
-    tutorial_button.grid(row = 3, column = 0, padx = 10, pady = 10)
+        about_button = tk.Button(self, font = fonts.button, text = EN_system_text.get("about_text"), width = 50)
+        about_button.grid(row = 4, column = 0, padx = 10, pady = 10)
 
-    about_button = tk.Button(menu_frame, font = fonts.button, text = EN_system_text.get("about_text"), width = 50)
-    about_button.grid(row = 4, column = 0, padx = 10, pady = 10)
-
-    close_game_button = tk.Button(menu_frame, font = fonts.button, text = EN_system_text.get("close_game_text"), width = 50, command = lambda : check_exit_game(root))
-    close_game_button.grid(row = 5, column = 0, padx = 10, pady = 10)
-
-    return menu_frame
+        close_game_button = tk.Button(self, font = fonts.button, text = EN_system_text.get("close_game_text"), width = 50,
+            command = lambda: check_exit_game(self))
+        close_game_button.grid(row = 5, column = 0, padx = 10, pady = 10)
     
-def openSave_createframe(root: Tk) -> Frame:
+class openSave_frame(tk.Frame):
     '''Creates the open save menu.'''
-    openSave_frame = tk.Frame(root)
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self)
+        openSave_frame = tk.Frame(self, parent)
 
-    save_list_info_label = tk.Label(openSave_frame, text = "Name\t\t\tDate\t\t\tProgress", justify = "left", anchor = "w", width = 80, height = 0)
-    save_list_info_label.grid(row = 0, column = 0)
+        save_list_info_label = tk.Label(openSave_frame, text = "Name\t\t\tDate\t\t\tProgress", justify = "left", anchor = "w", width = 80, height = 0)
+        save_list_info_label.grid(row = 0, column = 0)
 
-    saves_list = tk.Listbox(openSave_frame, width = 100)
-    count = 1
-    for file in os.listdir(SAVEDIR):
-        saves_list.insert(count, str(file).split(".")[0] + "             " + get_save_info(SAVEDIR + str(file))[1])
-    # i want the date and "progress" to be printed in the list as well... this poses an interesting problem, since they need to line up, and the saves may have a very long name
-    
-    # this has to be a lambda i think... there might be a better way
-    # get some info about the file and set the label's text accordingly - i hate to call the function twice but i'm not sure how to use the returned values otherwise
-    saves_list.bind('<<ListboxSelect>>', lambda x: save_info_label.config(text =
-        "Save Name: " + get_save_info(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt")[0] +
-        "\nSave Date: " + get_save_info(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt")[1]
-        ))
-    saves_list.grid(row = 1, column = 0)
+        saves_list = tk.Listbox(openSave_frame, width = 100)
+        count = 1
+        for file in os.listdir(SAVEDIR):
+            saves_list.insert(count, str(file).split(".")[0] + "             " + get_save_info(SAVEDIR + str(file))[1])
+        # i want the date and "progress" to be printed in the list as well... this poses an interesting problem, since they need to line up, and the saves may have a very long name
+        
+        # this has to be a lambda i think... there might be a better way
+        # get some info about the file and set the label's text accordingly - i hate to call the function twice but i'm not sure how to use the returned values otherwise
+        saves_list.bind('<<ListboxSelect>>', lambda x: save_info_label.config(text =
+            "Save Name: " + get_save_info(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt")[0] +
+            "\nSave Date: " + get_save_info(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt")[1]
+            ))
+        saves_list.grid(row = 1, column = 0)
 
-    save_info_label = tk.Label(openSave_frame, text = "Save Name:\nSave Date:", width = 25, height = 2, anchor = "w", justify = "left")
-    save_info_label.grid(row = 2, column = 0)
+        save_info_label = tk.Label(openSave_frame, text = "Save Name:\nSave Date:", width = 25, height = 2, anchor = "w", justify = "left")
+        save_info_label.grid(row = 2, column = 0)
 
-    open_save_button = tk.Button(openSave_frame, text = EN_system_text.get("open_game_text"), command = lambda: open_save(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt"))
-    open_save_button.grid(row = 3, column = 0)
+        open_save_button = tk.Button(openSave_frame, text = EN_system_text.get("open_game_text"),
+            command = lambda : open_save(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt"))
+        open_save_button.grid(row = 3, column = 0)
 
-    saves_list_back_button = tk.Button(openSave_frame, text = EN_system_text.get("back_text"), command = lambda: openFrame(root, menu_frame, "menu_frame"))
-    saves_list_back_button.grid(row = 4, column = 0)
+        saves_list_back_button = tk.Button(openSave_frame, text = EN_system_text.get("back_text"),
+            command = lambda: controller.show_frame())
+        saves_list_back_button.grid(row = 4, column = 0)
 
-    return openSave_frame
-
-def newGame_createframe(root: Tk) -> Frame:
+class newGame_frame(tk.Frame):
     '''Creates the new game menu.'''
-    newGame_frame = tk.Frame(root)
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        newGame_frame = tk.Frame(self)
 
-    new_game_back_button = tk.Button(newGame_frame, text = EN_system_text.get("back_text"), command = lambda: openFrame(root, menu_frame, "menu_frame"))
-    new_game_back_button.pack()
+        new_game_back_button = tk.Button(newGame_frame, text = EN_system_text.get("back_text"),
+            command = lambda: controller.show_frame())
+        new_game_back_button.pack()
 
-    start_game_button = tk.Button(newGame_frame, text = "Announce Candidacy", command = lambda: openFrame(root, characterView_frame))
-    start_game_button.pack()
+        start_game_button = tk.Button(newGame_frame, text = "Announce Candidacy",
+            command = lambda: controller.show_frame())
+        start_game_button.pack()
 
-    return newGame_frame
-
-def viewSwitcher_createframe(root: Tk) -> Frame:
+class viewSwitcher_frame(tk.Frame):
     '''Creates the view switcher menu.'''
-    viewSwitcher_frame = tk.Frame(root, width = root.winfo_width(), height = 200, bg = "green")
-    viewSwitcher_frame.pack_propagate(False)
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        viewSwitcher_frame = tk.Frame(self, width = self.winfo_width(), height = 200, bg = "green")
+        viewSwitcher_frame.pack_propagate(False)
 
-    character_view_button = tk.Button(viewSwitcher_frame, text = "Character View", command = lambda: openFrame(root, characterView_frame))
-    character_view_button.pack(side = "left")
+        character_view_button = tk.Button(viewSwitcher_frame, text = "Character View",
+            command = lambda: controller.show_frame())
+        character_view_button.pack(side = "left")
 
-    party_view_button = tk.Button(viewSwitcher_frame, text = "Party View", command = lambda: openFrame(root, partyView_frame))
-    party_view_button.pack(side = "left")
+        party_view_button = tk.Button(viewSwitcher_frame, text = "Party View",
+            command = lambda: controller.show_frame())
+        party_view_button.pack(side = "left")
 
-    race_view_button = tk.Button(viewSwitcher_frame, text = "Race View", command = ...)
-    race_view_button.pack(side = "left")
+        race_view_button = tk.Button(viewSwitcher_frame, text = "Race View", command = ...)
+        race_view_button.pack(side = "left")
 
-    map_view_button = tk.Button(viewSwitcher_frame, text = "Map View", command = lambda: openFrame(root, mapView_frame))
-    map_view_button.pack(side = "left")
+        map_view_button = tk.Button(viewSwitcher_frame, text = "Map View",
+            command = lambda: controller.show_frame())
+        map_view_button.pack(side = "left")
 
-    blocs_view_button = tk.Button(viewSwitcher_frame, text = "Blocs View", command = lambda: openFrame(root, blocsView_frame))
-    blocs_view_button.pack(side = "left")
+        blocs_view_button = tk.Button(viewSwitcher_frame, text = "Blocs View",
+            command = lambda: controller.show_frame())
+        blocs_view_button.pack(side = "left")
 
-    settings_button = tk.Button(viewSwitcher_frame, text = "Settings")
-    settings_button.pack(side = "left")
+        settings_button = tk.Button(viewSwitcher_frame, text = "Settings")
+        settings_button.pack(side = "left")
 
-    return viewSwitcher_frame
-
-def characterView_createframe(root: Tk) -> Frame:
+class characterView_frame(tk.Frame):
     '''Creates the character view frame.'''
-    characterView_frame = tk.Frame(root)
-    characterView_frame.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        characterView_frame = tk.Frame(self)
+        characterView_frame.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
 
-    image1 = Image.open("gfx\\empty_portrait.png")
-    portrait_label = tk.Label(characterView_frame, image = ImageTk.PhotoImage(image1))
-    portrait_label.image = ImageTk.PhotoImage(image1)
-    portrait_label.place(x=100, y=100)
-    portrait_label.pack()
+        image1 = Image.open("gfx\\empty_portrait.png")
+        portrait_label = tk.Label(characterView_frame, image = ImageTk.PhotoImage(image1))
+        portrait_label.image = ImageTk.PhotoImage(image1)
+        portrait_label.place(x=100, y=100)
+        portrait_label.pack()
 
-    return characterView_frame
-
-def partyView_createframe(root: Tk) -> Frame:
+class partyView_frame(tk.Frame):
     '''Creates the party view frame.'''
-    partyView_frame = tk.Frame(root)
-    partyView_frame.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        partyView_frame = tk.Frame(self)
+        partyView_frame.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
 
-    return partyView_frame
-
-def mapView_createframe(root: Tk) -> Frame:
+class mapView_frame(tk.Frame):
     '''Creates the map view frame.'''
-    mapView_frame = tk.Frame(root)
-    mapView_frame.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        mapView_frame = tk.Frame(self)
+        mapView_frame.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
 
-    return mapView_frame
-
-def blocsView_createframe(root: Tk) -> Frame:
+class blocsView_frame(tk.Frame):
     '''Creates the blocs view frame.'''
-    blocsView_frame = tk.Frame(root)
-    blocsView_frame.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
-
-    return blocsView_frame
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        blocsView_frame = tk.Frame(self)
+        blocsView_frame.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
 
 def check_exit_game(root) -> bool:
     '''Check that a user wishes to exit the game. Returns true if exit confirmed.'''
@@ -219,16 +235,20 @@ def on_closing() -> NoReturn:
     '''Called when the root window is closed. Exits the program.'''
     sys.exit(0)
 
-def openFrame(root: Tk, frame_to_open: Frame, frame_name: str = ""):
-    '''Opens a frame in the root window.'''
+def openFrame(root: Tk, frame_to_open: Frame, frame_name: str = "") -> bool:
+    '''Opens a frame in the root window. Returns true if opened successfully.'''
     # open the menu frame
     # takes the active Tk window
+    if frame_to_open is None:
+        print(f"open frame is None with object {frame_to_open} name {frame_name}")
+        return False
     clearWindow(root)
     if frame_name == "menu_frame":
         frame_to_open.place(x = 100, y = 400)
     else:
         frame_to_open.grid(row = 0, column = 0)
     frame_to_open.event_generate("<<ShowFrame>>")
+    return True
 
 def clearWindow(root):
     # clear a Tk window
@@ -300,18 +320,17 @@ def roll_probability(nominal, modifier):
     scale = 1 - nominal
     scaled_additive = additive * scale
     weighted = nominal + scaled_additive
-
+'''
 # create all frame pointers so they can be accessed statically / globally
-# note: SyntaxError to include with global import as they are mutable objects
-menu_frame: Frame = None
-openSave_frame: Frame = None
-newGame_frame: Frame = None
-viewSwitcher_frame: Frame = None
-characterView_frame: Frame = None
-partyView_frame: Frame = None
-mapView_frame: Frame = None
-blocsView_frame: Frame = None
-
+menu_frame: Frame|None = None
+openSave_frame: Frame|None = None
+newGame_frame: Frame|None = None
+viewSwitcher_frame: Frame|None = None
+characterView_frame: Frame|None = None
+partyView_frame: Frame|None = None
+mapView_frame: Frame|None = None
+blocsView_frame: Frame|None = None
+'''
 def main() -> None:
     ''' main.py '''
 
@@ -319,22 +338,7 @@ def main() -> None:
     reset()
 
     # create the root window
-    root = create_window()
-
-    # create all the frames
-    menu_frame: Frame = menu_createframe(root)
-    openSave_frame: Frame = openSave_createframe(root)
-    newGame_frame: Frame = newGame_createframe(root)
-    viewSwitcher_frame: Frame = viewSwitcher_createframe(root)
-    characterView_frame: Frame = characterView_createframe(root)
-    partyView_frame: Frame = partyView_createframe(root)
-    mapView_frame: Frame = mapView_createframe(root)
-    blocsView_frame: Frame = blocsView_createframe(root)
-
-    openSave_createframe(root)
-
-    openFrame(root, menu_frame, "menu_frame")
-
+    root = rootWindow()
     root.mainloop()
 
     reset()
