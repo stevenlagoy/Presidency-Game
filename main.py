@@ -22,7 +22,7 @@ from localization.EN_descriptions import EN_descriptions
 from localization.EN_system_text import EN_system_text
 
 SAVEDIR: str = "C:\\Users\\LaGoySM\\Downloads\\Documents\\Presidency Game\\savegames\\" # constant directory of saves folder
-
+'''
 def get_curr_screen_geometry() -> str:
     # find the size (in pixels) of current active screen even when there are multiple monitors
     # returns geometry: Tk geometry string [width]x[height]+[left]+[top]
@@ -37,7 +37,7 @@ def get_curr_screen_geometry() -> str:
     return geometry
 
 def dark_title_bar(window: Tk) -> None:
-    ''' Makes a window have a standard Windows dark topbar. Takes Tk window instance. '''
+    \''' Makes a window have a standard Windows dark topbar. Takes Tk window instance. \'''
     window.update()
     set_window_attribute = ct.windll.dwmapi.DwmSetWindowAttribute
     get_parent = ct.windll.user32.GetParent
@@ -46,10 +46,13 @@ def dark_title_bar(window: Tk) -> None:
     value = ct.c_int(value)
     set_window_attribute(hwnd, 20, ct.byref(value), 4)
     # only works sometimes????
+'''
 
 class rootWindow(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
+
+        # set some attributes of the window
         self.title(EN_system_text.get("title"))
         self.attributes("-fullscreen", True)
         self.state("iconic")
@@ -85,9 +88,11 @@ class menu_frame(tk.Frame):
         from fonts import fonts
         tk.Frame.__init__(self, parent, bg = "#808080", highlightbackground = "black", highlightthickness = 4)
 
-        background = tk.Label(self, image = ImageTk.PhotoImage(Image.open("gfx\\loadscreens\\mount_rushmore.png")))
+        background_image = ImageTk.PhotoImage(Image.open("gfx/loadscreens/mount_rushmore.png").resize((2560,1440)))
+        background = tk.Label(self, image = background_image)
+        background.image = background_image
         background.place(x = 0, y = 0)
-        background.lower()
+        #background.lower()
 
         titlecard = ImageTk.PhotoImage(Image.open("gfx/title_card.png").resize((606,300)))
         title_label = tk.Label(self, image = titlecard)
@@ -95,11 +100,11 @@ class menu_frame(tk.Frame):
         title_label.grid(row = 0, column = 0, pady = 10)
 
         new_save_button = tk.Button(self, font = fonts.button, text = EN_system_text.get("new_game_text"), width = 50,
-            command = lambda: controller.show_frame())
+            command = lambda: controller.show_frame(newGame_frame))
         new_save_button.grid(row = 1, column = 0, padx = 10, pady = 10)
 
         continue_button = tk.Button(self, font = fonts.button, text = EN_system_text.get("continue_game_text"), width = 50,
-            command = lambda: controller.show_frame())
+            command = lambda: controller.show_frame(openSave_frame))
         continue_button.grid(row = 2, column = 0, padx = 10, pady = 10)
 
         tutorial_button = tk.Button(self, font = fonts.button, text = EN_system_text.get("tutorial_text"), width = 50)
@@ -109,7 +114,7 @@ class menu_frame(tk.Frame):
         about_button.grid(row = 4, column = 0, padx = 10, pady = 10)
 
         close_game_button = tk.Button(self, font = fonts.button, text = EN_system_text.get("close_game_text"), width = 50,
-            command = lambda: check_exit_game(self))
+            command = lambda: check_exit_game(parent.master))
         close_game_button.grid(row = 5, column = 0, padx = 10, pady = 10)
     
 class openSave_frame(tk.Frame):
@@ -143,7 +148,7 @@ class openSave_frame(tk.Frame):
         open_save_button.grid(row = 3, column = 0)
 
         saves_list_back_button = tk.Button(openSave_frame, text = EN_system_text.get("back_text"),
-            command = lambda: controller.show_frame())
+            command = lambda: controller.show_frame(menu_frame))
         saves_list_back_button.grid(row = 4, column = 0)
 
 class newGame_frame(tk.Frame):
@@ -153,7 +158,7 @@ class newGame_frame(tk.Frame):
         newGame_frame = tk.Frame(self)
 
         new_game_back_button = tk.Button(newGame_frame, text = EN_system_text.get("back_text"),
-            command = lambda: controller.show_frame())
+            command = lambda: controller.show_frame(menu_frame))
         new_game_back_button.pack()
 
         start_game_button = tk.Button(newGame_frame, text = "Announce Candidacy",

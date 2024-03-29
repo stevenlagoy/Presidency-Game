@@ -1,4 +1,5 @@
 import tkinter as tk
+from PIL import ImageTk, Image
 
 class SampleApp(tk.Tk):
     def __init__(self):
@@ -30,6 +31,11 @@ class StartPage(tk.Frame):
         label = tk.Label(self, text="Start Page", font=("Arial", 18))
         label.pack(pady=10, padx=10)
         
+        titlecard = ImageTk.PhotoImage(Image.open("gfx/loadscreens/mount_rushmore.png").resize((606,300)))
+        title_label = tk.Label(self, image = titlecard)
+        title_label.image = titlecard
+        title_label.pack(padx = 10, pady = 10)
+
         button1 = tk.Button(self, text="Go to Frame 1",
                             command=lambda: controller.show_frame(Frame1))
         button1.pack()
