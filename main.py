@@ -78,8 +78,8 @@ class rootWindow(tk.Tk):
 
         self.show_frame(menu_frame)
     
-    def show_frame(self, cont):
-        frame = self.frames[cont]
+    def show_frame(self, controller):
+        frame = self.frames[controller]
         frame.tkraise()
 
 class menu_frame(tk.Frame):
@@ -121,12 +121,11 @@ class openSave_frame(tk.Frame):
     '''Creates the open save menu.'''
     def __init__(self, parent, controller):
         tk.Frame.__init__(self)
-        openSave_frame = tk.Frame(self, parent)
 
-        save_list_info_label = tk.Label(openSave_frame, text = "Name\t\t\tDate\t\t\tProgress", justify = "left", anchor = "w", width = 80, height = 0)
+        save_list_info_label = tk.Label(self, text = "Name\t\t\tDate\t\t\tProgress", justify = "left", anchor = "w", width = 80, height = 0)
         save_list_info_label.grid(row = 0, column = 0)
 
-        saves_list = tk.Listbox(openSave_frame, width = 100)
+        saves_list = tk.Listbox(self, width = 100)
         count = 1
         for file in os.listdir(SAVEDIR):
             saves_list.insert(count, str(file).split(".")[0] + "             " + get_save_info(SAVEDIR + str(file))[1])
@@ -140,14 +139,14 @@ class openSave_frame(tk.Frame):
             ))
         saves_list.grid(row = 1, column = 0)
 
-        save_info_label = tk.Label(openSave_frame, text = "Save Name:\nSave Date:", width = 25, height = 2, anchor = "w", justify = "left")
+        save_info_label = tk.Label(self, text = "Save Name:\nSave Date:", width = 25, height = 2, anchor = "w", justify = "left")
         save_info_label.grid(row = 2, column = 0)
 
-        open_save_button = tk.Button(openSave_frame, text = EN_system_text.get("open_game_text"),
+        open_save_button = tk.Button(self, text = EN_system_text.get("open_game_text"),
             command = lambda : open_save(SAVEDIR + saves_list.get(saves_list.curselection()) + ".txt"))
         open_save_button.grid(row = 3, column = 0)
 
-        saves_list_back_button = tk.Button(openSave_frame, text = EN_system_text.get("back_text"),
+        saves_list_back_button = tk.Button(self, text = EN_system_text.get("back_text"),
             command = lambda: controller.show_frame(menu_frame))
         saves_list_back_button.grid(row = 4, column = 0)
 
@@ -155,54 +154,51 @@ class newGame_frame(tk.Frame):
     '''Creates the new game menu.'''
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        newGame_frame = tk.Frame(self)
 
-        new_game_back_button = tk.Button(newGame_frame, text = EN_system_text.get("back_text"),
+        new_game_back_button = tk.Button(self, text = EN_system_text.get("back_text"),
             command = lambda: controller.show_frame(menu_frame))
-        new_game_back_button.pack()
+        new_game_back_button.grid(row = 0, column = 0)
 
-        start_game_button = tk.Button(newGame_frame, text = "Announce Candidacy",
+        start_game_button = tk.Button(self, text = "Announce Candidacy",
             command = lambda: controller.show_frame())
-        start_game_button.pack()
+        start_game_button.grid(row = 1, column = 0)
 
 class viewSwitcher_frame(tk.Frame):
     '''Creates the view switcher menu.'''
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        viewSwitcher_frame = tk.Frame(self, width = self.winfo_width(), height = 200, bg = "green")
-        viewSwitcher_frame.pack_propagate(False)
+        tk.Frame.__init__(self, parent, width = self.winfo_width(), height = 200, bg = "green")
+        self.pack_propagate(False)
 
-        character_view_button = tk.Button(viewSwitcher_frame, text = "Character View",
+        character_view_button = tk.Button(self, text = "Character View",
             command = lambda: controller.show_frame())
         character_view_button.pack(side = "left")
 
-        party_view_button = tk.Button(viewSwitcher_frame, text = "Party View",
+        party_view_button = tk.Button(self, text = "Party View",
             command = lambda: controller.show_frame())
         party_view_button.pack(side = "left")
 
-        race_view_button = tk.Button(viewSwitcher_frame, text = "Race View", command = ...)
+        race_view_button = tk.Button(self, text = "Race View", command = ...)
         race_view_button.pack(side = "left")
 
-        map_view_button = tk.Button(viewSwitcher_frame, text = "Map View",
+        map_view_button = tk.Button(self, text = "Map View",
             command = lambda: controller.show_frame())
         map_view_button.pack(side = "left")
 
-        blocs_view_button = tk.Button(viewSwitcher_frame, text = "Blocs View",
+        blocs_view_button = tk.Button(self, text = "Blocs View",
             command = lambda: controller.show_frame())
         blocs_view_button.pack(side = "left")
 
-        settings_button = tk.Button(viewSwitcher_frame, text = "Settings")
+        settings_button = tk.Button(self, text = "Settings")
         settings_button.pack(side = "left")
 
 class characterView_frame(tk.Frame):
     '''Creates the character view frame.'''
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        characterView_frame = tk.Frame(self)
-        characterView_frame.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
+        self.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
 
         image1 = Image.open("gfx\\empty_portrait.png")
-        portrait_label = tk.Label(characterView_frame, image = ImageTk.PhotoImage(image1))
+        portrait_label = tk.Label(self, image = ImageTk.PhotoImage(image1))
         portrait_label.image = ImageTk.PhotoImage(image1)
         portrait_label.place(x=100, y=100)
         portrait_label.pack()
@@ -211,22 +207,19 @@ class partyView_frame(tk.Frame):
     '''Creates the party view frame.'''
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        partyView_frame = tk.Frame(self)
-        partyView_frame.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
+        self.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
 
 class mapView_frame(tk.Frame):
     '''Creates the map view frame.'''
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        mapView_frame = tk.Frame(self)
-        mapView_frame.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
+        self.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
 
 class blocsView_frame(tk.Frame):
     '''Creates the blocs view frame.'''
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        blocsView_frame = tk.Frame(self)
-        blocsView_frame.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
+        self.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
 
 def check_exit_game(root) -> bool:
     '''Check that a user wishes to exit the game. Returns true if exit confirmed.'''
