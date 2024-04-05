@@ -1,17 +1,20 @@
 import tkinter as tk
-from PIL import ImageTk, Image
+from PIL import Image, ImageTk
 
-class SampleApp(tk.Tk):
+class RootWindow(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
-        self.title("Multi-Frame Application")
+        self.title("Fullscreen Application")
+        
+        # Make the window fullscreen
+        self.attributes('-fullscreen', True)
         
         # Create a container to hold all frames
-        container = tk.Frame(self)
+        container = tk.Frame(self, width = 2550, height = 1440)
         container.pack(side="top", fill="both", expand=True)
         
         # Dictionary to hold frames
-        self.frames = {}
+        self.frames = {}        
         
         # Create frames and add them to the dictionary
         for F in (StartPage, Frame1, Frame2):
@@ -20,22 +23,25 @@ class SampleApp(tk.Tk):
             frame.grid(row=0, column=0, sticky="nsew")
         
         self.show_frame(StartPage)
-    
+
     def show_frame(self, cont):
         frame = self.frames[cont]
         frame.tkraise()
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
+        tk.Frame.__init__(self, parent, width=2550, height=1440)
+        
+        # Create a label to display the background image
+        image = Image.open("gfx/loadscreens/inaguration.png")
+        image = image.resize((self.winfo_screenwidth(), self.winfo_screenheight()), Image.LANCZOS)
+        self.background_photo = ImageTk.PhotoImage(image)
+        self.background_label = tk.Label(self, image=self.background_photo)
+        self.background_label.place(x=0, y=0, relwidth=1, relheight=1)  # Fill the entire frame
+        
         label = tk.Label(self, text="Start Page", font=("Arial", 18))
         label.pack(pady=10, padx=10)
         
-        titlecard = ImageTk.PhotoImage(Image.open("gfx/loadscreens/mount_rushmore.png").resize((606,300)))
-        title_label = tk.Label(self, image = titlecard)
-        title_label.image = titlecard
-        title_label.pack(padx = 10, pady = 10)
-
         button1 = tk.Button(self, text="Go to Frame 1",
                             command=lambda: controller.show_frame(Frame1))
         button1.pack()
@@ -43,6 +49,12 @@ class StartPage(tk.Frame):
         button2 = tk.Button(self, text="Go to Frame 2",
                             command=lambda: controller.show_frame(Frame2))
         button2.pack()
+
+    def hide_background(self):
+        self.background_label.place_forget()
+
+    def show_background(self):
+        self.background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
 class Frame1(tk.Frame):
     def __init__(self, parent, controller):
@@ -65,5 +77,5 @@ class Frame2(tk.Frame):
         button.pack()
 
 if __name__ == "__main__":
-    app = SampleApp()
+    app = RootWindow()
     app.mainloop()

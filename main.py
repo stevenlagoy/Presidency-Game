@@ -1,18 +1,27 @@
 import sys
 import os
-import tkinter as tk
-from tkinter import *
-from tkinter import messagebox
-from tkinter import ttk
+# import tkinter
+try:
+    import tkinter as tk # type: ignore
+    from tkinter import * # type: ignore
+    from tkinter import messagebox # type: ignore
+    from tkinter import ttk # type: ignore
+    from tkinter.font import Font # type: ignore
+except ImportError:
+    import Tkinter as tk # type: ignore
+    from Tkinter import * # type: ignore
+    from Tkinter import messagebox # type: ignore
+    from Tkinter import ttk # type: ignore
+    from Tkinter.font import Font # type: ignore
+# import other modules
 from PIL import ImageTk, Image
-from tkinter.font import Font
 import ctypes as ct
 import random as rand
 import math as math
 import json as json
 import time as time
 from typing import List, Tuple, NoReturn, Dict
-
+# import program classes
 from character import Character
 from state import State # generates all states
 from convention import Primary
@@ -21,7 +30,7 @@ from engine import *
 from localization.EN_descriptions import EN_descriptions
 from localization.EN_system_text import EN_system_text
 
-SAVEDIR: str = "C:\\Users\\LaGoySM\\Downloads\\Documents\\Presidency Game\\savegames\\" # constant directory of saves folder
+SAVEDIR: str = os.path.abspath(__file__).replace("main.py", "savegames\\") # constant directory of saves folder
 '''
 def get_curr_screen_geometry() -> str:
     # find the size (in pixels) of current active screen even when there are multiple monitors
@@ -73,9 +82,10 @@ class rootWindow(tk.Tk):
         # create the frames and add to dictionary
         for F in (menu_frame, openSave_frame, newGame_frame):
             frame = F(container, self)
+            frame.pack_propagate(0)
             self.frames[F] = frame
             frame.grid(row = 0, column = 0, sticky = "nsew")
-
+        
         self.show_frame(menu_frame)
     
     def show_frame(self, controller):
@@ -122,7 +132,7 @@ class openSave_frame(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self)
 
-        save_list_info_label = tk.Label(self, text = "Name\t\t\tDate\t\t\tProgress", justify = "left", anchor = "w", width = 80, height = 0)
+        '''save_list_info_label = tk.Label(self, text = "Name\t\t\tDate\t\t\tProgress", justify = "left", anchor = "w", width = 80, height = 0)
         save_list_info_label.grid(row = 0, column = 0)
 
         saves_list = tk.Listbox(self, width = 100)
@@ -148,13 +158,14 @@ class openSave_frame(tk.Frame):
 
         saves_list_back_button = tk.Button(self, text = EN_system_text.get("back_text"),
             command = lambda: controller.show_frame(menu_frame))
-        saves_list_back_button.grid(row = 4, column = 0)
+        saves_list_back_button.grid(row = 4, column = 0)'''
 
 class newGame_frame(tk.Frame):
     '''Creates the new game menu.'''
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
+        '''
         new_game_back_button = tk.Button(self, text = EN_system_text.get("back_text"),
             command = lambda: controller.show_frame(menu_frame))
         new_game_back_button.grid(row = 0, column = 0)
@@ -162,6 +173,7 @@ class newGame_frame(tk.Frame):
         start_game_button = tk.Button(self, text = "Announce Candidacy",
             command = lambda: controller.show_frame())
         start_game_button.grid(row = 1, column = 0)
+        '''
 
 class viewSwitcher_frame(tk.Frame):
     '''Creates the view switcher menu.'''
@@ -169,6 +181,7 @@ class viewSwitcher_frame(tk.Frame):
         tk.Frame.__init__(self, parent, width = self.winfo_width(), height = 200, bg = "green")
         self.pack_propagate(False)
 
+        '''
         character_view_button = tk.Button(self, text = "Character View",
             command = lambda: controller.show_frame())
         character_view_button.pack(side = "left")
@@ -190,36 +203,37 @@ class viewSwitcher_frame(tk.Frame):
 
         settings_button = tk.Button(self, text = "Settings")
         settings_button.pack(side = "left")
+        '''
 
 class characterView_frame(tk.Frame):
     '''Creates the character view frame.'''
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        self.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
+        #self.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
 
-        image1 = Image.open("gfx\\empty_portrait.png")
+        '''image1 = Image.open("gfx\\empty_portrait.png")
         portrait_label = tk.Label(self, image = ImageTk.PhotoImage(image1))
         portrait_label.image = ImageTk.PhotoImage(image1)
         portrait_label.place(x=100, y=100)
-        portrait_label.pack()
+        portrait_label.pack()'''
 
 class partyView_frame(tk.Frame):
     '''Creates the party view frame.'''
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        self.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
+        #self.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
 
 class mapView_frame(tk.Frame):
     '''Creates the map view frame.'''
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        self.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
+        #self.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
 
 class blocsView_frame(tk.Frame):
     '''Creates the blocs view frame.'''
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        self.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
+        #self.bind("<<ShowFrame>>", lambda x : viewSwitcher_frame.pack(side = "bottom", fill = "x"))
 
 def check_exit_game(root) -> bool:
     '''Check that a user wishes to exit the game. Returns true if exit confirmed.'''
@@ -331,6 +345,7 @@ blocsView_frame: Frame|None = None
 '''
 def main() -> None:
     ''' main.py '''
+    print("savedir " + SAVEDIR)
 
     # call the reset function
     reset()
