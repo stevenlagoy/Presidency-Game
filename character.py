@@ -92,8 +92,12 @@ class Character:
         return f""
 
     def __eq__(self, other) -> bool:
-        ''' Returns true if all the datafields between two characters have the same value. Returns false otherwise. '''
-        return False
+        ''' Returns true if all the datafields between two characters have the same value. Returns false otherwise.'''
+        try:
+            return self.__repr__ == other.__repr__
+        except ValueError:
+            error_log(f"Attempted to compare mismatched-type objects: {self} of type {type(self)}, {other} of type {type(other)}")
+            return False
 
     '''
     possibilities for names:
@@ -120,7 +124,7 @@ class Character:
     '''
 
 class Candidate(Character):
-    instances = [] # list containing all instances of candidate class
+    instances: List = []
     def __init__(self, buildstring: str = None, is_player: bool = False):
         self.__class__.instances.append(self)
         Character.instances.append(self)
@@ -356,7 +360,7 @@ class Candidate(Character):
         return False if not isinstance(other, Character) else self.name == other.name and self.alignments == other.alignments and self.skills == other.skills
 
 class Player(Candidate):
-    instances = []
+    instances: List = []
     def __init__(self):
         self.__class__.instances.append(self)
         Candidate.instances.append(self)

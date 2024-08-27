@@ -5,6 +5,20 @@
         "version": "0.2.0",
         "configurations": [
                 {
+                        "type": "java",
+                        "name": "HelloWorld",
+                        "request": "launch",
+                        "mainClass": "HelloWorld",
+                        "projectName": "presidency_game_2f74b218"
+                },
+                {
+                        "type": "java",
+                        "name": "hello world",
+                        "request": "launch",
+                        "mainClass": "hello world",
+                        "projectName": "presidency_game_2f74b218"
+                },
+                {
                         "name": "Python Debugger: Current File",
                         "type": "debugpy",
                         "request": "launch",

@@ -1,18 +1,12 @@
 import sys
 import os
 # import tkinter
-try:
-    import tkinter as tk # type: ignore
-    from tkinter import * # type: ignore
-    from tkinter import messagebox # type: ignore
-    from tkinter import ttk # type: ignore
-    from tkinter.font import Font # type: ignore
-except ImportError:
-    import Tkinter as tk # type: ignore
-    from Tkinter import * # type: ignore
-    from Tkinter import messagebox # type: ignore
-    from Tkinter import ttk # type: ignore
-    from Tkinter.font import Font # type: ignore
+import tkinter as tk
+from tkinter import *
+from tkinter import messagebox
+from tkinter import ttk
+from tkinter.font import Font
+
 # import other modules
 from PIL import ImageTk, Image
 import ctypes as ct
@@ -80,7 +74,7 @@ class rootWindow(tk.Tk):
         self.frames: Dict[Frame] = {}
 
         # create the frames and add to dictionary
-        for F in (menu_frame, openSave_frame, newGame_frame):
+        for F in (menu_frame, openSave_frame, newGame_frame, characterRoll_frame):
             frame = F(container, self)
             frame.pack_propagate(0)
             self.frames[F] = frame
@@ -101,9 +95,9 @@ class menu_frame(tk.Frame):
         background_image = ImageTk.PhotoImage(Image.open("gfx/loadscreens/mount_rushmore.png").resize((2560,1440)))
         background = tk.Label(self, image = background_image)
         background.image = background_image
-        background.place(x = 0, y = 0)
+        #background.grid(row = 0, column = 0) need to be able to put the image behind the other gridded elements
         #background.lower()
-
+        
         titlecard = ImageTk.PhotoImage(Image.open("gfx/title_card.png").resize((606,300)))
         title_label = tk.Label(self, image = titlecard)
         title_label.image = titlecard
@@ -164,6 +158,10 @@ class newGame_frame(tk.Frame):
     '''Creates the new game menu.'''
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.pack_propagate(False)
+
+        next_button = tk.Button(self, text = "Continue", command = lambda : controller.show_frame(characterRoll_frame))
+        next_button.grid(row = 0, column = 0)
 
         '''
         new_game_back_button = tk.Button(self, text = EN_system_text.get("back_text"),
@@ -174,6 +172,24 @@ class newGame_frame(tk.Frame):
             command = lambda: controller.show_frame())
         start_game_button.grid(row = 1, column = 0)
         '''
+
+class characterRoll_frame(tk.Frame):
+    '''Screen to create a character.'''
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent, width = 100, height = 100, bg = "#808080")
+        self.pack_propagate(False)
+
+        givenName_entry = tk.Entry(self)
+        givenName_entry.grid(row = 0, column = 0)
+
+        middleName_entry = tk.Entry(self)
+        middleName_entry.grid(row = 0, column = 1)
+
+        familyName_entry = tk.Entry(self)
+        familyName_entry.grid(row = 0, column = 2)
+
+        next_button = tk.Button(text = "Continue")
+        next_button.grid(row = 1, column = 0)
 
 class viewSwitcher_frame(tk.Frame):
     '''Creates the view switcher menu.'''
