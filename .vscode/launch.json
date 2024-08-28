@@ -9,6 +9,13 @@
                         "name": "PresidencyGameGUI",
                         "request": "launch",
                         "mainClass": "PresidencyGameGUI",
+                        "projectName": "presidency_game_2f74b218"
+                },
+                {
+                        "type": "java",
+                        "name": "PresidencyGameGUI",
+                        "request": "launch",
+                        "mainClass": "PresidencyGameGUI",
                         "projectName": "Presidency-Game_9ca3bc38"
                 },
                 {
