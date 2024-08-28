@@ -6,6 +6,13 @@
         "configurations": [
                 {
                         "type": "java",
+                        "name": "PresidencyGameGUI",
+                        "request": "launch",
+                        "mainClass": "PresidencyGameGUI",
+                        "projectName": "Presidency-Game_9ca3bc38"
+                },
+                {
+                        "type": "java",
                         "name": "HelloWorld",
                         "request": "launch",
                         "mainClass": "HelloWorld",
