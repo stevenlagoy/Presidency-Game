@@ -28,6 +28,16 @@ public class PresidencyGameGUI extends Application {
     static Scene newGame_scene = new Scene(newGame_group);
     static Group openSave_group = new Group();
     static Scene openSave_scene = new Scene(openSave_group);
+    static Group characterRoll_group = new Group();
+    static Scene characterRoll_scene = new Scene(characterRoll_group);
+    static Group characterView_group = new Group();
+    static Scene characterView_scene = new Scene(characterView_group);
+    static Group partyView_group = new Group();
+    static Scene partyView_scene = new Scene(partyView_group);
+    static Group mapView_group = new Group();
+    static Scene mapView_scene = new Scene(mapView_group);
+    static Group blocsView_group = new Group();
+    static Scene blocsView_scene = new Scene(blocsView_group);
 
     @Override
     public void start(Stage primaryStage){
@@ -111,4 +121,11 @@ public class PresidencyGameGUI extends Application {
         primaryStage.setScene(startMenu_scene);
         primaryStage.show();
     }
+
+    public void open_save(String path){
+        String save_data = new String;
+        try {
+        }
+        catch FileNotFoundException {
+        }
 }
