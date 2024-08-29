@@ -1,5 +1,8 @@
 import java.io.*;
 import java.lang.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -11,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 
 public class PresidencyGameGUI extends Application {
@@ -19,6 +23,8 @@ public class PresidencyGameGUI extends Application {
     {
         launch(args);
     }
+
+    static final File savesDirectory = new File("savegames/");
 
     public static Stage primaryStage = new Stage();
 
@@ -65,8 +71,13 @@ public class PresidencyGameGUI extends Application {
         titleCard_label.setGraphic(titleCard_view);
         Button newGame_button = new Button("New Game");
         newGame_button.setOnAction(e -> {
-            controller.switchScene(newGame_scene);
-            //primaryStage.setScene(newGame_scene);
+            Alert newGame_alert = new Alert(AlertType.CONFIRMATION, "Start a New Game?", ButtonType.OK, ButtonType.CANCEL);
+            newGame_alert.setTitle("Confirmation");
+            newGame_alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK){
+                    controller.switchScene(newGame_scene);
+                }
+            });
         });
         Button continueGame_button = new Button("Continue Game");
         continueGame_button.setOnAction(e -> {
@@ -86,27 +97,86 @@ public class PresidencyGameGUI extends Application {
 
         // create newGame_scene
         Label newGame_label = new Label("Start a New Game");
+        Button startGame_button = new Button("Start Game");
+        Label age_label = new Label("Candidate Age:");
+        TextField age_field = new TextField();
+        age_field.setPromptText("35-100");
+        HBox age_box = new HBox(age_label, age_field);
+        Label origin_label = new Label("Origin State:");
+        ComboBox<String> origin_field = new ComboBox<>();
+        HBox origin_box = new HBox(origin_label, origin_field);
+        Label education_label = new Label("Education:");
+        Label educationSlider_label = new Label("6 - Bachelors Degree");
+        Slider education_slider = new Slider(1, 8, 6);
+        education_slider.setBlockIncrement(1);
+        education_slider.setSnapToTicks(true);
+        education_slider.setMajorTickUnit(1);
+        education_slider.setMinorTickCount(0);
+        education_slider.setShowTickMarks(true);
+        education_slider.setOnMouseDragged(e -> {
+            switch ((int) Math.round(education_slider.getValue())){
+                case 1:
+                    educationSlider_label.setText("1 - Primary Education");
+                    break;
+                case 2:
+                    educationSlider_label.setText("2 - Lower Secondary Education");
+                    break;
+                case 3:
+                    educationSlider_label.setText("3 - Upper Secondary Education");
+                    break;
+                case 4:
+                    educationSlider_label.setText("4 - Post-secondary Education");
+                    break;
+                case 5:
+                    educationSlider_label.setText("5 - Tertiary Education");
+                    break;
+                case 6:
+                    educationSlider_label.setText("6 - Bachelors Degree");
+                    break;
+                case 7:
+                    educationSlider_label.setText("7 - Masters Degree");
+                    break;
+                case 8:
+                    educationSlider_label.setText("8 - Doctoral Degree");
+                    break;
+            }
+        });
+        HBox education_box = new HBox(education_label, education_slider, educationSlider_label);
+        education_box.setPrefWidth(10.0);
         Button newGameBack_Button = new Button("Back");
         newGameBack_Button.setOnAction(e -> {
             controller.switchScene(startMenu_scene);
             //primaryStage.setScene(startMenu_scene);
         });
-        VBox newGamePanel_box = new VBox(newGame_label, newGameBack_Button);
+        VBox newGamePanel_box = new VBox(newGame_label, age_box, origin_box, education_box, startGame_button, newGameBack_Button);
         newGame_group.getChildren().add(newGamePanel_box);
         // -------------------------------------------------------
 
         // create openSave_scene
         Label openSave_label = new Label("Open a Save Game:");
         // import the list of saves here
-        String[] saves = new String[3];
-        saves[0] = "Save 1";
-        saves[1] = "Save 2";
-        saves[2] = "Save 3";
-        ListView<String> saves_list = new ListView<String>();
-        saves_list.getItems().addAll(saves);
+        // list all the files inside the savegames folder
+        // gather information from the first line of each save
+        // list that information on the listview
+        List<String> savesStringList = new ArrayList<>();
+        ListView<String> savesList = new ListView<String>();
+        for(File saveFile : savesDirectory.listFiles()){
+            try {
+            Scanner scan = new Scanner(saveFile);
+            String infoline = scan.nextLine();
+            savesStringList.add(infoline);
+            savesList.getItems().add(infoline);
+            scan.close(); // possible that the scanner is not closed after exception? 
+            }
+            catch (FileNotFoundException e){
+                System.out.println(e);
+            }
+            finally {
+            }
+        }
         Button loadSave_Button = new Button("Load Save");
         loadSave_Button.setOnAction(e -> {
-            System.out.printf("Loading save: %s%n", saves_list.getSelectionModel().getSelectedItem());
+            System.out.printf("Loading save: %s%n", savesList.getSelectionModel().getSelectedItem());
             // this will be where the main game is opened
         });
         Button openSaveBack_button = new Button("Back");
@@ -114,7 +184,7 @@ public class PresidencyGameGUI extends Application {
             controller.switchScene(startMenu_scene);
             //primaryStage.setScene(startMenu_scene);
         });
-        VBox openSavePanel_box = new VBox(openSave_label, saves_list, loadSave_Button, openSaveBack_button);
+        VBox openSavePanel_box = new VBox(openSave_label, savesList, loadSave_Button, openSaveBack_button);
         openSave_group.getChildren().add(openSavePanel_box);
         // ---------------------------------------------------------
 
@@ -122,10 +192,20 @@ public class PresidencyGameGUI extends Application {
         primaryStage.show();
     }
 
-    public void open_save(String path){
-        String save_data = new String;
+    public String getSaveData(File file){
+        String saveData = new String();
         try {
+            // read in the data from the savefile
+            Scanner scan = new Scanner(file);
+            while(scan.hasNext()){
+                saveData += scan.nextLine();
+            }
+            scan.close();
+            return saveData;
         }
-        catch FileNotFoundException {
+        catch (FileNotFoundException e) {
+            System.out.println(e);
+            return "";
         }
+    }
 }
