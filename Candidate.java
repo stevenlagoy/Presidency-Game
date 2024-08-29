@@ -1,13 +1,16 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Candidate extends Character
 {
-    private static List instances = new ArrayList();
+    private static List<Candidate> instances = new ArrayList<>();
 
     private short delegates;
     private int cash;
     private State origin;
     private byte education;
     private short[] alignments = new short[2];
-    private List experience = new ArrayList();
+    private List<String> experience = new ArrayList<>();
     private short[] skills = new short[3];
     private short aptitude;
     private short conviction;
@@ -16,6 +19,8 @@ public class Candidate extends Character
     public Candidate(String buildstring, boolean isPlayer)
     {
         super(buildstring);
+        if(isPlayer) this.genProfileInput();
+        else this.genProfile();
     }
 
     private void genProfileInput()
@@ -43,27 +48,48 @@ public class Candidate extends Character
 
     // input functions
     private void setNameInput(){
-        this.name = "";
+        this.setFamilyName("");
     }
-    private void setAgeInput();
-    private void setPresentationInput();
-    private void setOriginInput();
-    private void setEducationInput()
+    private void setAgeInput(){
+        this.setAge((byte) 0);
+    }
+    private void setPresentationInput(){}
+    private void setOriginInput(){}
+    private void setEducationInput(){}
+    private void setAlignmentInput(){}
 
     // inherited from Character
-    private void genName();
-    private void genAge();
-    private void genPresentation();
+    private void genName(){}
+    private void genAge(){}
+    private void genPresentation(){}
 
     // specific to Candidate
-    private void genEducation();
-    public void setEducation();
-    public byte getEducation();
-    private void rollSkills();
-    public void setSkills();
-    public short[] getSkills();
-    public short getAptitude();
-    private void rollConviction();
-    public void setConviction();
-    public short getConviction();
+    private void genOrigin(){}
+    private void genEducation(){}
+    public void setEducation(){}
+    public byte getEducation(){
+        return this.education;
+    }
+    private void rollSkills(){}
+    public void setSkills(){
+        this.aptitude = (short) 0;
+        for(int i = 0; i < 2; i++){
+            this.aptitude += this.getSkills()[i];
+        }
+    }
+    public short[] getSkills(){
+        short[] skillshort = new short[3];
+        skillshort[0] = 0;
+        skillshort[1] = 0;
+        skillshort[2] = 0;
+        return skillshort;
+    }
+    public short getAptitude(){
+        return this.aptitude;
+    }
+    private void rollConviction(){}
+    public void setConviction(){}
+    public short getConviction(){
+        return this.conviction;
+    }
 }
