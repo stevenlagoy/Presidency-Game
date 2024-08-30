@@ -3,7 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Party {
+public class Party
+{
 
     public static List<Party> instances = new ArrayList<>();
 

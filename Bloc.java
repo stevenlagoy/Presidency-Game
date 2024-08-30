@@ -1,11 +1,12 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Bloc
 {
+    private static List<Bloc> instances = new ArrayList<>();
     public static int totalVoters;
-
-    public static List<Bloc> instances = new ArrayList<>();
 
     private int numVoters;
     private String name;
@@ -15,10 +16,11 @@ public class Bloc
         this.name = name;
         this.numVoters = numVoters;
     }
-
     public Bloc(String name, float percentVoters)
     {
         this.name = name;
         this.numVoters = Math.round(percentVoters * totalVoters);
     }
 }
+
+//Map<String, Float> blocs = new HashMap<String, Float>();
