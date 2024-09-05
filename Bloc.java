@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Bloc
 {
@@ -22,5 +23,3 @@ public class Bloc
         this.numVoters = Math.round(percentVoters * totalVoters);
     }
 }
-
-//Map<String, Float> blocs = new HashMap<String, Float>();

@@ -6,6 +6,13 @@
         "configurations": [
                 {
                         "type": "java",
+                        "name": "Main",
+                        "request": "launch",
+                        "mainClass": "Main",
+                        "projectName": "presidency_game_2f74b218"
+                },
+                {
+                        "type": "java",
                         "name": "PresidencyGameGUI",
                         "request": "launch",
                         "mainClass": "PresidencyGameGUI",
