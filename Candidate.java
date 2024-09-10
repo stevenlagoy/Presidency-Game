@@ -3,9 +3,9 @@ import java.util.List;
 
 public class Candidate extends Character
 {
-    private static List<Candidate> instances = new ArrayList<>();
+    public static List<Candidate> instances = new ArrayList<>();
 
-    private short delegates;
+    private short numDelegates;
     private int cash;
     private State origin;
     private byte education;
@@ -78,11 +78,7 @@ public class Candidate extends Character
         }
     }
     public short[] getSkills(){
-        short[] skillshort = new short[3];
-        skillshort[0] = 0;
-        skillshort[1] = 0;
-        skillshort[2] = 0;
-        return skillshort;
+        return this.skills;
     }
     public short getAptitude(){
         return this.aptitude;
@@ -91,5 +87,24 @@ public class Candidate extends Character
     public void setConviction(){}
     public short getConviction(){
         return this.conviction;
+    }
+
+    public int getNumDelegates(){
+        return this.numDelegates;
+    }
+    public int getCash(){
+        return this.cash;
+    }
+    public State getOrigin(){
+        return this.origin;
+    }
+    public short[] getAlignments(){
+        return this.alignments;
+    }
+    public List<String> getExperience(){
+        return this.experience;
+    }
+    public float getAgeMod(){
+        return this.ageMod;
     }
 }

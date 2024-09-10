@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Character
 {
-    private static List<Character> instances = new ArrayList<>();
+    public static List<Character> instances = new ArrayList<>();
   
     private String givenName;
     private String middleName;
