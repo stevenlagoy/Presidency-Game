@@ -8,7 +8,7 @@ public class State {
     {
         Map<String, String> states = new HashMap<>();
         states.put("name", "Alabama");
-        // this is where states.txt will be read and the states objects created
+        // this is where states.json will be read and the states objects created
     }
 
     private static List<State> instances = new ArrayList<>();
@@ -27,6 +27,18 @@ public class State {
         this.abbreviation = abbreviation;
         this.universities = universities;
         this.demographics = demographics;
+
+        instances.add(this);
+    }
+
+    public String getName(){
+        return this.name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public List<String> getDemographics(){
+        return this.demographics;
     }
 
     public String toString(){
