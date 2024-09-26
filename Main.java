@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main{
@@ -34,12 +35,15 @@ public class Main{
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
+
+        Engine engine = new Engine();
 
         System.out.println("Race for the Presidency\n[NEW / CONTINUE]");
         
         System.out.println("Press enter to start");
         getInput();
         System.out.println("Start game");
+        engine.reset();
     }
 }
