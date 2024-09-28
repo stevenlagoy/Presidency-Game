@@ -1,5 +1,6 @@
 # Specific files
 log.txt
+.vscode/
 launch.json
 
 # FOR PYTHON
