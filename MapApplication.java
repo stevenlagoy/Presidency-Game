@@ -143,14 +143,18 @@ public class MapApplication extends Application
                 imageView.setFitWidth(2560);
             }
             else if(e.getCode() == KeyCode.PAGE_DOWN){
-                imageView.setX(imageView.getX() + (scrollSensitivity / 2));
-                imageView.setY(imageView.getY() + (scrollSensitivity/aspectRatio / 2));
-                imageView.setFitWidth(imageView.getFitWidth() - scrollSensitivity);
+                double centerX = imageView.getFitWidth()/2 - imageView.getX(), centerY = imageView.getFitWidth()*aspectRatio/2 - imageView.getX();
+                System.out.printf("%f %f %n", centerX, centerY);
+                imageView.setX(imageView.getX() + (Math.sqrt(scrollSensitivity * imageView.getFitWidth()) / 2));
+                imageView.setY(imageView.getY() + (Math.sqrt(scrollSensitivity * imageView.getFitWidth())/aspectRatio / 2));
+                imageView.setFitWidth(imageView.getFitWidth() - Math.sqrt(scrollSensitivity * imageView.getFitWidth()));
             }
             else if(e.getCode() == KeyCode.PAGE_UP){
-                imageView.setX(imageView.getX() - (scrollSensitivity / 2));
-                imageView.setY(imageView.getY() - (scrollSensitivity/aspectRatio / 2));
-                imageView.setFitWidth(imageView.getFitWidth() + scrollSensitivity);
+                double centerX = imageView.getFitWidth()/2 - imageView.getX(), centerY = imageView.getFitWidth()*aspectRatio/2 - imageView.getX();
+                System.out.printf("%f %f %n", centerX, centerY);
+                imageView.setX(imageView.getX() - (Math.sqrt(scrollSensitivity * imageView.getFitWidth()) / 2));
+                imageView.setY(imageView.getY() - (Math.sqrt(scrollSensitivity * imageView.getFitWidth())/aspectRatio / 2));
+                imageView.setFitWidth(imageView.getFitWidth() + Math.sqrt(scrollSensitivity * imageView.getFitWidth()));
             }
             else if(e.getCode() == KeyCode.UP){
                 imageView.setY(imageView.getY() + scrollSensitivity);
@@ -163,6 +167,9 @@ public class MapApplication extends Application
             }
             else if(e.getCode() == KeyCode.RIGHT){
                 imageView.setX(imageView.getX() - scrollSensitivity);
+            }
+            else if(e.getCode() == KeyCode.BACK_SPACE){
+                System.exit(0);
             }
         });
 
