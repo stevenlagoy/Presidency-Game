@@ -10,7 +10,7 @@ public class Character
     private String familyName;
     private int[] nameform;
     private String[] demographics;
-    private byte age = 0;
+    private int age = 0;
     private String presentation;
 
     public Character(String buildstring){
@@ -43,10 +43,10 @@ public class Character
     public String getFamilyName(){
         return this.familyName;
     }
-    public void setAge(byte age){
+    public void setAge(int age){
         this.age = age;
     }
-    public byte getAge(){
+    public int getAge(){
         return this.age;
     }
 }

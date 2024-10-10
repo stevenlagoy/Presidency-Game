@@ -9,9 +9,8 @@ import javafx.application.Application;
 
 public class Main
 {
-    static Engine engine = new Engine();
     public static void main(String[] args) throws IOException {
-        engine.reset();
+        Engine.reset();
 
         Application.launch(MapApplication.class, args);
     }

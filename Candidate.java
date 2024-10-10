@@ -8,12 +8,12 @@ public class Candidate extends Character
     private short numDelegates;
     private int cash;
     private State origin;
-    private byte education;
-    private short[] alignments = new short[2];
+    private int education;
+    private int[] alignments = new int[2];
     private List<String> experience = new ArrayList<>();
-    private short[] skills = new short[3];
-    private short aptitude;
-    private short conviction;
+    private int[] skills = new int[3];
+    private int aptitude;
+    private int conviction;
     private float ageMod;
 
     public Candidate(String buildstring, boolean isPlayer)
@@ -51,7 +51,7 @@ public class Candidate extends Character
         this.setFamilyName("");
     }
     private void setAgeInput(){
-        this.setAge((byte) 0);
+        this.setAge(0);
     }
     private void setPresentationInput(){}
     private void setOriginInput(){}
@@ -67,7 +67,7 @@ public class Candidate extends Character
     private void genOrigin(){}
     private void genEducation(){}
     public void setEducation(){}
-    public byte getEducation(){
+    public int getEducation(){
         return this.education;
     }
     private void rollSkills(){}
@@ -77,15 +77,15 @@ public class Candidate extends Character
             this.aptitude += this.getSkills()[i];
         }
     }
-    public short[] getSkills(){
+    public int[] getSkills(){
         return this.skills;
     }
-    public short getAptitude(){
+    public int getAptitude(){
         return this.aptitude;
     }
     private void rollConviction(){}
     public void setConviction(){}
-    public short getConviction(){
+    public int getConviction(){
         return this.conviction;
     }
 
@@ -98,7 +98,7 @@ public class Candidate extends Character
     public State getOrigin(){
         return this.origin;
     }
-    public short[] getAlignments(){
+    public int[] getAlignments(){
         return this.alignments;
     }
     public List<String> getExperience(){
