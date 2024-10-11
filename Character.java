@@ -12,7 +12,10 @@ public class Character
     private String[] demographics;
     private int age = 0;
     private String presentation;
+    protected State origin;
 
+    public Character(){
+    }
     public Character(String buildstring){
     }
 
@@ -25,11 +28,15 @@ public class Character
         instances.add(this);
     }
 
-    public void setGivenName(String name){
-        this.givenName = name;
+    protected void genGivenName(){
     }
     public String getGivenName(){
         return this.givenName;
+    }
+    public void setGivenName(String name){
+        this.givenName = name;
+    }
+    protected void genMiddleName(){
     }
     public void setMiddleName(String name){
         this.middleName = name;
@@ -37,11 +44,15 @@ public class Character
     public String getMiddleName(){
         return this.middleName;
     }
+    protected void genFamilyName(){
+    }
     public void setFamilyName(String name){
         this.familyName = name;
     }
     public String getFamilyName(){
         return this.familyName;
+    }
+    public void genOrigin(){
     }
     public void setAge(int age){
         this.age = age;
