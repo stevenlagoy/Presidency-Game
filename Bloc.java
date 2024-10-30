@@ -1,8 +1,5 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Scanner;
 
 public class Bloc
 {
@@ -21,5 +18,22 @@ public class Bloc
     {
         this.name = name;
         this.numVoters = Math.round(percentVoters * totalVoters);
+    }
+
+    public int getNumVoters(){
+        return numVoters;
+    }
+    public void setNumVoters(int numVoters){
+        this.numVoters = numVoters;
+    }
+    public String getName(){
+        return name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public List<Bloc> getInstances(){
+        return instances;
     }
 }
