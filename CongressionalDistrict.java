@@ -1,54 +1,54 @@
 public class CongressionalDistrict {
 
     // GIS and Census Information
-    private int objectID;
-    private int stateFIPS;
-    private int geoID;
-    private int CD118FP;
-    private String nameLSAD;
-    private String LSAD;
-    private int CDSessn;
-    private String MTFCC;
-    private String funcStat;
-    private long aLand;
-    private long aWater;
-    private double intptLat;
-    private double intptLon;
+    private int objectID; // Unique identifier for the object in the dataset
+    private int stateFIPS; // FIPS code identifying state/territory
+    private int geoID; // US Census unique identifier for congressional district (combines FIPS + district number)
+    private int CD118FP; // Congressional District number for the 118th Congress
+    private String nameLSAD; // Name and legal/statistical area description
+    private String LSAD; // Description code for area description
+    private int CDSessn; // Congressional session associated with the district (e.g., 118 for 118th Congress)
+    private String MTFCC; // MAF/TIGER Feature Class Code, indicates geographic feature type
+    private String funcStat; // Functional status of the district (e.g., "A" for active, "I" for inactive)
+    private long aLand; // Land area in square meters
+    private long aWater; // Water area in square meters
+    private double intptLat; // Latitude of district's center point
+    private double intptLon; // Longitude of district's center point
 
     // Congressional Office and Representative Information
-    private String officeID;
-    private String bioGuideID;
-    private int officeAuditID;
-    private String prefix;
-    private String firstName;
-    private String middleName;
-    private String lastName;
-    private String suffix;
-    private String listingName;
-    private String phone;
-    private String websiteURL;
-    private boolean vacant;
-    private String contactFormURL;
-    private String photoURL;
+    private String officeID; // ID for the congressional office
+    private String bioGuideID; // Biographical identifier for the representative
+    private int officeAuditID; // Audit identifier for the office
+    private String prefix; // Name prefix (e.g., "Mr.", "Ms.")
+    private String firstName; // Representative's first name
+    private String middleName; // Representative's middle name
+    private String lastName; // Representative's last name
+    private String suffix; // Name suffix (e.g., "Jr.", "III")
+    private String listingName; // Formal listing name for representative
+    private String phone; // Contact phone number
+    private String websiteURL; // Representative's official website URL
+    private boolean vacant; // Indicates if the seat is vacant
+    private String contactFormURL; // Contact form URL for the representative
+    private String photoURL; // URL for the representative's photo
 
     // Social Media Information
-    private String facebookURL;
-    private String twitterURL;
-    private String youtubeURL;
-    private String instagramURL;
-    private String flickrURL;
+    private String facebookURL; // Facebook profile URL
+    private String twitterURL; // Twitter profile URL
+    private String youtubeURL; // YouTube profile URL
+    private String instagramURL; // Instagram profile URL
+    private String flickrURL; // Flickr profile URL
 
     // Additional Information
-    private String party;
-    private int district;
-    private String state;
-    private boolean vacancy;
-    private String roomNum;
-    private String HOB;
-    private String committeeAssignments;
-    private String lastUpdated;
-    private double shapeArea;
-    private double shapeLength;
+    private String party; // Political party of the representative
+    private int district; // District number
+    private String state; // State abbreviation
+    private boolean vacancy; // True if the district is vacant
+    private String roomNum; // Office room number
+    private String HOB; // House office building name
+    private String committeeAssignments; // Committee assignments of the representative
+    private String lastUpdated; // Date of last update
+    private double shapeArea; // Area of the district's shape
+    private double shapeLength; // Length of the district's shape
 
     // Constructor
     public CongressionalDistrict(
