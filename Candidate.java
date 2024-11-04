@@ -5,7 +5,8 @@ public class Candidate extends PoliticalActor
 {
     public static List<Candidate> instances = new ArrayList<>();
 
-    private short numDelegates;
+    private int numDelegates;
+    private double influence;
 
     public Candidate(){
         super();
@@ -25,14 +26,31 @@ public class Candidate extends PoliticalActor
         super.genMiddleName();
         super.genFamilyName();
         super.genEducation();
-        this.rollSkills();
-        this.rollConviction();
+        this.genSkills();
+        this.genConviction();
     }
 
-    private void genAge(){}
-    private void genPresentation(){}
+    protected void genAge(){
+        super.genAge(35);
+    }
+    protected void genPresentation(){}
 
     public int getNumDelegates(){
         return this.numDelegates;
+    }
+    public void setNumDelegates(int numDelegates){
+        this.numDelegates = numDelegates;
+    }
+    public void addNumDelegates(int numDelegates){
+        this.numDelegates += numDelegates;
+    }
+    public double getInfluence(){
+        return influence;
+    }
+    public void setInfluence(double influence){
+        this.influence = influence;
+    }
+    public void addInfluence(double influence){
+        this.influence += influence;
     }
 }

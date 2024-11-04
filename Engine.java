@@ -3,6 +3,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Random;
 import java.util.Scanner;
 import java.io.IOException;
 
@@ -111,5 +112,30 @@ public class Engine {
         logStream.close();
         log("Reset Engine");
         return;
+    }
+
+    public static float randPercent(){
+        return randPercent(0.0f, 1.0f);
+    }
+
+    public static float randPercent(float min, float max){
+        // will perform the same if min and max are flipped
+        Random rand = new Random();
+        return (min - max) * rand.nextFloat() + min; // return a float between min and max (exclusive), equally distributed
+    }
+    public static double randDouble(double min, double max){
+        // will perform the same if min and max are flipped
+        Random rand = new Random();
+        return (min - max) * rand.nextDouble() + min; // return a double between min and max (exclusive), equally distributed
+    }
+
+    public static int randInt(int max){
+        return randInt(0, max);
+    }
+
+    public static int randInt(int min, int max){
+        if(max > min) throw new IllegalArgumentException(String.format("The minimum is less than the maximum: %d < %d.%n", max, min));
+        Random rand = new Random();
+        return rand.nextInt(max - min + 1) + min; // return an integer between min and max (inclusive), equally distributed
     }
 }

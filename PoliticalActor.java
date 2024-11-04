@@ -20,41 +20,61 @@ public class PoliticalActor extends Character
         super(buildstring);
     }
 
-    protected void genEducation(){}
-    public void setEducation(){}
+    public int getCash(){
+        return this.cash;
+    }
+    public void setCash(int cash){
+        this.cash = cash;
+    }
+    public void addCash(int cash){
+        this.cash += cash;
+    }
+
+    protected void genEducation(){
+    }
+    public void setEducation(int education){
+        this.education = education;
+    }
     public int getEducation(){
         return this.education;
     }
-    protected void rollSkills(){}
-    public void setSkills(){
-        this.aptitude = (short) 0;
-        for(int i = 0; i < 2; i++){
-            this.aptitude += this.getSkills()[i];
-        }
+    protected void genSkills(){
+    }
+    public void setSkills(int[] skills){
+        this.skills = skills;
+        this.evalAptitude();
     }
     public int[] getSkills(){
         return this.skills;
     }
+    private void evalAptitude(){
+        this.aptitude = 0;
+        for(int i = 0; i < 2; i++){
+            this.aptitude += this.getSkills()[i];
+        }
+    }
     public int getAptitude(){
         return this.aptitude;
     }
-    protected void rollConviction(){}
-    public void setConviction(){}
+    protected void genConviction(){
+    }
+    private void evalConviction(){
+    }
     public int getConviction(){
         return this.conviction;
     }
 
-    public int getCash(){
-        return this.cash;
-    }
-    public State getOrigin(){
-        return this.origin;
-    }
     public int[] getAlignments(){
         return this.alignments;
     }
     public List<String> getExperience(){
         return this.experience;
+    }
+    private void evalAgeMod(){
+        if(this.getAge() < 20) ageMod = 0;
+        else if(this.getAge() < 75) ageMod = (float) -((Math.pow(this.getAge()-55, 2))/20)+100;
+        else if(this.getAge() < 120) ageMod = (-(12*this.getAge())/15)+140;
+        else ageMod = 0;
     }
     public float getAgeMod(){
         return this.ageMod;
