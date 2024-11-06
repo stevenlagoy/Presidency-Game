@@ -6,6 +6,44 @@
         "configurations": [
                 {
                         "type": "java",
+<<<<<<< Updated upstream
+=======
+                        "name": "readCSV",
+                        "request": "launch",
+                        "mainClass": "readCSV",
+                        "projectName": "presidency_game_2f74b218"
+                },
+                {
+                        "type": "java",
+                        "name": "MapApplication",
+                        "request": "launch",
+                        "mainClass": "MapApplication",
+                        "projectName": "presidency_game_2f74b218"
+                },
+                {
+                        "type": "java",
+                        "name": "Main",
+                        "request": "launch",
+                        "mainClass": "Main",
+                        "projectName": "presidency_game_2f74b218"
+                },
+                {
+                        "type": "java",
+                        "name": "PresidencyGameGUI",
+                        "request": "launch",
+                        "mainClass": "PresidencyGameGUI",
+                        "projectName": "presidency_game_2f74b218"
+                },
+                {
+                        "type": "java",
+                        "name": "PresidencyGameGUI",
+                        "request": "launch",
+                        "mainClass": "PresidencyGameGUI",
+                        "projectName": "Presidency-Game_9ca3bc38"
+                },
+                {
+                        "type": "java",
+>>>>>>> Stashed changes
                         "name": "HelloWorld",
                         "request": "launch",
                         "mainClass": "HelloWorld",
