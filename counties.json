@@ -1,11 +1,29 @@
 {
     "counties": [
         {
+            "FIPS" : "",
+            "name" : "",
+            "state" : "",
+            "population" : ,
+            "area" : ,
+            "county_seat" : "",
+            "largest_city" : ""
+        },
+        {
+            "FIPS" : "01001",
+            "name" : "Autauga County",
+            "state" : "Alabama",
+            "population" : ,
+            "area" : ,
+            "county_seat" : "",
+            "largest_city" : ""
+        },
+        {
             "FIPS": "06037",
             "name": "Los Angeles County",
             "state": "California",
             "population": 10039107,
-            "area": 4060,  // area in square miles
+            "area": 4060,
             "county_seat": "Los Angeles",
             "largest_city": "Los Angeles"
         },
@@ -14,7 +32,7 @@
             "name": "Cook County",
             "state": "Illinois",
             "population": 5150233,
-            "area": 1635,  // area in square miles
+            "area": 1635,
             "county_seat": "Chicago",
             "largest_city": "Chicago"
         },
@@ -23,7 +41,7 @@
             "name": "Harris County",
             "state": "Texas",
             "population": 4713325,
-            "area": 1777,  // area in square miles
+            "area": 1777,
             "county_seat": "Houston",
             "largest_city": "Houston"
         },
@@ -32,7 +50,7 @@
             "name": "Maricopa County",
             "state": "Arizona",
             "population": 4485414,
-            "area": 9200,  // area in square miles
+            "area": 9200,
             "county_seat": "Phoenix",
             "largest_city": "Phoenix"
         },
@@ -41,7 +59,7 @@
             "name": "San Diego County",
             "state": "California",
             "population": 3338330,
-            "area": 4526,  // area in square miles
+            "area": 4526,
             "county_seat": "San Diego",
             "largest_city": "San Diego"
         }
