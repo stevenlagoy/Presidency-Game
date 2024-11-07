@@ -27,7 +27,7 @@ public class Candidate extends PoliticalActor
         super.genFamilyName();
         super.genEducation();
         this.genSkills();
-        this.genConviction();
+        this.evalConviction();
     }
 
     protected void genAge(){

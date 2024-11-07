@@ -13,8 +13,8 @@ public class Player extends Candidate
         this.setOriginInput();
         this.setEducationInput();
         this.setAlignmentInput();
-        super.rollSkills();
-        super.rollConviction();
+        this.genSkills();
+        this.evalConviction();
     }
 
     public void setNameInput(){

@@ -56,9 +56,7 @@ public class PoliticalActor extends Character
     public int getAptitude(){
         return this.aptitude;
     }
-    protected void genConviction(){
-    }
-    private void evalConviction(){
+    protected void evalConviction(){
     }
     public int getConviction(){
         return this.conviction;
