@@ -1,0 +1,49 @@
+{
+    "counties": [
+        {
+            "FIPS": "06037",
+            "name": "Los Angeles County",
+            "state": "California",
+            "population": 10039107,
+            "area": 4060,  // area in square miles
+            "county_seat": "Los Angeles",
+            "largest_city": "Los Angeles"
+        },
+        {
+            "FIPS": "17031",
+            "name": "Cook County",
+            "state": "Illinois",
+            "population": 5150233,
+            "area": 1635,  // area in square miles
+            "county_seat": "Chicago",
+            "largest_city": "Chicago"
+        },
+        {
+            "FIPS": "48201",
+            "name": "Harris County",
+            "state": "Texas",
+            "population": 4713325,
+            "area": 1777,  // area in square miles
+            "county_seat": "Houston",
+            "largest_city": "Houston"
+        },
+        {
+            "FIPS": "04013",
+            "name": "Maricopa County",
+            "state": "Arizona",
+            "population": 4485414,
+            "area": 9200,  // area in square miles
+            "county_seat": "Phoenix",
+            "largest_city": "Phoenix"
+        },
+        {
+            "FIPS": "06073",
+            "name": "San Diego County",
+            "state": "California",
+            "population": 3338330,
+            "area": 4526,  // area in square miles
+            "county_seat": "San Diego",
+            "largest_city": "San Diego"
+        }
+    ]
+}
