@@ -5,7 +5,10 @@ public class GovernmentOfficial extends PoliticalActor
     public GovernmentOfficial(){
         super();
     }
-    public GovernmentOfficial(String position){
+    public GovernmentOfficial(String buildstring){
+        super(buildstring);
+    }
+    public GovernmentOfficial(String position, Object o){
         super();
         this.position = position;
     }

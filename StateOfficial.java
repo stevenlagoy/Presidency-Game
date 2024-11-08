@@ -2,7 +2,13 @@ public class StateOfficial extends GovernmentOfficial
 {
     private State stateSeat;
 
-    public StateOfficial(String position){
+    public StateOfficial(){
+
+    }
+    public StateOfficial(String buildstring){
+        super(buildstring);
+    }
+    public StateOfficial(String position, State stateSeat){
         super(position);
     }
     public StateOfficial(State state){
