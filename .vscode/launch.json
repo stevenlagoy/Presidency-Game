@@ -6,6 +6,13 @@
         "configurations": [
                 {
                         "type": "java",
+                        "name": "readCSV",
+                        "request": "launch",
+                        "mainClass": "readCSV",
+                        "projectName": "presidency_game_2f74b218"
+                },
+                {
+                        "type": "java",
                         "name": "MapApplication",
                         "request": "launch",
                         "mainClass": "MapApplication",
