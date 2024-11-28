@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Random;
 import java.util.Scanner;
 import java.io.IOException;
+import java.lang.Math;
 
 public class Engine {
     static Scanner in = new Scanner(System.in);
@@ -114,6 +115,22 @@ public class Engine {
         return;
     }
 
+    public static boolean isPrime(long x){
+        if(x < 2) return false;
+        for(int i = 2; i <= Math.sqrt(x); i++){
+            if(x % i == 0) return false;
+        }
+        return true;
+    }
+    public static boolean isComposite(long x){
+        return !isPrime(x);
+    }
+    public static long nextPrime(long x){
+        do{
+            if(isPrime(++x)) return x;
+        } while(true);
+    }
+    
     public static float randPercent(){
         return randPercent(0.0f, 1.0f);
     }
