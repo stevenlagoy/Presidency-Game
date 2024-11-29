@@ -5,15 +5,16 @@ public class CharacterHashMap
         int key;
         Character value;
         CharacterNode next;
-        public CharacterNode(int key, Character value){
-            this.key = key;
+        public CharacterNode(Character value){
+            this.key = 0; // unused
             this.value = value;
-            this.next = null;
+            this.next = null; // unused
         }
     }
     
     static final int DEFAULT_CAPACITY = 101; // must be prime
     static final float DEFAULT_LOAD_FACTOR = 0.75f;
+    static final int ACCEPTABLE_NUM_TRIES = 20;
     
     private CharacterNode[] characters;
     private int size;
@@ -51,19 +52,35 @@ public class CharacterHashMap
         while(size * 1.0 / newCap > 0.5) newCap++;
         this.clear();
         characters = new CharacterNode[Engine.nextPrime(newCap)];
-  }
-  public void insert(Character character){
-      if(this.getLoadFactor() > DEFAULT_LOAD_FACTOR) this.rehash();
-      int key = hash1(character);
-      int jump = hash2(character);
-      for(int tries = 1; ; tries++){
-          if(characters[key*jump*tries].equals(character) return;
-          if(characters[key*jump*tries] != null){
-              characters[key*jump*tries] = new CharacterNode(key, character);
-              break;
-          }
-      }
-      return;
-  }
+    }
+    public void insert(Character character){
+        if(this.getLoadFactor() > DEFAULT_LOAD_FACTOR) this.rehash();
+        int key = hash1(character);
+        int jump = hash2(character);
+        for(int tries = 1; tries < ACCEPTABLE_NUM_TRIES; tries++){
+            if(characters[key*jump*tries % characters.length].value.equals(character) return;
+            if(characters[key*jump*tries % characters.length] != null){
+                characters[key*jump*tries % characters.length] = new CharacterNode(character);
+                break;
+            }
+        }
+        return;
+    }
+    public void remove(Character character){
+        int key = hash1(character);
+        int jump = hash2(character);
+        while(int tries = 1; tries < ACCEPTABLE_NUM_TRIES; tries++){
+            if(characters[key*jump*tries % characters.length] == null) continue;
+            if(characters[key*jump*tries % characters.length].value.equals(character){
+                characters[key*jump*tries % characters.length] = null;
+                break;
+            }
+        }
+        return;
+    }
+    private int hash1(Character character){
+        
+    }
+    
     
 }
