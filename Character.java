@@ -11,11 +11,13 @@ public class Character
     private String familyName; // last or family name, surname
     private int[] nameform; // representation of the order of the name
     private String fullName; // evaluated full name of the character
-    private String[] demographics; // list of applicable demographic blocs
+    private Bloc[] demographics; // list of applicable demographic blocs
     private int age = 0; // age in years
     private String presentation; // string representation of gender presentation
     private State origin; // state in which the character lives
     private Date birthday; // day of the year on which the character was born
+    private Position[] issuePreferences; // the character's prefered position on each issue
+    private float[] issueWeights; // how valued each issue is to the character
 
     public Character(){
     }
@@ -173,5 +175,15 @@ public class Character
     }
     public void setBirthday(long milliseconds){
         this.birthday = new Date(milliseconds);
+    }
+    public Candidate determineVote(Candidate[] candidates){
+        float[] candidatePreferences = new float[candidates.length];
+        Candidate candidate;
+        for(int i = 0; i < candidates.length; i++){
+            candidate = candidates[i];
+            for(Issue issue : issues){ // issues should be a list of all the issues in the election
+                candidatePreferences[i] += issueWeights[i] * Position.evaluateCloseness(this.getPosition(issue), candidate.getPosition(issue);
+            }
+        }
     }
 }
