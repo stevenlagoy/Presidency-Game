@@ -7,11 +7,13 @@ public class Main
         while(active){
             try {
                 active = Engine.tick();
+                if(!active) break;
                 Thread.sleep(Engine.tickSpeed);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                System.exit(0);
+                break;
             }
         }
+        System.out.print("Main Done\n");
     }
 }

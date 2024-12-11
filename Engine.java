@@ -18,7 +18,7 @@ public class Engine {
 
     public static final long baseSpeed = 2000L;
     public static final long[] speedSettings = {baseSpeed, baseSpeed/2, baseSpeed/4, baseSpeed/8, baseSpeed/16}; // Time in between ticks
-    public static int speedSetting = 0;
+    public static int speedSetting = 4;
     public static long tickSpeed = speedSettings[speedSetting];
 
     static Scanner stdin = new Scanner(System.in);
@@ -37,14 +37,29 @@ public class Engine {
 
     public static boolean tick(){
         boolean active = true;
+        String[] responses = {"Q", "L CHARACTERS"};
+        String input = getInput(responses);
+        switch(input){
+            case "Q" :
+                System.out.print("Quitting\n");
+                return false;
+            case "L CHARACTERS" :
+                System.out.print("Listing Characters:\n");
+                for(Character character : CharacterManager.getAllCharacters()){
+                    System.out.printf("\t%s\n", character.getName());
+                }
+                System.out.print("Done\n");
+                break;
+            default :;
+        }
 
-        System.out.println(DateManager.currentGameDate);
+        //System.out.println(DateManager.currentGameDate);
         active = active && DateManager.incrementQuarterHour();
 
         return active;
     }
 
-    public static int getInput(String[] responses){
+    public static String getInput(String[] responses){
         /* getInput
          * takes responses, a list of acceptable strings
          * only returns when an acceptable input is given
@@ -57,9 +72,10 @@ public class Engine {
             input = stdin.nextLine().toUpperCase();
             for(int i = 0; i < responses.length; i++){
                 if(responses[i].equals(input)){
-                    return i;
+                    return responses[i];
                 }
             }
+            System.out.println("Unrecognized Input");
         }
     }
     public static int getInput(){

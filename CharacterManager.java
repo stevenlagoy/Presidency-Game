@@ -64,9 +64,14 @@ public class CharacterManager
     }
     private static void createPlayerFamily(){
         Candidate player = Engine.playerCandidate;
+        
     }
     public static Character[] getAllCharacters(){
-        return (Character[]) characters.toArray();
+        Character[] charactersArray = new Character[characters.size()];
+        for(int i = 0; i < characters.size(); i++){
+            charactersArray[i] = characters.get(i);
+        }
+        return charactersArray;
     }
     public static int numCharacters(){
         return characters.size();
@@ -75,6 +80,10 @@ public class CharacterManager
         characters.add(character);
     }
     public static Candidate[] getAllCandidates(){
-        return (Candidate[]) candidates.toArray();
+        Candidate[] candidatesArray = new Candidate[candidates.size()];
+        for(int i = 0; i < candidates.size(); i++){
+            candidatesArray[i] = candidates.get(i);
+        }
+        return candidatesArray;
     }
 }
