@@ -3,12 +3,45 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
+
 import java.io.IOException;
 
 public class Engine {
-    static Scanner in = new Scanner(System.in);
+
+    public static String language;
+    public static String languageAbbreviation;
+    public static final String systemText_loc = "_system_text.txt";
+    public static final String descriptions_loc = "_descriptions.txt";
+
+    public static final long baseSpeed = 2000L;
+    public static final long[] speedSettings = {baseSpeed, baseSpeed/2, baseSpeed/4, baseSpeed/8, baseSpeed/16}; // Time in between ticks
+    public static int speedSetting = 0;
+    public static long tickSpeed = speedSettings[speedSetting];
+
+    static Scanner stdin = new Scanner(System.in);
+
+    public static MapManager mapManager = new MapManager();
+    public static CharacterManager characterManager = new CharacterManager();
+    public static DemographicsManager demograpicsManager = new DemographicsManager();
+    public static EventManager eventManager = new EventManager();
+    public static DateManager dateManager = new DateManager();
+
+    public static void init(){
+
+    }
+
+    public static boolean tick(){
+        boolean active = true;
+
+        System.out.println(DateManager.currentGameDate);
+        active = active && DateManager.incrementQuarterHour();
+
+        return active;
+    }
+
     public static int getInput(String[] responses){
         /* getInput
          * takes responses, a list of acceptable strings
@@ -19,7 +52,7 @@ public class Engine {
         String input = "";
         while(true){
             System.out.print("> ");
-            input = in.nextLine().toUpperCase();
+            input = stdin.nextLine().toUpperCase();
             for(int i = 0; i < responses.length; i++){
                 if(responses[i].equals(input)){
                     return i;
@@ -36,7 +69,7 @@ public class Engine {
         String input = "";
         while(true){
             System.out.print("> ");
-            input = in.nextLine().toUpperCase();
+            input = stdin.nextLine().toUpperCase();
             if(input != null) return 1;
         }
     }
