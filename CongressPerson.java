@@ -1,7 +1,7 @@
 public class CongressPerson extends StateOfficial
 {
     public CongressPerson(){
-        super();
+        super("Congressperson", null);
     }
     public CongressPerson(State state){
         super(state);

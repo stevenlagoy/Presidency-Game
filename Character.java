@@ -1,10 +1,10 @@
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.List;
 
 public class Character
 {
-    public static List<Character> instances = new LinkedList<Character>();
   
     private String givenName; // first or given name, forename
     private String middleName; // middle name
@@ -12,19 +12,42 @@ public class Character
     private int[] nameform; // representation of the order of the name
     private String fullName; // evaluated full name of the character
     private Bloc[] demographics; // list of applicable demographic blocs
-    private int age = 0; // age in years
+    private double age = 0; // age in years
     private String presentation; // string representation of gender presentation
-    private State origin; // state in which the character lives
+    private City birthPlace; // city the character was born in
+    private City currentLocation; // City the character is currently in / near
+    private City residencePlace; // City the character currently lives in
     private Date birthday; // day of the year on which the character was born
-    private Position[] issuePreferences; // the character's prefered position on each issue
-    private float[] issueWeights; // how valued each issue is to the character
+
+    static City generateOrigin(){
+        return City.selectCity();
+    }
+    static Bloc[] generateDemographics(City city){
+        return null;
+    }
+    static Bloc[] generateDemographics(State state){
+        return null;
+    }
+    static Date generateBirthDate(){
+        return null;
+    }
 
     public Character(){
+        // Get origin
+        this.birthPlace = generateOrigin();
+
+        // Get demographics
+        this.demographics = generateDemographics(birthPlace);
+
+        // Get birthday and age
+        this.birthday = generateBirthDate();
+        this.age = birthday.getTime();
+
     }
     public Character(String buildstring){
     }
 
-    public Character(String givenName, String middleName, String familyName, int[] nameform, String[] demographics, int age, String presentation, State origin, Date birthday){
+    public Character(String givenName, String middleName, String familyName, int[] nameform, Bloc[] demographics, int age, String presentation, City origin, Date birthday){
         this.givenName = givenName;
         this.middleName = middleName;
         this.familyName = familyName;
@@ -34,27 +57,27 @@ public class Character
         this.demographics = demographics;
         this.age = age;
         this.presentation = presentation;
-        this.origin = origin;
+        this.birthPlace = origin;
         this.birthday = birthday;
 
-        instances.add(this);
+        CharacterManager.addCharacter(this);
     }
-    public Character(String name, String[] demographics, int age, String presentation, State origin){
+    public Character(String name, Bloc[] demographics, int age, String presentation, City origin){
         this.setName(name);
 
         this.demographics = demographics;
         this.age = age;
         this.presentation = presentation;
-        this.origin = origin;
+        this.birthPlace = origin;
 
-        instances.add(this);
+        CharacterManager.addCharacter(this);
     }
 
     public boolean equals(Character other){
         return (
             this.fullName.equals(other.fullName) &&
             this.presentation.equals(other.presentation) &&
-            this.origin.equals(other.origin)
+            this.birthPlace.equals(other.birthPlace)
         );
     }
 
@@ -127,10 +150,10 @@ public class Character
     }
     protected void genDemographics(){
     }
-    public String[] getDemographics(){
+    public Bloc[] getDemographics(){
         return this.demographics;
     }
-    public void setDemographics(String[] demographics){
+    public void setDemographics(Bloc[] demographics){
         this.demographics = demographics;
     }
     protected void genAge(){
@@ -143,12 +166,11 @@ public class Character
         if(max > 120) throw new IllegalArgumentException(String.format("Max value of %d out of allowed range: age < 120.%n", max));
         if(min < 0) throw new IllegalArgumentException(String.format("Min value of %d out of allowed range: age >= 0.%n", min));
         this.age = Engine.randInt(min, max);
-
     }
     public void setAge(int age){
         this.age = age;
     }
-    public int getAge(){
+    public double getAge(){
         return this.age;
     }
     protected void genPresentation(){
@@ -161,11 +183,14 @@ public class Character
     }
     protected void genOrigin(){
     }
-    public State getOrigin(){
-        return origin;
+    public City getCityOrigin(){
+        return birthPlace;
     }
-    public void setOrigin(State origin){
-        this.origin = origin;
+    public State getStateOrigin(){
+        return birthPlace.getState();
+    }
+    public void setOrigin(City origin){
+        this.birthPlace = origin;
     }
     public Date getBirthday(){
         return this.birthday;
@@ -175,15 +200,5 @@ public class Character
     }
     public void setBirthday(long milliseconds){
         this.birthday = new Date(milliseconds);
-    }
-    public Candidate determineVote(Candidate[] candidates){
-        float[] candidatePreferences = new float[candidates.length];
-        Candidate candidate;
-        for(int i = 0; i < candidates.length; i++){
-            candidate = candidates[i];
-            for(Issue issue : issues){ // issues should be a list of all the issues in the election
-                candidatePreferences[i] += issueWeights[i] * Position.evaluateCloseness(this.getPosition(issue), candidate.getPosition(issue);
-            }
-        }
     }
 }

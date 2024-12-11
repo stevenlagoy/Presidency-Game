@@ -2,8 +2,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class City {
+
+    public static City[] cities;
+    public static City selectCity(){
+        return null;
+    }
     
     private CongressionalDistrict district;
+    private State state;
     private int population;
     private ArrayList<Character> charactersPresent = new ArrayList<Character>();
 
@@ -17,6 +23,12 @@ public class City {
     }
     public void setDistrict(CongressionalDistrict district){
         this.district = district;
+    }
+    public State getState(){
+        return this.state;
+    }
+    public void setState(State state){
+        this.state = state;
     }
     public int getPopulation(){
         return this.population;

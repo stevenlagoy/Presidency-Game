@@ -1,17 +1,19 @@
-import java.io.IOException;
-// import java.util.Scanner;
-import javafx.application.Application;
-// import javafx.application.Platform;
-// import javafx.stage.Stage;
-// import javafx.scene.Scene;
-// import javafx.scene.control.*;
-// import javafx.scene.layout.*;
-
 public class Main
 {
-    public static void main(String[] args) throws IOException {
-        Engine.reset();
+    public static void main(String[] args){
+        Engine.init();
+        boolean active = true;
 
-        Application.launch(MapApplication.class, args);
+        while(active){
+            try {
+                active = Engine.tick();
+                if(!active) break;
+                Thread.sleep(Engine.tickSpeed);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                break;
+            }
+        }
+        System.out.print("Main Done\n");
     }
 }
