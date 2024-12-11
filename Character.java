@@ -14,7 +14,9 @@ public class Character
     private Bloc[] demographics; // list of applicable demographic blocs
     private double age = 0; // age in years
     private String presentation; // string representation of gender presentation
-    private City origin; // city the character was born in
+    private City birthPlace; // city the character was born in
+    private City currentLocation; // City the character is currently in / near
+    private City residencePlace; // City the character currently lives in
     private Date birthday; // day of the year on which the character was born
 
     static City generateOrigin(){
@@ -32,10 +34,10 @@ public class Character
 
     public Character(){
         // Get origin
-        this.origin = generateOrigin();
+        this.birthPlace = generateOrigin();
 
         // Get demographics
-        this.demographics = generateDemographics(origin);
+        this.demographics = generateDemographics(birthPlace);
 
         // Get birthday and age
         this.birthday = generateBirthDate();
@@ -55,10 +57,10 @@ public class Character
         this.demographics = demographics;
         this.age = age;
         this.presentation = presentation;
-        this.origin = origin;
+        this.birthPlace = origin;
         this.birthday = birthday;
 
-        CharacterManager.characters.add(this);
+        CharacterManager.addCharacter(this);
     }
     public Character(String name, Bloc[] demographics, int age, String presentation, City origin){
         this.setName(name);
@@ -66,16 +68,16 @@ public class Character
         this.demographics = demographics;
         this.age = age;
         this.presentation = presentation;
-        this.origin = origin;
+        this.birthPlace = origin;
 
-        CharacterManager.characters.add(this);
+        CharacterManager.addCharacter(this);
     }
 
     public boolean equals(Character other){
         return (
             this.fullName.equals(other.fullName) &&
             this.presentation.equals(other.presentation) &&
-            this.origin.equals(other.origin)
+            this.birthPlace.equals(other.birthPlace)
         );
     }
 
@@ -182,13 +184,13 @@ public class Character
     protected void genOrigin(){
     }
     public City getCityOrigin(){
-        return origin;
+        return birthPlace;
     }
     public State getStateOrigin(){
-        return origin.getState();
+        return birthPlace.getState();
     }
     public void setOrigin(City origin){
-        this.origin = origin;
+        this.birthPlace = origin;
     }
     public Date getBirthday(){
         return this.birthday;

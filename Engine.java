@@ -29,6 +29,8 @@ public class Engine {
     public static EventManager eventManager = new EventManager();
     public static DateManager dateManager = new DateManager();
 
+    public static Candidate playerCandidate;
+
     public static void init(){
 
     }

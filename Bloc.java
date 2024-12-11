@@ -94,8 +94,8 @@ public class Bloc
         // <1 if underrepresented, >1 if overrepresented
         try
         {
-            if(CharacterManager.characters.size() == 0) return 1.0f;
-            return (this.characterMembership * 1.0f / CharacterManager.characters.size()) / (this.percentageVoters);
+            if(CharacterManager.numCharacters() == 0) return 1.0f;
+            return (this.characterMembership * 1.0f / CharacterManager.numCharacters()) / (this.percentageVoters);
         }
         catch(ArithmeticException e){
             return 1.0f;
