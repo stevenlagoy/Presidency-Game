@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.HashMap;
 
-public class Bloc
+public class Bloc implements Repr
 {
     private static List<Bloc> instances = new ArrayList<>();
     public static int totalVoters;
@@ -39,8 +39,17 @@ public class Bloc
         return characterBlocs;
     }
 
+    public static Bloc matchBlocName(String name){
+        for(Bloc bloc : instances){
+            if(bloc.name.equals(name)) return bloc;
+        }
+        Engine.log("INVALID BLOC NAME", String.format("The Bloc name \"%s\" is non-existent and could not be matched.", name), Thread.currentThread().getStackTrace().toString());
+        return null;
+    }
+
     private String name;
     private int numVoters;
+    private int membership;
     private int characterMembership;
     private float percentageVoters;
     private String demographicGroup;
@@ -73,6 +82,12 @@ public class Bloc
     public void setPercentageVoters(float percentageVoters){
         this.percentageVoters = percentageVoters;
         this.numVoters = Math.round(percentageVoters * totalVoters);
+    }
+    public int getMembership(){
+        return membership;
+    }
+    public void setMembership(int membership){
+        this.membership = membership;
     }
     public String getName(){
         return name;

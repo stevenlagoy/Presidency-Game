@@ -4,12 +4,14 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 import java.util.Random;
 import java.util.Scanner;
 
 import java.io.IOException;
 
-public class Engine {
+public class Engine
+{
 
     public static String language;
     public static String languageAbbreviation;
@@ -188,5 +190,54 @@ public class Engine {
         if(max > min) throw new IllegalArgumentException(String.format("The minimum is less than the maximum: %d < %d.%n", max, min));
         Random rand = new Random();
         return rand.nextInt(max - min + 1) + min; // return an integer between min and max (inclusive), equally distributed
+    }
+
+    /**
+     * Generic method. Selects a value from the items in accordance with the weights array. The two arrays must have the same length. Returns null if unsuccessful.
+     * @param items Any object array. The values from which to pick. Must have same length as weights array.
+     * @param weights The weight for each value. Must have same length as items array. For any index n within the items of either array, items[n] corresponds to weights[n].
+     * @return An entry selected from the items array weighted in accordance with the weights array.
+     */
+    public static <T> T weighedRandSelect(T[] items, double[] weights){
+        if(items.length < 1 || weights.length < 1){
+            Engine.log("INVALID SELECTION FROM EMPTY ARRAY", String.format("Unable to select an item from an array with length < 1."), Thread.currentThread().getStackTrace().toString());
+            return null;
+        }
+        if(items.length != weights.length){
+            Engine.log("WEIGHTED SELECTION FROM MISMATCHED ARRAYS", String.format("Provided arrays for a weighted selection have mismatched lengths."), Thread.currentThread().getStackTrace().toString());
+            return null;
+        }
+
+        double totalWeight = 0;
+        for(double weight : weights) totalWeight += weight;
+
+        Random rand = new Random();
+        double randomNumber = rand.nextDouble() * totalWeight;
+
+        double cumulativeWeight = 0;
+        for (int i = 0; i < items.length; i++){
+            cumulativeWeight += weights[i];
+            if(randomNumber < cumulativeWeight){
+                return items[i];
+            }
+        }
+        return null; // Edge-case failure to select
+    }
+
+    static String[] suffixes = {"th", "st", "nd", "rd", "th"};
+    public static String toOrdinal(int value){
+        if(value < 0){
+            Engine.log("ILLEGAL ARGUMENT EXCEPTION:", String.format("A value of %d was supplied, when the minimum value is 0.", value), Thread.currentThread().getStackTrace().toString());
+            return null;
+        }
+        return value + suffixes[value <= 3 ? value : 4];
+    }
+
+    public static String arrayToReprList(String[] array){
+        String repr = "";
+        for(int i = 0; i < array.length; i++){
+            repr += String.format("%d:\"%s\";", i, array[i]);
+        }
+        return repr;
     }
 }

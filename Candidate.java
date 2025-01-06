@@ -1,8 +1,16 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.IntStream;
 
-public class Candidate extends PoliticalActor
+public class Candidate extends PoliticalActor implements Repr, HasPersonality
 {
+    final static int SKILLS_BONUS_EDUCATION = 10;
+    final static double EDUCATION_SCALER = 1.25;
+    final static int MIN_AGE = 35;
+    final static int MAX_AGE = 120;
+    final static int POINTSPERSKILL = 10;
+
     public static List<Candidate> instances = new ArrayList<>();
 
     private int numDelegates;
@@ -14,25 +22,25 @@ public class Candidate extends PoliticalActor
     public Candidate(String buildstring)
     {
         super(buildstring);
+        this.fromRepr(buildstring);
         this.genProfile();
     }
 
-    private void genProfile()
+    private void generateAll()
     {
+        this.generateAge();
         this.genPresentation();
         this.genOrigin();
-        this.genAge();
-        super.genGivenName();
-        super.genMiddleName();
-        super.genFamilyName();
-        super.genEducation();
-        this.genSkills();
-        this.evalConviction();
+        this.generateProfile();
+        this.generatePolitics();
+        this.generateAppearance();
+        this.determinePersonality();
     }
 
-    protected void genAge(){
-        super.genAge(35);
+    private void generateProfile(){
+
     }
+
     protected void genPresentation(){}
 
     public int getNumDelegates(){
@@ -52,5 +60,17 @@ public class Candidate extends PoliticalActor
     }
     public void addInfluence(double influence){
         this.influence += influence;
+    }
+
+    public void determinePersonality(){
+
+    }
+
+    public String toRepr(){
+        String repr = String.format("");
+        return repr;
+    }
+    public void fromRepr(String repr){
+
     }
 }

@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateManager
@@ -132,5 +133,34 @@ public class DateManager
         }
 
         return totalMonths >= monthDurations.length ? monthDurations.length - 1 : (int) totalMonths;
+    }
+
+    public static long millisecondsBetween(Date startDate, Date endDate){
+        return Math.abs(endDate.getTime() - startDate.getTime());
+    }
+
+    public static long millisecondsAgo(Date date){
+        return millisecondsBetween(DateManager.currentGameDate, date);
+    }
+
+    public static int calculateYear(double yearsAgo) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(DateManager.currentGameDate);
+
+        // Subtract the number of years (rounded to an integer)
+        int targetYear = calendar.get(Calendar.YEAR) - (int) Math.floor(yearsAgo);
+        return targetYear;
+    }
+
+
+    public static boolean isLeapYear(int year){
+        if(year % 100 == 0){
+            if(year % 400 != 0) return false;
+            return true;
+        }
+        if(year % 4 == 0){
+            return true;
+        }
+        return false;
     }
 }

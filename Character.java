@@ -1,11 +1,14 @@
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.stream.IntStream;
 import java.util.List;
 
-public class Character
-{
-  
+public class Character implements Repr
+{ 
+    protected final static int MIN_AGE = 35;
+    protected final static int MAX_AGE = 120;
+
     private String givenName; // first or given name, forename
     private String middleName; // middle name
     private String familyName; // last or family name, surname
@@ -28,8 +31,17 @@ public class Character
     static Bloc[] generateDemographics(State state){
         return null;
     }
-    static Date generateBirthDate(){
-        return null;
+    protected void generateBirthDate(){
+        Date birthdate;
+        Integer[] range = IntStream.rangeClosed(1,10).boxed().toArray(Integer[]::new);
+        birthdate = new Date(Engine.weighedRandSelect(range, CharacterManager.getBirthdateDistribution()) * DateManager.dayDuration);
+        // check leapyear validity
+        if(birthdate.getTime() == 60 * DateManager.dayDuration && !DateManager.isLeapYear(DateManager.calculateYear(this.getAge()))){
+            generateBirthDate(); // retry
+            return;
+        }
+        this.setBirthday(birthdate);
+        this.setAge(this.getBirthday().getTime() / DateManager.yearDuration);
     }
 
     public Character(){
@@ -40,7 +52,7 @@ public class Character
         this.demographics = generateDemographics(birthPlace);
 
         // Get birthday and age
-        this.birthday = generateBirthDate();
+        generateBirthDate();
         this.age = birthday.getTime();
 
     }
@@ -157,17 +169,23 @@ public class Character
         this.demographics = demographics;
     }
     protected void genAge(){
-        this.genAge(0, 120);
+        this.genAge(MIN_AGE, MAX_AGE);
     }
     protected void genAge(int min){
-        this.genAge(min, 120);
+        this.genAge(min, MAX_AGE);
     }
     protected void genAge(int min, int max){
         if(max > 120) throw new IllegalArgumentException(String.format("Max value of %d out of allowed range: age < 120.%n", max));
         if(min < 0) throw new IllegalArgumentException(String.format("Min value of %d out of allowed range: age >= 0.%n", min));
-        this.age = Engine.randInt(min, max);
+        
+        int age = 0;
+        Integer[] range = IntStream.rangeClosed(1,10).boxed().toArray(Integer[]::new);
+        while(age < MIN_AGE || age > MAX_AGE){
+            age = Engine.weighedRandSelect(range, DemographicsManager.getPopulationPyramidPercent(DemographicsManager.EVERYONE));
+        }
+        this.setAge(age);
     }
-    public void setAge(int age){
+    public void setAge(double age){
         this.age = age;
     }
     public double getAge(){

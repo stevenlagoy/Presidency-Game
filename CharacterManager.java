@@ -86,4 +86,14 @@ public class CharacterManager
         }
         return candidatesArray;
     }
+
+    public static Personality matchPersonality(HasPersonality character){
+        return new Personality();
+    }
+
+    public static double[] getBirthdateDistribution(){
+        double[] distribution = {1.0, 2.0, 3.0, 4.0, 5.0}; // read this in from a json data file later
+
+        return distribution;
+    }
 }

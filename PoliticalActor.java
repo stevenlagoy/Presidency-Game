@@ -71,7 +71,7 @@ public class PoliticalActor extends Character
     private void evalAgeMod(){
         if(this.getAge() < 20) ageMod = 0;
         else if(this.getAge() < 75) ageMod = (float) -((Math.pow(this.getAge()-55, 2))/20)+100;
-        else if(this.getAge() < 120) ageMod = (-(12*this.getAge())/15)+140;
+        else if(this.getAge() < 120) ageMod = (float) (-(12*this.getAge())/15)+140;
         else ageMod = 0;
     }
     public float getAgeMod(){
