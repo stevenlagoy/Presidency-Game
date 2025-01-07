@@ -14,22 +14,18 @@ public class Character implements Repr
     private String familyName; // last or family name, surname
     private int[] nameform; // representation of the order of the name
     private String fullName; // evaluated full name of the character
-    private Bloc[] demographics; // list of applicable demographic blocs
+    private Demographics demographics;
     private double age = 0; // age in years
     private String presentation; // string representation of gender presentation
-    private City birthPlace; // city the character was born in
-    private City currentLocation; // City the character is currently in / near
-    private City residencePlace; // City the character currently lives in
+    private City birthplaceCity; // city the character was born in
+    private City currentLocationCity; // City the character is currently in / near
+    private City residenceCity; // City the character currently lives in
     private Date birthday; // day of the year on which the character was born
+
+    private CharacterModel appearance;
 
     static City generateOrigin(){
         return City.selectCity();
-    }
-    static Bloc[] generateDemographics(City city){
-        return null;
-    }
-    static Bloc[] generateDemographics(State state){
-        return null;
     }
     protected void generateBirthDate(){
         Date birthdate;
@@ -46,10 +42,10 @@ public class Character implements Repr
 
     public Character(){
         // Get origin
-        this.birthPlace = generateOrigin();
+        this.birthplaceCity = generateOrigin();
 
         // Get demographics
-        this.demographics = generateDemographics(birthPlace);
+        this.demographics = CharacterManager.generateDemographics();
 
         // Get birthday and age
         generateBirthDate();
@@ -59,7 +55,7 @@ public class Character implements Repr
     public Character(String buildstring){
     }
 
-    public Character(String givenName, String middleName, String familyName, int[] nameform, Bloc[] demographics, int age, String presentation, City origin, Date birthday){
+    public Character(String givenName, String middleName, String familyName, int[] nameform, Demographics demographics, int age, String presentation, City birthplaceCity, Date birthday){
         this.givenName = givenName;
         this.middleName = middleName;
         this.familyName = familyName;
@@ -69,18 +65,18 @@ public class Character implements Repr
         this.demographics = demographics;
         this.age = age;
         this.presentation = presentation;
-        this.birthPlace = origin;
+        this.birthplaceCity = birthplaceCity;
         this.birthday = birthday;
 
         CharacterManager.addCharacter(this);
     }
-    public Character(String name, Bloc[] demographics, int age, String presentation, City origin){
+    public Character(String name, Demographics demographics, int age, String presentation, City birthplaceCity){
         this.setName(name);
 
         this.demographics = demographics;
         this.age = age;
         this.presentation = presentation;
-        this.birthPlace = origin;
+        this.birthplaceCity = birthplaceCity;
 
         CharacterManager.addCharacter(this);
     }
@@ -89,7 +85,7 @@ public class Character implements Repr
         return (
             this.fullName.equals(other.fullName) &&
             this.presentation.equals(other.presentation) &&
-            this.birthPlace.equals(other.birthPlace)
+            this.birthplaceCity.equals(other.birthplaceCity)
         );
     }
 
@@ -106,6 +102,25 @@ public class Character implements Repr
             this.birthday
         );
         return repr;
+    }
+
+    public City getBirthplaceCity(){
+        return this.birthplaceCity;
+    }
+    public void setBirthplaceCity(City birthplace){
+        this.birthplaceCity = birthplace;
+    }
+    public City getCurrentLocationCity(){
+        return this.currentLocationCity;
+    }
+    public void setCurrentLocationCity(City currentLocation){
+        this.currentLocationCity = currentLocation;
+    }
+    public City getResidenceCity(){
+        return residenceCity;
+    }
+    public void setResidenceCity(City residence){
+        this.residenceCity = residence;
     }
 
     protected void genGivenName(){
@@ -162,10 +177,10 @@ public class Character implements Repr
     }
     protected void genDemographics(){
     }
-    public Bloc[] getDemographics(){
+    public Demographics getDemographics(){
         return this.demographics;
     }
-    public void setDemographics(Bloc[] demographics){
+    public void setDemographics(Demographics demographics){
         this.demographics = demographics;
     }
     protected void genAge(){
@@ -202,13 +217,10 @@ public class Character implements Repr
     protected void genOrigin(){
     }
     public City getCityOrigin(){
-        return birthPlace;
+        return birthplaceCity;
     }
     public State getStateOrigin(){
-        return birthPlace.getState();
-    }
-    public void setOrigin(City origin){
-        this.birthPlace = origin;
+        return birthplaceCity.getState();
     }
     public Date getBirthday(){
         return this.birthday;
@@ -218,5 +230,13 @@ public class Character implements Repr
     }
     public void setBirthday(long milliseconds){
         this.birthday = new Date(milliseconds);
+    }
+
+    public void fromRepr(String repr){
+
+    }
+    public String toRepr(){
+        String repr = "";
+        return repr;
     }
 }

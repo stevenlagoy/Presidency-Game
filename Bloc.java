@@ -116,4 +116,12 @@ public class Bloc implements Repr
             return 1.0f;
         }
     }
+
+    public void fromRepr(String repr){
+
+    }
+    public String toRepr(){
+        String repr = "";
+        return repr;
+    }
 }

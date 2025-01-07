@@ -12,6 +12,12 @@ import java.io.IOException;
 
 public class Engine
 {
+    final static String LOG_FILE_NAME = "log.txt";
+
+    enum Difficulty
+    {
+        LEVEL_1, LEVEL_2, LEVEL_3, LEVEL_4, LEVEL_5
+    }
 
     public static String language;
     public static String languageAbbreviation;
@@ -30,6 +36,8 @@ public class Engine
     public static DemographicsManager demograpicsManager = new DemographicsManager();
     public static EventManager eventManager = new EventManager();
     public static DateManager dateManager = new DateManager();
+
+    public static Difficulty gameDifficulty;
 
     public static Candidate playerCandidate;
 
@@ -95,7 +103,7 @@ public class Engine
     }
     public static void log(String logline){
         try {
-            File logFile = new File("log.txt");
+            File logFile = new File(LOG_FILE_NAME);
             logFile.createNewFile(); // does nothing if already exists
             PrintWriter logWriter = new PrintWriter(new FileWriter(logFile, true));
 
@@ -110,7 +118,7 @@ public class Engine
     }
     public static void log(String context, String logline){
         try {
-            File logFile = new File("log.txt");
+            File logFile = new File(LOG_FILE_NAME);
             logFile.createNewFile(); // does nothing if already exists
             PrintWriter logWriter = new PrintWriter(new FileWriter(logFile, true));
 
@@ -125,7 +133,7 @@ public class Engine
     }
     public static void log(String context, String logline, String trace){
         try {
-            File logFile = new File("log.txt");
+            File logFile = new File(LOG_FILE_NAME);
             logFile.createNewFile(); // does nothing if already exists
             PrintWriter logWriter = new PrintWriter(new FileWriter(logFile, true));
 
@@ -140,7 +148,7 @@ public class Engine
     }
     public static void log(Exception logE){
         try {
-            File logFile = new File("log.txt");
+            File logFile = new File(LOG_FILE_NAME);
             logFile.createNewFile(); // does nothing if already exists
             PrintWriter logWriter = new PrintWriter(new FileWriter(logFile, true));
 
@@ -159,7 +167,7 @@ public class Engine
     }
 
     public static void reset() throws IOException {
-        File logFile = new File("log.txt");
+        File logFile = new File(LOG_FILE_NAME);
         logFile.createNewFile(); // does nothing if already exists
         FileOutputStream logStream = new FileOutputStream(logFile, false);
         logStream.close();

@@ -1,17 +1,24 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class PoliticalActor extends Character
+public class PoliticalActor extends Character implements Repr, HasPersonality
 {
 
     private int cash;
     private int education;
     private int[] alignments = new int[2];
-    private List<String> experience = new ArrayList<>();
-    private int[] skills = new int[3];
+    private List<Experience> experiences = new ArrayList<Experience>();
+    
+    private int legislativeSkill;
+    private int executiveSkill;
+    private int judicialSkill;
     private int aptitude;
+
+    private List<Position> positions = new ArrayList<Position>();
     private int conviction;
     private float ageMod;
+
+    private Personality personality;
 
     public PoliticalActor(){
         super();
@@ -40,21 +47,58 @@ public class PoliticalActor extends Character
     }
     protected void genSkills(){
     }
-    public void setSkills(int[] skills){
-        this.skills = skills;
+    public void setSkills(int legislativeSkill, int executiveSkill, int judicialSkill){
+        this.legislativeSkill = legislativeSkill;
+        this.executiveSkill = executiveSkill;
+        this.judicialSkill = judicialSkill;
+        this.evalModifiedStats();
         this.evalAptitude();
     }
-    public int[] getSkills(){
-        return this.skills;
+    public int getLegislativeBaseSkill(){
+        return legislativeSkill;
     }
-    private void evalAptitude(){
-        this.aptitude = 0;
-        for(int i = 0; i < 2; i++){
-            this.aptitude += this.getSkills()[i];
-        }
+    public int getLegislativeModifiedSkill(){
+        return legislativeSkill;
+    }
+    public void setLegislativeBaseSkill(int legislativeSkill){
+        this.legislativeSkill = legislativeSkill;
+        this.evalAptitude();
+    }
+    public int getExecutiveBaseSkill(){
+        return executiveSkill;
+    }
+    public int getExecutiveModifiedSkill(){
+        return executiveSkill;
+    }
+    public void setExecutiveBaseSkill(int executiveSkill){
+        this.executiveSkill = executiveSkill;
+        this.evalAptitude();
+    }
+    public int getJudicialBaseSkill(){
+        return judicialSkill;
+    }
+    public int getJudicialModifiedSkill(){
+        return judicialSkill;
+    }
+    public void setJudicialBaseSkill(int judicialSkill){
+        this.judicialSkill = judicialSkill;
+        this.evalAptitude();
+    }
+    protected void evalModifiedStats(){
+        // multiply the base stats by the agemod and other modifiers
+    }
+    protected void evalAptitude(){
+        this.aptitude = legislativeSkill + executiveSkill + judicialSkill;
     }
     public int getAptitude(){
         return this.aptitude;
+    }
+    public Position getPositionOnIssue(Issue issue){
+        for(Position position : positions){
+            if(position.getRootIssue().equals(issue)) return position;
+        }
+        Engine.log("INVALID ISSUE NAME", String.format("An invalid issue name, \"%s\", was supplied. Unable to determine position on non-existant issue.", issue), Thread.currentThread().getStackTrace().toString());
+        return null;
     }
     protected void evalConviction(){
     }
@@ -65,8 +109,8 @@ public class PoliticalActor extends Character
     public int[] getAlignments(){
         return this.alignments;
     }
-    public List<String> getExperience(){
-        return this.experience;
+    public List<Experience> getExperience(){
+        return this.experiences;
     }
     private void evalAgeMod(){
         if(this.getAge() < 20) ageMod = 0;
@@ -76,5 +120,16 @@ public class PoliticalActor extends Character
     }
     public float getAgeMod(){
         return this.ageMod;
+    }
+    public void determinePersonality(){
+
+    }
+
+    public void fromRepr(String repr){
+
+    }
+    public String toRepr(){
+        String repr = "";
+        return repr;
     }
 }

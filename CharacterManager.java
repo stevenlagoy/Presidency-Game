@@ -96,4 +96,20 @@ public class CharacterManager
 
         return distribution;
     }
+
+    public static Demographics generateDemographics(){
+        return null;
+    }
+
+    public static CharacterModel generateAppearance(Character character){
+        CharacterModel model = new CharacterModel();
+
+        return model;
+    }
+
+    public static Bloc generatePresentation(Demographics demographics){
+        // Using the two other fields of the demographics object, select a presentation.
+        
+        return Bloc.matchBlocName("");
+    }
 }
