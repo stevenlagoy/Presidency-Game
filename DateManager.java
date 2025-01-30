@@ -12,6 +12,10 @@ public class DateManager
     public static final long minuteDuration = secondDuration * 60;
     public static final long hourDuration = minuteDuration * 60;
     public static final long dayDuration = hourDuration * 24;
+    public static final long weekDuration = dayDuration * 7;
+    // there is no single month duration because months vary in length
+
+    public static final int daysInYear = 366;
 
     public static final long yearDuration = 31_557_600_000L; // 365.25 days
     public static final long[] monthDurations = {
@@ -19,7 +23,7 @@ public class DateManager
         31L*dayDuration, 29L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration,
         31L*dayDuration, 28L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration
     }; // List of the lengths of all months from Jan 2027 to Jan 2029
-    public static final String[] monthNames = {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"}; // Will use lookup table in LANG_system_text to determine Month names
+    public static final String[] monthNames = {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"}; // Will use lookup table in LANG_system_text to determine Month names - should remain lower-case
     public static final String[] monthAbbreviations = {"jan_abbreviation", "feb_abbreviation", "mar_abbreviation", "apr_abbreviation", "may_abbreviation", "jun_abbreviation", "jul_abbreviation", "aug_abbreviation", "sep_abbreviation", "oct_abbreviation", "nov_abbreviation", "dec_abbreviation"};
     public static final String[] yearNumbers = {"2027", "2028", "2029"};
 
@@ -152,6 +156,21 @@ public class DateManager
         return targetYear;
     }
 
+    public static double timeToMillis(long time){
+        return time / 1.0;
+    }
+    public static double timeToSeconds(long time){
+        return time * 1.0 / secondDuration;
+    }
+    public static double timeToDays(long time){
+        return time * 1.0 / dayDuration;
+    }
+    public static double timeToWeeks(long time){
+        return time * 1.0 / weekDuration;
+    }
+    public static double timeToYears(long time){
+        return time * 1.0 / yearDuration;
+    }
 
     public static boolean isLeapYear(int year){
         if(year % 100 == 0){

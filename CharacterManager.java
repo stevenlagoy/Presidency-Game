@@ -1,5 +1,8 @@
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class CharacterManager
 {
@@ -15,6 +18,8 @@ public class CharacterManager
     private static VicePresident vicePresident;
     private static Character firstLady;
     private static Representative HouseSpeaker;
+
+    private static final String birthdate_popularity_filename = "birthdate_popularities.JSON";
 
     public static boolean init(){
         boolean successFlag = true;
@@ -92,12 +97,43 @@ public class CharacterManager
     }
 
     public static double[] getBirthdateDistribution(){
-        double[] distribution = {1.0, 2.0, 3.0, 4.0, 5.0}; // read this in from a json data file later
-
+        double[] distribution = new double[DateManager.daysInYear];
+        // read from JSON   
+        String[] contents = new String[DateManager.daysInYear + 10]; // make sure there's enough space for extra JSON syntax lines
+        try{
+            Scanner scanner = new Scanner(new File(birthdate_popularity_filename));
+            int i = 0;
+            while(scanner.hasNext() && i < contents.length){
+                contents[i++] = scanner.nextLine();
+            }
+            scanner.close();
+        }
+        catch(FileNotFoundException e){
+            Engine.log(e);
+            return null;
+        }
+        // get rid of the opening and closing brackets, and trim to length
+        String[] daysData = new String[DateManager.daysInYear];
+        int i = 0;
+        for(int j = 0; j < contents.length; j++){
+            if(contents[j] == null) break;
+            String line = contents[j].trim();
+            if(line.equals("{") || line.equals("}")) continue;
+            daysData[i++] = line.replace(",", "");
+        }
+        // extract weights from contents
+        for(int j = 0; j < daysData.length; j++){
+            String[] splitString = daysData[j].split("\\s+");
+            distribution[j] = Float.parseFloat(splitString[splitString.length-1]);
+        }
         return distribution;
     }
 
     public static Demographics generateDemographics(){
+        return null;
+    }
+
+    public static Name generateName(Demographics demographics){
         return null;
     }
 

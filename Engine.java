@@ -241,6 +241,60 @@ public class Engine
         return value + suffixes[value <= 3 ? value : 4];
     }
 
+    /**
+     * Takes any object and returns a blank repr string representation of an instance of that object's class. For a filled version, use the object's toRepr() method.
+     * @param <O> Generic object
+     * @param object
+     * @return Generic (unfilled) repr representation of the object. Does not complete field spaces with actual values, but does determine single value and list fields.
+     */
+    public static <O> String toRepr(O object){
+        String[] singleTypes = {"int", "java.lang.String", "char", "long", "float", "double"}; // All the types that are represented by a single value, all others are a list.
+
+        String repr = "";
+
+        repr += String.format("%s:[", object.getClass().toString().replace("class ", ""));
+
+        for(java.lang.reflect.Field f : object.getClass().getDeclaredFields()){
+            boolean added = false;
+            String field = f.toString();
+
+            //System.out.println(field);
+            // loop through all non-static fields
+            if(!field.contains("static")){
+                // the name of the field is the last portion only
+                System.out.println(field);
+                String[] parts = field.split(" ");
+                String type = parts[1];
+                field = parts[parts.length-1];
+
+                for(String singleType : singleTypes){
+                    if(type.equals(singleType)){
+                        repr += String.format("%s:\"", field.split("\\.")[1]);
+                        repr += String.format("\";");
+                        added = true;
+                        break;
+                    }
+                }
+                if(!added) repr += String.format("%s:[];", field.split("\\.")[1]);
+            }
+        }
+
+        repr += String.format("];");
+        return repr;
+        
+        /*
+        * first line should be the type of the passed object 
+        * for each field in the passed object:
+        *      append the name of the field, followed by :
+        *      if the field is a single item, put "";
+        *      if the field is a list, put [];
+        *          for each item in the list, add an index or key followed by :
+        *              if the value is a single item, put "";
+        *              if the value is a list, put [];
+        *                  etc ...
+        * end with ;
+        */
+    }
     public static String arrayToReprList(String[] array){
         String repr = "";
         for(int i = 0; i < array.length; i++){

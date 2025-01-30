@@ -4,6 +4,9 @@ public class Main
         Engine.init();
         boolean active = true;
 
+        Character character = new Character();
+        System.out.println(character.getBirthday().toString());
+
         while(active){
             try {
                 active = Engine.tick();
@@ -14,6 +17,7 @@ public class Main
                 break;
             }
         }
+        
         System.out.print("Main Done\n");
     }
 }
