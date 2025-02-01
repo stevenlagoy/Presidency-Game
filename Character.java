@@ -1,6 +1,8 @@
+import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.Set;
 import java.util.stream.IntStream;
 import java.util.List;
 
@@ -23,16 +25,15 @@ public class Character implements Repr
         return City.selectCity();
     }
     protected void generateBirthDate(){
+        Integer year, day;
         Date birthdate;
-        Integer[] range = IntStream.rangeClosed(0,DateManager.daysInYear - 1).boxed().toArray(Integer[]::new);
-        birthdate = new Date(Engine.weighedRandSelect(range, CharacterManager.getBirthdateDistribution()) * DateManager.dayDuration);
-        // check leapyear validity
-        if(birthdate.getTime() == 60 * DateManager.dayDuration && !DateManager.isLeapYear(DateManager.calculateYear(this.getAge()))){
-            generateBirthDate(); // retry
-            return;
-        }
+        // select a year to be the character's birth year
+        year = Engine.weightedRandSelect(CharacterManager.getAgeDistribution(this.demographics));
+        // select a day of the year to be the character's birthday
+        birthdate = new Date(Engine.weightedRandSelect(CharacterManager.getBirthdateDistribution()));
+        // validate leapyears
+
         this.setBirthday(birthdate);
-        this.setAge(this.getBirthday().getTime() / DateManager.yearDuration);
     }
 
     public Character(){
@@ -107,7 +108,7 @@ public class Character implements Repr
         long age = 0;
         Integer[] range = IntStream.rangeClosed(1,10).boxed().toArray(Integer[]::new);
         while(age < MIN_AGE || age > MAX_AGE){
-            age = Engine.weighedRandSelect(range, DemographicsManager.getPopulationPyramidPercent(DemographicsManager.EVERYONE));
+            age = Engine.weightedRandSelect(range, DemographicsManager.getPopulationPyramidPercent(DemographicsManager.EVERYONE));
         }
     }
     public void setAgeMillis(long age){ // this should almost never be used
@@ -155,10 +156,9 @@ public class Character implements Repr
     }
     public String toRepr(){
         String repr = String.format(
-            "%s:[name:\"%s\";age=%d;presentation=%s;origin=;birthday=%d;];",
+            "%s:[name:\"%s\";presentation=%s;origin=;birthday=%d;];",
             this.getClass().toString().replace("class ", ""),
             this.name.toRepr(),
-            this.age,
             this.presentation,
             this.birthday
         );

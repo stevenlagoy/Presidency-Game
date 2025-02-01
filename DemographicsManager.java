@@ -17,4 +17,10 @@ public class DemographicsManager
         }
         return percentagesPyramid;
     }
+
+    public static Demographics getMostCommonDemographics(){
+        // generation, presentation, raceEthnicity, religion
+        // should make this adaptive to the current population
+        return new Demographics("Millenial", "Evangelical", "European (White)", "Woman");
+    }
 }

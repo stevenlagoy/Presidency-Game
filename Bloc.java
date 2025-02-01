@@ -9,7 +9,17 @@ public class Bloc implements Repr
     public static int totalVoters;
 
     private static HashMap<String, HashSet<Bloc>> demographics = new HashMap<String, HashSet<Bloc>>();
-    private static int numberOfBlocs;
+
+    public static List<Bloc> getInstances(){
+        return instances;
+    }
+    public static int getNumberOfBlocs(){
+        return instances.size();
+    }
+    public static int getNumberOfCategories(){
+        return demographics.size();
+    }
+
     public static Bloc[] selectBlocs(){
         /*
          * Determine which bloc is most underrepresented out of all currently active characters
@@ -20,7 +30,7 @@ public class Bloc implements Repr
          */
         // this function selects the most underrepresented of each group, ignoring overlaps.
         // should be changed to evaluate overlaps
-        Bloc[] characterBlocs = new Bloc[numberOfBlocs];
+        Bloc[] characterBlocs = new Bloc[getNumberOfCategories()];
         int i = 0;
 
         Bloc underrepresentedBloc;
@@ -43,7 +53,7 @@ public class Bloc implements Repr
         for(Bloc bloc : instances){
             if(bloc.name.equals(name)) return bloc;
         }
-        Engine.log("INVALID BLOC NAME", String.format("The Bloc name \"%s\" is non-existent and could not be matched.", name), Thread.currentThread().getStackTrace().toString());
+        Engine.log("INVALID BLOC NAME", String.format("The Bloc name \"%s\" is non-existent and could not be matched.", name), new Exception());
         return null;
     }
 
@@ -55,6 +65,15 @@ public class Bloc implements Repr
     private String demographicGroup;
     private HashMap<Bloc, Double> overlaps = new HashMap<Bloc, Double>();
 
+    public Bloc(String name, String demographicGroup){
+        this.name = name;
+        this.numVoters = 0;
+        this.percentageVoters = 0.0f;
+        this.demographicGroup = demographicGroup;
+        instances.add(this);
+        if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
+        demographics.get(demographicGroup).add(this);
+    }
     public Bloc(String name, int numVoters, String demographicGroup)
     {
         this.name = name;
@@ -96,9 +115,6 @@ public class Bloc implements Repr
         this.name = name;
     }
 
-    public List<Bloc> getInstances(){
-        return instances;
-    }
     /**
      * Calculates how over- or under-represented a bloc is among all Character instances. Ratio of actual membership to expected membership. O(1)
      * @param bloc The bloc to be evaluated for representation.

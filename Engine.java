@@ -2,8 +2,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Scanner;
@@ -42,7 +45,21 @@ public class Engine
     public static Candidate playerCandidate;
 
     public static void init(){
+        try{
+            reset();
+        }
+        catch(IOException e){
+            System.exit(-1);
+        }
+    }
 
+    public static void reset() throws IOException {
+        File logFile = new File(LOG_FILE_NAME);
+        logFile.createNewFile(); // does nothing if already exists
+        FileOutputStream logStream = new FileOutputStream(logFile, false);
+        logStream.close();
+        log("RESET", "Reset Engine");
+        return;
     }
 
     public static boolean tick(){
@@ -131,13 +148,16 @@ public class Engine
             System.exit(-1);
         }
     }
-    public static void log(String context, String logline, String trace){
+    public static void log(String context, String logline, Exception logE){
         try {
             File logFile = new File(LOG_FILE_NAME);
             logFile.createNewFile(); // does nothing if already exists
             PrintWriter logWriter = new PrintWriter(new FileWriter(logFile, true));
 
-            logWriter.printf("%s : %s: %s @ %s%n", getDate(), context.toUpperCase(), logline, trace);
+            StringWriter sw = new StringWriter();
+            logE.printStackTrace(new PrintWriter(sw));
+            String stackTrace = sw.toString().replace("\t", " -> ").replace("\n", "").replace("\r", "");
+            logWriter.printf("%s : %s: %s @ %s%n", getDate(), context.toUpperCase(), logline, stackTrace);
             logWriter.close();
             return;
         }
@@ -152,7 +172,10 @@ public class Engine
             logFile.createNewFile(); // does nothing if already exists
             PrintWriter logWriter = new PrintWriter(new FileWriter(logFile, true));
 
-            logWriter.printf("%s : %s @ %s%n", getDate(), logE.toString(), logE.getStackTrace()[0].toString());
+            StringWriter sw = new StringWriter();
+            logE.printStackTrace(new PrintWriter(sw));
+            String stackTrace = sw.toString().replace("\t", " -> ").replace("\n", "").replace("\r", ""); // Handle any carriage return characters
+            logWriter.printf("%s : %s %n", getDate(), stackTrace);
             logWriter.close();
             return;
         }
@@ -164,15 +187,6 @@ public class Engine
 
     public static String getDate(){
         return new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS").format(new java.util.Date());
-    }
-
-    public static void reset() throws IOException {
-        File logFile = new File(LOG_FILE_NAME);
-        logFile.createNewFile(); // does nothing if already exists
-        FileOutputStream logStream = new FileOutputStream(logFile, false);
-        logStream.close();
-        log("Reset Engine");
-        return;
     }
 
     public static float randPercent(){
@@ -206,13 +220,13 @@ public class Engine
      * @param weights The weight for each value. Must have same length as items array. For any index n within the items of either array, items[n] corresponds to weights[n].
      * @return An entry selected from the items array weighted in accordance with the weights array.
      */
-    public static <T> T weighedRandSelect(T[] items, double[] weights){
+    public static <T> T weightedRandSelect(T[] items, double[] weights){
         if(items.length < 1 || weights.length < 1){
-            Engine.log("INVALID SELECTION FROM EMPTY ARRAY", String.format("Unable to select an item from an array with length < 1."), Thread.currentThread().getStackTrace().toString());
+            Engine.log("INVALID SELECTION FROM EMPTY ARRAY", String.format("Unable to select an item from an array with length < 1."), new Exception());
             return null;
         }
         if(items.length != weights.length){
-            Engine.log("WEIGHTED SELECTION FROM MISMATCHED ARRAYS", String.format("Provided arrays for a weighted selection have mismatched lengths."), Thread.currentThread().getStackTrace().toString());
+            Engine.log("WEIGHTED SELECTION FROM MISMATCHED ARRAYS", String.format("Provided arrays for a weighted selection have mismatched lengths."), new Exception());
             return null;
         }
 
@@ -223,19 +237,69 @@ public class Engine
         double randomNumber = rand.nextDouble() * totalWeight;
 
         double cumulativeWeight = 0;
-        for (int i = 0; i < items.length; i++){
+        for(int i = 0; i < items.length; i++){
             cumulativeWeight += weights[i];
             if(randomNumber < cumulativeWeight){
                 return items[i];
             }
         }
+        Engine.log("FAILURE TO SELECT", String.format("The weighted selection failed to select an item."), new Exception());
+        return null; // Edge-case failure to select
+    }
+    public static <T, P extends Number> T weightedRandSelect(Collection<T> items, Collection<P> weights){
+        if(items.size() < 1 || weights.size() < 1){
+            Engine.log("INVALID SELECTION FROM EMPTY ARRAY", String.format("Unable to select an item from an array with length < 1."), new Exception());
+            return null;
+        }
+        if(items.size() != weights.size()){
+            Engine.log("WEIGHTED SELECTION FROM MISMATCHED ARRAYS", String.format("Provided arrays for a weighted selection have mismatched lengths."), new Exception());
+            return null;
+        }
+
+        double totalWeight = 0;
+        for(P weight : weights) totalWeight += weight.doubleValue();
+
+        Random rand = new Random();
+        double randomNumber = rand.nextDouble() * totalWeight;
+
+        double cumulativeWeight = 0;
+        for(T item : items){
+            cumulativeWeight += weights.iterator().next().doubleValue();
+            if(randomNumber < cumulativeWeight){
+                return item;
+            }
+        }
+        Engine.log("FAILURE TO SELECT", String.format("The weighted selection failed to select an item."), new Exception());
+        return null; // Edge-case failure to select
+    }
+    public static <K, V extends Number> K weightedRandSelect(Map<K, V> items){
+        if(items.size() < 1){
+            Engine.log("INVALID SELECTION FROM EMPTY ARRAY", String.format("Unable to select an item from an array with length < 1."), new Exception());
+            return null;
+        }
+        // map requires bijective relationship between keys and values
+
+        double totalWeight = 0;
+        for(V weight : items.values()) totalWeight += weight.doubleValue();
+
+        Random rand = new Random();
+        double randomNumber = rand.nextDouble() * totalWeight;
+
+        double cumulativeWeight = 0;
+        for(K key : items.keySet()){
+            cumulativeWeight += items.get(key).doubleValue();
+            if(randomNumber < cumulativeWeight){
+                return key;
+            }
+        }
+        Engine.log("FAILURE TO SELECT", String.format("The weighted selection failed to select an item."), new Exception());
         return null; // Edge-case failure to select
     }
 
     static String[] suffixes = {"th", "st", "nd", "rd", "th"};
     public static String toOrdinal(int value){
         if(value < 0){
-            Engine.log("ILLEGAL ARGUMENT EXCEPTION:", String.format("A value of %d was supplied, when the minimum value is 0.", value), Thread.currentThread().getStackTrace().toString());
+            Engine.log("ILLEGAL ARGUMENT EXCEPTION:", String.format("A value of %d was supplied, when the minimum value is 0.", value), new Exception());
             return null;
         }
         return value + suffixes[value <= 3 ? value : 4];
