@@ -5,8 +5,9 @@ import java.util.HashMap;
 
 public class Bloc implements Repr
 {
+
     private static List<Bloc> instances = new ArrayList<>();
-    public static int totalVoters;
+    public static int totalVoters = 341_275_500; // as of 1 Feb 2025
 
     private static HashMap<String, HashSet<Bloc>> demographics = new HashMap<String, HashSet<Bloc>>();
 
@@ -59,8 +60,7 @@ public class Bloc implements Repr
 
     private String name;
     private int numVoters;
-    private int membership;
-    private int characterMembership;
+    private int membership; // number of characters
     private float percentageVoters;
     private String demographicGroup;
     private HashMap<Bloc, Double> overlaps = new HashMap<Bloc, Double>();
@@ -70,22 +70,31 @@ public class Bloc implements Repr
         this.numVoters = 0;
         this.percentageVoters = 0.0f;
         this.demographicGroup = demographicGroup;
-        instances.add(this);
+
+        Bloc.instances.add(this);
         if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
         demographics.get(demographicGroup).add(this);
     }
-    public Bloc(String name, int numVoters, String demographicGroup)
+    public Bloc(String name, String demographicGroup, int numVoters)
     {
         this.name = name;
         this.numVoters = numVoters;
         this.percentageVoters = numVoters * 1.0f / totalVoters;
         this.demographicGroup = demographicGroup;
+
+        Bloc.instances.add(this);
+        if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
+        demographics.get(demographicGroup).add(this);
     }
-    public Bloc(String name, float percentageVoters, String demographicGroup)
+    public Bloc(String name, String demographicGroup, float percentageVoters)
     {
         this.name = name;
         this.numVoters = Math.round(percentageVoters * totalVoters);
         this.percentageVoters = percentageVoters;
+
+        Bloc.instances.add(this);
+        if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
+        demographics.get(demographicGroup).add(this);
     }
 
     public int getNumVoters(){
@@ -126,7 +135,7 @@ public class Bloc implements Repr
         try
         {
             if(CharacterManager.numCharacters() == 0) return 1.0f;
-            return (this.characterMembership * 1.0f / CharacterManager.numCharacters()) / (this.percentageVoters);
+            return (this.membership * 1.0f / CharacterManager.numCharacters()) / (this.percentageVoters);
         }
         catch(ArithmeticException e){
             return 1.0f;
@@ -137,7 +146,15 @@ public class Bloc implements Repr
 
     }
     public String toRepr(){
-        String repr = "";
+        String repr = String.format(
+            "%s:[name:\"%s\";numVoters=%d;membership=%d;percentageVoters=%ff;demographicGroup=\"%s\";];",
+            this.getClass().toString().replace("class ", ""),
+            this.name,
+            this.numVoters,
+            this.membership,
+            this.percentageVoters,
+            this.demographicGroup
+        );
         return repr;
     }
 }

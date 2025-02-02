@@ -60,7 +60,7 @@ public class Name implements Repr
             }
         }
         if(res.length() != 3){
-            Engine.log("UNINITIALIZABLE NAME", String.format("At least one of (\"%s\", \"%s\", \"%s\") has no alphabetic characters and is uninitializable.", first, middle, last), Thread.currentThread().getStackTrace().toString());
+            Engine.log("UNINITIALIZABLE NAME", String.format("At least one of (\"%s\", \"%s\", \"%s\") has no alphabetic characters and is uninitializable.", first, middle, last), new Exception());
             return null;
         }
         return res;
@@ -86,7 +86,7 @@ public class Name implements Repr
             this.familyname = surname;
         }
         else {
-            Engine.log("NAME INVALID NAMEFORM: ", String.format("Invalid nameform supplied: %s", nameform), Thread.currentThread().getStackTrace().toString());
+            Engine.log("NAME INVALID NAMEFORM: ", String.format("Invalid nameform supplied: %s", nameform), new Exception());
             return;
         }
     }

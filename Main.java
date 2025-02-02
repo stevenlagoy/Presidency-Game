@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+
 public class Main
 {
     public static void errorFunc(){
@@ -10,16 +14,17 @@ public class Main
         Engine.init();
         boolean active = true;
 
+        HashMap<Object, Object> json = Engine.readJSONFile("blocs.json");
+        //System.out.println(json.toString());
+
         Engine.log("TEST LOG", "This is a test of the log system.", new Exception());
 
-        Bloc bloc = new Bloc("Millenial", "Generation");
-        bloc = new Bloc("Evangelical", "Religion");
-        bloc = new Bloc("European (White)", "Race & Ethnicity");
-        bloc = new Bloc("Woman", "Presentation");
+        System.out.println(Bloc.getInstances().toString());
 
         Character character = new Character();
         System.out.println(character.getBirthday().toString());
-
+        
+        /*
         while(active){
             try {
                 active = Engine.tick();
@@ -30,6 +35,8 @@ public class Main
                 break;
             }
         }
+        */
+
         System.out.print("Main Done\n");
     }
 }

@@ -59,7 +59,7 @@ public class Candidate extends PoliticalActor implements Repr, HasPersonality
                 totalPoints = Engine.randInt(400, 500);
                 break;
             default :
-                Engine.log("INVALID DIFFICULTY", String.format("The difficult value, \"%s\", is invalid.", Engine.gameDifficulty), Thread.currentThread().getStackTrace().toString());
+                Engine.log("INVALID DIFFICULTY", String.format("The difficulty value, \"%s\", is invalid.", Engine.gameDifficulty), new Exception());
                 return;
         }
         int allocations[] = new int[numCategories];

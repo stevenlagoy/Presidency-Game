@@ -1,16 +1,21 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.EmptyStackException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Scanner;
-
+import java.util.Stack;
 import java.io.IOException;
 
 public class Engine
@@ -51,6 +56,8 @@ public class Engine
         catch(IOException e){
             System.exit(-1);
         }
+
+        DemographicsManager.createDemographicBlocs();
     }
 
     public static void reset() throws IOException {
@@ -117,6 +124,72 @@ public class Engine
             input = stdin.nextLine().toUpperCase();
             if(input != null) return 1;
         }
+    }
+    public static HashMap<Object, Object> readJSONFile(String filename){
+        ArrayList<String> contents = new ArrayList<String>();
+        try{
+            File file = new File(filename);
+            Scanner scanner = new Scanner(file);
+            while(scanner.hasNextLine()){
+                contents.add(scanner.nextLine());
+            }
+            scanner.close();
+        }
+        catch(FileNotFoundException e){
+            Engine.log("FILE NOT FOUND", String.format("The file %s was not found.", filename), e);
+            return null;
+        }
+        // split the contents by JSON object, use nested Lists to represent the JSON structure
+        HashMap<Object, Object> json = new HashMap<Object, Object>();
+        Stack<Integer> stack = new Stack<Integer>();
+        Integer[] indices = new Integer[contents.size()];
+        for(int i = 0; i < contents.size(); i++){
+            if(contents.get(i) == null) break;
+            if(contents.get(i).contains("{")) stack.push(i);
+            if(contents.get(i).contains("}")){
+                try{
+                    indices[stack.pop()] = i;
+                }
+                catch(EmptyStackException e){
+                    Engine.log(String.format("JSON file \"%s\" is malformed, missing opening at line %d.", filename, i));
+                    return null;
+                }
+            }
+        }
+        if(!stack.isEmpty()){
+            Engine.log("JSON file is malformed, missing closing at line " + stack.pop());
+            return null;
+        }
+        return readJSONObject(contents.subList(1, contents.size()-1));
+    }
+    public static HashMap<Object, Object> readJSONObject(List<String> contents){
+        HashMap<Object, Object> object = new HashMap<Object, Object>();
+        for(int i = 0; i < contents.size(); i++){
+            String line = contents.get(i);
+            String key = line.split(":")[0].trim().replace("\"", "");
+            if(key.equals("")) key = "null";
+            String value = "";
+            try{
+                value = line.split(":")[1].trim().replace(",","");
+            }
+            catch(ArrayIndexOutOfBoundsException e){
+                // do nothing - this is expected at the end of a JSON object
+            }
+            if(line.contains("{")){
+                // read the object
+                object.put(key, readJSONObject(contents.subList(i+1, contents.size())));
+                // skip already read lines
+                while(!contents.get(i).contains("}")) i++;
+            }
+            else if(line.contains("}")){
+                // end the object
+                return object;
+            }
+            else{
+                object.put(key, value.trim().replace("\"", ""));
+            }
+        }
+        return object;
     }
     public static void log(String logline){
         try {

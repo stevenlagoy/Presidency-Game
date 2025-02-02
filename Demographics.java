@@ -50,7 +50,14 @@ public class Demographics implements Repr
 
 
     public String toRepr(){
-        String repr = "";
+        String repr = String.format(
+            "%s:[name:\"%s\";generation=\"%s\";religion=\"%s\";raceEthnicity=\"%s\";presentation=\"%s\";];",
+            this.getClass().toString().replace("class ", ""),
+            this.generation.getName(),
+            this.religion.getName(),
+            this.raceEthnicity.getName(),
+            this.presentation.getName()
+        );
         return repr;
     }
     public void fromRepr(String repr){

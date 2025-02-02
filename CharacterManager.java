@@ -9,6 +9,10 @@ import java.io.FileNotFoundException;
 
 public class CharacterManager
 {
+    // required filenames
+    private static final String birthdate_popularity_filename = "birthdate_popularities.JSON";
+    private static final String birthyear_percentages_filename = "birthyear_percentages.JSON";
+    
     private static List<Character> characters = new LinkedList<Character>();
     private static List<GovernmentOfficial> governmentOfficials = new LinkedList<GovernmentOfficial>();
     private static List<Representative> representatives = new LinkedList<Representative>();
@@ -22,8 +26,7 @@ public class CharacterManager
     private static Character firstLady;
     private static Representative HouseSpeaker;
 
-    private static final String birthdate_popularity_filename = "birthdate_popularities.JSON";
-    private static final String birthdate_percentages_filename = "birthyear_percentages.JSON";
+    
 
     public static boolean init(){
         boolean successFlag = true;
@@ -149,92 +152,39 @@ public class CharacterManager
             return ageDistribution.get(demographicGroup);
         }
 
-        // read from JSON
-        String[] contents = new String[numberOfYears * Bloc.getNumberOfBlocs() + 10]; // make sure there's enough space for extra JSON syntax lines
-        try{
-            Scanner scanner = new Scanner(new File(birthdate_percentages_filename));
-            int i = 0;
-            while(scanner.hasNext()){
-                contents[i++] = scanner.nextLine();
-            }
-            scanner.close();
-        }
-        catch(FileNotFoundException e){
-            Engine.log(e);
-            return null;
-        }
-        // split the contents up by the demographic group they discribe
-        // JSON file: { "firstGroup": { "1900" : 0.02, "1901" : 0.01 }, "secondGroup": { "1900" : 0.03, "1901" : 0.02 } }
-        // find JSON objects
-        Stack<Integer> stack = new Stack<Integer>();
-        Integer[] indices = new Integer[contents.length];
-        for(int i = 0; i < contents.length; i++){
-            if(contents[i] == null) break;
-            if(contents[i].contains("{")) stack.push(i);
-            if(contents[i].contains("}")){
-                try{
-                    indices[stack.pop()] = i;
-                }
-                catch(EmptyStackException e){
-                    Engine.log("JSON file is malformed, missing opening at line " + i);
-                    return null;
-                }
-            }
-        }
-        if(!stack.isEmpty()){
-            Engine.log("JSON file is malformed, missing closing at line " + stack.pop());
-            return null;
-        }
-        ageDistribution = new HashMap<String, HashMap<Integer, Double>>(); // initialize the map
-        for(int i = 1; i < indices.length; i++){ // skip the first object (the enclosing brackets)
-            if(indices[i] != null){
-                String objectName = contents[i].split(":")[0].trim().replace("\"","");
-                HashMap<Integer, Double> distribution = new HashMap<Integer, Double>();
+        HashMap<Object, Object> json = Engine.readJSONFile(birthyear_percentages_filename); // read the JSON file
+        CharacterManager.ageDistribution = new HashMap<String, HashMap<Integer, Double>>(); // initialize the map
 
-                // extract weights from contents, from the start of the object to the end
-                for(int j = i + 1; j < indices[i].intValue(); j++){
-                    String[] splitString = contents[j].split("[\\s+,]");
-                    distribution.put(j - i - 1, Double.parseDouble(splitString[splitString.length-1]));
-                }
-                // add the object to the map
-                ageDistribution.put(objectName, distribution);
+        for(Object key : json.keySet()){
+            String keyString = (String) key;
+            HashMap<Integer, Double> distribution = new HashMap<Integer, Double>();
+            for(int i = 0; i < numberOfYears; i++){
+                distribution.put(i + startYear, 0.0);
             }
+            @SuppressWarnings("unchecked")
+            HashMap<Object, Object> values = (HashMap<Object, Object>) json.get(key); // known structure of the JSON file
+            for(Object year : values.keySet()){
+                int yearInt = Integer.parseInt((String) year);
+                distribution.put(yearInt, Double.parseDouble((String) values.get(year)));
+            }
+            ageDistribution.put(keyString, distribution);
         }
+
         return getAgeDistribution(demographicGroup); // the map is now populated
     }
     private static HashMap<String, Double> birthdateDistribution; // Distribution of birthdates in a year, indexed by day
     public static HashMap<String, Double> getBirthdateDistribution(){
         if(birthdateDistribution != null) return birthdateDistribution;
 
+        HashMap <Object, Object> json = Engine.readJSONFile(birthdate_popularity_filename); // read the JSON file
         CharacterManager.birthdateDistribution = new HashMap<String, Double>();
-        // read from JSON
-        String[] contents = new String[DateManager.daysInYear + 10]; // make sure there's enough space for extra JSON syntax lines
-        try{
-            Scanner scanner = new Scanner(new File(birthdate_popularity_filename));
-            int i = 0;
-            while(scanner.hasNext() && i < contents.length){
-                contents[i++] = scanner.nextLine();
-            }
-            scanner.close();
+
+        for(Object key : json.keySet()){
+            String keyString = (String) key;
+            Double value = Double.parseDouble((String) json.get(key));
+            birthdateDistribution.put(keyString, value);
         }
-        catch(FileNotFoundException e){
-            Engine.log(e);
-            return null;
-        }
-        // get rid of the opening and closing brackets, and trim to length
-        String[] daysData = new String[DateManager.daysInYear];
-        int i = 0;
-        for(int j = 0; j < contents.length; j++){
-            if(contents[j] == null) break;
-            String line = contents[j].trim();
-            if(line.equals("{") || line.equals("}")) continue;
-            daysData[i++] = line.replace(",", "");
-        }
-        // extract weights from contents
-        for(int j = 0; j < daysData.length; j++){
-            String[] splitString = daysData[j].split("\\s+");
-            birthdateDistribution.put(DateManager.ordinalToDateFormat(j), Double.parseDouble(splitString[splitString.length-1]));
-        }
+
         return birthdateDistribution;
     }
 
