@@ -1,0 +1,87 @@
+{
+    "Generation" : {
+        "Greatest Generation" : 0.0020,
+        "Silent Generation" : 0.0549,
+        "Baby Boomers" : 0.2058,
+        "Generation X" : 0.1961,
+        "Millennial" : 0.2167,
+        "Generation Z" : 0.2088,
+        "Generation Alpha" : 0.1157,
+        "Generation Beta" : 0.0000
+    },
+    "Family" : {
+        "Single" : 0.1602,
+        "Married" : 0.2384,
+        "Widdowed" : 0.0266,
+        "Divorced" : 0.0448,
+        "At least one child" : 0.32,
+        "Three or more children" : 0.21
+    },
+    "Religion" : {
+        "Evangelical" : 0.201,
+        "Mainline Protestant" : 0.182,
+        "Black Protestant" : 0.073,
+        "Catholic" : 0.218,
+        "Mormon" : 0.013,
+        "Jehovah's Witness" : 0.005,
+        "Orthodox Christian" : 0.005,
+        "Unaffiliated" : 0.161,
+        "Agnostic" : 0.041,
+        "Atheist" : 0.031,
+        "Jewish" : 0.014,
+        "Muslim" : 0.008,
+        "Buddhist" : 0.008,
+        "Hindu" : 0.005,
+        "Other Non-Christian" : 0.035
+    },
+    "Education" : {
+        "Primary Education" : 0.088,
+        "Secondary Education" : 0.279,
+        "Tertiary Education" : 0.149,
+        "College Degree" : 0.340,
+        "Higher Degree" : 0.144
+    },
+    "Race & Ethnicity" : {
+        "European (White)" : 0.5963,
+        "African American (Black)" : 0.1223,
+        "Native American Indian" : 0.0071,
+        "East Asian" : 0.0254,
+        "South Asian" : 0.0253,
+        "Southeast Asian" : 0.0316,
+        "Pacific Islander" : 0.0024,
+        "Hispanic / Latino" : 0.1896
+    },
+    "Employment" : {
+        "Unemployed" : 0.037,
+        "Student" : 0.291,
+        "Professional & Business" : 0.088825,
+        "Healthcare" : 0.084738,
+        "Hospitality" : 0.064964,
+        "Retail Trade" : 0.060169,
+        "Local Government" : 0.056951,
+        "Manufacturing" : 0.050270,
+        "Construction" : 0.031185,
+        "Finance & Insurance" : 0.025931,
+        "Transportation & Warehousing" : 0.025712,
+        "Wholesale Trade" : 0.023610,
+        "Other Services" : 0.022820,
+        "State Government" : 0.020617,
+        "Private Education" : 0.015435,
+        "Information" : 0.011811,
+        "Federal Government" : 0.011478,
+        "Real Estate" : 0.009480,
+        "Resource Extraction" : 0.002481,
+        "Utility" : 0.002175,
+        "Other Sector" : 0.063348
+    },
+    "Residency" : {
+        "Urban" : 0.19,
+        "Suburban" : 0.46,
+        "Rural" : 0.35
+    },
+    "Presentation" : {
+        "Man" : 0.49294,
+        "Woman" : 0.50228,
+        "Non-Binary" : 0.00478
+    }
+}

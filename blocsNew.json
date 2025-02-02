@@ -1,0 +1,194 @@
+{
+    "Generation" : {
+        "Greatest Generation" : 0.0020,
+        "Silent Generation" : 0.0549,
+        "Baby Boomers" : 0.2058,
+        "Generation X" : 0.1961,
+        "Millennial" : 0.2167,
+        "Generation Z" : 0.2088,
+        "Generation Alpha" : 0.1157,
+        "Generation Beta" : 0.0000
+    },
+    "Family" : {
+        "Single" : 0.1602,
+        "Married" : 0.2384,
+        "Widdowed" : 0.0266,
+        "Divorced" : 0.0448,
+        "One Child" : 0.32,
+        "Two Children" : 0.00,
+        "Three Or More Children" : 0.21
+    },
+    "Religion" : {
+        "Christian" : {
+            "Evangelical" : {
+                "Baptist" : 0.000,
+                "Nondenominational" : 0.062,
+                "Pentecostal" : 0.046,
+                "Holiness" : 0.008,
+                "Fundamentalist / Other Evangelical" : 0.003
+            },
+            "Mainline Protestant" : {
+                "Methodist" : 0.046,
+                "Lutheran" : 0.035,
+                "Episcopalian" : 0.013,
+                "Presbyterian" : 0.022,
+                "Congregationalist" : 0.006,
+                "Calvinist / Other Reformed" : 0.003
+            },
+            "Black Protestant" : 0.073,
+            "Other Protestant" : {
+                "Unspecified Protestant" : 0.038,
+                "Restorationist" : 0.019,
+                "Adventist" : 0.006,
+                "Anabaptist" : 0.003,
+                "Pietist" : 0.003,
+                "Quaker" : 0.003
+            },
+            "Catholic" : {
+                "White Catholic" : 0.117,
+                "Hispanic Catholic" : 0.082,
+                "Other Non-White Catholic" : 0.019
+            },
+            "Mormon" : 0.013,
+            "Jehovah's Witness" : 0.005,
+            "Orthodox Christian" : 0.005
+        },
+        "Unaffiliated" : {
+            "Unaffiliated" : 0.161,
+            "Agnostic" : 0.041,
+            "Atheist" : 0.031
+        },
+        "Jewish" : 0.014,
+        "Muslim" : 0.008,
+        "Buddhist" : 0.008,
+        "Hindu" : 0.005,
+        "Other Non-Christian" : 0.035
+    },
+    "Education" : {
+        "Primary Education" : 0.088,
+        "Secondary Education" : 0.279,
+        "Tertiary Education" : 0.149,
+        "College Degree" : 0.340,
+        "Higher Degree" : 0.144
+    },
+    "Race & Ethnicity" : {
+        "White" : {
+            "English" : 0.141,
+            "German" : 0.136,
+            "Irish" : 0.119,
+            "French" : 0.074,
+            "American" : 0.059,
+            "Italian" : 0.054,
+            "Scottish" : 0.036,
+            "Polish" : 0.027,
+            "Unspecified European" : 0.014,
+            "Swedish" : 0.012,
+            "Norwegian" : 0.010,
+            "Dutch" : 0.009,
+            "Scotch-Irish" : 0.008,
+            "Russian" : 0.006,
+            "Spanish" : 0.006,
+            "French Canadian" : 0.005,
+            "Welsh" : 0.005,
+            "Portuguese" : 0.004,
+            "Hungarian" : 0.004,
+            "Greek" : 0.004,
+            "Unspecified British" : 0.004,
+            "Czech" : 0.004,
+            "Ukrainian" : 0.003,
+            "Danish" : 0.003,
+            "Unspecified Eastern European" : 0.003,
+            "Unspecified Scandinavian" : 0.003,
+            "Swiss" : 0.003,
+            "Finnish" : 0.002,
+            "Slovak" : 0.002,
+            "Lithuanian" : 0.002,
+            "Austrian" : 0.002,
+            "Canadian" : 0.002
+        },
+        "Black" : {
+            "African American" : 0.000,
+            "Afro-Caribbean" : 0.000,
+            "Jamaican" : 0.004,
+            "Haitian" : 0.003,
+            "Nigerian" : 0.002,
+            "Sub-Saharan African" : 0.000,
+            "Unspecified African" : 0.005
+        },
+        "Native / Indian" : {
+            "Indigenous American" : 0.029,
+            "Indigenous Mexican" : 0.003,
+            "Indigenous Central American" : 0.002,
+            "Native Hawaiian" : 0.002,
+            "Alaska Native" : 0.000
+        },
+        "Asian" : {
+            "Chinese" : 0.016,
+            "Indian" : 0.015,
+            "Filipino" : 0.013,
+            "Vietnamese" : 0.007,
+            "Korean" : 0.006,
+            "Japanese" : 0.005,
+            "Pakistani" : 0.002,
+            "Unspecified Asian" : 0.002
+        },
+        "Hispanic / Latino" : {
+            "Mexican" : 0.112,
+            "Puerto Rican" : 0.018,
+            "Salvadoran" : 0.007,
+            "Cuban" : 0.007,
+            "Dominican" : 0.007,
+            "Guatemalan" : 0.006,
+            "Colombian" : 0.004,
+            "Honduran" : 0.004,
+            "Ecuadorian" : 0.003,
+            "Venezuelan" : 0.002,
+            "Peruvian" : 0.002,
+            "Brazilian" : 0.002,
+            "Unspecified Hispanic / Latino" : 0.007
+        },
+        "Middle Eastern / North African" : {
+            "Lebanese" : 583719,
+            "Egyptian" : 334574,
+            "Syrian" : 203282,
+            "Palestinian" : 171969,
+            "Iraqi" : 164851,
+            "Moroccan" : 140196,
+            "Unpecified Arab" : 0.000,
+            "Iranian" : 0.002
+        },
+        "Two Or More Races" : 0.000
+    },
+    "Employment" : {
+        "Mining" : 0.000,
+        "Utilities" : 0.000,
+        "Construction" : 0.000,
+        "Manufacturing" : 0.000,
+        "Wholesale Trade" : 0.000,
+        "Retail Trade" : 0.000,
+        "Transportation & Warehousing" : 0.000,
+        "Information" : 0.000,
+        "Finance & Insurance" : 0.000,
+        "Real Estate & Rental & Leasing" : 0.000,
+        "Professional / Scientific & Technical Services" : 0.000,
+        "Management" : 0.000,
+        "Administrative & Support & Waste Management & Remediation Services" : 0.000,
+        "Educational Services" : 0.000,
+        "Health Care & Social Assistance" : 0.000,
+        "Arts / Entertainment & Recreation" : 0.000,
+        "Accommodation & Food Services" : 0.000,
+        "Public Administration" : 0.000,
+        "Other Services" : 0.000,
+        "Unemployed" : 0.000
+    },
+    "Residency" : {
+        "Urban" : 0.19,
+        "Suburban" : 0.46,
+        "Rural" : 0.35
+    },
+    "Presentation" : {
+        "Man" : 0.49294,
+        "Woman" : 0.50228,
+        "Other / Non-Binary" : 0.00478
+    }
+}
