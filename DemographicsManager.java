@@ -28,7 +28,7 @@ public class DemographicsManager
     public static Demographics getMostCommonDemographics(){
         // generation, presentation, raceEthnicity, religion
         // should make this adaptive to the current population
-        return new Demographics("Millennial", "Evangelical", "European (White)", "Woman");
+        return new Demographics("Millennial", "Evangelical", "White", "Woman");
     }
     public static void createDemographicBlocs() {
         // read the JSON file and create blocs

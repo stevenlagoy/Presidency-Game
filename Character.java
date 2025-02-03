@@ -21,27 +21,12 @@ public class Character implements Repr
 
     private CharacterModel appearance;
 
-    static City generateOrigin(){
-        return City.selectCity();
-    }
-    protected void generateBirthDate(){
-        Integer year, day;
-        Date birthdate;
-        // select a year to be the character's birth year
-        year = Engine.weightedRandSelect(CharacterManager.getAgeDistribution(this.demographics));
-        // select a day of the year to be the character's birthday
-        birthdate = new Date(Engine.weightedRandSelect(CharacterManager.getBirthdateDistribution()));
-        // validate leapyears
-
-        this.setBirthday(birthdate);
-    }
-
     public Character(){
-        // Get origin
-        this.birthplaceCity = generateOrigin();
-
         // Get demographics
         this.demographics = CharacterManager.generateDemographics();
+
+        // Get origin
+        generateOrigin();
 
         // Get birthday and age
         generateBirthDate();
@@ -60,6 +45,27 @@ public class Character implements Repr
         CharacterManager.addCharacter(this);
     }
 
+    protected void generateBirthDate(){
+        Integer year, day;
+        long birthdate;
+        // select a year to be the character's birth year
+        year = Engine.weightedRandSelect(CharacterManager.getAgeDistribution(this.demographics));
+        // select a day of the year to be the character's birthday
+        birthdate = DateManager.dateFormatToOrdinal(Engine.weightedRandSelect(CharacterManager.getBirthdateDistribution())) * DateManager.dayDuration;
+        // validate leapyears
+        //System.out.printf("Selected year: %d, Selected date: %s.\n", year.intValue(), DateManager.ordinalToDateFormat((int) (birthdate / DateManager.dayDuration)));
+        if(birthdate == 60 * DateManager.dayDuration && !DateManager.isLeapYear(year)){
+            //System.out.println("Selected Feb 29 in a non-Leap Year. Reselecting.");
+            generateBirthDate();
+            return;
+        }
+        // set the birthday
+        this.setBirthday(new Date(DateManager.yearToMillis(year) + birthdate));
+    }
+
+    protected void generateOrigin(){
+        this.birthplaceCity = City.selectCity(this.demographics);
+    }
     public City getBirthplaceCity(){
         return this.birthplaceCity;
     }

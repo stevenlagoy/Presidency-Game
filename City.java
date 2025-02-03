@@ -4,7 +4,7 @@ import java.util.Collection;
 public class City {
 
     public static City[] cities;
-    public static City selectCity(){
+    public static City selectCity(Demographics demographics){
         return null;
     }
     
@@ -12,10 +12,17 @@ public class City {
     private State state;
     private int population;
     private ArrayList<Character> charactersPresent = new ArrayList<Character>();
+    private DateManager.TimeZone timeZone;
 
-    public City(CongressionalDistrict district, int population){
+    public City(CongressionalDistrict district, int population, DateManager.TimeZone timeZone){
         this.district = district;
         this.population = population;
+        this.timeZone = timeZone;
+    }
+    public City(CongressionalDistrict district, int population, String timeZone){
+        this.district = district;
+        this.population = population;
+        this.timeZone = DateManager.matchTimeZone(timeZone);
     }
 
     public CongressionalDistrict getDistrict(){

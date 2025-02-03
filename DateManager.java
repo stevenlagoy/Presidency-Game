@@ -7,6 +7,25 @@ public class DateManager
     public static final Date startDate = new Date(1800464400000L); // Wednesday, January 20, 2027 12:00:00 PM GMT-05:00
     public static final Date endDate = new Date(1863622800000L); // Saturday, January 20, 2029 12:00:00 PM GMT-05:00
     public static Date currentGameDate = new Date(startDate.getTime()); // Updated throughout gameplay
+    
+    public static final long epochMillis = 1970 * DateManager.yearDuration;
+    public static final int epochYear = 1970;
+    public static final long timezoneCorrectionEST = 5L; // use this as the default / universal, since it is the time in Washington, DC.
+    public static final long timezoneCorrectionEDT = 4L;
+    public static final long timezoneCorrectionCST = 6L;
+    public static final long timezoneCorrectionCDT = 5L;
+    public static final long timezoneCorrectionMST = 7L;
+    public static final long timezoneCorrectionMDT = 6L;
+    public static final long timezoneCorrectionPST = 8L;
+    public static final long timezoneCorrectionPDT = 7L;
+    public static final long timezoneCorrectionAKST = 9L;
+    public static final long timezoneCorrectionAKDT = 8L;
+    public static final long timezoneCorrectionHST = 10L;
+    public static final long timezoneCorrectionHDT = 9L;
+    public static enum TimeZone
+    {
+        EST, EDT, CST, CDT, MST, MDT, PST, PDT, AKST, AKDT, HST, HDT
+    }
 
     public static final long secondDuration = 1000L;
     public static final long minuteDuration = secondDuration * 60;
@@ -14,10 +33,10 @@ public class DateManager
     public static final long dayDuration = hourDuration * 24;
     public static final long weekDuration = dayDuration * 7;
     // there is no single month duration because months vary in length
-
+    public static final long leapYearDuration = 366 * dayDuration;
+    public static final long yearDuration = 365 * dayDuration;
     public static final int daysInYear = 366;
 
-    public static final long yearDuration = 31_557_600_000L; // 365.25 days
     public static final long[] monthsDurationsMillis = {
         31L*dayDuration, 28L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration,
         31L*dayDuration, 29L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration, 30L*dayDuration, 31L*dayDuration,
@@ -43,7 +62,7 @@ public class DateManager
     }
     public static boolean incrementQuarterMinute(){
         long currentTime = currentGameDate.getTime();
-        long newTime = currentTime + minuteDuration / 4;
+        long newTime = currentTime + 15*secondDuration;
 
         if(newTime > endDate.getTime()) return false;
 
@@ -52,7 +71,7 @@ public class DateManager
     }
     public static boolean incrementHalfMinute(){
         long currentTime = currentGameDate.getTime();
-        long newTime = currentTime + minuteDuration / 2;
+        long newTime = currentTime + 30*secondDuration;
 
         if(newTime > endDate.getTime()) return false;
 
@@ -70,7 +89,7 @@ public class DateManager
     }
     public static boolean incrementQuarterHour(){
         long currentTime = currentGameDate.getTime();
-        long newTime = currentTime + hourDuration / 4;
+        long newTime = currentTime + 15*minuteDuration;
 
         if(newTime > endDate.getTime()) return false;
 
@@ -79,7 +98,7 @@ public class DateManager
     }
     public static boolean incrementHalfHour(){
         long currentTime = currentGameDate.getTime();
-        long newTime = currentTime + hourDuration / 2;
+        long newTime = currentTime + 30*minuteDuration;
 
         if(newTime > endDate.getTime()) return false;
 
@@ -89,6 +108,24 @@ public class DateManager
     public static boolean incrementHour(){
         long currentTime = currentGameDate.getTime();
         long newTime = currentTime + hourDuration;
+
+        if(newTime > endDate.getTime()) return false;
+
+        currentGameDate.setTime(newTime);
+        return true;
+    }
+    public static boolean incrementQuarterDay(){
+        long currentTime = currentGameDate.getTime();
+        long newTime = currentTime + 3*hourDuration;
+
+        if(newTime > endDate.getTime()) return false;
+
+        currentGameDate.setTime(newTime);
+        return true;
+    }
+    public static boolean incrementHalfDay(){
+        long currentTime = currentGameDate.getTime();
+        long newTime = currentTime + 6*hourDuration;
 
         if(newTime > endDate.getTime()) return false;
 
@@ -129,6 +166,15 @@ public class DateManager
         currentGameDate.setTime(newTime);
         return true;
     }
+
+    public static TimeZone matchTimeZone(String timeZoneString){
+        for(TimeZone tz : TimeZone.values()){
+            if(timeZoneString.equals(tz.toString())) return tz;
+        }
+        Engine.log("INVALID TIMEZONE", String.format("The supplied time zone name, %s, does not match any accepted time zone.", timeZoneString), new Exception());
+        return null;
+    }
+
     /**
      * Calculates the month index for the given time. (1-12)
      * @param time The time to calculate the month index for.
@@ -172,13 +218,38 @@ public class DateManager
      * @param yearsAgo The year to calculate the time since.
      * @return The number of years between the current game date and the given year.
      */
-    public static int calculateYear(double yearsAgo) {
+    public static int yearYearsAgo(double yearsAgo) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(DateManager.currentGameDate);
 
         // Subtract the number of years (rounded to an integer)
         int targetYear = calendar.get(Calendar.YEAR) - (int) Math.floor(yearsAgo);
         return targetYear;
+    }
+    /**
+     * Calculates and returns the number of milliseconds since epoch for Jan 1 00:00:00 in a given year, adjusted to the EST timezone. Only accurate in the range [1583,292278994].
+     * @param year The year to calculate (1900, 1970, 2000)
+     * @return The number of milliseconds since epoch.
+     */
+    public static long yearToMillis(int year){
+        if(year < 1583 || year > 292_278_994){
+            Engine.log("DATE OUT OF BOUNDS", String.format("The year requested, %s, is out of the accurate bounds of [1583,292278994].", year));
+            return Long.MAX_VALUE;
+        }
+        long millis = ((long) year) * yearDuration - epochMillis;
+        // calculate for leap years
+        int numberLeapYears = 0;
+        if(year > epochYear)
+        for(int i = epochYear; i < year; i++){
+            if(isLeapYear(i)) numberLeapYears++;
+        }
+        else if(year < epochYear)
+        for(int i = year; i <= epochYear; i++){
+            if(isLeapYear(i)) numberLeapYears--;
+        }
+        // no calculation required if year == epochYear
+        millis += (numberLeapYears * dayDuration) + (timezoneCorrectionEST * hourDuration);
+        return millis;
     }
 
     public static double timeToMillis(long time){
@@ -199,13 +270,9 @@ public class DateManager
 
     public static boolean isLeapYear(int year){
         if(year % 100 == 0){
-            if(year % 400 != 0) return false;
-            return true;
+            return year % 400 == 0;
         }
-        if(year % 4 == 0){
-            return true;
-        }
-        return false;
+        return year % 4 == 0;
     }
 
     /**
@@ -247,7 +314,7 @@ public class DateManager
      */
     public static int dateFormatToOrdinal(String dateFormat){
 
-        String[] parts = dateFormat.split("/");
+        String[] parts = dateFormat.split("[-//]");
         if(parts.length != 2){
             Engine.log("INVALID DATE FORMAT", String.format("The date format \"%s\" is invalid. Must be in the format MM/DD.", dateFormat), new Exception());
             return -1;

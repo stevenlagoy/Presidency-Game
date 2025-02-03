@@ -42,8 +42,8 @@
         "Higher Degree" : 0.144
     },
     "Race & Ethnicity" : {
-        "European (White)" : 0.5963,
-        "African American (Black)" : 0.1223,
+        "White" : 0.5963,
+        "Black" : 0.1223,
         "Native American Indian" : 0.0071,
         "East Asian" : 0.0254,
         "South Asian" : 0.0253,

@@ -12,7 +12,6 @@ import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
@@ -21,6 +20,7 @@ import java.io.IOException;
 public class Engine
 {
     final static String LOG_FILE_NAME = "log.txt";
+    final static String ERROR_FILE_NAME = "error.txt";
 
     enum Difficulty
     {
@@ -29,10 +29,14 @@ public class Engine
 
     public static String language;
     public static String languageAbbreviation;
+    public static enum LanguageAbbreviations
+    {
+        EN, ZH, RU, ES, PT, DE, FR, JA, PL, TR
+    }
     public static final String systemText_loc = "_system_text.txt";
     public static final String descriptions_loc = "_descriptions.txt";
 
-    public static final long baseSpeed = 2000L;
+    public static final long baseSpeed = 2000L; // Make sure this is a multiple of the smallest speedsetting
     public static final long[] speedSettings = {baseSpeed, baseSpeed/2, baseSpeed/4, baseSpeed/8, baseSpeed/16}; // Time in between ticks
     public static int speedSetting = 4;
     public static long tickSpeed = speedSettings[speedSetting];
@@ -56,17 +60,50 @@ public class Engine
         catch(IOException e){
             System.exit(-1);
         }
-
         DemographicsManager.createDemographicBlocs();
     }
 
     public static void reset() throws IOException {
-        File logFile = new File(LOG_FILE_NAME);
-        logFile.createNewFile(); // does nothing if already exists
-        FileOutputStream logStream = new FileOutputStream(logFile, false);
-        logStream.close();
+        writeErrorToLog();
+        clearErrorFile();
         log("RESET", "Reset Engine");
         return;
+    }
+    public static void done(){
+        log("DONE");
+        writeErrorToLog();
+    }
+
+    public static void writeErrorToLog(){
+        try{
+            File errorFile = new File(ERROR_FILE_NAME);
+            errorFile.createNewFile(); // does nothing if already exists
+            File logFile = new File(LOG_FILE_NAME);
+            logFile.createNewFile();
+            Scanner scanner = new Scanner(errorFile);
+            ArrayList<String> contents = new ArrayList<>();
+            while(scanner.hasNext()) contents.add(scanner.nextLine());
+            scanner.close();
+            PrintWriter writer = new PrintWriter(new FileOutputStream(logFile, true));
+            for(String line : contents) writer.println(line);
+            writer.close();
+        }
+        catch(IOException e){
+            log("ERROR/LOG FILE NOT FOUND", "Somehow, the error file or log file was unable to be found.", e);
+            return;
+        }
+    }
+    public static void clearErrorFile(){
+        try{
+            File errorFile = new File(ERROR_FILE_NAME);
+            errorFile.createNewFile();
+            FileOutputStream errorStream = new FileOutputStream(errorFile, false);
+            errorStream.close();
+        }
+        catch(IOException e){
+            log("ERROR/LOG FILE NOT FOUND", "Somehow, the error file or log file was unable to be found.", e);
+            return;
+        }
     }
 
     public static boolean tick(){
@@ -140,7 +177,6 @@ public class Engine
             return null;
         }
         // split the contents by JSON object, use nested Lists to represent the JSON structure
-        HashMap<Object, Object> json = new HashMap<Object, Object>();
         Stack<Integer> stack = new Stack<Integer>();
         Integer[] indices = new Integer[contents.size()];
         for(int i = 0; i < contents.size(); i++){
@@ -175,14 +211,18 @@ public class Engine
             catch(ArrayIndexOutOfBoundsException e){
                 // do nothing - this is expected at the end of a JSON object
             }
-            if(line.contains("{")){
+            if(line.contains("{") && !line.contains("}")){ // start of an object
                 // read the object
                 object.put(key, readJSONObject(contents.subList(i+1, contents.size())));
                 // skip already read lines
                 while(!contents.get(i).contains("}")) i++;
             }
-            else if(line.contains("}")){
+            else if(!line.contains("{") && line.contains("}")){ // end of an object
                 // end the object
+                return object;
+            }
+            else if(line.contains("{") && line.contains("}")){ // object all on one line
+                object.put(key, "null");
                 return object;
             }
             else{
@@ -193,9 +233,9 @@ public class Engine
     }
     public static void log(String logline){
         try {
-            File logFile = new File(LOG_FILE_NAME);
-            logFile.createNewFile(); // does nothing if already exists
-            PrintWriter logWriter = new PrintWriter(new FileWriter(logFile, true));
+            File errorFile = new File(ERROR_FILE_NAME);
+            errorFile.createNewFile(); // does nothing if already exists
+            PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
 
             logWriter.printf("%s : %s%n", getDate(), logline);
             logWriter.close();
@@ -208,9 +248,9 @@ public class Engine
     }
     public static void log(String context, String logline){
         try {
-            File logFile = new File(LOG_FILE_NAME);
-            logFile.createNewFile(); // does nothing if already exists
-            PrintWriter logWriter = new PrintWriter(new FileWriter(logFile, true));
+            File errorFile = new File(ERROR_FILE_NAME);
+            errorFile.createNewFile(); // does nothing if already exists
+            PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
 
             logWriter.printf("%s : %s: %s%n", getDate(), context.toUpperCase(), logline);
             logWriter.close();
@@ -223,9 +263,9 @@ public class Engine
     }
     public static void log(String context, String logline, Exception logE){
         try {
-            File logFile = new File(LOG_FILE_NAME);
-            logFile.createNewFile(); // does nothing if already exists
-            PrintWriter logWriter = new PrintWriter(new FileWriter(logFile, true));
+            File errorFile = new File(ERROR_FILE_NAME);
+            errorFile.createNewFile(); // does nothing if already exists
+            PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
 
             StringWriter sw = new StringWriter();
             logE.printStackTrace(new PrintWriter(sw));
@@ -241,9 +281,9 @@ public class Engine
     }
     public static void log(Exception logE){
         try {
-            File logFile = new File(LOG_FILE_NAME);
-            logFile.createNewFile(); // does nothing if already exists
-            PrintWriter logWriter = new PrintWriter(new FileWriter(logFile, true));
+            File errorFile = new File(ERROR_FILE_NAME);
+            errorFile.createNewFile(); // does nothing if already exists
+            PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
 
             StringWriter sw = new StringWriter();
             logE.printStackTrace(new PrintWriter(sw));

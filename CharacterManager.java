@@ -116,27 +116,31 @@ public class CharacterManager
         double totalPercentages = 0.0;
         // generation data
         response = getAgeDistribution(demographics.getGeneration());
+        if(response != null)
         for(int i = 0; i < response.size(); i++){
             result.put(i + startYear, response.get(i + startYear) + response.get(i + startYear));
-            totalPercentages += response.get(i);
+            totalPercentages += response.get(i + startYear);
         }
         // presentation data
         response = getAgeDistribution(demographics.getPresentation());
+        if(response != null)
         for(int i = 0; i < response.size(); i++){
             result.put(i + startYear, response.get(i + startYear) + response.get(i + startYear));
-            totalPercentages += response.get(i);
+            totalPercentages += response.get(i + startYear);
         }
         // race/ethnicity data
         response = getAgeDistribution(demographics.getRaceEthnicity());
+        if(response != null)
         for(int i = 0; i < response.size(); i++){
             result.put(i + startYear, response.get(i + startYear) + response.get(i + startYear));
-            totalPercentages += response.get(i);
+            totalPercentages += response.get(i + startYear);
         }
         // religion data
         response = getAgeDistribution(demographics.getReligion());
+        if(response != null)
         for(int i = 0; i < response.size(); i++){
             result.put(i + startYear, response.get(i + startYear) + response.get(i + startYear));
-            totalPercentages += response.get(i);
+            totalPercentages += response.get(i + startYear);
         }
         // normalize the values
         for(int i = 0; i < result.size(); i++){
@@ -161,6 +165,7 @@ public class CharacterManager
             for(int i = 0; i < numberOfYears; i++){
                 distribution.put(i + startYear, 0.0);
             }
+            if(json.get(key).equals("null")) continue;
             @SuppressWarnings("unchecked")
             HashMap<Object, Object> values = (HashMap<Object, Object>) json.get(key); // known structure of the JSON file
             for(Object year : values.keySet()){

@@ -25,7 +25,7 @@
                 "Nondenominational" : 0.062,
                 "Pentecostal" : 0.046,
                 "Holiness" : 0.008,
-                "Fundamentalist / Other Evangelical" : 0.003
+                "Fundamentalist / Evangelical" : 0.003
             },
             "Mainline Protestant" : {
                 "Methodist" : 0.046,
@@ -33,7 +33,7 @@
                 "Episcopalian" : 0.013,
                 "Presbyterian" : 0.022,
                 "Congregationalist" : 0.006,
-                "Calvinist / Other Reformed" : 0.003
+                "Calvinist / Reformed" : 0.003
             },
             "Black Protestant" : 0.073,
             "Other Protestant" : {
@@ -42,7 +42,8 @@
                 "Adventist" : 0.006,
                 "Anabaptist" : 0.003,
                 "Pietist" : 0.003,
-                "Quaker" : 0.003
+                "Quaker" : 0.003,
+                "Unitarian" : 0.000
             },
             "Catholic" : {
                 "White Catholic" : 0.117,
@@ -51,7 +52,8 @@
             },
             "Mormon" : 0.013,
             "Jehovah's Witness" : 0.005,
-            "Orthodox Christian" : 0.005
+            "Orthodox Christian" : 0.005,
+            "Unspecified Christian" : 0.000
         },
         "Unaffiliated" : {
             "Unaffiliated" : 0.161,
@@ -111,8 +113,11 @@
             "Afro-Caribbean" : 0.000,
             "Jamaican" : 0.004,
             "Haitian" : 0.003,
-            "Nigerian" : 0.002,
-            "Sub-Saharan African" : 0.000,
+            "Central African" : 0.000,
+            "East African" : 0.002,
+            "Horn African" : 0.000,
+            "Southern African" : 0.000,
+            "West African" : 0.000,
             "Unspecified African" : 0.005
         },
         "Native / Indian" : {

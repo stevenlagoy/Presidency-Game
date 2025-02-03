@@ -1,5 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 
 public class Main
@@ -14,16 +18,17 @@ public class Main
         Engine.init();
         boolean active = true;
 
-        HashMap<Object, Object> json = Engine.readJSONFile("blocs.json");
+        //HashMap<Object, Object> json = Engine.readJSONFile("blocs.json");
         //System.out.println(json.toString());
 
         Engine.log("TEST LOG", "This is a test of the log system.", new Exception());
 
         System.out.println(Bloc.getInstances().toString());
 
-        Character character = new Character();
-        System.out.println(character.getBirthday().toString());
-        
+        for(int i = 0; i < 10000; i++){
+            Character character = new Character();
+        }
+
         /*
         while(active){
             try {
@@ -38,5 +43,6 @@ public class Main
         */
 
         System.out.print("Main Done\n");
+        Engine.done();
     }
 }
