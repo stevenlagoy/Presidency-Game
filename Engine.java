@@ -22,6 +22,9 @@ import java.io.OutputStreamWriter;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL;
+
+import javafx.stage.Window;
+
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -74,7 +77,7 @@ public class Engine
 
     public static Candidate playerCandidate;
 
-    private static long window;
+    private static WindowManager window;
 
     public static void init() {
         try {
@@ -85,6 +88,8 @@ public class Engine
             System.exit(-1);
         }
         DemographicsManager.createDemographicBlocs();
+        window = new WindowManager("Engine", 0, 0, false);
+        window.init();
     }
 
     public static void reset() throws IOException {
@@ -95,88 +100,23 @@ public class Engine
     }
 
     public static void done() {
+        window.cleanup();
         log("DONE");
         writeErrorToLog();
     }
 
     public static boolean tick() {
         boolean active = true;
-        String[] responses = {"Q", "L CHARACTERS"};
-        String input = getInput(responses);
-        switch (input) {
-            case "Q" :
-                System.out.print("Quitting\n");
-                return false;
-            case "L CHARACTERS" :
-                System.out.print("Listing Characters:\n");
-                for (Character character : CharacterManager.getAllCharacters()) {
-                    System.out.printf("\t%s\n", character.getName());
-                }
-                System.out.print("Done\n");
-                break;
-            default :;
-        }
+        window.update();
 
         //System.out.println(DateManager.currentGameDate);
         active = active && DateManager.incrementQuarterHour();
+        active = active && !window.windowShouldClose();
         return active;
     }
 
-    public static void initOpenGL() {
-        // Initialize GLFW
-        if (!glfwInit()) {
-            throw new IllegalStateException("Unable to initialize GLFW");
-        }
-
-        // Configure GLFW
-        glfwDefaultWindowHints();
-        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-
-        // Create the window
-        window = glfwCreateWindow(800, 600, "OpenGL Window", NULL, NULL);
-        if (window == NULL) {
-            throw new RuntimeException("Failed to create the GLFW window");
-        }
-
-        // Make the OpenGL context current
-        glfwMakeContextCurrent(window);
-        // Enable v-sync
-        glfwSwapInterval(1);
-        // Make the window visible
-        glfwShowWindow(window);
-    }
-
-    public static void runOpenGL() {
-        // This line is critical for LWJGL's interoperation with GLFW's
-        // OpenGL context, or any context that is managed externally.
-        // LWJGL detects the context that is current in the current thread,
-        // creates the GLCapabilities instance and makes the OpenGL
-        // bindings available for use.
-        GL.createCapabilities();
-
-        // Set the clear color
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
-        // Run the rendering loop until the user has attempted to close
-        // the window or has pressed the ESCAPE key.
-        while (!glfwWindowShouldClose(window)) {
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-
-            // Swap the color buffers
-            glfwSwapBuffers(window);
-
-            // Poll for window events. The key callback above will only be
-            // invoked during this call.
-            glfwPollEvents();
-        }
-
-        // Free the window callbacks and destroy the window
-        glfwFreeCallbacks(window);
-        glfwDestroyWindow(window);
-
-        // Terminate GLFW and free the error callback
-        glfwTerminate();
+    public static WindowManager getWindow() {
+        return window;
     }
 
     public static void writeErrorToLog() {
