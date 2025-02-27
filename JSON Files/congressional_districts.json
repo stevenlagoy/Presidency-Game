@@ -1,0 +1,561 @@
+{
+    "Alabama" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0
+    },
+    "Alaska" : {
+        "At-Large" : 0
+    },
+    "American Samoa" : {
+        "At-Large" : 1
+    },
+    "Arizona" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0
+    },
+    "Arkansas" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0
+    },
+    "California" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0,
+        "10th District" : 0,
+        "11th District" : 0,
+        "12th District" : 0,
+        "13th District" : 0,
+        "14th District" : 0,
+        "15th District" : 0,
+        "16th District" : 0,
+        "17th District" : 0,
+        "18th District" : 0,
+        "19th District" : 0,
+        "20th District" : 0,
+        "21th District" : 0,
+        "22th District" : 0,
+        "23th District" : 0,
+        "24th District" : 0,
+        "25th District" : 0,
+        "26th District" : 0,
+        "27th District" : 0,
+        "28th District" : 0,
+        "29th District" : 0,
+        "30th District" : 0,
+        "31th District" : 0,
+        "32th District" : 0,
+        "33th District" : 0,
+        "34th District" : 0,
+        "35th District" : 0,
+        "36th District" : 0,
+        "37th District" : 0,
+        "38th District" : 0,
+        "39th District" : 0,
+        "40th District" : 0,
+        "41th District" : 0,
+        "42th District" : 0,
+        "43th District" : 0,
+        "44th District" : 0,
+        "45th District" : 0,
+        "46th District" : 0,
+        "47th District" : 0,
+        "48th District" : 0,
+        "49th District" : 0,
+        "50th District" : 0,
+        "51th District" : 0,
+        "52th District" : 0
+    },
+    "Cherokee Nation" : {
+        "At-Large" : 1
+    },
+    "Choctaw Nation" : {
+        "At-Large" : 1
+    },
+    "Colorado" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0
+    },
+    "Connecticut" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0
+    },
+    "Delaware" : {
+        "At-Large" : 0
+    },
+    "District of Columbia" : {
+        "At-Large" : 1
+    },
+    "Florida" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0,
+        "10th District" : 0,
+        "11th District" : 0,
+        "12th District" : 0,
+        "13th District" : 0,
+        "14th District" : 0,
+        "15th District" : 0,
+        "16th District" : 0,
+        "17th District" : 0,
+        "18th District" : 0,
+        "19th District" : 0,
+        "20th District" : 0,
+        "21th District" : 0,
+        "22th District" : 0,
+        "23th District" : 0,
+        "24th District" : 0,
+        "25th District" : 0,
+        "26th District" : 0,
+        "27th District" : 0,
+        "28th District" : 0
+    },
+    "Georgia" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0,
+        "10th District" : 0,
+        "11th District" : 0,
+        "12th District" : 0,
+        "13th District" : 0,
+        "14th District" : 0
+    },
+    "Guam" : {
+        "At-Large" : 1
+    },
+    "Hawaii" : {
+        "1st District" : 0,
+        "2nd District" : 0
+    },
+    "Idaho" : {
+        "1st District" : 0,
+        "2nd District" : 0
+    },
+    "Illinois" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0,
+        "10th District" : 0,
+        "11th District" : 0,
+        "12th District" : 0,
+        "13th District" : 0,
+        "14th District" : 0,
+        "15th District" : 0,
+        "16th District" : 0,
+        "17th District" : 0
+    },
+    "Indiana" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0
+    },
+    "Iowa" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0
+    },
+    "Kansas" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0
+    },
+    "Kentucky" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0
+    },
+    "Louisiana" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0
+    },
+    "Maine" : {
+        "1st District" : 0,
+        "2nd District" : 0
+    },
+    "Maryland" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0
+    },
+    "Massachusetts" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0
+    },
+    "Michigan" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0,
+        "10th District" : 0,
+        "11th District" : 0,
+        "12th District" : 0,
+        "13th District" : 0
+    },
+    "Minnesota" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0
+    },
+    "Mississippi" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0
+    },
+    "Missouri" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0
+    },
+    "Montana" : {
+        "1st District" : 0,
+        "2nd District" : 0
+    },
+    "Nebraska" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0
+    },
+    "Nevada" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0
+    },
+    "New Hampshire" : {
+        "1st District" : 0,
+        "2nd District" : 0
+    },
+    "New Jersey" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0,
+        "10th District" : 0,
+        "11th District" : 0,
+        "12th District" : 0
+    },
+    "New Mexico" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0
+    },
+    "New York" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0,
+        "10th District" : 0,
+        "11th District" : 0,
+        "12th District" : 0,
+        "13th District" : 0,
+        "14th District" : 0,
+        "15th District" : 0,
+        "16th District" : 0,
+        "17th District" : 0,
+        "18th District" : 0,
+        "19th District" : 0,
+        "20th District" : 0,
+        "21th District" : 0,
+        "22th District" : 0,
+        "23th District" : 0,
+        "24th District" : 0,
+        "25th District" : 0,
+        "26th District" : 0
+    },
+    "North Carolina" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0,
+        "10th District" : 0,
+        "11th District" : 0,
+        "12th District" : 0,
+        "13th District" : 0,
+        "14th District" : 0
+    },
+    "North Dakota" : {
+        "At-Large" : 0
+    },
+    "Northern Mariana Islands" : {
+        "At-Large" : 1
+    },
+    "Ohio" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0,
+        "10th District" : 0,
+        "11th District" : 0,
+        "12th District" : 0,
+        "13th District" : 0,
+        "14th District" : 0,
+        "15th District" : 0
+    },
+    "Oklahoma" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0
+    },
+    "Oregon" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0
+    },
+    "Pennsylvania" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0,
+        "10th District" : 0,
+        "11th District" : 0,
+        "12th District" : 0,
+        "13th District" : 0,
+        "14th District" : 0,
+        "15th District" : 0,
+        "16th District" : 0,
+        "17th District" : 0
+    },
+    "Puerto Rico" : {
+        "At-Large" : 1
+    },
+    "Rhode Island" : {
+        "1st District" : 0,
+        "2nd District" : 0
+    },
+    "South Carolina" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0
+    },
+    "South Dakota" : {
+        "At-Large" : 0
+    },
+    "Tennessee" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0
+    },
+    "Texas" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0,
+        "10th District" : 0,
+        "11th District" : 0,
+        "12th District" : 0,
+        "13th District" : 0,
+        "14th District" : 0,
+        "15th District" : 0,
+        "16th District" : 0,
+        "17th District" : 0,
+        "18th District" : 0,
+        "19th District" : 0,
+        "20th District" : 0,
+        "21th District" : 0,
+        "22th District" : 0,
+        "23th District" : 0,
+        "24th District" : 0,
+        "25th District" : 0,
+        "26th District" : 0,
+        "27th District" : 0,
+        "28th District" : 0,
+        "29th District" : 0,
+        "30th District" : 0,
+        "31th District" : 0,
+        "32th District" : 0,
+        "33th District" : 0,
+        "34th District" : 0,
+        "35th District" : 0,
+        "36th District" : 0,
+        "37th District" : 0,
+        "38th District" : 0
+    },
+    "U.S. Virgin Islands" : {
+        "At-Large" : 1
+    },
+    "Utah" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0
+    },
+    "Vermont" : {
+        "At-Large" : 0
+    },
+    "Virginia" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0,
+        "10th District" : 0,
+        "11th District" : 0
+    },
+    "Washington" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0,
+        "9th District" : 0,
+        "10th District" : 0
+    },
+    "West Virginia" : {
+        "1st District" : 0,
+        "2nd District" : 0
+    },
+    "Wisconsin" : {
+        "1st District" : 0,
+        "2nd District" : 0,
+        "3rd District" : 0,
+        "4th District" : 0,
+        "5th District" : 0,
+        "6th District" : 0,
+        "7th District" : 0,
+        "8th District" : 0
+    },
+    "Wyoming" : {
+        "At-Large" : 0
+    }
+}

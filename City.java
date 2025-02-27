@@ -4,6 +4,7 @@ import java.util.Collection;
 public class City {
 
     public static City[] cities;
+
     public static City selectCity(Demographics demographics){
         return null;
     }

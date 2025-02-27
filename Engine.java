@@ -119,7 +119,6 @@ public class Engine
 
         //System.out.println(DateManager.currentGameDate);
         active = active && DateManager.incrementQuarterHour();
-
         return active;
     }
 

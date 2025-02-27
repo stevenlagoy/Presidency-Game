@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class PoliticalActor extends Character implements Repr, HasPersonality
@@ -17,6 +18,7 @@ public class PoliticalActor extends Character implements Repr, HasPersonality
     private List<Position> positions = new ArrayList<Position>();
     private int conviction;
     private float ageMod;
+    private List<String> positions = new ArrayList<>();
 
     private Personality personality;
 
@@ -100,6 +102,17 @@ public class PoliticalActor extends Character implements Repr, HasPersonality
         Engine.log("INVALID ISSUE NAME", String.format("An invalid issue name, \"%s\", was supplied. Unable to determine position on non-existant issue.", issue), Thread.currentThread().getStackTrace().toString());
         return null;
     }
+    public List<String> getPositions(){
+        return this.positions;
+    }
+    public void addPosition(String position){
+        this.positions.add(position);
+        evalConviction();
+    }
+    public void addPositions(Collection<? extends String> position){
+        this.positions.addAll(position);
+        evalConviction();
+    }
     protected void evalConviction(){
     }
     public int getConviction(){
@@ -112,7 +125,7 @@ public class PoliticalActor extends Character implements Repr, HasPersonality
     public List<Experience> getExperience(){
         return this.experiences;
     }
-    private void evalAgeMod(){
+    protected void evalAgeMod(){
         if(this.getAge() < 20) ageMod = 0;
         else if(this.getAge() < 75) ageMod = (float) -((Math.pow(this.getAge()-55, 2))/20)+100;
         else if(this.getAge() < 120) ageMod = (float) (-(12*this.getAge())/15)+140;

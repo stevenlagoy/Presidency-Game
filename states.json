@@ -1,5 +1,6 @@
 {
     "Alabama" : {
+        "FIPS" : "01",
         "name" : "Alabama",
         "population" : 5024279,
         "largest_cities" : ["Montgomery", "Huntsville", "Birmingham", "Mobile", "Tuscaloosa"],
@@ -9,6 +10,7 @@
         "universities" : ["University of Alabama", "Auburn University", "University of Alabama at Birmingham", "Columbia Southern University"]
     },
     "Alaska" : {
+        "FIPS" : "02",
         "name" : "Alaska",
         "population" : 733391,
         "largest_cities" : ["Juneau", "Anchorage", "Fairbanks", "Wasilla", "Sitka"],
@@ -18,6 +20,7 @@
         "universities" : ["University of Alaska"]
     },
     "Arizona" : {
+        "FIPS" : "04",
         "name": "Arizona",
         "population": 7151502,
         "largest_cities": ["Phoenix", "Tucson", "Mesa", "Chandler", "Glendale"],
@@ -27,6 +30,7 @@
         "universities": ["University of Arizona", "Arizona State University", "University of Phoenix"]
     },
     "American Samoa" : {
+        "FIPS" : "",
         "name": "American Samoa",
         "population": 46189,
         "largest_cities": ["Pago Pago", "Tafuna", "Nu'uuli", "Ili'ili", "Aua"],
@@ -36,6 +40,7 @@
         "universities": ["American Samoa Community College"]
     },
     "Arkansas" : {
+        "FIPS" : "05",
         "name": "Arkansas",
         "population": 3011524,
         "largest_cities": ["Little Rock", "Fort Smith", "Fayetteville", "Springdale", "Jonesboro"],
@@ -45,6 +50,7 @@
         "universities": ["University of Arkansas", "Arkansas State University"]
     },
     "California" : {
+        "FIPS" : "06",
         "name": "California",
         "population": 39538223,
         "largest_cities": ["Sacramento", "Los Angeles", "San Diego", "San Jose", "San Francisco", "Fresno"],
@@ -54,6 +60,7 @@
         "universities": ["University of California, Berkeley", "Stanford University", "University of Southern California"]
     },
     "Colorado" : {
+        "FIPS" : "08",
         "name": "Colorado",
         "population": 5773714,
         "largest_cities": ["Denver", "Colorado Springs", "Aurora", "Fort Collins", "Lakewood"],
@@ -64,6 +71,7 @@
         "bellwether" : "True"
     },
     "Connecticut" : {
+        "FIPS" : "09",
         "name": "Connecticut",
         "population": 3605944,
         "largest_cities": ["Hartford", "Bridgeport", "New Haven", "Stamford", "Waterbury"],
@@ -73,6 +81,7 @@
         "universities": ["Yale University", "University of Connecticut", "Quinnipiac University"]
     },
     "Delaware" : {
+        "FIPS" : "10",
         "name": "Delaware",
         "population": 989948,
         "largest_cities": ["Dover", "Wilmington", "Newark", "Middletown", "Smyrna"],
@@ -82,6 +91,7 @@
         "universities": ["University of Delaware", "Delaware State University"]
     },
     "District of Columbia" : {
+        "FIPS" : "11",
         "name": "District of Columbia",
         "population": 689545,
         "largest_cities": ["Washington, D.C."],
@@ -91,6 +101,7 @@
         "universities": ["Georgetown University", "George Washington University", "Howard University"]
     },
     "Florida" : {
+        "FIPS" : "12",
         "name": "Florida",
         "population": 21538187,
         "largest_cities": ["Tallahassee", "Jacksonville", "Miami", "Tampa", "Orlando", "St. Petersburg"],
@@ -101,6 +112,7 @@
         "bellwether" : "True"
     },
     "Georgia" : {
+        "FIPS" : "13",
         "name": "Georgia",
         "population": 10711908,
         "largest_cities": ["Atlanta", "Augusta", "Columbus", "Macon", "Savannah"],
@@ -110,6 +122,7 @@
         "universities": ["University of Georgia", "Georgia Institute of Technology", "Emory University"]
     },
     "Guam" : {
+        "FIPS" : "",
         "name": "Guam",
         "population": 169231,
         "largest_cities": ["Hagåtña", "Dededo", "Yigo", "Tamuning", "Mangilao", "Barrigada"],
@@ -119,6 +132,7 @@
         "universities": ["University of Guam"]
     },
     "Hawaii" : {
+        "FIPS" : "15",
         "name": "Hawaii",
         "population": 1455271,
         "largest_cities": ["Honolulu", "Pearl City", "Hilo", "Kailua", "Waipahu"],
@@ -128,6 +142,7 @@
         "universities": ["University of Hawaii at Manoa", "Brigham Young University–Hawaii"]
     },
     "Idaho" : {
+        "FIPS" : "16",
         "name": "Idaho",
         "population": 1839106,
         "largest_cities": ["Boise", "Meridian", "Nampa", "Idaho Falls", "Pocatello"],
@@ -137,6 +152,7 @@
         "universities": ["Boise State University", "University of Idaho", "Idaho State University"]
     },
     "Illinois" : {
+        "FIPS" : "17",
         "name": "Illinois",
         "population": 12812508,
         "largest_cities": ["Springfield", "Chicago", "Aurora", "Rockford", "Joliet", "Naperville"],
@@ -146,6 +162,7 @@
         "universities": ["University of Illinois Urbana-Champaign", "Northwestern University", "University of Chicago"]
     },
     "Indiana" : {
+        "FIPS" : "18",
         "name": "Indiana",
         "population": 6785528,
         "largest_cities": ["Indianapolis", "Fort Wayne", "Evansville", "South Bend", "Carmel"],
@@ -155,6 +172,7 @@
         "universities": ["Indiana University Bloomington", "Purdue University", "University of Notre Dame"]
     },
     "Iowa" : {
+        "FIPS" : "19",
         "name": "Iowa",
         "population": 3190369,
         "largest_cities": ["Des Moines", "Cedar Rapids", "Davenport", "Sioux City", "Iowa City"],
@@ -164,6 +182,7 @@
         "universities": ["University of Iowa", "Iowa State University", "University of Northern Iowa", "Ashford University", "Kaplan University"]
     },
     "Kansas" : {
+        "FIPS" : "20",
         "name": "Kansas",
         "population": 2937880,
         "largest_cities": ["Topeka", "Wichita", "Overland Park", "Kansas City", "Olathe"],
@@ -173,6 +192,7 @@
         "universities": ["University of Kansas", "Kansas State University", "Wichita State University"]
     },
     "Kentucky" : {
+        "FIPS" : "21",
         "name": "Kentucky",
         "population": 4505836,
         "largest_cities": ["Frankfort", "Louisville", "Lexington", "Bowling Green", "Owensboro", "Covington"],
@@ -182,6 +202,7 @@
         "universities": ["University of Kentucky", "University of Louisville", "Western Kentucky University"]
     },
     "Louisiana" : {
+        "FIPS" : "22",
         "name": "Louisiana",
         "population": 4657757,
         "largest_cities": ["Baton Rouge", "New Orleans", "Shreveport", "Lafayette", "Lake Charles"],
@@ -191,6 +212,7 @@
         "universities": ["Louisiana State University", "Tulane University", "University of Louisiana at Lafayette"]
     },
     "Maine" : {
+        "FIPS" : "23",
         "name": "Maine",
         "population": 1362359,
         "largest_cities": ["Agusta", "Portland", "Lewiston", "Bangor", "South Portland", "Auburn"],
@@ -200,6 +222,7 @@
         "universities": ["University of Maine", "Bates College", "Bowdoin College"]
     },
     "Maryland" : {
+        "FIPS" : "24",
         "name": "Maryland",
         "population": 6177224,
         "largest_cities": ["Annapolis", "Baltimore", "Columbia", "Germantown", "Silver Spring", "Frederick"],
@@ -209,6 +232,7 @@
         "universities": ["University of Maryland, College Park", "Johns Hopkins University", "University of Maryland, Baltimore County"]
     },
     "Massachusetts" : {
+        "FIPS" : "25",
         "name": "Massachusetts",
         "population": 7029917,
         "largest_cities": ["Boston", "Worcester", "Springfield", "Cambridge", "Lowell"],
@@ -218,6 +242,7 @@
         "universities": ["Harvard University", "Massachusetts Institute of Technology (MIT)", "Boston University"]
     },
     "Michigan" : {
+        "FIPS" : "26",
         "name": "Michigan",
         "population": 10077331,
         "largest_cities": ["Lansing", "Detroit", "Grand Rapids", "Warren", "Sterling Heights", "Ann Arbor"],
@@ -227,6 +252,7 @@
         "universities": ["University of Michigan, Ann Arbor", "Michigan State University", "Wayne State University"]
     },
     "Minnesota" : {
+        "FIPS" : "27",
         "name": "Minnesota",
         "population": 5706494,
         "largest_cities": ["Saint Paul", "Minneapolis", "Rochester", "Duluth", "Bloomington"],
@@ -236,6 +262,7 @@
         "universities": ["University of Minnesota, Twin Cities", "Minnesota State University, Mankato", "St. Olaf College"]
     },
     "Mississippi" : {
+        "FIPS" : "28",
         "name": "Mississippi",
         "population": 2961279,
         "largest_cities": ["Jackson", "Gulfport", "Southaven", "Hattiesburg", "Biloxi"],
@@ -245,6 +272,7 @@
         "universities": ["University of Mississippi (Ole Miss)", "Mississippi State University", "Jackson State University"]
     },
     "Missouri" : {
+        "FIPS" : "29",
         "name": "Missouri",
         "population": 6154913,
         "largest_cities": ["Jefferson City", "Kansas City", "St. Louis", "Springfield", "Columbia", "Independence"],
@@ -254,6 +282,7 @@
         "universities": ["University of Missouri, Columbia", "Washington University in St. Louis", "Missouri State University"]
     },
     "Montana" : {
+        "FIPS" : "30",
         "name": "Montana",
         "population": 1084225,
         "largest_cities": ["Helena", "Billings", "Missoula", "Great Falls", "Bozeman", "Butte"],
@@ -263,6 +292,7 @@
         "universities": ["University of Montana", "Montana State University", "Montana Tech"]
     },
     "Nebraska" : {
+        "FIPS" : "31",
         "name": "Nebraska",
         "population": 1961504,
         "largest_cities": ["Lincoln", "Omaha", "Bellevue", "Grand Island", "Kearney"],
@@ -272,6 +302,7 @@
         "universities": ["University of Nebraska-Lincoln", "Creighton University", "University of Nebraska Omaha"]
     },
     "Nevada" : {
+        "FIPS" : "32",
         "name": "Nevada",
         "population": 3104614,
         "largest_cities": ["Carson City", "Las Vegas", "Henderson", "Reno", "North Las Vegas", "Sparks"],
@@ -282,6 +313,7 @@
         "bellwether" : "True"
     },
     "New Hampshire" : {
+        "FIPS" : "33",
         "name": "New Hampshire",
         "population": 1377529,
         "largest_cities": ["Concord", "Manchester", "Nashua", "Derry", "Dover"],
@@ -292,6 +324,7 @@
         "bellwether" : "True"
     },
     "New Jersey" : {
+        "FIPS" : "34",
         "name": "New Jersey",
         "population": 9288994,
         "largest_cities": ["Trenton", "Newark", "Jersey City", "Paterson", "Elizabeth", "Edison"],
@@ -301,6 +334,7 @@
         "universities": ["Princeton University", "Rutgers University", "Stevens Institute of Technology"]
     },
     "New Mexico" : {
+        "FIPS" : "35",
         "name": "New Mexico",
         "population": 2117522,
         "largest_cities": ["Santa Fe", "Albuquerque", "Las Cruces", "Rio Rancho", "Roswell"],
@@ -311,6 +345,7 @@
         "bellwether" : "True"
     },
     "New York" : {
+        "FIPS" : "36",
         "name": "New York",
         "population": 20201249,
         "largest_cities": ["Albany", "New York City", "Buffalo", "Rochester", "Yonkers", "Syracuse"],
@@ -320,6 +355,7 @@
         "universities": ["Columbia University", "New York University (NYU)", "Cornell University"]
     },
     "North Carolina" : {
+        "FIPS" : "37",
         "name": "North Carolina",
         "population": 10439388,
         "largest_cities": ["Raleigh", "Charlotte", "Greensboro", "Durham", "Winston-Salem"],
@@ -329,6 +365,7 @@
         "universities": ["University of North Carolina at Chapel Hill", "Duke University", "North Carolina State University"]
     },
     "North Dakota" : {
+        "FIPS" : "38",
         "name": "North Dakota",
         "population": 779094,
         "largest_cities": ["Bismarck", "Fargo", "Grand Forks", "Minot", "West Fargo"],
@@ -338,6 +375,7 @@
         "universities": ["University of North Dakota", "North Dakota State University", "Minot State University"]
     },
     "Northern Mariana Islands" : {
+        "FIPS" : "",
         "name": "Northern Mariana Islands",
         "population": 49587,
         "largest_cities": ["Saipan", "Tinian", "Rota"],
@@ -347,6 +385,7 @@
         "universities": ["Northern Marianas College"]
     },
     "Ohio" : {
+        "FIPS" : "39",
         "name": "Ohio",
         "population": 11799448,
         "largest_cities": ["Columbus", "Cleveland", "Cincinnati", "Toledo", "Akron"],
@@ -357,6 +396,7 @@
         "bellwether" : "True"
     },
     "Oklahoma" : {
+        "FIPS" : "40",
         "name": "Oklahoma",
         "population": 3959353,
         "largest_cities": ["Oklahoma City", "Tulsa", "Norman", "Broken Arrow", "Lawton"],
@@ -366,6 +406,7 @@
         "universities": ["University of Oklahoma", "Oklahoma State University", "University of Tulsa"]
     },
     "Oregon" : {
+        "FIPS" : "41",
         "name": "Oregon",
         "population": 4237256,
         "largest_cities": ["Salem", "Portland", "Eugene", "Gresham", "Hillsboro"],
@@ -375,6 +416,7 @@
         "universities": ["University of Oregon", "Oregon State University", "Portland State University"]
     },
     "Pennsylvania" : {
+        "FIPS" : "42",
         "name": "Pennsylvania",
         "population": 13002700,
         "largest_cities": ["Harrisburg", "Philadelphia", "Pittsburgh", "Allentown", "Erie", "Reading"],
@@ -385,6 +427,7 @@
         "bellwether" : "True"
     },
     "Puerto Rico" : {
+        "FIPS" : "",
         "name": "Puerto Rico",
         "population": 3285874,
         "largest_cities": ["San Juan", "Bayamón", "Carolina", "Ponce", "Caguas"],
@@ -394,6 +437,7 @@
         "universities": ["Universidad de Puerto Rico", "Sistema Universitario Ana G. Mendez", "Universidad Interamericana de Puerto Rico"]
     },
     "Rhode Island" : {
+        "FIPS" : "44",
         "name": "Rhode Island",
         "population": 1097379,
         "largest_cities": ["Providence", "Warwick", "Cranston", "Pawtucket", "East Providence"],
@@ -403,6 +447,7 @@
         "universities": ["Brown University", "University of Rhode Island", "Providence College"]
     },
     "South Carolina" : {
+        "FIPS" : "45",
         "name": "South Carolina",
         "population": 5118425,
         "largest_cities": ["Columbia", "Charleston", "North Charleston", "Mount Pleasant", "Rock Hill"],
@@ -412,6 +457,7 @@
         "universities": ["University of South Carolina", "Clemson University", "College of Charleston"]
     },
     "South Dakota" : {
+        "FIPS" : "46",
         "name": "South Dakota",
         "population": 886667,
         "largest_cities": ["Pierre", "Sioux Falls", "Rapid City", "Aberdeen", "Brookings", "Watertown"],
@@ -421,6 +467,7 @@
         "universities": ["University of South Dakota", "South Dakota State University", "Dakota State University"]
     },
     "Tennessee" : {
+        "FIPS" : "47",
         "name": "Tennessee",
         "population": 6910840,
         "largest_cities": ["Nashville", "Memphis", "Knoxville", "Chattanooga", "Clarksville"],
@@ -430,6 +477,7 @@
         "universities": ["Vanderbilt University", "University of Tennessee, Knoxville", "Belmont University"]
     },
     "Texas" : {
+        "FIPS" : "48",
         "name": "Texas",
         "population": 29145505,
         "largest_cities": ["Austin", "Houston", "San Antonio", "Dallas", "Fort Worth"],
@@ -439,6 +487,7 @@
         "universities": ["University of Texas at Austin", "Texas A&M University", "Rice University", "Dallas College"]
     },
     "Utah" : {
+        "FIPS" : "49",
         "name": "Utah",
         "population": 3271616,
         "largest_cities": ["Salt Lake City", "West Valley City", "Provo", "West Jordan", "Orem"],
@@ -448,6 +497,7 @@
         "universities": ["University of Utah", "Brigham Young University", "Utah State University"]
     },
     "Vermont" : {
+        "FIPS" : "50",
         "name": "Vermont",
         "population": 643077,
         "largest_cities": ["Montpelier", "Burlington", "South Burlington", "Rutland", "Essex Junction", "Barre"],
@@ -457,6 +507,7 @@
         "universities": ["University of Vermont", "Middlebury College", "Norwich University"]
     },
     "Virginia" : {
+        "FIPS" : "51",
         "name": "Virginia",
         "population": 8631393,
         "largest_cities": ["Richmond", "Virginia Beach", "Norfolk", "Chesapeake", "Arlington"],
@@ -466,6 +517,7 @@
         "universities": ["University of Virginia", "Virginia Tech", "George Mason University", "Liberty University"]
     },
     "U.S. Virgin Islands" : {
+        "FIPS" : "",
         "name": "U.S. Virgin Islands",
         "population": 106290,
         "largest_cities": ["Charlotte Amalie", "Anna's Retreat", "St. Croix", "Frederiksted", "Christiansted"],
@@ -475,6 +527,7 @@
         "universities": ["University of the Virgin Islands"]
     },
     "Washington" : {
+        "FIPS" : "53",
         "name": "Washington",
         "population": 7693612,
         "largest_cities": ["Olympia", "Seattle", "Spokane", "Tacoma", "Vancouver", "Bellevue"],
@@ -484,6 +537,7 @@
         "universities": ["University of Washington", "Washington State University", "Seattle University"]
     },
     "West Virginia" : {
+        "FIPS" : "54",
         "name": "West Virginia",
         "population": 1793716,
         "largest_cities": ["Charleston", "Huntington", "Parkersburg", "Morgantown", "Wheeling"],
@@ -493,6 +547,7 @@
         "universities": ["West Virginia University", "Marshall University", "West Liberty University"]
     },
     "Wisconsin" : {
+        "FIPS" : "55",
         "name": "Wisconsin",
         "population": 5893718,
         "largest_cities": ["Madison", "Milwaukee", "Green Bay", "Kenosha", "Racine"],
@@ -502,6 +557,7 @@
         "universities": ["University of Wisconsin-Madison", "Marquette University", "University of Wisconsin-Milwaukee"]
     },
     "Wyoming" : {
+        "FIPS" : "56",
         "name": "Wyoming",
         "population": 576851,
         "largest_cities": ["Cheyenne", "Casper", "Laramie", "Gillette", "Rock Springs"],

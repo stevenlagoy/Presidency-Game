@@ -26,8 +26,6 @@ public class CharacterManager
     private static Character firstLady;
     private static Representative HouseSpeaker;
 
-    
-
     public static boolean init(){
         boolean successFlag = true;
         characterSetup();
