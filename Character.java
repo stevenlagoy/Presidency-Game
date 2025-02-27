@@ -1,23 +1,25 @@
+import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.IntStream;
 import java.util.List;
 
-public class Character
-{
-  
-    private String givenName; // first or given name, forename
-    private String middleName; // middle name
-    private String familyName; // last or family name, surname
-    private int[] nameform; // representation of the order of the name
-    private String fullName; // evaluated full name of the character
-    private Bloc[] demographics; // list of applicable demographic blocs
-    private double age = 0; // age in years
+public class Character implements Repr
+{ 
+    protected final static int MIN_AGE = 35;
+    protected final static int MAX_AGE = 120;
+
+    private Name name;
+    private Demographics demographics;
     private String presentation; // string representation of gender presentation
-    private City birthPlace; // city the character was born in
-    private City currentLocation; // City the character is currently in / near
-    private City residencePlace; // City the character currently lives in
-    private Date birthday; // day of the year on which the character was born
+    private City birthplaceCity; // city the character was born in
+    private City currentLocationCity; // City the character is currently in / near
+    private City residenceCity; // City the character currently lives in
+    private Date birthday; // day of the year on which the character was born, also used to find age
+
+    private CharacterModel appearance;
 
     static City generateOrigin(){
         return City.selectCity();
@@ -33,164 +35,126 @@ public class Character
     }
 
     public Character(){
-        // Get origin
-        this.birthPlace = generateOrigin();
-
         // Get demographics
-        this.demographics = generateDemographics(birthPlace);
+        this.demographics = CharacterManager.generateDemographics();
+
+        // Get origin
+        generateOrigin();
 
         // Get birthday and age
-        this.birthday = generateBirthDate();
-        this.age = birthday.getTime();
-
+        generateBirthDate();
     }
     public Character(String buildstring){
     }
 
-    public Character(String givenName, String middleName, String familyName, int[] nameform, Bloc[] demographics, int age, String presentation, City origin, Date birthday){
-        this.givenName = givenName;
-        this.middleName = middleName;
-        this.familyName = familyName;
-        this.nameform = nameform;
-        this.evaluateName();
+    public Character(Name name, Demographics demographics, String presentation, City birthplaceCity, Date birthday){
+        this.name = name;
 
         this.demographics = demographics;
-        this.age = age;
         this.presentation = presentation;
-        this.birthPlace = origin;
+        this.birthplaceCity = birthplaceCity;
         this.birthday = birthday;
 
         CharacterManager.addCharacter(this);
     }
-    public Character(String name, Bloc[] demographics, int age, String presentation, City origin){
-        this.setName(name);
 
-        this.demographics = demographics;
-        this.age = age;
-        this.presentation = presentation;
-        this.birthPlace = origin;
-
-        CharacterManager.addCharacter(this);
-    }
-
-    public boolean equals(Character other){
-        return (
-            this.fullName.equals(other.fullName) &&
-            this.presentation.equals(other.presentation) &&
-            this.birthPlace.equals(other.birthPlace)
-        );
-    }
-
-    public String toString(){
-        String repr = String.format(
-            "%S:givenName=%s,middleName=%s,familyName=%s,nameform=,age=%d,presentation=%s,origin=,birthday=%d,",
-            "CHARACTER",
-            this.givenName,
-            this.middleName,
-            this.familyName,
-            this.nameform.toString(),
-            this.age,
-            this.presentation,
-            this.birthday
-        );
-        return repr;
-    }
-
-    protected void genGivenName(){
-        this.evaluateName();
-    }
-    public String getGivenName(){
-        return this.givenName;
-    }
-    public void setGivenName(String name){
-        this.givenName = name;
-        this.evaluateName();
-    }
-    protected void genMiddleName(){
-        this.evaluateName();
-    }
-    public void setMiddleName(String name){
-        this.middleName = name;
-        this.evaluateName();
-    }
-    public String getMiddleName(){
-        return this.middleName;
-    }
-    protected void genFamilyName(){
-        this.evaluateName();
-    }
-    public void setFamilyName(String name){
-        this.familyName = name;
-        this.evaluateName();
-    }
-    public String getFamilyName(){
-        return this.familyName;
-    }
-    private void evaluateName(){
-        fullName = "";
-        for(int name : nameform){
-            if(name == 0) fullName += givenName;
-            if(name == 1) fullName += middleName;
-            if(name == 2) fullName += familyName;
+    protected void generateBirthDate(){
+        Integer year, day;
+        long birthdate;
+        // select a year to be the character's birth year
+        year = Engine.weightedRandSelect(CharacterManager.getAgeDistribution(this.demographics));
+        // select a day of the year to be the character's birthday
+        birthdate = DateManager.dateFormatToOrdinal(Engine.weightedRandSelect(CharacterManager.getBirthdateDistribution())) * DateManager.dayDuration;
+        // validate leapyears
+        //System.out.printf("Selected year: %d, Selected date: %s.\n", year.intValue(), DateManager.ordinalToDateFormat((int) (birthdate / DateManager.dayDuration)));
+        if(birthdate == 60 * DateManager.dayDuration && !DateManager.isLeapYear(year)){
+            //System.out.println("Selected Feb 29 in a non-Leap Year. Reselecting.");
+            generateBirthDate();
+            return;
         }
+        // set the birthday
+        this.setBirthday(new Date(DateManager.yearToMillis(year) + birthdate));
     }
-    public String getName(){
-        return fullName;
-    }
-    public void setName(String name){
 
+    protected void generateOrigin(){
+        this.birthplaceCity = City.selectCity(this.demographics);
     }
-    public void setName(String givenName, String middleName, String familyName, int[] nameform){
-        this.givenName = givenName;
-        this.middleName = middleName;
-        this.familyName = familyName;
-        this.nameform = nameform;
+    public City getBirthplaceCity(){
+        return this.birthplaceCity;
+    }
+    public void setBirthplaceCity(City birthplace){
+        this.birthplaceCity = birthplace;
+    }
+    public City getCurrentLocationCity(){
+        return this.currentLocationCity;
+    }
+    public void setCurrentLocationCity(City currentLocation){
+        this.currentLocationCity = currentLocation;
+    }
+    public City getResidenceCity(){
+        return residenceCity;
+    }
+    public void setResidenceCity(City residence){
+        this.residenceCity = residence;
+    }
 
-        this.evaluateName();
+    protected void genName(){
+        CharacterManager.generateName(this.demographics);
+    }
+    public Name getName(){
+        return this.name;
     }
     protected void genDemographics(){
+        CharacterManager.generateDemographics();
     }
-    public Bloc[] getDemographics(){
+    public Demographics getDemographics(){
         return this.demographics;
     }
-    public void setDemographics(Bloc[] demographics){
+    public void setDemographics(Demographics demographics){
         this.demographics = demographics;
     }
     protected void genAge(){
-        this.genAge(0, 120);
+        this.genAge(Character.MIN_AGE, Character.MAX_AGE);
     }
     protected void genAge(int min){
-        this.genAge(min, 120);
+        if(min < 0) throw new IllegalArgumentException(String.format("Min value of %d out of allowed range: age >= 0.%n", min));
+        this.genAge(min, Character.MAX_AGE);
     }
     protected void genAge(int min, int max){
         if(max > 120) throw new IllegalArgumentException(String.format("Max value of %d out of allowed range: age < 120.%n", max));
         if(min < 0) throw new IllegalArgumentException(String.format("Min value of %d out of allowed range: age >= 0.%n", min));
-        this.age = Engine.randInt(min, max);
+        
+        long age = 0;
+        Integer[] range = IntStream.rangeClosed(1,10).boxed().toArray(Integer[]::new);
+        while(age < MIN_AGE || age > MAX_AGE){
+            age = Engine.weightedRandSelect(range, DemographicsManager.getPopulationPyramidPercent(DemographicsManager.EVERYONE));
+        }
     }
-    public void setAge(int age){
-        this.age = age;
+    public void setAgeMillis(long age){ // this should almost never be used
+        this.birthday = new Date(DateManager.currentGameDate.getTime() - age);
     }
-    public double getAge(){
-        return this.age;
+    public long getAgeMillis(){
+        return DateManager.currentGameDate.getTime() - this.birthday.getTime();
+    }
+    public double getAgeYears(){
+        return DateManager.timeToYears(this.getAgeMillis());
     }
     protected void genPresentation(){
+        CharacterManager.generatePresentation(this.demographics);
     }
-    public String getPresentation(){
+    public String getPresentation(){ // should this be a string?
         return this.presentation;
     }
-    public void setPresentation(String presentation){
+    public void setPresentation(String presentation){ // should this be a string?
         this.presentation = presentation;
     }
     protected void genOrigin(){
     }
     public City getCityOrigin(){
-        return birthPlace;
+        return birthplaceCity;
     }
     public State getStateOrigin(){
-        return birthPlace.getState();
-    }
-    public void setOrigin(City origin){
-        this.birthPlace = origin;
+        return birthplaceCity.getState();
     }
     public Date getBirthday(){
         return this.birthday;
@@ -200,5 +164,26 @@ public class Character
     }
     public void setBirthday(long milliseconds){
         this.birthday = new Date(milliseconds);
+    }
+
+    public void fromRepr(String repr){
+
+    }
+
+    public boolean equals(Character other){
+        return this.toString().equals(other.toString());
+    }
+    public String toString(){
+        return this.toRepr();
+    }
+    public String toRepr(){
+        String repr = String.format(
+            "%s:[name:\"%s\";presentation=%s;origin=;birthday=%d;];",
+            this.getClass().toString().replace("class ", ""),
+            this.name.toRepr(),
+            this.presentation,
+            this.birthday
+        );
+        return repr;
     }
 }

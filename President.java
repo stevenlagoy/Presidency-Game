@@ -1,4 +1,4 @@
-public class President extends GovernmentOfficial
+public class President extends FederalOfficial
 {
     public President(){
         super("President");

@@ -1,8 +1,18 @@
+import java.util.EmptyStackException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.Stack;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class CharacterManager
 {
+    // required filenames
+    private static final String birthdate_popularity_filename = "birthdate_popularities.JSON";
+    private static final String birthyear_percentages_filename = "birthyear_percentages.JSON";
+    
     private static List<Character> characters = new LinkedList<Character>();
     private static List<GovernmentOfficial> governmentOfficials = new LinkedList<GovernmentOfficial>();
     private static List<Representative> representatives = new LinkedList<Representative>();
@@ -85,5 +95,119 @@ public class CharacterManager
             candidatesArray[i] = candidates.get(i);
         }
         return candidatesArray;
+    }
+
+    public static Personality matchPersonality(HasPersonality character){
+        return new Personality();
+    }
+    private static HashMap<String, HashMap<Integer, Double>> ageDistribution; // Key is the name of a demographic group, values are a list of age distributions among members of that group. Indexes within the arrays correspond to the year, starting in 1900. 0 = 1900, 1 = 1901, 100 = 2000, 101 = 2001, etc.
+    private static int numberOfYears = 200; // assume that no more than this many years will be read
+    private static int startYear = 1900; // assume that the first year will be 1900
+    public static HashMap<Integer, Double> getAgeDistribution(Demographics demographics){
+        if(demographics == null) demographics = DemographicsManager.getMostCommonDemographics();
+
+        HashMap<Integer, Double> result = new HashMap<Integer, Double>();
+        for(int i = 0; i < numberOfYears; i++){
+            result.put(i + startYear, 0.0);
+        }
+        HashMap<Integer, Double> response;
+        double totalPercentages = 0.0;
+        // generation data
+        response = getAgeDistribution(demographics.getGeneration());
+        if(response != null)
+        for(int i = 0; i < response.size(); i++){
+            result.put(i + startYear, response.get(i + startYear) + response.get(i + startYear));
+            totalPercentages += response.get(i + startYear);
+        }
+        // presentation data
+        response = getAgeDistribution(demographics.getPresentation());
+        if(response != null)
+        for(int i = 0; i < response.size(); i++){
+            result.put(i + startYear, response.get(i + startYear) + response.get(i + startYear));
+            totalPercentages += response.get(i + startYear);
+        }
+        // race/ethnicity data
+        response = getAgeDistribution(demographics.getRaceEthnicity());
+        if(response != null)
+        for(int i = 0; i < response.size(); i++){
+            result.put(i + startYear, response.get(i + startYear) + response.get(i + startYear));
+            totalPercentages += response.get(i + startYear);
+        }
+        // religion data
+        response = getAgeDistribution(demographics.getReligion());
+        if(response != null)
+        for(int i = 0; i < response.size(); i++){
+            result.put(i + startYear, response.get(i + startYear) + response.get(i + startYear));
+            totalPercentages += response.get(i + startYear);
+        }
+        // normalize the values
+        for(int i = 0; i < result.size(); i++){
+            result.put(i + startYear, result.get(i + startYear) / totalPercentages);
+        }
+        return result;
+    }
+    public static HashMap<Integer, Double> getAgeDistribution(Bloc bloc){
+        return getAgeDistribution(bloc.getName());
+    }
+    public static HashMap<Integer, Double> getAgeDistribution(String demographicGroup){
+        if(ageDistribution != null) {
+            return ageDistribution.get(demographicGroup);
+        }
+
+        HashMap<Object, Object> json = Engine.readJSONFile(birthyear_percentages_filename); // read the JSON file
+        CharacterManager.ageDistribution = new HashMap<String, HashMap<Integer, Double>>(); // initialize the map
+
+        for(Object key : json.keySet()){
+            String keyString = (String) key;
+            HashMap<Integer, Double> distribution = new HashMap<Integer, Double>();
+            for(int i = 0; i < numberOfYears; i++){
+                distribution.put(i + startYear, 0.0);
+            }
+            if(json.get(key).equals("null")) continue;
+            @SuppressWarnings("unchecked")
+            HashMap<Object, Object> values = (HashMap<Object, Object>) json.get(key); // known structure of the JSON file
+            for(Object year : values.keySet()){
+                int yearInt = Integer.parseInt((String) year);
+                distribution.put(yearInt, Double.parseDouble((String) values.get(year)));
+            }
+            ageDistribution.put(keyString, distribution);
+        }
+
+        return getAgeDistribution(demographicGroup); // the map is now populated
+    }
+    private static HashMap<String, Double> birthdateDistribution; // Distribution of birthdates in a year, indexed by day
+    public static HashMap<String, Double> getBirthdateDistribution(){
+        if(birthdateDistribution != null) return birthdateDistribution;
+
+        HashMap <Object, Object> json = Engine.readJSONFile(birthdate_popularity_filename); // read the JSON file
+        CharacterManager.birthdateDistribution = new HashMap<String, Double>();
+
+        for(Object key : json.keySet()){
+            String keyString = (String) key;
+            Double value = Double.parseDouble((String) json.get(key));
+            birthdateDistribution.put(keyString, value);
+        }
+
+        return birthdateDistribution;
+    }
+
+    public static Demographics generateDemographics(){
+        return null;
+    }
+
+    public static Name generateName(Demographics demographics){
+        return null;
+    }
+
+    public static CharacterModel generateAppearance(Character character){
+        CharacterModel model = new CharacterModel();
+
+        return model;
+    }
+
+    public static Bloc generatePresentation(Demographics demographics){
+        // Using the two other fields of the demographics object, select a presentation.
+        
+        return Bloc.matchBlocName("");
     }
 }

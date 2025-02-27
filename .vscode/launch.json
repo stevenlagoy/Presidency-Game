@@ -6,6 +6,13 @@
         "configurations": [
                 {
                         "type": "java",
+                        "name": "LWJGLExample",
+                        "request": "launch",
+                        "mainClass": "LWJGLExample",
+                        "projectName": "presidency_game_2f74b218"
+                },
+                {
+                        "type": "java",
                         "name": "MapApplication",
                         "request": "launch",
                         "mainClass": "MapApplication",
