@@ -17,6 +17,8 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.io.IOException;
 
+import org.lwjgl.*;
+
 public class Engine
 {
     final static String LOG_FILE_NAME = "log.txt";

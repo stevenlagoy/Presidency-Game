@@ -123,6 +123,9 @@ public class Character implements Repr
     public long getAgeMillis(){
         return DateManager.currentGameDate.getTime() - this.birthday.getTime();
     }
+    public double getAgeYears(){
+        return DateManager.timeToYears(this.getAgeMillis());
+    }
     protected void genPresentation(){
         CharacterManager.generatePresentation(this.demographics);
     }

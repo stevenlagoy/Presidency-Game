@@ -58,4 +58,8 @@ public class City {
     public void removeCharacters(Collection<? extends Character> characters){
         this.charactersPresent.removeAll(characters);
     }
+
+    public boolean equals(City other){
+        return this.toString().equals(other.toString());
+    }
 }

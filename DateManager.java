@@ -252,9 +252,6 @@ public class DateManager
         return millis;
     }
 
-    public static double timeToMillis(long time){
-        return time / 1.0;
-    }
     public static double timeToSeconds(long time){
         return time * 1.0 / secondDuration;
     }
