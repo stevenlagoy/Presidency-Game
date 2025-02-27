@@ -17,7 +17,12 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.io.IOException;
 
-import org.lwjgl.*;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL;
+import static org.lwjgl.glfw.Callbacks.*;
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 public class Engine
 {
