@@ -1,3 +1,9 @@
-2025.02.02.22.29.52.892 : RESET: Reset Engine
-2025.02.02.22.29.52.902 : TEST LOG: This is a test of the log system. @ java.lang.Exception -> at Main.main(Main.java:24)
-2025.02.02.22.29.53.805 : DONE
+2025.02.27.16.52.36.703 : RESET: Reset Engine
+2025.02.27.16.52.36.710 : INVALID LANGUAGE ABBREVIATION: Attempted to access language abbreviation RU which has no associated localization file. @ java.lang.Exception -> at Engine.openLocalizationFiles(Engine.java:511) -> at Engine.init(Engine.java:82) -> at Main.main(Main.java:19)
+2025.02.27.16.52.36.712 : INVALID LANGUAGE ABBREVIATION: Attempted to access language abbreviation PT which has no associated localization file. @ java.lang.Exception -> at Engine.openLocalizationFiles(Engine.java:511) -> at Engine.init(Engine.java:82) -> at Main.main(Main.java:19)
+2025.02.27.16.52.36.713 : INVALID LANGUAGE ABBREVIATION: Attempted to access language abbreviation DE which has no associated localization file. @ java.lang.Exception -> at Engine.openLocalizationFiles(Engine.java:511) -> at Engine.init(Engine.java:82) -> at Main.main(Main.java:19)
+2025.02.27.16.52.36.714 : INVALID LANGUAGE ABBREVIATION: Attempted to access language abbreviation FR which has no associated localization file. @ java.lang.Exception -> at Engine.openLocalizationFiles(Engine.java:511) -> at Engine.init(Engine.java:82) -> at Main.main(Main.java:19)
+2025.02.27.16.52.36.714 : INVALID LANGUAGE ABBREVIATION: Attempted to access language abbreviation JA which has no associated localization file. @ java.lang.Exception -> at Engine.openLocalizationFiles(Engine.java:511) -> at Engine.init(Engine.java:82) -> at Main.main(Main.java:19)
+2025.02.27.16.52.36.715 : INVALID LANGUAGE ABBREVIATION: Attempted to access language abbreviation PL which has no associated localization file. @ java.lang.Exception -> at Engine.openLocalizationFiles(Engine.java:511) -> at Engine.init(Engine.java:82) -> at Main.main(Main.java:19)
+2025.02.27.16.52.36.716 : INVALID LANGUAGE ABBREVIATION: Attempted to access language abbreviation TR which has no associated localization file. @ java.lang.Exception -> at Engine.openLocalizationFiles(Engine.java:511) -> at Engine.init(Engine.java:82) -> at Main.main(Main.java:19)
+2025.02.27.16.52.38.601 : DONE

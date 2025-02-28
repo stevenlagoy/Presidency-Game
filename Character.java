@@ -21,16 +21,10 @@ public class Character implements Repr
 
     private CharacterModel appearance;
 
-    static City generateOrigin(){
-        return City.selectCity();
-    }
     static Bloc[] generateDemographics(City city){
         return null;
     }
     static Bloc[] generateDemographics(State state){
-        return null;
-    }
-    static Date generateBirthDate(){
         return null;
     }
 

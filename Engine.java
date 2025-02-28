@@ -23,8 +23,6 @@ import java.io.OutputStreamWriter;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL;
 
-import javafx.stage.Window;
-
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;

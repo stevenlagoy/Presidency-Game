@@ -18,8 +18,7 @@ public class PoliticalActor extends Character implements Repr, HasPersonality
     private List<Position> positions = new ArrayList<Position>();
     private int conviction;
     private float ageMod;
-    private List<String> positions = new ArrayList<>();
-
+    private int age;
     private Personality personality;
 
     public PoliticalActor(){
@@ -99,17 +98,17 @@ public class PoliticalActor extends Character implements Repr, HasPersonality
         for(Position position : positions){
             if(position.getRootIssue().equals(issue)) return position;
         }
-        Engine.log("INVALID ISSUE NAME", String.format("An invalid issue name, \"%s\", was supplied. Unable to determine position on non-existant issue.", issue), Thread.currentThread().getStackTrace().toString());
+        Engine.log("INVALID ISSUE NAME", String.format("An invalid issue name, \"%s\", was supplied. Unable to determine position on non-existant issue.", issue), new Exception());
         return null;
     }
-    public List<String> getPositions(){
+    public List<Position> getPositions(){
         return this.positions;
     }
-    public void addPosition(String position){
+    public void addPosition(Position position){
         this.positions.add(position);
         evalConviction();
     }
-    public void addPositions(Collection<? extends String> position){
+    public void addPositions(Collection<? extends Position> position){
         this.positions.addAll(position);
         evalConviction();
     }
@@ -124,6 +123,9 @@ public class PoliticalActor extends Character implements Repr, HasPersonality
     }
     public List<Experience> getExperience(){
         return this.experiences;
+    }
+    protected int getAge() {
+        return this.age;
     }
     protected void evalAgeMod(){
         if(this.getAge() < 20) ageMod = 0;

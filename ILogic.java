@@ -4,7 +4,7 @@ public interface ILogic {
 
     void input();
 
-    void update();
+    void update(float interval, MouseInput mouse);
 
     void render();
     

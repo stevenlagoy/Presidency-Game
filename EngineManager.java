@@ -2,8 +2,6 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.nanovg.NanoSVG;
 
-import javafx.stage.Window;
-
 public class EngineManager {
     
     public static final long NANOSECOND = 1_000_000_000;
@@ -16,12 +14,17 @@ public class EngineManager {
 
     private WindowManager window;
     private GLFWErrorCallback errorCallback;
+    private MouseInput mouse;
     private ILogic gameLogic;
 
     private void init() throws Exception {
         GLFW.glfwSetErrorCallback(errorCallback = GLFWErrorCallback.createPrint(System.err));
         window = Main.getWindow();
+        gameLogic = Main.getGame();
+        mouse = new MouseInput();
         window.init();
+        gameLogic.init();
+        mouse.init();
     }
 
     public void start() throws Exception {
@@ -65,7 +68,7 @@ public class EngineManager {
             }
 
             if (render) {
-                update();
+                update(frametime);
                 render();
                 frames++;
             }
@@ -81,6 +84,7 @@ public class EngineManager {
 
     private void input() {
         gameLogic.input();
+        mouse.input();
     }
 
     private void render() {
@@ -88,12 +92,13 @@ public class EngineManager {
         window.update();
     }
 
-    private void update() {
-        gameLogic.update();
+    private void update(float interval) {
+        gameLogic.update(interval, mouse);
     }
 
     private void cleanup() {
         window.cleanup();
+        gameLogic.cleanup();
         errorCallback.free();
         GLFW.glfwTerminate();
     }
