@@ -44,6 +44,15 @@ public class ShaderManager {
         createUniform(uniformName + ".reflectance");
     }
 
+    public void createPointLightUniform(String uniformaName) throws Exception {
+        createUniform(uniformaName + ".color");
+        createUniform(uniformaName + ".position");
+        createUniform(uniformaName + ".intensity");
+        createUniform(uniformaName + ".constant");
+        createUniform(uniformaName + ".linear");
+        createUniform(uniformaName + ".exponent");
+    }
+
     public void setUniform(String uniformName, Matrix4f value) {
         try (MemoryStack stack = MemoryStack.stackPush()) {
             GL20.glUniformMatrix4fv(uniforms.get(uniformName), false, value.get(stack.mallocFloat(16)));
@@ -83,6 +92,15 @@ public class ShaderManager {
         setUniform(uniformName + ".color", directionalLight.getColor());
         setUniform(uniformName + ".direction", directionalLight.getDirection());
         setUniform(uniformName + ".intensity", directionalLight.getIntensity());
+    }
+
+    public void setUniform(String uniformName, PointLight pointLight) {
+        setUniform(uniformName + ".color", pointLight.getColor());
+        setUniform(uniformName + ".position", pointLight.getPosition());
+        setUniform(uniformName + ".intensity", pointLight.getIntensity());
+        setUniform(uniformName + ".constant", pointLight.getConstant());
+        setUniform(uniformName + ".linear", pointLight.getLinear());
+        setUniform(uniformName + ".exponent", pointLight.getExponent());
     }
 
     public void createVertexShader(String shaderCode) throws Exception {

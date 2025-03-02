@@ -1,7 +1,6 @@
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL11;
 
 public class TestGame implements ILogic{
 
@@ -19,6 +18,7 @@ public class TestGame implements ILogic{
 
     private float lightAngle;
     private DirectionalLight directionalLight;
+    private PointLight pointLight;
 
     public TestGame() {
         renderer = new RenderManager();
@@ -39,9 +39,13 @@ public class TestGame implements ILogic{
         entity = new Entity(model, new Vector3f(0, 0, -5), new Vector3f(0, 0, 0), 0.5f);
     
         float lightIntensity = 1.0f;
-        Vector3f lightDirection = new Vector3f(0, 0, -1);
+        Vector3f lightPosition = new Vector3f(0, 0, -3.2f);
         Vector3f lightColor = new Vector3f(1, 1, 1);
-        directionalLight = new DirectionalLight(lightColor, lightDirection, lightIntensity);
+        pointLight = new PointLight(lightColor, lightPosition, lightIntensity, 0, 0, 1);
+
+        lightPosition = new Vector3f(0, 0, -1);
+        lightColor = new Vector3f(1, 1, 1);
+        directionalLight = new DirectionalLight(lightColor, lightPosition, lightIntensity);
     }
 
     @Override
@@ -71,6 +75,11 @@ public class TestGame implements ILogic{
             camera.moveRotation(0.0f, 0.0f, -0.5f);
         if(window.isKeyPressed(GLFW.GLFW_KEY_L))
             camera.moveRotation(0.0f, 0.0f, 0.5f);
+
+        if (window.isKeyPressed(GLFW.GLFW_KEY_O))
+            pointLight.getPosition().x += 0.1f;
+        if (window.isKeyPressed(GLFW.GLFW_KEY_P))
+            pointLight.getPosition().x -= 0.1f;
     }
 
     @Override
@@ -108,7 +117,7 @@ public class TestGame implements ILogic{
 
     @Override
     public void render() {
-        renderer.render(entity, camera, directionalLight);
+        renderer.render(entity, camera, directionalLight, pointLight);
     }
 
     @Override
