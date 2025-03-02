@@ -19,14 +19,29 @@ public class ShaderManager {
         if(programID == 0)
             throw new Exception("Could not creat shader");
         
-            uniforms = new HashMap<String, Integer>();
+        uniforms = new HashMap<String, Integer>();
     }
 
     public void createUniform(String uniformName) throws Exception {
         int uniformLocation = GL20.glGetUniformLocation(programID, uniformName);
         if (uniformLocation < 0)
             throw new Exception("Could not find uniform " + uniformName);
+        System.out.println("Uniform " + uniformName + " location: " + uniformLocation);
         uniforms.put(uniformName, uniformLocation);
+    }
+
+    public void createDirectionalLightUniform(String uniformName) throws Exception {
+        createUniform(uniformName + ".color");
+        createUniform(uniformName + ".direction");
+        createUniform(uniformName + ".intensity");
+    }
+
+    public void createMaterialUniform(String uniformName) throws Exception {
+        createUniform(uniformName + ".ambient");
+        createUniform(uniformName + ".diffuse");
+        createUniform(uniformName + ".specular");
+        createUniform(uniformName + ".hasTexture");
+        createUniform(uniformName + ".reflectance");
     }
 
     public void setUniform(String uniformName, Matrix4f value) {
@@ -54,6 +69,20 @@ public class ShaderManager {
     public void setUniform(String uniformName, boolean value) {
         float res = value ? 1 : 0;
         GL20.glUniform1f(uniforms.get(uniformName), res);
+    }
+
+    public void setUniform(String uniformName, Material material) {
+        setUniform(uniformName + ".ambient", material.getAmbientColor());
+        setUniform(uniformName + ".diffuse", material.getDiffuseColor());
+        setUniform(uniformName + ".specular", material.getSpecularColor());
+        setUniform(uniformName + ".hasTexture", material.hasTexture() ? 1 : 0);
+        setUniform(uniformName + ".reflectance", material.getReflectance());
+    }
+
+    public void setUniform(String uniformName, DirectionalLight directionalLight) {
+        setUniform(uniformName + ".color", directionalLight.getColor());
+        setUniform(uniformName + ".direction", directionalLight.getDirection());
+        setUniform(uniformName + ".intensity", directionalLight.getIntensity());
     }
 
     public void createVertexShader(String shaderCode) throws Exception {
