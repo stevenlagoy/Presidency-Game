@@ -29,6 +29,14 @@ public class ShaderManager {
         uniforms.put(uniformName, uniformLocation);
     }
 
+    public void createMaterialUniform(String uniformName) throws Exception {
+        createUniform(uniformName + ".ambient");
+        createUniform(uniformName + ".diffuse");
+        createUniform(uniformName + ".specular");
+        createUniform(uniformName + ".hasTexture");
+        createUniform(uniformName + ".reflectance");
+    }
+
     public void setUniform(String uniformName, Matrix4f value) {
         try (MemoryStack stack = MemoryStack.stackPush()) {
             GL20.glUniformMatrix4fv(uniforms.get(uniformName), false, value.get(stack.mallocFloat(16)));
@@ -54,6 +62,14 @@ public class ShaderManager {
     public void setUniform(String uniformName, boolean value) {
         float res = value ? 1 : 0;
         GL20.glUniform1f(uniforms.get(uniformName), res);
+    }
+
+    public void setUniform(String uniformName, Material material) {
+        setUniform(uniformName + ".ambient", material.getAmbientColor());
+        setUniform(uniformName + ".diffuse", material.getDiffuseColor());
+        setUniform(uniformName + ".specular", material.getSpecularColor());
+        setUniform(uniformName + ".reflectance", material.getReflectance());
+        setUniform(uniformName + ".hasTexture", material.hasTexture() ? 1 : 0);
     }
 
     public void createVertexShader(String shaderCode) throws Exception {
