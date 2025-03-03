@@ -9,6 +9,7 @@ import org.lwjgl.system.MemoryStack;
 
 import lighting.DirectionalLight;
 import lighting.PointLight;
+import lighting.SpotLight;
 
 public class ShaderManager {
     
@@ -47,6 +48,18 @@ public class ShaderManager {
         createUniform(uniformName + ".exponent");
     }
 
+    public void createSpotLightUniform(String uniformName) throws Exception {
+        createUniform(uniformName + ".pl.color");
+        createUniform(uniformName + ".pl.position");
+        createUniform(uniformName + ".pl.intensity");
+        createUniform(uniformName + ".pl.constant");
+        createUniform(uniformName + ".pl.linear");
+        createUniform(uniformName + ".pl.exponent");
+
+        createUniform(uniformName + ".coneDirection");
+        createUniform(uniformName + ".cutoff");
+    }
+
     public void createMaterialUniform(String uniformName) throws Exception {
         createUniform(uniformName + ".ambient");
         createUniform(uniformName + ".diffuse");
@@ -68,6 +81,12 @@ public class ShaderManager {
         setUniform(uniformName + ".constant", light.getConstant());
         setUniform(uniformName + ".linear", light.getLinear());
         setUniform(uniformName + ".exponent", light.getExponent());
+    }
+
+    public void setUniform(String uniformName, SpotLight light) {
+        setUniform(uniformName + ".pl", light.getPointLight());
+        setUniform(uniformName + ".coneDirection", light.getConeDirection());
+        setUniform(uniformName + ".cutoff", light.getCutoff());
     }
 
     public void setUniform(String uniformName, Matrix4f value) {

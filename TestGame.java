@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import lighting.DirectionalLight;
 import lighting.PointLight;
+import lighting.SpotLight;
 
 public class TestGame implements ILogic{
 
@@ -25,6 +26,7 @@ public class TestGame implements ILogic{
     private float lightAngle;
     private DirectionalLight directionalLight;
     private PointLight pointLight;
+    private SpotLight spotLight;
 
     public TestGame() {
         renderer = new RenderManager();
@@ -51,6 +53,11 @@ public class TestGame implements ILogic{
         lightPosition = new Vector3f(0, 0, -3.2f);
         lightColor = new Vector3f(1, 1, 1);
         pointLight = new PointLight(lightColor, lightPosition, lightIntensity, 0, 0, 1);
+
+        // Spot Light
+        Vector3f coneDirection = new Vector3f(0, 0, 1);
+        float cutoff = (float) Math.cos(Math.toRadians(180));
+        spotLight = new SpotLight(new PointLight(lightColor, new Vector3f(0, 0, 1f), lightIntensity, 0, 0, 1), coneDirection, cutoff);
 
         // Directional Light
         lightIntensity = 0.0f;
@@ -90,6 +97,11 @@ public class TestGame implements ILogic{
             pointLight.getPosition().x += 0.1f;
         if(window.isKeyPressed(GLFW.GLFW_KEY_P))
             pointLight.getPosition().x -= 0.1f;
+        float lightPosition = spotLight.getPointLight().getPosition().z;
+        if(window.isKeyPressed(GLFW.GLFW_KEY_N))
+            spotLight.getPointLight().getPosition().z = lightPosition + 0.1f;
+        if(window.isKeyPressed(GLFW.GLFW_KEY_M))
+            spotLight.getPointLight().getPosition().z = lightPosition - 0.1f;
     }
 
     @Override
@@ -128,7 +140,7 @@ public class TestGame implements ILogic{
 
     @Override
     public void render() {
-        renderer.render(entity, camera, directionalLight, pointLight);
+        renderer.render(entity, camera, directionalLight, pointLight, spotLight);
     }
 
     @Override
