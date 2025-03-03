@@ -44,18 +44,19 @@ public class TestGame implements ILogic{
         renderer.init();
 
         Model model = loader.loadOBJModel("/models/cube.obj");
-        model.setTexture(new Texture(loader.loadTexture("textures/blue.png")), 1f);
+        model.setTexture(new Texture(loader.loadTexture("textures/test_checker.png")), 1f);
 
         entities = new ArrayList<>();
         Random rand = new Random();
-        for (int i = 0; i < 200; i++) {
-            float x = rand.nextFloat() * 100 - 50;
-            float y = rand.nextFloat() * 100 - 50;
-            float z = rand.nextFloat() * -300;
+        int factor = 100;
+        for (int i = 0; i < (factor * 2); i++) {
+            float x = rand.nextFloat() * factor - (factor / 2);
+            float y = rand.nextFloat() * factor - (factor / 2);
+            float z = rand.nextFloat() * -(3 * factor);
             entities.add(
                 new Entity(model, new Vector3f(x, y, z),
                 new Vector3f(rand.nextFloat() * 180, rand.nextFloat() * 180, 0),
-                1)
+                factor / 100)
             );
         }
         entities.add(new Entity(model, new Vector3f(0, 0, -2f), new Vector3f(0, 0, 0), 1));
@@ -97,10 +98,10 @@ public class TestGame implements ILogic{
             cameraInc.x = -10;
         if(window.isKeyPressed(GLFW.GLFW_KEY_D))
             cameraInc.x = 10;
-        if(window.isKeyPressed(GLFW.GLFW_KEY_Z))
-            cameraInc.y = -10;
-        if(window.isKeyPressed(GLFW.GLFW_KEY_X))
+        if(window.isKeyPressed(GLFW.GLFW_KEY_SPACE))
             cameraInc.y = 10;
+        if(window.isKeyPressed(GLFW.GLFW_KEY_LEFT_SHIFT))
+            cameraInc.y = -10;
         if(window.isKeyPressed(GLFW.GLFW_KEY_E))
             camera.moveRotation(0.0f, 0.5f, 0.0f);
         if(window.isKeyPressed(GLFW.GLFW_KEY_Q))
