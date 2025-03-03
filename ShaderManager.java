@@ -7,6 +7,9 @@ import org.joml.Vector4f;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.system.MemoryStack;
 
+import lighting.DirectionalLight;
+import lighting.PointLight;
+
 public class ShaderManager {
     
     private final int programID;
@@ -29,12 +32,42 @@ public class ShaderManager {
         uniforms.put(uniformName, uniformLocation);
     }
 
+    public void createDirectionalLightUniform(String uniformName) throws Exception {
+        createUniform(uniformName + ".color");
+        createUniform(uniformName + ".direction");
+        createUniform(uniformName + ".intensity");
+    }
+
+    public void createPointLightUniform(String uniformName) throws Exception {
+        createUniform(uniformName + ".color");
+        createUniform(uniformName + ".position");
+        createUniform(uniformName + ".intensity");
+        createUniform(uniformName + ".constant");
+        createUniform(uniformName + ".linear");
+        createUniform(uniformName + ".exponent");
+    }
+
     public void createMaterialUniform(String uniformName) throws Exception {
         createUniform(uniformName + ".ambient");
         createUniform(uniformName + ".diffuse");
         createUniform(uniformName + ".specular");
         createUniform(uniformName + ".hasTexture");
         createUniform(uniformName + ".reflectance");
+    }
+
+    public void setUniform(String uniformName, DirectionalLight light) {
+        setUniform(uniformName + ".color", light.getColor());
+        setUniform(uniformName + ".direction", light.getDirection());
+        setUniform(uniformName + ".intensity", light.getIntensity());
+    }
+
+    public void setUniform(String uniformName, PointLight light) {
+        setUniform(uniformName + ".color", light.getColor());
+        setUniform(uniformName + ".position", light.getPosition());
+        setUniform(uniformName + ".intensity", light.getIntensity());
+        setUniform(uniformName + ".constant", light.getConstant());
+        setUniform(uniformName + ".linear", light.getLinear());
+        setUniform(uniformName + ".exponent", light.getExponent());
     }
 
     public void setUniform(String uniformName, Matrix4f value) {

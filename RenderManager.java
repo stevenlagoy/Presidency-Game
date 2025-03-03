@@ -1,9 +1,10 @@
 import org.joml.Vector3f;
-import org.joml.Vector4f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+
+import lighting.DirectionalLight;
 
 public class RenderManager {
     
@@ -25,9 +26,11 @@ public class RenderManager {
         shader.createUniform("viewMatrix");
         shader.createUniform("ambientLight");
         shader.createMaterialUniform("material");
+        shader.createUniform("specularPower");
+        shader.createDirectionalLightUniform("directionalLight");
     }
 
-    public void render(Entity entity, Camera camera) {
+    public void render(Entity entity, Camera camera, DirectionalLight directionalLight) {
         clear();
 
         if(window.isResize()){
@@ -42,6 +45,8 @@ public class RenderManager {
         shader.setUniform("viewMatrix", Transformation.getViewMatrix(camera));
         shader.setUniform("ambientLight", new Vector3f(0.6f, 0.6f, 0.6f));
         shader.setUniform("material", entity.getModel().getMaterial());
+        shader.setUniform("specularPower", 10f);
+        shader.setUniform("directionalLight", directionalLight);
 
         GL30.glBindVertexArray(entity.getModel().getId());
         GL20.glEnableVertexAttribArray(0);
