@@ -53,6 +53,12 @@ public class ShaderManager {
         createUniform(uniformaName + ".exponent");
     }
 
+    public void createSpotLightUniform(String uniformName) throws Exception {
+        createPointLightUniform(uniformName + ".pl");
+        createUniform(uniformName + ".conedir");
+        createUniform(uniformName + ".cutoff");
+    }
+
     public void setUniform(String uniformName, Matrix4f value) {
         try (MemoryStack stack = MemoryStack.stackPush()) {
             GL20.glUniformMatrix4fv(uniforms.get(uniformName), false, value.get(stack.mallocFloat(16)));
@@ -102,6 +108,12 @@ public class ShaderManager {
         setUniform(uniformName + ".linear", pointLight.getLinear());
         setUniform(uniformName + ".exponent", pointLight.getExponent());
     }
+
+    public void setUniform(String uniformName, SpotLight spotLight) {
+        setUniform(uniformName + ".pl", spotLight.getPointLight());
+        setUniform(uniformName + ".conedir", spotLight.getConeDirection());
+        setUniform(uniformName + ".cutoff", spotLight.getCutoff());
+    } 
 
     public void createVertexShader(String shaderCode) throws Exception {
         vertexShaderID = createShader(shaderCode, GL20.GL_VERTEX_SHADER);

@@ -20,6 +20,8 @@ public class RenderManager {
         shader.createFragmentShader(Utils.loadResource("/shaders/fragment.fs"));
         shader.link();
 
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+
         shader.createUniform("textureSampler");
         shader.createUniform("transformationMatrix");
         shader.createUniform("projectionMatrix");
@@ -29,10 +31,17 @@ public class RenderManager {
         shader.createUniform("specularPower");
         shader.createDirectionalLightUniform("directionalLight");
         shader.createPointLightUniform("pointLight");
+        shader.createSpotLightUniform("spotLight");
     }
 
-    public void render(Entity entity, Camera camera, DirectionalLight directionalLight, PointLight pointLight) {
+    public void render(Entity entity, Camera camera, DirectionalLight directionalLight, PointLight pointLight, SpotLight spotLight) {
         clear();
+
+        System.out.println("Rendering entity with " + entity.getModel().getVertexCount() + " vertices");
+        System.out.println("Camera position: " + camera.getPosition());
+        System.out.println("Camera rotation: " + camera.getRotation());
+        System.out.println("Entity position: " + entity.getPos());
+        System.out.println("Light direction: " + directionalLight.getDirection());
 
         if (!window.isResized()) {
             glViewport(0, 0, window.getWidth(), window.getHeight());
@@ -50,6 +59,7 @@ public class RenderManager {
         shader.setUniform("specularPower", Engine.SPECULAR_POWER);
         shader.setUniform("directionalLight", directionalLight);
         shader.setUniform("pointLight", pointLight);
+        shader.setUniform("spotLight", spotLight);
         
         GL30.glBindVertexArray(entity.getModel().getId());
         GL20.glEnableVertexAttribArray(0);

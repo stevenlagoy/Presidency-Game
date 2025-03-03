@@ -19,6 +19,7 @@ public class TestGame implements ILogic{
     private float lightAngle;
     private DirectionalLight directionalLight;
     private PointLight pointLight;
+    private SpotLight spotLight;
 
     public TestGame() {
         renderer = new RenderManager();
@@ -38,18 +39,37 @@ public class TestGame implements ILogic{
         model.setTexture(new Texture(loader.loadTexture("textures/blue.png")), 1f);
         entity = new Entity(model, new Vector3f(0, 0, -5), new Vector3f(0, 0, 0), 0.5f);
     
-        float lightIntensity = 1.0f;
-        Vector3f lightPosition = new Vector3f(0, 0, -3.2f);
-        Vector3f lightColor = new Vector3f(1, 1, 1);
+        float lightIntensity;
+        Vector3f lightPosition, lightColor, coneDir;
+        float cutoff;
+
+        // Point Light
+        lightIntensity = 1.0f;
+        lightPosition = new Vector3f(0, 0, -3.2f);
+        lightColor = new Vector3f(1, 1, 1);
         pointLight = new PointLight(lightColor, lightPosition, lightIntensity, 0, 0, 1);
 
-        lightPosition = new Vector3f(0, 0, -1);
+        // Spot Light
+        lightIntensity = 1.0f;
+        coneDir = new Vector3f(0, 0, 1);
+        cutoff = (float) Math.cos(Math.toRadians(180));
+        spotLight = new SpotLight(new PointLight(lightColor, new Vector3f(0, 0, 1f), lightIntensity, 0, 0, 1), coneDir, cutoff);
+
+        // Directional Light
+        lightIntensity = 1.0f;
+        lightPosition = new Vector3f(-1, -1, -1).normalize();
         lightColor = new Vector3f(1, 1, 1);
         directionalLight = new DirectionalLight(lightColor, lightPosition, lightIntensity);
     }
 
     @Override
     public void input() {
+        float lightPos = spotLight.getPointLight().getPosition().x;
+        if (window.isKeyPressed(GLFW.GLFW_KEY_N))
+            spotLight.getPointLight().getPosition().z = lightPos + 0.1f;
+        if (window.isKeyPressed(GLFW.GLFW_KEY_M))
+            spotLight.getPointLight().getPosition().z = lightPos - 0.1f;
+
         cameraInc.set(0, 0, 0);
         if(window.isKeyPressed(GLFW.GLFW_KEY_W))
             cameraInc.z = -1;
@@ -93,7 +113,7 @@ public class TestGame implements ILogic{
 
         entity.incRotation(0.0f, 0.25f, 0.0f);
 
-        lightAngle += 1.05f;
+        lightAngle += 1.5f;
         if (lightAngle > 90) {
             directionalLight.setIntensity(0);
             if (lightAngle >= 360) lightAngle = -90;
@@ -117,7 +137,7 @@ public class TestGame implements ILogic{
 
     @Override
     public void render() {
-        renderer.render(entity, camera, directionalLight, pointLight);
+        renderer.render(entity, camera, directionalLight, pointLight, spotLight);
     }
 
     @Override
