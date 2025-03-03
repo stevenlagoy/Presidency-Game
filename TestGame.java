@@ -1,4 +1,6 @@
-import java.lang.constant.DirectMethodHandleDesc;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -18,7 +20,7 @@ public class TestGame implements ILogic{
     private final ObjectLoader loader;
     private final WindowManager window;
 
-    private Entity entity;
+    private List<Entity> entities;
     private Camera camera;
 
     Vector3f cameraInc;
@@ -43,7 +45,20 @@ public class TestGame implements ILogic{
 
         Model model = loader.loadOBJModel("/models/cube.obj");
         model.setTexture(new Texture(loader.loadTexture("textures/blue.png")), 1f);
-        entity = new Entity(model, new Vector3f(0, 0, -5), new Vector3f(0, 0, 0), 1);
+
+        entities = new ArrayList<>();
+        Random rand = new Random();
+        for (int i = 0; i < 200; i++) {
+            float x = rand.nextFloat() * 100 - 50;
+            float y = rand.nextFloat() * 100 - 50;
+            float z = rand.nextFloat() * -300;
+            entities.add(
+                new Entity(model, new Vector3f(x, y, z),
+                new Vector3f(rand.nextFloat() * 180, rand.nextFloat() * 180, 0),
+                1)
+            );
+        }
+        entities.add(new Entity(model, new Vector3f(0, 0, -2f), new Vector3f(0, 0, 0), 1));
 
         float lightIntensity;
         Vector3f lightPosition, lightColor;
@@ -75,17 +90,17 @@ public class TestGame implements ILogic{
     public void input() {
         cameraInc.set(0, 0, 0);
         if(window.isKeyPressed(GLFW.GLFW_KEY_W))
-            cameraInc.z = -1;
+            cameraInc.z = -10;
         if(window.isKeyPressed(GLFW.GLFW_KEY_S))
-            cameraInc.z = 1;
+            cameraInc.z = 10;
             if(window.isKeyPressed(GLFW.GLFW_KEY_A))
-            cameraInc.x = -1;
+            cameraInc.x = -10;
         if(window.isKeyPressed(GLFW.GLFW_KEY_D))
-            cameraInc.x = 1;
+            cameraInc.x = 10;
         if(window.isKeyPressed(GLFW.GLFW_KEY_Z))
-            cameraInc.y = -1;
+            cameraInc.y = -10;
         if(window.isKeyPressed(GLFW.GLFW_KEY_X))
-            cameraInc.y = 1;
+            cameraInc.y = 10;
         if(window.isKeyPressed(GLFW.GLFW_KEY_E))
             camera.moveRotation(0.0f, 0.5f, 0.0f);
         if(window.isKeyPressed(GLFW.GLFW_KEY_Q))
@@ -141,11 +156,15 @@ public class TestGame implements ILogic{
         double angRad = Math.toRadians(lightAngle);
         directionalLight.getDirection().x = (float)Math.sin(angRad);
         directionalLight.getDirection().y = (float)Math.cos(angRad);
+
+        for (Entity entity : entities) {
+            renderer.processEntity(entity);
+        }
     }
 
     @Override
     public void render() {
-        renderer.render(entity, camera, directionalLight, pointLights, spotLights);
+        renderer.render(camera, directionalLight, pointLights, spotLights);
     }
 
     @Override
