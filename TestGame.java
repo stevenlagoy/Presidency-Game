@@ -6,6 +6,7 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 
 import lighting.DirectionalLight;
+import lighting.PointLight;
 
 public class TestGame implements ILogic{
 
@@ -23,6 +24,7 @@ public class TestGame implements ILogic{
 
     private float lightAngle;
     private DirectionalLight directionalLight;
+    private PointLight pointLight;
 
     public TestGame() {
         renderer = new RenderManager();
@@ -41,9 +43,19 @@ public class TestGame implements ILogic{
         model.setTexture(new Texture(loader.loadTexture("textures/blue.png")), 1f);
         entity = new Entity(model, new Vector3f(0, 0, -5), new Vector3f(0, 0, 0), 1);
 
-        float lightIntensity = 0.0f;
-        Vector3f lightPosition = new Vector3f(-1, -10, 0);
-        Vector3f lightColor = new Vector3f(1, 1, 1);
+        float lightIntensity;
+        Vector3f lightPosition, lightColor;
+
+        // Point Light
+        lightIntensity = 1.0f;
+        lightPosition = new Vector3f(0, 0, -3.2f);
+        lightColor = new Vector3f(1, 1, 1);
+        pointLight = new PointLight(lightColor, lightPosition, lightIntensity, 0, 0, 1);
+
+        // Directional Light
+        lightIntensity = 0.0f;
+        lightPosition = new Vector3f(-1, -10, 0);
+        lightColor = new Vector3f(1, 1, 1);
         directionalLight = new DirectionalLight(lightColor, lightPosition, lightIntensity);
     }
 
@@ -74,6 +86,10 @@ public class TestGame implements ILogic{
             camera.moveRotation(0.0f, 0.0f, -0.5f);
         if(window.isKeyPressed(GLFW.GLFW_KEY_L))
             camera.moveRotation(0.0f, 0.0f, 0.5f);
+        if(window.isKeyPressed(GLFW.GLFW_KEY_O))
+            pointLight.getPosition().x += 0.1f;
+        if(window.isKeyPressed(GLFW.GLFW_KEY_P))
+            pointLight.getPosition().x -= 0.1f;
     }
 
     @Override
@@ -112,7 +128,7 @@ public class TestGame implements ILogic{
 
     @Override
     public void render() {
-        renderer.render(entity, camera, directionalLight);
+        renderer.render(entity, camera, directionalLight, pointLight);
     }
 
     @Override
