@@ -5,7 +5,6 @@ import java.util.Random;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL11;
 
 import lighting.DirectionalLight;
 import lighting.PointLight;
@@ -13,7 +12,7 @@ import lighting.SpotLight;
 
 public class TestGame implements ILogic{
 
-    private static final float CAMERA_MOVE_SPEED = 0.01f;
+    private static final float CAMERA_MOVE_SPEED = 0.005f;
     private static final float MOUSE_SENSITIVITY = 0.2f;
 
     private final RenderManager renderer;
@@ -35,6 +34,7 @@ public class TestGame implements ILogic{
         window = Main.getWindow();
         loader = new ObjectLoader();
         camera = new Camera();
+        camera.setPosition(0, 0, 5);
         cameraInc = new Vector3f(0, 0, 0);
         lightAngle = -90;
     }
@@ -89,6 +89,12 @@ public class TestGame implements ILogic{
 
     @Override
     public void input() {
+        float lightPos = spotLight.getPointLight().getPosition().x;
+        if (window.isKeyPressed(GLFW.GLFW_KEY_N))
+            spotLight.getPointLight().getPosition().z = lightPos + 0.1f;
+        if (window.isKeyPressed(GLFW.GLFW_KEY_M))
+            spotLight.getPointLight().getPosition().z = lightPos - 0.1f;
+
         cameraInc.set(0, 0, 0);
         if(window.isKeyPressed(GLFW.GLFW_KEY_W))
             cameraInc.z = -10;

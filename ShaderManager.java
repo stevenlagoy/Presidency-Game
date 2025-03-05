@@ -23,13 +23,14 @@ public class ShaderManager {
         if(programID == 0)
             throw new Exception("Could not creat shader");
         
-            uniforms = new HashMap<String, Integer>();
+        uniforms = new HashMap<String, Integer>();
     }
 
     public void createUniform(String uniformName) throws Exception {
         int uniformLocation = GL20.glGetUniformLocation(programID, uniformName);
         if (uniformLocation < 0)
             throw new Exception("Could not find uniform " + uniformName);
+        System.out.println("Uniform " + uniformName + " location: " + uniformLocation);
         uniforms.put(uniformName, uniformLocation);
     }
 

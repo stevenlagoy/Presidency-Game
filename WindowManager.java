@@ -63,7 +63,7 @@ public class WindowManager {
         GLFW.glfwSetFramebufferSizeCallback(window, (window, width, height) -> {
             this.width = width;
             this.height = height;
-            this.setResize(true);
+            this.setResized(true);
         });
 
         GLFW.glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
@@ -125,10 +125,10 @@ public class WindowManager {
         GLFW.glfwSetWindowTitle(window, title);
     }
 
-    public boolean isResize() {
+    public boolean isResized() {
         return resize;
     }
-    public void setResize(boolean resize) {
+    public void setResized(boolean resize) {
         this.resize = resize;
     }
 

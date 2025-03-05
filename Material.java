@@ -1,5 +1,4 @@
 import java.util.Vector;
-
 import org.joml.Vector4f;
 
 public class Material {
@@ -15,7 +14,6 @@ public class Material {
         this.reflectance = reflectance;
         this.texture = texture;
     }
-
     public Material() {
         this.ambientColor = Engine.DEFAULT_COLOR;
         this.diffuseColor = Engine.DEFAULT_COLOR;

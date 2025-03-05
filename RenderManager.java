@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.joml.Vector3f;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
@@ -29,6 +30,9 @@ public class RenderManager {
         shader.createVertexShader(Utils.loadResource("/shaders/vertex.vs"));
         shader.createFragmentShader(Utils.loadResource("/shaders/fragment.fs"));
         shader.link();
+
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+
         shader.createUniform("textureSampler");
         shader.createUniform("transformationMatrix");
         shader.createUniform("projectionMatrix");
@@ -120,11 +124,13 @@ public class RenderManager {
     }
 
     public void clear() {
+        GL11.glClearColor(0.5f, 0.5f, 0.5f, 0.5f);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
     }
 
     public void cleanup() {
-        shader.cleanup();
+        if (shader != null)
+            shader.cleanup();
     }
 
 }

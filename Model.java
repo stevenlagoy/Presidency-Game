@@ -52,4 +52,8 @@ public class Model {
         this.material.setReflectance(reflectance);
     }
 
+    public void setTexture(Texture texture, float reflectance) {
+        this.material.setTexture(texture);
+        this.material.setReflectance(reflectance);
+    }
 }
