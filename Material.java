@@ -1,3 +1,4 @@
+import java.util.Vector;
 import org.joml.Vector4f;
 
 public class Material {
@@ -6,12 +7,19 @@ public class Material {
     private float reflectance;
     private Texture texture;
 
+    public Material(Vector4f ambientColor, Vector4f diffuseColor, Vector4f specularColor, float reflectance, Texture texture) {
+        this.ambientColor = ambientColor;
+        this.diffuseColor = diffuseColor;
+        this.specularColor = specularColor;
+        this.reflectance = reflectance;
+        this.texture = texture;
+    }
     public Material() {
         this.ambientColor = Engine.DEFAULT_COLOR;
         this.diffuseColor = Engine.DEFAULT_COLOR;
         this.specularColor = Engine.DEFAULT_COLOR;
-        this.texture = null;
         this.reflectance = 0;
+        this.texture = null;
     }
 
     public Material(Vector4f color, float reflectance) {
@@ -26,16 +34,8 @@ public class Material {
         this(Engine.DEFAULT_COLOR, Engine.DEFAULT_COLOR, Engine.DEFAULT_COLOR, 0, texture);
     }
 
-    public Material(Vector4f ambientColor, Vector4f diffuseColor, Vector4f specularColor, float reflectance, Texture texture) {
-        this.ambientColor = ambientColor;
-        this.diffuseColor = diffuseColor;
-        this.specularColor = specularColor;
-        this.reflectance = reflectance;
-        this.texture = texture;
-    }
-
     public Vector4f getAmbientColor() {
-        return this.ambientColor;
+        return ambientColor;
     }
 
     public void setAmbientColor(Vector4f ambientColor) {
@@ -43,7 +43,7 @@ public class Material {
     }
 
     public Vector4f getDiffuseColor() {
-        return this.diffuseColor;
+        return diffuseColor;
     }
 
     public void setDiffuseColor(Vector4f diffuseColor) {
@@ -51,7 +51,7 @@ public class Material {
     }
 
     public Vector4f getSpecularColor() {
-        return this.specularColor;
+        return specularColor;
     }
 
     public void setSpecularColor(Vector4f specularColor) {
@@ -59,7 +59,7 @@ public class Material {
     }
 
     public float getReflectance() {
-        return this.reflectance;
+        return reflectance;
     }
 
     public void setReflectance(float reflectance) {
@@ -67,15 +67,14 @@ public class Material {
     }
 
     public Texture getTexture() {
-        return this.texture;
+        return texture;
     }
 
     public void setTexture(Texture texture) {
         this.texture = texture;
     }
 
-    public boolean hasTexture() {
+    boolean hasTexture() {
         return texture != null;
     }
-
 }

@@ -1,3 +1,4 @@
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -18,9 +19,9 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL;
@@ -78,6 +79,7 @@ public class Engine
     public static Candidate playerCandidate;
 
     private static WindowManager window;
+    public static final Vector4f DEFAULT_COLOR = new Vector4f(1.0f, 1.0f, 1.0f, 1.0f);
 
     public static final Vector4f DEFAULT_COLOR = new Vector4f(1.0f, 1.0f, 1.0f, 1.0f);
     public static final Vector3f AMBIENT_LIGHT = new Vector3f(0.6f, 0.6f, 0.6f);
@@ -121,6 +123,20 @@ public class Engine
 
     public static WindowManager getWindow() {
         return window;
+    }
+
+    public static List<String> readAllLines (String fileName) {
+        List<String> list = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(Class.forName(Engine.class.getName()).getResourceAsStream(fileName)))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                list.add(line);
+            }
+        }
+        catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     public static void writeErrorToLog() {
