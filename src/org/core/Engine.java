@@ -187,6 +187,10 @@ public class Engine {
         glfwTerminate();
     }
 
+    public static long getWindow() {
+        return window;
+    }
+
     public static void writeErrorToLog() {
         try {
             File errorFile = new File(ERROR_FILE_NAME);
@@ -607,7 +611,6 @@ public class Engine {
         }
         return res;
     }
-
 
     public static boolean isPrime(int value) {
         if (value < 2) return false;
