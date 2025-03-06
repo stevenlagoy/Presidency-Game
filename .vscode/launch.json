@@ -6,6 +6,13 @@
         "configurations": [
                 {
                         "type": "java",
+                        "name": "Main",
+                        "request": "launch",
+                        "mainClass": "src.org.core.Main",
+                        "projectName": "presidency_game_2f74b218"
+                },
+                {
+                        "type": "java",
                         "name": "LWJGLExample",
                         "request": "launch",
                         "mainClass": "LWJGLExample",
