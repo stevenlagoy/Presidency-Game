@@ -1,4 +1,4 @@
-package politics;
+package org.core.politics;
 public class Position
 {
     private Issue rootIssue;

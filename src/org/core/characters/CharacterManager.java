@@ -1,4 +1,4 @@
-package src.org.core.characters;
+package org.core.characters;
 import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
-import src.org.core.demographics.Bloc;
-import src.org.core.demographics.Demographics;
-import src.org.core.demographics.DemographicsManager;
-import src.org.core.Engine;
-import src.org.core.characters.Candidate;
-import src.org.core.characters.GovernmentOfficial;
-import src.org.core.characters.Name;
-import src.org.core.characters.Personality;
+import org.core.demographics.Bloc;
+import org.core.demographics.Demographics;
+import org.core.demographics.DemographicsManager;
+import org.core.Engine;
+import org.core.characters.Candidate;
+import org.core.characters.GovernmentOfficial;
+import org.core.characters.Name;
+import org.core.characters.Personality;
 
 import java.io.File;
 import java.io.FileNotFoundException;

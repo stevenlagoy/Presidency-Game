@@ -1,9 +1,9 @@
-package src.org.core.graphics;
+package org.core.graphics;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
-import src.org.core.graphics.entity.Entity;
-import src.org.core.graphics.entity.terrain.Terrain;
+import org.core.graphics.entity.Entity;
+import org.core.graphics.entity.terrain.Terrain;
 
 public class Transformation {
     

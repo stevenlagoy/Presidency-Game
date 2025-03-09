@@ -1,6 +1,6 @@
-package src.org.core.characters;
+package org.core.characters;
 
-import src.org.core.characters.PoliticalActor;
+import org.core.characters.PoliticalActor;
 
 public class GovernmentOfficial extends PoliticalActor
 {

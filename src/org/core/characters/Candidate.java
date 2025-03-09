@@ -1,11 +1,11 @@
-package src.org.core.characters;
+package org.core.characters;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import src.org.core.Engine;
-import src.org.core.Repr;
+import org.core.Engine;
+import org.core.Repr;
 
 public class Candidate extends PoliticalActor implements Repr, HasPersonality {
     final static int SKILLS_BONUS_EDUCATION = 10;

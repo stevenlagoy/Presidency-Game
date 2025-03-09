@@ -1,4 +1,4 @@
-package src.org.core.graphics;
+package org.core.graphics;
 
 import static org.lwjgl.opengl.GL11.GL_NEAREST;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
@@ -21,8 +21,8 @@ import org.lwjgl.system.MemoryStack;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector3i;
-import src.org.core.graphics.entity.Model;
-import src.org.core.graphics.utils.Utils;
+import org.core.graphics.entity.Model;
+import org.core.graphics.utils.Utils;
 
 public class ObjectLoader {
     

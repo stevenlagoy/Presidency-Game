@@ -6,6 +6,20 @@
         "configurations": [
                 {
                         "type": "java",
+                        "name": "Main",
+                        "request": "launch",
+                        "mainClass": "org.core.Main",
+                        "projectName": "presidency-game"
+                },
+                {
+                        "type": "java",
+                        "name": "Main",
+                        "request": "launch",
+                        "mainClass": "Main",
+                        "projectName": "presidency-game"
+                },
+                {
+                        "type": "java",
                         "name": "Launcher",
                         "request": "launch",
                         "mainClass": "src.org.core.graphics.game.Launcher",

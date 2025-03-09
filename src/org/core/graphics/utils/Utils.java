@@ -1,4 +1,4 @@
-package src.org.core.graphics.utils;
+package org.core.graphics.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 import org.lwjgl.system.MemoryUtil;
 
-import src.org.core.graphics.game.Launcher;
+import org.core.graphics.game.Launcher;
 
 public class Utils {
     

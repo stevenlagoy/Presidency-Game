@@ -1,8 +1,8 @@
-package src.org.core.graphics.entity;
+package org.core.graphics.entity;
 
 import org.joml.Vector3f;
 
-import src.org.core.graphics.entity.ModelManager.ModelInfo;
+import org.core.graphics.entity.ModelManager.ModelInfo;
 
 public class Entity {
     

@@ -1,11 +1,11 @@
-package src.org.core.graphics;
+package org.core.graphics;
 
 import org.joml.Vector2d;
 import org.joml.Vector2f;
 import org.lwjgl.glfw.GLFW;
 
-import src.org.core.Engine;
-import src.org.core.graphics.game.Launcher;
+import org.core.Engine;
+import org.core.graphics.game.Launcher;
 
 public class MouseInput {
     

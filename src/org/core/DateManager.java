@@ -1,4 +1,4 @@
-package src.org.core;
+package org.core;
 
 import java.util.Calendar;
 import java.util.Date;

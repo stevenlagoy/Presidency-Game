@@ -1,7 +1,7 @@
-package src.org.core.characters;
+package org.core.characters;
 
-import src.org.core.Engine;
-import src.org.core.Repr;
+import org.core.Engine;
+import org.core.Repr;
 
 public class Name implements Repr
 {

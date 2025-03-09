@@ -1,13 +1,13 @@
-package src.org.core.demographics;
+package org.core.demographics;
 
 import java.util.HashMap;
 
-import src.org.core.Engine;
+import org.core.Engine;
 
 public class DemographicsManager
 {
     // required filenames
-    private static final String blocs_filename = "blocs.json";
+    private static final String blocs_filename = "src/org/resources/blocs.json";
 
     //final static Bloc EVERYONE = Bloc.matchBlocName("everyone");
     //final static Bloc VOTERS = Bloc.matchBlocName("voters");

@@ -1,4 +1,4 @@
-package src.org.core.map;
+package org.core.map;
 public class MapManager
 {
     public static String[] mapModeNames = {"Default", "States", "Polling", "Population", "Conventions", "Districts", "Counties", "Travel"};

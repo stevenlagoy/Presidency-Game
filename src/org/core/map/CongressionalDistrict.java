@@ -1,4 +1,4 @@
-package src.org.core.map;
+package org.core.map;
 public class CongressionalDistrict {
 
     // GIS and Census Information

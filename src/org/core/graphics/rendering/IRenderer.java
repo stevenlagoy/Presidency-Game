@@ -1,10 +1,10 @@
-package src.org.core.graphics.rendering;
+package org.core.graphics.rendering;
 
-import src.org.core.graphics.Camera;
-import src.org.core.graphics.entity.Model;
-import src.org.core.graphics.lighting.DirectionalLight;
-import src.org.core.graphics.lighting.PointLight;
-import src.org.core.graphics.lighting.SpotLight;
+import org.core.graphics.Camera;
+import org.core.graphics.entity.Model;
+import org.core.graphics.lighting.DirectionalLight;
+import org.core.graphics.lighting.PointLight;
+import org.core.graphics.lighting.SpotLight;
 
 public interface IRenderer<T> {
     public void init() throws Exception;

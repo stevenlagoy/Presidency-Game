@@ -1,4 +1,4 @@
-package src.org.core.graphics.entity.terrain;
+package org.core.graphics.entity.terrain;
 
 public class BlendMapTerrain {
     

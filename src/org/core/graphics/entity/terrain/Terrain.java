@@ -1,11 +1,11 @@
-package src.org.core.graphics.entity.terrain;
+package org.core.graphics.entity.terrain;
 
 import org.joml.Vector3f;
 
-import src.org.core.graphics.ObjectLoader;
-import src.org.core.graphics.entity.Material;
-import src.org.core.graphics.entity.Model;
-import src.org.core.graphics.entity.Texture;
+import org.core.graphics.ObjectLoader;
+import org.core.graphics.entity.Material;
+import org.core.graphics.entity.Model;
+import org.core.graphics.entity.Texture;
 
 public class Terrain {
     

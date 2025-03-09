@@ -1,9 +1,9 @@
-package src.org.core.graphics.entity;
+package org.core.graphics.entity;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import src.org.core.graphics.ObjectLoader;
+import org.core.graphics.ObjectLoader;
 
 public class TextureManager {
     

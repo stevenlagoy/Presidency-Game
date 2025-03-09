@@ -1,10 +1,10 @@
-package src.org.core.map;
+package org.core.map;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import src.org.core.Engine;
-import src.org.core.characters.Character;
+import org.core.Engine;
+import org.core.characters.Character;
 
 import java.util.HashMap;
 

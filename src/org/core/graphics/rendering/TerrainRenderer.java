@@ -1,4 +1,4 @@
-package src.org.core.graphics.rendering;
+package org.core.graphics.rendering;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,18 +8,18 @@ import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
-import src.org.core.graphics.Camera;
-import src.org.core.graphics.ShaderManager;
-import src.org.core.graphics.Transformation;
-import src.org.core.graphics.entity.Material;
-import src.org.core.graphics.entity.Model;
-import src.org.core.graphics.entity.terrain.Terrain;
-import src.org.core.graphics.game.Launcher;
-import src.org.core.graphics.lighting.DirectionalLight;
-import src.org.core.graphics.lighting.PointLight;
-import src.org.core.graphics.lighting.SpotLight;
-import src.org.core.graphics.utils.Consts;
-import src.org.core.graphics.utils.Utils;
+import org.core.graphics.Camera;
+import org.core.graphics.ShaderManager;
+import org.core.graphics.Transformation;
+import org.core.graphics.entity.Material;
+import org.core.graphics.entity.Model;
+import org.core.graphics.entity.terrain.Terrain;
+import org.core.graphics.game.Launcher;
+import org.core.graphics.lighting.DirectionalLight;
+import org.core.graphics.lighting.PointLight;
+import org.core.graphics.lighting.SpotLight;
+import org.core.graphics.utils.Consts;
+import org.core.graphics.utils.Utils;
 
 public class TerrainRenderer implements IRenderer<Object> {
 

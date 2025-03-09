@@ -1,8 +1,8 @@
-package src.org.core.graphics.game;
+package org.core.graphics.game;
 
-import src.org.core.graphics.EngineManager;
-import src.org.core.graphics.WindowManager;
-import src.org.core.graphics.utils.Consts;
+import org.core.graphics.EngineManager;
+import org.core.graphics.WindowManager;
+import org.core.graphics.utils.Consts;
 
 public class Launcher {
 

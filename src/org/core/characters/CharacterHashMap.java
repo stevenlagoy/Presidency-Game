@@ -1,6 +1,6 @@
-package src.org.core.characters;
+package org.core.characters;
 
-import src.org.core.Engine;
+import org.core.Engine;
 
 public class CharacterHashMap
 {

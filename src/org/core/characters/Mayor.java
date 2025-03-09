@@ -1,4 +1,4 @@
-package src.org.core.characters;
+package org.core.characters;
 public class Mayor extends LocalOfficial {
     public Mayor(){
         super("Mayor", null);

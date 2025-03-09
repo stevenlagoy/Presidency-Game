@@ -1,7 +1,7 @@
-package src.org.core.characters;
+package org.core.characters;
 
-import src.org.core.characters.GovernmentOfficial;
-import src.org.core.map.State;
+import org.core.characters.GovernmentOfficial;
+import org.core.map.State;
 
 public class StateOfficial extends GovernmentOfficial
 {

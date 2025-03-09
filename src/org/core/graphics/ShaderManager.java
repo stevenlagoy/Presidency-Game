@@ -1,4 +1,4 @@
-package src.org.core.graphics;
+package org.core.graphics;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,10 +9,10 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.system.MemoryStack;
 
 import org.joml.Vector3f;
-import src.org.core.graphics.entity.Material;
-import src.org.core.graphics.lighting.DirectionalLight;
-import src.org.core.graphics.lighting.PointLight;
-import src.org.core.graphics.lighting.SpotLight;
+import org.core.graphics.entity.Material;
+import org.core.graphics.lighting.DirectionalLight;
+import org.core.graphics.lighting.PointLight;
+import org.core.graphics.lighting.SpotLight;
 
 public class ShaderManager {
     

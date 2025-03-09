@@ -1,6 +1,6 @@
-package src.org.core.map;
+package org.core.map;
 
-import src.org.core.characters.StateOfficial;
+import org.core.characters.StateOfficial;
 
 public class CongressionalDistrict2 {
 

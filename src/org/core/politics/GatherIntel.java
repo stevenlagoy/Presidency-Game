@@ -1,8 +1,8 @@
-package politics;
+package org.core.politics;
 import java.util.ArrayList;
 import java.util.List;
 
-import characters.Character;
+import org.core.characters.Character;
 
 public class GatherIntel extends Operation
 {

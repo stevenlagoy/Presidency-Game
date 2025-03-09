@@ -1,4 +1,4 @@
-package src.org.core.graphics.entity;
+package org.core.graphics.entity;
 
 public class Texture {
     

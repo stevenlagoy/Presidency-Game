@@ -1,4 +1,4 @@
-package src.org.core.graphics;
+package org.core.graphics;
 
 import org.joml.Vector3f;
 

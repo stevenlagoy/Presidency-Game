@@ -1,4 +1,4 @@
-package src.org.core.graphics.lighting;
+package org.core.graphics.lighting;
 
 import org.joml.Vector3f;
 

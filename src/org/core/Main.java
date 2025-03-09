@@ -1,4 +1,4 @@
-package src.org.core;
+package org.core;
 
 public class Main
 {

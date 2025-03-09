@@ -1,14 +1,14 @@
-package src.org.core.graphics.entity;
+package org.core.graphics.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.joml.Vector3f;
 
-import src.org.core.graphics.entity.terrain.Terrain;
-import src.org.core.graphics.lighting.DirectionalLight;
-import src.org.core.graphics.lighting.PointLight;
-import src.org.core.graphics.lighting.SpotLight;
+import org.core.graphics.entity.terrain.Terrain;
+import org.core.graphics.lighting.DirectionalLight;
+import org.core.graphics.lighting.PointLight;
+import org.core.graphics.lighting.SpotLight;
 
 public class SceneManager {
     

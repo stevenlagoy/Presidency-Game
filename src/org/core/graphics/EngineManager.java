@@ -1,10 +1,10 @@
-package src.org.core.graphics;
+package org.core.graphics;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 
-import src.org.core.graphics.game.Launcher;
-import src.org.core.graphics.utils.Consts;
+import org.core.graphics.game.Launcher;
+import org.core.graphics.utils.Consts;
 
 public class EngineManager {
     

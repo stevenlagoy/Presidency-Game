@@ -1,4 +1,4 @@
-package politics;
+package org.core.politics;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package src.org.core.graphics.rendering;
+package org.core.graphics.rendering;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,16 +6,16 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import org.joml.Vector3f;
-import src.org.core.graphics.Camera;
-import src.org.core.graphics.ShaderManager;
-import src.org.core.graphics.WindowManager;
-import src.org.core.graphics.entity.Entity;
-import src.org.core.graphics.entity.SceneManager;
-import src.org.core.graphics.entity.terrain.Terrain;
-import src.org.core.graphics.game.Launcher;
-import src.org.core.graphics.lighting.DirectionalLight;
-import src.org.core.graphics.lighting.PointLight;
-import src.org.core.graphics.lighting.SpotLight;
+import org.core.graphics.Camera;
+import org.core.graphics.ShaderManager;
+import org.core.graphics.WindowManager;
+import org.core.graphics.entity.Entity;
+import org.core.graphics.entity.SceneManager;
+import org.core.graphics.entity.terrain.Terrain;
+import org.core.graphics.game.Launcher;
+import org.core.graphics.lighting.DirectionalLight;
+import org.core.graphics.lighting.PointLight;
+import org.core.graphics.lighting.SpotLight;
 
 public class RenderManager {
     

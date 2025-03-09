@@ -1,4 +1,4 @@
-package src.org.core.graphics.utils;
+package org.core.graphics.utils;
 
 import org.joml.Vector4f;
 

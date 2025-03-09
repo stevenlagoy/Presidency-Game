@@ -1,28 +1,28 @@
-package src.org.core.graphics.game;
+package org.core.graphics.game;
 
 import org.lwjgl.glfw.GLFW;
 
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
-import src.org.core.graphics.Camera;
-import src.org.core.graphics.ILogic;
-import src.org.core.graphics.MouseInput;
-import src.org.core.graphics.ObjectLoader;
-import src.org.core.graphics.WindowManager;
-import src.org.core.graphics.entity.Entity;
-import src.org.core.graphics.entity.Material;
-import src.org.core.graphics.entity.Model;
-import src.org.core.graphics.entity.ModelManager;
-import src.org.core.graphics.entity.SceneManager;
-import src.org.core.graphics.entity.Texture;
-import src.org.core.graphics.entity.TextureManager;
-import src.org.core.graphics.entity.terrain.BlendMapTerrain;
-import src.org.core.graphics.entity.terrain.Terrain;
-import src.org.core.graphics.entity.terrain.TerrainTexture;
-import src.org.core.graphics.lighting.DirectionalLight;
-import src.org.core.graphics.rendering.RenderManager;
-import src.org.core.graphics.utils.Consts;
+import org.core.graphics.Camera;
+import org.core.graphics.ILogic;
+import org.core.graphics.MouseInput;
+import org.core.graphics.ObjectLoader;
+import org.core.graphics.WindowManager;
+import org.core.graphics.entity.Entity;
+import org.core.graphics.entity.Material;
+import org.core.graphics.entity.Model;
+import org.core.graphics.entity.ModelManager;
+import org.core.graphics.entity.SceneManager;
+import org.core.graphics.entity.Texture;
+import org.core.graphics.entity.TextureManager;
+import org.core.graphics.entity.terrain.BlendMapTerrain;
+import org.core.graphics.entity.terrain.Terrain;
+import org.core.graphics.entity.terrain.TerrainTexture;
+import org.core.graphics.lighting.DirectionalLight;
+import org.core.graphics.rendering.RenderManager;
+import org.core.graphics.utils.Consts;
 
 public class TestGame implements ILogic {
 

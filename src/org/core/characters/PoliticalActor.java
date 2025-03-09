@@ -1,14 +1,14 @@
-package src.org.core.characters;
+package org.core.characters;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import src.org.core.Engine;
-import src.org.core.characters.Experience;
-import src.org.core.politics.Issue;
-import src.org.core.characters.Personality;
-import src.org.core.politics.Position;
-import src.org.core.Repr;
+import org.core.Engine;
+import org.core.characters.Experience;
+import org.core.politics.Issue;
+import org.core.characters.Personality;
+import org.core.politics.Position;
+import org.core.Repr;
 
 public class PoliticalActor extends Character implements Repr, HasPersonality
 {

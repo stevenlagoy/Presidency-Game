@@ -1,11 +1,11 @@
-package src.org.core.graphics.entity;
+package org.core.graphics.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.joml.Vector3f;
 
-import src.org.core.graphics.ObjectLoader;
+import org.core.graphics.ObjectLoader;
 
 public class ModelManager {
     

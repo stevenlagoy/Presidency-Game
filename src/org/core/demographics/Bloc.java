@@ -1,10 +1,10 @@
-package src.org.core.demographics;
+package org.core.demographics;
 
 import java.util.List;
 
-import src.org.core.Repr;
-import src.org.core.Engine;
-import src.org.core.characters.CharacterManager;
+import org.core.Repr;
+import org.core.Engine;
+import org.core.characters.CharacterManager;
 
 import java.util.ArrayList;
 import java.util.HashSet;

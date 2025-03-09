@@ -1,6 +1,6 @@
-package src.org.core.demographics;
+package org.core.demographics;
 
-import src.org.core.Repr;
+import org.core.Repr;
 
 public class Demographics implements Repr
 {

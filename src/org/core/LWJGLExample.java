@@ -1,4 +1,4 @@
-package src.org.core;
+package org.core;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL;

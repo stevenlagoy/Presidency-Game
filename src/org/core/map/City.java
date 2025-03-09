@@ -1,10 +1,10 @@
-package src.org.core.map;
+package org.core.map;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import src.org.core.DateManager;
-import src.org.core.characters.Character;
-import src.org.core.demographics.Demographics;
+import org.core.DateManager;
+import org.core.characters.Character;
+import org.core.demographics.Demographics;
 
 public class City {
 

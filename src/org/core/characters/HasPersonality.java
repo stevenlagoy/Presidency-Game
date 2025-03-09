@@ -1,4 +1,4 @@
-package src.org.core.characters;
+package org.core.characters;
 public interface HasPersonality {
     public void determinePersonality();
 }

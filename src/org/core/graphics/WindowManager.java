@@ -1,4 +1,4 @@
-package src.org.core.graphics;
+package org.core.graphics;
 
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryUtil;
 
-import src.org.core.graphics.utils.Consts;
+import org.core.graphics.utils.Consts;
 
 public class WindowManager {
     

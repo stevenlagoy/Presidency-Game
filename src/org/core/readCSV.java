@@ -1,4 +1,4 @@
-package src.org.core;
+package org.core;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import src.org.core.map.County;
+import org.core.map.County;
 
 public class readCSV {
     

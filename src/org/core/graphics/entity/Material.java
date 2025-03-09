@@ -1,8 +1,8 @@
-package src.org.core.graphics.entity;
+package org.core.graphics.entity;
 
 import org.joml.Vector4f;
 
-import src.org.core.graphics.utils.Consts;
+import org.core.graphics.utils.Consts;
 
 public class Material {
     

@@ -1,6 +1,6 @@
-package src.org.core.characters;
+package org.core.characters;
 
-import src.org.core.characters.GovernmentOfficial;
+import org.core.characters.GovernmentOfficial;
 
 public class LocalOfficial extends GovernmentOfficial {
     public LocalOfficial(){

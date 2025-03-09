@@ -1,4 +1,4 @@
-package src.org.core;
+package org.core;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,11 +25,11 @@ import java.io.OutputStreamWriter;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL;
 
-import src.org.core.politics.EventManager;
-import src.org.core.characters.Candidate;
-import src.org.core.characters.CharacterManager;
-import src.org.core.demographics.DemographicsManager;
-import src.org.core.map.MapManager;
+import org.core.politics.EventManager;
+import org.core.characters.Candidate;
+import org.core.characters.CharacterManager;
+import org.core.demographics.DemographicsManager;
+import org.core.map.MapManager;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -37,8 +37,8 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public class Engine {
-    final static String LOG_FILE_NAME = "log.txt";
-    final static String ERROR_FILE_NAME = "error.txt";
+    final static String LOG_FILE_NAME = "logs/log.txt";
+    final static String ERROR_FILE_NAME = "logs/error.txt";
 
     public enum Difficulty
     {
@@ -117,7 +117,7 @@ public class Engine {
                 return false;
             case "L CHARACTERS" :
                 System.out.print("Listing Characters:\n");
-                for (src.org.core.characters.Character character : CharacterManager.getAllCharacters()) {
+                for (org.core.characters.Character character : CharacterManager.getAllCharacters()) {
                     System.out.printf("\t%s\n", character.getName());
                 }
                 System.out.print("Done\n");
@@ -579,7 +579,7 @@ public class Engine {
         for(Language language : Language.values()){
             ArrayList<String> contents = new ArrayList<>();
             try {
-                File file = new File(String.format("localization/%s%s", language, systemText_loc));
+                File file = new File(String.format("src/org/resources/localization/%s%s", language, systemText_loc));
                 Scanner scanner = scannerUtil.createScanner(file);
                 while (scanner.hasNext()) contents.add(scanner.nextLine());
                 scanner.close();

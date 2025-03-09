@@ -1,9 +1,9 @@
-package politics;
+package org.core.politics;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import characters.Character;
+import org.core.characters.Character;
 
 import java.util.HashSet;
 
