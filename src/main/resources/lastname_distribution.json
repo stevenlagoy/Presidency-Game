@@ -1,0 +1,40 @@
+{
+    "White" : {
+        "Smith" : 1732071,
+        "Johnson" : 1139779,
+        "Miller" : 976885,
+        "Brown" : 832757,
+        "Jones" : 786717
+    },
+    "Black" : {
+        "Wiliams" : 774920,
+        "Johnson" : 669333,
+        "Smith" : 564572,
+        "Jones" : 548521,
+        "Brown" : 511581
+    },
+    "Native / Indian" : {
+
+    },
+    "Asian" : {
+        "Li" : 1,
+        "Wang" : 1,
+        "Zhang" : 1,
+        "Liu" : 1,
+        "Chen" : 1
+    },
+    "Hispanic / Latino" : {
+        "Garcia" : 1073180,
+        "Rodriguez" : 1026710,
+        "Hernandez" : 989969,
+        "Martinez" : 984994,
+        "Lopez" : 812607
+    },
+    "Middle Eastern / North African" : {
+        "Habib" : 1,
+        "Osman" : 1,
+        "Shariq" : 1,
+        "Rafiq" : 1,
+        "Hadid" : 1
+    }
+}

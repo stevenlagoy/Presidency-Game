@@ -1,0 +1,23 @@
+Arabic : اَلْعَرَبِيَّةُ : AR
+Bulgarian : Български : BG
+Czech : Čeština : CS
+Danish : Dansk : DA
+German : Deutsch : DE
+Greek : Νέα Ελληνικά : EL
+English : English : EN
+Spanish : Español : ES
+Finnish : Suomi : FI
+French : Français : FR
+Hungarian : Magyar nyelv : HU
+Indonesian : Bahasa Indonesia : ID
+Italian : Italiano : IT
+Japanese : 日本語 : JA
+Dutch : Nederlands : NL
+Norwegian : Norsk : NO
+Polish : Polski : PL
+Portuguese : Português : PT
+Russian : Русский язык : RU
+Swedish : Svenska : SV
+Thai : ภาษาไทย : TH
+Turkish : Türkçe : TR
+Vietnamese : Tiếng Việt : VI

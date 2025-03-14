@@ -1,0 +1,81 @@
+{
+    "Man" : {
+        "White" : {
+            "James" : 4586625,
+            "Michael" : 4350425,
+            "Robert" : 4305346,
+            "John" : 4304850,
+            "David" : 3563511
+        },
+        "Black" : {
+            "Reginald" : 111200,
+            "Kameron" : 37600,
+            "Terrell" : 36300,
+            "Kendrick" : 32300,
+            "Javon" : 17300
+        },
+        "Native / Indian" : {
+
+        },
+        "Asian" : {
+            "Wei" : 290607,
+            "Hao" : 281568,
+            "Jun" : 268268,
+            "Chen" : 246737,
+            "Yun" : 244223
+        },
+        "Hispanic / Latino" : {
+            "Santiago" : 1,
+            "Sebastián" : 1,
+            "Matías" : 1,
+            "Mateo" : 1,
+            "Nicolás" : 1
+        },
+        "Middle Eastern / North African" : {
+            "Ali" : 1,
+            "Amir" : 1,
+            "Hamza" : 1,
+            "Hassan" : 1,
+            "Idris" : 1
+        }
+    },
+    "Woman" : {
+        "White" : {
+            "Mary" : 2985148,
+            "Patricia" : 1546373,
+            "Jennifer" : 1470260,
+            "Linda" : 1448217,
+            "Elizabeth" : 1395049
+        },
+        "Black" : {
+            "Jada" : 67000,
+            "Latoya" : 45500,
+            "Jayla" : 45000,
+            "Tamika" : 22800,
+            "Latonya" : 21800
+        },
+        "Native / Indian" : {
+        },
+        "Asian" : {
+            "Mei" : 1,
+            "Meng" : 1,
+            "Yao" : 1,
+            "Xin" : 1,
+            "Xiu" : 1
+        },
+        "Hispanic / Latino" : {
+            "Sofia" : 1,
+            "Isabella" : 1,
+            "Camila" : 1,
+            "Valentina" : 1,
+            "Valeria" : 1
+        },
+        "Middle Eastern / North African" : {
+            "Layla" : 1,
+            "Aaliyah" : 1,
+            "Fatima" : 1,
+            "Imani" : 1,
+            "Aisha" : 1
+        }
+    }
+}

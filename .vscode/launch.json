@@ -8,6 +8,13 @@
                         "type": "java",
                         "name": "Main",
                         "request": "launch",
+                        "mainClass": "main.core.Main",
+                        "projectName": "presidency-game"
+                },
+                {
+                        "type": "java",
+                        "name": "Main",
+                        "request": "launch",
                         "mainClass": "org.core.Main",
                         "projectName": "presidency-game"
                 },
