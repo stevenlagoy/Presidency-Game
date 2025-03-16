@@ -49,13 +49,6 @@ public class Engine {
     private static MouseInput mouse;
     private static ILogic gameLogic;
 
-    /*
-     * File Locations
-     */
-    final static String LOG_FILE_NAME = "logs/log.txt";
-    final static String ERROR_FILE_NAME = "logs/error.txt";
-    public static final String systemText_loc = "_system_text.txt";
-    public static final String descriptions_loc = "_descriptions.txt";
 
     /*
      * Game Constants
@@ -291,9 +284,9 @@ public class Engine {
 
     public static void writeErrorToLog() {
         try {
-            File errorFile = new File(ERROR_FILE_NAME);
+            File errorFile = new File(FilePaths.ERROR);
             errorFile.createNewFile(); // does nothing if already exists
-            File logFile = new File(LOG_FILE_NAME);
+            File logFile = new File(FilePaths.LOG);
             logFile.createNewFile();
             Scanner scanner = scannerUtil.createScanner(errorFile);
             ArrayList<String> contents = new ArrayList<>();
@@ -304,13 +297,13 @@ public class Engine {
             writer.close();
         }
         catch (IOException e) {
-            log("ERROR/LOG FILE NOT FOUND", "Somehow, the error file or log file was unable to be found.", e);
+            log("ERROR/LOG FILE NOT FOUND", "The error file or log file was unable to be found.", e);
             return;
         }
     }
     public static void clearErrorFile() {
         try {
-            File errorFile = new File(ERROR_FILE_NAME);
+            File errorFile = new File(FilePaths.ERROR);
             errorFile.createNewFile();
             FileOutputStream errorStream = new FileOutputStream(errorFile, false);
             errorStream.close();
@@ -397,7 +390,16 @@ public class Engine {
             if (key.equals("")) key = "null";
             String value = "";
             try {
-                value = line.split(":")[1].trim().replace(",","");
+                value = line.split(":")[1].trim();
+                if (value.contains("[")) { // the value is a list
+                    List<String> list = new ArrayList<String>(); 
+                    for (String entry : value.replaceAll("\\[|\\]", "").split(",")) {
+                        list.add(entry.replace("\"","").trim());
+                    }
+                    value = list.toString();
+                }
+                else
+                    value = value.replace(",","");
             }
             catch (ArrayIndexOutOfBoundsException e) {
                 // do nothing - this is expected at the end of a JSON object
@@ -430,11 +432,12 @@ public class Engine {
     }
     public static void log(String logline) {
         try {
-            File errorFile = new File(ERROR_FILE_NAME);
+            File errorFile = new File(FilePaths.ERROR);
             errorFile.createNewFile(); // does nothing if already exists
             PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
 
             logWriter.printf("%s : %s%n", getDate(), logline);
+            System.out.printf("%s : %s%n", getDate(), logline);
             logWriter.close();
             return;
         }
@@ -445,11 +448,12 @@ public class Engine {
     }
     public static void log(String context, String logline) {
         try {
-            File errorFile = new File(ERROR_FILE_NAME);
+            File errorFile = new File(FilePaths.ERROR);
             errorFile.createNewFile(); // does nothing if already exists
             PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
 
             logWriter.printf("%s : %s: %s%n", getDate(), context.toUpperCase(), logline);
+            System.out.printf("%s : %s: %s%n", getDate(), context.toUpperCase(), logline);
             logWriter.close();
             return;
         }
@@ -460,7 +464,7 @@ public class Engine {
     }
     public static void log(String context, String logline, Exception logE) {
         try {
-            File errorFile = new File(ERROR_FILE_NAME);
+            File errorFile = new File(FilePaths.ERROR);
             errorFile.createNewFile(); // does nothing if already exists
             PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
 
@@ -468,6 +472,7 @@ public class Engine {
             logE.printStackTrace(new PrintWriter(sw));
             String stackTrace = sw.toString().replace("\t", " -> ").replace("\n", "").replace("\r", "");
             logWriter.printf("%s : %s: %s @ %s%n", getDate(), context.toUpperCase(), logline, stackTrace);
+            System.out.printf("%s : %s: %s @ %s%n", getDate(), context.toUpperCase(), logline, stackTrace);
             logWriter.close();
             return;
         }
@@ -478,7 +483,7 @@ public class Engine {
     }
     public static void log(Exception logE) {
         try {
-            File errorFile = new File(ERROR_FILE_NAME);
+            File errorFile = new File(FilePaths.ERROR);
             errorFile.createNewFile(); // does nothing if already exists
             PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
 
@@ -486,6 +491,7 @@ public class Engine {
             logE.printStackTrace(new PrintWriter(sw));
             String stackTrace = sw.toString().replace("\t", " -> ").replace("\n", "").replace("\r", ""); // Handle any carriage return characters
             logWriter.printf("%s : %s %n", getDate(), stackTrace);
+            System.out.printf("%s : %s %n", getDate(), stackTrace);
             logWriter.close();
             return;
         }
@@ -506,12 +512,12 @@ public class Engine {
     public static float randPercent(float min, float max) {
         // will perform the same if min and max are flipped
         Random rand = new Random();
-        return (min - max) * rand.nextFloat() + min; // return a float between min and max (exclusive), equally distributed
+        return (max - min) * rand.nextFloat() + min; // return a float between min and max (exclusive), equally distributed
     }
     public static double randDouble(double min, double max) {
         // will perform the same if min and max are flipped
         Random rand = new Random();
-        return (min - max) * rand.nextDouble() + min; // return a double between min and max (exclusive), equally distributed
+        return (max - min) * rand.nextDouble() + min; // return a double between min and max (exclusive), equally distributed
     }
 
     public static int randInt(int max) {
@@ -519,7 +525,7 @@ public class Engine {
     }
 
     public static int randInt(int min, int max) {
-        if (max > min) throw new IllegalArgumentException(String.format("The minimum is less than the maximum: %d < %d.%n", max, min));
+        if (max < min) throw new IllegalArgumentException(String.format("The minimum is less than the maximum: %d < %d.%n", max, min));
         Random rand = new Random();
         return rand.nextInt(max - min + 1) + min; // return an integer between min and max (inclusive), equally distributed
     }
@@ -695,7 +701,7 @@ public class Engine {
         for(Language language : Language.values()){
             ArrayList<String> contents = new ArrayList<>();
             try {
-                File file = new File(String.format("src/org/resources/localization/%s%s", language, systemText_loc));
+                File file = new File(String.format("%s/%s%s", FilePaths.localizationFolder_loc, language, FilePaths.systemText_loc));
                 Scanner scanner = scannerUtil.createScanner(file);
                 while (scanner.hasNext()) contents.add(scanner.nextLine());
                 scanner.close();

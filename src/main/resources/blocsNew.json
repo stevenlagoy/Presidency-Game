@@ -73,7 +73,7 @@
         "College Degree" : 0.340,
         "Higher Degree" : 0.144
     },
-    "Race & Ethnicity" : {
+    "Race / Ethnicity" : {
         "White" : {
             "English" : 0.141,
             "German" : 0.136,

@@ -7,6 +7,7 @@ import main.core.Repr;
 import main.core.characters.CharacterManager;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.HashMap;
 
@@ -70,6 +71,7 @@ public class Bloc implements Repr {
     private float percentageVoters;
     private String demographicGroup;
     private HashMap<Bloc, Double> overlaps = new HashMap<Bloc, Double>();
+    private List<Bloc> subBlocs = new ArrayList<>();
 
     public Bloc(String name, String demographicGroup){
         this.name = name;
@@ -97,6 +99,7 @@ public class Bloc implements Repr {
         this.name = name;
         this.numVoters = Math.round(percentageVoters * totalVoters);
         this.percentageVoters = percentageVoters;
+        this.demographicGroup = demographicGroup;
 
         Bloc.instances.add(this);
         if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
@@ -129,6 +132,31 @@ public class Bloc implements Repr {
     public void setName(String name){
         this.name = name;
     }
+    public String getDemographicGroup() {
+        return this.demographicGroup;
+    }
+    public void setDemographicGroup(String group) {
+        this.demographicGroup = group;
+    }
+    public void addSubBloc(Bloc bloc) {
+        this.subBlocs.add(bloc);
+    }
+    public void addSubBlocs(Bloc[] blocs) {
+        for (Bloc bloc : blocs) {
+            this.addSubBloc(bloc);
+        }
+    }
+    public <T extends Collection<Bloc>> void addSubBlocs(T blocs) {
+        for (Bloc bloc : blocs) {
+            this.addSubBloc(bloc);
+        }
+    }
+    public void removeSubBloc(Bloc bloc) {
+        this.subBlocs.remove(bloc);
+    }
+    public void clearSubBlocs() {
+        this.subBlocs.clear();
+    }
 
     /**
      * Calculates how over- or under-represented a bloc is among all Character instances. Ratio of actual membership to expected membership. O(1)
@@ -137,7 +165,7 @@ public class Bloc implements Repr {
      */
     private float determineRepresentationRatio(){
         // Returns ratio of actual character membership to expected membership
-        // <1 if underrepresented, >1 if overrepresented
+        // <1 if underrepresented, >1 if overrepresented, =1 if perfectly represented
         try
         {
             if(CharacterManager.numCharacters() == 0) return 1.0f;
