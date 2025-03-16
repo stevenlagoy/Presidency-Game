@@ -1,21 +1,18 @@
 package main.core.characters;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 import main.core.Engine;
+import main.core.FilePaths;
 import main.core.demographics.Bloc;
 import main.core.demographics.Demographics;
 import main.core.demographics.DemographicsManager;
 
 public class CharacterManager
 {
-    // required filenames
-    private static final String birthdate_popularity_filename = "birthdate_popularities.JSON";
-    private static final String birthyear_percentages_filename = "birthyear_percentages.JSON";
-    private static final String firstname_popularity_filename = "src/main/resources/firstname_distributions.json";
-    private static final String middlename_popularity_filename = "src/main/resources/middlename_distribution.json";
-    private static final String lastname_popularity_filename = "src/main/resources/lastname_distribution.json";
     
     private static List<Character> characters = new LinkedList<Character>();
     private static List<GovernmentOfficial> governmentOfficials = new LinkedList<GovernmentOfficial>();
@@ -29,6 +26,22 @@ public class CharacterManager
     private static VicePresident vicePresident;
     private static Character firstLady;
     private static Representative HouseSpeaker;
+
+    private static final float asianEasternNamePercent = 0.50f; // percentage of Asian people who should have an Eastern name
+    private static final float asianWesternNamePercent = 0.25f; // percentage of Asian people with an Eastern name who should also have a Western name
+    private static final float hispanicHispanicNamePercent = 0.80f; // percentage of Hispanic/Latino people who should have a Hispanic name
+    private static final float nativeNativeNamePercent = 0.25f; // percentage of Native American people who should have a Native American name
+    private static final float hasMiddleNamePercent = 0.80f; // percentage of people with a middle name
+    private static final float multipleMiddleNamesPercent = 0.11f; // percentage of people with more middle names. 11% of people have 2, 0.121% have 3 etc
+    private static final float abbreviateFirstNamesPercent = 0.04f;
+    private static final float abbreviateMiddleNamesPercent = 0.38f;
+    private static final float abbreviateBothNamesPercent = 0.08f;
+    private static final float useNicknamePercent = 0.23f; // Percentage of people who usually use a nickname. alternately could have each name in nicknames file have it's own percentage
+    private static final float useMiddleNicknamePercent = 0.04f;
+    private static final float srOrdinationPercent = 0.04f;
+    private static final float jrOrdinationPercent = 0.08f;
+    private static final float iiOrdinationPercent = 0.04f;
+
 
     public static boolean init(){
         boolean successFlag = true;
@@ -158,7 +171,7 @@ public class CharacterManager
             return ageDistribution.get(demographicGroup);
         }
 
-        HashMap<Object, Object> json = Engine.readJSONFile(birthyear_percentages_filename); // read the JSON file
+        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.birthyear_percentages); // read the JSON file
         CharacterManager.ageDistribution = new HashMap<String, HashMap<Integer, Double>>(); // initialize the map
 
         for(Object key : json.keySet()){
@@ -183,7 +196,7 @@ public class CharacterManager
     public static HashMap<String, Double> getBirthdateDistribution(){
         if(birthdateDistribution != null) return birthdateDistribution;
 
-        HashMap<Object, Object> json = Engine.readJSONFile(birthdate_popularity_filename); // read the JSON file
+        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.birthdate_popularity); // read the JSON file
         birthdateDistribution = new HashMap<String, Double>();
 
         for(Object key : json.keySet()){
@@ -207,13 +220,8 @@ public class CharacterManager
     private static HashMap<Bloc, HashMap<String, Double>> middleNamesManDistribution;
     private static HashMap<Bloc, HashMap<String, Double>> middleNamesWomanDistribution;
     private static HashMap<Bloc, HashMap<String, Double>> lastNamesDistribution;
-    private static final float asianEasternNamePercent = 0.50f; // percentage of Asian people who should have an Eastern name
-    private static final float asianWesternNamePercent = 0.25f; // percentage of Asian people with an Eastern name who should also have a Western name
-    private static final float hispanicHispanicNamePercent = 0.80f; // percentage of Hispanic/Latino people who should have a Hispanic name
-    private static final float nativeNativeNamePercent = 0.25f; // percentage of Native American people who should have a Native American name
-    private static final float hasMiddleNamePercent = 0.80f; // percentage of people with a middle name
-    private static final float multipleMiddleNamesPercent = 0.11f; // percentage of people with more middle names. 11% of people have 2, 0.121% have 3 etc
-    
+    private static HashMap<String, List<String>> nicknames;
+
     public static HashMap<Bloc, HashMap<String, Double>> getFirstNameManDistribution() {
         if (firstNamesManDistribution != null) return firstNamesManDistribution;
         readFirstNamesFile();
@@ -226,7 +234,7 @@ public class CharacterManager
     }
 
     private static void readFirstNamesFile() {
-        HashMap<Object, Object> json = Engine.readJSONFile(firstname_popularity_filename);
+        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.firstname_popularity);
         firstNamesManDistribution = new HashMap<Bloc, HashMap<String, Double>>();
         firstNamesWomanDistribution = new HashMap<Bloc, HashMap<String, Double>>();
 
@@ -264,7 +272,7 @@ public class CharacterManager
     }
     
     private static void readMiddleNamesFile() {
-        HashMap<Object, Object> json = Engine.readJSONFile(middlename_popularity_filename);
+        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.middlename_popularity);
         middleNamesManDistribution = new HashMap<Bloc, HashMap<String, Double>>();
         middleNamesWomanDistribution = new HashMap<Bloc, HashMap<String, Double>>();
 
@@ -297,7 +305,7 @@ public class CharacterManager
     }
 
     private static void readLastNamesFile() {
-        HashMap<Object, Object> json = Engine.readJSONFile(lastname_popularity_filename);
+        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.lastname_popularity);
         lastNamesDistribution = new HashMap<Bloc, HashMap<String, Double>>();
 
         for (Object blocName : json.keySet()) {
@@ -315,10 +323,25 @@ public class CharacterManager
         }
     }
 
+    public static void readNicknamesFile() {
+        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.nicknames);
+        nicknames = new HashMap<String, List<String>>();
+
+        for (Object key : json.keySet()) {
+            String name = key.toString();
+            List<String> nicks = new ArrayList<>();
+            for (String nickname : json.get(key).toString().replaceAll("\\[|\\]", "").split(",")) {
+                nicks.add(nickname.trim());
+            }
+            nicknames.put(name, nicks);
+        }
+    }
+
     public static void readAllNamesFiles() {
         readFirstNamesFile();
         readMiddleNamesFile();
         readLastNamesFile();
+        readNicknamesFile();
     }
 
     public static Name generateName(Demographics demographics){
@@ -334,7 +357,7 @@ public class CharacterManager
         // Determine Nameform and Number of names
         Name.NameForm nf;
         int numGiven = 0, numMiddle = 0, numFamily = 0;
-        if (demographics.getRaceEthnicity().getName().toLowerCase().equals("Asian")) {
+        if (demographics.getRaceEthnicity().getName().equals("Chinese")) {
             if (Engine.randPercent() <= asianEasternNamePercent) {
                 nf = Name.NameForm.EASTERN;
                 numGiven = 1; numMiddle = 1; numFamily = 1;
@@ -378,7 +401,7 @@ public class CharacterManager
             nf = Name.NameForm.WESTERN;
             numGiven = 1; numMiddle = 0; numFamily = 1;
             if (Engine.randPercent() <= hasMiddleNamePercent) numMiddle = 1;
-            while (Engine.randPercent() <= multipleMiddleNamesPercent) numMiddle++;
+            while (numMiddle > 0 && Engine.randPercent() <= multipleMiddleNamesPercent) numMiddle++;
         }
         
         HashMap<String, Double> aggrGivenNameMap = new HashMap<>();
@@ -391,6 +414,7 @@ public class CharacterManager
             case "Man" :
                 for (Bloc bloc : demographics.toBlocsArray()) {
                     blocNamesDistribution = firstNamesManDistribution.get(bloc);
+                    if (blocNamesDistribution == null) continue;
                     for (String name : blocNamesDistribution.keySet()) {
                         aggrGivenNameMap.put(name, aggrGivenNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
                     }
@@ -407,6 +431,7 @@ public class CharacterManager
             case "Woman" :
                 for (Bloc bloc : demographics.toBlocsArray()) {
                     blocNamesDistribution = firstNamesWomanDistribution.get(bloc);
+                    if (blocNamesDistribution == null) continue;
                     for (String name : blocNamesDistribution.keySet()) {
                         aggrGivenNameMap.put(name, aggrGivenNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
                     }
@@ -426,21 +451,104 @@ public class CharacterManager
         String givenNames[] = new String[numGiven > 0 ? numGiven : 1];
         String middleNames[] = new String[numMiddle > 0 ? numMiddle : 1];
         String familyNames[] = new String[numFamily > 0 ? numFamily : 1];
+        String nickname = null;
+        List<String> selectedNames = new ArrayList<>();
+        String name;
 
         for (int i = 0; i < numGiven; i++) {
-            givenNames[i] = Engine.weightedRandSelect(aggrGivenNameMap);
+            name = Engine.weightedRandSelect(aggrGivenNameMap);
+            if (!selectedNames.contains(name)) {
+                givenNames[i] = name;
+                selectedNames.add(name);
+            }
+            else i--;
         }
         if (givenNames[0] == null && givenNames.length == 1) givenNames[0] = "";
         for (int i = 0; i < numMiddle; i++) {
-            middleNames[i] = Engine.weightedRandSelect(aggrMiddleNameMap);
+            name = Engine.weightedRandSelect(aggrMiddleNameMap);
+            if (!selectedNames.contains(name)) {
+                middleNames[i] = name;
+                selectedNames.add(name);
+            }
+            else i--;
         }
         if (middleNames[0] == null && middleNames.length == 1) middleNames[0] = "";
         for (int i = 0; i < numFamily; i++) {
-            familyNames[i] = Engine.weightedRandSelect(aggrFamilyNameMap);
+            name = Engine.weightedRandSelect(aggrFamilyNameMap);
+            if (!selectedNames.contains(name)) {
+                familyNames[i] = name;
+                selectedNames.add(name);
+            }
+            else i--;
         }
         if (familyNames[0] == null && familyNames.length == 1) familyNames[0] = "";
 
-        return new Name(nf, String.join("", givenNames), String.join("", middleNames), String.join("", familyNames));
+        // Determine abbreviations
+        boolean abbreviateFirst = false, abbreviateMiddle = false;
+        if (Engine.randPercent() <= abbreviateBothNamesPercent) {
+            abbreviateFirst = true; abbreviateMiddle = true;
+        }
+        else if (Engine.randPercent() <= abbreviateMiddleNamesPercent) {
+            abbreviateMiddle = true;
+        }
+        else if (Engine.randPercent() <= abbreviateFirstNamesPercent) {
+            abbreviateFirst = true;
+        }
+
+        // Determine nickname(s)
+        if (!abbreviateFirst && Engine.randPercent() <= useNicknamePercent) {
+            for (String n : givenNames) {
+                if (nicknames.get(n) != null && !nicknames.get(n).isEmpty()) {
+                    nickname = nicknames.get(n).get(Engine.randInt(nicknames.get(n).size() - 1));
+                }
+            }
+        }
+        else if (!abbreviateMiddle && Engine.randPercent() <= useMiddleNicknamePercent) {
+            for (String n : middleNames) {
+                if (nicknames.get(n) != null && !nicknames.get(n).isEmpty()) {
+                    nickname = nicknames.get(n).get(Engine.randInt(nicknames.get(n).size() - 1));
+                }
+            }
+        }
+
+        // Determine ordination
+        String ordination = null;
+        if (presentation.equals("Woman")) {}
+        else if (Engine.randPercent() <= jrOrdinationPercent) {
+            ordination = "Jr.";
+        }
+        else if (Engine.randPercent() <= srOrdinationPercent) {
+            ordination = "Sr.";
+        }
+        else {
+            float iPct = iiOrdinationPercent;
+            while (Engine.randPercent() <= iPct) {
+                iPct = 2.0f * (float) Math.log(iPct+1);
+                if (ordination == null) ordination = "I";
+                ordination += "I";
+                if (ordination.equals("III"))
+                    continue;
+                if (ordination.equals("IIII"))
+                    ordination = "IV";
+                else if (ordination.equals("IVI"))
+                    ordination = "V";
+                else if (ordination.equals("VI"))
+                    break;
+            }
+        }
+
+
+        Name n = new Name(nf, String.join(" ", givenNames), String.join(" ", middleNames), String.join(" ", familyNames));
+        n.setAbbrFirst(abbreviateFirst);
+        n.setAbbrMiddle(abbreviateMiddle);
+        if (nickname != null && !nickname.equals("")) {
+            n.addNickname(nickname);
+            n.setIncludeNickname(true);
+        }
+        if (ordination != null && !ordination.equals("")) {
+            n.setOrdinal(ordination);
+        }
+        return n;
     }
 
     public static CharacterModel generateAppearance(Character character){

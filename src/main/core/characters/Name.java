@@ -1,5 +1,7 @@
 package main.core.characters;
 
+import static org.lwjgl.opengl.GL11.nglFogiv;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -121,6 +123,7 @@ public class Name implements Repr
                 this.familyName = familyName;
                 break;
         }
+        this.nicknames = new ArrayList<>();
     }
 
     public Name(String firstName, String middleName, String lastName){
@@ -164,7 +167,7 @@ public class Name implements Repr
     }
 
     private String formatProfessionalSuffixes() {
-        if (suffixes.isEmpty()) {
+        if (suffixes == null || suffixes.isEmpty()) {
             return "";
         }
         return ", " + String.join(", ", suffixes);
@@ -173,17 +176,20 @@ public class Name implements Repr
     @Override
     public String toString() {
         // Check if specific display options are set
-        boolean showHonorific = displayOptions.contains(DisplayOption.INCL_HONORIFICS);
-        boolean useInitials = displayOptions.contains(DisplayOption.USE_INITIALS);
-        boolean useNicknameAsGiven = displayOptions.contains(DisplayOption.NICKNAME_AS_GIVEN);
-        boolean useFormal = displayOptions.contains(DisplayOption.FORMAL);
-        boolean useInformal = displayOptions.contains(DisplayOption.INFORMAL);
+        boolean showHonorific = false, useInitials = false, nicknameAsGiven = false, useFormal = false, useInformal = false;
+        if (displayOptions != null) {
+            showHonorific = displayOptions.contains(DisplayOption.INCL_HONORIFICS);
+            useInitials = displayOptions.contains(DisplayOption.USE_INITIALS);
+            nicknameAsGiven = displayOptions.contains(DisplayOption.NICKNAME_AS_GIVEN);
+            useFormal = displayOptions.contains(DisplayOption.FORMAL);
+            useInformal = displayOptions.contains(DisplayOption.INFORMAL);
+        }
         
         // If no display options are set, use default behavior
-        if (displayOptions.isEmpty()) {
+        if (displayOptions != null && displayOptions.isEmpty()) {
             showHonorific = true;
             useInitials = abbrFirst || abbrMiddle;
-            useNicknameAsGiven = includeNickname;
+            nicknameAsGiven = includeNickname;
         }
         
         StringBuilder nameString = new StringBuilder();
@@ -221,27 +227,12 @@ public class Name implements Repr
             nameString.append(givenName);
         }
         else if (nameForm == NameForm.EASTERN) {
-            String fullChineseName = familyName + " " + (middleName != null ? middleName + " " : "") + givenName;
-            if (givenName != null) {
-                String first;
-                if (useNicknameAsGiven && !nicknames.isEmpty()) {
-                    first = nicknames.get(0);
-                } else {
-                    first = useInitials || abbrFirst ? abbreviate(givenName, atomicFirst) : givenName;
-                }
-                
-                String middle = (middleName != null && !middleName.isEmpty()) ? 
-                    (useInitials || abbrMiddle ? abbreviate(middleName, atomicMiddle) : middleName) : "";
-                
-                String westernName = first + (middle.isEmpty() ? "" : " " + middle) + " " + familyName;
-                nameString.append(westernName).append(" / ").append(fullChineseName);
-            } else {
-                nameString.append(fullChineseName);
-            }
+            String fullChineseName = familyName + " " + (middleName != null ? middleName + givenName.toLowerCase() : givenName);
+            nameString.append(fullChineseName);
         } else {
             // Western and other name forms
             String first;
-            if (useNicknameAsGiven && !nicknames.isEmpty()) {
+            if (nicknameAsGiven && !nicknames.isEmpty()) {
                 first = nicknames.get(0);
             } else {
                 first = useInitials || abbrFirst ? abbreviate(givenName, atomicFirst) : givenName;
@@ -254,17 +245,18 @@ public class Name implements Repr
             if (!middle.isEmpty()) {
                 nameString.append(" ").append(middle);
             }
+            
+            // Add nickname if not used as given name
+            if (includeNickname && !nicknames.isEmpty() && !nicknameAsGiven) {
+                nameString.append(" \"").append(nicknames.get(0)).append("\"");
+            }
+
             nameString.append(" ").append(familyName);
             
             // Add birth surname if applicable
             if (birthSurname != null && !birthSurname.isEmpty() && useFormal) {
                 nameString.append(" (née ").append(birthSurname).append(")");
             }
-        }
-        
-        // Add nickname if not used as given name
-        if (includeNickname && !nicknames.isEmpty() && !useNicknameAsGiven) {
-            nameString.append(" \"").append(nicknames.get(0)).append("\"");
         }
         
         // Add ordinal if present
@@ -288,4 +280,88 @@ public class Name implements Repr
     public void fromRepr(String repr){
         
     }
+
+    public String getGivenName() {
+        return givenName;
+    }
+    public void setGivenName(String name) {
+        this.givenName = name;
+    }
+    public boolean isAbbrFirst() {
+        return abbrFirst;
+    }
+    public void setAbbrFirst(boolean abbr) {
+        this.abbrFirst = abbr;
+    }
+    public boolean isAtomicFirst() {
+        return atomicFirst;
+    }
+    public void setAtomicFirst(boolean atomic) {
+        this.atomicFirst = atomic;
+    }
+    public String getMiddleName() {
+        return middleName;
+    }
+    public void setMiddleName(String name) {
+        this.middleName = name;
+    }
+    public boolean isAbbrMiddle() {
+        return abbrMiddle;
+    }
+    public void setAbbrMiddle(boolean abbr) {
+        this.abbrMiddle = abbr;
+    }
+    public boolean isAtomicMiddle() {
+        return atomicMiddle;
+    }
+    public void setAtomicMiddle(boolean atomic) {
+        this.atomicMiddle = atomic;
+    }
+    public String getFamilyName() {
+        return familyName;
+    }
+    public void setFamilyName(String name) {
+        this.familyName = name;
+    }
+    public String getBirthSurname() {
+        return this.birthSurname;
+    }
+    @SuppressWarnings("unused")
+    private void setBirthSurname(String name) {
+        this.birthSurname = name;
+    }
+    public String getPaternalName() {
+        return this.paternalName;
+    }
+    public void setPaternalName(String name) {
+        this.paternalName = name;
+    }
+    public String getMaternalName() {
+        return this.maternalName;
+    }
+    public void setMaternalName(String name) {
+        this.maternalName = name;
+    }
+    public String[] getNicknames() {
+        return (String[]) this.nicknames.toArray();
+    }
+    public void addNickname(String name) {
+        this.nicknames.add(name);
+    }
+    public void removeNickname(String name) {
+        this.nicknames.remove(name);
+    }
+    public boolean isIncludeNickname() {
+        return includeNickname;
+    }
+    public void setIncludeNickname(boolean include) {
+        this.includeNickname = include;
+    }
+    public String getOrdinal() {
+        return this.ordinal;
+    }
+    public void setOrdinal(String ordinal) {
+        this.ordinal = ordinal;
+    }
+
 }

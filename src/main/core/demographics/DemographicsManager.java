@@ -3,15 +3,15 @@ package main.core.demographics;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import main.core.Engine;
+import main.core.FilePaths;
 
 public class DemographicsManager
 {
-    // required filenames
-    private static final String blocs_filename = "src/main/resources/blocs.json";
 
-    public static final List<Bloc> blocs = new ArrayList<Bloc>();
+    private static Map<String, List<Bloc>> demographicBlocs = new HashMap<>();
 
     //final static Bloc EVERYONE = Bloc.matchBlocName("everyone");
     //final static Bloc VOTERS = Bloc.matchBlocName("voters");
@@ -39,15 +39,44 @@ public class DemographicsManager
         return new Demographics("Millennial", "Evangelical", "White", "Woman");
     }
     public static void createDemographicBlocs() {
-        // read the JSON file and create blocs
-        HashMap<Object, Object> json = Engine.readJSONFile(blocs_filename);
-        // json will be a map Strings to maps of strings to floats
-        for(Object key : json.keySet()){
-            @SuppressWarnings("unchecked")
-            HashMap<Object, Object> group = (HashMap<Object, Object>) json.get(key); // known structure of the JSON file
-            for(Object bloc : group.keySet()){
-                new Bloc(bloc.toString(), key.toString(), Float.parseFloat((String) group.get(bloc)));
-            }
+        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.blocs);
+
+        // Loop over Demographic categories
+        for (Object categoryKey : json.keySet()) {
+            String categoryName = categoryKey.toString();
+            HashMap<Object, Object> structure = (HashMap<Object, Object>) json.get(categoryKey);
+            DemographicsManager.demographicBlocs.put(categoryName, createBlocs(categoryName, structure));
         }
     }
+
+    private static List<Bloc> createBlocs(String category, HashMap<Object, Object> structure){
+        /*
+         * Structure is a JSON object:object map.
+         * We assume structure has only one key entry
+         * The top-level key object is the parent bloc
+         * If the value is numerical, then the bloc has no children
+         * If the value is another structure, recursively call 
+         */
+        List<Bloc> blocs = new ArrayList<>();
+        Bloc parent;
+        for (Object key : structure.keySet()) {
+            try {
+                // assume base case: no nested blocs
+                parent = new Bloc(key.toString(), category, Float.parseFloat(structure.get(key).toString()));
+                blocs.add(parent);
+            }
+            catch (Exception e) {
+                // recursive case: has nested blocs
+                parent = new Bloc(key.toString(), category);
+                parent.addSubBlocs(createBlocs(category, (HashMap<Object, Object>) structure.get(key)));
+                blocs.add(parent);                
+            }
+        }
+        return blocs;
+    }
+
+    public static Map<String, List<Bloc>> getDemographicBlocs() {
+        return demographicBlocs;
+    }
+
 }
