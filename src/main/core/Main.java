@@ -4,6 +4,7 @@ import main.core.characters.CharacterManager;
 import main.core.characters.Name;
 import main.core.demographics.Bloc;
 import main.core.demographics.Demographics;
+import main.core.demographics.DemographicsManager;
 import main.core.graphics.WindowManager;
 import main.core.graphics.game.TestGame;
 
@@ -33,10 +34,11 @@ public class Main
         Demographics d2 = new Demographics(Bloc.matchBlocName("Generation X"), Bloc.matchBlocName("Evangelical"), Bloc.matchBlocName("White"), Bloc.matchBlocName("Woman"));
         Name name;
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
-            name = CharacterManager.generateName(d1);
+            name = CharacterManager.generateName(DemographicsManager.randomDemographics());
+            //name = CharacterManager.generateName(d1);
             System.out.println(name.toString());
-            name = CharacterManager.generateName(d1);
-            System.out.println(name.toString());
+            //name = CharacterManager.generateName(d2);
+            //System.out.println(name.toString());
         }
 
         while (active) {

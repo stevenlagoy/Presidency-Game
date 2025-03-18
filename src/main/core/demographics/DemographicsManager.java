@@ -44,6 +44,7 @@ public class DemographicsManager
         // Loop over Demographic categories
         for (Object categoryKey : json.keySet()) {
             String categoryName = categoryKey.toString();
+            @SuppressWarnings("unchecked")
             HashMap<Object, Object> structure = (HashMap<Object, Object>) json.get(categoryKey);
             DemographicsManager.demographicBlocs.put(categoryName, createBlocs(categoryName, structure));
         }
@@ -69,7 +70,7 @@ public class DemographicsManager
                 // recursive case: has nested blocs
                 parent = new Bloc(key.toString(), category);
                 parent.addSubBlocs(createBlocs(category, (HashMap<Object, Object>) structure.get(key)));
-                blocs.add(parent);                
+                blocs.add(parent);
             }
         }
         return blocs;
@@ -77,6 +78,40 @@ public class DemographicsManager
 
     public static Map<String, List<Bloc>> getDemographicBlocs() {
         return demographicBlocs;
+    }
+
+    public static Demographics generateDemographics(){
+        // select the currently most underrepresented demographic bloc
+        // given that bloc's overlap, select the most underrepresented of the rest of the blocs
+        // return those together
+        return null;
+    }
+
+    public static Demographics randomDemographics() {
+        Bloc generation, religion, raceEthnicity, presentation;
+        try {
+            generation = demographicBlocs.get("Generation").get(Engine.randInt(demographicBlocs.get("Generation").size() - 1));
+            while (generation.getSubBlocs().size() != 0) {
+                generation = generation.getSubBlocs().get(Engine.randInt(generation.getSubBlocs().size() - 1));
+            }
+            religion = demographicBlocs.get("Religion").get(Engine.randInt(demographicBlocs.get("Religion").size() - 1));
+            while (religion.getSubBlocs().size() != 0) {
+                religion = religion.getSubBlocs().get(Engine.randInt(religion.getSubBlocs().size() - 1));
+            }
+            raceEthnicity = demographicBlocs.get("Race / Ethnicity").get(Engine.randInt(demographicBlocs.get("Race / Ethnicity").size() - 1));
+            while (raceEthnicity.getSubBlocs().size() != 0) {
+                raceEthnicity = raceEthnicity.getSubBlocs().get(Engine.randInt(raceEthnicity.getSubBlocs().size() - 1));
+            }
+            presentation = demographicBlocs.get("Presentation").get(Engine.randInt(demographicBlocs.get("Presentation").size() - 1));
+            while (presentation.getSubBlocs().size() != 0) {
+                presentation = presentation.getSubBlocs().get(Engine.randInt(presentation.getSubBlocs().size() - 1));
+            }
+            return new Demographics(generation, religion, raceEthnicity, presentation);
+        }
+        catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

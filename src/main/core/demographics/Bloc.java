@@ -71,6 +71,7 @@ public class Bloc implements Repr {
     private float percentageVoters;
     private String demographicGroup;
     private HashMap<Bloc, Double> overlaps = new HashMap<Bloc, Double>();
+    private Bloc superBloc;
     private List<Bloc> subBlocs = new ArrayList<>();
 
     public Bloc(String name, String demographicGroup){
@@ -78,6 +79,7 @@ public class Bloc implements Repr {
         this.numVoters = 0;
         this.percentageVoters = 0.0f;
         this.demographicGroup = demographicGroup;
+        this.superBloc = null;
 
         Bloc.instances.add(this);
         if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
@@ -89,6 +91,7 @@ public class Bloc implements Repr {
         this.numVoters = numVoters;
         this.percentageVoters = numVoters * 1.0f / totalVoters;
         this.demographicGroup = demographicGroup;
+        this.superBloc = null;
 
         Bloc.instances.add(this);
         if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
@@ -100,6 +103,7 @@ public class Bloc implements Repr {
         this.numVoters = Math.round(percentageVoters * totalVoters);
         this.percentageVoters = percentageVoters;
         this.demographicGroup = demographicGroup;
+        this.superBloc = null;
 
         Bloc.instances.add(this);
         if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
@@ -132,13 +136,42 @@ public class Bloc implements Repr {
     public void setName(String name){
         this.name = name;
     }
+    public List<String> getNestedNames() {
+        // return a list of the names of this bloc and all superblocs
+        List<String> names = new ArrayList<>();
+        Bloc bloc = this;
+        do {
+            names.add(bloc.getName());
+            bloc = bloc.getSuperBloc();
+        } while (bloc != null);
+        return names;
+    }
+    public List<Bloc> getNestedSuperBlocs() {
+        List<Bloc> blocs = new ArrayList<>();
+        Bloc bloc = this;
+        do {
+            blocs.add(bloc);
+            bloc = bloc.getSuperBloc();
+        } while (bloc != null);
+        return blocs;
+    }
     public String getDemographicGroup() {
         return this.demographicGroup;
     }
     public void setDemographicGroup(String group) {
         this.demographicGroup = group;
     }
+    public Bloc getSuperBloc() {
+        return superBloc;
+    }
+    public void setSuperBloc(Bloc superBloc) {
+        this.superBloc = superBloc;
+    }
+    public List<Bloc> getSubBlocs() {
+        return this.subBlocs;
+    }
     public void addSubBloc(Bloc bloc) {
+        bloc.setSuperBloc(this);
         this.subBlocs.add(bloc);
     }
     public void addSubBlocs(Bloc[] blocs) {
@@ -152,6 +185,7 @@ public class Bloc implements Repr {
         }
     }
     public void removeSubBloc(Bloc bloc) {
+        bloc.setSuperBloc(null);
         this.subBlocs.remove(bloc);
     }
     public void clearSubBlocs() {

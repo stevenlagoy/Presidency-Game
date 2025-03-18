@@ -1,6 +1,6 @@
 package main.core;
 
-public class FilePaths {
+public abstract class FilePaths {
     
     public static final String ROOT = "src/main";
     public static final String RESOURCES = ROOT + "/resources";
@@ -15,9 +15,9 @@ public class FilePaths {
     // CHARACTER MANAGER FILES
     public static final String birthdate_popularity = "birthdate_popularities.JSON";
     public static final String birthyear_percentages = "birthyear_percentages.JSON";
-    public static final String firstname_popularity = RESOURCES + "/firstname_distributions.json";
-    public static final String middlename_popularity = RESOURCES + "/middlename_distribution.json";
-    public static final String lastname_popularity = RESOURCES + "/lastname_distribution.json";
+    public static final String firstname_popularity = RESOURCES + "/names/firstname_distributions.json";
+    public static final String middlename_popularity = RESOURCES + "/names/middlename_distribution.json";
+    public static final String lastname_popularity = RESOURCES + "/names/lastname_distribution.json";
     public static final String nicknames = RESOURCES + "/nicknames.json";
 
     // DEMOGRAPHICS MANAGER FILES

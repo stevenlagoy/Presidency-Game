@@ -121,7 +121,14 @@
             "Unspecified African" : 0.005
         },
         "Native / Indian" : {
-            "Indigenous American" : 0.029,
+            "Indigenous American" : {
+                "Cherokee" : 0.0145,
+                "Navajo" : 0.00436,
+                "Choctaw" : 0.00296,
+                "Blackfeet" : 0.00289,
+                "Sioux" : 0.00221,
+                "Apache" : 0.00192
+            },
             "Indigenous Mexican" : 0.003,
             "Indigenous Central American" : 0.002,
             "Native Hawaiian" : 0.002,
@@ -161,8 +168,7 @@
             "Moroccan" : 140196,
             "Unpecified Arab" : 0.000,
             "Iranian" : 0.002
-        },
-        "Two Or More Races" : 0.000
+        }
     },
     "Employment" : {
         "Mining" : 0.000,

@@ -208,13 +208,6 @@ public class CharacterManager
         return birthdateDistribution;
     }
 
-    public static Demographics generateDemographics(){
-        // select the currently most underrepresented demographic bloc
-        // given that bloc's overlap, select the most underrepresented of the rest of the blocs
-        // return those together
-        return null;
-    }
-
     private static HashMap<Bloc, HashMap<String, Double>> firstNamesManDistribution;
     private static HashMap<Bloc, HashMap<String, Double>> firstNamesWomanDistribution;
     private static HashMap<Bloc, HashMap<String, Double>> middleNamesManDistribution;
@@ -357,7 +350,7 @@ public class CharacterManager
         // Determine Nameform and Number of names
         Name.NameForm nf;
         int numGiven = 0, numMiddle = 0, numFamily = 0;
-        if (demographics.getRaceEthnicity().getName().equals("Chinese")) {
+        if (demographics.getRaceEthnicity().getNestedNames().contains("Chinese")) {
             if (Engine.randPercent() <= asianEasternNamePercent) {
                 nf = Name.NameForm.EASTERN;
                 numGiven = 1; numMiddle = 1; numFamily = 1;
@@ -371,7 +364,7 @@ public class CharacterManager
                 while (Engine.randPercent() <= multipleMiddleNamesPercent) numMiddle++;
             }
         }
-        else if (demographics.getRaceEthnicity().getName().equals("Hispanic / Latino")) {
+        else if (demographics.getRaceEthnicity().getNestedNames().contains("Hispanic / Latino")) {
             if (Engine.randPercent() <= hispanicHispanicNamePercent) {
                 nf = Name.NameForm.HISPANIC;
                 numGiven = 1; numMiddle = 0; numFamily = 2;
@@ -385,7 +378,7 @@ public class CharacterManager
                 while (Engine.randPercent() <= multipleMiddleNamesPercent) numMiddle++;
             }
         }
-        else if (demographics.getRaceEthnicity().getName().equals("Indigenous American")) {
+        else if (demographics.getRaceEthnicity().getNestedNames().contains("Indigenous American")) {
             if (Engine.randPercent() <= nativeNativeNamePercent) {
                 nf = Name.NameForm.NATIVE_AMERICAN;
                 numGiven = 1; numMiddle = 0; numFamily = 1;
@@ -413,35 +406,67 @@ public class CharacterManager
         switch (presentation) {
             case "Man" :
                 for (Bloc bloc : demographics.toBlocsArray()) {
-                    blocNamesDistribution = firstNamesManDistribution.get(bloc);
-                    if (blocNamesDistribution == null) continue;
-                    for (String name : blocNamesDistribution.keySet()) {
-                        aggrGivenNameMap.put(name, aggrGivenNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
-                    }
-                    blocNamesDistribution = middleNamesManDistribution.get(bloc);
-                    for (String name : blocNamesDistribution.keySet()) {
-                        aggrMiddleNameMap.put(name, aggrMiddleNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
-                    }
-                    blocNamesDistribution = lastNamesDistribution.get(bloc);
-                    for (String name : blocNamesDistribution.keySet()) {
-                        aggrFamilyNameMap.put(name, aggrFamilyNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
+                    for (Bloc supers : bloc.getNestedSuperBlocs()) {
+                            blocNamesDistribution = firstNamesManDistribution.get(supers);
+                        if (blocNamesDistribution == null) continue;
+                        for (String name : blocNamesDistribution.keySet()) {
+                            aggrGivenNameMap.put(name, aggrGivenNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
+                        }
+                        blocNamesDistribution = middleNamesManDistribution.get(supers);
+                        if (blocNamesDistribution == null) continue;
+                        for (String name : blocNamesDistribution.keySet()) {
+                            aggrMiddleNameMap.put(name, aggrMiddleNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
+                        }
+                        blocNamesDistribution = lastNamesDistribution.get(supers);
+                        if (blocNamesDistribution == null) continue;
+                        for (String name : blocNamesDistribution.keySet()) {
+                            aggrFamilyNameMap.put(name, aggrFamilyNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
+                        }
                     }
                 }
                 break;
             case "Woman" :
                 for (Bloc bloc : demographics.toBlocsArray()) {
-                    blocNamesDistribution = firstNamesWomanDistribution.get(bloc);
-                    if (blocNamesDistribution == null) continue;
-                    for (String name : blocNamesDistribution.keySet()) {
-                        aggrGivenNameMap.put(name, aggrGivenNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
+                    for (Bloc supers : bloc.getNestedSuperBlocs()) {
+                        blocNamesDistribution = firstNamesWomanDistribution.get(supers);
+                        if (blocNamesDistribution == null) continue;
+                        for (String name : blocNamesDistribution.keySet()) {
+                            aggrGivenNameMap.put(name, aggrGivenNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
+                        }
+                        blocNamesDistribution = middleNamesWomanDistribution.get(supers);
+                        if (blocNamesDistribution == null) continue;
+                        for (String name : blocNamesDistribution.keySet()) {
+                            aggrMiddleNameMap.put(name, aggrMiddleNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
+                        }
+                        blocNamesDistribution = lastNamesDistribution.get(supers);
+                        if (blocNamesDistribution == null) continue;
+                        for (String name : blocNamesDistribution.keySet()) {
+                            aggrFamilyNameMap.put(name, aggrFamilyNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
+                        }
                     }
-                    blocNamesDistribution = middleNamesWomanDistribution.get(bloc);
-                    for (String name : blocNamesDistribution.keySet()) {
-                        aggrMiddleNameMap.put(name, aggrMiddleNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
-                    }
-                    blocNamesDistribution = lastNamesDistribution.get(bloc);
-                    for (String name : blocNamesDistribution.keySet()) {
-                        aggrFamilyNameMap.put(name, aggrFamilyNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
+                }
+                break;
+            case "Other / Non-Binary" :
+            default :
+                for (Bloc bloc : demographics.toBlocsArray()) {
+                    for (Bloc supers : bloc.getNestedSuperBlocs()) {
+                        blocNamesDistribution = firstNamesWomanDistribution.get(supers);
+                        if (blocNamesDistribution == null) continue;
+                        blocNamesDistribution.putAll(firstNamesManDistribution.get(supers));
+                        for (String name : blocNamesDistribution.keySet()) {
+                            aggrGivenNameMap.put(name, aggrGivenNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
+                        }
+                        blocNamesDistribution = middleNamesWomanDistribution.get(supers);
+                        if (blocNamesDistribution == null) continue;
+                        blocNamesDistribution.putAll(middleNamesManDistribution.get(supers));
+                        for (String name : blocNamesDistribution.keySet()) {
+                            aggrMiddleNameMap.put(name, aggrMiddleNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
+                        }
+                        blocNamesDistribution = lastNamesDistribution.get(supers);
+                        if (blocNamesDistribution == null) continue;
+                        for (String name : blocNamesDistribution.keySet()) {
+                            aggrFamilyNameMap.put(name, aggrFamilyNameMap.getOrDefault(name, 0.0) + blocNamesDistribution.get(name));
+                        }
                     }
                 }
                 break;
@@ -454,32 +479,54 @@ public class CharacterManager
         String nickname = null;
         List<String> selectedNames = new ArrayList<>();
         String name;
+        int MAX_TRIES = 5, tries = 0;
 
-        for (int i = 0; i < numGiven; i++) {
+        for (int i = 0; i < numGiven && tries < MAX_TRIES; i++) {
             name = Engine.weightedRandSelect(aggrGivenNameMap);
+            if (name == null) {
+                Engine.log(String.format("Failed to select with demographic: %s", demographics.toRepr()));
+                continue;
+            }
             if (!selectedNames.contains(name)) {
                 givenNames[i] = name;
                 selectedNames.add(name);
             }
-            else i--;
+            else {
+                i--;
+                tries++;
+            }
         }
         if (givenNames[0] == null && givenNames.length == 1) givenNames[0] = "";
-        for (int i = 0; i < numMiddle; i++) {
+        for (int i = 0; i < numMiddle && tries < MAX_TRIES; i++) {
             name = Engine.weightedRandSelect(aggrMiddleNameMap);
+            if (name == null) {
+                Engine.log(String.format("Failed to select with demographic: %s.", demographics.toRepr()));
+                continue;
+            }
             if (!selectedNames.contains(name)) {
                 middleNames[i] = name;
                 selectedNames.add(name);
             }
-            else i--;
+            else {
+                i--;
+                tries++;
+            }
         }
         if (middleNames[0] == null && middleNames.length == 1) middleNames[0] = "";
-        for (int i = 0; i < numFamily; i++) {
+        for (int i = 0; i < numFamily && tries < MAX_TRIES; i++) {
             name = Engine.weightedRandSelect(aggrFamilyNameMap);
+            if (name == null) {
+                Engine.log(String.format("Failed to select with demographic: %s.", demographics.toRepr()));
+                continue;
+            }
             if (!selectedNames.contains(name)) {
                 familyNames[i] = name;
                 selectedNames.add(name);
             }
-            else i--;
+            else {
+                i--;
+                tries++;
+            }
         }
         if (familyNames[0] == null && familyNames.length == 1) familyNames[0] = "";
 
@@ -523,17 +570,26 @@ public class CharacterManager
         else {
             float iPct = iiOrdinationPercent;
             while (Engine.randPercent() <= iPct) {
-                iPct = 2.0f * (float) Math.log(iPct+1);
-                if (ordination == null) ordination = "I";
-                ordination += "I";
-                if (ordination.equals("III"))
-                    continue;
-                if (ordination.equals("IIII"))
-                    ordination = "IV";
-                else if (ordination.equals("IVI"))
-                    ordination = "V";
-                else if (ordination.equals("VI"))
-                    break;
+                switch (ordination) {
+                    case null :
+                        ordination = "II";
+                        iPct = 0.80f;
+                        break;
+                    case "II" :
+                        ordination = "III";
+                        iPct = 0.50f;
+                        break;
+                    case "III" :
+                        ordination = "IV";
+                        iPct = 0.50f;
+                        break;
+                    case "IV" :
+                        ordination = "V";
+                        iPct = 0.50f;
+                        break;
+                    default:
+                        iPct = 0.0f;
+                }
             }
         }
 

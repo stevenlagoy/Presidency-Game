@@ -42,7 +42,7 @@ public class Character implements Repr {
 
     public Character(){
         // Get demographics
-        this.demographics = CharacterManager.generateDemographics();
+        this.demographics = DemographicsManager.generateDemographics();
 
         // Get origin
         generateOrigin();
@@ -118,7 +118,7 @@ public class Character implements Repr {
         return this.name;
     }
     protected void genDemographics(){
-        CharacterManager.generateDemographics();
+        this.demographics = DemographicsManager.generateDemographics();
     }
     public Demographics getDemographics(){
         return this.demographics;
