@@ -7,11 +7,14 @@ import java.util.Map;
 
 import main.core.Engine;
 import main.core.FilePaths;
+import main.core.characters.Character;
+import main.core.characters.CharacterManager;
 
 public class DemographicsManager
 {
 
     private static Map<String, List<Bloc>> demographicBlocs = new HashMap<>();
+    private static final String[] characterBlocCategories = { "Generation", "Religion", "Race / Ethnicity", "Presentation" };
 
     //final static Bloc EVERYONE = Bloc.matchBlocName("everyone");
     //final static Bloc VOTERS = Bloc.matchBlocName("voters");
@@ -24,7 +27,7 @@ public class DemographicsManager
     }
     public static double[] getPopulationPyramidPercent(Bloc applicableBloc){
         int[] pyramid = getPopulationPyramid(applicableBloc);
-        int totalMembers = applicableBloc.getMembership();
+        int totalMembers = applicableBloc.getMembers().size();
         double[] percentagesPyramid = new double[pyramid.length];
 
         for(int i = 0; i < pyramid.length; i++){
@@ -84,7 +87,88 @@ public class DemographicsManager
         // select the currently most underrepresented demographic bloc
         // given that bloc's overlap, select the most underrepresented of the rest of the blocs
         // return those together
-        return null;
+
+        if (CharacterManager.getAllCharacters().length == 0) {
+            return getMostCommonDemographics();
+        }
+
+        Demographics underrepresentedDemographics = new Demographics();
+
+        for (String category : characterBlocCategories){
+            Bloc underrepresentedBloc = null;
+            float underrepresentedValue = Float.MAX_VALUE;
+            Bloc candidate = findMostUnderrepresentedBloc(demographicBlocs.get(category));
+            float ratio = determineRepresentationRatio(candidate);
+
+            if (ratio < underrepresentedValue) {
+                underrepresentedValue = ratio;
+                underrepresentedBloc = candidate;
+            }
+            else if (ratio == underrepresentedValue && candidate.getPercentageVoters() > underrepresentedBloc.getPercentageVoters()) {
+                underrepresentedValue = ratio;
+                underrepresentedBloc = candidate;
+            }
+            switch (category) {
+                case "Generation" :
+                    underrepresentedDemographics.setGeneration(underrepresentedBloc);
+                    break;
+                case "Religion" :
+                    underrepresentedDemographics.setReligion(underrepresentedBloc);
+                    break;
+                case "Race / Ethnicity" :
+                    underrepresentedDemographics.setRaceEthnicity(underrepresentedBloc);
+                    break;
+                case "Presentation" :
+                    underrepresentedDemographics.setPresentation(underrepresentedBloc);
+                    break;
+            }
+        }
+
+        return underrepresentedDemographics;
+    }
+    private static Bloc findMostUnderrepresentedBloc(List<Bloc> blocs){
+        if (blocs == null || blocs.isEmpty()) return null;
+        
+        Bloc underrepresentedBloc = blocs.get(0);
+        float underrepresentedValue = determineRepresentationRatio(underrepresentedBloc);
+
+        for (Bloc bloc : blocs) {
+            if (bloc.getSubBlocs().isEmpty()) {
+                float representationRatio = determineRepresentationRatio(bloc);
+                if (representationRatio < underrepresentedValue) {
+                    underrepresentedBloc = bloc;
+                    underrepresentedValue = representationRatio;
+                }
+                else if (representationRatio == underrepresentedValue && bloc.getPercentageVoters() > underrepresentedBloc.getPercentageVoters()) {
+                    underrepresentedBloc = bloc;
+                    underrepresentedValue = representationRatio;
+                }
+            }
+            else {
+                underrepresentedBloc = findMostUnderrepresentedBloc(bloc.getSubBlocs());
+                underrepresentedValue = determineRepresentationRatio(underrepresentedBloc);
+            }
+        }
+
+        return underrepresentedBloc;
+    }
+
+    private static float determineRepresentationRatio(Bloc bloc) {
+        // Returns ratio of actual character membership to expected membership
+        // <1 if underrepresented, >1 if overrepresented, =1 if perfectly represented
+        try {
+            if(CharacterManager.numCharacters() == 0) return 1.0f; // if there are no characters, every bloc is perfectly represented
+            float expectedRepresentation = bloc.getPercentageVoters();
+            float actualRepresentation = bloc.getMembers().size() * 1.0f / CharacterManager.numCharacters();
+            float representationRatio = actualRepresentation / expectedRepresentation;
+
+            System.out.printf("Bloc Name : %60s, \tCount : %5d, \tExpected : %1.5f, \tActual : %1.5f, \tRatio : %1.5f.%n", bloc.getName(), bloc.getMembers().size(), expectedRepresentation, actualRepresentation, representationRatio);
+
+            return (representationRatio);
+        }
+        catch (ArithmeticException e) {
+            return 1.0f;
+        }
     }
 
     public static Demographics randomDemographics() {
@@ -111,6 +195,12 @@ public class DemographicsManager
         catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public static void addCharacterToBlocs(Character character, Demographics demographics) {
+        for (Bloc bloc : demographics.toBlocsArray()) {
+            bloc.addMember(character);
         }
     }
 

@@ -32,11 +32,14 @@ public class Main
 
         Demographics d1 = new Demographics(Bloc.matchBlocName("Generation X"), Bloc.matchBlocName("Evangelical"), Bloc.matchBlocName("White"), Bloc.matchBlocName("Man"));
         Demographics d2 = new Demographics(Bloc.matchBlocName("Generation X"), Bloc.matchBlocName("Evangelical"), Bloc.matchBlocName("White"), Bloc.matchBlocName("Woman"));
-        Name name;
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
-            name = CharacterManager.generateName(DemographicsManager.randomDemographics());
+            Demographics demographics = DemographicsManager.generateDemographics();
+            Name name = CharacterManager.generateName(demographics);
+            main.core.characters.Character character = new main.core.characters.Character(name, demographics);
             //name = CharacterManager.generateName(d1);
-            System.out.println(name.toString());
+            System.out.println(character.getName().toString());
+            System.out.println(character.getDemographics().toRepr());
+            System.out.print("\n\n\n\n\n\n");
             //name = CharacterManager.generateName(d2);
             //System.out.println(name.toString());
         }

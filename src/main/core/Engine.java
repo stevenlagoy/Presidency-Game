@@ -29,7 +29,6 @@ import main.core.demographics.DemographicsManager;
 import main.core.graphics.ILogic;
 import main.core.graphics.MouseInput;
 import main.core.graphics.WindowManager;
-import main.core.graphics.game.TestGame;
 import main.core.graphics.utils.Consts;
 import main.core.map.MapManager;
 import main.core.politics.EventManager;
@@ -386,8 +385,9 @@ public class Engine {
         HashMap<Object, Object> object = new HashMap<Object, Object>();
         for (int i = 0; i < contents.size(); i++) {
             String line = contents.get(i);
+            if (line.trim().isEmpty()) continue; // Skip empty lines
             String key = line.split(":")[0].trim().replace("\"", "");
-            if (key.equals("")) key = "null";
+            if (key.equals("")) continue; // Skip empty keys: invalid entry format
             String value = "";
             try {
                 value = line.split(":")[1].trim();
@@ -421,7 +421,20 @@ public class Engine {
                 return object;
             }
             else if (line.contains("{") && line.contains("}")) { // object all on one line
-                object.put(key, "null");
+                String objectContent = line.substring(line.indexOf("{") + 1, line.indexOf("}")).trim();
+                HashMap<Object, Object> innerObject = new HashMap<>();
+                if (!objectContent.isEmpty()) {
+                    String[] pairs = objectContent.split(",");
+                    for (String pair : pairs) {
+                        String[] keyValue = pair.split(":");
+                        if (keyValue.length == 2) {
+                            String innerKey = keyValue[0].trim().replace("\"", "");
+                            String innerValue = keyValue[1].trim().replace("\"", "");
+                            innerObject.put(innerKey, innerValue);
+                        }
+                    }
+                }
+                object.put(key, innerObject);
                 return object;
             }
             else{

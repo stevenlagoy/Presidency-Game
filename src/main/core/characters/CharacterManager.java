@@ -105,6 +105,7 @@ public class CharacterManager
     }
     public static void addCharacter(Character character){
         characters.add(character);
+        DemographicsManager.addCharacterToBlocs(character, character.getDemographics());
     }
     public static Candidate[] getAllCandidates(){
         Candidate[] candidatesArray = new Candidate[candidates.size()];
@@ -560,7 +561,7 @@ public class CharacterManager
 
         // Determine ordination
         String ordination = null;
-        if (presentation.equals("Woman")) {}
+        if (presentation.equals("Woman") || nf != Name.NameForm.WESTERN) {}
         else if (Engine.randPercent() <= jrOrdinationPercent) {
             ordination = "Jr.";
         }

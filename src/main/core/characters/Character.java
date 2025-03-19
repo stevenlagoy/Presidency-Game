@@ -25,7 +25,6 @@ public class Character implements Repr {
 
     private Name name;
     private Demographics demographics;
-    private String presentation; // string representation of gender presentation
     private City birthplaceCity; // city the character was born in
     private City currentLocationCity; // City the character is currently in / near
     private City residenceCity; // City the character currently lives in
@@ -33,31 +32,41 @@ public class Character implements Repr {
 
     private CharacterModel appearance;
 
-    static Bloc[] generateDemographics(City city){
-        return null;
-    }
-    static Bloc[] generateDemographics(State state){
-        return null;
-    }
-
     public Character(){
         // Get demographics
         this.demographics = DemographicsManager.generateDemographics();
+        this.name = CharacterManager.generateName(demographics);
 
         // Get origin
         generateOrigin();
 
         // Get birthday and age
         generateBirthDate();
+
+        CharacterManager.addCharacter(this);
     }
     public Character(String buildstring){
+
+        CharacterManager.addCharacter(this);
     }
 
-    public Character(Name name, Demographics demographics, String presentation, City birthplaceCity, Date birthday){
+    public Character(Demographics demographics) {
+        this.name = CharacterManager.generateName(demographics);
+
+        CharacterManager.addCharacter(this);
+    }
+
+    public Character(Name name, Demographics demographics) {
+        this.name = name;
+        this.demographics = demographics;
+
+        CharacterManager.addCharacter(this);
+    }
+
+    public Character(Name name, Demographics demographics, City birthplaceCity, Date birthday){
         this.name = name;
 
         this.demographics = demographics;
-        this.presentation = presentation;
         this.birthplaceCity = birthplaceCity;
         this.birthday = birthday;
 
@@ -152,15 +161,6 @@ public class Character implements Repr {
     public double getAgeYears(){
         return DateManager.timeToYears(this.getAgeMillis());
     }
-    protected void genPresentation(){
-        CharacterManager.generatePresentation(this.demographics);
-    }
-    public String getPresentation(){ // should this be a string?
-        return this.presentation;
-    }
-    public void setPresentation(String presentation){ // should this be a string?
-        this.presentation = presentation;
-    }
     protected void genOrigin(){
     }
     public City getCityOrigin(){
@@ -191,10 +191,9 @@ public class Character implements Repr {
     }
     public String toRepr(){
         String repr = String.format(
-            "%s:[name:\"%s\";presentation=%s;origin=;birthday=%d;];",
+            "%s:[name:\"%s\";origin=;birthday=%d;];",
             this.getClass().toString().replace("class ", ""),
             this.name.toRepr(),
-            this.presentation,
             this.birthday
         );
         return repr;

@@ -10,6 +10,13 @@ public class Demographics implements Repr
     private Bloc raceEthnicity;
     private Bloc presentation;
 
+    public Demographics() {
+        this.generation = null;
+        this.religion = null;
+        this.raceEthnicity = null;
+        this.presentation = null;
+    }
+
     public Demographics(String generation, String religion, String raceEthnicity, String presentation){
         this.generation = Bloc.matchBlocName(generation);
         if (!this.generation.getDemographicGroup().equals("Generation")) {

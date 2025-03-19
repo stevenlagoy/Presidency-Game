@@ -28,35 +28,6 @@ public class Bloc implements Repr {
         return demographics.size();
     }
 
-    public static Bloc[] selectBlocs(){
-        /*
-         * Determine which bloc is most underrepresented out of all currently active characters
-         * Starting with that bloc, determine which of that bloc's overlap is most underrepresented
-         * If two are equally underrepresented, select the one that appears first on the list
-         * Continue until all demographic fields have been filled
-         * Return the demographics
-         */
-        // this function selects the most underrepresented of each group, ignoring overlaps.
-        // should be changed to evaluate overlaps
-        Bloc[] characterBlocs = new Bloc[getNumberOfCategories()];
-        int i = 0;
-
-        Bloc underrepresentedBloc;
-        double underrepresentedValue;
-        for(HashSet<Bloc> group : demographics.values()){
-            underrepresentedBloc = (Bloc) group.toArray()[0];
-            underrepresentedValue = underrepresentedBloc.determineRepresentationRatio();
-            for(Bloc bloc : group){
-                if(bloc.determineRepresentationRatio() < underrepresentedValue){
-                    underrepresentedBloc = bloc;
-                    underrepresentedValue = bloc.determineRepresentationRatio();
-                }
-            }
-            characterBlocs[i++] = underrepresentedBloc;
-        }
-        return characterBlocs;
-    }
-
     public static Bloc matchBlocName(String name){
         for(Bloc bloc : instances){
             if(bloc.name.equals(name)) return bloc;
@@ -67,7 +38,7 @@ public class Bloc implements Repr {
 
     private String name;
     private int numVoters;
-    private int membership; // number of characters
+    private List<main.core.characters.Character> members;
     private float percentageVoters;
     private String demographicGroup;
     private HashMap<Bloc, Double> overlaps = new HashMap<Bloc, Double>();
@@ -80,6 +51,7 @@ public class Bloc implements Repr {
         this.percentageVoters = 0.0f;
         this.demographicGroup = demographicGroup;
         this.superBloc = null;
+        this.members = new ArrayList<>();
 
         Bloc.instances.add(this);
         if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
@@ -92,6 +64,7 @@ public class Bloc implements Repr {
         this.percentageVoters = numVoters * 1.0f / totalVoters;
         this.demographicGroup = demographicGroup;
         this.superBloc = null;
+        this.members = new ArrayList<>();
 
         Bloc.instances.add(this);
         if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
@@ -99,15 +72,30 @@ public class Bloc implements Repr {
     }
     public Bloc(String name, String demographicGroup, float percentageVoters)
     {
-        this.name = name;
-        this.numVoters = Math.round(percentageVoters * totalVoters);
-        this.percentageVoters = percentageVoters;
-        this.demographicGroup = demographicGroup;
-        this.superBloc = null;
+        if (percentageVoters == (int) percentageVoters) {
+            this.name = name;
+            this.numVoters = (int) percentageVoters;
+            this.percentageVoters = percentageVoters / totalVoters;
+            this.demographicGroup = demographicGroup;
+            this.superBloc = null;
+            this.members = new ArrayList<>();
 
-        Bloc.instances.add(this);
-        if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
-        demographics.get(demographicGroup).add(this);
+            Bloc.instances.add(this);
+            if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
+            demographics.get(demographicGroup).add(this);
+        }
+        else {
+            this.name = name;
+            this.numVoters = Math.round(percentageVoters * totalVoters);
+            this.percentageVoters = percentageVoters;
+            this.demographicGroup = demographicGroup;
+            this.superBloc = null;
+            this.members = new ArrayList<>();
+
+            Bloc.instances.add(this);
+            if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
+            demographics.get(demographicGroup).add(this);
+        }
     }
 
     public int getNumVoters(){
@@ -124,11 +112,14 @@ public class Bloc implements Repr {
         this.percentageVoters = percentageVoters;
         this.numVoters = Math.round(percentageVoters * totalVoters);
     }
-    public int getMembership(){
-        return membership;
+    public List<main.core.characters.Character> getMembers(){
+        return members;
     }
-    public void setMembership(int membership){
-        this.membership = membership;
+    public void addMember(main.core.characters.Character member){
+        this.members.add(member);
+    }
+    public void removeMember(Character member) {
+        this.members.remove(member);
     }
     public String getName(){
         return name;
@@ -197,29 +188,16 @@ public class Bloc implements Repr {
      * @param bloc The bloc to be evaluated for representation.
      * @return A float value for representation. <1 indicates the bloc is under-represented, while >1 indicates the bloc is over-represented. 
      */
-    private float determineRepresentationRatio(){
-        // Returns ratio of actual character membership to expected membership
-        // <1 if underrepresented, >1 if overrepresented, =1 if perfectly represented
-        try
-        {
-            if(CharacterManager.numCharacters() == 0) return 1.0f;
-            return (this.membership * 1.0f / CharacterManager.numCharacters()) / (this.percentageVoters);
-        }
-        catch(ArithmeticException e){
-            return 1.0f;
-        }
-    }
 
     public void fromRepr(String repr){
 
     }
     public String toRepr(){
         String repr = String.format(
-            "%s:[name:\"%s\";numVoters=%d;membership=%d;percentageVoters=%ff;demographicGroup=\"%s\";];",
+            "%s:[name:\"%s\";numVoters=%d;percentageVoters=%ff;demographicGroup=\"%s\";];",
             this.getClass().toString().replace("class ", ""),
             this.name,
             this.numVoters,
-            this.membership,
             this.percentageVoters,
             this.demographicGroup
         );
