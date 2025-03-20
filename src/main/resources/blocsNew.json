@@ -25,7 +25,7 @@
     "Religion" : {
         "Christian" : {
             "Evangelical" : {
-                "Baptist" : 0.001,
+                "Baptist" : 0.053,
                 "Nondenominational" : 0.062,
                 "Pentecostal" : 0.046,
                 "Holiness" : 0.008,
@@ -82,10 +82,10 @@
             "British" : {
                 "English" :            31380620,
                 "Irish" :              30655612,
+                "American" :           17786214,
                 "Scottish" :           5352344,
                 "Scotch-Irish" :       2524746,
                 "Welsh" :              1521565,
-                "American" :           17786214,
                 "Canadian" :           542459,
                 "Australian" :         88999,
                 "British" :            1196265
@@ -93,9 +93,9 @@
             "Northern European" : {
                 "Swedish" :            3936772,
                 "Norwegian" :          3317462,
-                "Icelandic" :          53415,
-                "Finnish" :            606028,
                 "Danish" :             1127518,
+                "Finnish" :            606028,
+                "Icelandic" :          53415,
                 "Scandinavian" :       935153,
                 "Northern European" :  434292
             },
@@ -110,32 +110,31 @@
                 "German" :             41137168,
                 "French" :             6310548,
                 "Dutch" :              3019465,
+                "Quebecois" :          1626456,
                 "Swiss" :              847247,
+                "Austrian" :           584517,
                 "Belgian" :            316493,
                 "Pennsylvania Dutch" : 228634,
-                "Quebecois" :          1626456,
-                "Cajun" :              91706,
-                "Austrian" :           584517
+                "Cajun" :              91706
             },
             "Eastern European" : {
                 "Polish" :             8249491,
                 "Russian" :            2099079,
-                "Romanian" :           450751,
-                "Lithuanian" :         598508,
-                "Yugoslav" :           198687,
-                "Macedonian" :         65107,
+                "Czech" :              1331403,
                 "Hungarian" :          1247165,
-                "Czech" :              1188711,
                 "Ukrainian" :          1164728,
-                "Slovak" :             602949,
-                "Czechoslovak" :       227217,
-                "Bulgarian" :          106896,
-                "Latvian" :            91859,
-                "Slavic" :             140956,
+                "Slovak" :             687474,
+                "Lithuanian" :         598508,
+                "Romanian" :           450751,
+                "Croatian" :           389272,
                 "Albanian" :           223984,
+                "Yugoslav" :           198687,
                 "Serbian" :            191538,
                 "Slovene" :            153589,
-                "Croatian" :           389272,
+                "Slavic" :             140956,
+                "Bulgarian" :          106896,
+                "Latvian" :            91859,
+                "Macedonian" :         65107,
                 "Eastern European" :   951384
             },
             "Other European" :         4819541

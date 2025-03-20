@@ -93,26 +93,21 @@ public class CharacterManager
         Candidate player = Engine.playerCandidate;
         
     }
-    public static Character[] getAllCharacters(){
-        Character[] charactersArray = new Character[characters.size()];
-        for(int i = 0; i < characters.size(); i++){
-            charactersArray[i] = characters.get(i);
-        }
-        return charactersArray;
+    public static List<Character> getAllCharacters(){
+        return characters;
     }
-    public static int numCharacters(){
+    public static int getNumCharacters(){
         return characters.size();
     }
     public static void addCharacter(Character character){
         characters.add(character);
         DemographicsManager.addCharacterToBlocs(character, character.getDemographics());
     }
-    public static Candidate[] getAllCandidates(){
-        Candidate[] candidatesArray = new Candidate[candidates.size()];
-        for(int i = 0; i < candidates.size(); i++){
-            candidatesArray[i] = candidates.get(i);
-        }
-        return candidatesArray;
+    public static List<Candidate> getAllCandidates(){
+        return candidates;
+    }
+    public static int getNumCandidates() {
+        return candidates.size();
     }
 
     public static Personality matchPersonality(HasPersonality character){
@@ -618,5 +613,23 @@ public class CharacterManager
         // Using the other fields of the demographics object, select a presentation.
         
         return Bloc.matchBlocName("");
+    }
+
+    public static void generateBlocsReport() {
+        int differenceValue = 5;
+        System.out.println("TOTAL # CHARACTERS : " + getNumCharacters());
+        for (Bloc bloc : Bloc.getInstances()) {
+            if (bloc.getSubBlocs().isEmpty()) {
+                if (!DemographicsManager.isCharacterBlocCategory(bloc.getDemographicGroup())) continue;
+                float expectedRepresentation = bloc.getPercentageVoters();
+                float actualRepresentation = bloc.getMembers().size() * 1.0f / CharacterManager.getNumCharacters();
+                float representationRatio = actualRepresentation / expectedRepresentation;
+                System.out.printf("Bloc Name : %70s,\tMember Count : %8d,\tExpected Count : %8d,\tExpected %% : %f,\tActual %% : %f,\tRatio : %f\t%s%n",
+                    bloc.getName(), bloc.getMembers().size(), (int) (CharacterManager.getNumCharacters() * expectedRepresentation), expectedRepresentation, actualRepresentation, representationRatio, 
+                    (bloc.getMembers().size() > (int) (CharacterManager.getNumCharacters() * expectedRepresentation) + differenceValue ? "EXCESS" : (bloc.getMembers().size() < (int) (CharacterManager.getNumCharacters() * expectedRepresentation) - differenceValue ? "LACK" : ""))
+                );
+            }
+        }
+        System.out.println("TOTAL # CHARACTERS : " + getNumCharacters());
     }
 }

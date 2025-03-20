@@ -1,6 +1,7 @@
 package main.core.demographics;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,14 +13,15 @@ import main.core.characters.CharacterManager;
 
 public class DemographicsManager
 {
+    public static int totalVoters = 341_275_500; // as of 1 Feb 2025
 
     private static Map<String, List<Bloc>> demographicBlocs = new HashMap<>();
     private static final String[] characterBlocCategories = { "Generation", "Religion", "Race / Ethnicity", "Presentation" };
 
     //final static Bloc EVERYONE = Bloc.matchBlocName("everyone");
     //final static Bloc VOTERS = Bloc.matchBlocName("voters");
-    public final static Bloc EVERYONE = new Bloc("Everyone", null, 1.0f);
-    public final static Bloc VOTERS = new Bloc("Voters", null, 0.7083f);
+    //public final static Bloc EVERYONE = new Bloc("Everyone", null, 1.0f);
+    //public final static Bloc VOTERS = new Bloc("Voters", null, 0.7083f);
 
     public static int[] getPopulationPyramid(Bloc applicableBloc){
         int[] pyramid = {1, 2, 3, 4, 5};
@@ -39,7 +41,7 @@ public class DemographicsManager
     public static Demographics getMostCommonDemographics(){
         // generation, presentation, raceEthnicity, religion
         // should make this adaptive to the current population
-        return new Demographics("Millennial", "Evangelical", "White", "Woman");
+        return new Demographics("Millennial", "Nondenominational", "English", "Woman");
     }
     public static void createDemographicBlocs() {
         HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.blocs);
@@ -66,7 +68,14 @@ public class DemographicsManager
         for (Object key : structure.keySet()) {
             try {
                 // assume base case: no nested blocs
-                parent = new Bloc(key.toString(), category, Float.parseFloat(structure.get(key).toString()));
+                float value = Float.parseFloat(structure.get(key).toString());
+                if ((int) value == value) {
+                    parent = new Bloc(key.toString(), category, (int) value);
+                }
+                else {
+                    parent = new Bloc(key.toString(), category, value);
+                }
+                // System.out.printf("Bloc : %70s, \tPercent : %f, \tNumber : %d.%n", parent.getName(), parent.getPercentageVoters(), parent.getNumVoters());
                 blocs.add(parent);
             }
             catch (Exception e) {
@@ -88,26 +97,14 @@ public class DemographicsManager
         // given that bloc's overlap, select the most underrepresented of the rest of the blocs
         // return those together
 
-        if (CharacterManager.getAllCharacters().length == 0) {
+        if (CharacterManager.getNumCharacters() == 0) {
             return getMostCommonDemographics();
         }
 
         Demographics underrepresentedDemographics = new Demographics();
 
         for (String category : characterBlocCategories){
-            Bloc underrepresentedBloc = null;
-            float underrepresentedValue = Float.MAX_VALUE;
-            Bloc candidate = findMostUnderrepresentedBloc(demographicBlocs.get(category));
-            float ratio = determineRepresentationRatio(candidate);
-
-            if (ratio < underrepresentedValue) {
-                underrepresentedValue = ratio;
-                underrepresentedBloc = candidate;
-            }
-            else if (ratio == underrepresentedValue && candidate.getPercentageVoters() > underrepresentedBloc.getPercentageVoters()) {
-                underrepresentedValue = ratio;
-                underrepresentedBloc = candidate;
-            }
+            Bloc underrepresentedBloc = findMostUnderrepresentedBloc(demographicBlocs.get(category));
             switch (category) {
                 case "Generation" :
                     underrepresentedDemographics.setGeneration(underrepresentedBloc);
@@ -126,27 +123,42 @@ public class DemographicsManager
 
         return underrepresentedDemographics;
     }
-    private static Bloc findMostUnderrepresentedBloc(List<Bloc> blocs){
-        if (blocs == null || blocs.isEmpty()) return null;
-        
+    public static String[] getCharacterBlocCategories() {
+        return characterBlocCategories;
+    }
+    public static boolean isCharacterBlocCategory(String demographicGroup) {
+        return Arrays.asList(characterBlocCategories).contains(demographicGroup);
+    }
+    /**
+     * Selects the most Underrepresented Bloc from the passed List of Blocs their subBloc trees. Underrepresentation is determined by the bloc's Representation Ratio, or the actual representation / expected representation.
+     * @param blocs A list of blocs to search (along with their subBloc trees).
+     * @return The innermost bloc which is most underrepresented.
+     */
+    private static Bloc findMostUnderrepresentedBloc(List<Bloc> blocs){        
         Bloc underrepresentedBloc = blocs.get(0);
         float underrepresentedValue = determineRepresentationRatio(underrepresentedBloc);
 
         for (Bloc bloc : blocs) {
             if (bloc.getSubBlocs().isEmpty()) {
                 float representationRatio = determineRepresentationRatio(bloc);
-                if (representationRatio < underrepresentedValue) {
+                if (representationRatio < underrepresentedValue ||
+                    (representationRatio == underrepresentedValue &&
+                        bloc.getPercentageVoters() > underrepresentedBloc.getPercentageVoters())) {
                     underrepresentedBloc = bloc;
                     underrepresentedValue = representationRatio;
-                }
-                else if (representationRatio == underrepresentedValue && bloc.getPercentageVoters() > underrepresentedBloc.getPercentageVoters()) {
-                    underrepresentedBloc = bloc;
-                    underrepresentedValue = representationRatio;
+                    // System.out.printf("Found %s with ratio %f.%n", underrepresentedBloc.getName(), underrepresentedValue);
                 }
             }
             else {
-                underrepresentedBloc = findMostUnderrepresentedBloc(bloc.getSubBlocs());
-                underrepresentedValue = determineRepresentationRatio(underrepresentedBloc);
+                Bloc candidate = findMostUnderrepresentedBloc(bloc.getSubBlocs());
+                float candidateRatio = determineRepresentationRatio(candidate);
+                if (Float.isNaN(underrepresentedValue) || candidateRatio < underrepresentedValue ||
+                    (candidateRatio == underrepresentedValue &&
+                        bloc.getPercentageVoters() > underrepresentedBloc.getPercentageVoters())) {
+                    underrepresentedBloc = candidate;
+                    underrepresentedValue = candidateRatio;
+                    // System.out.printf("Found %s with ratio %f.%n", underrepresentedBloc.getName(), underrepresentedValue);
+                }
             }
         }
 
@@ -157,12 +169,10 @@ public class DemographicsManager
         // Returns ratio of actual character membership to expected membership
         // <1 if underrepresented, >1 if overrepresented, =1 if perfectly represented
         try {
-            if(CharacterManager.numCharacters() == 0) return 1.0f; // if there are no characters, every bloc is perfectly represented
+            if(CharacterManager.getNumCharacters() == 0) return 1.0f; // if there are no characters, every bloc is perfectly represented
             float expectedRepresentation = bloc.getPercentageVoters();
-            float actualRepresentation = bloc.getMembers().size() * 1.0f / CharacterManager.numCharacters();
+            float actualRepresentation = bloc.getMembers().size() * 1.0f / CharacterManager.getNumCharacters();
             float representationRatio = actualRepresentation / expectedRepresentation;
-
-            System.out.printf("Bloc Name : %60s, \tCount : %5d, \tExpected : %1.5f, \tActual : %1.5f, \tRatio : %1.5f.%n", bloc.getName(), bloc.getMembers().size(), expectedRepresentation, actualRepresentation, representationRatio);
 
             return (representationRatio);
         }
