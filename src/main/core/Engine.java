@@ -30,7 +30,11 @@ import main.core.graphics.ILogic;
 import main.core.graphics.MouseInput;
 import main.core.graphics.WindowManager;
 import main.core.graphics.utils.Consts;
+import main.core.map.City;
+import main.core.map.CongressionalDistrict;
+import main.core.map.County;
 import main.core.map.MapManager;
+import main.core.map.State;
 import main.core.politics.EventManager;
 
 public class Engine {
@@ -111,6 +115,7 @@ public class Engine {
 
             DemographicsManager.createDemographicBlocs();
             CharacterManager.readAllNamesFiles();
+            MapManager.createMap();
         }
         catch (Exception e) {
             // Engine.cleanup();
@@ -199,20 +204,53 @@ public class Engine {
 
     public static boolean tick() {
         boolean active = true;
-        String[] responses = {"Q", "L CHARACTERS"};
+        String[] responses = {"Q", "QUIT", "L CHARACTERS", "LIST CHARACTERS", "L STATES", "LIST STATES", "L CONGRESSIONAL_DISTRICTS", "LIST CONGRESSIONAL_DISTRICTS", "L COUNTIES", "LIST COUNTIES", "L CITIES", "LIST CITIES"};
         String input = getInput(responses);
         switch (input) {
             case "Q" :
+            case "QUIT" :
                 System.out.print("Quitting\n");
                 return false;
             case "L CHARACTERS" :
+            case "LIST CHARACTERS" :
                 System.out.print("Listing Characters:\n");
                 for (main.core.characters.Character character : CharacterManager.getAllCharacters()) {
                     System.out.printf("\t%s\n", character.getName());
                 }
                 System.out.print("Done\n");
                 break;
-            default :;
+            case "L STATES" :
+            case "LIST STATES" :
+                System.out.print("Listing States:\n");
+                for (State state : MapManager.getStates()) {
+                    System.out.printf("\t%s\n", state.getName());
+                }
+                System.out.print("Done\n");
+                break;
+            case "L CONGRESSIONAL_DISTRICTS" :
+            case "LIST CONGRESSIONAL_DISTRICTS" :
+                System.out.print("Listing Congressional Districts:\n");
+                for (CongressionalDistrict district : MapManager.getCongressionalDistricts()) {
+                    System.out.printf("\t%s\n", district.getOfficeID());
+                }
+                System.out.print("Done\n");
+                break;
+            case "L COUNTIES" :
+            case "LIST COUNTIES" :
+                System.out.print("Listing Counties:\n");
+                for (County county : MapManager.getCounties()) {
+                    System.out.printf("\t%s, %s\n", county.getName(), county.getState().getAbbreviation());
+                }
+                System.out.print("Done\n");
+                break;
+            case "L CITIES" :
+            case "LIST CITIES" :
+                System.out.print("Listing Cities:\n");
+                for (City city : MapManager.getCities()) {
+                    System.out.printf("\t%s, %s\n", city.getName(), city.getState().getAbbreviation());
+                }
+                System.out.print("Done\n");
+                break;
         }
 
         //System.out.println(DateManager.currentGameDate);
@@ -390,13 +428,36 @@ public class Engine {
             if (key.equals("")) continue; // Skip empty keys: invalid entry format
             String value = "";
             try {
-                value = line.split(":")[1].trim();
-                if (value.contains("[")) { // the value is a list
-                    List<String> list = new ArrayList<String>(); 
-                    for (String entry : value.replaceAll("\\[|\\]", "").split(",")) {
-                        list.add(entry.replace("\"","").trim());
+                int colonIndex = -1;
+                for (int j = 0; j < line.length(); j++) {
+                    if (line.charAt(j) == ':' && !isInString(line, j)) {
+                        colonIndex = j;
+                        break;
                     }
-                    value = list.toString();
+                }
+                if (colonIndex != -1) {
+                    value = line.substring(colonIndex + 1).trim();
+                }
+                else {
+                    value = "";
+                }
+                if (containsUnquotedChar(value, '[')) { // the value is a list
+                    if (value.replaceAll("\\[\\s*\\]", "").replace(",", "").trim().equals("")) {
+                        // empty list
+                        value = "";
+                    }
+                    else {
+                        List<String> list = new ArrayList<String>();
+                        int startIndex = 2;
+                        for (int j = 2; j < value.length() - 2; j++) {
+                            if (value.charAt(j) == ',' && !isInString(value, j)) {
+                                list.add(value.substring(startIndex, j).replace("\"", "").replace(",", "").trim());
+                                startIndex = j;
+                            }
+                        }
+                        list.add(value.substring(startIndex, value.length() - 2).replace("\"", "").replace(",", "").trim());
+                        value = list.toString();
+                    }
                 }
                 else
                     value = value.replace(",","");
@@ -404,23 +465,23 @@ public class Engine {
             catch (ArrayIndexOutOfBoundsException e) {
                 // do nothing - this is expected at the end of a JSON object
             }
-            if (line.contains("{") && !line.contains("}")) { // start of an object
+            if (containsUnquotedChar(line, '{') && !containsUnquotedChar(line, '}')) { // start of an object
                 // jump over recursively-read lines to start of next object
                 int braceCount = 1, startIndex = i + 1;
                 while (braceCount > 0 && i < contents.size() - 1) {
                     i++;
                     String currentLine = contents.get(i);
-                    if (currentLine.contains("{")) braceCount++;
-                    if (currentLine.contains("}")) braceCount--;
+                    if (containsUnquotedChar(currentLine, '{')) braceCount++;
+                    if (containsUnquotedChar(currentLine, '}')) braceCount--;
                 }
                 // read the object
                 object.put(key, readJSONObject(contents.subList(startIndex, contents.size())));
             }
-            else if (!line.contains("{") && line.contains("}")) { // end of an object
+            else if (!containsUnquotedChar(line, '{') && containsUnquotedChar(line, '}')) { // end of an object
                 // end the object
                 return object;
             }
-            else if (line.contains("{") && line.contains("}")) { // object all on one line
+            else if (containsUnquotedChar(line, '{') && containsUnquotedChar(line, '}')) { // object all on one line
                 String objectContent = line.substring(line.indexOf("{") + 1, line.indexOf("}")).trim();
                 HashMap<Object, Object> innerObject = new HashMap<>();
                 if (!objectContent.isEmpty()) {
@@ -443,6 +504,26 @@ public class Engine {
         }
         return object;
     }
+
+    private static boolean isInString(String line, int position) {
+        boolean inString = false;
+        for (int i = 0; i < position; i++) {
+            if (line.charAt(i) == '"' && (i == 0 || line.charAt(i-1) != '\\')) {
+                inString = !inString;
+            }
+        }
+        return inString;
+    }
+    
+    private static boolean containsUnquotedChar(String line, char target) {
+        for (int i = 0; i < line.length(); i++) {
+            if (line.charAt(i) == target && !isInString(line, i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void log(String logline) {
         try {
             File errorFile = new File(FilePaths.ERROR);

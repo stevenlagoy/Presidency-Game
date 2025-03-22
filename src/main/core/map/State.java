@@ -1,10 +1,12 @@
 package main.core.map;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import main.core.Engine;
 import main.core.characters.Character;
+import main.core.characters.PoliticalActor;
 
 import java.util.HashMap;
 
@@ -18,50 +20,43 @@ public class State {
 
     private static List<State> instances = new ArrayList<>();
 
+    private int FIPS;
     private String name;
     private int population;
-    private List<String> largestCities = new ArrayList<>();
     private String abbreviation;
+    private String motto;
+    private String nickname;
+    private List<CongressionalDistrict> congressionalDistricts = new ArrayList<>();
+    private List<County> counties = new ArrayList<>();
+    private List<City> cities = new ArrayList<>();
     private List<String> universities = new ArrayList<>();
     private List<String> demographics = new ArrayList<>();
-    private Character[] senators;
-    private Character governor;
+    private List<PoliticalActor> senators;
+    private PoliticalActor governor;
 
-    public State(String name, int population, List<String> largestCities, String abbreviation, List<String> universities, List<String> demographics){
+    public State(int FIPS, String name, int population, String abbreviation, String motto, String nickname) {
+        this.FIPS = FIPS;
         this.name = name;
         this.population = population;
-        this.largestCities = largestCities;
         this.abbreviation = abbreviation;
-        this.universities = universities;
+        this.motto = motto;
+        this.nickname = nickname;
+    }
+
+    public State(String name, int population, String abbreviation, List<String> demographics){
+        this.name = name;
+        this.population = population;
+        this.abbreviation = abbreviation;
         this.demographics = demographics;
-        this.senators = new Character[2];
 
         instances.add(this);
     }
 
-    public boolean hasSenator(Character senator){
-        if(senators[0].equals(senator)) return true;
-        else if(senators[1].equals(senator)) return true;
-        else return false;
+    public int getFIPS() {
+        return FIPS;
     }
-    public void createSenators(){
-        this.createSenators(2);
-    }
-
-    public void createSenators(int numberOfSenators){
-
-    }
-    public void removeSenator(Character senator){
-        if(!this.hasSenator(senator)){
-            Engine.log("Failed to remove Senator from State: %s. Character not assigned to State as Senator.", this.name);
-        }
-        else if(senators[0].equals(senator)) senators[0] = null;
-        else if(senators[1].equals(senator)) senators[1] = null;
-    }
-    public void removeSenator(int senator){
-        if(senator > this.senators.length-1){
-            Engine.log("Failed to remove Senator from State: %s. Index out of Bounds.", this.name);
-        }
+    public void setFIPS(int FIPS) {
+        this.FIPS = FIPS;
     }
 
     public String getName(){
@@ -70,6 +65,82 @@ public class State {
     public void setName(String name){
         this.name = name;
     }
+
+    public int getPopulation() {
+        return population;
+    }
+    public void setPopulation(int population) {
+        this.population = population;
+    }
+    public void addPopulation(int population) {
+        this.population += population;
+    }
+
+    public String getAbbreviation() {
+        return abbreviation;
+    }
+    public void setAbbreviation(String abbreviation) {
+        this.abbreviation = abbreviation;
+    }
+
+    public String getMotto() {
+        return motto;
+    }
+    public void setMotto(String motto) {
+        this.motto = motto;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public List<CongressionalDistrict> getCongressionalDistricts() {
+        return congressionalDistricts;
+    }
+    public void addCongressionalDistrict(CongressionalDistrict district) {
+        congressionalDistricts.add(district);
+    }
+    public void removeCongressionalDistrict(CongressionalDistrict district) {
+        congressionalDistricts.remove(district);
+    }
+
+    public List<County> getCounties() {
+        return counties;
+    }
+    public void addCongressionalDistrict(County county) {
+        counties.add(county);
+    }
+    public void removeCounty(County county) {
+        counties.remove(county);
+    }
+
+    public List<City> getCities() {
+        return cities;
+    }
+    public void addCity(City city) {
+        cities.add(city);
+    }
+    public void removeCity(City city) {
+        cities.remove(city);
+    }
+
+    public boolean hasSenator(PoliticalActor senator){
+        return senators.contains(senator);
+    }
+    public void createSenators(){
+        this.createSenators(2);
+    }
+
+    public void createSenators(int numberOfSenators){
+
+    }
+    public void removeSenator(PoliticalActor senator){
+        senators.remove(senator);
+    }
+
     public List<String> getDemographics(){
         return this.demographics;
     }
@@ -78,9 +149,8 @@ public class State {
         return String.format("State("+
         "name=%s," +
         "population=%s," +
-        "largest_cities=%s," +
         "abbreviation=%s," +
         "universities=%s",
-        this.name, this.population, this.largestCities, this.abbreviation, this.universities);
+        this.name, this.population, this.abbreviation, this.universities);
     }
 }

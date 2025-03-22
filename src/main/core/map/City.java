@@ -14,11 +14,30 @@ public class City {
         return null;
     }
     
+    private String name;
     private CongressionalDistrict district;
     private State state;
     private int population;
+    private double area;
     private ArrayList<Character> charactersPresent = new ArrayList<Character>();
     private DateManager.TimeZone timeZone;
+
+    public City(String name, int population, double area) {
+        this.name = name;
+        this.population = population;
+        this.area = area;
+    }
+
+    public City(String name, String state, int population, double area) {
+        this(name, MapManager.matchState(state), population, area);
+    }
+
+    public City(String name, State state, int population, double area) {
+        this.name = name;
+        this.state = state;
+        this.population = population;
+        this.area = area;
+    }
 
     public City(CongressionalDistrict district, int population, DateManager.TimeZone timeZone){
         this.district = district;
@@ -31,18 +50,27 @@ public class City {
         this.timeZone = DateManager.matchTimeZone(timeZone);
     }
 
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public CongressionalDistrict getDistrict(){
         return this.district;
     }
     public void setDistrict(CongressionalDistrict district){
         this.district = district;
     }
+
     public State getState(){
         return this.state;
     }
     public void setState(State state){
         this.state = state;
     }
+
     public int getPopulation(){
         return this.population;
     }
@@ -52,6 +80,14 @@ public class City {
     public void addPopulation(int population){
         this.population += population;
     }
+
+    public double getArea() {
+        return area;
+    }
+    public void setArea(double area) {
+        this.area = area;
+    }
+
     public void addCharacter(Character character){
         this.charactersPresent.add(character);
     }
