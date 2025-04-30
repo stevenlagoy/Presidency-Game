@@ -55,6 +55,42 @@ public class DateManager
     public static final String[] monthAbbreviations = {"jan_abbreviation", "feb_abbreviation", "mar_abbreviation", "apr_abbreviation", "may_abbreviation", "jun_abbreviation", "jul_abbreviation", "aug_abbreviation", "sep_abbreviation", "oct_abbreviation", "nov_abbreviation", "dec_abbreviation"};
     public static final String[] yearNumbers = {"2027", "2028", "2029"};
 
+    public static int getCurrentYear() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentGameDate);
+        return calendar.get(Calendar.YEAR);
+    }
+
+    public static int getCurrentMonth() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentGameDate);
+        return calendar.get(Calendar.MONTH) + 1; // Adding 1 since Calendar months are 0-based
+    }
+
+    public static int getCurrentDay() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentGameDate);
+        return calendar.get(Calendar.DAY_OF_MONTH);
+    }
+
+    public static String getCurrentTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentGameDate);
+        return String.format("%02d:%02d:%02d", 
+            calendar.get(Calendar.HOUR_OF_DAY),
+            calendar.get(Calendar.MINUTE),
+            calendar.get(Calendar.SECOND));
+    }
+
+    public static String formattedCurrentDate() {
+        StringBuilder dateString = new StringBuilder();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentGameDate);
+        
+        dateString.append(getCurrentYear()).append("-").append(getCurrentMonth()).append("-").append(getCurrentDay()).append("-").append(getCurrentTime().replace(":","-"));
+        return dateString.toString();
+    }
+
     /**
      * Increments the current game date by one second.
      */

@@ -1,7 +1,5 @@
 package main.core.characters;
 
-import static org.lwjgl.opengl.GL11.nglFogiv;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -124,6 +122,7 @@ public class Name implements Repr
                 break;
         }
         this.nicknames = new ArrayList<>();
+        this.suffixes = new ArrayList<>();
     }
 
     public Name(String firstName, String middleName, String lastName){
@@ -270,15 +269,26 @@ public class Name implements Repr
         return nameString.toString().trim();
     }
 
-    public String toRepr(){
-        String repr = String.format(
-            "nameform:\"%s\";forename:\"%s\";middlename:\"%s\";nicknames:%s;surname:\"%s\";familyname:\"%s\";generationname:\"%s\";givenname:\"%s\";honorific:\"%s\";ordination:\"%s\";abbreviatefirst:\"%s\";abbreviatemiddle:\"%s\";",
-            nameForm.toString().toLowerCase(), givenName, Engine.arrayToReprList(nicknames), middleName, familyName, familyName, middleName, givenName, honorific, ordinal, String.valueOf(abbrFirst), String.valueOf(abbrMiddle)
-        );
-        return repr;
-    }
-    public void fromRepr(String repr){
-        
+    public String getFullName() {
+        StringBuilder nameString = new StringBuilder();
+        if (nameForm == NameForm.WESTERN) {
+            if (givenName != null) nameString.append(givenName).append(" ");
+            if (middleName != null) nameString.append(middleName).append(" ");
+            if (familyName != null) nameString.append(familyName);
+        }
+        else if (nameForm == NameForm.EASTERN) {
+            if (familyName != null) nameString.append(familyName).append(" ");
+            if (middleName != null) nameString.append(middleName);
+            if (givenName != null) nameString.append(givenName);
+        }
+        else if (nameForm == NameForm.HISPANIC) {
+            if (givenName != null) nameString.append(givenName).append(" ");
+            if (middleName != null) nameString.append(middleName).append(" ");
+            if (paternalName != null) nameString.append(paternalName).append(" ");
+            if (maternalName != null) nameString.append(maternalName);
+        }
+
+        return nameString.toString().trim();
     }
 
     public String getGivenName() {
@@ -362,6 +372,44 @@ public class Name implements Repr
     }
     public void setOrdinal(String ordinal) {
         this.ordinal = ordinal;
+    }
+
+    public String toRepr(){
+        String[] nicknamesStrings = new String[nicknames.size()];
+        for (int i = 0; i < nicknames.size(); i++) {
+            nicknamesStrings[i] = nicknames.get(i);
+        }
+        String nicknamesRepr = Engine.arrayToReprList(nicknamesStrings);
+
+        String[] suffixesStrings = new String[suffixes.size()];
+        for (int i = 0; i < suffixes.size(); i++) {
+            suffixesStrings[i] = suffixes.get(i);
+        }
+        String suffixesRepr = Engine.arrayToReprList(suffixesStrings);
+
+        String repr = String.format("%s:[nameForm=\"%s\";givenName=\"%s\";abbrFirst=%b;atomicFirst=%b;middleName=\"%s\";abbrMiddle=%b;atomicMiddle=%b;familyName=\"%s\";birthSurname=\"%s\";paternalName=\"%s\";maternalName=\"%s\";nicknames=[%s];includeNickname=%b;honorific=\"%s\";ordinal=\"%s\";suffixes=[%s];];",
+            this.getClass().getName().split("\\.")[this.getClass().getName().split("\\.").length - 1],
+            this.nameForm.toString(),
+            givenName,
+            abbrFirst,
+            atomicFirst,
+            middleName,
+            abbrMiddle,
+            atomicMiddle,
+            familyName,
+            birthSurname,
+            paternalName,
+            maternalName,
+            nicknamesRepr,
+            includeNickname,
+            honorific,
+            ordinal,
+            suffixesRepr
+        );
+        return repr;
+    }
+    public void fromRepr(String repr){
+        
     }
 
 }

@@ -41,7 +41,7 @@ public class DemographicsManager
     public static Demographics getMostCommonDemographics(){
         // generation, presentation, raceEthnicity, religion
         // should make this adaptive to the current population
-        return new Demographics("Millennial", "Nondenominational", "English", "Woman");
+        return new Demographics("Millennial", "White Catholic", "English", "Woman");
     }
     public static void createDemographicBlocs() {
         HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.blocs);
@@ -212,6 +212,14 @@ public class DemographicsManager
         for (Bloc bloc : demographics.toBlocsArray()) {
             bloc.addMember(character);
         }
+    }
+
+    public static Bloc matchBlocName(String name){
+        for(Bloc bloc : Bloc.getInstances()){
+            if(bloc.getName().equals(name)) return bloc;
+        }
+        Engine.log("INVALID BLOC NAME", String.format("The Bloc name \"%s\" is non-existent and could not be matched.", name), new Exception());
+        return null;
     }
 
 }

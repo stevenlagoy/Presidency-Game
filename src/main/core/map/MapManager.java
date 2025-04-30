@@ -209,4 +209,12 @@ public class MapManager
     public static List<City> getCities() {
         return cities;
     }
+
+    public static String generateSaveString() {
+        StringBuilder saveString = new StringBuilder();
+        for (State state : states) {
+            saveString.append(state.toRepr()).append("\n");
+        }
+        return saveString.toString();
+    }
 }

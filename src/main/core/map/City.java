@@ -53,6 +53,9 @@ public class City {
     public String getName() {
         return name;
     }
+    public String getNameWithState() {
+        return name + ", " + state.getAbbreviation();
+    }
     public void setName(String name) {
         this.name = name;
     }

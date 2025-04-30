@@ -232,7 +232,7 @@ public class CharacterManager
             HashMap<Object, Object> values = (HashMap<Object, Object>) json.get(key);
             HashMap<Bloc, HashMap<String, Double>> distributions = new HashMap<>();
             for (Object blocName : values.keySet()) {
-                Bloc bloc = Bloc.matchBlocName(blocName.toString());
+                Bloc bloc = DemographicsManager.matchBlocName(blocName.toString());
                 if (bloc == null) continue;
                 HashMap<Object, Object> names = (HashMap<Object, Object>) values.get(blocName);
                 HashMap<String, Double> blocDistributions = new HashMap<>();
@@ -270,7 +270,7 @@ public class CharacterManager
             HashMap<Object, Object> values = (HashMap<Object, Object>) json.get(key);
             HashMap<Bloc, HashMap<String, Double>> distributions = new HashMap<>();
             for (Object blocName : values.keySet()) {
-                Bloc bloc = Bloc.matchBlocName(blocName.toString());
+                Bloc bloc = DemographicsManager.matchBlocName(blocName.toString());
                 if (bloc == null) continue;
                 HashMap<Object, Object> names = (HashMap<Object, Object>) values.get(blocName);
                 HashMap<String, Double> blocDistributions = new HashMap<>();
@@ -298,7 +298,7 @@ public class CharacterManager
         lastNamesDistribution = new HashMap<Bloc, HashMap<String, Double>>();
 
         for (Object blocName : json.keySet()) {
-            Bloc bloc = Bloc.matchBlocName(blocName.toString());
+            Bloc bloc = DemographicsManager.matchBlocName(blocName.toString());
             if (bloc == null) continue;
             HashMap<Object, Object> names = (HashMap<Object, Object>) json.get(blocName);
             HashMap<String, Double> blocDistributions = new HashMap<>();
@@ -612,7 +612,7 @@ public class CharacterManager
     public static Bloc generatePresentation(Demographics demographics){
         // Using the other fields of the demographics object, select a presentation.
         
-        return Bloc.matchBlocName("");
+        return DemographicsManager.matchBlocName("Woman");
     }
 
     public static void generateBlocsReport() {
@@ -631,5 +631,13 @@ public class CharacterManager
             }
         }
         System.out.println("TOTAL # CHARACTERS : " + getNumCharacters());
+    }
+
+    public static String generateSaveString() {
+        StringBuilder saveString = new StringBuilder();
+        for (Character character : characters) {
+            saveString.append(character.toRepr());
+        }
+        return saveString.toString();
     }
 }

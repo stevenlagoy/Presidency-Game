@@ -6,7 +6,7 @@
             "lifespan": "1732-1799",
             "term_years": ["1789-1797"],
             "election_years": ["1789", "1792"],
-            "vice_president": ["John Adams"],
+            "vice_presidents": ["John Adams"],
             "political_party": "Independent"
         },
         {
@@ -15,7 +15,7 @@
             "lifespan": "1735-1826",
             "term_years": ["1797-1801"],
             "election_years": ["1796"],
-            "vice_president": ["Thomas Jefferson"],
+            "vice_presidents": ["Thomas Jefferson"],
             "political_party": "Federalist"
         },
         {
@@ -24,7 +24,7 @@
             "lifespan": "1743-1826",
             "term_years": ["1801-1809"],
             "election_years": ["1800", "1804"],
-            "vice_president": ["Aaron Burr", "George Clinton"],
+            "vice_presidents": ["Aaron Burr", "George Clinton"],
             "political_party": "Democratic-Republican"
         },
         {
@@ -33,7 +33,7 @@
             "lifespan": "1751-1836",
             "term_years": ["1809-1817"],
             "election_years": ["1808", "1812"],
-            "vice_president": ["George Clinton", "Elbridge Gerry"],
+            "vice_presidents": ["George Clinton", "Elbridge Gerry"],
             "political_party": "Democratic-Republican"
         },
         {
@@ -42,7 +42,7 @@
             "lifespan": "1758-1831",
             "term_years": ["1817-1825"],
             "election_years": ["1816", "1820"],
-            "vice_president": ["Daniel D. Tompkins"],
+            "vice_presidents": ["Daniel D. Tompkins"],
             "political_party": "Democratic-Republican"
         },
         {
@@ -51,7 +51,7 @@
             "lifespan": "1767-1848",
             "term_years": ["1825-1829"],
             "election_years": ["1824"],
-            "vice_president": ["John Caldwell Calhoun"],
+            "vice_presidents": ["John Caldwell Calhoun"],
             "political_party": "Democratic-Republican"
         },
         {
@@ -60,7 +60,7 @@
             "lifespan": "1767-1845",
             "term_years": ["1829-1837"],
             "election_years": ["1828", "1832"],
-            "vice_president": ["John Caldwell Calhoun", "Martin Van Buren"],
+            "vice_presidents": ["John Caldwell Calhoun", "Martin Van Buren"],
             "political_party": "Democratic"
         },
         {
@@ -69,7 +69,7 @@
             "lifespan": "1782-1862",
             "term_years": ["1837-1841"],
             "election_years": ["1836"],
-            "vice_president": ["Richard Mentor Johnson"],
+            "vice_presidents": ["Richard Mentor Johnson"],
             "political_party": "Democratic"
         },
         {
@@ -78,7 +78,7 @@
             "lifespan": "1773-1841",
             "term_years": ["1841"],
             "election_years": ["1840"],
-            "vice_president": ["John Tyler"],
+            "vice_presidents": ["John Tyler"],
             "political_party": "Whig"
         },
         {
@@ -87,7 +87,7 @@
             "lifespan": "1790-1862",
             "term_years": ["1841-1845"],
             "election_years": ["-"],
-            "vice_president": ["-"],
+            "vice_presidents": ["-"],
             "political_party": "Whig"
         },
         {
@@ -96,7 +96,7 @@
             "lifespan": "1795-1849",
             "term_years": ["1845-1849"],
             "election_years": ["1844"],
-            "vice_president": ["George Mifflin Dallas"],
+            "vice_presidents": ["George Mifflin Dallas"],
             "political_party": "Democratic"
         },
         {
@@ -105,7 +105,7 @@
             "lifespan": "1784-1850",
             "term_years": ["1849-1850"],
             "election_years": ["1848"],
-            "vice_president": ["Millard Fillmore"],
+            "vice_presidents": ["Millard Fillmore"],
             "political_party": "Whig"
         },
         {
@@ -114,7 +114,7 @@
             "lifespan": "1800-1874",
             "term_years": ["1850-1853"],
             "election_years": ["-"],
-            "vice_president": ["-"],
+            "vice_presidents": ["-"],
             "political_party": "Whig"
         },
         {
@@ -123,7 +123,7 @@
             "lifespan": "1804-1869",
             "term_years": ["1853-1857"],
             "election_years": ["1853-1857"],
-            "vice_president": ["William Rufus DeVane King"],
+            "vice_presidents": ["William Rufus DeVane King"],
             "political_party": "Democratic"
         },
         {
@@ -132,7 +132,7 @@
             "lifespan": "1791-1868",
             "term_years": ["1857-1861"],
             "election_years": ["1856"],
-            "vice_president": ["John Cabell Breckinridge"],
+            "vice_presidents": ["John Cabell Breckinridge"],
             "political_party": "Democratic"
         },
         {
@@ -141,7 +141,7 @@
             "lifespan": "1809-1865",
             "term_years": ["1861-1865"],
             "election_years": ["1860", "1864"],
-            "vice_president": ["Hannibal Hamlin", "Andrew Johnson"],
+            "vice_presidents": ["Hannibal Hamlin", "Andrew Johnson"],
             "political_party": "Rebublican"
         },
         {
@@ -150,7 +150,7 @@
             "lifespan": "1808-1875",
             "term_years": ["1865-1869"],
             "election_years": ["-"],
-            "vice_president": ["-"],
+            "vice_presidents": ["-"],
             "political_party": "Democratic"
         },
         {
@@ -159,7 +159,7 @@
             "lifespan": "1822-1885",
             "term_years": ["1869-1877"],
             "election_years": ["1869", "1872"],
-            "vice_president": ["Schuyler Colfax", "Henry Wilson"],
+            "vice_presidents": ["Schuyler Colfax", "Henry Wilson"],
             "political_party": "Republican"
         },
         {
@@ -168,7 +168,7 @@
             "lifespan": "1822-1893",
             "term_years": ["1877-1881"],
             "election_years": [""],
-            "vice_president": ["William A. Wheeler"],
+            "vice_presidents": ["William A. Wheeler"],
             "political_party": "Republican"
         },
         {
@@ -177,7 +177,7 @@
             "lifespan": "1831-1881",
             "term_years": ["1881-1881"],
             "election_years": ["1880"],
-            "vice_president": ["Chester Alan Arthur"],
+            "vice_presidents": ["Chester Alan Arthur"],
             "political_party": "Republican"
         },
         {
@@ -186,7 +186,7 @@
             "lifespan": "1829-1886",
             "term_years": ["1881-1885"],
             "election_years": ["-"],
-            "vice_president": ["-"],
+            "vice_presidents": ["-"],
             "political_party": "Republican"
         },
         {
@@ -195,7 +195,7 @@
             "lifespan": "1837-1908",
             "term_years": ["1885-1889"],
             "election_years": ["1884"],
-            "vice_president": ["Thomas A. Hendricks"],
+            "vice_presidents": ["Thomas A. Hendricks"],
             "political_party": "Democratic"
         },
         {
@@ -204,7 +204,7 @@
             "lifespan": "1833-1901",
             "term_years": ["1889-1893"],
             "election_years": ["1888"],
-            "vice_president": ["Levi P. Morton"],
+            "vice_presidents": ["Levi P. Morton"],
             "political_party": "Republican"
         },
         {
@@ -213,7 +213,7 @@
             "lifespan": "1837-1908",
             "term_years": ["1893-1897"],
             "election_years": ["1892"],
-            "vice_president": ["Adlai Stevenson I"],
+            "vice_presidents": ["Adlai Stevenson I"],
             "political_party": "Democratic"
         },
         {
@@ -222,7 +222,7 @@
             "lifespan": "1843-1901",
             "term_years": ["1897-1901"],
             "election_years": ["1896", "1900"],
-            "vice_president": ["Garret Hobart", "Theodore Roosevelt"],
+            "vice_presidents": ["Garret Hobart", "Theodore Roosevelt"],
             "political_party": "Republican"
         },
         {
@@ -231,7 +231,7 @@
             "lifespan": "1858-1919",
             "term_years": ["1901-1909"],
             "election_years": ["-", "1904"],
-            "vice_president": ["-", "Charles W. Fairbanks"],
+            "vice_presidents": ["-", "Charles W. Fairbanks"],
             "political_party": "Republican"
         },
         {
@@ -240,7 +240,7 @@
             "lifespan": "1857-1930",
             "term_years": ["1909-1913"],
             "election_years": ["1908"],
-            "vice_president": ["James S. Sherman"],
+            "vice_presidents": ["James S. Sherman"],
             "political_party": "Republican"
         },
         {
@@ -249,7 +249,7 @@
             "lifespan": "1856-1924",
             "term_years": ["1913-1921"],
             "election_years": ["1912", "1916"],
-            "vice_president": ["Thomas R. Marshall"],
+            "vice_presidents": ["Thomas R. Marshall"],
             "political_party": "Democratic"
         },
         {
@@ -258,7 +258,7 @@
             "lifespan": "1865-1923",
             "term_years": ["1921-1923"],
             "election_years": ["1920"],
-            "vice_president": ["Calvin Coolidge"],
+            "vice_presidents": ["Calvin Coolidge"],
             "political_party": "Republican"
         },
         {
@@ -267,7 +267,7 @@
             "lifespan": "1872-1933",
             "term_years": ["1923-1929"],
             "election_years": ["-", "1924"],
-            "vice_president": ["Charles G. Dawes"],
+            "vice_presidents": ["Charles G. Dawes"],
             "political_party": "Republican"
         },
         {
@@ -276,7 +276,7 @@
             "lifespan": "1874-1964",
             "term_years": ["1929-1933"],
             "election_years": ["1928"],
-            "vice_president": ["Charles Curtis"],
+            "vice_presidents": ["Charles Curtis"],
             "political_party": "Republican"
         },
         {
@@ -285,7 +285,7 @@
             "lifespan": "1882-1945",
             "term_years": ["1933-1945"],
             "election_years": ["1932", "1936", "1940", "1944"],
-            "vice_president": ["John Nance Garner", "Henry A. Wallace", "Harry S. Truman"],
+            "vice_presidents": ["John Nance Garner", "Henry A. Wallace", "Harry S. Truman"],
             "political_party": "Democratic"
         },
         {
@@ -294,7 +294,7 @@
             "lifespan": "1884-1972",
             "term_years": ["1945-1953"],
             "election_years": ["-", "1948"],
-            "vice_president": ["Alben W. Barkley"],
+            "vice_presidents": ["Alben W. Barkley"],
             "political_party": "Democratic"
         },
         {
@@ -303,7 +303,7 @@
             "lifespan": "1890-1969",
             "term_years": ["1953-1961"],
             "election_years": ["1952", "1956"],
-            "vice_president": ["Richard Nixon"],
+            "vice_presidents": ["Richard Nixon"],
             "political_party": "Republican"
         },
         {
@@ -312,7 +312,7 @@
             "lifespan": "1917-1963",
             "term_years": ["1961-1963"],
             "election_years": ["1960"],
-            "vice_president": ["Lyndon Baines Johnson"],
+            "vice_presidents": ["Lyndon Baines Johnson"],
             "political_party": "Democratic"
         },
         {
@@ -321,7 +321,7 @@
             "lifespan": "1908-1973",
             "term_years": ["1963-1969"],
             "election_years": ["-", "1964"],
-            "vice_president": ["Hubert Humphrey"],
+            "vice_presidents": ["Hubert Humphrey"],
             "political_party": "Democratic"
         },
         {
@@ -330,7 +330,7 @@
             "lifespan": "1913-1994",
             "term_years": ["1969-1974"],
             "election_years": ["1968", "1972"],
-            "vice_president": ["Spiro Agnew", "Gerald Ford"],
+            "vice_presidents": ["Spiro Agnew", "Gerald Ford"],
             "political_party": "Republican"
         },
         {
@@ -339,7 +339,7 @@
             "lifespan": "1913-2006",
             "term_years": ["1974-1977"],
             "election_years": ["-"],
-            "vice_president": ["Nelson Rockefeller"],
+            "vice_presidents": ["Nelson Rockefeller"],
             "political_party": "Republican"
         },
         {
@@ -348,7 +348,7 @@
             "lifespan": "1924-",
             "term_years": ["1977-1981"],
             "election_years": ["1977-1981"],
-            "vice_president": ["Walter Mondale"],
+            "vice_presidents": ["Walter Mondale"],
             "political_party": "Democratic"
         },
         {
@@ -357,7 +357,7 @@
             "lifespan": "1911-2004",
             "term_years": ["1981-1989"],
             "election_years": ["1980", "1984"],
-            "vice_president": ["George H. W. Bush"],
+            "vice_presidents": ["George H. W. Bush"],
             "political_party": "Republican"
         },
         {
@@ -366,7 +366,7 @@
             "lifespan": "1924-2018",
             "term_years": ["1989-1993"],
             "election_years": ["1988"],
-            "vice_president": ["Dan Quayle"],
+            "vice_presidents": ["Dan Quayle"],
             "political_party": "Republican"
         },
         {
@@ -375,7 +375,7 @@
             "lifespan": "1946-",
             "term_years": ["1993-2001"],
             "election_years": ["1992", "1996"],
-            "vice_president": ["Al Gore"],
+            "vice_presidents": ["Al Gore"],
             "political_party": "Democratic"
         },
         {
@@ -384,7 +384,7 @@
             "lifespan": "1946-",
             "term_years": ["2001-2009"],
             "election_years": ["2000", "2004"],
-            "vice_president": ["Dick Cheney"],
+            "vice_presidents": ["Dick Cheney"],
             "political_party": "Republican"
         },
         {
@@ -393,7 +393,7 @@
             "lifespan": "1961-",
             "term_years": ["2009-2017"],
             "election_years": ["2008", "2012"],
-            "vice_president": ["Joseph Biden"],
+            "vice_presidents": ["Joseph Biden"],
             "political_party": "Democratic"
         },
         {
@@ -402,7 +402,7 @@
             "lifespan": "1946-",
             "term_years": ["2017-2021"],
             "election_years": ["2016"],
-            "vice_president": ["Mike Pence"],
+            "vice_presidents": ["Mike Pence"],
             "political_party": "Republican"
         },
         {
@@ -411,7 +411,7 @@
             "lifespan": "1942-",
             "term_years": ["2021-2025"],
             "election_years": ["2020"],
-            "vice_president": ["Kamala Harris"],
+            "vice_presidents": ["Kamala Harris"],
             "political_party": "Democratic"
         },
         {
@@ -420,9 +420,8 @@
             "lifespan": "1946-",
             "term_years": ["2025-2029"],
             "election_years": ["2024"],
-            "vice_president": ["JD Vance"],
+            "vice_presidents": ["JD Vance"],
             "political_party": "Republican"
         }
-        
     ]
 }

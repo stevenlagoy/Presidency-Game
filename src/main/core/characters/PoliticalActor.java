@@ -7,6 +7,7 @@ import main.core.Engine;
 import main.core.Repr;
 import main.core.characters.Experience;
 import main.core.characters.Personality;
+import main.core.demographics.Demographics;
 import main.core.politics.Issue;
 import main.core.politics.Position;
 
@@ -33,6 +34,9 @@ public class PoliticalActor extends Character implements Repr, HasPersonality {
 
     public PoliticalActor(){
         super();
+    }
+    public PoliticalActor(Name name, Demographics demographics) {
+        super(name, demographics);
     }
     public PoliticalActor(String buildstring){
         super(buildstring);
@@ -146,12 +150,50 @@ public class PoliticalActor extends Character implements Repr, HasPersonality {
     public void determinePersonality(){
 
     }
+    public Personality getPersonality() {
+        return personality;
+    }
+    public void setPersonality(Personality personality) {
+        this.personality = personality;
+    }
 
     public void fromRepr(String repr){
 
     }
     public String toRepr(){
-        String repr = "";
+        String superRepr = super.toRepr();
+        String[] splitSuperRepr = superRepr.split(":\\[");
+        superRepr = "";
+        for (int i = 1; i < splitSuperRepr.length; i++) {
+            superRepr += splitSuperRepr[i] + ":[";
+        }
+        superRepr = superRepr.substring(0, superRepr.length() - 4);
+        String[] experiencesStrings = new String[experiences.size()];
+        for (int i = 0; i < experiences.size(); i++) {
+            experiencesStrings[i] = experiences.get(i).toRepr();
+        }
+        String experiencesRepr = Engine.arrayToReprList(experiencesStrings);
+        String[] positionsStrings = new String[positions.size()];
+        for (int i = 0; i < positions.size(); i++) {
+            positionsStrings[i] = experiences.get(i).toRepr();
+        }
+        String positionsRepr = Engine.arrayToReprList(positionsStrings);
+        String repr = String.format("%s:[%scash=%d;education=%d;alignments=(%d,%d);experiences=[%s];legislativeSkill=%d;executiveSkill=%d;judicialSkill=%d;aptitude=%d;positions=[%s];conviction=%d;ageMod=%f;personality=%s;];",
+            this.getClass().getName().split("\\.")[this.getClass().getName().split("\\.").length - 1],
+            superRepr,
+            cash,
+            education,
+            alignments[0], alignments[1],
+            experiencesRepr,
+            legislativeSkill,
+            executiveSkill,
+            judicialSkill,
+            aptitude,
+            positionsRepr,
+            conviction,
+            ageMod,
+            personality.toRepr()
+        );
         return repr;
     }
 }

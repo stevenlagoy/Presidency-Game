@@ -13,6 +13,7 @@ public abstract class FilePaths {
     public static final String localizationFolder_loc = RESOURCES + "/localization";
     public static final String systemText_loc = "_system_text.txt";
     public static final String descriptions_loc = "_descriptions.txt";
+    public static final String saves = "saves/";
 
     // CHARACTER MANAGER FILES
     public static final String birthdate_popularity = "birthdate_popularities.JSON";
@@ -22,6 +23,7 @@ public abstract class FilePaths {
     public static final String lastname_popularity = RESOURCES + "/names/lastname_distribution.json";
     public static final String nicknames = RESOURCES + "/names/nicknames.json";
 
+    // MAP MANAGER FILES
     public static final String states = RESOURCES + "/states.json";
     public static final String congressional_districts = RESOURCES + "/congressional_districts.json";
     public static final String counties = RESOURCES + "/counties.json";

@@ -258,6 +258,32 @@ public class Engine {
         return active;
     }
 
+    public static void writeSave() {
+        try {
+            String saveName = String.format("%s - %s", playerCandidate.getName().getFullName(), DateManager.formattedCurrentDate());
+            File saveFile = new File(FilePaths.saves, saveName + ".txt");
+            for (int i = 1; saveFile.exists(); i++) {
+                saveName = String.format("%s - %s %s", playerCandidate.getName().getFullName(), DateManager.formattedCurrentDate(), String.format("(%d)", i));
+                saveFile = new File(FilePaths.saves, saveName + ".txt");
+            }
+            saveFile.createNewFile();
+            FileWriter fw = new FileWriter(saveFile);
+            fw.append(CharacterManager.generateSaveString());
+            fw.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<String> listSaveNames() {
+        return null;
+    }
+
+    public static void readSave(String saveName) {
+
+    }
+
     // public static void initOpenGL() {
     //     // Initialize GLFW
     //     if (!glfwInit()) {

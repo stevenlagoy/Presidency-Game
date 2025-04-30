@@ -6,6 +6,7 @@ import java.util.stream.IntStream;
 
 import main.core.Engine;
 import main.core.Repr;
+import main.core.demographics.Demographics;
 
 public class Candidate extends PoliticalActor implements Repr, HasPersonality {
 
@@ -25,6 +26,9 @@ public class Candidate extends PoliticalActor implements Repr, HasPersonality {
 
     public Candidate(){
         super();
+    }
+    public Candidate(Name name, Demographics demographics) {
+        super(name, demographics);
     }
     public Candidate(String buildstring)
     {
@@ -179,7 +183,19 @@ public class Candidate extends PoliticalActor implements Repr, HasPersonality {
     }
 
     public String toRepr(){
-        String repr = String.format("");
+        String superRepr = super.toRepr();
+        String[] splitSuperRepr = superRepr.split(":\\[");
+        superRepr = "";
+        for (int i = 1; i < splitSuperRepr.length; i++) {
+            superRepr += splitSuperRepr[i] + ":[";
+        }
+        superRepr = superRepr.substring(0, superRepr.length() - 5);
+        String repr = String.format("%s:[%snumDelegates=%d;influence=%s;];",
+            this.getClass().getName().split("\\.")[this.getClass().getName().split("\\.").length - 1],
+            superRepr,
+            numDelegates,
+            influence
+        );
         return repr;
     }
     public void fromRepr(String repr){

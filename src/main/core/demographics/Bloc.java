@@ -27,14 +27,6 @@ public class Bloc implements Repr {
         return demographics.size();
     }
 
-    public static Bloc matchBlocName(String name){
-        for(Bloc bloc : instances){
-            if(bloc.name.equals(name)) return bloc;
-        }
-        Engine.log("INVALID BLOC NAME", String.format("The Bloc name \"%s\" is non-existent and could not be matched.", name), new Exception());
-        return null;
-    }
-
     private String name;
     private int numVoters;
     private List<main.core.characters.Character> members;

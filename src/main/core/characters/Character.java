@@ -149,7 +149,7 @@ public class Character implements Repr {
         long age = 0;
         Integer[] range = IntStream.rangeClosed(1,10).boxed().toArray(Integer[]::new);
         while(age < MIN_AGE || age > MAX_AGE){
-            age = Engine.weightedRandSelect(range, DemographicsManager.getPopulationPyramidPercent(DemographicsManager.EVERYONE));
+            //age = Engine.weightedRandSelect(range, DemographicsManager.getPopulationPyramidPercent(DemographicsManager.EVERYONE));
         }
     }
     public void setAgeMillis(long age){ // this should almost never be used
@@ -179,6 +179,13 @@ public class Character implements Repr {
         this.birthday = new Date(milliseconds);
     }
 
+    public CharacterModel getAppearance() {
+        return appearance;
+    }
+    public void setAppearance(CharacterModel appearance) {
+        this.appearance = appearance;
+    }
+
     public void fromRepr(String repr){
 
     }
@@ -189,12 +196,16 @@ public class Character implements Repr {
     public String toString(){
         return this.toRepr();
     }
-    public String toRepr(){
+    public String toRepr() {
         String repr = String.format(
-            "%s:[name:\"%s\";origin=;birthday=%d;];",
-            this.getClass().toString().replace("class ", ""),
+            "%s:[name:%sbirthplaceCity=%s;currentLocationCity=%s;residenceCity=%s;birthday=%d;appearance=%s];",
+            this.getClass().getName().split("\\.")[this.getClass().getName().split("\\.").length - 1],
             this.name.toRepr(),
-            this.birthday
+            this.birthplaceCity.getNameWithState(),
+            this.currentLocationCity.getNameWithState(),
+            this.residenceCity.getNameWithState(),
+            this.birthday.getTime(),
+            this.appearance.toRepr()
         );
         return repr;
     }
