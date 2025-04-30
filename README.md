@@ -2,6 +2,10 @@
 
 A real-time strategy/roleplaying game that simulates the complex journey of running for President of the United States.
 
+## NOTE
+
+This is a work-in-progress personal project. While running this code will not harm your computer, I cannot guarantee it will run on every machine, and even if it does run then there's likely little to be seen. The game is very much in pre-alpha and everything is liable to change with later development. So have no expectations for what this game will actually do. Thanks :) ✨
+
 ## Overview
 
 Race for the Presidency is a detailed political simulation game where you take on the role of a presidential candidate in the United States. Navigate the complex political landscape as you:
