@@ -1,4 +1,0 @@
-{
-    "list" : ["list1", "list2,with comma", "list3", ",,,"],
-    "not a list" : "this is not a list"
-}
