@@ -6,6 +6,13 @@
         "configurations": [
                 {
                         "type": "java",
+                        "name": "Launcher",
+                        "request": "launch",
+                        "mainClass": "main.core.graphics.game.Launcher",
+                        "projectName": "presidency-game"
+                },
+                {
+                        "type": "java",
                         "name": "Project",
                         "request": "launch",
                         "mainClass": "main.core.Project",
