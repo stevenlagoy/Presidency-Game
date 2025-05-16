@@ -1,5 +1,6 @@
 package main.core;
 
+import java.nio.file.Path;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,6 +8,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import core.JSONObject;
+import core.JSONProcessor;
+import core.JSONStringifier;
 import main.core.characters.Candidate;
 import main.core.characters.Character;
 import main.core.characters.CharacterManager;
@@ -26,6 +30,7 @@ public class Main
     public static TestGame game;
 
     public static void main(String[] args){
+
         boolean active;
         try {
             Engine.language = Engine.Language.EN;

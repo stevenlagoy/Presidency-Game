@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.print.DocFlavor.STRING;
 
+import core.JSONObject;
+import core.JSONProcessor;
 import main.core.Engine;
 import main.core.FilePaths;
 
@@ -28,10 +30,10 @@ public class MapManager
     public static double mapCameraX; // X-coordinate on the map which the camera is currently centered on. 0.0 is center of map.
     public static double mapCameraY; // Y-coordinate on the map which the camera is currently centered on. 0.0 is center of map.
 
-    public static List<State> states = new ArrayList<>();
-    public static List<CongressionalDistrict> congressionalDistricts = new ArrayList<>();
-    public static List<County> counties = new ArrayList<>();
-    public static List<City> cities = new ArrayList<>();
+    public static List<State>                   states                  = new ArrayList<>();
+    public static List<CongressionalDistrict>   congressionalDistricts  = new ArrayList<>();
+    public static List<County>                  counties                = new ArrayList<>();
+    public static List<City>                    cities                  = new ArrayList<>();
 
     public static void init(){
         setMapMode(0);
@@ -61,84 +63,126 @@ public class MapManager
         resolveLocationFields();
     }
     public static void createStates() {
-        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.states);
-        for (Object o : json.keySet()) {
-            HashMap<String, String> state = (HashMap<String, String>) json.get(o);
-            states.add(new State(
-                Integer.parseInt(state.get("FIPS")),
-                state.get("name"),
-                Integer.parseInt(state.get("population")),
-                state.get("abbreviation"),
-                state.get("motto"),
-                state.get("nickname")
-            ));
+        JSONObject json = JSONProcessor.processJson(FilePaths.STATES);
+
+        for (Object element : json) {
+            System.out.println(element.toString());
         }
+
+        // TODO: Fix old json functionality
+        // for (Object o : json.keySet()) {
+        //     HashMap<String, String> state = (HashMap<String, String>) json.get(o);
+        //     states.add(new State(
+        //         Integer.parseInt(state.get("FIPS")),
+        //         state.get("name"),
+        //         Integer.parseInt(state.get("population")),
+        //         state.get("abbreviation"),
+        //         state.get("motto"),
+        //         state.get("nickname")
+        //     ));
+        // }
     }
     public static void createCongressionalDistricts() {
-        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.congressional_districts);
-        for (Object o : json.keySet()) {
-            HashMap<String, String> district = (HashMap<String, String>) json.get(o);
-            congressionalDistricts.add(new CongressionalDistrict(
-                district.get("hexID"),
-                district.get("nameLSAD"),
-                district.get("districtNum"),
-                district.get("officeID")
-            ));
+        JSONObject json = JSONProcessor.processJson(FilePaths.CONGRESSIONAL_DISTRICTS);
+
+        for (Object element : json) {
+            System.out.println(element.toString());
         }
+
+        // TODO: Fix old json functionality
+        // for (Object o : json.keySet()) {
+        //     HashMap<String, String> district = (HashMap<String, String>) json.get(o);
+        //     congressionalDistricts.add(new CongressionalDistrict(
+        //         district.get("hexID"),
+        //         district.get("nameLSAD"),
+        //         district.get("districtNum"),
+        //         district.get("officeID")
+        //     ));
+        // }
     }
     public static void createCounties() {
-        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.counties);
-        for (Object o : json.keySet()) {
-            HashMap<String, String> county = (HashMap<String, String>) json.get(o);
-            counties.add(new County(
-                county.get("FIPS"),
-                county.get("name"),
-                Integer.parseInt(county.get("population")),
-                Double.parseDouble(county.get("square_milage"))
-            ));
+        JSONObject json = JSONProcessor.processJson(FilePaths.COUNTIES);
+
+        for (Object element : json) {
+            System.out.println(element.toString());
         }
+
+        // TODO: Fix old json functionality
+        // for (Object o : json.keySet()) {
+        //     HashMap<String, String> county = (HashMap<String, String>) json.get(o);
+        //     counties.add(new County(
+        //         county.get("FIPS"),
+        //         county.get("name"),
+        //         Integer.parseInt(county.get("population")),
+        //         Double.parseDouble(county.get("square_milage"))
+        //     ));
+        // }
     }
     public static void createCities() {
-        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.cities);
-        for (Object o : json.keySet()) {
-            HashMap<String, String> city = (HashMap<String, String>) json.get(o);
-            cities.add(new City(
-                city.get("name"),
-                Integer.parseInt(city.get("population2027")),
-                Double.parseDouble(city.get("landArea2020"))
-            ));
+        JSONObject json = JSONProcessor.processJson(FilePaths.CITIES);
+
+        for (Object element : json) {
+            System.out.println(element.toString());
         }
+
+        // TODO: Fix old json functionality
+        // for (Object o : json.keySet()) {
+        //     HashMap<String, String> city = (HashMap<String, String>) json.get(o);
+        //     cities.add(new City(
+        //         city.get("name"),
+        //         Integer.parseInt(city.get("population2027")),
+        //         Double.parseDouble(city.get("landArea2020"))
+        //     ));
+        // }
     }
 
     private static void resolveLocationFields() {
-        HashMap<Object, Object> json;
+        JSONObject json;
 
         // Fix Congressional Districts
-        json = Engine.readJSONFile(FilePaths.congressional_districts);
-        for (Object o : json.keySet()) {
-            HashMap<String, String> d = (HashMap<String, String>) json.get(o);
-            CongressionalDistrict congressionalDistrict = matchCongressionalDistrict(d.get("officeID"));
-            congressionalDistrict.setState(matchState(d.get("state")));
+        json = JSONProcessor.processJson(FilePaths.CONGRESSIONAL_DISTRICTS);
+
+        for (Object element : json) {
+            System.out.println(element.toString());
         }
+
+        // TODO: Fix old json functionality
+        // for (Object o : json.keySet()) {
+        //     HashMap<String, String> d = (HashMap<String, String>) json.get(o);
+        //     CongressionalDistrict congressionalDistrict = matchCongressionalDistrict(d.get("officeID"));
+        //     congressionalDistrict.setState(matchState(d.get("state")));
+        // }
 
         // Fix Counties
-        json = Engine.readJSONFile(FilePaths.counties);
-        for (Object o : json.keySet()) {
-            HashMap<String, String> c = (HashMap<String, String>) json.get(o);
-            County county = matchCounty(c.get("FIPS"));
-            county.setState(matchState(c.get("state")));
-            //county.setCongressionalDistrict(null);
-            //county.setCountySeat(matchCity(c.get("county_seat"), c.get("state")));
+        json = JSONProcessor.processJson(FilePaths.COUNTIES);
+
+        for (Object element : json) {
+            System.out.println(element.toString());
         }
 
+        // TODO: Fix old json functionality
+        // for (Object o : json.keySet()) {
+        //     HashMap<String, String> c = (HashMap<String, String>) json.get(o);
+        //     County county = matchCounty(c.get("FIPS"));
+        //     county.setState(matchState(c.get("state")));
+        //     //county.setCongressionalDistrict(null);
+        //     //county.setCountySeat(matchCity(c.get("county_seat"), c.get("state")));
+        // }
+
         // Fix Cities
-        json = Engine.readJSONFile(FilePaths.cities);
-        for (Object o : json.keySet()) {
-            HashMap<String, String> c = (HashMap<String, String>) json.get(o);
-            City city = matchCity(c.get("name"), Integer.parseInt(c.get("population2027")), Double.parseDouble(c.get("landArea2020")));
-            city.setState(matchState(c.get("state")));
-            //city.setDistrict(null);
+        json = JSONProcessor.processJson(FilePaths.CITIES);
+
+        for (Object element : json) {
+            System.out.println(element.toString());
         }
+
+        // TODO: Fix old json functionality
+        // for (Object o : json.keySet()) {
+        //     HashMap<String, String> c = (HashMap<String, String>) json.get(o);
+        //     City city = matchCity(c.get("name"), Integer.parseInt(c.get("population2027")), Double.parseDouble(c.get("landArea2020")));
+        //     city.setState(matchState(c.get("state")));
+        //     //city.setDistrict(null);
+        // }
     }
 
     public static State matchState(String stateName) {

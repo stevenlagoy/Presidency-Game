@@ -82,9 +82,9 @@
 
         <!-- JSON Processing -->
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20231013</version>
+            <groupId>com.github.stevenlagoy</groupId>
+            <artifactId>json-java-objectifier</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 

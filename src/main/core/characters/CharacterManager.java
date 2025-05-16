@@ -1,10 +1,11 @@
 package main.core.characters;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import core.JSONObject;
+import core.JSONProcessor;
 import main.core.Engine;
 import main.core.FilePaths;
 import main.core.demographics.Bloc;
@@ -14,34 +15,33 @@ import main.core.demographics.DemographicsManager;
 public class CharacterManager
 {
     
-    private static List<Character> characters = new LinkedList<Character>();
+    private static List<Character>          characters          = new LinkedList<Character>();
     private static List<GovernmentOfficial> governmentOfficials = new LinkedList<GovernmentOfficial>();
-    private static List<Representative> representatives = new LinkedList<Representative>();
-    private static List<Senator> senators = new LinkedList<Senator>();
-    private static List<StateOfficial> stateOfficials = new LinkedList<StateOfficial>();
-    private static List<Governor> governors = new LinkedList<Governor>();
-    private static List<Mayor> mayors = new LinkedList<Mayor>();
-    private static List<Candidate> candidates = new LinkedList<Candidate>();
-    private static President president;
-    private static VicePresident vicePresident;
-    private static Character firstLady;
-    private static Representative HouseSpeaker;
+    private static List<Representative>     representatives     = new LinkedList<Representative>();
+    private static List<Senator>            senators            = new LinkedList<Senator>();
+    private static List<StateOfficial>      stateOfficials      = new LinkedList<StateOfficial>();
+    private static List<Governor>           governors           = new LinkedList<Governor>();
+    private static List<Mayor>              mayors              = new LinkedList<Mayor>();
+    private static List<Candidate>          candidates          = new LinkedList<Candidate>();
+    private static President                president;
+    private static VicePresident            vicePresident;
+    private static Character                firstLady;
+    private static Representative           HouseSpeaker;
 
-    private static final float asianEasternNamePercent = 0.50f; // percentage of Asian people who should have an Eastern name
-    private static final float asianWesternNamePercent = 0.25f; // percentage of Asian people with an Eastern name who should also have a Western name
-    private static final float hispanicHispanicNamePercent = 0.80f; // percentage of Hispanic/Latino people who should have a Hispanic name
-    private static final float nativeNativeNamePercent = 0.25f; // percentage of Native American people who should have a Native American name
-    private static final float hasMiddleNamePercent = 0.80f; // percentage of people with a middle name
-    private static final float multipleMiddleNamesPercent = 0.11f; // percentage of people with more middle names. 11% of people have 2, 0.121% have 3 etc
-    private static final float abbreviateFirstNamesPercent = 0.04f;
+    private static final float asianEasternNamePercent      = 0.50f; // percentage of Asian people who should have an Eastern name
+    private static final float asianWesternNamePercent      = 0.25f; // percentage of Asian people with an Eastern name who should also have a Western name
+    private static final float hispanicHispanicNamePercent  = 0.80f; // percentage of Hispanic/Latino people who should have a Hispanic name
+    private static final float nativeNativeNamePercent      = 0.25f; // percentage of Native American people who should have a Native American name
+    private static final float hasMiddleNamePercent         = 0.80f; // percentage of people with a middle name
+    private static final float multipleMiddleNamesPercent   = 0.11f; // percentage of people with more middle names. 11% of people have 2, 0.121% have 3 etc
+    private static final float abbreviateFirstNamesPercent  = 0.04f;
     private static final float abbreviateMiddleNamesPercent = 0.38f;
-    private static final float abbreviateBothNamesPercent = 0.08f;
-    private static final float useNicknamePercent = 0.23f; // Percentage of people who usually use a nickname. alternately could have each name in nicknames file have it's own percentage
-    private static final float useMiddleNicknamePercent = 0.04f;
-    private static final float srOrdinationPercent = 0.04f;
-    private static final float jrOrdinationPercent = 0.08f;
-    private static final float iiOrdinationPercent = 0.04f;
-
+    private static final float abbreviateBothNamesPercent   = 0.08f;
+    private static final float useNicknamePercent           = 0.23f; // Percentage of people who usually use a nickname. alternately could have each name in nicknames file have it's own percentage
+    private static final float useMiddleNicknamePercent     = 0.04f;
+    private static final float srOrdinationPercent          = 0.04f;
+    private static final float jrOrdinationPercent          = 0.08f;
+    private static final float iiOrdinationPercent          = 0.04f;
 
     public static boolean init(){
         boolean successFlag = true;
@@ -113,9 +113,12 @@ public class CharacterManager
     public static Personality matchPersonality(HasPersonality character){
         return new Personality();
     }
-    private static HashMap<String, HashMap<Integer, Double>> ageDistribution; // Key is the name of a demographic group, values are a list of age distributions among members of that group. Indexes within the arrays correspond to the year, starting in 1900. 0 = 1900, 1 = 1901, 100 = 2000, 101 = 2001, etc.
-    private static int numberOfYears = 200; // assume that no more than this many years will be read
-    private static int startYear = 1900; // assume that the first year will be 1900
+    /** Key is the name of a demographic group, values are a list of age distributions among members of that group. Indexes within the arrays correspond to the year, starting in 1900. 0 = 1900, 1 = 1901, 100 = 2000, 101 = 2001, etc. */
+    private static HashMap<String, HashMap<Integer, Double>> ageDistribution;
+    /** Assume that no more than this many years will be read. */
+    private static int numberOfYears = 200;
+    /** Assume that the first year will be 1900. */
+    private static int startYear = 1900;
     public static HashMap<Integer, Double> getAgeDistribution(Demographics demographics){
         if(demographics == null) demographics = DemographicsManager.getMostCommonDemographics();
 
@@ -167,24 +170,29 @@ public class CharacterManager
             return ageDistribution.get(demographicGroup);
         }
 
-        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.birthyear_percentages); // read the JSON file
+        JSONObject json = JSONProcessor.processJson(FilePaths.BIRTHYEAR_DISTR); // read the JSON file
         CharacterManager.ageDistribution = new HashMap<String, HashMap<Integer, Double>>(); // initialize the map
 
-        for(Object key : json.keySet()){
-            String keyString = (String) key;
-            HashMap<Integer, Double> distribution = new HashMap<Integer, Double>();
-            for(int i = 0; i < numberOfYears; i++){
-                distribution.put(i + startYear, 0.0);
-            }
-            if(json.get(key).equals("null")) continue;
-            @SuppressWarnings("unchecked")
-            HashMap<Object, Object> values = (HashMap<Object, Object>) json.get(key); // known structure of the JSON file
-            for(Object year : values.keySet()){
-                int yearInt = Integer.parseInt((String) year);
-                distribution.put(yearInt, Double.parseDouble((String) values.get(year)));
-            }
-            ageDistribution.put(keyString, distribution);
+        for (Object entry : json) {
+            System.out.println(entry.toString());
         }
+
+        // TODO: Replace old json functionality
+        // for(Object key : json.keySet()){
+        //     String keyString = (String) key;
+        //     HashMap<Integer, Double> distribution = new HashMap<Integer, Double>();
+        //     for(int i = 0; i < numberOfYears; i++){
+        //         distribution.put(i + startYear, 0.0);
+        //     }
+        //     if(json.get(key).equals("null")) continue;
+        //     @SuppressWarnings("unchecked")
+        //     HashMap<Object, Object> values = (HashMap<Object, Object>) json.get(key); // known structure of the JSON file
+        //     for(Object year : values.keySet()){
+        //         int yearInt = Integer.parseInt((String) year);
+        //         distribution.put(yearInt, Double.parseDouble((String) values.get(year)));
+        //     }
+        //     ageDistribution.put(keyString, distribution);
+        // }
 
         return getAgeDistribution(demographicGroup); // the map is now populated
     }
@@ -192,14 +200,19 @@ public class CharacterManager
     public static HashMap<String, Double> getBirthdateDistribution(){
         if(birthdateDistribution != null) return birthdateDistribution;
 
-        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.birthdate_popularity); // read the JSON file
+        JSONObject json = JSONProcessor.processJson(FilePaths.BIRTHDATE_DISTR); // read the JSON file
         birthdateDistribution = new HashMap<String, Double>();
 
-        for(Object key : json.keySet()){
-            String keyString = (String) key;
-            Double value = Double.parseDouble((String) json.get(key));
-            birthdateDistribution.put(keyString, value);
+        for (Object entry : json.getAsObject()) {
+            System.out.println(entry.toString());
         }
+
+        // TODO: Replace old json functionality
+        // for(Object key : json.keySet()){
+        //     String keyString = (String) key;
+        //     Double value = Double.parseDouble((String) json.get(key));
+        //     birthdateDistribution.put(keyString, value);
+        // }
 
         return birthdateDistribution;
     }
@@ -223,30 +236,35 @@ public class CharacterManager
     }
 
     private static void readFirstNamesFile() {
-        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.firstname_popularity);
+        JSONObject json = JSONProcessor.processJson(FilePaths.FIRSTNAME_DISTR);
         firstNamesManDistribution = new HashMap<Bloc, HashMap<String, Double>>();
         firstNamesWomanDistribution = new HashMap<Bloc, HashMap<String, Double>>();
 
-        for (Object key : json.keySet()) {
-            String supercategory = key.toString(); // supercategories
-            HashMap<Object, Object> values = (HashMap<Object, Object>) json.get(key);
-            HashMap<Bloc, HashMap<String, Double>> distributions = new HashMap<>();
-            for (Object blocName : values.keySet()) {
-                Bloc bloc = DemographicsManager.matchBlocName(blocName.toString());
-                if (bloc == null) continue;
-                HashMap<Object, Object> names = (HashMap<Object, Object>) values.get(blocName);
-                HashMap<String, Double> blocDistributions = new HashMap<>();
-                for (Object n : names.keySet()) {
-                    String name = n.toString();
-                    if (name.equals("null")) continue;
-                    Double value = Double.parseDouble(names.get(n).toString());
-                    blocDistributions.put(name, value);
-                }
-                distributions.put(bloc, blocDistributions);
-            }
-            if (supercategory.equals("Man")) firstNamesManDistribution = distributions;
-            if (supercategory.equals("Woman")) firstNamesWomanDistribution = distributions;
+        for (Object entry : json) {
+            System.out.println(entry.toString());
         }
+
+        // TODO: Replace old json functionality
+        // for (Object key : json.keySet()) {
+        //     String supercategory = key.toString(); // supercategories
+        //     HashMap<Object, Object> values = (HashMap<Object, Object>) json.get(key);
+        //     HashMap<Bloc, HashMap<String, Double>> distributions = new HashMap<>();
+        //     for (Object blocName : values.keySet()) {
+        //         Bloc bloc = DemographicsManager.matchBlocName(blocName.toString());
+        //         if (bloc == null) continue;
+        //         HashMap<Object, Object> names = (HashMap<Object, Object>) values.get(blocName);
+        //         HashMap<String, Double> blocDistributions = new HashMap<>();
+        //         for (Object n : names.keySet()) {
+        //             String name = n.toString();
+        //             if (name.equals("null")) continue;
+        //             Double value = Double.parseDouble(names.get(n).toString());
+        //             blocDistributions.put(name, value);
+        //         }
+        //         distributions.put(bloc, blocDistributions);
+        //     }
+        //     if (supercategory.equals("Man")) firstNamesManDistribution = distributions;
+        //     if (supercategory.equals("Woman")) firstNamesWomanDistribution = distributions;
+        // }
     }
 
     public static HashMap<Bloc, HashMap<String, Double>> getMiddleNameManDistribution() {
@@ -261,30 +279,35 @@ public class CharacterManager
     }
     
     private static void readMiddleNamesFile() {
-        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.middlename_popularity);
+        JSONObject json = JSONProcessor.processJson(FilePaths.MIDDLENAME_DISTR);
         middleNamesManDistribution = new HashMap<Bloc, HashMap<String, Double>>();
         middleNamesWomanDistribution = new HashMap<Bloc, HashMap<String, Double>>();
 
-        for (Object key : json.keySet()) {
-            String supercategory = key.toString(); // supercategories
-            HashMap<Object, Object> values = (HashMap<Object, Object>) json.get(key);
-            HashMap<Bloc, HashMap<String, Double>> distributions = new HashMap<>();
-            for (Object blocName : values.keySet()) {
-                Bloc bloc = DemographicsManager.matchBlocName(blocName.toString());
-                if (bloc == null) continue;
-                HashMap<Object, Object> names = (HashMap<Object, Object>) values.get(blocName);
-                HashMap<String, Double> blocDistributions = new HashMap<>();
-                for (Object n : names.keySet()) {
-                    String name = n.toString();
-                    if (name.equals("null")) continue;
-                    Double value = Double.parseDouble(names.get(n).toString());
-                    blocDistributions.put(name, value);
-                }
-                distributions.put(bloc, blocDistributions);
-            }
-            if (supercategory.equals("Man")) middleNamesManDistribution = distributions;
-            if (supercategory.equals("Woman")) middleNamesWomanDistribution = distributions;
+        for (Object entry : json) {
+            System.out.println(entry.toString());
         }
+
+        // TODO: Replace old json functionality
+        // for (Object key : json.keySet()) {
+        //     String supercategory = key.toString(); // supercategories
+        //     HashMap<Object, Object> values = (HashMap<Object, Object>) json.get(key);
+        //     HashMap<Bloc, HashMap<String, Double>> distributions = new HashMap<>();
+        //     for (Object blocName : values.keySet()) {
+        //         Bloc bloc = DemographicsManager.matchBlocName(blocName.toString());
+        //         if (bloc == null) continue;
+        //         HashMap<Object, Object> names = (HashMap<Object, Object>) values.get(blocName);
+        //         HashMap<String, Double> blocDistributions = new HashMap<>();
+        //         for (Object n : names.keySet()) {
+        //             String name = n.toString();
+        //             if (name.equals("null")) continue;
+        //             Double value = Double.parseDouble(names.get(n).toString());
+        //             blocDistributions.put(name, value);
+        //         }
+        //         distributions.put(bloc, blocDistributions);
+        //     }
+        //     if (supercategory.equals("Man")) middleNamesManDistribution = distributions;
+        //     if (supercategory.equals("Woman")) middleNamesWomanDistribution = distributions;
+        // }
     }
 
     public static HashMap<Bloc, HashMap<String, Double>> getLastNameDistribution() {
@@ -294,36 +317,46 @@ public class CharacterManager
     }
 
     private static void readLastNamesFile() {
-        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.lastname_popularity);
+        JSONObject json = JSONProcessor.processJson(FilePaths.LASTNAME_DISTR);
         lastNamesDistribution = new HashMap<Bloc, HashMap<String, Double>>();
 
-        for (Object blocName : json.keySet()) {
-            Bloc bloc = DemographicsManager.matchBlocName(blocName.toString());
-            if (bloc == null) continue;
-            HashMap<Object, Object> names = (HashMap<Object, Object>) json.get(blocName);
-            HashMap<String, Double> blocDistributions = new HashMap<>();
-            for (Object n : names.keySet()) {
-                String name = n.toString();
-                if (name.equals("null")) continue;
-                Double value = Double.parseDouble(names.get(n).toString());
-                blocDistributions.put(name, value);
-            }
-            lastNamesDistribution.put(bloc, blocDistributions);
+        for (Object entry : json) {
+            System.out.println(entry.toString());
         }
+
+        // TODO: Replace old json functionality
+        // for (Object blocName : json.keySet()) {
+        //     Bloc bloc = DemographicsManager.matchBlocName(blocName.toString());
+        //     if (bloc == null) continue;
+        //     HashMap<Object, Object> names = (HashMap<Object, Object>) json.get(blocName);
+        //     HashMap<String, Double> blocDistributions = new HashMap<>();
+        //     for (Object n : names.keySet()) {
+        //         String name = n.toString();
+        //         if (name.equals("null")) continue;
+        //         Double value = Double.parseDouble(names.get(n).toString());
+        //         blocDistributions.put(name, value);
+        //     }
+        //     lastNamesDistribution.put(bloc, blocDistributions);
+        // }
     }
 
     public static void readNicknamesFile() {
-        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.nicknames);
+        JSONObject json = JSONProcessor.processJson(FilePaths.NICKNAMES);
         nicknames = new HashMap<String, List<String>>();
 
-        for (Object key : json.keySet()) {
-            String name = key.toString();
-            List<String> nicks = new ArrayList<>();
-            for (String nickname : json.get(key).toString().replaceAll("\\[|\\]", "").split(",")) {
-                nicks.add(nickname.trim());
-            }
-            nicknames.put(name, nicks);
+        for (Object element : json) {
+            System.out.println(element.toString());
         }
+
+        // TODO: Replace old json functionality
+        // for (Object key : json.keySet()) {
+        //     String name = key.toString();
+        //     List<String> nicks = new ArrayList<>();
+        //     for (String nickname : json.get(key).toString().replaceAll("\\[|\\]", "").split(",")) {
+        //         nicks.add(nickname.trim());
+        //     }
+        //     nicknames.put(name, nicks);
+        // }
     }
 
     public static void readAllNamesFiles() {

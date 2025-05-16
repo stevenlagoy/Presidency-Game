@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import core.JSONObject;
+import core.JSONProcessor;
 import main.core.Engine;
 import main.core.FilePaths;
 import main.core.characters.Character;
@@ -44,15 +46,20 @@ public class DemographicsManager
         return new Demographics("Millennial", "White Catholic", "English", "Woman");
     }
     public static void createDemographicBlocs() {
-        HashMap<Object, Object> json = Engine.readJSONFile(FilePaths.blocs);
+        JSONObject json = JSONProcessor.processJson(FilePaths.BLOCS);
 
-        // Loop over Demographic categories
-        for (Object categoryKey : json.keySet()) {
-            String categoryName = categoryKey.toString();
-            @SuppressWarnings("unchecked")
-            HashMap<Object, Object> structure = (HashMap<Object, Object>) json.get(categoryKey);
-            DemographicsManager.demographicBlocs.put(categoryName, createBlocs(categoryName, structure));
+        for (Object element : json) {
+            System.out.println(element.toString());
         }
+
+        // TODO: Replace old json functionality
+        // Loop over Demographic categories
+        // for (Object categoryKey : json.keySet()) {
+        //     String categoryName = categoryKey.toString();
+        //     @SuppressWarnings("unchecked")
+        //     HashMap<Object, Object> structure = (HashMap<Object, Object>) json.get(categoryKey);
+        //     DemographicsManager.demographicBlocs.put(categoryName, createBlocs(categoryName, structure));
+        // }
     }
 
     private static List<Bloc> createBlocs(String category, HashMap<Object, Object> structure){

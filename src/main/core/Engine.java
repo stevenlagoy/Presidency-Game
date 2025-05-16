@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -51,7 +52,6 @@ public class Engine {
     private static GLFWErrorCallback errorCallback;
     private static MouseInput mouse;
     private static ILogic gameLogic;
-
 
     /*
      * Game Constants
@@ -261,10 +261,10 @@ public class Engine {
     public static void writeSave() {
         try {
             String saveName = String.format("%s - %s", playerCandidate.getName().getFullName(), DateManager.formattedCurrentDate());
-            File saveFile = new File(FilePaths.saves, saveName + ".txt");
+            File saveFile = new File(FilePaths.SAVES_DIR.toString() + saveName + ".txt");
             for (int i = 1; saveFile.exists(); i++) {
                 saveName = String.format("%s - %s %s", playerCandidate.getName().getFullName(), DateManager.formattedCurrentDate(), String.format("(%d)", i));
-                saveFile = new File(FilePaths.saves, saveName + ".txt");
+                saveFile = new File(FilePaths.SAVES_DIR.toString() + saveName + ".txt");
             }
             saveFile.createNewFile();
             FileWriter fw = new FileWriter(saveFile);
@@ -347,9 +347,9 @@ public class Engine {
 
     public static void writeErrorToLog() {
         try {
-            File errorFile = new File(FilePaths.ERROR);
+            File errorFile = new File(FilePaths.ERROR_LOG.toString());
             errorFile.createNewFile(); // does nothing if already exists
-            File logFile = new File(FilePaths.LOG);
+            File logFile = new File(FilePaths.LOG_FILE.toString());
             logFile.createNewFile();
             Scanner scanner = scannerUtil.createScanner(errorFile);
             ArrayList<String> contents = new ArrayList<>();
@@ -366,7 +366,7 @@ public class Engine {
     }
     public static void clearErrorFile() {
         try {
-            File errorFile = new File(FilePaths.ERROR);
+            File errorFile = new File(FilePaths.ERROR_LOG.toString());
             errorFile.createNewFile();
             FileOutputStream errorStream = new FileOutputStream(errorFile, false);
             errorStream.close();
@@ -409,150 +409,10 @@ public class Engine {
             if (input != null) return 1;
         }
     }
-    public static HashMap<Object, Object> readJSONFile(String filename) {
-        ArrayList<String> contents = new ArrayList<String>();
-        try {
-            File file = new File(filename);
-            Scanner scanner = scannerUtil.createScanner(file);
-            while (scanner.hasNextLine()) {
-                contents.add(scanner.nextLine());
-            }
-            scanner.close();
-        }
-        catch (FileNotFoundException e) {
-            Engine.log("FILE NOT FOUND", String.format("The file %s was not found.", filename), e);
-            return null;
-        }
-        // split the contents by JSON object, use nested Lists to represent the JSON structure
-        Stack<Integer> stack = new Stack<Integer>();
-        Integer[] indices = new Integer[contents.size()];
-        for (int i = 0; i < contents.size(); i++) {
-            if (contents.get(i) == null) break;
-            if (contents.get(i).contains("{")) stack.push(i);
-            if (contents.get(i).contains("}")) {
-                try {
-                    indices[stack.pop()] = i;
-                }
-                catch (EmptyStackException e) {
-                    Engine.log(String.format("JSON file \"%s\" is malformed, missing opening at line %d.", filename, i));
-                    return null;
-                }
-            }
-        }
-        if (!stack.isEmpty()) {
-            Engine.log("JSON file is malformed, missing closing at line " + stack.pop());
-            return null;
-        }
-        return readJSONObject(contents.subList(1, contents.size()-1));
-    }
-    public static HashMap<Object, Object> readJSONObject(List<String> contents) {
-        HashMap<Object, Object> object = new HashMap<Object, Object>();
-        for (int i = 0; i < contents.size(); i++) {
-            String line = contents.get(i);
-            if (line.trim().isEmpty()) continue; // Skip empty lines
-            String key = line.split(":")[0].trim().replace("\"", "");
-            if (key.equals("")) continue; // Skip empty keys: invalid entry format
-            String value = "";
-            try {
-                int colonIndex = -1;
-                for (int j = 0; j < line.length(); j++) {
-                    if (line.charAt(j) == ':' && !isInString(line, j)) {
-                        colonIndex = j;
-                        break;
-                    }
-                }
-                if (colonIndex != -1) {
-                    value = line.substring(colonIndex + 1).trim();
-                }
-                else {
-                    value = "";
-                }
-                if (containsUnquotedChar(value, '[')) { // the value is a list
-                    if (value.replaceAll("\\[\\s*\\]", "").replace(",", "").trim().equals("")) {
-                        // empty list
-                        value = "";
-                    }
-                    else {
-                        List<String> list = new ArrayList<String>();
-                        int startIndex = 2;
-                        for (int j = 2; j < value.length() - 2; j++) {
-                            if (value.charAt(j) == ',' && !isInString(value, j)) {
-                                list.add(value.substring(startIndex, j).replace("\"", "").replace(",", "").trim());
-                                startIndex = j;
-                            }
-                        }
-                        list.add(value.substring(startIndex, value.length() - 2).replace("\"", "").replace(",", "").trim());
-                        value = list.toString();
-                    }
-                }
-                else
-                    value = value.replace(",","");
-            }
-            catch (ArrayIndexOutOfBoundsException e) {
-                // do nothing - this is expected at the end of a JSON object
-            }
-            if (containsUnquotedChar(line, '{') && !containsUnquotedChar(line, '}')) { // start of an object
-                // jump over recursively-read lines to start of next object
-                int braceCount = 1, startIndex = i + 1;
-                while (braceCount > 0 && i < contents.size() - 1) {
-                    i++;
-                    String currentLine = contents.get(i);
-                    if (containsUnquotedChar(currentLine, '{')) braceCount++;
-                    if (containsUnquotedChar(currentLine, '}')) braceCount--;
-                }
-                // read the object
-                object.put(key, readJSONObject(contents.subList(startIndex, contents.size())));
-            }
-            else if (!containsUnquotedChar(line, '{') && containsUnquotedChar(line, '}')) { // end of an object
-                // end the object
-                return object;
-            }
-            else if (containsUnquotedChar(line, '{') && containsUnquotedChar(line, '}')) { // object all on one line
-                String objectContent = line.substring(line.indexOf("{") + 1, line.indexOf("}")).trim();
-                HashMap<Object, Object> innerObject = new HashMap<>();
-                if (!objectContent.isEmpty()) {
-                    String[] pairs = objectContent.split(",");
-                    for (String pair : pairs) {
-                        String[] keyValue = pair.split(":");
-                        if (keyValue.length == 2) {
-                            String innerKey = keyValue[0].trim().replace("\"", "");
-                            String innerValue = keyValue[1].trim().replace("\"", "");
-                            innerObject.put(innerKey, innerValue);
-                        }
-                    }
-                }
-                object.put(key, innerObject);
-                return object;
-            }
-            else{
-                object.put(key, value.trim().replace("\"", ""));
-            }
-        }
-        return object;
-    }
-
-    private static boolean isInString(String line, int position) {
-        boolean inString = false;
-        for (int i = 0; i < position; i++) {
-            if (line.charAt(i) == '"' && (i == 0 || line.charAt(i-1) != '\\')) {
-                inString = !inString;
-            }
-        }
-        return inString;
-    }
-    
-    private static boolean containsUnquotedChar(String line, char target) {
-        for (int i = 0; i < line.length(); i++) {
-            if (line.charAt(i) == target && !isInString(line, i)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public static void log(String logline) {
         try {
-            File errorFile = new File(FilePaths.ERROR);
+            File errorFile = new File(FilePaths.ERROR_LOG.toString());
             errorFile.createNewFile(); // does nothing if already exists
             PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
 
@@ -568,7 +428,7 @@ public class Engine {
     }
     public static void log(String context, String logline) {
         try {
-            File errorFile = new File(FilePaths.ERROR);
+            File errorFile = new File(FilePaths.ERROR_LOG.toString());
             errorFile.createNewFile(); // does nothing if already exists
             PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
 
@@ -584,7 +444,7 @@ public class Engine {
     }
     public static void log(String context, String logline, Exception logE) {
         try {
-            File errorFile = new File(FilePaths.ERROR);
+            File errorFile = new File(FilePaths.ERROR_LOG.toString());
             errorFile.createNewFile(); // does nothing if already exists
             PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
 
@@ -603,7 +463,7 @@ public class Engine {
     }
     public static void log(Exception logE) {
         try {
-            File errorFile = new File(FilePaths.ERROR);
+            File errorFile = new File(FilePaths.ERROR_LOG.toString());
             errorFile.createNewFile(); // does nothing if already exists
             PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
 
@@ -854,7 +714,7 @@ public class Engine {
         for(Language language : Language.values()){
             ArrayList<String> contents = new ArrayList<>();
             try {
-                File file = new File(String.format("%s/%s%s", FilePaths.localizationFolder_loc, language, FilePaths.systemText_loc));
+                File file = new File(String.format("%s/%s%s", FilePaths.LOCALIZATION_DIR, language, FilePaths.SYSTEM_TEXT_LOC));
                 Scanner scanner = scannerUtil.createScanner(file);
                 while (scanner.hasNext()) contents.add(scanner.nextLine());
                 scanner.close();
