@@ -625,25 +625,58 @@ public class Engine {
         return new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS").format(new java.util.Date());
     }
 
+    /**
+     * Selects a float between 0.0 and 1.0 which can be used as a percentage.
+     * 
+     * @return A pseudorandomly selected float in the range [0.0, 1.0)
+     */
     public static float randPercent() {
         return randPercent(0.0f, 1.0f);
     }
 
+    /**
+     * Selects a float between the min and the max.
+     * 
+     * @param min The minimum value which can be selected (inclusive)
+     * @param max The maximum value which can be selected (exclusive)
+     * @return A pseudorandomly selected float in the range [min, max)
+     */
     public static float randPercent(float min, float max) {
         // will perform the same if min and max are flipped
         Random rand = new Random();
         return (max - min) * rand.nextFloat() + min; // return a float between min and max (exclusive), equally distributed
     }
+
+    /**
+     * Selects a double between the min and the max.
+     * 
+     * @param min The minimum value which can be selected (inclusive)
+     * @param max The maximum value which can be selected (exclusive)
+     * @return A pseudorandomly selected double in the range [min, max)
+     */
     public static double randDouble(double min, double max) {
         // will perform the same if min and max are flipped
         Random rand = new Random();
         return (max - min) * rand.nextDouble() + min; // return a double between min and max (exclusive), equally distributed
     }
 
+    /**
+     * Selects an integer between zero and the max, evenly distributed.
+     * 
+     * @param max The maximum value which can be randomly selected (exclusive)
+     * @return A pseudorandomly generated integer in the range [0, max)
+     */
     public static int randInt(int max) {
         return randInt(0, max);
     }
 
+    /**
+     * Selects an integer between the min and the max, evenly distributed.
+     * 
+     * @param min The minimum value which can be selected (inclusive)
+     * @param max The maximum value which can be selected (exclusive)
+     * @return A pseudorandomly generated integer in the range [min, max)
+     */
     public static int randInt(int min, int max) {
         if (max < min) throw new IllegalArgumentException(String.format("The minimum is less than the maximum: %d < %d.%n", max, min));
         Random rand = new Random();
