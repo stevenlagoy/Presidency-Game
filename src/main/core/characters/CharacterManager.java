@@ -1,8 +1,12 @@
 package main.core.characters;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import core.JSONObject;
 import core.JSONProcessor;
@@ -173,26 +177,25 @@ public class CharacterManager
         JSONObject json = JSONProcessor.processJson(FilePaths.BIRTHYEAR_DISTR); // read the JSON file
         CharacterManager.ageDistribution = new HashMap<String, HashMap<Integer, Double>>(); // initialize the map
 
-        for (Object entry : json) {
-            System.out.println(entry.toString());
-        }
+        for (Object blocObj : json.getAsList()) {
+            if (blocObj instanceof JSONObject blocJson) {
+                String key = blocJson.getKey();
+                HashMap<Integer, Double> distribution = new HashMap<>();
+                for (int i = 0; i < numberOfYears; i++) {
+                    distribution.put(i + startYear, 0.0);
+                }
+                
+                for (Object dataObj : blocJson.getAsList()) {
+                    if (dataObj instanceof JSONObject dataJson) {
+                        int year = Integer.parseInt(dataJson.getKey());
+                        double value = dataJson.getAsNumber().doubleValue();
 
-        // TODO: Replace old json functionality
-        // for(Object key : json.keySet()){
-        //     String keyString = (String) key;
-        //     HashMap<Integer, Double> distribution = new HashMap<Integer, Double>();
-        //     for(int i = 0; i < numberOfYears; i++){
-        //         distribution.put(i + startYear, 0.0);
-        //     }
-        //     if(json.get(key).equals("null")) continue;
-        //     @SuppressWarnings("unchecked")
-        //     HashMap<Object, Object> values = (HashMap<Object, Object>) json.get(key); // known structure of the JSON file
-        //     for(Object year : values.keySet()){
-        //         int yearInt = Integer.parseInt((String) year);
-        //         distribution.put(yearInt, Double.parseDouble((String) values.get(year)));
-        //     }
-        //     ageDistribution.put(keyString, distribution);
-        // }
+                        distribution.put(year, value);
+                    }
+                }
+                CharacterManager.ageDistribution.put(key, distribution);
+            }
+        }
 
         return getAgeDistribution(demographicGroup); // the map is now populated
     }
@@ -203,19 +206,19 @@ public class CharacterManager
         JSONObject json = JSONProcessor.processJson(FilePaths.BIRTHDATE_DISTR); // read the JSON file
         birthdateDistribution = new HashMap<String, Double>();
 
-        for (Object entry : json.getAsObject()) {
-            System.out.println(entry.toString());
+        for (Object dateObj : json.getAsList()) {
+            if (dateObj instanceof JSONObject dateJson) {
+                String date = dateJson.getKey();
+                double value = dateJson.getAsNumber().doubleValue();
+                birthdateDistribution.put(date, value);
+            }
         }
-
-        // TODO: Replace old json functionality
-        // for(Object key : json.keySet()){
-        //     String keyString = (String) key;
-        //     Double value = Double.parseDouble((String) json.get(key));
-        //     birthdateDistribution.put(keyString, value);
-        // }
 
         return birthdateDistribution;
     }
+
+    private static Map<Set<Bloc>, Map<String, Double>> firstNamesDistribution;
+    private static Map<Set<Bloc>, Map<String, Double>> middleNamesDistribution;
 
     private static HashMap<Bloc, HashMap<String, Double>> firstNamesManDistribution;
     private static HashMap<Bloc, HashMap<String, Double>> firstNamesWomanDistribution;
@@ -224,95 +227,134 @@ public class CharacterManager
     private static HashMap<Bloc, HashMap<String, Double>> lastNamesDistribution;
     private static HashMap<String, List<String>> nicknames;
 
-    public static HashMap<Bloc, HashMap<String, Double>> getFirstNameManDistribution() {
-        if (firstNamesManDistribution != null) return firstNamesManDistribution;
-        readFirstNamesFile();
-        return firstNamesManDistribution;
+    public static Map<Set<Bloc>, Map<String, Double>> getFirstNamesDistribution() {
+        if (firstNamesDistribution == null) readFirstNamesFile();
+        return firstNamesDistribution;
     }
-    public static HashMap<Bloc, HashMap<String, Double>> getFirstNameWomanDistribution() {
-        if (firstNamesWomanDistribution != null) return firstNamesWomanDistribution;
-        readFirstNamesFile();
-        return firstNamesWomanDistribution;
+
+    public static Map<String, Double> getFirstNamesDistribution(Demographics demographics) {
+        return getFirstNamesDistribution(demographics.toBlocsArray());
+    }
+    
+    public static Map<String, Double> getFirstNamesDistribution(Bloc... blocs) {
+        return getFirstNamesDistribution(Set.of(blocs));
+    }
+
+    public static Map<String, Double> getFirstNamesDistribution(Collection<Bloc> blocs) {
+        if (firstNamesDistribution == null) readFirstNamesFile();
+        Set<Bloc> key = new HashSet<>(blocs);
+        return firstNamesDistribution.get(key);
     }
 
     private static void readFirstNamesFile() {
         JSONObject json = JSONProcessor.processJson(FilePaths.FIRSTNAME_DISTR);
-        firstNamesManDistribution = new HashMap<Bloc, HashMap<String, Double>>();
-        firstNamesWomanDistribution = new HashMap<Bloc, HashMap<String, Double>>();
+        firstNamesDistribution = new HashMap<>();
 
-        for (Object entry : json) {
-            System.out.println(entry.toString());
+        processFirstNameStructure(json, new HashSet<>());
+    }
+
+    private static Map<String, Double> processFirstNameStructure(JSONObject json, Set<Bloc> currentBlocs) {
+        Map<String, Double> distributions = new HashMap<String,Double>();
+
+        for (Object obj : json.getAsList()) {
+            if (!(obj instanceof JSONObject entry)) continue;
+            
+            String key = entry.getKey();
+            Object value = entry.getValue();
+
+            if (value instanceof Number) {
+                // This is a name-number pair
+                // Add or update the name distribution for all current blocs
+                if (!currentBlocs.isEmpty()) {
+                    distributions.put(key, ((Number) value).doubleValue());
+                    Map<String, Double> existingDistributions = firstNamesDistribution
+                        .computeIfAbsent(currentBlocs, k -> new HashMap<>());
+                    existingDistributions.put(key, ((Number) value).doubleValue());
+                }
+            }
+            else if (value instanceof ArrayList<?>) {
+                // This is a nested structure
+
+                // If key is a valid bloc name, add it to the current set of blocs
+                Bloc bloc = DemographicsManager.matchBlocName(key);
+                Set<Bloc> updatedBlocs = new HashSet<>(currentBlocs);
+                if (bloc != null) {
+                    updatedBlocs.add(bloc);
+                }
+
+                // Recurse with updated bloc set
+                Map<String, Double> nestedDistributions = processFirstNameStructure(new JSONObject(key, (ArrayList<?>) value), updatedBlocs);
+                distributions.putAll(nestedDistributions);
+            }
         }
-
-        // TODO: Replace old json functionality
-        // for (Object key : json.keySet()) {
-        //     String supercategory = key.toString(); // supercategories
-        //     HashMap<Object, Object> values = (HashMap<Object, Object>) json.get(key);
-        //     HashMap<Bloc, HashMap<String, Double>> distributions = new HashMap<>();
-        //     for (Object blocName : values.keySet()) {
-        //         Bloc bloc = DemographicsManager.matchBlocName(blocName.toString());
-        //         if (bloc == null) continue;
-        //         HashMap<Object, Object> names = (HashMap<Object, Object>) values.get(blocName);
-        //         HashMap<String, Double> blocDistributions = new HashMap<>();
-        //         for (Object n : names.keySet()) {
-        //             String name = n.toString();
-        //             if (name.equals("null")) continue;
-        //             Double value = Double.parseDouble(names.get(n).toString());
-        //             blocDistributions.put(name, value);
-        //         }
-        //         distributions.put(bloc, blocDistributions);
-        //     }
-        //     if (supercategory.equals("Man")) firstNamesManDistribution = distributions;
-        //     if (supercategory.equals("Woman")) firstNamesWomanDistribution = distributions;
-        // }
+        return distributions;
     }
 
-    public static HashMap<Bloc, HashMap<String, Double>> getMiddleNameManDistribution() {
-        if (middleNamesManDistribution != null) return middleNamesManDistribution;
-        readMiddleNamesFile();
-        return middleNamesManDistribution;
+    public static Map<Set<Bloc>, Map<String, Double>> getMiddleNamesDistribution() {
+        if (firstNamesDistribution == null) readMiddleNamesFile();
+        return middleNamesDistribution;
     }
-    public static HashMap<Bloc, HashMap<String, Double>> getMiddleNameWomanDistribution() {
-        if (middleNamesWomanDistribution != null) return middleNamesWomanDistribution;
-        readMiddleNamesFile();
-        return middleNamesWomanDistribution;
+
+    public static Map<String, Double> getMiddleNamesDistribution(Demographics demographics) {
+        return getMiddleNamesDistribution(demographics.toBlocsArray());
     }
     
+    public static Map<String, Double> getMiddleNamesDistribution(Bloc... blocs) {
+        return getMiddleNamesDistribution(Set.of(blocs));
+    }
+
+    public static Map<String, Double> getMiddleNamesDistribution(Collection<Bloc> blocs) {
+        if (firstNamesDistribution == null) readMiddleNamesFile();
+        Set<Bloc> key = new HashSet<>(blocs);
+        return middleNamesDistribution.get(key);
+    }
+
     private static void readMiddleNamesFile() {
-        JSONObject json = JSONProcessor.processJson(FilePaths.MIDDLENAME_DISTR);
-        middleNamesManDistribution = new HashMap<Bloc, HashMap<String, Double>>();
-        middleNamesWomanDistribution = new HashMap<Bloc, HashMap<String, Double>>();
+        JSONObject json = JSONProcessor.processJson(FilePaths.FIRSTNAME_DISTR);
+        middleNamesDistribution = new HashMap<>();
 
-        for (Object entry : json) {
-            System.out.println(entry.toString());
+        processMiddleNameStructure(json, new HashSet<>());
+    }
+
+    private static Map<String, Double> processMiddleNameStructure(JSONObject json, Set<Bloc> currentBlocs) {
+        Map<String, Double> distributions = new HashMap<String,Double>();
+
+        for (Object obj : json.getAsList()) {
+            if (!(obj instanceof JSONObject entry)) continue;
+            
+            String key = entry.getKey();
+            Object value = entry.getValue();
+
+            if (value instanceof Number) {
+                // This is a name-number pair
+                // Add or update the name distribution for all current blocs
+                if (!currentBlocs.isEmpty()) {
+                    distributions.put(key, ((Number) value).doubleValue());
+                    Map<String, Double> existingDistributions = middleNamesDistribution
+                        .computeIfAbsent(currentBlocs, k -> new HashMap<>());
+                    existingDistributions.put(key, ((Number) value).doubleValue());
+                }
+            }
+            else if (value instanceof ArrayList<?>) {
+                // This is a nested structure
+
+                // If key is a valid bloc name, add it to the current set of blocs
+                Bloc bloc = DemographicsManager.matchBlocName(key);
+                Set<Bloc> updatedBlocs = new HashSet<>(currentBlocs);
+                if (bloc != null) {
+                    updatedBlocs.add(bloc);
+                }
+
+                // Recurse with updated bloc set
+                Map<String, Double> nestedDistributions = processFirstNameStructure(new JSONObject(key, (ArrayList<?>) value), updatedBlocs);
+                distributions.putAll(nestedDistributions);
+            }
         }
-
-        // TODO: Replace old json functionality
-        // for (Object key : json.keySet()) {
-        //     String supercategory = key.toString(); // supercategories
-        //     HashMap<Object, Object> values = (HashMap<Object, Object>) json.get(key);
-        //     HashMap<Bloc, HashMap<String, Double>> distributions = new HashMap<>();
-        //     for (Object blocName : values.keySet()) {
-        //         Bloc bloc = DemographicsManager.matchBlocName(blocName.toString());
-        //         if (bloc == null) continue;
-        //         HashMap<Object, Object> names = (HashMap<Object, Object>) values.get(blocName);
-        //         HashMap<String, Double> blocDistributions = new HashMap<>();
-        //         for (Object n : names.keySet()) {
-        //             String name = n.toString();
-        //             if (name.equals("null")) continue;
-        //             Double value = Double.parseDouble(names.get(n).toString());
-        //             blocDistributions.put(name, value);
-        //         }
-        //         distributions.put(bloc, blocDistributions);
-        //     }
-        //     if (supercategory.equals("Man")) middleNamesManDistribution = distributions;
-        //     if (supercategory.equals("Woman")) middleNamesWomanDistribution = distributions;
-        // }
+        return distributions;
     }
 
     public static HashMap<Bloc, HashMap<String, Double>> getLastNameDistribution() {
-        if (lastNamesDistribution != null) return lastNamesDistribution;
-        readLastNamesFile();
+        if (lastNamesDistribution == null) readLastNamesFile();
         return lastNamesDistribution;
     }
 
@@ -320,43 +362,40 @@ public class CharacterManager
         JSONObject json = JSONProcessor.processJson(FilePaths.LASTNAME_DISTR);
         lastNamesDistribution = new HashMap<Bloc, HashMap<String, Double>>();
 
-        for (Object entry : json) {
-            System.out.println(entry.toString());
+        for (Object blocObj: json.getAsList()) {
+            if (blocObj instanceof JSONObject blocJson) {
+                Bloc bloc = DemographicsManager.matchBlocName(blocJson.getKey());
+                if (bloc == null) continue;
+                
+                HashMap<String, Double> blocDistributions = new HashMap<>();
+                for (Object lastnameObj : blocJson.getAsList()) {
+                    if (lastnameObj instanceof JSONObject lastnameJson) {
+                        String lastname = lastnameJson.getKey();
+                        double value = lastnameJson.getAsNumber().doubleValue();
+                        blocDistributions.put(lastname, value);
+                    }
+                }
+                CharacterManager.lastNamesDistribution.put(bloc, blocDistributions);
+            }
         }
-
-        // TODO: Replace old json functionality
-        // for (Object blocName : json.keySet()) {
-        //     Bloc bloc = DemographicsManager.matchBlocName(blocName.toString());
-        //     if (bloc == null) continue;
-        //     HashMap<Object, Object> names = (HashMap<Object, Object>) json.get(blocName);
-        //     HashMap<String, Double> blocDistributions = new HashMap<>();
-        //     for (Object n : names.keySet()) {
-        //         String name = n.toString();
-        //         if (name.equals("null")) continue;
-        //         Double value = Double.parseDouble(names.get(n).toString());
-        //         blocDistributions.put(name, value);
-        //     }
-        //     lastNamesDistribution.put(bloc, blocDistributions);
-        // }
     }
 
-    public static void readNicknamesFile() {
+    private static void readNicknamesFile() {
         JSONObject json = JSONProcessor.processJson(FilePaths.NICKNAMES);
         nicknames = new HashMap<String, List<String>>();
 
-        for (Object element : json) {
-            System.out.println(element.toString());
+        for (Object nicknameObj : json.getAsList()) {
+            if (nicknameObj instanceof JSONObject nicknameJson) {
+                String name = nicknameJson.getKey();
+                List<?> rawNicks = nicknameJson.getAsList();
+                List<String> nicks = new ArrayList<>();
+                for (Object obj : rawNicks) {
+                    if (obj != null) nicks.add(obj.toString());
+                }
+                CharacterManager.nicknames.put(name, nicks);
+            }
         }
 
-        // TODO: Replace old json functionality
-        // for (Object key : json.keySet()) {
-        //     String name = key.toString();
-        //     List<String> nicks = new ArrayList<>();
-        //     for (String nickname : json.get(key).toString().replaceAll("\\[|\\]", "").split(",")) {
-        //         nicks.add(nickname.trim());
-        //     }
-        //     nicknames.put(name, nicks);
-        // }
     }
 
     public static void readAllNamesFiles() {

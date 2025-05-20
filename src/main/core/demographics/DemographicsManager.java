@@ -40,58 +40,67 @@ public class DemographicsManager
         return percentagesPyramid;
     }
 
+    public static enum DemographicCategory {
+        GENERATION ("Generation"),
+        MARITAL_STATUS ("Marital Status"),
+        FAMILY_SIZE ("Family Size"),
+        RELIGION ("Religion"),
+        EDUCATION ("Education"),
+        RACE_ETHNICITY ("Race / Ethnicity"),
+        EMPLOYMENT ("Employment"),
+        RESIDENCY ("Residency"),
+        PRESENTATION ("Presentation");
+
+        public final String label;
+        private DemographicCategory(String label) { this.label = label; }
+    }
+
     public static Demographics getMostCommonDemographics(){
         // generation, presentation, raceEthnicity, religion
         // should make this adaptive to the current population
         return new Demographics("Millennial", "White Catholic", "English", "Woman");
     }
+
     public static void createDemographicBlocs() {
         JSONObject json = JSONProcessor.processJson(FilePaths.BLOCS);
 
-        for (Object element : json) {
-            System.out.println(element.toString());
+        for (Object categoryObj : json.getAsList()) {
+            if (categoryObj instanceof JSONObject categoryJson) {
+                String categoryName = categoryJson.getKey();
+                List<Bloc> blocs = createBlocs(categoryName, categoryJson.getAsObject());
+                demographicBlocs.put(categoryName, blocs);
+            }
         }
-
-        // TODO: Replace old json functionality
-        // Loop over Demographic categories
-        // for (Object categoryKey : json.keySet()) {
-        //     String categoryName = categoryKey.toString();
-        //     @SuppressWarnings("unchecked")
-        //     HashMap<Object, Object> structure = (HashMap<Object, Object>) json.get(categoryKey);
-        //     DemographicsManager.demographicBlocs.put(categoryName, createBlocs(categoryName, structure));
-        // }
     }
 
-    private static List<Bloc> createBlocs(String category, HashMap<Object, Object> structure){
-        /*
-         * Structure is a JSON object:object map.
-         * We assume structure has only one key entry
-         * The top-level key object is the parent bloc
-         * If the value is numerical, then the bloc has no children
-         * If the value is another structure, recursively call 
-         */
+    private static List<Bloc> createBlocs(String category, JSONObject structure) {
         List<Bloc> blocs = new ArrayList<>();
-        Bloc parent;
-        for (Object key : structure.keySet()) {
-            try {
-                // assume base case: no nested blocs
-                float value = Float.parseFloat(structure.get(key).toString());
-                if ((int) value == value) {
-                    parent = new Bloc(key.toString(), category, (int) value);
+        
+        for (Object key : structure.getAsList()) {
+            if (key instanceof JSONObject keyObj) {
+                String blocName = keyObj.getKey();
+                Object value = keyObj.getValue();
+                
+                Bloc parent;
+                if (value instanceof Number numVal) {
+                    // Base case: numerical value represents percentage
+                    float percentageOrCount = numVal.floatValue();
+                    if (percentageOrCount == (int) percentageOrCount) { // Count
+                        parent = new Bloc(blocName, category, (int) percentageOrCount);
+                    }
+                    else { // Percentage
+                        parent = new Bloc(blocName, category, percentageOrCount);
+                    }
+                    blocs.add(parent);
+                } 
+                else if (value instanceof List<?>) {
+                    // Recursive case: nested blocs
+                    parent = new Bloc(blocName, category);
+                    parent.addSubBlocs(createBlocs(category, keyObj));
+                    blocs.add(parent);
                 }
-                else {
-                    parent = new Bloc(key.toString(), category, value);
-                }
-                // System.out.printf("Bloc : %70s, \tPercent : %f, \tNumber : %d.%n", parent.getName(), parent.getPercentageVoters(), parent.getNumVoters());
-                blocs.add(parent);
             }
-            catch (Exception e) {
-                // recursive case: has nested blocs
-                parent = new Bloc(key.toString(), category);
-                parent.addSubBlocs(createBlocs(category, (HashMap<Object, Object>) structure.get(key)));
-                blocs.add(parent);
-            }
-        }
+        }    
         return blocs;
     }
 
@@ -222,8 +231,10 @@ public class DemographicsManager
     }
 
     public static Bloc matchBlocName(String name){
+        List<Bloc> blocs  = Bloc.getInstances();
         for(Bloc bloc : Bloc.getInstances()){
-            if(bloc.getName().equals(name)) return bloc;
+            if(bloc.getName().equals(name))
+                return bloc;
         }
         Engine.log("INVALID BLOC NAME", String.format("The Bloc name \"%s\" is non-existent and could not be matched.", name), new Exception());
         return null;

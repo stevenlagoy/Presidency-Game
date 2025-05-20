@@ -102,6 +102,7 @@ public class Engine {
 
     public static void init() {
         try {
+            long startTime = System.nanoTime();
             // GLFW.glfwSetErrorCallback(errorCallback = GLFWErrorCallback.createPrint(System.err));
             reset();
 
@@ -116,6 +117,8 @@ public class Engine {
             DemographicsManager.createDemographicBlocs();
             CharacterManager.readAllNamesFiles();
             MapManager.createMap();
+            long elapsedTime = System.nanoTime() - startTime;
+            Engine.log("Engine initialization complete in " + String.valueOf(elapsedTime / 1000000) + " miliseconds.");
         }
         catch (Exception e) {
             // Engine.cleanup();

@@ -69,7 +69,8 @@ public class Bloc implements Repr {
         this.members = new ArrayList<>();
 
         Bloc.instances.add(this);
-        if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
+        if(!demographics.containsKey(demographicGroup))
+            demographics.put(demographicGroup, new HashSet<Bloc>());
         demographics.get(demographicGroup).add(this);
     }
 

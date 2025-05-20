@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.print.DocFlavor.STRING;
 
@@ -11,6 +12,7 @@ import core.JSONObject;
 import core.JSONProcessor;
 import main.core.Engine;
 import main.core.FilePaths;
+import main.core.demographics.Demographics;
 
 public class MapManager
 {
@@ -56,6 +58,9 @@ public class MapManager
     }
 
     public static void createMap() {
+        // Two-Phase Initialization
+        // 1) Construct skeleton objects top-down
+        // 2) Resolve references bottom-up
         createStates();
         createCongressionalDistricts();
         createCounties();
@@ -65,75 +70,76 @@ public class MapManager
     public static void createStates() {
         JSONObject json = JSONProcessor.processJson(FilePaths.STATES);
 
-        for (Object element : json) {
-            System.out.println(element.toString());
+        for (Object stateObj : json.getAsList()) {
+            if (stateObj instanceof JSONObject stateJson) {
+                try {
+                    int FIPS = Integer.parseInt(stateJson.get("FIPS").toString());
+                    String name = stateJson.get("name").toString();
+                    int population = Integer.parseInt(stateJson.get("population").toString());
+                    String abbreviation = stateJson.get("abbreviation").toString();
+                    String motto = stateJson.get("motto").toString();
+                    String nickname = stateJson.get("nickname").toString();
+                    MapManager.states.add(new State(
+                        FIPS, name, population, abbreviation, motto, nickname
+                    ));
+                }
+                catch (NumberFormatException e) {
+                    Engine.log("INVALID STATE ENTRY", "The parsed state either lacked necessary values or had malformed numbers. State: " + stateJson.getKey(), e);
+                }
+            }
         }
-
-        // TODO: Fix old json functionality
-        // for (Object o : json.keySet()) {
-        //     HashMap<String, String> state = (HashMap<String, String>) json.get(o);
-        //     states.add(new State(
-        //         Integer.parseInt(state.get("FIPS")),
-        //         state.get("name"),
-        //         Integer.parseInt(state.get("population")),
-        //         state.get("abbreviation"),
-        //         state.get("motto"),
-        //         state.get("nickname")
-        //     ));
-        // }
     }
     public static void createCongressionalDistricts() {
         JSONObject json = JSONProcessor.processJson(FilePaths.CONGRESSIONAL_DISTRICTS);
 
-        for (Object element : json) {
-            System.out.println(element.toString());
+        for (Object districtObj : json.getAsList()) {
+            if (districtObj instanceof JSONObject districtJson) {
+                try {
+                    String hexID = districtJson.get("hexID").toString();
+                    String nameLSAD = districtJson.get("nameLSAD").toString();
+                    String state = districtJson.get("state").toString();
+                    String districtNum = districtJson.get("districtNum").toString();
+                    String officeID = districtJson.get("officeID").toString();
+                    MapManager.congressionalDistricts.add(new CongressionalDistrict(
+                        hexID, nameLSAD, state, districtNum, officeID
+                    ));
+                }
+                catch (NumberFormatException e) {
+                    Engine.log("INVALID CONGRESSIONAL DISTRICT ENTRY", "The parsed congressional district either lacked necessary values or had malformed numbers. District: " + districtJson.getKey(), e);
+                }
+            }
         }
-
-        // TODO: Fix old json functionality
-        // for (Object o : json.keySet()) {
-        //     HashMap<String, String> district = (HashMap<String, String>) json.get(o);
-        //     congressionalDistricts.add(new CongressionalDistrict(
-        //         district.get("hexID"),
-        //         district.get("nameLSAD"),
-        //         district.get("districtNum"),
-        //         district.get("officeID")
-        //     ));
-        // }
     }
     public static void createCounties() {
         JSONObject json = JSONProcessor.processJson(FilePaths.COUNTIES);
 
-        for (Object element : json) {
-            System.out.println(element.toString());
+        for (Object countyObj : json.getAsList()) {
+            if (countyObj instanceof JSONObject countyJson) {
+                String FIPS = countyJson.get("FIPS").toString();
+                String name = countyJson.get("name").toString();
+                String state = countyJson.get("state").toString();
+                String countySeat = countyJson.get("county_seat").toString();
+                int population = Integer.parseInt(countyJson.get("population").toString());
+                double area = Double.parseDouble(countyJson.get("square_milage").toString());
+                MapManager.counties.add(new County(
+                    FIPS, name, state, countySeat, population, area
+                ));
+            }
         }
-
-        // TODO: Fix old json functionality
-        // for (Object o : json.keySet()) {
-        //     HashMap<String, String> county = (HashMap<String, String>) json.get(o);
-        //     counties.add(new County(
-        //         county.get("FIPS"),
-        //         county.get("name"),
-        //         Integer.parseInt(county.get("population")),
-        //         Double.parseDouble(county.get("square_milage"))
-        //     ));
-        // }
     }
     public static void createCities() {
         JSONObject json = JSONProcessor.processJson(FilePaths.CITIES);
 
-        for (Object element : json) {
-            System.out.println(element.toString());
+        for (Object cityObj : json.getAsList()) {
+            if (cityObj instanceof JSONObject cityJson) {
+                String name = cityJson.get("name").toString();
+                int population = Integer.parseInt(cityJson.get("population2027").toString());
+                double area = Double.parseDouble(cityJson.get("landArea2020").toString());
+                MapManager.cities.add(new City(
+                    name, population, area
+                ));
+            }
         }
-
-        // TODO: Fix old json functionality
-        // for (Object o : json.keySet()) {
-        //     HashMap<String, String> city = (HashMap<String, String>) json.get(o);
-        //     cities.add(new City(
-        //         city.get("name"),
-        //         Integer.parseInt(city.get("population2027")),
-        //         Double.parseDouble(city.get("landArea2020"))
-        //     ));
-        // }
     }
 
     private static void resolveLocationFields() {
@@ -142,11 +148,13 @@ public class MapManager
         // Fix Congressional Districts
         json = JSONProcessor.processJson(FilePaths.CONGRESSIONAL_DISTRICTS);
 
-        for (Object element : json) {
-            System.out.println(element.toString());
+        for (Object congressionalDistrictObj : json.getAsList()) {
+            if (congressionalDistrictObj instanceof JSONObject congressionalDistrictJson) {
+
+            }
         }
 
-        // TODO: Fix old json functionality
+        // old json functionality
         // for (Object o : json.keySet()) {
         //     HashMap<String, String> d = (HashMap<String, String>) json.get(o);
         //     CongressionalDistrict congressionalDistrict = matchCongressionalDistrict(d.get("officeID"));
@@ -156,11 +164,13 @@ public class MapManager
         // Fix Counties
         json = JSONProcessor.processJson(FilePaths.COUNTIES);
 
-        for (Object element : json) {
-            System.out.println(element.toString());
+        for (Object countyObj : json.getAsList()) {
+            if (countyObj instanceof JSONObject countyJson) {
+
+            }
         }
 
-        // TODO: Fix old json functionality
+        // old json functionality
         // for (Object o : json.keySet()) {
         //     HashMap<String, String> c = (HashMap<String, String>) json.get(o);
         //     County county = matchCounty(c.get("FIPS"));
@@ -172,11 +182,13 @@ public class MapManager
         // Fix Cities
         json = JSONProcessor.processJson(FilePaths.CITIES);
 
-        for (Object element : json) {
-            System.out.println(element.toString());
+        for (Object cityObj : json.getAsList()) {
+            if (cityObj instanceof JSONObject cityJson) {
+
+            }
         }
 
-        // TODO: Fix old json functionality
+        // old json functionality
         // for (Object o : json.keySet()) {
         //     HashMap<String, String> c = (HashMap<String, String>) json.get(o);
         //     City city = matchCity(c.get("name"), Integer.parseInt(c.get("population2027")), Double.parseDouble(c.get("landArea2020")));

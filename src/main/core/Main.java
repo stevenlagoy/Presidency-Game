@@ -1,28 +1,12 @@
 package main.core;
 
-import java.nio.file.Path;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
-import core.JSONObject;
-import core.JSONProcessor;
-import core.JSONStringifier;
-import main.core.characters.Candidate;
-import main.core.characters.Character;
-import main.core.characters.CharacterManager;
-import main.core.characters.CharacterModel;
-import main.core.characters.Name;
-import main.core.characters.Personality;
-import main.core.demographics.Bloc;
-import main.core.demographics.Demographics;
-import main.core.demographics.DemographicsManager;
-import main.core.graphics.WindowManager;
-import main.core.graphics.game.TestGame;
-import main.core.map.MapManager;
+import main.core.characters.*;
+import main.core.demographics.*;
+import main.core.graphics.*;
+import main.core.graphics.game.*;
+import main.core.map.*;
 
 public class Main
 {
