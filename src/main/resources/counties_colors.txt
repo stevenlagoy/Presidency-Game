@@ -36,7 +36,7 @@
 01071		#32DBFF		Jackson County, AL
 01073		#32D2FF		Jefferson County, AL
 01075		#32C9FF		Lamar County, AL
-01077		#32BFFF		Lauderdale County, AL
+01077		#31BFFF		Lauderdale County, AL
 01079		#32B6FF		Lawrence County, AL
 01081		#32ADFF		Lee County, AL
 01083		#32A4FF		Limestone County, AL
@@ -943,21 +943,21 @@
 20107		#32C5FF		Linn County, KS
 20109		#32BFFF		Logan County, KS
 20111		#32B9FF		Lyon County, KS
-20115		#32B3FF		Marion County, KS
+20115		#31B3FF		Marion County, KS
 20117		#32ADFF		Marshall County, KS
-20113		#32A7FF		McPherson County, KS
+20113		#31A7FF		McPherson County, KS
 20119		#32A2FF		Meade County, KS
 20121		#329CFF		Miami County, KS
 20123		#3296FF		Mitchell County, KS
-20125		#3290FF		Montgomery County, KS
+20125		#3190FF		Montgomery County, KS
 20127		#328AFF		Morris County, KS
-20129		#3284FF		Morton County, KS
+20129		#3184FF		Morton County, KS
 20131		#327FFF		Nemaha County, KS
 20133		#3279FF		Neosho County, KS
 20135		#3273FF		Ness County, KS
-20137		#326DFF		Norton County, KS
+20137		#316DFF		Norton County, KS
 20139		#3267FF		Osage County, KS
-20141		#3261FF		Osborne County, KS
+20141		#3161FF		Osborne County, KS
 20143		#3861FF		Ottawa County, KS
 20145		#3E61FF		Pawnee County, KS
 20147		#4361FF		Phillips County, KS
@@ -1169,16 +1169,16 @@
 22109		#FF32E9		Terrebonne Parish, LA
 22111		#FF32E0		Union Parish, LA
 22113		#FF32D6		Vermilion Parish, LA
-22115		#FF32CC		Vernon Parish, LA
+22115		#FE32CC		Vernon Parish, LA
 22117		#FF32C3		Washington Parish, LA
 22119		#FF32B9		Webster Parish, LA
 22121		#FF32B0		West Baton Rouge Parish, LA
 22123		#FF32A6		West Carroll Parish, LA
 22125		#FF329D		West Feliciana Parish, LA
 22127		#FF3293		Winn Parish, LA
-23001		#FF3232		Androscoggin County, ME
+23001		#FE3232		Androscoggin County, ME
 23003		#FF5832		Aroostook County, ME
-23005		#FF7F32		Cumberland County, ME
+23005		#FE7F32		Cumberland County, ME
 23007		#F29832		Franklin County, ME
 23009		#CC9832		Hancock County, ME
 23011		#A59832		Kennebec County, ME
@@ -1190,7 +1190,7 @@
 23023		#A53298		Sagadahoc County, ME
 23025		#CC3298		Somerset County, ME
 23027		#F23298		Waldo County, ME
-23029		#FF327F		Washington County, ME
+23029		#FE327F		Washington County, ME
 23031		#FF3258		York County, ME
 24001		#B69832		Allegany County, MD
 24003		#B6B232		Anne Arundel County, MD
@@ -1523,23 +1523,23 @@
 29077		#34FF41		Greene County, MO
 29079		#32FF45		Grundy County, MO
 29081		#32FF4A		Harrison County, MO
-29083		#32FF4F		Henry County, MO
+29083		#31FF4F		Henry County, MO
 29085		#32FF55		Hickory County, MO
-29087		#32FF5A		Holt County, MO
+29087		#31FF5A		Holt County, MO
 29089		#32FF5F		Howard County, MO
-29091		#32FF64		Howell County, MO
+29091		#31FF64		Howell County, MO
 29093		#32FF6A		Iron County, MO
-29095		#32FF6F		Jackson County, MO
+29095		#31FF6F		Jackson County, MO
 29097		#32FF74		Jasper County, MO
 29099		#32FF7A		Jefferson County, MO
 29101		#32FF7F		Johnson County, MO
-29103		#32FF84		Knox County, MO
+29103		#31FF84		Knox County, MO
 29105		#32FF8A		Laclede County, MO
-29107		#32FF8F		Lafayette County, MO
+29107		#31FF8F		Lafayette County, MO
 29109		#32FF94		Lawrence County, MO
 29111		#32FF9A		Lewis County, MO
 29113		#32FF9F		Lincoln County, MO
-29115		#32FFA4		Linn County, MO
+29115		#31FFA4		Linn County, MO
 29117		#32FCA7		Livingston County, MO
 29121		#32F7A7		Macon County, MO
 29123		#32F1A7		Madison County, MO
@@ -1617,15 +1617,15 @@
 30035		#44FF6C		Glacier County, MT
 30037		#39FF6C		Golden Valley County, MT
 30039		#32FF70		Granite County, MT
-30041		#32FF7B		Hill County, MT
+30041		#31FF7B		Hill County, MT
 30043		#32FF86		Jefferson County, MT
-30045		#32FF91		Judith Basin County, MT
+30045		#31FF91		Judith Basin County, MT
 30047		#32FF9C		Lake County, MT
-30049		#32FFA7		Lewis and Clark County, MT
+30049		#31FFA7		Lewis and Clark County, MT
 30051		#32FFB2		Liberty County, MT
-30053		#32FFBD		Lincoln County, MT
+30053		#31FFBD		Lincoln County, MT
 30057		#32FFC8		Madison County, MT
-30055		#32FFD3		McCone County, MT
+30055		#31FFD3		McCone County, MT
 30059		#32F4D3		Meagher County, MT
 30061		#32E9D3		Mineral County, MT
 30063		#32DED3		Missoula County, MT
@@ -1660,9 +1660,9 @@
 31009		#FFAF32		Blaine County, NE
 31011		#FFB532		Boone County, NE
 31013		#FFBC32		Box Butte County, NE
-31015		#FFC332		Boyd County, NE
+31015		#FEC332		Boyd County, NE
 31017		#FFC932		Brown County, NE
-31019		#FFD032		Buffalo County, NE
+31019		#FED032		Buffalo County, NE
 31021		#FFD632		Burt County, NE
 31023		#FFDD32		Butler County, NE
 31025		#FFE332		Cass County, NE
@@ -1794,7 +1794,7 @@
 34037		#CC32F0		Sussex County, New NJ
 34039		#CC32D3		Union County, New NJ
 34041		#CC32B6		Warren County, New NJ
-35001		#FF3269		Bernalillo County, New NM
+35001		#FF3269		Bernalillo County, New NMssss
 35003		#FF4569		Catron County, New NM
 35005		#FF5769		Chaves County, New NM
 35006		#FF6A69		Cibola County, New NM
@@ -1832,7 +1832,7 @@
 36005		#FF5132		Bronx County, New NY
 36007		#FF5B32		Broome County, New NY
 36009		#FF6432		Cattaraugus County, New NY
-36011		#FF6E32		Cayuga County, New NY
+36011		#FE6E32		Cayuga County, New NY
 36013		#FF7832		Chautauqua County, New NY
 36015		#FF8232		Chemung County, New NY
 36017		#FF8C32		Chenango County, New NY
@@ -2139,9 +2139,9 @@
 40013		#FFB932		Bryan County, OK
 40015		#FFC132		Caddo County, OK
 40017		#FFC932		Canadian County, OK
-40019		#FFD132		Carter County, OK
+40019		#FED132		Carter County, OK
 40021		#FFD932		Cherokee County, OK
-40023		#FFE132		Choctaw County, OK
+40023		#FEE132		Choctaw County, OK
 40025		#FFE932		Cimarron County, OK
 40027		#FDF032		Cleveland County, OK
 40029		#F5F032		Coal County, OK
@@ -2610,7 +2610,7 @@
 48171		#32FF57		Gillespie County, TX
 48173		#32FF5A		Glasscock County, TX
 48175		#32FF5C		Goliad County, TX
-48177		#32FF5F		Gonzales County, TX
+48177		#31FF5F		Gonzales County, TX
 48179		#32FF61		Gray County, TX
 48181		#32FF63		Grayson County, TX
 48183		#32FF66		Gregg County, TX
@@ -2632,7 +2632,7 @@
 48215		#32FF8C		Hidalgo County, TX
 48217		#32FF8F		Hill County, TX
 48219		#32FF91		Hockley County, TX
-48221		#32FF94		Hood County, TX
+48221		#31FF94		Hood County, TX
 48223		#32FF96		Hopkins County, TX
 48225		#32FF98		Houston County, TX
 48227		#32FF9B		Howard County, TX
@@ -3047,17 +3047,17 @@
 54107		#FF5E48		Wood County, West WV
 54109		#FF5E3D		Wyoming County, West WV
 55001		#FF7F32		Adams County, WI
-55003		#FF8832		Ashland County, WI
+55003		#FE8832		Ashland County, WI
 55005		#FF9032		Barron County, WI
 55007		#FF9832		Bayfield County, WI
 55009		#FFA132		Brown County, WI
-55011		#FFAA32		Buffalo County, WI
+55011		#FEAA32		Buffalo County, WI
 55013		#FFB232		Burnett County, WI
-55015		#FFBB32		Calumet County, WI
+55015		#FEBB32		Calumet County, WI
 55017		#FFC332		Chippewa County, WI
-55019		#FFCC32		Clark County, WI
+55019		#FECC32		Clark County, WI
 55021		#FFD432		Columbia County, WI
-55023		#FFDD32		Crawford County, WI
+55023		#FEDD32		Crawford County, WI
 55025		#FFE532		Dane County, WI
 55027		#F6E532		Dodge County, WI
 55029		#EDE532		Door County, WI

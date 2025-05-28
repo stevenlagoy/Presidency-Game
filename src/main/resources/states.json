@@ -2,6 +2,8 @@
     "Alabama" : {
         "FIPS" : "01",
         "name" : "Alabama",
+		"map_color" : "#32D3FF",
+		"flag_loc" : "alabama_flag.png",
         "population" : 5024279,
         "largest_cities" : ["Montgomery", "Huntsville", "Birmingham", "Mobile", "Tuscaloosa"],
         "abbreviation" : "AL",
@@ -12,6 +14,8 @@
     "Alaska" : {
         "FIPS" : "02",
         "name" : "Alaska",
+		"map_color" : "#323AFF",
+		"flag_loc" : "alaska_flag.png",
         "population" : 733391,
         "largest_cities" : ["Juneau", "Anchorage", "Fairbanks", "Wasilla", "Sitka"],
         "abbreviation" : "AL",
@@ -22,6 +26,8 @@
     "Arizona" : {
         "FIPS" : "04",
         "name": "Arizona",
+		"map_color" : "#3265FF",
+		"flag_loc" : "arizona_flag.png",
         "population": 7151502,
         "largest_cities": ["Phoenix", "Tucson", "Mesa", "Chandler", "Glendale"],
         "abbreviation": "AZ",
@@ -32,6 +38,8 @@
     "American Samoa" : {
         "FIPS" : "60",
         "name": "American Samoa",
+		"map_color" : "#FF1616",
+		"flag_loc" : "american_samoa_flag.png",
         "population": 46189,
         "largest_cities": ["Pago Pago", "Tafuna", "Nu'uuli", "Ili'ili", "Aua"],
         "abbreviation": "AS",
@@ -42,6 +50,8 @@
     "Arkansas" : {
         "FIPS" : "05",
         "name": "Arkansas",
+		"map_color" : "#32A7FF",
+		"flag_loc" : "arkansas_flag.png",
         "population": 3011524,
         "largest_cities": ["Little Rock", "Fort Smith", "Fayetteville", "Springdale", "Jonesboro"],
         "abbreviation": "AR",
@@ -52,6 +62,8 @@
     "California" : {
         "FIPS" : "06",
         "name": "California",
+		"map_color" : "#DAFF32",
+		"flag_loc" : "california_flag.png",
         "population": 39538223,
         "largest_cities": ["Sacramento", "Los Angeles", "San Diego", "San Jose", "San Francisco", "Fresno"],
         "abbreviation": "CA",
@@ -62,17 +74,20 @@
     "Colorado" : {
         "FIPS" : "08",
         "name": "Colorado",
+		"map_color" : "#32FF91",
+		"flag_loc" : "colorado_flag.png",
         "population": 5773714,
         "largest_cities": ["Denver", "Colorado Springs", "Aurora", "Fort Collins", "Lakewood"],
         "abbreviation": "CO",
         "motto" : "Nil sine numine",
         "nickname" : "Centennial State",
-        "universities": ["University of Colorado Boulder", "Colorado State University", "University of Denver"],
-        "bellwether" : "True"
+        "universities": ["University of Colorado Boulder", "Colorado State University", "University of Denver"]
     },
     "Connecticut" : {
         "FIPS" : "09",
         "name": "Connecticut",
+		"map_color" : "#83FF32",
+		"flag_loc" : "connecticut_flag.png",
         "population": 3605944,
         "largest_cities": ["Hartford", "Bridgeport", "New Haven", "Stamford", "Waterbury"],
         "abbreviation": "CT",
@@ -83,6 +98,8 @@
     "Delaware" : {
         "FIPS" : "10",
         "name": "Delaware",
+		"map_color" : "#FF5E32",
+		"flag_loc" : "delaware_flag.png",
         "population": 989948,
         "largest_cities": ["Dover", "Wilmington", "Newark", "Middletown", "Smyrna"],
         "abbreviation": "DE",
@@ -93,6 +110,8 @@
     "District of Columbia" : {
         "FIPS" : "11",
         "name": "District of Columbia",
+		"map_color" : "#C432FF",
+		"flag_loc" : "district_of_columbia_flag.png",
         "population": 689545,
         "largest_cities": ["Washington, D.C."],
         "abbreviation": "DC",
@@ -103,17 +122,20 @@
     "Florida" : {
         "FIPS" : "12",
         "name": "Florida",
+		"map_color" : "#FF7432",
+		"flag_loc" : "florida_flag.png",
         "population": 21538187,
         "largest_cities": ["Tallahassee", "Jacksonville", "Miami", "Tampa", "Orlando", "St. Petersburg"],
         "abbreviation": "FL",
         "motto" : "In God we trust",
         "nickname" : "Sunshine State",
-        "universities": ["University of Florida", "University of Central Florida", "Florida State University", "University of Miami", "Florida International University"],
-        "bellwether" : "True"
+        "universities": ["University of Florida", "University of Central Florida", "Florida State University", "University of Miami", "Florida International University"]
     },
     "Georgia" : {
         "FIPS" : "13",
         "name": "Georgia",
+		"map_color" : "#DA32FF",
+		"flag_loc" : "georgia_flag.png",
         "population": 10711908,
         "largest_cities": ["Atlanta", "Augusta", "Columbus", "Macon", "Savannah"],
         "abbreviation": "GA",
@@ -124,6 +146,8 @@
     "Guam" : {
         "FIPS" : "66",
         "name": "Guam",
+        "map_color" : "#5732FF",
+        "flag_loc" : "guam_flag.png",
         "population": 169231,
         "largest_cities": ["Hagåtña", "Dededo", "Yigo", "Tamuning", "Mangilao", "Barrigada"],
         "abbreviation": "GU",
@@ -134,6 +158,8 @@
     "Hawaii" : {
         "FIPS" : "15",
         "name": "Hawaii",
+		"map_color" : "#FF325E",
+		"flag_loc" : "hawaii_flag.png",
         "population": 1455271,
         "largest_cities": ["Honolulu", "Pearl City", "Hilo", "Kailua", "Waipahu"],
         "abbreviation": "HI",
@@ -144,6 +170,8 @@
     "Idaho" : {
         "FIPS" : "16",
         "name": "Idaho",
+		"map_color" : "#3250FF",
+		"flag_loc" : "idaho_flag.png",
         "population": 1839106,
         "largest_cities": ["Boise", "Meridian", "Nampa", "Idaho Falls", "Pocatello"],
         "abbreviation": "ID",
@@ -154,6 +182,8 @@
     "Illinois" : {
         "FIPS" : "17",
         "name": "Illinois",
+		"map_color" : "#32BDFF",
+		"flag_loc" : "illinois_flag.png",
         "population": 12812508,
         "largest_cities": ["Springfield", "Chicago", "Aurora", "Rockford", "Joliet", "Naperville"],
         "abbreviation": "IL",
@@ -164,6 +194,8 @@
     "Indiana" : {
         "FIPS" : "18",
         "name": "Indiana",
+		"map_color" : "#FFB632",
+		"flag_loc" : "indiana_flag.png",
         "population": 6785528,
         "largest_cities": ["Indianapolis", "Fort Wayne", "Evansville", "South Bend", "Carmel"],
         "abbreviation": "IN",
@@ -174,6 +206,8 @@
     "Iowa" : {
         "FIPS" : "19",
         "name": "Iowa",
+		"map_color" : "#FF32CC",
+		"flag_loc" : "iowa_flag.png",
         "population": 3190369,
         "largest_cities": ["Des Moines", "Cedar Rapids", "Davenport", "Sioux City", "Iowa City"],
         "abbreviation": "IA",
@@ -184,6 +218,8 @@
     "Kansas" : {
         "FIPS" : "20",
         "name": "Kansas",
+		"map_color" : "#3291FF",
+		"flag_loc" : "kansas_flag.png",
         "population": 2937880,
         "largest_cities": ["Topeka", "Wichita", "Overland Park", "Kansas City", "Olathe"],
         "abbreviation": "KS",
@@ -194,6 +230,8 @@
     "Kentucky" : {
         "FIPS" : "21",
         "name": "Kentucky",
+		"map_color" : "#F032FF",
+		"flag_loc" : "kentucky_flag.png",
         "population": 4505836,
         "largest_cities": ["Frankfort", "Louisville", "Lexington", "Bowling Green", "Owensboro", "Covington"],
         "abbreviation": "KY",
@@ -204,6 +242,8 @@
     "Louisiana" : {
         "FIPS" : "22",
         "name": "Louisiana",
+		"map_color" : "#FF32E1",
+		"flag_loc" : "louisiana_flag.png",
         "population": 4657757,
         "largest_cities": ["Baton Rouge", "New Orleans", "Shreveport", "Lafayette", "Lake Charles"],
         "abbreviation": "LA",
@@ -214,6 +254,8 @@
     "Maine" : {
         "FIPS" : "23",
         "name": "Maine",
+		"map_color" : "#FF3232",
+		"flag_loc" : "maine_flag.png",
         "population": 1362359,
         "largest_cities": ["Agusta", "Portland", "Lewiston", "Bangor", "South Portland", "Auburn"],
         "abbreviation": "ME",
@@ -224,6 +266,8 @@
     "Maryland" : {
         "FIPS" : "24",
         "name": "Maryland",
+		"map_color" : "#6DFF32",
+		"flag_loc" : "maryland_flag.png",
         "population": 6177224,
         "largest_cities": ["Annapolis", "Baltimore", "Columbia", "Germantown", "Silver Spring", "Frederick"],
         "abbreviation": "MD",
@@ -234,6 +278,8 @@
     "Massachusetts" : {
         "FIPS" : "25",
         "name": "Massachusetts",
+		"map_color" : "#32FFD3",
+		"flag_loc" : "massachusetts_flag.png",
         "population": 7029917,
         "largest_cities": ["Boston", "Worcester", "Springfield", "Cambridge", "Lowell"],
         "abbreviation": "MA",
@@ -244,6 +290,8 @@
     "Michigan" : {
         "FIPS" : "26",
         "name": "Michigan",
+		"map_color" : "#FF32F7",
+		"flag_loc" : "michigan_flag.png",
         "population": 10077331,
         "largest_cities": ["Lansing", "Detroit", "Grand Rapids", "Warren", "Sterling Heights", "Ann Arbor"],
         "abbreviation": "MI",
@@ -254,6 +302,8 @@
     "Minnesota" : {
         "FIPS" : "27",
         "name": "Minnesota",
+		"map_color" : "#32FF65",
+		"flag_loc" : "minnesota_flag.png",
         "population": 5706494,
         "largest_cities": ["Saint Paul", "Minneapolis", "Rochester", "Duluth", "Bloomington"],
         "abbreviation": "MN",
@@ -264,6 +314,8 @@
     "Mississippi" : {
         "FIPS" : "28",
         "name": "Mississippi",
+		"map_color" : "#32FF3A",
+		"flag_loc" : "mississippi_flag.png",
         "population": 2961279,
         "largest_cities": ["Jackson", "Gulfport", "Southaven", "Hattiesburg", "Biloxi"],
         "abbreviation": "MS",
@@ -274,6 +326,8 @@
     "Missouri" : {
         "FIPS" : "29",
         "name": "Missouri",
+		"map_color" : "#32FF50",
+		"flag_loc" : "missouri_flag.png",
         "population": 6154913,
         "largest_cities": ["Jefferson City", "Kansas City", "St. Louis", "Springfield", "Columbia", "Independence"],
         "abbreviation": "MO",
@@ -284,6 +338,8 @@
     "Montana" : {
         "FIPS" : "30",
         "name": "Montana",
+		"map_color" : "#32FFA7",
+		"flag_loc" : "montana_flag.png",
         "population": 1084225,
         "largest_cities": ["Helena", "Billings", "Missoula", "Great Falls", "Bozeman", "Butte"],
         "abbreviation": "MT",
@@ -294,6 +350,8 @@
     "Nebraska" : {
         "FIPS" : "31",
         "name": "Nebraska",
+		"map_color" : "#FFF732",
+		"flag_loc" : "nebraska_flag.png",
         "population": 1961504,
         "largest_cities": ["Lincoln", "Omaha", "Bellevue", "Grand Island", "Kearney"],
         "abbreviation": "NE",
@@ -304,28 +362,32 @@
     "Nevada" : {
         "FIPS" : "32",
         "name": "Nevada",
+		"map_color" : "#32FFBD",
+		"flag_loc" : "nevada_flag.png",
         "population": 3104614,
         "largest_cities": ["Carson City", "Las Vegas", "Henderson", "Reno", "North Las Vegas", "Sparks"],
         "abbreviation": "NV",
         "motto" : "All for our country",
         "nickname" : "Silver State",
-        "universities": ["University of Nevada, Las Vegas (UNLV)", "University of Nevada, Reno", "Nevada State College"],
-        "bellwether" : "True"
+        "universities": ["University of Nevada, Las Vegas (UNLV)", "University of Nevada, Reno", "Nevada State College"]
     },
     "New Hampshire" : {
         "FIPS" : "33",
         "name": "New Hampshire",
+		"map_color" : "#99FF32",
+		"flag_loc" : "new_hampshire_flag.png",
         "population": 1377529,
         "largest_cities": ["Concord", "Manchester", "Nashua", "Derry", "Dover"],
         "abbreviation": "NH",
         "motto" : "Live free or die",
         "nickname" : "Granite State",
-        "universities": ["Dartmouth College", "University of New Hampshire", "Southern New Hampshire University"],
-        "bellwether" : "True"
+        "universities": ["Dartmouth College", "University of New Hampshire", "Southern New Hampshire University"]
     },
     "New Jersey" : {
         "FIPS" : "34",
         "name": "New Jersey",
+		"map_color" : "#9932FF",
+		"flag_loc" : "new_jersey_flag.png",
         "population": 9288994,
         "largest_cities": ["Trenton", "Newark", "Jersey City", "Paterson", "Elizabeth", "Edison"],
         "abbreviation": "NJ",
@@ -336,17 +398,20 @@
     "New Mexico" : {
         "FIPS" : "35",
         "name": "New Mexico",
+		"map_color" : "#FF32A0",
+		"flag_loc" : "new_mexico_flag.png",
         "population": 2117522,
         "largest_cities": ["Santa Fe", "Albuquerque", "Las Cruces", "Rio Rancho", "Roswell"],
         "abbreviation": "NM",
         "motto" : "Cescit enudo",
         "nickname" : "The Land of Enchantment",
-        "universities": ["University of New Mexico", "New Mexico State University", "New Mexico Institute of Mining and Technology"],
-        "bellwether" : "True"
+        "universities": ["University of New Mexico", "New Mexico State University", "New Mexico Institute of Mining and Technology"]
     },
     "New York" : {
         "FIPS" : "36",
         "name": "New York",
+		"map_color" : "#FF4832",
+		"flag_loc" : "new_york_flag.png",
         "population": 20201249,
         "largest_cities": ["Albany", "New York City", "Buffalo", "Rochester", "Yonkers", "Syracuse"],
         "abbreviation": "NY",
@@ -357,6 +422,8 @@
     "North Carolina" : {
         "FIPS" : "37",
         "name": "North Carolina",
+		"map_color" : "#57FF32",
+		"flag_loc" : "north_carolina_flag.png",
         "population": 10439388,
         "largest_cities": ["Raleigh", "Charlotte", "Greensboro", "Durham", "Winston-Salem"],
         "abbreviation": "NC",
@@ -367,6 +434,8 @@
     "North Dakota" : {
         "FIPS" : "38",
         "name": "North Dakota",
+		"map_color" : "#FF32B6",
+		"flag_loc" : "north_dakota_flag.png",
         "population": 779094,
         "largest_cities": ["Bismarck", "Fargo", "Grand Forks", "Minot", "West Fargo"],
         "abbreviation": "ND",
@@ -377,6 +446,8 @@
     "Northern Mariana Islands" : {
         "FIPS" : "69",
         "name": "Northern Mariana Islands",
+		"map_color" : "#AEFF32",
+		"flag_loc" : "northern_mariana_islands_flag.png",
         "population": 49587,
         "largest_cities": ["Saipan", "Tinian", "Rota"],
         "abbreviation": "MP",
@@ -387,17 +458,20 @@
     "Ohio" : {
         "FIPS" : "39",
         "name": "Ohio",
+		"map_color" : "#41FF32",
+		"flag_loc" : "ohio_flag.png",
         "population": 11799448,
         "largest_cities": ["Columbus", "Cleveland", "Cincinnati", "Toledo", "Akron"],
         "abbreviation": "OH",
         "motto" : "With God, all things are possible",
         "nickname" : "Buckeye State",
-        "universities": ["Ohio State University", "University of Cincinnati", "Case Western Reserve University"],
-        "bellwether" : "True"
+        "universities": ["Ohio State University", "University of Cincinnati", "Case Western Reserve University"]
     },
     "Oklahoma" : {
         "FIPS" : "40",
         "name": "Oklahoma",
+		"map_color" : "#FFE132",
+		"flag_loc" : "oklahoma_flag.png",
         "population": 3959353,
         "largest_cities": ["Oklahoma City", "Tulsa", "Norman", "Broken Arrow", "Lawton"],
         "abbreviation": "OK",
@@ -408,6 +482,8 @@
     "Oregon" : {
         "FIPS" : "41",
         "name": "Oregon",
+		"map_color" : "#FF3274",
+		"flag_loc" : "oregon_flag.png",
         "population": 4237256,
         "largest_cities": ["Salem", "Portland", "Eugene", "Gresham", "Hillsboro"],
         "abbreviation": "OR",
@@ -418,17 +494,20 @@
     "Pennsylvania" : {
         "FIPS" : "42",
         "name": "Pennsylvania",
+		"map_color" : "#32FFE9",
+		"flag_loc" : "pennsylvania_flag.png",
         "population": 13002700,
         "largest_cities": ["Harrisburg", "Philadelphia", "Pittsburgh", "Allentown", "Erie", "Reading"],
         "abbreviation": "PA",
         "motto" : "Virtue, Liberty and Independence",
         "nickname" : "Keystone State",
-        "universities": ["University of Pennsylvania", "Penn State University", "Carnegie Mellon University"],
-        "bellwether" : "True"
+        "universities": ["University of Pennsylvania", "Penn State University", "Carnegie Mellon University"]
     },
     "Puerto Rico" : {
         "FIPS" : "72",
         "name": "Puerto Rico",
+		"map_color" : "#FF3248",
+		"flag_loc" : "puerto_rico_flag.png",
         "population": 3285874,
         "largest_cities": ["San Juan", "Bayamón", "Carolina", "Ponce", "Caguas"],
         "abbreviation": "PR",
@@ -439,6 +518,8 @@
     "Rhode Island" : {
         "FIPS" : "44",
         "name": "Rhode Island",
+		"map_color" : "#6D32FF",
+		"flag_loc" : "rhode_island_flag.png",
         "population": 1097379,
         "largest_cities": ["Providence", "Warwick", "Cranston", "Pawtucket", "East Providence"],
         "abbreviation": "RI",
@@ -449,6 +530,8 @@
     "South Carolina" : {
         "FIPS" : "45",
         "name": "South Carolina",
+		"map_color" : "#32E9FF",
+		"flag_loc" : "south_carolina_flag.png",
         "population": 5118425,
         "largest_cities": ["Columbia", "Charleston", "North Charleston", "Mount Pleasant", "Rock Hill"],
         "abbreviation": "SC",
@@ -459,6 +542,8 @@
     "South Dakota" : {
         "FIPS" : "46",
         "name": "South Dakota",
+		"map_color" : "#327BFF",
+		"flag_loc" : "south_dakota_flag.png",
         "population": 886667,
         "largest_cities": ["Pierre", "Sioux Falls", "Rapid City", "Aberdeen", "Brookings", "Watertown"],
         "abbreviation": "SD",
@@ -469,6 +554,8 @@
     "Tennessee" : {
         "FIPS" : "47",
         "name": "Tennessee",
+		"map_color" : "#FFA032",
+		"flag_loc" : "tennessee_flag.png",
         "population": 6910840,
         "largest_cities": ["Nashville", "Memphis", "Knoxville", "Chattanooga", "Clarksville"],
         "abbreviation": "TN",
@@ -479,6 +566,8 @@
     "Texas" : {
         "FIPS" : "48",
         "name": "Texas",
+		"map_color" : "#32FF7B",
+		"flag_loc" : "texas_flag.png",
         "population": 29145505,
         "largest_cities": ["Austin", "Houston", "San Antonio", "Dallas", "Fort Worth"],
         "abbreviation": "TX",
@@ -489,6 +578,8 @@
     "Utah" : {
         "FIPS" : "49",
         "name": "Utah",
+		"map_color" : "#F0FF32",
+		"flag_loc" : "utah_flag.png",
         "population": 3271616,
         "largest_cities": ["Salt Lake City", "West Valley City", "Provo", "West Jordan", "Orem"],
         "abbreviation": "UT",
@@ -499,6 +590,8 @@
     "Vermont" : {
         "FIPS" : "50",
         "name": "Vermont",
+		"map_color" : "#8332FF",
+		"flag_loc" : "vermont_flag.png",
         "population": 643077,
         "largest_cities": ["Montpelier", "Burlington", "South Burlington", "Rutland", "Essex Junction", "Barre"],
         "abbreviation": "VT",
@@ -509,6 +602,8 @@
     "Virginia" : {
         "FIPS" : "51",
         "name": "Virginia",
+		"map_color" : "#32FFFF",
+		"flag_loc" : "virginia_flag.png",
         "population": 8631393,
         "largest_cities": ["Richmond", "Virginia Beach", "Norfolk", "Chesapeake", "Arlington"],
         "abbreviation": "VA",
@@ -519,6 +614,8 @@
     "U.S. Virgin Islands" : {
         "FIPS" : "78",
         "name": "U.S. Virgin Islands",
+		"map_color" : "#4132FF",
+		"flag_loc" : "virgin_islands_flag.png",
         "population": 106290,
         "largest_cities": ["Charlotte Amalie", "Anna's Retreat", "St. Croix", "Frederiksted", "Christiansted"],
         "abbreviation": "VI",
@@ -529,6 +626,8 @@
     "Washington" : {
         "FIPS" : "53",
         "name": "Washington",
+		"map_color" : "#C4FF32",
+		"flag_loc" : "washington_flag.png",
         "population": 7693612,
         "largest_cities": ["Olympia", "Seattle", "Spokane", "Tacoma", "Vancouver", "Bellevue"],
         "abbreviation": "WA",
@@ -539,6 +638,8 @@
     "West Virginia" : {
         "FIPS" : "54",
         "name": "West Virginia",
+		"map_color" : "#FF8A32",
+		"flag_loc" : "west_virginia_flag.png",
         "population": 1793716,
         "largest_cities": ["Charleston", "Huntington", "Parkersburg", "Morgantown", "Wheeling"],
         "abbreviation": "WV",
@@ -549,6 +650,8 @@
     "Wisconsin" : {
         "FIPS" : "55",
         "name": "Wisconsin",
+		"map_color" : "#FFCC32",
+		"flag_loc" : "wisconsin_flag.png",
         "population": 5893718,
         "largest_cities": ["Madison", "Milwaukee", "Green Bay", "Kenosha", "Racine"],
         "abbreviation": "WI",
@@ -559,6 +662,8 @@
     "Wyoming" : {
         "FIPS" : "56",
         "name": "Wyoming",
+		"map_color" : "#FF328A",
+		"flag_loc" : "wyoming_flag.png",
         "population": 576851,
         "largest_cities": ["Cheyenne", "Casper", "Laramie", "Gillette", "Rock Springs"],
         "abbreviation": "WY",
