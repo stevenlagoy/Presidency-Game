@@ -131,8 +131,14 @@ public class PoliticalActor extends Character implements HasPersonality {
         this.personality = personality;
     }
 
+    @Override
     public PoliticalActor fromJson(JSONObject json) {
         return this;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        return new JSONObject();
     }
 
     @Override

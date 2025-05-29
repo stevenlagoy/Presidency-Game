@@ -2,7 +2,9 @@ package main.core.demographics;
 
 import java.util.List;
 
+import core.JSONObject;
 import main.core.Engine;
+import main.core.Jsonic;
 import main.core.Repr;
 import main.core.characters.CharacterManager;
 
@@ -11,7 +13,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.HashMap;
 
-public class Bloc implements Repr {
+public class Bloc implements Repr<Bloc>, Jsonic<Bloc> {
 
     private static List<Bloc> instances = new ArrayList<>();
 
@@ -178,5 +180,15 @@ public class Bloc implements Repr {
             this.demographicGroup
         );
         return repr;
+    }
+    @Override
+    public JSONObject toJson() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+    }
+    @Override
+    public Bloc fromJson(JSONObject json) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromJson'");
     }
 }

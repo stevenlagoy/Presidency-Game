@@ -2,10 +2,11 @@ package main.core.demographics;
 
 import core.JSONObject;
 import main.core.Engine;
+import main.core.Jsonic;
 import main.core.Repr;
 
-public class Demographics implements Repr
-{
+public class Demographics implements Repr<Demographics>, Jsonic<Demographics> {
+    
     private Bloc generation;
     private Bloc religion;
     private Bloc raceEthnicity;
@@ -136,6 +137,18 @@ public class Demographics implements Repr
     }
 
     public static Demographics fromJson(JSONObject demographicsJson) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromJson'");
+    }
+
+    @Override
+    public JSONObject toJson() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+    }
+
+    @Override
+    public Demographics fromJson(JSONObject json) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'fromJson'");
     }

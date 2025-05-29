@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import core.JSONObject;
 import main.core.Engine;
+import main.core.Jsonic;
 import main.core.Repr;
 import main.core.characters.PoliticalActor;
 import main.core.demographics.Demographics;
 
-public class State implements Repr {
+public class State implements Repr<State>, Jsonic<State> {
     static
     {
         Map<String, String> states = new HashMap<>();
@@ -195,7 +197,19 @@ public class State implements Repr {
         return repr;
     }
 
-    public void fromRepr(String repr) {
-        return;
+    public State fromRepr(String repr) {
+        return this;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+    }
+
+    @Override
+    public State fromJson(JSONObject json) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromJson'");
     }
 }

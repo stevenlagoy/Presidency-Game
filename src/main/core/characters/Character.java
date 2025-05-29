@@ -3,14 +3,14 @@ import java.util.Date;
 
 import core.JSONObject;
 import main.core.DateManager;
+import main.core.Jsonic;
 import main.core.Repr;
 import main.core.demographics.Demographics;
 import main.core.demographics.DemographicsManager;
 import main.core.map.City;
 import main.core.map.MapManager;
 
-
-public class Character implements Repr<Character> { 
+public class Character implements Repr<Character>, Jsonic<Character> {
 
     protected final static int MIN_AGE = 0;
     protected final static int MAX_AGE = 120;
@@ -192,6 +192,12 @@ public class Character implements Repr<Character> {
     }
 
     @Override
+    public JSONObject toJson() {
+        JSONObject result = new JSONObject();
+        return result;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
@@ -220,4 +226,5 @@ public class Character implements Repr<Character> {
         );
         return repr;
     }
+
 }
