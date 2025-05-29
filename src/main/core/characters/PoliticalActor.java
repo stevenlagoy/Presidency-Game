@@ -1,48 +1,69 @@
 package main.core.characters;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
+import core.JSONObject;
 import main.core.Engine;
-import main.core.Repr;
-import main.core.characters.Experience;
-import main.core.characters.Personality;
 import main.core.demographics.Demographics;
+import main.core.map.City;
 import main.core.politics.Issue;
 import main.core.politics.Position;
 
-public class PoliticalActor extends Character implements Repr, HasPersonality {
+public class PoliticalActor extends Character implements HasPersonality {
     
     protected static final int MIN_AGE = 20;
     protected static final int MAX_AGE = 120;
 
     private int cash;
     private int education;
-    private int[] alignments = new int[2];
-    private List<Experience> experiences = new ArrayList<Experience>();
-    
-    private int legislativeSkill;
-    private int executiveSkill;
-    private int judicialSkill;
-    private int aptitude;
-
-    private List<Position> positions = new ArrayList<Position>();
+    private int[] alignments;
+    private List<Experience> experiences;
+    private Skills skills;
+    private List<Position> positions;
     private int conviction;
-    private float ageMod;
-
     private Personality personality;
 
-    public PoliticalActor(){
-        super();
+    public PoliticalActor() {
+        this(new Character());
     }
-    public PoliticalActor(Name name, Demographics demographics) {
-        super(name, demographics);
-    }
+    
     public PoliticalActor(String buildstring){
         super(buildstring);
     }
 
-    public int getCash(){
+    public PoliticalActor(Character character) {
+        super(character);
+        this.cash = 0;
+        this.education = 0;
+        this.alignments = new int[] {0, 0};
+        this.experiences = new ArrayList<Experience>();
+        this.skills = new Skills();
+        this.positions = new ArrayList<Position>();
+        this.conviction = 100;
+        this.personality = new Personality();
+    }
+
+    public PoliticalActor(Character character, int cash, int education, int[] alignments, List<Experience> experiences, Skills skills, List<Position> positions, int conviction, Personality personality) {
+        super(character);
+        this.cash = cash;
+        this.education = education;
+        if (alignments.length != 2)
+            throw new IllegalArgumentException("The alignments int array must have a length of 2.");
+        this.alignments = alignments;
+        this.conviction = conviction;
+        this.experiences = experiences != null ? experiences : new ArrayList<Experience>();
+        this.skills      = skills      != null ? skills      : new Skills();
+        this.positions   = positions   != null ? positions   : new ArrayList<Position>();
+        this.personality = personality != null ? personality : new Personality();
+    }
+
+    public PoliticalActor(Demographics demographics, Name name, City birthplaceCity, City currentLocationCity, City residenceCity, Date birthday, CharacterModel appearance, int cash, int education, int[] alignments, List<Experience> experiences, Skills skills, List<Position> positions, int conviction, Personality personality) {
+        this(new Character(demographics, name, birthplaceCity, currentLocationCity, residenceCity, birthday, appearance));
+    }
+
+    public int getCash() {
         return this.cash;
     }
     public void setCash(int cash){
@@ -52,62 +73,13 @@ public class PoliticalActor extends Character implements Repr, HasPersonality {
         this.cash += cash;
     }
 
-    protected void genEducation(){
-    }
     public void setEducation(int education){
         this.education = education;
     }
-    public int getEducation(){
+    public int getEducation() {
         return this.education;
     }
-    protected void genSkills(){
-    }
-    public void setSkills(int legislativeSkill, int executiveSkill, int judicialSkill){
-        this.legislativeSkill = legislativeSkill;
-        this.executiveSkill = executiveSkill;
-        this.judicialSkill = judicialSkill;
-        this.evalModifiedStats();
-        this.evalAptitude();
-    }
-    public int getLegislativeBaseSkill(){
-        return legislativeSkill;
-    }
-    public int getLegislativeModifiedSkill(){
-        return legislativeSkill;
-    }
-    public void setLegislativeBaseSkill(int legislativeSkill){
-        this.legislativeSkill = legislativeSkill;
-        this.evalAptitude();
-    }
-    public int getExecutiveBaseSkill(){
-        return executiveSkill;
-    }
-    public int getExecutiveModifiedSkill(){
-        return executiveSkill;
-    }
-    public void setExecutiveBaseSkill(int executiveSkill){
-        this.executiveSkill = executiveSkill;
-        this.evalAptitude();
-    }
-    public int getJudicialBaseSkill(){
-        return judicialSkill;
-    }
-    public int getJudicialModifiedSkill(){
-        return judicialSkill;
-    }
-    public void setJudicialBaseSkill(int judicialSkill){
-        this.judicialSkill = judicialSkill;
-        this.evalAptitude();
-    }
-    protected void evalModifiedStats(){
-        // multiply the base stats by the agemod and other modifiers
-    }
-    protected void evalAptitude(){
-        this.aptitude = legislativeSkill + executiveSkill + judicialSkill;
-    }
-    public int getAptitude(){
-        return this.aptitude;
-    }
+    
     public Position getPositionOnIssue(Issue issue){
         for(Position position : positions){
             if(position.getRootIssue().equals(issue)) return position;
@@ -115,7 +87,7 @@ public class PoliticalActor extends Character implements Repr, HasPersonality {
         Engine.log("INVALID ISSUE NAME", String.format("An invalid issue name, \"%s\", was supplied. Unable to determine position on non-existant issue.", issue), new Exception());
         return null;
     }
-    public List<Position> getPositions(){
+    public List<Position> getPositions() {
         return this.positions;
     }
     public void addPosition(Position position){
@@ -126,30 +98,32 @@ public class PoliticalActor extends Character implements Repr, HasPersonality {
         this.positions.addAll(position);
         evalConviction();
     }
-    protected void evalConviction(){
+    
+    protected void evalConviction() {
     }
-    public int getConviction(){
+    public int getConviction() {
         return this.conviction;
     }
 
-    public int[] getAlignments(){
+    public int[] getAlignments() {
         return this.alignments;
     }
-    public List<Experience> getExperience(){
+
+    public List<Experience> getExperience() {
         return this.experiences;
     }
-    protected void evalAgeMod(){
-        if(this.getAgeYears() < 20) ageMod = 0;
-        else if(this.getAgeYears() < 75) ageMod = (float) -((Math.pow(this.getAgeYears()-55, 2))/20)+100;
-        else if(this.getAgeYears() < 120) ageMod = (float) (-(12*this.getAgeYears())/15)+140;
-        else ageMod = 0;
+
+    protected float getAgeMod() {
+        float ageMod;
+        int age = this.getAge();
+        ageMod = (float) (100 * Math.pow(Math.E, -1 * Math.pow(((age - 55) / 30.0f), 2)));
+        return ageMod;
     }
-    public float getAgeMod(){
-        return this.ageMod;
-    }
-    public void determinePersonality(){
+
+    public void determinePersonality() {
 
     }
+    
     public Personality getPersonality() {
         return personality;
     }
@@ -157,10 +131,17 @@ public class PoliticalActor extends Character implements Repr, HasPersonality {
         this.personality = personality;
     }
 
-    public void fromRepr(String repr){
-
+    public PoliticalActor fromJson(JSONObject json) {
+        return this;
     }
-    public String toRepr(){
+
+    @Override
+    public PoliticalActor fromRepr(String repr){
+        return this;
+    }
+
+    @Override
+    public String toRepr() {
         String superRepr = super.toRepr();
         String[] splitSuperRepr = superRepr.split(":\\[");
         superRepr = "";
@@ -178,22 +159,33 @@ public class PoliticalActor extends Character implements Repr, HasPersonality {
             positionsStrings[i] = experiences.get(i).toRepr();
         }
         String positionsRepr = Engine.arrayToReprList(positionsStrings);
-        String repr = String.format("%s:[%scash=%d;education=%d;alignments=(%d,%d);experiences=[%s];legislativeSkill=%d;executiveSkill=%d;judicialSkill=%d;aptitude=%d;positions=[%s];conviction=%d;ageMod=%f;personality=%s;];",
+        String repr = String.format("%s:[%scash=%d;education=%d;alignments=(%d,%d);experiences=[%s];skills:%s;positions=[%s];conviction=%d;ageMod=%f;personality=%s;];",
             this.getClass().getName().split("\\.")[this.getClass().getName().split("\\.").length - 1],
             superRepr,
             cash,
             education,
             alignments[0], alignments[1],
             experiencesRepr,
-            legislativeSkill,
-            executiveSkill,
-            judicialSkill,
-            aptitude,
+            skills.toRepr(),
             positionsRepr,
             conviction,
-            ageMod,
             personality.toRepr()
         );
         return repr;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || this.getClass() != obj.getClass())
+            return false;
+        PoliticalActor other = (PoliticalActor) obj;
+        return this.toString().equals(other.toString());
+    }
+
+    @Override
+    public String toString() {
+        return this.toRepr();
     }
 }

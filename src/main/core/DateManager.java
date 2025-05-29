@@ -264,6 +264,16 @@ public class DateManager
     }
 
     /**
+     * Calculates the number of years between the current game date and the given date.
+     * @param date A past date to use in the calculation.
+     * @return The number of years (whole number) ago which the date represents.
+     * @see #millisecondsAgo(Date)
+     */
+    public static int yearsAgo(Date date) {
+        return (int) (millisecondsAgo(date) / yearDuration);
+    }
+
+    /**
      * Calculates the number of full years in between the current game date and the given year.
      * @param yearsAgo The year to calculate the time since.
      * @return The number of years between the current game date and the given year.
@@ -327,6 +337,27 @@ public class DateManager
     }
 
     /**
+     * 
+     * @param dateString
+     * @return
+     */
+    public static Date dateFromString(String dateString) {
+        String[] dateParts = dateString.split("[-//]", 3);
+        int year = Integer.parseInt(dateParts[0]);
+        int month = Integer.parseInt(dateParts[1]);
+        int day = Integer.parseInt(dateParts[2]);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month - 1); // Calendar months are 0-based
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTime();
+    }
+
+    /**
      * Returns the date in the format MM/DD for the given day ordinal. Includes leap years (i = 59).
      * @param dayOrdinal The day ordinal to convert to a date.
      * @return The date in the format MM/DD.
@@ -358,6 +389,7 @@ public class DateManager
 
         return String.format("%02d/%02d", month, day);
     }
+
     /**
      * Returns the day ordinal for the given date in the format MM/DD. Includes leap years (i = 59).
      * @param dateFormat The date in the format MM/DD to convert to a day ordinal.

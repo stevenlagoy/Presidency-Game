@@ -1,14 +1,11 @@
 package main.core.characters;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import main.core.Engine;
-import main.core.Repr;
 import main.core.demographics.Demographics;
 
-public class Candidate extends PoliticalActor implements Repr, HasPersonality {
+public class Candidate extends PoliticalActor {
 
     public static final int MIN_AGE = 35;
     public static final int MAX_AGE = 120;
@@ -26,6 +23,7 @@ public class Candidate extends PoliticalActor implements Repr, HasPersonality {
 
     public Candidate(){
         super();
+        generateAll();
     }
     public Candidate(Name name, Demographics demographics) {
         super(name, demographics);
@@ -136,6 +134,10 @@ public class Candidate extends PoliticalActor implements Repr, HasPersonality {
         int pointsForSelection, pointsForUpgrade, refund = 0;
         pointsForSelection = (int) Math.floor(Engine.randPercent(0.25f, 0.75f) * points);
         pointsForUpgrade = points - pointsForSelection;
+
+        while (pointsForUpgrade > 0) {
+            
+        }
 
         return refund;
     }

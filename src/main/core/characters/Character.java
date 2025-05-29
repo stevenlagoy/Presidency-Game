@@ -32,6 +32,16 @@ public class Character implements Repr<Character> {
         // Have builder constructor generate all fields
         this(null, null, null, null, null, null, null);
     }
+    
+    public Character(Character other) {
+        this.demographics = new Demographics(other.demographics);
+        this.name = new Name(other.name);
+        this.birthplaceCity = other.birthplaceCity;
+        this.currentLocationCity = other.currentLocationCity;
+        this.residenceCity = other.residenceCity;
+        this.birthday = (Date) other.birthday.clone();
+        this.appearance = new CharacterModel(other.appearance);
+    }
 
     /**
      * Creates a Character parsed from the Repr buildstring.
@@ -39,7 +49,7 @@ public class Character implements Repr<Character> {
      */
     public Character(String buildstring) {
         if (buildstring == null || buildstring.isBlank()) {
-            throw new IllegalArgumentException("The given buildstring was null, and a character could not be created.");
+            throw new IllegalArgumentException("The given buildstring was null, and a Character object could not be created.");
         }
         fromRepr(buildstring);
         CharacterManager.addCharacter(this);
@@ -51,9 +61,10 @@ public class Character implements Repr<Character> {
      */
     public Character(JSONObject json) {
         if (json == null) {
-            throw new IllegalArgumentException("The passed JSON Object was null, and a character could not be created.");
+            throw new IllegalArgumentException("The passed JSON Object was null, and a Character object could not be created.");
         }
         fromJson(json);
+        CharacterManager.addCharacter(this);
     }
 
     /**
@@ -150,7 +161,7 @@ public class Character implements Repr<Character> {
         if (nameObj == null)
             this.name = CharacterManager.generateName(demographics);
         else if (nameObj instanceof JSONObject nameJson)
-            this.name = Name.fromJson(nameJson);
+            this.name = new Name(nameJson);
         Object birthplaceObj = json.get("birthplace");
         if (birthplaceObj == null)
             this.birthplaceCity = MapManager.selectCity(demographics);

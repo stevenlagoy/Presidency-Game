@@ -1,6 +1,6 @@
 package main.core;
 
-public interface Repr {
+public interface Repr<T extends Repr<T>> {
     public String toRepr();
-    public void fromRepr(String repr);
+    public T fromRepr(String repr);
 }

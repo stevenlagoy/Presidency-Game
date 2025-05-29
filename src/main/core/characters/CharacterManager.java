@@ -1,6 +1,7 @@
 package main.core.characters;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -10,11 +11,14 @@ import java.util.Set;
 
 import core.JSONObject;
 import core.JSONProcessor;
+import main.core.DateManager;
 import main.core.Engine;
 import main.core.FilePaths;
 import main.core.demographics.Bloc;
 import main.core.demographics.Demographics;
 import main.core.demographics.DemographicsManager;
+import main.core.map.City;
+import main.core.map.MapManager;
 
 public class CharacterManager
 {
@@ -711,5 +715,45 @@ public class CharacterManager
             saveString.append(character.toRepr());
         }
         return saveString.toString();
+    }
+
+    public static Date generateBirthday(Demographics demographics) {
+        return generateBirthday(demographics, Character.MIN_AGE, Character.MAX_AGE);
+    }
+
+    public static Date generateBirthday(Demographics demographics, int minAge, int maxAge) {
+        Integer year;
+        long birthdate;
+        // Select a year
+        year = Engine.weightedRandSelect(CharacterManager.getAgeDistribution(demographics));
+        // Select a valid day of the year
+        do {
+            birthdate = DateManager.dateFormatToOrdinal(Engine.weightedRandSelect(CharacterManager.getBirthdateDistribution())) * DateManager.dayDuration;
+        }
+        while (DateManager.timeToYears(birthdate) < minAge || DateManager.timeToYears(birthdate) > maxAge ||
+            (birthdate == 60 * DateManager.dayDuration && !DateManager.isLeapYear(year)));
+
+        return new Date(DateManager.yearToMillis(year) + birthdate);
+    }
+
+    /**
+     * Generates a character model based on the demographics and birthdate of a person. Incorporates some randomness.
+     * @param demographics The demographics of the person.
+     * @param birthdate The date of birth of the person.
+     * @return A character model which looks like a person with the demographics and age.
+     * @see #generateCharacterModel(Demographics, int)
+     */
+    public static CharacterModel generateCharacterModel(Demographics demographics, Date birthdate) {
+        return generateCharacterModel(demographics, DateManager.yearsAgo(birthdate));
+    }
+
+    /**
+     * Generates a character model based on the demographics and age of a person. Incorporates some randomness.
+     * @param demographics The demographics of the person.
+     * @param age The age in years of the person.
+     * @return A character model which looks like a person with the demographics and age.
+     */
+    public static CharacterModel generateCharacterModel(Demographics demographics, int age) {
+        return new CharacterModel();
     }
 }

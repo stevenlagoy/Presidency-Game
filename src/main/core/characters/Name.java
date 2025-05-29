@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import core.JSONObject;
 import main.core.Engine;
 import main.core.Repr;
 
-public class Name implements Repr
+public class Name implements Repr<Name>
 {
     public static enum NameForm {
         WESTERN,
@@ -29,7 +30,7 @@ public class Name implements Repr
     public static String initialize(int limit, String... names) {
         List<String> splitNames = new ArrayList<String>();
         for (String name : names){
-            splitNames.addAll(Arrays.asList(name.split("[\\s]")));
+            splitNames.addAll(Arrays.asList(name.split("[\s]")));
         }
         String res = "";
         for (int i = 0; i < splitNames.size() && limit == -1 ? true : i < limit; i++) {
@@ -81,6 +82,46 @@ public class Name implements Repr
 
     private List<DisplayOption> displayOptions;
 
+    public Name() {
+
+    }
+
+    public Name(String buildstring) {
+        if (buildstring == null || buildstring.isBlank()) {
+            throw new IllegalArgumentException("The given buildstring was null, and a Name object could not be created.");
+        }
+        fromRepr(buildstring);
+    }
+
+    public Name(JSONObject json) {
+        if (json == null) {
+            throw new IllegalArgumentException("The passed JSON Object was null, and a Character object could not be created.");
+        }
+        fromJson(json);
+    }
+
+    public Name(Name other) {
+        this.nameForm = other.getNameForm();
+        this.givenName = other.getGivenName();
+        this.abbrFirst = other.isAbbrFirst();
+        this.atomicFirst = other.isAtomicFirst();
+        this.middleName = other.getMiddleName();
+        this.abbrMiddle = other.isAbbrMiddle();
+        this.atomicMiddle = other.isAtomicMiddle();
+        this.familyName = other.getFamilyName();
+        this.birthSurname = other.getBirthSurname();
+        this.paternalName = other.getPaternalName();
+        this.maternalName = other.getMaternalName();
+        for (String nickname : other.getNicknames())
+            this.nicknames.add(nickname);
+        this.includeNickname = other.isIncludeNickname();
+        this.ordinal = other.getOrdinal();
+        for (String suffix : other.getSuffixes())
+            this.suffixes.add(suffix);
+        for (DisplayOption option : other.getDisplayOptions())
+            this.displayOptions.add(option);
+    }
+
     /**
      * Create a Name object.
      * @param nameform "WESTERN" or "EASTERN"
@@ -113,8 +154,8 @@ public class Name implements Repr
             case HISPANIC :
                 this.givenName = givenName;
                 this.middleName = middleName;
-                this.paternalName = familyName.split("\\s+")[0];
-                this.maternalName = familyName.split("\\s+")[1];
+                this.paternalName = familyName.split("\s+")[0];
+                this.maternalName = familyName.split("\s+")[1];
                 break;
             case NATIVE_AMERICAN :
                 this.givenName = givenName;
@@ -135,7 +176,7 @@ public class Name implements Repr
         this.abbrMiddle = abbrMiddle;
     }
 
-    private String abbreviate(String name) {
+    public String abbreviate(String name) {
         return abbreviate(name, false);
     }
 
@@ -150,7 +191,7 @@ public class Name implements Repr
             }
             else {
                 String res = "";
-                String[] names = name.split("[\\s]");
+                String[] names = name.split("[\s]");
                 for (String n : names) {
                     for (int i = 0; i < n.length(); i++) {
                         if (java.lang.Character.isAlphabetic(n.charAt(i))) {
@@ -291,6 +332,10 @@ public class Name implements Repr
         return nameString.toString().trim();
     }
 
+    public NameForm getNameForm() {
+        return nameForm;
+    }
+
     public String getGivenName() {
         return givenName;
     }
@@ -352,8 +397,8 @@ public class Name implements Repr
     public void setMaternalName(String name) {
         this.maternalName = name;
     }
-    public String[] getNicknames() {
-        return (String[]) this.nicknames.toArray();
+    public List<String> getNicknames() {
+        return this.nicknames;
     }
     public void addNickname(String name) {
         this.nicknames.add(name);
@@ -372,6 +417,12 @@ public class Name implements Repr
     }
     public void setOrdinal(String ordinal) {
         this.ordinal = ordinal;
+    }
+    private List<DisplayOption> getDisplayOptions() {
+        return displayOptions;
+    }
+    private List<String> getSuffixes() {
+        return suffixes;
     }
 
     public String toRepr(){
@@ -408,8 +459,11 @@ public class Name implements Repr
         );
         return repr;
     }
-    public void fromRepr(String repr){
-        
+    public Name fromRepr(String repr){
+        return this;
+    }
+    public Name fromJson(JSONObject nameJson) {
+        return this;
     }
 
 }

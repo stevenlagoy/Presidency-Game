@@ -1,5 +1,6 @@
 package main.core.demographics;
 
+import core.JSONObject;
 import main.core.Engine;
 import main.core.Repr;
 
@@ -15,6 +16,13 @@ public class Demographics implements Repr
         this.religion = null;
         this.raceEthnicity = null;
         this.presentation = null;
+    }
+
+    public Demographics(Demographics other) {
+        this.generation = other.getGeneration();
+        this.religion = other.getReligion();
+        this.raceEthnicity = other.getRaceEthnicity();
+        this.presentation = other.getPresentation();
     }
 
     public Demographics(String generation, String religion, String raceEthnicity, String presentation){
@@ -123,7 +131,12 @@ public class Demographics implements Repr
         );
         return repr;
     }
-    public void fromRepr(String repr){
+    public Demographics fromRepr(String repr){
+        return this;
+    }
 
+    public static Demographics fromJson(JSONObject demographicsJson) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromJson'");
     }
 }

@@ -10,6 +10,7 @@ import javax.print.DocFlavor.STRING;
 
 import core.JSONObject;
 import core.JSONProcessor;
+import core.StringOperations;
 import main.core.Engine;
 import main.core.FilePaths;
 import main.core.demographics.Demographics;
@@ -197,6 +198,11 @@ public class MapManager
         // }
     }
 
+    /**
+     * Finds and returns a state which matches the passed name.
+     * @param stateName The name or abbreviation of the state.
+     * @return The matched state, if found, or {@code null} otherwise.
+     */
     public static State matchState(String stateName) {
         for (State state : states) {
             if (state.getName().equals(stateName) || state.getAbbreviation().equals(stateName)) return state;
@@ -231,6 +237,26 @@ public class MapManager
         return null;
     }
 
+    /**
+     * Finds and matches a city from a string containing the name of the city and the name or abbreviation of a state.
+     * @param cityAndStateName A String contining the city and state information.
+     * @return The found city if successfully matched, or {@code null} otherwise.
+     */
+    public static City matchCity(String cityAndStateName) {
+        String[] nameParts;
+        if (StringOperations.containsUnquotedChar(cityAndStateName, ',')) {
+            nameParts = StringOperations.splitByUnquotedString(cityAndStateName, ",");
+        }
+        // Assume the last word in the string is a state name or abbreviation. Will not work for state names with more than one word.
+        else {
+            nameParts = cityAndStateName.split("(?s)\\s(?=[^\\s]*$)", 2);
+
+        }
+        String cityName = nameParts[0];
+        String stateNameOrAbbr = nameParts[1];
+        return matchCity(cityName, stateNameOrAbbr);
+    }
+
     public static City matchCity(String cityName, State state) {
         for (City city : cities) {
             if (city.getName().equals(cityName) && city.getState().equals(state)) return city;
@@ -238,10 +264,17 @@ public class MapManager
         Engine.log("INVALID CITY", String.format("The city name, %s, or the state, %s, could not be matched.", cityName, state.getName()), new Exception());
         return null;
     }
+
+    /**
+     * Finds and returns the city that matches the passed values.
+     * @param cityName Name of the city, without a state abbreviation.
+     * @param state Either the name or abbreviation of a state.
+     * @return The found city, or {@code null} if not found.
+     */
     public static City matchCity(String cityName, String state) {
         return matchCity(cityName, matchState(state));
     }
-    // This method to be used before cities have assigned states. Assumes all cities are unique by (name, population, area)
+    /** This method to be used before cities have assigned states. Assumes all cities are unique by (name, population, area) */
     public static City matchCity(String cityName, int population, double area) {
         for (City city : cities) {
             if (city.getName().equals(cityName) && city.getPopulation() == population && city.getArea() == area) return city;
@@ -272,5 +305,9 @@ public class MapManager
             saveString.append(state.toRepr()).append("\n");
         }
         return saveString.toString();
+    }
+    public static City selectCity(Demographics demographics) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'selectCity'");
     }
 }
