@@ -1,5 +1,11 @@
 {
     "George Washington" : {
+        "demographics" : {
+            "generation" : "Generation X",
+            "religion" : "Episcopalian",
+            "race_ethnicity" : "English",
+            "presentation" : "Man"
+        },
         "name" : {
             "honorific" : "",
             "first_name" : "George",
@@ -14,15 +20,9 @@
             "legislative" : 70,
             "judicial" : 82
         },
-        "historical_birthdate" : "1732-02-22",
+        "birthday" : "1732-02-22",
         "age_at_prominence" : "57",
-        "birthplace" : "Popes Creek, VA",
-        "demographics" : {
-            "generation" : "Generation X",
-            "religion" : "Episcopalian",
-            "race_ethnicity" : "English",
-            "presentation" : "Man"
-        }
+        "birthplace" : "Popes Creek, VA"
     },
     "John Adams" : {
 
