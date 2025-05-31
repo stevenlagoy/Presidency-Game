@@ -1,5 +1,16 @@
+/*
+ * PoliticalActor.java
+ * Steven LaGoy
+ * Created: 11 October 2024 at 5:16 PM
+ * Modified: 29 May 2025
+ */
+
 package main.core.characters;
-import java.util.ArrayList;
+
+ // IMPORTS ---------------------------------------------------------------------------------------
+
+ import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -11,77 +22,287 @@ import main.core.map.City;
 import main.core.politics.Issue;
 import main.core.politics.Position;
 
+/**
+ * A Character subclass which represents a Character who may interact with political systems, like leaders, lobbyists, or candidates.
+ * <p>
+ * Contains fields and methods which describe a PoliticalActor's alignments and positions.
+ * @see Character
+ * @see HasPersonality
+ */
 public class PoliticalActor extends Character implements HasPersonality {
     
-    protected static final int MIN_AGE = 20;
-    protected static final int MAX_AGE = 120;
+    // STATIC VARIABLES ---------------------------------------------------------------------------
 
+    /** Minimum age of a Political Actor */
+    public static final int MIN_AGE = 20;
+    /** Maximum age of a Political Actor */
+    public static final int MAX_AGE = Character.MAX_AGE;
+
+    /** Enum for Education levels, based on ISCED 9-level framework. */
+    public static enum Education {
+
+        /** {@code 0} <p> Early Childhood Education: For children younger than three years through Preschool or Kindergarden. */
+        EARLY_CHILDHOOD (0),
+        /** {@code 1} <p> Primary Education: Core knowledge in Reading, Writing, and Mathematics. Elementary School (K/1 - 5/6). */
+        PRIMARY         (1),
+        /** {@code 2} <p> Lower Secondary Education: English, Science, Social Studies, and Algebra. Middle School (5/6 - 8/9) */
+        LOWER_SECONDARY (2),
+        /** {@code 3} <p> Upper Secondary Education: Language, Political Science, Higher Sciences, Higher Mathematics. High School (9 - 12)*/
+        UPPER_SECONDARY (3),
+        /** {@code 4} <p> Post-Secondary Non-Tertiary Education: Vocational or Technical Skills, Certifications. */
+        POST_SECONDARY  (4),
+        /** {@code 5} <p> Short-Cycle Tertiary Education: Any amount of a practically-based occupationally-specific concentrated education program. */
+        SHORT_TERTIARY  (5),
+        /** {@code 6} <p> Bachelor's Degree or Equivalent: Intermediate academic or professional knowledge, skills, and competencies. */
+        BACHELORS       (6),
+        /** {@code 7} <p> Master's Degree or Equivalent: Advanced academic or professional knowledge, skills, and competencies. */
+        MASTERS         (7),
+        /** {@code 8} <p> Doctorate or Equivalent: Advanced research qualification, usually with submission and defense of a substantive dissertation. */
+        DOCTORAL        (8);
+
+        public final int value;
+        private Education(int value) { this.value = value; }
+        public static Education level(int value) {
+            for (Education edu : Education.values())
+                if (edu.value == value)
+                    return edu;
+            throw new IllegalArgumentException("Invalid education level: " + value);
+        }
+        public static Education label(String label) {
+            String target = label.trim().toUpperCase().replace("\\s", "_");
+            for (Education edu : Education.values())
+                if (edu.toString().equals(target))
+                    return edu;
+            throw new IllegalArgumentException("Invalid education label: " + label);
+        }
+    }
+
+    // INSTANCE VARIABLES -------------------------------------------------------------------------
+
+    /** The funds currently usable by this PoliticalActor. */
     private int cash;
-    private int education;
+    /** The highest education level attained by this PoliticalActor. */
+    private Education education;
+    /** An int array of two values between -100 and +100, where alignments[0] gives authoritarian (+)
+     * and liberatarian (-) leaning, and alignments[1] gives left (-) and right (+) leaning. Based on
+     * the accepted political compass model in Cartesian space.
+     */
     private int[] alignments;
+    /** A List of Experiences representing the experiences of this PoliticalActor. */
     private List<Experience> experiences;
+    /** A Skills object representing the legislative, executive, and judicial skills (and aptitude) of this PoliticalActor. */
     private Skills skills;
+    /** A List of Positions on Issues held by this PoliticalActor. */
     private List<Position> positions;
+    /** The overall conviction of this PoliticalActor. */
     private int conviction;
+    /** The Personality object for this PoliticalActor's personality. */
     private Personality personality;
 
+    // CONSTRUCTORS -------------------------------------------------------------------------------
+
+    /**
+     * Creates a PoliticalActor with all fields generated by the CharacterManager.
+     * @see Character#Character()
+     */
     public PoliticalActor() {
         this(new Character());
     }
-    
-    public PoliticalActor(String buildstring){
-        super(buildstring);
+
+    /**
+     * Deep-copies the existing fields of another PoliticalActor object.
+     * @param other PoliticalActor to copy fields from.
+     */
+    public PoliticalActor(PoliticalActor other) {
+        this(other, true);
     }
 
-    public PoliticalActor(Character character) {
-        super(character);
-        this.cash = 0;
-        this.education = 0;
-        this.alignments = new int[] {0, 0};
+    /**
+     * Deep-copies the existing fields of another PoliticalActor object.
+     * Optionally adds to CharacterManager's list of Characters.
+     * @param other PoliticalActor to copy fields from.
+     * @param addToCharacterList Boolean indicating whether to add the created object to the list.
+     */
+    public PoliticalActor(PoliticalActor other, boolean addToCharacterList) {
+        super(other, false);
+        this.cash = other.cash;
+        this.education = other.education;
+        this.alignments = Arrays.copyOf(other.alignments, 2);
         this.experiences = new ArrayList<Experience>();
-        this.skills = new Skills();
+        addAllExperiences(other.experiences);
+        this.skills = (Skills) other.skills.clone();
         this.positions = new ArrayList<Position>();
-        this.conviction = 100;
-        this.personality = new Personality();
+        addAllPositions(other.positions);
+        this.conviction = other.conviction;
+        this.personality = (Personality) other.personality.clone();
+
+        if (addToCharacterList) CharacterManager.addCharacter(this);
     }
 
-    public PoliticalActor(Character character, int cash, int education, int[] alignments, List<Experience> experiences, Skills skills, List<Position> positions, int conviction, Personality personality) {
+    /**
+     * Creates a PoliticalActor by deep-copying the fields of the passed Character object,
+     * with all other fields generated by the CharacterManager.
+     * @param character Character to copy fields from.
+     * @see Character#Character(Character)
+     */
+    public PoliticalActor(Character character) {
+        super(character, false);
+        this.cash        = 0;
+        this.education   = Education.POST_SECONDARY;
+        this.alignments  = new int[] {0, 0};
+        this.experiences = new ArrayList<Experience>();
+        this.skills      = new Skills();
+        this.positions   = new ArrayList<Position>();
+        this.conviction  = 100;
+        this.personality = new Personality();
+
+        CharacterManager.addCharacter(this);
+    }
+
+    /**
+     * Creates a PoliticalActor parsed from the Repr buildstring.
+     * @param buildstring Valid Repr-format buildstring.
+     */
+    public PoliticalActor(String buildstring) {
+        if (buildstring == null || buildstring.isBlank()) {
+            throw new IllegalArgumentException("The given buildstring was null, and a " + getClass().getSimpleName() + " object could not be created.");
+        }
+        fromRepr(buildstring);
+        CharacterManager.addCharacter(this);
+    }
+
+    public PoliticalActor(JSONObject json) {
+        if (json == null) {
+            throw new IllegalArgumentException("The passed JSONObject was null, and a " + getClass().getSimpleName() + " object could not be created.");
+        }
+        fromJson(json);
+        CharacterManager.addCharacter(this);
+    }
+
+    /**
+     * Creates a PoliticalActor by deep-copying the fields of the passed Character object,
+     * and fills the other fields with the passed values. The CharacterManager will generate
+     * values for any {@code null} values passed.
+     * @param character Character to copy fields from.
+     * @param cash Funds currently usable by this PoliticalActor.
+     * @param education Highest education level attained by this PoliticalActor.
+     * @param alignments Int array of two values between -100 and +100, which represents the PoliticalActor's Auth/Lib and Right/Left alignments.
+     * @param experiences List of Experiences representing the experiences of this PoliticalActor.
+     * @param skills Skills object representing the skills and aptitude of this PoliticalActor.
+     * @param positions List of the positions on issues held by this PoliticalActor.
+     * @param personality Personality object for this PoliticalActor's personality.
+     */
+    public PoliticalActor(Character character, int cash, Education education, int[] alignments, List<Experience> experiences, Skills skills, List<Position> positions, Personality personality) {
         super(character);
+        if (alignments.length != 2)
+            throw new IllegalArgumentException("The alignments int array must have a length of 2, not " + String.valueOf(alignments.length));
         this.cash = cash;
         this.education = education;
-        if (alignments.length != 2)
-            throw new IllegalArgumentException("The alignments int array must have a length of 2.");
         this.alignments = alignments;
-        this.conviction = conviction;
+        this.conviction = evalConviction();
         this.experiences = experiences != null ? experiences : new ArrayList<Experience>();
         this.skills      = skills      != null ? skills      : new Skills();
         this.positions   = positions   != null ? positions   : new ArrayList<Position>();
         this.personality = personality != null ? personality : new Personality();
     }
 
-    public PoliticalActor(Demographics demographics, Name name, City birthplaceCity, City currentLocationCity, City residenceCity, Date birthday, CharacterModel appearance, int cash, int education, int[] alignments, List<Experience> experiences, Skills skills, List<Position> positions, int conviction, Personality personality) {
-        this(new Character(demographics, name, birthplaceCity, currentLocationCity, residenceCity, birthday, appearance));
+    /**
+     * Creates a PoliticalActor, filling fields with the passed values. The CharacterManager
+     * will generate values for any {@code null} values passed.
+     * @param demographics Demographics object representing this Character's demographic memberships.
+     * @param name Name object representing this Character's name.
+     * @param birthplaceCity City in which this Character was born.
+     * @param currentLocationCity City to which this Character is currently nearest.
+     * @param residenceCity City in which this Character currently resides (primary residence).
+     * @param birthday Date on which this character was born.
+     * @param appearance CharacterModel object to be rendered for this Character.
+     * @param cash Funds currently usable by this PoliticalActor.
+     * @param education Highest education level attained by this PoliticalActor.
+     * @param alignments Int array of two values between -100 and +100, which represents the PoliticalActor's Auth/Lib and Right/Left alignments.
+     * @param experiences List of Experiences representing the experiences of this PoliticalActor.
+     * @param skills Skills object representing the skills and aptitude of this PoliticalActor.
+     * @param positions List of the positions on issues held by this PoliticalActor.
+     * @param personality Personality object for this PoliticalActor's personality.
+     * @see Character#Character(Demographics, Name, City, City, City, Date, CharacterModel)
+     * @see #PoliticalActor(Character, int, Education, int[], List, Skills, List, Personality)
+     */
+    public PoliticalActor(Demographics demographics, Name name, City birthplaceCity, City currentLocationCity, City residenceCity, Date birthday, CharacterModel appearance, int cash, Education education, int[] alignments, List<Experience> experiences, Skills skills, List<Position> positions, Personality personality) {
+        this(
+            new Character(demographics, name, birthplaceCity, currentLocationCity, residenceCity, birthday, appearance),
+            cash, education, alignments, experiences, skills, positions, personality
+        );
     }
 
+    // GETTERS AND SETTERS ------------------------------------------------------------------------
+
+    // Cash
     public int getCash() {
         return this.cash;
     }
-    public void setCash(int cash){
+    public void setCash(int cash) {
         this.cash = cash;
     }
-    public void addCash(int cash){
+    public void addCash(int cash) {
         this.cash += cash;
     }
 
-    public void setEducation(int education){
+    // Education
+    public void setEducation(Education education) {
         this.education = education;
     }
-    public int getEducation() {
+    public Education getEducation() {
         return this.education;
     }
+
+    // Alignment(s)
+    public int[] getAlignments() {
+        return this.alignments;
+    }
+    public void setAlignments(int[] alignments) {
+        if (alignments.length != 2)
+            throw new IllegalArgumentException("The alignments int array must have a length of 2, not " + String.valueOf(alignments.length));
+        setAuthLibAlignment(alignments[0]);
+        setRightLeftAlignment(alignments[1]);
+    }
+    public int getAuthLibAlignment() {
+        return this.alignments[0];
+    }
+    public void setAuthLibAlignment(int alignment) {
+        if (alignment < -100 || alignment > 100)
+            throw new IllegalArgumentException("Alignment values must be between -100 and +100, not " + String.valueOf(alignment));
+        this.alignments[0] = alignment;
+    }
+    public int getRightLeftAlignment() {
+        return this.alignments[1];
+    }
+    public void setRightLeftAlignment(int alignment) {
+        if (alignment < -100 || alignment > 100)
+            throw new IllegalArgumentException("Alignment values must be between -100 and +100, not " + String.valueOf(alignment));
+        this.alignments[1] = alignment;
+    }
+
+    // Experiences
+    public List<Experience> getExperience() {
+        return this.experiences;
+    }
+    public void addExperience(Experience experience) {
+        this.experiences.add(experience);
+    }
+    public void addAllExperiences(Collection<Experience> experiences) {
+        this.experiences.addAll(experiences);
+    }
+
+    // Skills
+    public Skills getSkills() {
+        return this.skills;
+    }
+    public void setSkills(Skills skills) {
+        this.skills = skills;
+    }
     
-    public Position getPositionOnIssue(Issue issue){
-        for(Position position : positions){
+    // Position(s)
+    public Position getPositionOnIssue(Issue issue) {
+        for(Position position : positions) {
             if(position.getRootIssue().equals(issue)) return position;
         }
         Engine.log("INVALID ISSUE NAME", String.format("An invalid issue name, \"%s\", was supplied. Unable to determine position on non-existant issue.", issue), new Exception());
@@ -90,27 +311,39 @@ public class PoliticalActor extends Character implements HasPersonality {
     public List<Position> getPositions() {
         return this.positions;
     }
-    public void addPosition(Position position){
+    public void addPosition(Position position) {
         this.positions.add(position);
         evalConviction();
     }
-    public void addPositions(Collection<? extends Position> position){
-        this.positions.addAll(position);
+    public void addAllPositions(Collection<Position> positions) {
+        this.positions.addAll(positions);
         evalConviction();
     }
     
-    protected void evalConviction() {
+    // Conviction
+    protected int evalConviction() {
+        // TODO Complete this function
+        return 75;
     }
     public int getConviction() {
         return this.conviction;
     }
 
-    public int[] getAlignments() {
-        return this.alignments;
+    // Personality
+    @Override
+    public Personality determinePersonality() {
+        return new Personality();
     }
-
-    public List<Experience> getExperience() {
-        return this.experiences;
+    public Personality getPersonality() {
+        return personality;
+    }
+    public void setPersonality(Personality personality) {
+        this.personality = personality;
+    }
+    @Override
+    public float evaluateAction() {
+        // TODO Complete this function
+        return 0.5f;
     }
 
     protected float getAgeMod() {
@@ -120,32 +353,19 @@ public class PoliticalActor extends Character implements HasPersonality {
         return ageMod;
     }
 
-    public void determinePersonality() {
+    // REPRESENTATION METHODS ---------------------------------------------------------------------
 
-    }
-    
-    public Personality getPersonality() {
-        return personality;
-    }
-    public void setPersonality(Personality personality) {
-        this.personality = personality;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public PoliticalActor fromJson(JSONObject json) {
+    public PoliticalActor fromRepr(String repr) {
         return this;
     }
 
-    @Override
-    public JSONObject toJson() {
-        return new JSONObject();
-    }
-
-    @Override
-    public PoliticalActor fromRepr(String repr){
-        return this;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toRepr() {
         String superRepr = super.toRepr();
@@ -180,6 +400,35 @@ public class PoliticalActor extends Character implements HasPersonality {
         return repr;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PoliticalActor fromJson(JSONObject json) {
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JSONObject toJson() {
+        return new JSONObject();
+    }
+
+    /**
+     * @see #toRepr()
+     */
+    @Override
+    public String toString() {
+        return this.toRepr();
+    }
+
+    // OBJECT METHODS -----------------------------------------------------------------------------
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -190,8 +439,24 @@ public class PoliticalActor extends Character implements HasPersonality {
         return this.toString().equals(other.toString());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public String toString() {
-        return this.toRepr();
+    public int hashCode() {
+        final int prime = 43;
+        int hash = super.hashCode();
+        hash = prime * hash + (skills == null ? 0 : skills.hashCode());
+        hash = prime * hash + (conviction);
+        hash = prime * hash + (personality.hashCode());
+        return hash;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PoliticalActor clone() {
+        return new PoliticalActor(this);
     }
 }
