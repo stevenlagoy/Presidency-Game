@@ -1,24 +1,81 @@
-package main.core.characters;
+/*
+ * Name.java
+ * Steven LaGoy
+ * Created: 23 March 2025 at 1:27 AM
+ * Modified: 31 May 2025
+ */
 
+package main.core.characters.names;
+
+// IMPORTS ----------------------------------------------------------------------------------------
+
+// Standard Library Imports
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+// Internal Imports
 import core.JSONObject;
 import main.core.Engine;
+import main.core.Jsonic;
 import main.core.Repr;
 
-public class Name implements Repr<Name>
-{
+/** Models the Personal Name of a Character, with options for several Name Forms, Patterns, and Display Options.
+ * <p>
+ * Contains fields and methods for basic parts of a person's name, data about the way those parts are used, and various forms of displaying that name.
+ */
+public final class Name implements Repr<Name>, Jsonic<Name> {
+    
+    private static enum NamePart {
+        HONORIFIC,
+        GIVEN_NAME,
+        MIDDLE_NAME,
+        NICKNAME,
+        FAMILY_NAME,
+        MATERNAL_NAME,
+        PATERNAL_NAME,
+        ORDINAL,
+        SUFFIXES
+    }
+
+    private static enum NameStyle {
+        LEGAL,
+        FORMAL,
+        BIOGRAPHICAL,
+        COMMON,
+        INFORMAL,
+        NICKNAME
+    }
+
+    private static final Map<NameStyle, List<NamePart>> namePatterns = Map.of(
+        NameStyle.LEGAL,        List.of(NamePart.GIVEN_NAME, NamePart.MIDDLE_NAME, NamePart.FAMILY_NAME, NamePart.ORDINAL),
+        NameStyle.FORMAL,       List.of(),
+        NameStyle.BIOGRAPHICAL, List.of(NamePart.HONORIFIC, NamePart.GIVEN_NAME, NamePart.MIDDLE_NAME, NamePart.NICKNAME, NamePart.FAMILY_NAME, NamePart.ORDINAL, NamePart.SUFFIXES),
+        NameStyle.COMMON,       List.of(NamePart.GIVEN_NAME, NamePart.MIDDLE_NAME, NamePart.FAMILY_NAME),
+        NameStyle.INFORMAL,     List.of(NamePart.GIVEN_NAME, NamePart.FAMILY_NAME),
+        NameStyle.NICKNAME,     List.of(NamePart.NICKNAME, NamePart.FAMILY_NAME)
+    );
+
     public static enum NameForm {
         WESTERN,
         EASTERN,
         HISPANIC,
-        NATIVE_AMERICAN
+        NATIVE_AMERICAN;
+
+        public static NameForm defaultForm = NameForm.WESTERN;
     }
 
     private static enum DisplayOption {
-        INCL_HONORIFICS, USE_INITIALS, NICKNAME_AS_GIVEN, FORMAL, INFORMAL
+        WESTERN_FIRST,
+        EASTERN_FIRST,
+        NATIVE_FIRST,
+        PATERNAL_FIRST,
+        MATERNAL_FIRST,
+        INCLUDE_ORDINAL,
+        INCLUDE_NICKNAME;
     }
 
     /**
@@ -54,13 +111,17 @@ public class Name implements Repr<Name>
 
     private NameForm nameForm;
 
-    // Western Name Elements
+    // First or Given Name
     private String givenName;
     private boolean abbrFirst;
     private boolean atomicFirst;
+
+    // Middle or Generational Name
     private String middleName;
     private boolean abbrMiddle;
     private boolean atomicMiddle;
+    
+    // Last or Family Name
     private String familyName;
     private String birthSurname;
     private String paternalName;
@@ -72,6 +133,7 @@ public class Name implements Repr<Name>
 
     // Other Names
     private String religiousName;
+    private String westernName;
     private String legalName;
     private String informalName;
 
@@ -80,10 +142,29 @@ public class Name implements Repr<Name>
     private String ordinal;
     private List<String> suffixes;
 
-    private List<DisplayOption> displayOptions;
+    private Set<DisplayOption> displayOptions;
 
     public Name() {
-
+        this.nameForm = NameForm.defaultForm;
+        this.givenName = "";
+        this.abbrFirst = false;
+        this.atomicFirst = false;
+        this.middleName = "";
+        this.abbrMiddle = false;
+        this.atomicMiddle = false;
+        this.familyName = "";
+        this.birthSurname = "";
+        this.paternalName = "";
+        this.maternalName = "";
+        this.nicknames = new ArrayList<>();
+        this.includeNickname = false;
+        this.religiousName = "";
+        this.legalName = "";
+        this.informalName = "";
+        this.honorific = "";
+        this.ordinal = "";
+        this.suffixes = new ArrayList<>();
+        this.displayOptions = new HashSet<>();
     }
 
     public Name(String buildstring) {
@@ -115,28 +196,26 @@ public class Name implements Repr<Name>
         for (String nickname : other.getNicknames())
             this.nicknames.add(nickname);
         this.includeNickname = other.isIncludeNickname();
-        this.ordinal = other.getOrdinal();
+        this.religiousName = other.religiousName;
+        this.legalName = other.legalName;
+        this.informalName = other.informalName;
+        this.honorific = other.honorific;
+        this.ordinal = other.ordinal;
         for (String suffix : other.getSuffixes())
             this.suffixes.add(suffix);
         for (DisplayOption option : other.getDisplayOptions())
             this.displayOptions.add(option);
     }
 
-    /**
-     * Create a Name object.
-     * @param nameform "WESTERN" or "EASTERN"
-     * @param name1 If Western, first name. If Eastern, family name. If Hispanic, given name.
-     * @param name2 If Western, middle name. If Eastern, generation name. If Hispanic, paternal name.
-     * @param name3 If Western, last name. If Eastern, given name. If Hispanic, maternal name.
-     */
-    public Name(String nameform, String givenName, String middleName, String familyName){
-        this(NameForm.valueOf(nameform.toUpperCase()), givenName, middleName, familyName);
+    public Name(String firstName, String middleName, String lastName){
+        this(NameForm.defaultForm, firstName, middleName, lastName);
     }
 
     public Name(NameForm nameform, String givenName, String middleName, String familyName){
+        this();
         if (nameform == null) {
-            Engine.log("NAME INVALID NAMEFORM: ", String.format("Invalid nameform supplied: %s", nameform), new Exception());
-            return;
+            Engine.log("INVALID NAMEFORM: ", String.format("Invalid nameform supplied: %s", nameform), new Exception());
+            throw new IllegalArgumentException(String.format("Invalid nameform supplied: %s", nameform));
         }
         this.nameForm = nameform;
         switch (nameform) {
@@ -166,14 +245,46 @@ public class Name implements Repr<Name>
         this.suffixes = new ArrayList<>();
     }
 
-    public Name(String firstName, String middleName, String lastName){
-        this(NameForm.WESTERN, firstName, middleName, lastName);
-    }
-
-    public Name(String firstName, boolean abbrFirst, String middleName, boolean abbrMiddle, String lastName) {
-        this(firstName, middleName, lastName);
+    public Name(
+        NameForm nameForm,
+        String givenName,
+        boolean abbrFirst,
+        boolean atomicFirst,
+        String middleName,
+        boolean abbrMiddle,
+        boolean atomicMiddle,
+        String familyName,
+        String birthSurname,
+        String paternalName,
+        String maternalName,
+        List<String> nicknames,
+        boolean includeNickname,
+        String religiousName,
+        String legalName,
+        String informalName,
+        String honorific,
+        String ordinal,
+        List<String> suffixes
+    ) {
+        this.nameForm = nameForm;
+        this.givenName = givenName;
         this.abbrFirst = abbrFirst;
+        this.atomicFirst = atomicFirst;
+        this.middleName = middleName;
         this.abbrMiddle = abbrMiddle;
+        this.atomicMiddle = atomicMiddle;
+        this.familyName = familyName;
+        this.birthSurname = birthSurname;
+        this.paternalName = paternalName;
+        this.maternalName = maternalName;
+        this.nicknames = nicknames;
+        this.includeNickname = includeNickname;
+        this.religiousName = religiousName;
+        this.legalName = legalName;
+        this.informalName = informalName;
+        this.honorific = honorific;
+        this.ordinal = ordinal;
+        this.suffixes = suffixes;
     }
 
     public String abbreviate(String name) {
@@ -418,7 +529,7 @@ public class Name implements Repr<Name>
     public void setOrdinal(String ordinal) {
         this.ordinal = ordinal;
     }
-    private List<DisplayOption> getDisplayOptions() {
+    private Set<DisplayOption> getDisplayOptions() {
         return displayOptions;
     }
     private List<String> getSuffixes() {
@@ -430,13 +541,13 @@ public class Name implements Repr<Name>
         for (int i = 0; i < nicknames.size(); i++) {
             nicknamesStrings[i] = nicknames.get(i);
         }
-        String nicknamesRepr = Engine.arrayToReprList(nicknamesStrings);
+        String nicknamesRepr = Repr.arrayToReprList(nicknamesStrings);
 
         String[] suffixesStrings = new String[suffixes.size()];
         for (int i = 0; i < suffixes.size(); i++) {
             suffixesStrings[i] = suffixes.get(i);
         }
-        String suffixesRepr = Engine.arrayToReprList(suffixesStrings);
+        String suffixesRepr = Repr.arrayToReprList(suffixesStrings);
 
         String repr = String.format("%s:[nameForm=\"%s\";givenName=\"%s\";abbrFirst=%b;atomicFirst=%b;middleName=\"%s\";abbrMiddle=%b;atomicMiddle=%b;familyName=\"%s\";birthSurname=\"%s\";paternalName=\"%s\";maternalName=\"%s\";nicknames=[%s];includeNickname=%b;honorific=\"%s\";ordinal=\"%s\";suffixes=[%s];];",
             this.getClass().getName().split("\\.")[this.getClass().getName().split("\\.").length - 1],
@@ -465,5 +576,104 @@ public class Name implements Repr<Name>
     public Name fromJson(JSONObject nameJson) {
         return this;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hash = 7;
+        hash = prime * hash + (givenName == null ? 0 : givenName.hashCode());
+        hash = prime * hash + (middleName == null ? 0 : middleName.hashCode());
+        hash = prime * hash + (familyName == null ? 0 : familyName.hashCode());
+        return hash;
+    }
+    @Override
+    public JSONObject toJson() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+    }
+
+
+    /** Returns the Legal Name of the Character, which is how their name might appear on a government form.
+     * <p>
+     * Western: Given [Middle(s)] Family
+     * @return String Legal Name
+     */
+    public String getLegalName() {
+        return switch(nameForm) {
+            case WESTERN -> {
+                if (displayOptions.contains(DisplayOption.INCLUDE_ORDINAL))
+                    yield String.format("%s %s %s %s", givenName, middleName, familyName, ordinal).replace("  ", " ");
+                else
+                    yield String.format("%s %s %s", givenName, middleName, familyName).replace("  ", " ");
+            }
+            case EASTERN -> {
+                if (displayOptions.contains(DisplayOption.WESTERN_FIRST))
+                    yield String.format("%s %s%s %s", westernName, middleName, givenName, familyName).replace("  ", " ");
+                if (displayOptions.contains(DisplayOption.EASTERN_FIRST))
+                    yield String.format("%s%s %s %s", middleName, givenName, westernName, familyName).replace("  ", " ");
+                yield "IMPROPER DISPLAY OPTIONS";
+            }
+            case HISPANIC -> {
+                if (displayOptions.contains(DisplayOption.MATERNAL_FIRST))
+                    yield String.format("%s %s %s", givenName, maternalName, paternalName).replace("  ", " ");
+                if (displayOptions.contains(DisplayOption.PATERNAL_FIRST))
+                    yield String.format("%s %s %s", givenName, maternalName, paternalName).replace("  ", " ");
+                yield "IMPROPER DISPLAY OPTIONS";
+            }
+            case NATIVE_AMERICAN -> {
+                if (displayOptions.contains(DisplayOption.WESTERN_FIRST))
+                    yield String.format("%s %s %s", westernName, givenName, familyName).replace("  ", " ");
+                if (displayOptions.contains(DisplayOption.NATIVE_FIRST))
+                    yield String.format("%s %s %s", givenName, westernName, familyName).replace("  ", " ");
+                yield "IMPROPER DISPLAY OPTIONS";
+            }
+        };
+    }
+
+    /** May include Honorifics and Suffixes */
+    public String getFormalName() {
+        if (suffixes.size() > 0)
+            return String.format("%s %s, %s", honorific, getLegalName(), String.join(", ", suffixes)).replace("  ", " ");
+        else
+            return String.format("%s %s", honorific, getLegalName()).replace("  ", " ");
+    }
+
+    /** May include a nickname in quotations between given/middle name(s) and family name(s). */
+    public String getBiographicalName() {
+        return switch(nameForm) {
+            case WESTERN -> {
+                if (displayOptions.contains(DisplayOption.INCLUDE_NICKNAME))
+                    yield String.format("%s %s %s \"%s\" %s %s, %s",
+                            honorific,
+                            givenName,
+                            middleName,
+                            nicknames.get(0),
+                            familyName,
+                            ordinal,
+                            String.join(", ", suffixes)
+                        ).replace("  ", " ");
+                else
+                    yield String.format("%s %s %s %s %s, %s",
+                            honorific,
+                            givenName,
+                            middleName,
+                            familyName,
+                            ordinal,
+                            String.join(", ", suffixes)
+                        ).replace("  ", " ");
+            }
+            case EASTERN -> {
+                yield "";
+            }
+            case HISPANIC -> {
+                yield "";
+            }
+            case NATIVE_AMERICAN -> {
+                yield "";
+            }
+        };
+        
+    }
+
 
 }

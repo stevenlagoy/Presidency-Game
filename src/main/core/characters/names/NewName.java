@@ -1,4 +1,4 @@
-package main.core.characters;
+package main.core.characters.names;
 
 import java.util.ArrayList;
 import java.util.List;
