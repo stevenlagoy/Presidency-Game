@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -68,9 +69,9 @@ public class IOUtil {
     /** Standard input from System.in. @see IOUtil#createScanner(InputStream) */
     public static final Scanner stdin = IOUtil.createScanner(System.in);
     /** Standard output to System.out. @see IOUtil#createWriter(OutputStream) */
-    public static final BufferedWriter stdout = IOUtil.createWriter(System.out);
+    public static final PrintWriter stdout = IOUtil.createWriter(System.out);
     /** Standard output to System.err. @see IOUtil#createWriter(OutputStream) */
-    public static final BufferedWriter stderr = IOUtil.createWriter(System.err);
+    public static final PrintWriter stderr = IOUtil.createWriter(System.err);
 
     public static Scanner createScanner(InputStream inputStream) {
         return new Scanner(inputStream, StandardCharsets.UTF_8.name());
@@ -78,20 +79,14 @@ public class IOUtil {
     public static Scanner createScanner(File file) throws FileNotFoundException {
         return new Scanner(file, StandardCharsets.UTF_8.name());
     }
-    public static BufferedWriter createWriter(OutputStream outputStream) {
-        return new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+    public static PrintWriter createWriter(OutputStream outputStream) {
+        return new PrintWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8), true);
     }
-    public static BufferedWriter createWriter(File file) throws IOException {
-        return new BufferedWriter(new FileWriter(file, StandardCharsets.UTF_8));
+    public static PrintWriter createWriter(File file) throws IOException {
+        return new PrintWriter(new FileWriter(file, StandardCharsets.UTF_8), true);
     }
-    public static BufferedReader createReader(InputStream inputStream) {
-        return new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-    }
-    public static BufferedReader createReader(File file) throws IOException {
-        return new BufferedReader(new FileReader(file, StandardCharsets.UTF_8));
-    }
-    public static BufferedWriter createWriter(File file, boolean append) throws IOException {
-        return new BufferedWriter(new FileWriter(file, StandardCharsets.UTF_8, append));
+    public static PrintWriter createWriter(File file, boolean append) throws IOException {
+        return new PrintWriter(new FileWriter(file, StandardCharsets.UTF_8, append), true);
     }
     public static void closeQuietly(Closeable c) {
         if (c != null) try { c.close(); } catch (IOException ignored) {}
@@ -244,9 +239,9 @@ public class IOUtil {
             if (!file.createNewFile() && !file.exists()) {
                 throw new IOException("Failed to create new file: " + file.getAbsolutePath());
             }
-            try (BufferedWriter writer = IOUtil.createWriter(file, false)) {
+            try (PrintWriter writer = IOUtil.createWriter(file, false)) {
                 for (String line : content) {
-                    writer.write(line + "\n");
+                    writer.println(line);
                 }
             }
         }
