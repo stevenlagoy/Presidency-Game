@@ -2,19 +2,23 @@
  * Character.java
  * Steven LaGoy
  * Created: 28 August 2024 at 1:07 PM
- * Modified: 29 May 2025
+ * Modified: 31 May 2025
  */
 
 package main.core.characters;
 
 // IMPORTS ----------------------------------------------------------------------------------------
 
+// Standard Library Imports
 import java.util.Date;
 
+// Internal Imports
 import core.JSONObject;
 import main.core.DateManager;
 import main.core.Jsonic;
 import main.core.Repr;
+import main.core.characters.names.Name;
+import main.core.characters.names.NameManager;
 import main.core.demographics.Demographics;
 import main.core.demographics.DemographicsManager;
 import main.core.map.City;
@@ -124,13 +128,13 @@ public class Character implements Repr<Character>, Jsonic<Character> {
      * @param appearance CharacterModel object to be rendered for this Character.
      */
     public Character(Demographics demographics, Name name, City birthplaceCity, City currentLocationCity, City residenceCity, Date birthday, CharacterModel appearance) {
-        this.demographics        = demographics        != null ? demographics        : DemographicsManager.generateDemographics();
-        this.name                = name                != null ? name                : CharacterManager.generateName(demographics);
-        this.birthplaceCity      = birthplaceCity      != null ? birthplaceCity      : MapManager.selectCity(demographics);
-        this.currentLocationCity = currentLocationCity != null ? currentLocationCity : MapManager.selectCity(demographics);
-        this.residenceCity       = residenceCity       != null ? residenceCity       : MapManager.selectCity(demographics);
-        this.birthday            = birthday            != null ? birthday            : CharacterManager.generateBirthday(demographics);
-        this.appearance          = appearance          != null ? appearance          : CharacterManager.generateCharacterModel(demographics, birthday);
+        this.demographics        = demographics        != null ? demographics        : DemographicsManager.generateWeightedDemographics();
+        this.name                = name                != null ? name                : NameManager.generateName(this.demographics);
+        this.birthplaceCity      = birthplaceCity      != null ? birthplaceCity      : MapManager.selectCity(this.demographics);
+        this.currentLocationCity = currentLocationCity != null ? currentLocationCity : MapManager.selectCity(this.demographics);
+        this.residenceCity       = residenceCity       != null ? residenceCity       : MapManager.selectCity(this.demographics);
+        this.birthday            = birthday            != null ? birthday            : CharacterManager.generateBirthday(this.demographics);
+        this.appearance          = appearance          != null ? appearance          : CharacterManager.generateCharacterModel(this.demographics, this.birthday);
         
         CharacterManager.addCharacter(this);
     }
@@ -236,12 +240,12 @@ public class Character implements Repr<Character>, Jsonic<Character> {
             return null;
         Object demographicsObj = json.get("demographics");
         if (demographicsObj == null)
-            this.demographics = DemographicsManager.generateDemographics();
+            this.demographics = DemographicsManager.generateWeightedDemographics();
         else if (demographicsObj instanceof JSONObject demographicsJson)
             this.demographics = new Demographics(demographicsJson);
         Object nameObj = json.get("name");
         if (nameObj == null)
-            this.name = CharacterManager.generateName(demographics);
+            this.name = NameManager.generateName(demographics);
         else if (nameObj instanceof JSONObject nameJson)
             this.name = new Name(nameJson);
         Object birthplaceObj = json.get("birthplace");

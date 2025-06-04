@@ -11,7 +11,6 @@ package main.core.characters.names;
 
 // Standard Library Imports
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -29,114 +28,112 @@ import main.core.Repr;
  */
 public final class Name implements Repr<Name>, Jsonic<Name> {
     
+    /** Enum for parts of a name. */
     private static enum NamePart {
         HONORIFIC,
         GIVEN_NAME,
+        PREFERRED_NAME,
+        PREFERRED_FIRST,
         MIDDLE_NAME,
+        PREFERRED_MIDDLE,
+        GENERATION,
+        PREFERRED_GENERATION,
+        WESTERN_NAME,
+        WESTERN_NAME_QUOTED,
         NICKNAME,
+        NICKNAME_QUOTED,
         FAMILY_NAME,
-        MATERNAL_NAME,
-        PATERNAL_NAME,
+        APELLIDO_1, // Usually Paternal Surname
+        APELLIDO_2, // Usually Maternal Surname
         ORDINAL,
-        SUFFIXES
+        SUFFIXES;
     }
 
+    /** Enum for styles of writing a name, and patterns for that style. */
     private static enum NameStyle {
-        LEGAL,
-        FORMAL,
-        BIOGRAPHICAL,
-        COMMON,
-        INFORMAL,
-        NICKNAME
+        LEGAL (Map.of(
+            NameForm.WESTERN, List.of(NamePart.GIVEN_NAME, NamePart.MIDDLE_NAME, NamePart.FAMILY_NAME, NamePart.ORDINAL),
+            NameForm.EASTERN, List.of(NamePart.GENERATION, NamePart.GIVEN_NAME, NamePart.FAMILY_NAME),
+            NameForm.HISPANIC, List.of(NamePart.GIVEN_NAME, NamePart.APELLIDO_1, NamePart.APELLIDO_2),
+            NameForm.NATIVE_AMERICAN, List.of(NamePart.GIVEN_NAME, NamePart.FAMILY_NAME)
+            )),
+        FORMAL (Map.of(
+            NameForm.WESTERN, List.of(NamePart.HONORIFIC, NamePart.GIVEN_NAME, NamePart.MIDDLE_NAME, NamePart.FAMILY_NAME, NamePart.ORDINAL),
+            NameForm.EASTERN, List.of(NamePart.HONORIFIC, NamePart.FAMILY_NAME, NamePart.GENERATION, NamePart.GIVEN_NAME),
+            NameForm.HISPANIC, List.of(NamePart.HONORIFIC, NamePart.GIVEN_NAME, NamePart.APELLIDO_1, NamePart.APELLIDO_2, NamePart.ORDINAL),
+            NameForm.NATIVE_AMERICAN, List.of(NamePart.HONORIFIC, NamePart.GIVEN_NAME, NamePart.FAMILY_NAME)
+            )),
+        BIOGRAPHICAL (Map.of(
+            NameForm.WESTERN, List.of(NamePart.HONORIFIC, NamePart.GIVEN_NAME, NamePart.MIDDLE_NAME, NamePart.NICKNAME_QUOTED, NamePart.FAMILY_NAME, NamePart.ORDINAL, NamePart.SUFFIXES),
+            NameForm.EASTERN, List.of(NamePart.HONORIFIC, NamePart.WESTERN_NAME, NamePart.FAMILY_NAME, NamePart.GENERATION, NamePart.GIVEN_NAME, NamePart.SUFFIXES),
+            NameForm.HISPANIC, List.of(NamePart.HONORIFIC, NamePart.GIVEN_NAME, NamePart.NICKNAME_QUOTED, NamePart.APELLIDO_1, NamePart.APELLIDO_2, NamePart.SUFFIXES),
+            NameForm.NATIVE_AMERICAN, List.of(NamePart.HONORIFIC, NamePart.GIVEN_NAME, NamePart.FAMILY_NAME, NamePart.SUFFIXES)
+            )),
+        COMMON (Map.of(
+            NameForm.WESTERN, List.of(NamePart.PREFERRED_FIRST, NamePart.PREFERRED_MIDDLE, NamePart.FAMILY_NAME),
+            NameForm.EASTERN, List.of(NamePart.FAMILY_NAME, NamePart.PREFERRED_GENERATION, NamePart.GIVEN_NAME),
+            NameForm.HISPANIC, List.of(NamePart.PREFERRED_NAME, NamePart.APELLIDO_1, NamePart.APELLIDO_2),
+            NameForm.NATIVE_AMERICAN, List.of(NamePart.PREFERRED_FIRST, NamePart.FAMILY_NAME)
+            )),
+        INFORMAL (Map.of(
+            NameForm.WESTERN, List.of(NamePart.PREFERRED_NAME, NamePart.FAMILY_NAME),
+            NameForm.EASTERN, List.of(NamePart.FAMILY_NAME, NamePart.PREFERRED_GENERATION, NamePart.GIVEN_NAME),
+            NameForm.HISPANIC, List.of(NamePart.PREFERRED_NAME, NamePart.APELLIDO_1, NamePart.APELLIDO_2),
+            NameForm.NATIVE_AMERICAN, List.of(NamePart.PREFERRED_FIRST, NamePart.FAMILY_NAME)
+            ));
+
+        public final Map<NameForm, List<NamePart>> pattern;
+        private NameStyle(Map<NameForm, List<NamePart>> pattern) { this.pattern = pattern; }
     }
 
-    private static final Map<NameStyle, List<NamePart>> namePatterns = Map.of(
-        NameStyle.LEGAL,        List.of(NamePart.GIVEN_NAME, NamePart.MIDDLE_NAME, NamePart.FAMILY_NAME, NamePart.ORDINAL),
-        NameStyle.FORMAL,       List.of(),
-        NameStyle.BIOGRAPHICAL, List.of(NamePart.HONORIFIC, NamePart.GIVEN_NAME, NamePart.MIDDLE_NAME, NamePart.NICKNAME, NamePart.FAMILY_NAME, NamePart.ORDINAL, NamePart.SUFFIXES),
-        NameStyle.COMMON,       List.of(NamePart.GIVEN_NAME, NamePart.MIDDLE_NAME, NamePart.FAMILY_NAME),
-        NameStyle.INFORMAL,     List.of(NamePart.GIVEN_NAME, NamePart.FAMILY_NAME),
-        NameStyle.NICKNAME,     List.of(NamePart.NICKNAME, NamePart.FAMILY_NAME)
-    );
-
+    /** Enum for broader forms of a name, from culture or religion etc. */
     public static enum NameForm {
-        WESTERN,
         EASTERN,
         HISPANIC,
-        NATIVE_AMERICAN;
+        NATIVE_AMERICAN,
+        WESTERN;
 
         public static NameForm defaultForm = NameForm.WESTERN;
     }
 
-    private static enum DisplayOption {
+    /** Options for displaying a name. */
+    public static enum DisplayOption {
+        ABBREVIATE_FIRST,
+        ABBREVIATE_MIDDLE,
+        PREFER_MIDDLE,
         WESTERN_FIRST,
         EASTERN_FIRST,
+        LATENT_GENERATION,
         NATIVE_FIRST,
         PATERNAL_FIRST,
         MATERNAL_FIRST,
+        INCLUDE_WESTERN,
+        INCLUDE_NICKNAME,
         INCLUDE_ORDINAL,
-        INCLUDE_NICKNAME;
+        INCLUDE_HONORIFIC,
+        INCLUDE_SUFFIXES;
     }
 
-    /**
-     * Returns a number of initials from the passed name(s).
-     * @param name The name(s) to be initialized. Each will be split by whitespace before being initialized.
-     * @param limit The maximum number of initial letters to be returned.
-     * @return At most limit number of capitalized letters as the initials of the name(s).
-     */
-    public static String initialize(int limit, String... names) {
-        List<String> splitNames = new ArrayList<String>();
-        for (String name : names){
-            splitNames.addAll(Arrays.asList(name.split("[\s]")));
-        }
-        String res = "";
-        for (int i = 0; i < splitNames.size() && limit == -1 ? true : i < limit; i++) {
-            for(int j = 0; j < splitNames.get(i).length(); j++){
-                if (java.lang.Character.isAlphabetic(names[i].charAt(j))){
-                    res += java.lang.Character.toUpperCase(names[i].charAt(j));
-                    break;
-                }
-            }
-        }
-        return res;
-    }
-    /**
-     * Returns the first letter initial of the passed name(s).
-     * @param names The name(s) to be initialized.
-     * @return The first valid letter of the name(s), capitalized.
-     */
-    public static String initialize(String... names){
-        return initialize(-1, names);
-    }
+    // INSTANCE VARIABLES -------------------------------------------------------------------------
 
     private NameForm nameForm;
 
-    // First or Given Name
+    /** First or Given Name */
     private String givenName;
-    private boolean abbrFirst;
-    private boolean atomicFirst;
-
-    // Middle or Generational Name
-    private String middleName;
-    private boolean abbrMiddle;
-    private boolean atomicMiddle;
-    
-    // Last or Family Name
+    /** Middle or Generation Name */
+    private String middleName;    
+    /** Last or Family Name */
     private String familyName;
     private String birthSurname;
     private String paternalName;
     private String maternalName;
-
-    // Nicknames
-    private List<String> nicknames;
-    private boolean includeNickname;
-
+    /** Nicknames */
+    private String nickname;
     // Other Names
     private String religiousName;
     private String westernName;
     private String legalName;
     private String informalName;
-
     // Additional Name Parts
     private String honorific;
     private String ordinal;
@@ -144,20 +141,21 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
 
     private Set<DisplayOption> displayOptions;
 
+    // CONSTRUCTORS -------------------------------------------------------------------------------
+
+    /**
+     * Creates a Name with all fields default. The nameform will be {@code NameForm.defaultForm}
+     * @see #Name(NameForm, String, boolean, boolean, String, boolean, boolean, String, String, String, String, List, boolean, String, String, String, String, String, List)
+     */
     public Name() {
         this.nameForm = NameForm.defaultForm;
         this.givenName = "";
-        this.abbrFirst = false;
-        this.atomicFirst = false;
         this.middleName = "";
-        this.abbrMiddle = false;
-        this.atomicMiddle = false;
         this.familyName = "";
         this.birthSurname = "";
         this.paternalName = "";
         this.maternalName = "";
-        this.nicknames = new ArrayList<>();
-        this.includeNickname = false;
+        this.nickname = "";
         this.religiousName = "";
         this.legalName = "";
         this.informalName = "";
@@ -182,20 +180,15 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
     }
 
     public Name(Name other) {
+        this();
         this.nameForm = other.getNameForm();
         this.givenName = other.getGivenName();
-        this.abbrFirst = other.isAbbrFirst();
-        this.atomicFirst = other.isAtomicFirst();
         this.middleName = other.getMiddleName();
-        this.abbrMiddle = other.isAbbrMiddle();
-        this.atomicMiddle = other.isAtomicMiddle();
         this.familyName = other.getFamilyName();
         this.birthSurname = other.getBirthSurname();
         this.paternalName = other.getPaternalName();
         this.maternalName = other.getMaternalName();
-        for (String nickname : other.getNicknames())
-            this.nicknames.add(nickname);
-        this.includeNickname = other.isIncludeNickname();
+        this.nickname = other.getNickname();
         this.religiousName = other.religiousName;
         this.legalName = other.legalName;
         this.informalName = other.informalName;
@@ -207,11 +200,11 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
             this.displayOptions.add(option);
     }
 
-    public Name(String firstName, String middleName, String lastName){
+    public Name(String firstName, String middleName, String lastName) {
         this(NameForm.defaultForm, firstName, middleName, lastName);
     }
 
-    public Name(NameForm nameform, String givenName, String middleName, String familyName){
+    public Name(NameForm nameform, String givenName, String middleName, String familyName) {
         this();
         if (nameform == null) {
             Engine.log("INVALID NAMEFORM: ", String.format("Invalid nameform supplied: %s", nameform), new Exception());
@@ -241,210 +234,48 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
                 this.familyName = familyName;
                 break;
         }
-        this.nicknames = new ArrayList<>();
         this.suffixes = new ArrayList<>();
     }
 
     public Name(
         NameForm nameForm,
         String givenName,
-        boolean abbrFirst,
-        boolean atomicFirst,
         String middleName,
-        boolean abbrMiddle,
-        boolean atomicMiddle,
         String familyName,
         String birthSurname,
         String paternalName,
         String maternalName,
-        List<String> nicknames,
-        boolean includeNickname,
+        String nickname,
         String religiousName,
         String legalName,
         String informalName,
         String honorific,
         String ordinal,
-        List<String> suffixes
+        List<String> suffixes,
+        Set<DisplayOption> displayOptions
     ) {
-        this.nameForm = nameForm;
+        this.nameForm  = nameForm;
         this.givenName = givenName;
-        this.abbrFirst = abbrFirst;
-        this.atomicFirst = atomicFirst;
         this.middleName = middleName;
-        this.abbrMiddle = abbrMiddle;
-        this.atomicMiddle = atomicMiddle;
         this.familyName = familyName;
         this.birthSurname = birthSurname;
         this.paternalName = paternalName;
         this.maternalName = maternalName;
-        this.nicknames = nicknames;
-        this.includeNickname = includeNickname;
+        this.nickname = nickname;
         this.religiousName = religiousName;
         this.legalName = legalName;
         this.informalName = informalName;
         this.honorific = honorific;
         this.ordinal = ordinal;
         this.suffixes = suffixes;
-    }
-
-    public String abbreviate(String name) {
-        return abbreviate(name, false);
-    }
-
-    private String abbreviate(String name, boolean atomic) {
-        if (name != null && !name.isEmpty()) {
-            if (atomic) {
-                // For names like JeanLuc, return J. instead of J.L.
-                for (int i = 0; i < name.length(); i++) {
-                    if (java.lang.Character.isAlphabetic(name.charAt(i)))
-                        return String.valueOf(name.charAt(i)) + ".";
-                }
-            }
-            else {
-                String res = "";
-                String[] names = name.split("[\s]");
-                for (String n : names) {
-                    for (int i = 0; i < n.length(); i++) {
-                        if (java.lang.Character.isAlphabetic(n.charAt(i))) {
-                            res += String.valueOf(n.charAt(0)) + ".";
-                            break;
-                        }
-                    }
-                }
-                return res;
-            }
-        }
-        return "";
-    }
-
-    private String formatProfessionalSuffixes() {
-        if (suffixes == null || suffixes.isEmpty()) {
-            return "";
-        }
-        return ", " + String.join(", ", suffixes);
-    }
-
-    @Override
-    public String toString() {
-        // Check if specific display options are set
-        boolean showHonorific = false, useInitials = false, nicknameAsGiven = false, useFormal = false, useInformal = false;
-        if (displayOptions != null) {
-            showHonorific = displayOptions.contains(DisplayOption.INCL_HONORIFICS);
-            useInitials = displayOptions.contains(DisplayOption.USE_INITIALS);
-            nicknameAsGiven = displayOptions.contains(DisplayOption.NICKNAME_AS_GIVEN);
-            useFormal = displayOptions.contains(DisplayOption.FORMAL);
-            useInformal = displayOptions.contains(DisplayOption.INFORMAL);
-        }
-        
-        // If no display options are set, use default behavior
-        if (displayOptions != null && displayOptions.isEmpty()) {
-            showHonorific = true;
-            useInitials = abbrFirst || abbrMiddle;
-            nicknameAsGiven = includeNickname;
-        }
-        
-        StringBuilder nameString = new StringBuilder();
-        
-        // Handle religious name format
-        if (religiousName != null) {
-            if (useFormal) {
-                if (showHonorific && honorific != null && !honorific.isEmpty()) {
-                    nameString.append(honorific).append(" ");
-                }
-                nameString.append(religiousName);
-                if (legalName != null && !legalName.isEmpty()) {
-                    nameString.append(" (").append(legalName).append(")");
-                }
-            } else {
-                nameString.append(religiousName);
-            }
-            nameString.append(formatProfessionalSuffixes());
-            return nameString.toString().trim();
-        }
-        
-        // Handle informal name format
-        if (useInformal && informalName != null && !informalName.isEmpty()) {
-            nameString.append(informalName);
-            return nameString.toString().trim();
-        }
-        
-        // Handle honorific
-        if (showHonorific && honorific != null && !honorific.isEmpty()) {
-            nameString.append(honorific).append(" ");
-        }
-        
-        // Handle different name forms
-        if (nameForm == NameForm.NATIVE_AMERICAN) {
-            nameString.append(givenName);
-        }
-        else if (nameForm == NameForm.EASTERN) {
-            String fullChineseName = familyName + " " + (middleName != null ? middleName + givenName.toLowerCase() : givenName);
-            nameString.append(fullChineseName);
-        } else {
-            // Western and other name forms
-            String first;
-            if (nicknameAsGiven && !nicknames.isEmpty()) {
-                first = nicknames.get(0);
-            } else {
-                first = useInitials || abbrFirst ? abbreviate(givenName, atomicFirst) : givenName;
-            }
-            
-            String middle = (middleName != null && !middleName.isEmpty()) ? 
-                (useInitials || abbrMiddle ? abbreviate(middleName, atomicMiddle) : middleName) : "";
-            
-            nameString.append(first);
-            if (!middle.isEmpty()) {
-                nameString.append(" ").append(middle);
-            }
-            
-            // Add nickname if not used as given name
-            if (includeNickname && !nicknames.isEmpty() && !nicknameAsGiven) {
-                nameString.append(" \"").append(nicknames.get(0)).append("\"");
-            }
-
-            nameString.append(" ").append(familyName);
-            
-            // Add birth surname if applicable
-            if (birthSurname != null && !birthSurname.isEmpty() && useFormal) {
-                nameString.append(" (née ").append(birthSurname).append(")");
-            }
-        }
-        
-        // Add ordinal if present
-        if (ordinal != null && !ordinal.isEmpty()) {
-            nameString.append(" ").append(ordinal);
-        }
-        
-        // Add professional suffixes
-        nameString.append(formatProfessionalSuffixes());
-        
-        return nameString.toString().trim();
-    }
-
-    public String getFullName() {
-        StringBuilder nameString = new StringBuilder();
-        if (nameForm == NameForm.WESTERN) {
-            if (givenName != null) nameString.append(givenName).append(" ");
-            if (middleName != null) nameString.append(middleName).append(" ");
-            if (familyName != null) nameString.append(familyName);
-        }
-        else if (nameForm == NameForm.EASTERN) {
-            if (familyName != null) nameString.append(familyName).append(" ");
-            if (middleName != null) nameString.append(middleName);
-            if (givenName != null) nameString.append(givenName);
-        }
-        else if (nameForm == NameForm.HISPANIC) {
-            if (givenName != null) nameString.append(givenName).append(" ");
-            if (middleName != null) nameString.append(middleName).append(" ");
-            if (paternalName != null) nameString.append(paternalName).append(" ");
-            if (maternalName != null) nameString.append(maternalName);
-        }
-
-        return nameString.toString().trim();
+        this.displayOptions = displayOptions;
     }
 
     public NameForm getNameForm() {
         return nameForm;
+    }
+    public void setNameForm(NameForm nameForm) {
+        this.nameForm = nameForm;
     }
 
     public String getGivenName() {
@@ -453,35 +284,11 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
     public void setGivenName(String name) {
         this.givenName = name;
     }
-    public boolean isAbbrFirst() {
-        return abbrFirst;
-    }
-    public void setAbbrFirst(boolean abbr) {
-        this.abbrFirst = abbr;
-    }
-    public boolean isAtomicFirst() {
-        return atomicFirst;
-    }
-    public void setAtomicFirst(boolean atomic) {
-        this.atomicFirst = atomic;
-    }
     public String getMiddleName() {
         return middleName;
     }
     public void setMiddleName(String name) {
         this.middleName = name;
-    }
-    public boolean isAbbrMiddle() {
-        return abbrMiddle;
-    }
-    public void setAbbrMiddle(boolean abbr) {
-        this.abbrMiddle = abbr;
-    }
-    public boolean isAtomicMiddle() {
-        return atomicMiddle;
-    }
-    public void setAtomicMiddle(boolean atomic) {
-        this.atomicMiddle = atomic;
     }
     public String getFamilyName() {
         return familyName;
@@ -492,8 +299,7 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
     public String getBirthSurname() {
         return this.birthSurname;
     }
-    @SuppressWarnings("unused")
-    private void setBirthSurname(String name) {
+    public void setBirthSurname(String name) {
         this.birthSurname = name;
     }
     public String getPaternalName() {
@@ -508,20 +314,11 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
     public void setMaternalName(String name) {
         this.maternalName = name;
     }
-    public List<String> getNicknames() {
-        return this.nicknames;
+    public String getNickname() {
+        return this.nickname;
     }
-    public void addNickname(String name) {
-        this.nicknames.add(name);
-    }
-    public void removeNickname(String name) {
-        this.nicknames.remove(name);
-    }
-    public boolean isIncludeNickname() {
-        return includeNickname;
-    }
-    public void setIncludeNickname(boolean include) {
-        this.includeNickname = include;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
     public String getOrdinal() {
         return this.ordinal;
@@ -535,42 +332,39 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
     private List<String> getSuffixes() {
         return suffixes;
     }
+    public String getWesternName() {
+        return westernName;
+    }
+    public void setWesternName(String westernName) {
+        this.westernName = westernName;
+    }
+    public void addDisplayOption(DisplayOption option) {
+        this.displayOptions.add(option);
+    }
 
-    public String toRepr(){
-        String[] nicknamesStrings = new String[nicknames.size()];
-        for (int i = 0; i < nicknames.size(); i++) {
-            nicknamesStrings[i] = nicknames.get(i);
-        }
-        String nicknamesRepr = Repr.arrayToReprList(nicknamesStrings);
-
+    public String toRepr() {
         String[] suffixesStrings = new String[suffixes.size()];
         for (int i = 0; i < suffixes.size(); i++) {
             suffixesStrings[i] = suffixes.get(i);
         }
         String suffixesRepr = Repr.arrayToReprList(suffixesStrings);
 
-        String repr = String.format("%s:[nameForm=\"%s\";givenName=\"%s\";abbrFirst=%b;atomicFirst=%b;middleName=\"%s\";abbrMiddle=%b;atomicMiddle=%b;familyName=\"%s\";birthSurname=\"%s\";paternalName=\"%s\";maternalName=\"%s\";nicknames=[%s];includeNickname=%b;honorific=\"%s\";ordinal=\"%s\";suffixes=[%s];];",
+        String repr = String.format("%s:[nameForm=\"%s\";givenName=\"%s\";middleName=\"%s\";familyName=\"%s\";paternalName=\"%s\";maternalName=\"%s\";nickname=\"%s\";honorific=\"%s\";ordinal=\"%s\";suffixes=[%s];];",
             this.getClass().getName().split("\\.")[this.getClass().getName().split("\\.").length - 1],
             this.nameForm.toString(),
             givenName,
-            abbrFirst,
-            atomicFirst,
             middleName,
-            abbrMiddle,
-            atomicMiddle,
             familyName,
-            birthSurname,
             paternalName,
             maternalName,
-            nicknamesRepr,
-            includeNickname,
+            nickname,
             honorific,
             ordinal,
             suffixesRepr
         );
         return repr;
     }
-    public Name fromRepr(String repr){
+    public Name fromRepr(String repr) {
         return this;
     }
     public Name fromJson(JSONObject nameJson) {
@@ -592,88 +386,143 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
         throw new UnsupportedOperationException("Unimplemented method 'toJson'");
     }
 
+    public String getNameInStyle(NameStyle style) {
+        StringBuilder sb = new StringBuilder();
+        for (NamePart part : style.pattern.get(nameForm)) {
+            sb.append(getNamePart(part));
+        }
+        String name = sb.toString().replaceAll("\\s+", " ").trim();
+        if (name.split("\\s+").length < 2) {
+            for (NamePart part : style.pattern.get(nameForm)) {
+                System.out.println(getNamePart(part));
+            }
+        }
+        return name;
+    }
 
-    /** Returns the Legal Name of the Character, which is how their name might appear on a government form.
+    /**
+     * Get this name in the Legal Style: Given Middle Family Ordinal
      * <p>
-     * Western: Given [Middle(s)] Family
-     * @return String Legal Name
+     * Example: Joseph Robinette Biden Jr.
+     * @return Name in Legal Style
      */
     public String getLegalName() {
-        return switch(nameForm) {
-            case WESTERN -> {
-                if (displayOptions.contains(DisplayOption.INCLUDE_ORDINAL))
-                    yield String.format("%s %s %s %s", givenName, middleName, familyName, ordinal).replace("  ", " ");
-                else
-                    yield String.format("%s %s %s", givenName, middleName, familyName).replace("  ", " ");
-            }
-            case EASTERN -> {
-                if (displayOptions.contains(DisplayOption.WESTERN_FIRST))
-                    yield String.format("%s %s%s %s", westernName, middleName, givenName, familyName).replace("  ", " ");
-                if (displayOptions.contains(DisplayOption.EASTERN_FIRST))
-                    yield String.format("%s%s %s %s", middleName, givenName, westernName, familyName).replace("  ", " ");
-                yield "IMPROPER DISPLAY OPTIONS";
-            }
-            case HISPANIC -> {
-                if (displayOptions.contains(DisplayOption.MATERNAL_FIRST))
-                    yield String.format("%s %s %s", givenName, maternalName, paternalName).replace("  ", " ");
-                if (displayOptions.contains(DisplayOption.PATERNAL_FIRST))
-                    yield String.format("%s %s %s", givenName, maternalName, paternalName).replace("  ", " ");
-                yield "IMPROPER DISPLAY OPTIONS";
-            }
-            case NATIVE_AMERICAN -> {
-                if (displayOptions.contains(DisplayOption.WESTERN_FIRST))
-                    yield String.format("%s %s %s", westernName, givenName, familyName).replace("  ", " ");
-                if (displayOptions.contains(DisplayOption.NATIVE_FIRST))
-                    yield String.format("%s %s %s", givenName, westernName, familyName).replace("  ", " ");
-                yield "IMPROPER DISPLAY OPTIONS";
-            }
-        };
+        return getNameInStyle(NameStyle.LEGAL);
     }
-
-    /** May include Honorifics and Suffixes */
+    /**
+     * Get this name in the Formal Style: Honorific Given Middle Family Ordinal
+     * <p>
+     * Example: Rev. Martin Luther King Jr.
+     */
     public String getFormalName() {
-        if (suffixes.size() > 0)
-            return String.format("%s %s, %s", honorific, getLegalName(), String.join(", ", suffixes)).replace("  ", " ");
-        else
-            return String.format("%s %s", honorific, getLegalName()).replace("  ", " ");
+        return getNameInStyle(NameStyle.FORMAL);
     }
-
-    /** May include a nickname in quotations between given/middle name(s) and family name(s). */
+    /**
+     * Get this name in the Biographical Style: Honorific Given Middle Nickname? Family Ordinal
+     * <p>
+     * Example: Pres. James Earl "Jimmy" Carter Jr.
+     * @return Name in Biographical Style
+     */
     public String getBiographicalName() {
-        return switch(nameForm) {
-            case WESTERN -> {
-                if (displayOptions.contains(DisplayOption.INCLUDE_NICKNAME))
-                    yield String.format("%s %s %s \"%s\" %s %s, %s",
-                            honorific,
-                            givenName,
-                            middleName,
-                            nicknames.get(0),
-                            familyName,
-                            ordinal,
-                            String.join(", ", suffixes)
-                        ).replace("  ", " ");
-                else
-                    yield String.format("%s %s %s %s %s, %s",
-                            honorific,
-                            givenName,
-                            middleName,
-                            familyName,
-                            ordinal,
-                            String.join(", ", suffixes)
-                        ).replace("  ", " ");
-            }
-            case EASTERN -> {
-                yield "";
-            }
-            case HISPANIC -> {
-                yield "";
-            }
-            case NATIVE_AMERICAN -> {
-                yield "";
-            }
-        };
-        
+        return getNameInStyle(NameStyle.BIOGRAPHICAL);
+    }
+    /**
+     * Get this name in the Common Style: First Middle Family
+     * <p>
+     * Example: George W. Bush
+     * @return Name in Common Style
+     */
+    public String getCommonName() {
+        return getNameInStyle(NameStyle.COMMON);
+    }
+    /**
+     * Get this name in the Informal Style: First/Nickname Family
+     * <p>
+     * Example: Bill Clinton
+     * @return Name in Informal Style
+     */
+    public String getInformalName() {
+        return getNameInStyle(NameStyle.INFORMAL);
     }
 
+    public String getNamePart(NamePart part) {
+        return switch(part) {
+            case HONORIFIC -> getHonorific() + " ";
+            case GIVEN_NAME -> getGivenName() + " ";
+            case PREFERRED_NAME -> getPreferredName() + " ";
+            case PREFERRED_FIRST -> getPreferredFirst() + " ";
+            case MIDDLE_NAME -> getMiddleName() + " ";
+            case PREFERRED_MIDDLE -> getPreferredMiddle() + " ";
+            case NICKNAME -> getNickname() + " ";
+            case NICKNAME_QUOTED -> ("\"" + getNickname() + "\"").replace("\"\"", "").trim() + " ";
+            case FAMILY_NAME -> getFamilyName() + " ";
+            case APELLIDO_1 -> {
+                if (displayOptions.contains(DisplayOption.MATERNAL_FIRST))
+                    yield getMaternalName() + " ";
+                else if (displayOptions.contains(DisplayOption.PATERNAL_FIRST))
+                    yield getPaternalName() + " ";
+                else yield "";
+            }
+            case APELLIDO_2 -> {
+                if (displayOptions.contains(DisplayOption.MATERNAL_FIRST))
+                    yield getPaternalName() + " ";
+                else if (displayOptions.contains(DisplayOption.PATERNAL_FIRST))
+                    yield getMaternalName() + " ";
+                else yield "";
+            }
+            case ORDINAL -> getOrdinal() + " ";
+            case SUFFIXES -> getFormattedSuffixes() + " ";
+            case GENERATION -> getMiddleName(); // No space following generation name
+            case PREFERRED_GENERATION -> {
+                if (displayOptions.contains(DisplayOption.LATENT_GENERATION))
+                    yield "";
+                else yield getMiddleName();
+            }
+            case WESTERN_NAME -> getWesternName() + " ";
+            case WESTERN_NAME_QUOTED -> ("\"" + getWesternName() + "\"").replace("\"\"", "").trim() + " ";
+        };
+    }
+    
+    private String getPreferredName() {
+        if (displayOptions.contains(DisplayOption.INCLUDE_NICKNAME)) {
+            return nickname;
+        }
+        if (displayOptions.contains(DisplayOption.PREFER_MIDDLE)) {
+            return middleName;
+        }
+        else {
+            return givenName;
+        }
+    }
 
+    private String getPreferredFirst() {
+        return displayOptions.contains(DisplayOption.ABBREVIATE_FIRST) ? abbreviate(givenName) : givenName;
+    }
+
+    private String getPreferredMiddle() {
+        return displayOptions.contains(DisplayOption.ABBREVIATE_MIDDLE) ? abbreviate(middleName) : middleName;
+    }
+    
+    private String getHonorific() {
+        return honorific;
+    }
+
+    private String abbreviate(String name) {
+        char initial;
+        name = name.strip();
+        for (int i = 0; i < name.length(); i++) {
+            initial = name.charAt(i);
+            if (Character.isAlphabetic(initial))
+                return String.valueOf(initial);
+        }
+        return "";
+    }
+
+    private String getFormattedSuffixes() {
+        StringBuilder sb = new StringBuilder();
+        for (String suffix : suffixes) {
+            sb.append(", ").append(suffix);
+        }
+        return sb.toString();
+    }
 }

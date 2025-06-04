@@ -1,31 +1,36 @@
+/*
+ * Engine.java
+ * Steven LaGoy
+ * Created: 26 September 2024 at 12:21 AM
+ * Modified: 30 May 2025
+ */
+
 package main.core;
+
+// IMPORTS ----------------------------------------------------------------------------------------
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Stack;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 
-import main.core.characters.Candidate;
 import main.core.characters.CharacterManager;
+import main.core.characters.names.NameManager;
 import main.core.demographics.DemographicsManager;
 import main.core.graphics.ILogic;
 import main.core.graphics.MouseInput;
@@ -36,13 +41,24 @@ import main.core.map.CongressionalDistrict;
 import main.core.map.County;
 import main.core.map.MapManager;
 import main.core.map.State;
-import main.core.politics.EventManager;
 
-public class Engine {
+/**
+ * Engine is the main driver of the game engine, facilitating the initialization and function
+ * of the game by tracking critical details for game settings and other information.
+ * <p>
+ * This class is final and has no instance variables, and is not designed to be instantiated.
+ */
+public final class Engine {
 
-    /*
-     * Graphics Constants
-     */
+    /** This class is non-instantiable. All values and functions should be accessed in a static way. */
+    private Engine() {} // Non-Instantiable
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    //                                    CONSTANTS AND ENUMS                                    //
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    // GRAPHICS CONSTANTS -------------------------------------------------------------------------
+
     public static final long NANOSECOND = 1_000_000_000;
     public static final float FRAMERATE = 1000;
     public static int fps;
@@ -52,61 +68,164 @@ public class Engine {
     private static GLFWErrorCallback errorCallback;
     private static MouseInput mouse;
     private static ILogic gameLogic;
-
-    /*
-     * Game Constants
-     */
-    public enum Difficulty
-    {
-        LEVEL_1, LEVEL_2, LEVEL_3, LEVEL_4, LEVEL_5
-    }
-
-    public static Language language;
-    public static enum Language
-    {
-        EN, ZH, RU, ES, PT, DE, FR, JA, PL, TR
-    }
     
-    public static HashMap<String, HashMap<String, String>> localizations;
+    // DIFFICULTY ---------------------------------------------------------------------------------
 
-    /*
-     * Speed Settings
-     */
-    public static final long baseSpeed = 2000L; // Make sure this is a multiple of the smallest speedsetting
-    public static final long[] speedSettings = {baseSpeed, baseSpeed/2, baseSpeed/4, baseSpeed/8, baseSpeed/16}; // Time in between ticks
-    public static int speedSetting = 4;
-    public static long tickSpeed = speedSettings[speedSetting];
+    /** Current difficulty level of the game. */
+    private static Difficulty gameDifficulty;
+    public static Difficulty getGameDifficulty() { return gameDifficulty; }
+    public static boolean setGameDifficulty(Difficulty difficulty) { return (gameDifficulty = difficulty) != null; }
+    /** Dificulty values impact some calculations, impacting the difficulty of the game. */
+    public static enum Difficulty {
 
-    // Static class to control how scanners operate: should always use UTF-8 encoding to allow special characters 
-    public static class ScannerUtil {
-        public Scanner createScanner(InputStream inputStream) {
-            return new Scanner(inputStream, StandardCharsets.UTF_8.name());
+        LEVEL_1 (1, "Aspiring Politician"),
+        LEVEL_2 (2, "Fledgling Politician"),
+        LEVEL_3 (3, "Hometown Hero"),
+        LEVEL_4 (4, "Career Politican"),
+        LEVEL_5 (5, "Political Machine");
+
+        public final int value;
+        public final String name;
+        private Difficulty(int value, String name) {
+            this.value = value;
+            this.name = name;
         }
-        public Scanner createScanner(File file) throws FileNotFoundException {
-            return new Scanner(file, StandardCharsets.UTF_8.name());
+        public static Difficulty level(int value) {
+            for (Difficulty diff : Difficulty.values())
+                if (diff.value == value)
+                    return diff;
+            throw new IllegalArgumentException("Invalid difficulty level: " + value);
+        }
+        public static Difficulty label(String label) {
+            String target = label.trim().toUpperCase().replace("\\s", "_");
+            for (Difficulty diff : Difficulty.values())
+                if (diff.toString().equals(target))
+                    return diff;
+            throw new IllegalArgumentException("Invalid difficulty label: " + label);
+        }
+        public static Difficulty name(String name) {
+            for (Difficulty diff : Difficulty.values())
+                if (diff.name.equals(name))
+                    return diff;
+            throw new IllegalArgumentException("Invalid difficulty name: " + name);
         }
     }
 
-    static ScannerUtil scannerUtil = new ScannerUtil();
-    static Scanner stdin = scannerUtil.createScanner(System.in);
+    // LANGUAGE -----------------------------------------------------------------------------------
 
-    public static MapManager mapManager = new MapManager();
-    public static CharacterManager characterManager = new CharacterManager();
-    public static DemographicsManager demograpicsManager = new DemographicsManager();
-    public static EventManager eventManager = new EventManager();
-    public static DateManager dateManager = new DateManager();
+    /** Current language of the game. */
+    private static Language gameLanguage;
+    public static Language getGameLanguage() { return gameLanguage; }
+    /**
+     * Loads localization for the language, and if successful sets the game language.
+     * @return {@code true} if successfully loaded and set language, {@code false} otherwise.
+     */
+    public static boolean setGameLanguage(Language language) {
+        if (loadLocalizations(language)) {
+            gameLanguage = language;
+            return true;
+        }
+        return false;
+    }
+    /** Default language for engine initialization. */
+    public static final Language defaultLanguage = Language.EN;
+    /** Languages which game text could appear in. */
+    public static enum Language {
+        
+        EN ("English"),
+        ZH ("简体中文"),
+        RU ("Русский"),
+        ES ("Español"),
+        PT ("Português"),
+        DE ("Deutsch"),
+        FR ("Français"),
+        JA ("日本語"),
+        PL ("Polski"),
+        TR ("Türkçe");
 
-    public static Difficulty gameDifficulty;
+        public final String name;
+        private Language(String name) { this.name = name; }
+        public static Language fromName(String name) {
+            for (Language lang : Language.values())
+                if (lang.name.equals(name))
+                    return lang;
+            throw new IllegalArgumentException("Invalid language name: " + name);
+        }
+        public static Language label(String label) {
+            String target = label.trim().toUpperCase().replace("\\s", "_");
+            for (Language lang : Language.values())
+                if (lang.toString().equals(target))
+                    return lang;
+            throw new IllegalArgumentException("Invalid language label: " + label);
+        }
+    }
+    /** For each language, stores tag : sentence pairs for localization tags. */
+    public static Map<Language, Map<String, String>> localizations;
 
-    public static Candidate playerCandidate;
+    public static boolean loadLocalizations(Language language) {
+        boolean successFlag = true;
 
-    public static void init() {
+        if (localizations == null)
+            localizations = new HashMap<Language, Map<String, String>>();
+
+        HashMap<String, String> local = new HashMap<>();
+
+        List<String> contents = IOUtil.readFile(Path.of(String.format("%s/%s%s", FilePaths.LOCALIZATION_DIR, language, FilePaths.SYSTEM_TEXT_LOC)));
+        if (contents == null) successFlag = false;
+        for (String line : contents) {
+            if (line == null || line.isBlank()) continue;
+            String[] parts = StringOperations.splitByUnquotedString(line, ":", 2);
+            if (parts.length != 2) {
+                Engine.log("INVALID LOCALIZATION ENTRY", String.format("In localization file for language %s, the entry \"%s\" was invalid.", language.toString(), line), new Exception());
+                continue;
+            }
+            local.put(parts[0], parts[1]);
+        }
+        if (local.size() == 0) successFlag = false;
+        Engine.localizations.put(language, local);
+
+        return successFlag;
+    }
+
+    public static String getLocalization(String tag) {
+        if (gameLanguage == null) {
+            Engine.log("UNINITIALIZED GAME LANGUAGE", String.format("The game language was never initialized or was set to null."), new Exception());
+            return null;
+        }
+        return getLocalization(tag, gameLanguage);
+    }
+
+    public static String getLocalization(String tag, Language language) {
+        String res = localizations.get(language).get(tag);
+        if (res == null) {
+            Engine.log("INVALID LOCALIZATION TAG", String.format("Attempted to access localization tag %s for language %s, which is invalid.", tag, language.toString()), new Exception());
+            return "INVALID LOCALIZATION TAG";
+        }
+        return res;
+    }
+
+    // GAME SPEED SETTINGS ------------------------------------------------------------------------
+    /** The Base Speed of the game, representing the minimum tick time in miliseconds */
+    public static final long baseSpeed = 125L;
+    public static final long[] speedSettings = {baseSpeed, baseSpeed*2, baseSpeed*4, baseSpeed*8, baseSpeed*16}; // Time in between ticks
+    private static int speedSetting = 4;
+    public static int getSpeedSetting() { return speedSetting; }
+    public static void setSpeedSetting(int speed) {
+        speedSetting = Math.clamp(speed, 0, speedSettings.length - 1);
+        tickSpeed = speedSettings[speedSetting];
+    }
+    private static long tickSpeed = speedSettings[speedSetting];
+    public static long getTickSpeed() { return tickSpeed; }
+
+    // GAME SETUP
+
+    public static boolean init() {
+        boolean successFlag = true;
         try {
             long startTime = System.nanoTime();
             // GLFW.glfwSetErrorCallback(errorCallback = GLFWErrorCallback.createPrint(System.err));
             reset();
-
-            openLocalizationFiles();
+            setGameLanguage(defaultLanguage); // Load localization and set language
             // window = new WindowManager(Consts.TITLE, 0, 0, false);
             // gameLogic = new TestGame();
             // mouse = new MouseInput();
@@ -114,18 +233,19 @@ public class Engine {
             // gameLogic.init();
             // mouse.init();
 
-            DemographicsManager.createDemographicBlocs();
-            CharacterManager.readAllNamesFiles();
-            MapManager.createMap();
+            successFlag = successFlag && DemographicsManager.createDemographicBlocs();
+            successFlag = successFlag && NameManager.readAllNamesFiles();
+            successFlag = successFlag && MapManager.createMap();
             long elapsedTime = System.nanoTime() - startTime;
             Engine.log("Engine initialization complete in " + String.valueOf(elapsedTime / 1000000) + " miliseconds.");
         }
         catch (Exception e) {
             // Engine.cleanup();
-            e.printStackTrace();
-            Engine.log("Failed to initialize game engine. Exiting.");
-            System.exit(-1);
+            Engine.log("Failed to initialize game engine.");
+            Engine.log(e);
+            successFlag = false;
         }
+        return successFlag;
     }
 
     public static void run() {
@@ -135,7 +255,7 @@ public class Engine {
         long lastTime = System.nanoTime();
         double unprocessedTime = 0;
 
-        while (isRunning && false) {
+        while (isRunning) {
             boolean render = false;
             long startTime = System.nanoTime();
             long passedTime = startTime - lastTime;
@@ -170,16 +290,21 @@ public class Engine {
         // Engine.cleanup();
     }
 
-    public static void reset() throws IOException {
-        writeErrorToLog();
-        clearErrorFile();
+    public static boolean reset() {
+        boolean successFlag = true;
+        successFlag = successFlag && writeErrorToLog();
+        successFlag = successFlag && clearErrorFile();
         log("RESET", "Reset Engine");
-        return;
+        return successFlag;
     }
 
     public static void stop() {
         if(!isRunning) return;
-        isRunning = false;
+        window.cleanup();
+        gameLogic.cleanup();
+        errorCallback.free();
+        GLFW.glfwTerminate();
+        Engine.isRunning = false;
         log("DONE");
         writeErrorToLog();
     }
@@ -198,63 +323,9 @@ public class Engine {
         gameLogic.update(interval, mouse);
     }
 
-    private static void cleanup() {
-        window.cleanup();
-        gameLogic.cleanup();
-        errorCallback.free();
-        GLFW.glfwTerminate();
-    }
-
     public static boolean tick() {
+        input();
         boolean active = true;
-        String[] responses = {"Q", "QUIT", "L CHARACTERS", "LIST CHARACTERS", "L STATES", "LIST STATES", "L CONGRESSIONAL_DISTRICTS", "LIST CONGRESSIONAL_DISTRICTS", "L COUNTIES", "LIST COUNTIES", "L CITIES", "LIST CITIES"};
-        String input = getInput(responses);
-        switch (input) {
-            case "Q" :
-            case "QUIT" :
-                System.out.print("Quitting\n");
-                return false;
-            case "L CHARACTERS" :
-            case "LIST CHARACTERS" :
-                System.out.print("Listing Characters:\n");
-                for (main.core.characters.Character character : CharacterManager.getAllCharacters()) {
-                    System.out.printf("\t%s\n", character.getName());
-                }
-                System.out.print("Done\n");
-                break;
-            case "L STATES" :
-            case "LIST STATES" :
-                System.out.print("Listing States:\n");
-                for (State state : MapManager.getStates()) {
-                    System.out.printf("\t%s\n", state.getName());
-                }
-                System.out.print("Done\n");
-                break;
-            case "L CONGRESSIONAL_DISTRICTS" :
-            case "LIST CONGRESSIONAL_DISTRICTS" :
-                System.out.print("Listing Congressional Districts:\n");
-                for (CongressionalDistrict district : MapManager.getCongressionalDistricts()) {
-                    System.out.printf("\t%s\n", district.getOfficeID());
-                }
-                System.out.print("Done\n");
-                break;
-            case "L COUNTIES" :
-            case "LIST COUNTIES" :
-                System.out.print("Listing Counties:\n");
-                for (County county : MapManager.getCounties()) {
-                    System.out.printf("\t%s, %s\n", county.getName(), county.getState().getAbbreviation());
-                }
-                System.out.print("Done\n");
-                break;
-            case "L CITIES" :
-            case "LIST CITIES" :
-                System.out.print("Listing Cities:\n");
-                for (City city : MapManager.getCities()) {
-                    System.out.printf("\t%s, %s\n", city.getName(), city.getState().getAbbreviation());
-                }
-                System.out.print("Done\n");
-                break;
-        }
 
         //System.out.println(DateManager.currentGameDate);
         active = active && DateManager.incrementQuarterHour();
@@ -263,10 +334,10 @@ public class Engine {
 
     public static void writeSave() {
         try {
-            String saveName = String.format("%s - %s", playerCandidate.getName().getFullName(), DateManager.formattedCurrentDate());
+            String saveName = String.format("%s - %s", CharacterManager.getPlayer().getName().getLegalName(), DateManager.formattedCurrentDate());
             File saveFile = new File(FilePaths.SAVES_DIR.toString() + saveName + ".txt");
             for (int i = 1; saveFile.exists(); i++) {
-                saveName = String.format("%s - %s %s", playerCandidate.getName().getFullName(), DateManager.formattedCurrentDate(), String.format("(%d)", i));
+                saveName = String.format("%s - %s %s", CharacterManager.getPlayer().getName().getLegalName(), DateManager.formattedCurrentDate(), String.format("(%d)", i));
                 saveFile = new File(FilePaths.SAVES_DIR.toString() + saveName + ".txt");
             }
             saveFile.createNewFile();
@@ -348,71 +419,61 @@ public class Engine {
     //     return window;
     // }
 
-    public static void writeErrorToLog() {
-        try {
-            File errorFile = new File(FilePaths.ERROR_LOG.toString());
-            errorFile.createNewFile(); // does nothing if already exists
-            File logFile = new File(FilePaths.LOG_FILE.toString());
-            logFile.createNewFile();
-            Scanner scanner = scannerUtil.createScanner(errorFile);
-            ArrayList<String> contents = new ArrayList<>();
-            while (scanner.hasNext()) contents.add(scanner.nextLine());
-            scanner.close();
-            PrintWriter writer = new PrintWriter(new FileOutputStream(logFile, true));
-            for (String line : contents) writer.println(line);
-            writer.close();
-        }
-        catch (IOException e) {
-            log("ERROR/LOG FILE NOT FOUND", "The error file or log file was unable to be found.", e);
-            return;
-        }
-    }
-    public static void clearErrorFile() {
-        try {
-            File errorFile = new File(FilePaths.ERROR_LOG.toString());
-            errorFile.createNewFile();
-            FileOutputStream errorStream = new FileOutputStream(errorFile, false);
-            errorStream.close();
-        }
-        catch (IOException e) {
-            log("ERROR/LOG FILE NOT FOUND", "Somehow, the error file or log file was unable to be found.", e);
-            return;
-        }
-    }
+    private static Map<Integer, Boolean> primeCache = new HashMap<>();
+    public static boolean isPrime(int value) {
+        if (value <= 1) return false;
+        if (primeCache.containsKey(value))
+            return primeCache.get(value);
 
-    public static String getInput(String[] responses) {
-        /* getInput
-         * takes responses, a list of acceptable strings
-         * only returns when an acceptable input is given
-         * returns an integer corresponding to the index of the accepted string in the responses list
-        */
-
-        String input = "";
-        while (true) {
-            System.out.print("> ");
-            input = stdin.nextLine().toUpperCase();
-            for (int i = 0; i < responses.length; i++) {
-                if (responses[i].equals(input)) {
-                    return responses[i];
-                }
+        for (int i = 2; i <= Math.sqrt(value); i++) {
+            if (value % i == 0) {
+                primeCache.put(value, false);
+                return false;
             }
-            System.out.println("Unrecognized Input");
         }
-    }
-    public static int getInput() {
-        /* getInput
-         * asks for an input until one is given
-         * returns when input is recieved
-        */
-
-        String input = "";
-        while (true) {
-            System.out.print("> ");
-            input = stdin.nextLine().toUpperCase();
-            if (input != null) return 1;
-        }
+        primeCache.put(value, true);
+        return true;
     }
 
+    public static int nextPrime(int value) {
+        if (value < 1) return 1;
+        else if (value == 1) return 2;
+        while (!isPrime(value++));
+        return value;
+    }
+
+    /** Suffixes to place after numbers in ordinal form. */
+    static String[] suffixes = {"th", "st", "nd", "rd", "th"};
+    /**
+     * Takes an int value and returns a String for the ordinal form of that number. Example: toOrdinal(1) -> "1st", toOrdinal(2) -> "2nd", toOrdinal(5) -> "5th"
+     * @param value A number.
+     * @return The ordinal form of the value.
+     */
+    public static String toOrdinal(int value) {
+        int index;
+        switch (Math.abs(value) % 100) {
+            case 11:
+            case 12:
+            case 13:
+                index = 0;
+                break;
+            default:
+                index = Math.abs(value) % 10 <= 3 ? Math.abs(value) % 10 : 4;
+        }
+        return (value < 0 ? "negative " : "") + String.valueOf(Math.abs(value)) + suffixes[index];
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    //                                     LOGGING FUNCTIONS                                     //
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Write the passed logline to the standard error file.
+     * @param logline String to be written, explaining information about the event logged.
+     * @see #log(Exception)
+     * @see #log(String, String)
+     * @see #log(String, String, Exception)
+     */
     public static void log(String logline) {
         try {
             File errorFile = new File(FilePaths.ERROR_LOG.toString());
@@ -429,41 +490,12 @@ public class Engine {
             System.exit(-1);
         }
     }
-    public static void log(String context, String logline) {
-        try {
-            File errorFile = new File(FilePaths.ERROR_LOG.toString());
-            errorFile.createNewFile(); // does nothing if already exists
-            PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
 
-            logWriter.printf("%s : %s: %s%n", getDate(), context.toUpperCase(), logline);
-            System.out.printf("%s : %s: %s%n", getDate(), context.toUpperCase(), logline);
-            logWriter.close();
-            return;
-        }
-        catch (IOException e) {
-            System.out.println(e);
-            System.exit(-1);
-        }
-    }
-    public static void log(String context, String logline, Exception logE) {
-        try {
-            File errorFile = new File(FilePaths.ERROR_LOG.toString());
-            errorFile.createNewFile(); // does nothing if already exists
-            PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
-
-            StringWriter sw = new StringWriter();
-            logE.printStackTrace(new PrintWriter(sw));
-            String stackTrace = sw.toString().replace("\t", " -> ").replace("\n", "").replace("\r", "");
-            logWriter.printf("%s : %s: %s @ %s%n", getDate(), context.toUpperCase(), logline, stackTrace);
-            System.out.printf("%s : %s: %s @ %s%n", getDate(), context.toUpperCase(), logline, stackTrace);
-            logWriter.close();
-            return;
-        }
-        catch (IOException e) {
-            System.out.println(e);
-            System.exit(-1);
-        }
-    }
+    /**
+     * Write the Exception to the standard error file.
+     * @param logE Exception to be written. The Exception.printStackTrace() method will be used.
+     * @see #log(String, String, Exception)
+     */
     public static void log(Exception logE) {
         try {
             File errorFile = new File(FilePaths.ERROR_LOG.toString());
@@ -484,14 +516,124 @@ public class Engine {
         }
     }
 
-    public static String getDate() {
+    /**
+     * Write the passed logline to the standard error file, with the context string as a label.
+     * @param context String for the label/context in which the log is being written. Will be put in full-capitals.
+     * @param logline String to be written, explaining information about the event logged.
+     * @see #log(String, String, Exception)
+     */
+    public static void log(String context, String logline) {
+        try {
+            File errorFile = new File(FilePaths.ERROR_LOG.toString());
+            errorFile.createNewFile(); // does nothing if already exists
+            PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
+
+            logWriter.printf("%s : %s: %s%n", getDate(), context.toUpperCase(), logline);
+            System.out.printf("%s : %s: %s%n", getDate(), context.toUpperCase(), logline);
+            logWriter.close();
+            return;
+        }
+        catch (IOException e) {
+            System.out.println(e);
+            System.exit(-1);
+        }
+    }
+
+    /**
+     * Write the passed logline to the standard error file, with the context string as a label and with the passed Exception's stack trace also being written.
+     * @param context String for the label/context in which the log is being written. Will be put in full-capitals.
+     * @param logline String to be written, explaining information about the event logged.
+     * @param logE Exception to be written. The Exception.printStackTrace() method will be used.
+     */
+    public static void log(String context, String logline, Exception logE) {
+        try {
+            File errorFile = new File(FilePaths.ERROR_LOG.toString());
+            errorFile.createNewFile(); // does nothing if already exists
+            PrintWriter logWriter = new PrintWriter(new FileWriter(errorFile, true));
+
+            StringWriter sw = new StringWriter();
+            logE.printStackTrace(new PrintWriter(sw));
+            String stackTrace = sw.toString().replace("\t", " -> ").replace("\n", "").replace("\r", "");
+            logWriter.printf("%s : %s: %s @ %s%n", getDate(), context.toUpperCase(), logline, stackTrace);
+            System.out.printf("%s : %s: %s @ %s%n", getDate(), context.toUpperCase(), logline, stackTrace);
+            logWriter.close();
+            return;
+        }
+        catch (IOException e) {
+            System.out.println(e);
+            System.exit(-1);
+        }
+    }
+
+    /**
+     * Gives the current date as a formatted string for logging purposes.
+     * @return The current date, formatted as {@code yyyy.MM.dd.HH.mm.ss.SSS}
+     */
+    private static String getDate() {
         return new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS").format(new java.util.Date());
     }
 
     /**
+     * Writes the contents of the Error file into the longterm Log file.
+     */
+    private static boolean writeErrorToLog() {
+        boolean successFlag = true;
+        try {
+            File errorFile = new File(FilePaths.ERROR_LOG.toString());
+            errorFile.createNewFile(); // does nothing if already exists
+            File logFile = new File(FilePaths.LOG_FILE.toString());
+            logFile.createNewFile();
+            ArrayList<String> contents = new ArrayList<>();
+            try (Scanner scanner = IOUtil.createScanner(errorFile)) {
+                while (scanner.hasNext())
+                    contents.add(scanner.nextLine());
+            }
+            catch (FileNotFoundException e) {
+                log("ERROR FILE NOT FOUND", "The error file was unable to be found.", e);
+                successFlag = false;
+            }
+            try (PrintWriter writer = IOUtil.createWriter(logFile, true)) {
+                for (String line : contents)
+                    writer.println(line);
+            }
+            catch (IOException e) {
+                log("LOG FILE NOT FOUND", "The log file was unable to be found.", e);
+                successFlag = false;
+            }
+        }
+        catch (IOException e) {
+            log("ERROR/LOG FILE NOT FOUND", "The error file or log file was unable to be found.", e);
+            successFlag = false;
+        }
+        return successFlag;
+    }
+
+    /**
+     * Empties the Error file of all contents.
+     */
+    private static boolean clearErrorFile() {
+        boolean successFlag = true;
+        try {
+            File errorFile = new File(FilePaths.ERROR_LOG.toString());
+            errorFile.createNewFile();
+            FileOutputStream errorStream = new FileOutputStream(errorFile, false);
+            errorStream.close();
+        }
+        catch (IOException e) {
+            log("ERROR/LOG FILE NOT FOUND", "Somehow, the error file or log file was unable to be found.", e);
+            successFlag = false;
+        }
+        return successFlag;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////
+    //                          RANDOMNESS AND SELECTION FUNCTIONS                          //
+    //////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
      * Selects a float between 0.0 and 1.0 which can be used as a percentage.
-     * 
      * @return A pseudorandomly selected float in the range [0.0, 1.0)
+     * @see #randPercent(float, float)
      */
     public static float randPercent() {
         return randPercent(0.0f, 1.0f);
@@ -499,7 +641,8 @@ public class Engine {
 
     /**
      * Selects a float between the min and the max.
-     * 
+     * <p>
+     * <i>If min is a larger value than max, their values will be swapped.</i>
      * @param min The minimum value which can be selected (inclusive)
      * @param max The maximum value which can be selected (exclusive)
      * @return A pseudorandomly selected float in the range [min, max)
@@ -512,7 +655,6 @@ public class Engine {
 
     /**
      * Selects a double between the min and the max.
-     * 
      * @param min The minimum value which can be selected (inclusive)
      * @param max The maximum value which can be selected (exclusive)
      * @return A pseudorandomly selected double in the range [min, max)
@@ -525,7 +667,6 @@ public class Engine {
 
     /**
      * Selects an integer between zero and the max, evenly distributed.
-     * 
      * @param max The maximum value which can be randomly selected (exclusive)
      * @return A pseudorandomly generated integer in the range [0, max)
      */
@@ -535,7 +676,6 @@ public class Engine {
 
     /**
      * Selects an integer between the min and the max, evenly distributed.
-     * 
      * @param min The minimum value which can be selected (inclusive)
      * @param max The maximum value which can be selected (exclusive)
      * @return A pseudorandomly generated integer in the range [min, max)
@@ -546,11 +686,44 @@ public class Engine {
         return rand.nextInt(max - min + 1) + min; // return an integer between min and max (inclusive), equally distributed
     }
 
+    /** Selects one value from an array.
+     * @param items The array to select from.
+     * @return One randomly selected value.
+     */
+    public static <T> T randSelect(T[] items) {
+        if (items.length == 0) return null;
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(items.length);
+        return items[randomNumber];
+    }
+
+    /** Selects one value from a collection.
+     * @param items The collection to select from.
+     * @return One randomly selected value.
+     */
+    public static <T> T randSelect(Collection<T> items) {
+        if (items == null || items.size() == 0) return null;
+
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(items.size());
+        int i = 0;
+        for (T item : items) {
+            if (i == randomNumber) {
+                return item;
+            }
+            i++;
+        }
+        return null; // Should never reach here if items.size() > 0
+    }
+
     /**
-     * Generic method. Selects a value from the items in accordance with the weights array. The two arrays must have the same length. Returns null if unsuccessful.
-     * @param items Any object array. The values from which to pick. Must have same length as weights array.
-     * @param weights The weight for each value. Must have same length as items array. For any index n within the items of either array, items[n] corresponds to weights[n].
-     * @return An entry selected from the items array weighted in accordance with the weights array.
+     * Selects a value from the items array, with the weight for selection given by the weights array. The arrays must have the same length.
+     * @param <T> Object
+     * @param items Array of selectable values. Must have same length as weights array.
+     * @param weights Array of weights for each value. Must have same length as items array.
+     *                For any index n within the items of either array, {@code items[n]} corresponds to {@code weights[n]}.
+     *                The probability that any item i will be selected is given by {@code weights[i] / sum(weights)}
+     * @return One value selected from the items array, or {@code null} if unsuccessful.
      */
     public static <T> T weightedRandSelect(T[] items, double[] weights) {
         if (items.length < 1 || weights.length < 1) {
@@ -578,7 +751,17 @@ public class Engine {
         Engine.log("FAILURE TO SELECT", String.format("The weighted selection failed to select an item."), new Exception());
         return null; // Edge-case failure to select
     }
-    public static <T, P extends Number> T weightedRandSelect(Collection<T> items, Collection<P> weights) {
+
+    /**
+     * Selects a value from the items array, with the weight for selection given by the weights array. The arrays must have the same length.
+     * @param <T> Object
+     * @param items Collection of selectable values. Must have same size as weights array.
+     * @param weights Collection of weights for each value. Must have same size as items array.
+     *                For any index n within the items of either collection, {@code items[n]} corresponds to {@code weights[n]}.
+     *                The probability that any item i will be selected is given by {@code weights[i] / sum(weights)}
+     * @return One value selected from the items collection, or {@code null} if unsuccessful.
+     */
+    public static <T> T weightedRandSelect(Collection<T> items, Collection<Number> weights) {
         if (items.size() < 1 || weights.size() < 1) {
             Engine.log("INVALID SELECTION FROM EMPTY ARRAY", String.format("Unable to select an item from an array with length < 1."), new Exception());
             return null;
@@ -589,7 +772,7 @@ public class Engine {
         }
 
         double totalWeight = 0;
-        for (P weight : weights) totalWeight += weight.doubleValue();
+        for (Number weight : weights) totalWeight += weight.doubleValue();
 
         Random rand = new Random();
         double randomNumber = rand.nextDouble() * totalWeight;
@@ -604,163 +787,42 @@ public class Engine {
         Engine.log("FAILURE TO SELECT", String.format("The weighted selection failed to select an item."), new Exception());
         return null; // Edge-case failure to select
     }
-    public static <K, V extends Number> K weightedRandSelect(Map<K, V> items) {
-        if (items.size() < 1) {
-            Engine.log("INVALID SELECTION FROM EMPTY ARRAY", String.format("Unable to select an item from an array with length < 1."), new Exception());
+
+    /**
+     * Selects a value from the items map, with the weight for selection given by the item's map value. 
+     * @param <T> Object
+     * @param items Map of Object to Number, where the keys are Objects to select from and the values are the weights for each object.
+     *              The probability that any item i will be selected is given by {@code items[i] / sum(items.values)}
+     * @return One value selected from the items map, or {@code null} if unsuccessful.
+     */
+    public static <T> T weightedRandSelect(Map<T, ? extends Number> items) {
+        if (items == null || items.isEmpty()) {
+            Engine.log("INVALID SELECTION FROM EMPTY ARRAY", String.format("Unable to select an item from an empty or null array."), new Exception());
             return null;
         }
         // map requires bijective relationship between keys and values
 
-        double totalWeight = 0;
-        for (V weight : items.values()) totalWeight += weight.doubleValue();
+        double totalWeight = 0.0;
+        for (Number weight : items.values()) totalWeight += weight.doubleValue();
+        if (totalWeight == 0.0) return randSelect(items.keySet());
 
         Random rand = new Random();
         double randomNumber = rand.nextDouble() * totalWeight;
 
         double cumulativeWeight = 0;
-        for (K key : items.keySet()) {
-            cumulativeWeight += items.get(key).doubleValue();
+        for (T item : items.keySet()) {
+            cumulativeWeight += items.get(item).doubleValue();
             if (randomNumber < cumulativeWeight) {
-                return key;
+                return item;
             }
         }
         Engine.log("FAILURE TO SELECT", String.format("The weighted selection failed to select an item."), new Exception());
         return null; // Edge-case failure to select
     }
 
-    static String[] suffixes = {"th", "st", "nd", "rd", "th"};
-    public static String toOrdinal(int value) {
-        if (value < 0) {
-            Engine.log("ILLEGAL ARGUMENT EXCEPTION:", String.format("A value of %d was supplied, when the minimum value is 0.", value), new Exception());
-            return null;
-        }
-        return value + suffixes[value <= 3 ? value : 4];
-    }
-
-    /**
-     * Takes any object and returns a blank repr string representation of an instance of that object's class. For a filled version, use the object's toRepr() method.
-     * @param <O> Generic object
-     * @param object
-     * @return Generic (unfilled) repr representation of the object. Does not complete field spaces with actual values, but does determine single value and list fields.
-     */
-    public static <O> String toRepr(O object) {
-        String[] singleTypes = {"int", "java.lang.String", "char", "long", "float", "double"}; // All the types that are represented by a single value, all others are a list.
-
-        String repr = "";
-
-        repr += String.format("%s:[", object.getClass().toString().replace("class ", ""));
-
-        for (java.lang.reflect.Field f : object.getClass().getDeclaredFields()) {
-            boolean added = false;
-            String field = f.toString();
-
-            //System.out.println(field);
-            // loop through all non-static fields
-            if (!field.contains("static")) {
-                // the name of the field is the last portion only
-                System.out.println(field);
-                String[] parts = field.split(" ");
-                String type = parts[1];
-                field = parts[parts.length-1];
-
-                for (String singleType : singleTypes) {
-                    if (type.equals(singleType)) {
-                        repr += String.format("%s:\"", field.split("\\.")[1]);
-                        repr += String.format("\";");
-                        added = true;
-                        break;
-                    }
-                }
-                if (!added) repr += String.format("%s:[];", field.split("\\.")[1]);
-            }
-        }
-
-        repr += String.format("];");
-        return repr;
-        
-        /*
-        * first line should be the type of the passed object 
-        * for each field in the passed object:
-        *      append the name of the field, followed by :
-        *      if the field is a single item, put "";
-        *      if the field is a list, put [];
-        *          for each item in the list, add an index or key followed by :
-        *              if the value is a single item, put "";
-        *              if the value is a list, put [];
-        *                  etc ...
-        * end with ;
-        */
-    }
-
-    public static String arrayToReprList(String[] array) {
-        if (array == null) return "";
-        StringBuilder repr = new StringBuilder();
-        for (int i = 0; i < array.length; i++) {
-            repr.append(String.format("%d:\"%s\";", i, array[i]));
-        }
-        return repr.toString();
-    }
-
-    public static <T extends Collection<String>> String arrayToReprList(T list) {
-        if (list == null) return "";
-        StringBuilder repr = new StringBuilder();
-        int i = 0;
-        for (String item : list) {
-            repr.append(String.format("%d:\"%s\";", i++, item));
-        }
-        return repr.toString();
-    }
-
-    public static void openLocalizationFiles(){
-        localizations = new HashMap<String, HashMap<String, String>>();
-        // for each language in Language enum, open the language system text file and read key-value pairs
-        for(Language language : Language.values()){
-            ArrayList<String> contents = new ArrayList<>();
-            try {
-                File file = new File(String.format("%s/%s%s", FilePaths.LOCALIZATION_DIR, language, FilePaths.SYSTEM_TEXT_LOC));
-                Scanner scanner = scannerUtil.createScanner(file);
-                while (scanner.hasNext()) contents.add(scanner.nextLine());
-                scanner.close();
-            }
-            catch (FileNotFoundException e) {
-                log("INVALID LANGUAGE ABBREVIATION", String.format("Attempted to access language abbreviation %s which has no associated localization file.", language.toString()), new Exception());
-                continue;
-            }
-            localizations.put(language.toString(), new HashMap<String, String>());
-            for(String line : contents){
-                if(line.equals("")) continue;
-                localizations.get(language.toString()).put(line.split(":")[0].trim(), line.split(":")[1].trim());
-            }
-        }
-    }
-
-    public static String getLocalization(String tag) {
-        if (language == null) {
-            Engine.log("UNINITIALIZED GAME LANGUAGE", String.format("The game language was never initialized or was set to null."), new Exception());
-            return null;
-        }
-        return getLocalization(tag, language);
-    }
-    public static String getLocalization(String tag, Language language){
-        String res = localizations.get(language.toString()).get(tag);
-        if (res == null) {
-            Engine.log("INVALID LOCALIZATION TAG", String.format("Attempted to access localization tag %s for language %s, which is invalid.", tag, language.toString()), new Exception());
-            return String.format("[%s : %s]", language.toString(), tag);
-        }
-        return res;
-    }
-
-    public static boolean isPrime(int value) {
-        if (value < 2) return false;
-        for (int i = 2; i <= Math.sqrt(value); i++) {
-            if (value % i == 0) return false;
-        }
-        return true;
-    }
-
-    public static int nextPrime(int value) {
-        if (value < 2) return 2;
-        while (!isPrime(value)) value++;
-        return value;
+    public static int probabilisticCount(float f) {
+        int count = 0;
+        while (randPercent() <= f) count++;
+        return count;
     }
 }

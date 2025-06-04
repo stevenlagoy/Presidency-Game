@@ -1,12 +1,19 @@
+/*
+ * Main.java
+ * Steven LaGoy
+ * 
+ */
+
 package main.core;
 
-import java.util.Date;
-
-import main.core.characters.*;
-import main.core.demographics.*;
 import main.core.graphics.*;
 import main.core.graphics.game.*;
-import main.core.map.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import main.core.characters.Character;
+import main.core.characters.CharacterManager;
 
 public class Main
 {
@@ -15,33 +22,34 @@ public class Main
 
     public static void main(String[] args){
 
-        boolean active;
+        List<String> names = new ArrayList<>();
+        for (int i = 0; i < 1000; i++) {
+            try {
+                Character character = new Character();
+                IOUtil.stdout.println(character.getName().getBiographicalName());
+            }
+            catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+        }
+        CharacterManager.generateBlocsReport();
+
+        boolean active = false;
         try {
-            Engine.language = Engine.Language.EN;
-            Engine.init();
-            Engine.run();
-            active = true;
+            // Engine.language = Engine.Language.EN;
+            active = active && Engine.init();
+            if (active) Engine.run();
         }
         catch (Exception e) {
             e.printStackTrace();
             active = false;
         }
 
-        Name name = new Name("Steven", "Michael", "LaGoy");
-        Demographics demographics = new Demographics("Generation Z", "Christian", "White", "Other / Non-Binary");
-        Engine.playerCandidate = new Candidate(name, demographics);
-        Engine.playerCandidate.setBirthplaceCity(MapManager.matchCity("New York", "NY"));
-        Engine.playerCandidate.setCurrentLocationCity(MapManager.matchCity("New York", "NY"));
-        Engine.playerCandidate.setResidenceCity(MapManager.matchCity("New York", "NY"));
-        Engine.playerCandidate.setBirthday(new Date(1093838400000L));
-        Engine.playerCandidate.setAppearance(new CharacterModel());
-        Engine.playerCandidate.setPersonality(new Personality());
-
         while (active) {
             try {
                 active = Engine.tick();
                 if (!active) break;
-                Thread.sleep(Engine.tickSpeed);
+                Thread.sleep(Engine.getTickSpeed());
             }
             catch (InterruptedException e) {
                 e.printStackTrace();
@@ -49,8 +57,8 @@ public class Main
             }
         }
 
-        Engine.writeSave();
-        Engine.stop();
+        // Engine.writeSave();
+        // Engine.stop();
         System.out.print("Main Done\n");
         System.exit(0);
     }
