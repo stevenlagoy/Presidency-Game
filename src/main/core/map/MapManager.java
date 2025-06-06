@@ -1,22 +1,27 @@
 package main.core.map;
 
-import java.io.File;
+// IMPORTS ----------------------------------------------------------------------------------------
+
+// Standard Library Imports
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.print.DocFlavor.STRING;
-
+// Internal Imports
 import core.JSONObject;
 import core.JSONProcessor;
 import core.StringOperations;
 import main.core.Engine;
 import main.core.FilePaths;
+import main.core.demographics.Bloc;
 import main.core.demographics.Demographics;
+import main.core.demographics.DemographicsManager;
 
-public class MapManager
-{
+public final class MapManager {
+    private MapManager() {} // Non-Instantiable
+
     public static String[] mapModeNames = {"Default", "States", "Polling", "Population", "Conventions", "Districts", "Counties", "Travel"};
     /*
      * Default view - Switch between States, Districts, and Counties depending on zoom level.
@@ -26,7 +31,7 @@ public class MapManager
      * Polling view - Shade areas between Blue, White, and Red according to poll results.
      * Population view - Shade areas between Black and White depending on membership of selected bloc.
      * Conventions view - Shade states between Black and White depending on how soon their Convention is.
-     * Travel view - Show roadways, airports, and other Routes between cities.
+     * Travel view - Show roadways, airports, and other Routes between municipalities.
      */
     public static int mapMode; // Currently selected map mode / view. 0 is Default.
     public static double zoomLevel; // Number of horizontal pixels of the map currently on screen.
@@ -36,7 +41,7 @@ public class MapManager
     public static List<State>                   states                  = new ArrayList<>();
     public static List<CongressionalDistrict>   congressionalDistricts  = new ArrayList<>();
     public static List<County>                  counties                = new ArrayList<>();
-    public static List<City>                    cities                  = new ArrayList<>();
+    public static List<Municipality>            municipalities          = new ArrayList<>();
 
     public static void init(){
         setMapMode(0);
@@ -58,17 +63,19 @@ public class MapManager
         mapMode = mode;
     }
 
-    public static void createMap() {
+    public static boolean createMap() {
         // Two-Phase Initialization
         // 1) Construct skeleton objects top-down
         // 2) Resolve references bottom-up
-        createStates();
-        createCongressionalDistricts();
-        createCounties();
-        createCities();
-        resolveLocationFields();
+        boolean successFlag = true;
+        successFlag = successFlag && createStates();
+        successFlag = successFlag && createCongressionalDistricts();
+        successFlag = successFlag && createCounties(false);
+        successFlag = successFlag && createCities();
+        successFlag = successFlag && resolveLocationFields();
+        return successFlag;
     }
-    public static void createStates() {
+    public static boolean createStates() {
         JSONObject json = JSONProcessor.processJson(FilePaths.STATES);
 
         for (Object stateObj : json.getAsList()) {
@@ -89,8 +96,9 @@ public class MapManager
                 }
             }
         }
+        return true;
     }
-    public static void createCongressionalDistricts() {
+    public static boolean createCongressionalDistricts() {
         JSONObject json = JSONProcessor.processJson(FilePaths.CONGRESSIONAL_DISTRICTS);
 
         for (Object districtObj : json.getAsList()) {
@@ -110,8 +118,11 @@ public class MapManager
                 }
             }
         }
+        return true;
     }
-    public static void createCounties() {
+
+    public static boolean createCounties() { return createCounties(); }
+    public static boolean createCounties(boolean citiesLoaded) {
         JSONObject json = JSONProcessor.processJson(FilePaths.COUNTIES);
 
         for (Object countyObj : json.getAsList()) {
@@ -121,81 +132,56 @@ public class MapManager
                 String state = countyJson.get("state").toString();
                 String countySeat = countyJson.get("county_seat").toString();
                 int population = Integer.parseInt(countyJson.get("population").toString());
-                double area = Double.parseDouble(countyJson.get("square_milage").toString());
+                double area = Double.parseDouble(countyJson.get("square_mileage").toString());
                 MapManager.counties.add(new County(
-                    FIPS, name, state, countySeat, population, area
+                    FIPS, name, state, citiesLoaded ? countySeat : null, population, area
                 ));
             }
         }
+        return true;
     }
-    public static void createCities() {
-        JSONObject json = JSONProcessor.processJson(FilePaths.CITIES);
-
-        for (Object cityObj : json.getAsList()) {
-            if (cityObj instanceof JSONObject cityJson) {
-                String name = cityJson.get("name").toString();
-                int population = Integer.parseInt(cityJson.get("population2027").toString());
-                double area = Double.parseDouble(cityJson.get("landArea2020").toString());
-                MapManager.cities.add(new City(
-                    name, population, area
-                ));
-            }
-        }
-    }
-
-    private static void resolveLocationFields() {
-        JSONObject json;
-
-        // Fix Congressional Districts
-        json = JSONProcessor.processJson(FilePaths.CONGRESSIONAL_DISTRICTS);
-
-        for (Object congressionalDistrictObj : json.getAsList()) {
-            if (congressionalDistrictObj instanceof JSONObject congressionalDistrictJson) {
-
-            }
-        }
-
-        // old json functionality
-        // for (Object o : json.keySet()) {
-        //     HashMap<String, String> d = (HashMap<String, String>) json.get(o);
-        //     CongressionalDistrict congressionalDistrict = matchCongressionalDistrict(d.get("officeID"));
-        //     congressionalDistrict.setState(matchState(d.get("state")));
-        // }
-
-        // Fix Counties
-        json = JSONProcessor.processJson(FilePaths.COUNTIES);
+    private static boolean resolveCountySeats() {
+        JSONObject json = JSONProcessor.processJson(FilePaths.COUNTIES);
 
         for (Object countyObj : json.getAsList()) {
             if (countyObj instanceof JSONObject countyJson) {
-
+                String FIPS = countyJson.get("FIPS").toString();
+                String state = countyJson.get("state").toString();
+                String countySeat = countyJson.get("county_seat").toString();
+                MapManager.matchCounty(FIPS).setCountySeat(MapManager.matchMunicipality(countySeat, state));
             }
         }
+        return true;
+    }
 
-        // old json functionality
-        // for (Object o : json.keySet()) {
-        //     HashMap<String, String> c = (HashMap<String, String>) json.get(o);
-        //     County county = matchCounty(c.get("FIPS"));
-        //     county.setState(matchState(c.get("state")));
-        //     //county.setCongressionalDistrict(null);
-        //     //county.setCountySeat(matchCity(c.get("county_seat"), c.get("state")));
-        // }
+    public static boolean createCities() { return createCities(true); }
+    public static boolean createCities(boolean countiesLoaded) {
+        JSONObject json = JSONProcessor.processJson(FilePaths.CITIES);
 
-        // Fix Cities
-        json = JSONProcessor.processJson(FilePaths.CITIES);
-
-        for (Object cityObj : json.getAsList()) {
-            if (cityObj instanceof JSONObject cityJson) {
-
+        for (Object municipalityObj : json.getAsList()) {
+            if (municipalityObj instanceof JSONObject municipalityJson) {
+                String name = municipalityJson.get("name").toString();
+                String state = municipalityJson.get("state").toString();
+                String FIPS = municipalityJson.get("FIPS").toString();
+                List<String> counties = new ArrayList<>();
+                for (String county : (ArrayList<String>) municipalityJson.get("counties")) {
+                    counties.add(county);
+                }
+                String typeClass = municipalityJson.get("type_class").toString();
+                int population = Integer.parseInt(municipalityJson.get("population_2027").toString());
+                double area = Double.parseDouble(municipalityJson.get("land_area_2020").toString());
+                MapManager.municipalities.add(new Municipality(
+                    FIPS, name, state, counties, typeClass, population, area, null, null
+                ));
             }
         }
+        return true;
+    }
 
-        // old json functionality
-        // for (Object o : json.keySet()) {
-        //     HashMap<String, String> c = (HashMap<String, String>) json.get(o);
-        //     City city = matchCity(c.get("name"), Integer.parseInt(c.get("population2027")), Double.parseDouble(c.get("landArea2020")));
-        //     city.setState(matchState(c.get("state")));
-        //     //city.setDistrict(null);
-        // }
+    private static boolean resolveLocationFields() {
+        boolean successFlag = true;
+        successFlag = successFlag && resolveCountySeats();
+        return successFlag;
     }
 
     /**
@@ -236,50 +222,66 @@ public class MapManager
         Engine.log("INVALID COUNTY", String.format("The county FIPS, %s, could not be matched.", FIPS), new Exception());
         return null;
     }
+    public static County matchCounty(String name, State state) {
+        for (County county : counties) {
+            if (county.getName().equals(name) && county.getState().equals(state)) return county;
+            if (county.getName().replace("County", "").trim().equals(name.replace("County", "").trim()) && county.getState().equals(state)) return county;
+        }
+        Engine.log("INVALID COUNTY", String.format("The county name, %s, could not be matched to a county in %s.", name, state.getName()), new Exception());
+        return null;
+    }
+    public static List<County> matchCounties(Collection<String> names, State state) {
+        List<County> result = new ArrayList<>();
+        for (String name : names) {
+            County matched = matchCounty(name, state);
+            if (matched != null) result.add(matched);
+        }
+        return result;
+    }
 
     /**
-     * Finds and matches a city from a string containing the name of the city and the name or abbreviation of a state.
-     * @param cityAndStateName A String contining the city and state information.
-     * @return The found city if successfully matched, or {@code null} otherwise.
+     * Finds and matches a municipality from a string containing the name of the municipality and the name or abbreviation of a state.
+     * @param municipalityAndStateName A String contining the municipality name and and state names or abbreviation, separated by a comma {@code ,}
+     * @return The found municipality if successfully matched, or {@code null} otherwise.
      */
-    public static City matchCity(String cityAndStateName) {
+    public static Municipality matchMunicipality(String municipalityAndStateName) {
         String[] nameParts;
-        if (StringOperations.containsUnquotedChar(cityAndStateName, ',')) {
-            nameParts = StringOperations.splitByUnquotedString(cityAndStateName, ",");
+        if (StringOperations.containsUnquotedChar(municipalityAndStateName, ',')) {
+            nameParts = StringOperations.splitByUnquotedString(municipalityAndStateName, ",");
         }
         // Assume the last word in the string is a state name or abbreviation. Will not work for state names with more than one word.
         else {
-            nameParts = cityAndStateName.split("(?s)\\s(?=[^\\s]*$)", 2);
+            nameParts = municipalityAndStateName.split("(?s)\\s(?=[^\\s]*$)", 2);
 
         }
-        String cityName = nameParts[0];
+        String municipalityName = nameParts[0];
         String stateNameOrAbbr = nameParts[1];
-        return matchCity(cityName, stateNameOrAbbr);
+        return matchMunicipality(municipalityName, stateNameOrAbbr);
     }
 
-    public static City matchCity(String cityName, State state) {
-        for (City city : cities) {
-            if (city.getName().equals(cityName) && city.getState().equals(state)) return city;
+    public static Municipality matchMunicipality(String municipalityName, State state) {
+        for (Municipality municipality : municipalities) {
+            if (municipality.getName().equals(municipalityName) && municipality.getState().equals(state)) return municipality;
         }
-        Engine.log("INVALID CITY", String.format("The city name, %s, or the state, %s, could not be matched.", cityName, state.getName()), new Exception());
+        Engine.log("INVALID MUNICIPALITY", String.format("The municipality name, %s, or the state, %s, could not be matched.", municipalityName, state.getName()), new Exception());
         return null;
     }
 
     /**
-     * Finds and returns the city that matches the passed values.
-     * @param cityName Name of the city, without a state abbreviation.
+     * Finds and returns the municipality that matches the passed values.
+     * @param municipalityName Name of the municipality, without a state abbreviation.
      * @param state Either the name or abbreviation of a state.
-     * @return The found city, or {@code null} if not found.
+     * @return The found municipality, or {@code null} if not found.
      */
-    public static City matchCity(String cityName, String state) {
-        return matchCity(cityName, matchState(state));
+    public static Municipality matchMunicipality(String municipalityName, String state) {
+        return matchMunicipality(municipalityName, matchState(state));
     }
     /** This method to be used before cities have assigned states. Assumes all cities are unique by (name, population, area) */
-    public static City matchCity(String cityName, int population, double area) {
-        for (City city : cities) {
-            if (city.getName().equals(cityName) && city.getPopulation() == population && city.getArea() == area) return city;
+    public static Municipality matchMunicipality(String municipalityName, int population, double area) {
+        for (Municipality municipality : municipalities) {
+            if (municipality.getName().equals(municipalityName) && municipality.getPopulation() == population && municipality.getArea() == area) return municipality;
         }
-        Engine.log("INVALID CITY", String.format("No city exists with the name %s, a population of %d, and an area of %f.", cityName, population, area), new Exception());
+        Engine.log("INVALID MUNICIPALITY", String.format("No municipality exists with the name %s, a population of %d, and an area of %f.", municipalityName, population, area), new Exception());
         return null;
     }
 
@@ -295,8 +297,8 @@ public class MapManager
         return counties;
     }
 
-    public static List<City> getCities() {
-        return cities;
+    public static List<Municipality> getCities() {
+        return municipalities;
     }
 
     public static String generateSaveString() {
@@ -306,8 +308,42 @@ public class MapManager
         }
         return saveString.toString();
     }
-    public static City selectCity(Demographics demographics) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'selectCity'");
+    
+    public static Municipality selectMunicipality() {
+        Map<Municipality, Integer> populations = new HashMap<>();
+        for (Municipality municipality : municipalities) {
+            populations.put(municipality, municipality.getPopulation());
+        }
+        Municipality selected = Engine.weightedRandSelect(populations);
+        return selected;
+    }
+    public static Municipality selectMunicipality(Demographics demographics) {
+        Map<Municipality, Integer> populations = new HashMap<>();
+        for (Municipality municipality : municipalities) {
+            int blocsPop = 0;
+            for (Bloc bloc : demographics.toBlocsArray()) {
+                blocsPop += (int) (municipality.getPopulation() * municipality.getDemographicPercentage(bloc));
+            }
+            populations.put(municipality, blocsPop);
+        }
+        Municipality selected = Engine.weightedRandSelect(populations);
+        return selected;
+    }
+
+    private static Map<Bloc, Float> defaultDemographics;
+    public static Map<Bloc, Float> getDefaultDemographics() {
+        if (defaultDemographics != null) {
+            return defaultDemographics;
+        }
+
+        // Must create default demographics
+        defaultDemographics = new HashMap<>();
+        for (List<Bloc> blocs : DemographicsManager.getDemographicBlocs().values()) {
+            for (Bloc bloc : blocs) {
+                defaultDemographics.put(bloc, bloc.getPercentageVoters());
+            }
+        }
+
+        return getDefaultDemographics();
     }
 }

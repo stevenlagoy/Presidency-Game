@@ -34,13 +34,10 @@ import main.core.characters.names.NameManager;
 import main.core.demographics.DemographicsManager;
 import main.core.graphics.ILogic;
 import main.core.graphics.MouseInput;
-import main.core.graphics.WindowManager;
+import main.core.graphics.Window;
+import main.core.graphics.game.TestGame;
 import main.core.graphics.utils.Consts;
-import main.core.map.City;
-import main.core.map.CongressionalDistrict;
-import main.core.map.County;
 import main.core.map.MapManager;
-import main.core.map.State;
 
 /**
  * Engine is the main driver of the game engine, facilitating the initialization and function
@@ -64,7 +61,8 @@ public final class Engine {
     public static int fps;
     private static float frametime = 1.0f / FRAMERATE;
     private static boolean isRunning;
-    private static WindowManager window;
+    private static Window window;
+    public static Window getWindow() { return window; }
     private static GLFWErrorCallback errorCallback;
     private static MouseInput mouse;
     private static ILogic gameLogic;
@@ -170,7 +168,7 @@ public final class Engine {
 
         HashMap<String, String> local = new HashMap<>();
 
-        List<String> contents = IOUtil.readFile(Path.of(String.format("%s/%s%s", FilePaths.LOCALIZATION_DIR, language, FilePaths.SYSTEM_TEXT_LOC)));
+        List<String> contents = IOUtil.readFile(Path.of(String.format("%s/%s%s", FilePaths.LOCALIZATION_RESOURCES, language, FilePaths.SYSTEM_TEXT_LOC)));
         if (contents == null) successFlag = false;
         for (String line : contents) {
             if (line == null || line.isBlank()) continue;
@@ -217,21 +215,23 @@ public final class Engine {
     private static long tickSpeed = speedSettings[speedSetting];
     public static long getTickSpeed() { return tickSpeed; }
 
-    // GAME SETUP
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    //                                        GAME SETUP                                         //
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 
     public static boolean init() {
         boolean successFlag = true;
         try {
             long startTime = System.nanoTime();
-            // GLFW.glfwSetErrorCallback(errorCallback = GLFWErrorCallback.createPrint(System.err));
+            GLFW.glfwSetErrorCallback(errorCallback = GLFWErrorCallback.createPrint(System.err));
             reset();
             setGameLanguage(defaultLanguage); // Load localization and set language
-            // window = new WindowManager(Consts.TITLE, 0, 0, false);
-            // gameLogic = new TestGame();
-            // mouse = new MouseInput();
-            // window.init();
-            // gameLogic.init();
-            // mouse.init();
+            window = new Window(Consts.TITLE, 0, 0, false);
+            gameLogic = new TestGame();
+            mouse = new MouseInput();
+            window.init();
+            gameLogic.init();
+            mouse.init();
 
             successFlag = successFlag && DemographicsManager.createDemographicBlocs();
             successFlag = successFlag && NameManager.readAllNamesFiles();
@@ -264,7 +264,7 @@ public final class Engine {
             unprocessedTime += passedTime / (double) NANOSECOND;
             frameCounter += passedTime;
 
-            // Engine.input();
+            Engine.input();
 
             while (unprocessedTime > frametime) {
                 render = true;
@@ -287,7 +287,7 @@ public final class Engine {
                 frames++;
             }
         }
-        // Engine.cleanup();
+        Engine.cleanup();
     }
 
     public static boolean reset() {
@@ -333,6 +333,7 @@ public final class Engine {
     }
 
     public static void writeSave() {
+        if (CharacterManager.getPlayer() == null) return;
         try {
             String saveName = String.format("%s - %s", CharacterManager.getPlayer().getName().getLegalName(), DateManager.formattedCurrentDate());
             File saveFile = new File(FilePaths.SAVES_DIR.toString() + saveName + ".txt");
@@ -350,74 +351,24 @@ public final class Engine {
         }
     }
 
+    public static void cleanup() {
+        window.cleanup();
+        gameLogic.cleanup();
+        errorCallback.free();
+        GLFW.glfwTerminate();
+    }
+
     public static List<String> listSaveNames() {
-        return null;
+        return new ArrayList<>();
     }
 
     public static void readSave(String saveName) {
 
     }
 
-    // public static void initOpenGL() {
-    //     // Initialize GLFW
-    //     if (!glfwInit()) {
-    //         throw new IllegalStateException("Unable to initialize GLFW");
-    //     }
-
-    //     // Configure GLFW
-    //     glfwDefaultWindowHints();
-    //     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-    //     glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-
-    //     // Create the window
-    //     window = glfwCreateWindow(800, 600, "OpenGL Window", NULL, NULL);
-    //     if (window == NULL) {
-    //         throw new RuntimeException("Failed to create the GLFW window");
-    //     }
-
-    //     // Make the OpenGL context current
-    //     glfwMakeContextCurrent(window);
-    //     // Enable v-sync
-    //     glfwSwapInterval(1);
-    //     // Make the window visible
-    //     glfwShowWindow(window);
-    // }
-
-    // public static void runOpenGL() {
-    //     // This line is critical for LWJGL's interoperation with GLFW's
-    //     // OpenGL context, or any context that is managed externally.
-    //     // LWJGL detects the context that is current in the current thread,
-    //     // creates the GLCapabilities instance and makes the OpenGL
-    //     // bindings available for use.
-    //     GL.createCapabilities();
-
-    //     // Set the clear color
-    //     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
-    //     // Run the rendering loop until the user has attempted to close
-    //     // the window or has pressed the ESCAPE key.
-    //     while (!glfwWindowShouldClose(window)) {
-    //         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-
-    //         // Swap the color buffers
-    //         glfwSwapBuffers(window);
-
-    //         // Poll for window events. The key callback above will only be
-    //         // invoked during this call.
-    //         glfwPollEvents();
-    //     }
-
-    //     // Free the window callbacks and destroy the window
-    //     glfwFreeCallbacks(window);
-    //     glfwDestroyWindow(window);
-
-    //     // Terminate GLFW and free the error callback
-    //     glfwTerminate();
-    // }
-
-    // public static long getWindow() {
-    //     return window;
-    // }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // NUMBER FUNCTIONS //
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 
     private static Map<Integer, Boolean> primeCache = new HashMap<>();
     public static boolean isPrime(int value) {

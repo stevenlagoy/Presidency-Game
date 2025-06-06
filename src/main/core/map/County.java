@@ -43,7 +43,7 @@ public class County {
     private String name;
     private State state;
     private CongressionalDistrict congressionalDistrict;
-    private City countySeat;
+    private Municipality countySeat;
     private int population;
     private double area;
 
@@ -55,18 +55,18 @@ public class County {
     }
 
     public County(String FIPS, String name, String state, String countySeat, int population, double area) {
-        this(FIPS, name, MapManager.matchState(state), MapManager.matchCity(countySeat, state), population, area);
+        this(FIPS, name, state != null ? MapManager.matchState(state) : null, countySeat != null ? MapManager.matchMunicipality(countySeat, state) : null, population, area);
     }
 
     public County(String FIPS, String name, State state, String countySeat, int population, double area) {
-        this(FIPS, name, state, MapManager.matchCity(countySeat, state), population, area);
+        this(FIPS, name, state, countySeat != null ? MapManager.matchMunicipality(countySeat, state) : null, population, area);
     }
 
-    public County(String FIPS, String name, String state, City countySeat, int population, double area) {
+    public County(String FIPS, String name, String state, Municipality countySeat, int population, double area) {
         this(FIPS, name, MapManager.matchState(state), countySeat, population, area);
     }
 
-    public County(String FIPS, String name, State state, City countySeat, int population, double area) {
+    public County(String FIPS, String name, State state, Municipality countySeat, int population, double area) {
         this.FIPS = FIPS;
         this.name = name;
         this.state = state;
@@ -109,17 +109,14 @@ public class County {
         this.congressionalDistrict = MapManager.matchCongressionalDistrict(districtOfficeID);
     }
 
-    public City getCountySeat() {
+    public Municipality getCountySeat() {
         return countySeat;
     }
-    public void setCountySeat(City countySeat) {
+    public void setCountySeat(Municipality countySeat) {
         this.countySeat = countySeat;
     }
-    public void setCountySeat(String countySeat, State state) {
-        this.countySeat = MapManager.matchCity(countySeat, state);
-    }
-    public void setCountySeat(String countySeat, String state) {
-        this.countySeat = MapManager.matchCity(countySeat, state);
+    public void setCountySeat(String countySeat) {
+        this.countySeat = MapManager.matchMunicipality(countySeat, this.state);
     }
 
     public int getPopulation() {

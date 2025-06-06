@@ -2,23 +2,27 @@
  * PoliticalActor.java
  * Steven LaGoy
  * Created: 11 October 2024 at 5:16 PM
- * Modified: 29 May 2025
+ * Modified: 31 May 2025
  */
 
 package main.core.characters;
 
  // IMPORTS ---------------------------------------------------------------------------------------
 
- import java.util.ArrayList;
+ // Standard Library Imports
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+// Internal Imports
 import core.JSONObject;
 import main.core.Engine;
+import main.core.Repr;
+import main.core.characters.names.Name;
 import main.core.demographics.Demographics;
-import main.core.map.City;
+import main.core.map.Municipality;
 import main.core.politics.Issue;
 import main.core.politics.Position;
 
@@ -211,9 +215,9 @@ public class PoliticalActor extends Character implements HasPersonality {
      * will generate values for any {@code null} values passed.
      * @param demographics Demographics object representing this Character's demographic memberships.
      * @param name Name object representing this Character's name.
-     * @param birthplaceCity City in which this Character was born.
-     * @param currentLocationCity City to which this Character is currently nearest.
-     * @param residenceCity City in which this Character currently resides (primary residence).
+     * @param birthplaceMunicipality Municipality in which this Character was born.
+     * @param currentLocationMunicipality Municipality to which this Character is currently nearest.
+     * @param residenceMunicipality Municipality in which this Character currently resides (primary residence).
      * @param birthday Date on which this character was born.
      * @param appearance CharacterModel object to be rendered for this Character.
      * @param cash Funds currently usable by this PoliticalActor.
@@ -223,12 +227,12 @@ public class PoliticalActor extends Character implements HasPersonality {
      * @param skills Skills object representing the skills and aptitude of this PoliticalActor.
      * @param positions List of the positions on issues held by this PoliticalActor.
      * @param personality Personality object for this PoliticalActor's personality.
-     * @see Character#Character(Demographics, Name, City, City, City, Date, CharacterModel)
+     * @see Character#Character(Demographics, Name, Municipality, Municipality, Municipality, Date, CharacterModel)
      * @see #PoliticalActor(Character, int, Education, int[], List, Skills, List, Personality)
      */
-    public PoliticalActor(Demographics demographics, Name name, City birthplaceCity, City currentLocationCity, City residenceCity, Date birthday, CharacterModel appearance, int cash, Education education, int[] alignments, List<Experience> experiences, Skills skills, List<Position> positions, Personality personality) {
+    public PoliticalActor(Demographics demographics, Name name, Municipality birthplaceMunicipality, Municipality currentLocationMunicipality, Municipality residenceMunicipality, Date birthday, CharacterModel appearance, int cash, Education education, int[] alignments, List<Experience> experiences, Skills skills, List<Position> positions, Personality personality) {
         this(
-            new Character(demographics, name, birthplaceCity, currentLocationCity, residenceCity, birthday, appearance),
+            new Character(demographics, name, birthplaceMunicipality, currentLocationMunicipality, residenceMunicipality, birthday, appearance),
             cash, education, alignments, experiences, skills, positions, personality
         );
     }
@@ -379,12 +383,12 @@ public class PoliticalActor extends Character implements HasPersonality {
         for (int i = 0; i < experiences.size(); i++) {
             experiencesStrings[i] = experiences.get(i).toRepr();
         }
-        String experiencesRepr = Engine.arrayToReprList(experiencesStrings);
+        String experiencesRepr = Repr.arrayToReprList(experiencesStrings);
         String[] positionsStrings = new String[positions.size()];
         for (int i = 0; i < positions.size(); i++) {
             positionsStrings[i] = experiences.get(i).toRepr();
         }
-        String positionsRepr = Engine.arrayToReprList(positionsStrings);
+        String positionsRepr = Repr.arrayToReprList(positionsStrings);
         String repr = String.format("%s:[%scash=%d;education=%d;alignments=(%d,%d);experiences=[%s];skills:%s;positions=[%s];conviction=%d;ageMod=%f;personality=%s;];",
             this.getClass().getName().split("\\.")[this.getClass().getName().split("\\.").length - 1],
             superRepr,

@@ -2,20 +2,20 @@ package main.core.map;
 
 public class University {
     
-    private City city;
+    private Municipality municipality;
     private String name;
 
-    public University(String city, String state, String name) {
-        this(MapManager.matchCity(city, state), name);
+    public University(String municipality, String state, String name) {
+        this(MapManager.matchMunicipality(municipality, state), name);
     }
 
-    public University(City city, String name) {
-        this.city = city;
+    public University(Municipality municipality, String name) {
+        this.municipality = municipality;
         this.name = name;
     }
 
-    public City getCity() {
-        return city;
+    public Municipality getMunicipality() {
+        return municipality;
     }
 
     public String getName() {

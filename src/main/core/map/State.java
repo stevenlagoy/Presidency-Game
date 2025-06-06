@@ -29,7 +29,7 @@ public class State implements Repr<State>, Jsonic<State> {
     private String nickname;
     private List<CongressionalDistrict> congressionalDistricts = new ArrayList<>();
     private List<County> counties = new ArrayList<>();
-    private List<City> cities = new ArrayList<>();
+    private List<Municipality> municipalities = new ArrayList<>();
     private List<University> universities = new ArrayList<>();
     private Map<Demographics, Float> demographics = new HashMap<>();
     private List<PoliticalActor> senators;
@@ -118,14 +118,14 @@ public class State implements Repr<State>, Jsonic<State> {
         counties.remove(county);
     }
 
-    public List<City> getCities() {
-        return cities;
+    public List<Municipality> getMunicipalities() {
+        return municipalities;
     }
-    public void addCity(City city) {
-        cities.add(city);
+    public void addMunicipality(Municipality municipality) {
+        municipalities.add(municipality);
     }
-    public void removeCity(City city) {
-        cities.remove(city);
+    public void removeMunicipality(Municipality municipality) {
+        municipalities.remove(municipality);
     }
 
     public boolean hasSenator(PoliticalActor senator){
@@ -151,32 +151,32 @@ public class State implements Repr<State>, Jsonic<State> {
         for (int i = 0; i < congressionalDistricts.size(); i++) {
             congressionalDistrictsStrings[i] = congressionalDistricts.get(i).getOfficeID();
         }
-        String congressionalDistrictsRepr = Engine.arrayToReprList(congressionalDistrictsStrings);
+        String congressionalDistrictsRepr = Repr.arrayToReprList(congressionalDistrictsStrings);
         String [] countiesStrings = new String[counties.size()];
         for (int i = 0; i < counties.size(); i++) {
             countiesStrings[i] = counties.get(i).getName() + ", " + counties.get(i).getState().getAbbreviation();
         }
-        String countiesRepr = Engine.arrayToReprList(countiesStrings);
-        String [] citiesStrings = new String[cities.size()];
-        for (int i = 0; i < cities.size(); i++) {
-            citiesStrings[i] = cities.get(i).getName() + ", " + cities.get(i).getState().getAbbreviation();
+        String countiesRepr = Repr.arrayToReprList(countiesStrings);
+        String [] citiesStrings = new String[municipalities.size()];
+        for (int i = 0; i < municipalities.size(); i++) {
+            citiesStrings[i] = municipalities.get(i).getName() + ", " + municipalities.get(i).getState().getAbbreviation();
         }
-        String citiesRepr = Engine.arrayToReprList(citiesStrings);
+        String citiesRepr = Repr.arrayToReprList(citiesStrings);
         String [] universitiesStrings = new String[universities.size()];
         for (int i = 0; i < universities.size(); i++) {
             universitiesStrings[i] = universities.get(i).getName();
         }
-        String universitiesRepr = Engine.arrayToReprList(universitiesStrings);
+        String universitiesRepr = Repr.arrayToReprList(universitiesStrings);
         String [] demographicsStrings = new String[demographics.size()];
         for (int i = 0; i < universities.size(); i++) {
             demographicsStrings[i] = "PLACEHOLDER : 0.0";
         }
-        String demographicsRepr = Engine.arrayToReprList(demographicsStrings);
+        String demographicsRepr = Repr.arrayToReprList(demographicsStrings);
         String [] senatorsStrings = new String[senators.size()];
         for (int i = 0; i < senators.size(); i++) {
-            senatorsStrings[i] = senators.get(i).getName() + ", " + senators.get(i).getName().getFullName();
+            senatorsStrings[i] = senators.get(i).getName() + ", " + senators.get(i).getName().getLegalName();
         }
-        String senatorsRepr = Engine.arrayToReprList(senatorsStrings);
+        String senatorsRepr = Repr.arrayToReprList(senatorsStrings);
         String repr = String.format(
             "%s:[FIPS:%s;name=%s;population=%d;abbreviation=%s;motto=%s;nickname=%s;congressionalDistricts=[%s];counties=[%s];cities=[%s];universities=[%s];demographics=[%s];senators=[%s];governor=%s;];",
             this.getClass().getName().split("\\.")[this.getClass().getName().split("\\.").length - 1],
@@ -192,7 +192,7 @@ public class State implements Repr<State>, Jsonic<State> {
             universitiesRepr,
             demographicsRepr,
             senatorsRepr,
-            this.governor.getName().getFullName()
+            this.governor.getName().getLegalName()
         );
         return repr;
     }

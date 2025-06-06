@@ -1,14 +1,36 @@
+/*
+ * Candidate.java
+ * Steven LaGoy
+ * Created: August 28, 2024 at 5:42 PM
+ * Modified: 29 May 2025
+ */
+
 package main.core.characters;
+
+// IMPORTS ----------------------------------------------------------------------------------------
+
 import java.util.ArrayList;
 import java.util.List;
 
+import core.JSONObject;
 import main.core.Engine;
 import main.core.demographics.Demographics;
 
+/**
+ * A Character subclass which extends PoliticalActor and models a Candidate in the Presidential race.
+ * <p>
+ * Contains fields and methods particular to a Candidate's campaign details and information.
+ * @see Character
+ * @see PoliticalActor
+ */
 public class Candidate extends PoliticalActor {
 
+    // STATIC VARIABLES ---------------------------------------------------------------------------
+
+    /** Minimum age of a Candidate for the Presidency */
     public static final int MIN_AGE = 35;
-    public static final int MAX_AGE = 120;
+    /** Maximum age of a Candidate */
+    public static final int MAX_AGE = PoliticalActor.MAX_AGE;
 
     final static int SKILLS_BONUS_EDUCATION = 10;
     final static double EDUCATION_SCALER = 1.25;
@@ -16,40 +38,53 @@ public class Candidate extends PoliticalActor {
     final static int MAX_EDUCATION_LEVEL = 8;
     final static int POINTS_PER_SKILL = 10;
 
-    public static List<Candidate> instances = new ArrayList<>();
-
     private int numDelegates;
     private double influence;
 
-    public Candidate(){
-        super();
-        generateAll();
-    }
-    public Candidate(Name name, Demographics demographics) {
-        super(name, demographics);
-    }
-    public Candidate(String buildstring)
-    {
-        super(buildstring);
-        this.fromRepr(buildstring);
-        this.generateProfile();
+    public Candidate() {
+        this(new PoliticalActor());
     }
 
-    private void generateAll()
-    {
-        super.genAge(MIN_AGE);
-        this.genPresentation();
-        this.genOrigin();
-        this.generateProfile();
-        this.generatePolitics();
-        this.generateAppearance();
-        this.determinePersonality();
+    public Candidate(Candidate other) {
+
+    }
+
+    public Candidate(Candidate other, boolean addToCharacterList) {
+
+    }
+
+    public Candidate(Character character) {
+        super(character);
+    }
+
+    public Candidate(PoliticalActor actor) {
+        super(actor, false);
+    }
+
+    public Candidate(String buildstring) {
+
+    }
+
+    public Candidate(JSONObject json) {
+
+    }
+
+    public Candidate(Character character, String fields) {
+
+    }
+
+    public Candidate(PoliticalActor actor, String fields) {
+
+    }
+
+    public Candidate(String fields, int field) {
+
     }
 
     protected void generateProfile(){
-        int totalPoints;
+        int totalPoints = 0;
         int numCategories = 4;
-        switch(Engine.gameDifficulty){
+        switch(Engine.getGameDifficulty()){
             case LEVEL_1 :
                 totalPoints = Engine.randInt(400, 500);
                 break;
@@ -65,9 +100,6 @@ public class Candidate extends PoliticalActor {
             case LEVEL_5 :
                 totalPoints = Engine.randInt(400, 500);
                 break;
-            default :
-                Engine.log("INVALID DIFFICULTY", String.format("The difficulty value, \"%s\", is invalid.", Engine.gameDifficulty), new Exception());
-                return;
         }
         int allocations[] = new int[numCategories];
         int allocatedPoints = 0;
@@ -82,7 +114,7 @@ public class Candidate extends PoliticalActor {
         int res;
         res = generateEducation(allocations[0]);
         allocations[1] += res;
-        allocations[1] += Math.pow(this.getEducation() * SKILLS_BONUS_EDUCATION, EDUCATION_SCALER);
+        allocations[1] += Math.pow(this.getEducation().value * SKILLS_BONUS_EDUCATION, EDUCATION_SCALER);
         res = generateSkills(allocations[1]);
         allocations[2] += res;
         res = generateTraits(allocations[2]);
@@ -94,9 +126,9 @@ public class Candidate extends PoliticalActor {
         // Give the maximum possible education with the provided points
         int educationLevel = points / EDUCATION_COST;
         if(educationLevel > MAX_EDUCATION_LEVEL) educationLevel = MAX_EDUCATION_LEVEL;
-        this.setEducation(points / EDUCATION_COST);
-        if(this.getEducation() > 4) this.selectEducationalInstitution();
-        int refund = points - this.getEducation() * EDUCATION_COST;
+        this.setEducation(Education.level(points / EDUCATION_COST));
+        if(this.getEducation().value > 4) this.selectEducationalInstitution();
+        int refund = points - this.getEducation().value * EDUCATION_COST;
 
         // select a specific education type?
 
@@ -181,7 +213,8 @@ public class Candidate extends PoliticalActor {
         this.influence += influence;
     }
 
-    public void determinePersonality(){
+    public Personality determinePersonality(){
+        return null;
     }
 
     public String toRepr(){
@@ -200,7 +233,7 @@ public class Candidate extends PoliticalActor {
         );
         return repr;
     }
-    public void fromRepr(String repr){
-
+    public Candidate fromRepr(String repr){
+        return null;
     }
 }
