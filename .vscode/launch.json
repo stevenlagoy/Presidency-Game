@@ -4,103 +4,13 @@
         // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
         "version": "0.2.0",
         "configurations": [
-                {
-                        "type": "java",
-                        "name": "Launcher",
-                        "request": "launch",
-                        "mainClass": "main.core.graphics.game.Launcher",
-                        "projectName": "presidency-game"
-                },
-                {
-                        "type": "java",
-                        "name": "Project",
-                        "request": "launch",
-                        "mainClass": "main.core.Project",
-                        "projectName": "presidency-game"
-                },
+
                 {
                         "type": "java",
                         "name": "Main",
                         "request": "launch",
                         "mainClass": "main.core.Main",
                         "projectName": "presidency-game"
-                },
-                {
-                        "type": "java",
-                        "name": "Main",
-                        "request": "launch",
-                        "mainClass": "org.core.Main",
-                        "projectName": "presidency-game"
-                },
-                {
-                        "type": "java",
-                        "name": "Main",
-                        "request": "launch",
-                        "mainClass": "Main",
-                        "projectName": "presidency-game"
-                },
-                {
-                        "type": "java",
-                        "name": "Launcher",
-                        "request": "launch",
-                        "mainClass": "src.org.core.graphics.game.Launcher",
-                        "projectName": "presidency_game_2f74b218"
-                },
-                {
-                        "type": "java",
-                        "name": "Main",
-                        "request": "launch",
-                        "mainClass": "src.org.core.Main",
-                        "projectName": "presidency_game_2f74b218"
-                },
-                {
-                        "type": "java",
-                        "name": "LWJGLExample",
-                        "request": "launch",
-                        "mainClass": "LWJGLExample",
-                        "projectName": "presidency_game_2f74b218"
-                },
-                {
-                        "type": "java",
-                        "name": "MapApplication",
-                        "request": "launch",
-                        "mainClass": "MapApplication",
-                        "projectName": "presidency_game_2f74b218"
-                },
-                {
-                        "type": "java",
-                        "name": "Main",
-                        "request": "launch",
-                        "mainClass": "Main",
-                        "projectName": "presidency_game_2f74b218"
-                },
-                {
-                        "type": "java",
-                        "name": "PresidencyGameGUI",
-                        "request": "launch",
-                        "mainClass": "PresidencyGameGUI",
-                        "projectName": "presidency_game_2f74b218"
-                },
-                {
-                        "type": "java",
-                        "name": "PresidencyGameGUI",
-                        "request": "launch",
-                        "mainClass": "PresidencyGameGUI",
-                        "projectName": "Presidency-Game_9ca3bc38"
-                },
-                {
-                        "type": "java",
-                        "name": "HelloWorld",
-                        "request": "launch",
-                        "mainClass": "HelloWorld",
-                        "projectName": "presidency_game_2f74b218"
-                },
-                {
-                        "type": "java",
-                        "name": "hello world",
-                        "request": "launch",
-                        "mainClass": "hello world",
-                        "projectName": "presidency_game_2f74b218"
                 },
                 {
                         "name": "Python Debugger: Current File",
