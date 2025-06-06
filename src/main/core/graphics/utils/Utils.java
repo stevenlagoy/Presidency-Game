@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 import org.lwjgl.system.MemoryUtil;
 
-import main.core.graphics.game.Launcher;
+import main.core.Main;
 
 public class Utils {
     
@@ -43,7 +43,7 @@ public class Utils {
 
     public static List<String> readAllLines(String fileName) {
         List<String> list = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(Class.forName(Launcher.class.getName()).getResourceAsStream(fileName)))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(Class.forName(Main.class.getName()).getResourceAsStream(fileName)))) {
             String line;
             while ((line = br.readLine()) != null) {
                 list.add(line);

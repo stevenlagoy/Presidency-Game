@@ -5,7 +5,6 @@ import org.joml.Vector2f;
 import org.lwjgl.glfw.GLFW;
 
 import main.core.Engine;
-import main.core.graphics.game.Launcher;
 
 public class MouseInput {
     
@@ -21,16 +20,16 @@ public class MouseInput {
     }
 
     public void init() {
-        GLFW.glfwSetCursorPosCallback(Launcher.getWindow().getWindow(), (window, xpos, ypos) -> {
+        GLFW.glfwSetCursorPosCallback(Engine.getWindow().getWindow(), (window, xpos, ypos) -> {
             currentPos.x = xpos;
             currentPos.y = ypos;
         });
 
-        GLFW.glfwSetCursorEnterCallback(Launcher.getWindow().getWindow(), (window, entered) -> {
+        GLFW.glfwSetCursorEnterCallback(Engine.getWindow().getWindow(), (window, entered) -> {
             inWindow = entered;
         });
 
-        GLFW.glfwSetMouseButtonCallback(Launcher.getWindow().getWindow(), (window, button, action, mods) -> {
+        GLFW.glfwSetMouseButtonCallback(Engine.getWindow().getWindow(), (window, button, action, mods) -> {
             leftButtonPress = button == GLFW.GLFW_MOUSE_BUTTON_1 && action == GLFW.GLFW_PRESS;
             rightButtonPress = button == GLFW.GLFW_MOUSE_BUTTON_2 && action == GLFW.GLFW_PRESS;
         });

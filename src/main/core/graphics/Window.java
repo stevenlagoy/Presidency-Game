@@ -10,7 +10,7 @@ import org.lwjgl.system.MemoryUtil;
 
 import main.core.graphics.utils.Consts;
 
-public class WindowManager {
+public class Window {
     
     private final String title;
 
@@ -21,7 +21,7 @@ public class WindowManager {
 
     private Matrix4f projectionMatrix;
 
-    public WindowManager(String title, int width, int height, boolean vSync) {
+    public Window(String title, int width, int height, boolean vSync) {
         this.title = title;
         this.width = width;
         this.height = height;

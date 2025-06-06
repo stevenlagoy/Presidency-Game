@@ -9,13 +9,13 @@ import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import main.core.Engine;
 import main.core.graphics.Camera;
 import main.core.graphics.ShaderManager;
 import main.core.graphics.Transformation;
 import main.core.graphics.entity.Entity;
 import main.core.graphics.entity.Material;
 import main.core.graphics.entity.Model;
-import main.core.graphics.game.Launcher;
 import main.core.graphics.lighting.DirectionalLight;
 import main.core.graphics.lighting.PointLight;
 import main.core.graphics.lighting.SpotLight;
@@ -52,7 +52,7 @@ public class EntityRenderer implements IRenderer<Object> {
     @Override
     public void render(Camera camera, PointLight[] pointLights, SpotLight[] spotLights, DirectionalLight directionalLight) {
         shader.bind();
-        shader.setUniform("projectionMatrix", Launcher.getWindow().updateProjectionMatrix());
+        shader.setUniform("projectionMatrix", Engine.getWindow().updateProjectionMatrix());
         RenderManager.renderLights(pointLights, spotLights, directionalLight, shader);
         for (Model model : entities.keySet()) {
             bind(model);

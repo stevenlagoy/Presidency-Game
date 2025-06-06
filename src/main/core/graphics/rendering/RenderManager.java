@@ -5,13 +5,13 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
+import main.core.Engine;
 import main.core.graphics.Camera;
 import main.core.graphics.ShaderManager;
-import main.core.graphics.WindowManager;
+import main.core.graphics.Window;
 import main.core.graphics.entity.Entity;
 import main.core.graphics.entity.SceneManager;
 import main.core.graphics.entity.terrain.Terrain;
-import main.core.graphics.game.Launcher;
 import main.core.graphics.lighting.DirectionalLight;
 import main.core.graphics.lighting.PointLight;
 import main.core.graphics.lighting.SpotLight;
@@ -20,14 +20,14 @@ import org.joml.Vector3f;
 
 public class RenderManager {
     
-    private final WindowManager window;
+    private Window window;
     private EntityRenderer entityRenderer;
     private TerrainRenderer terrainRenderer;
 
     private static boolean isCulling = false;
     
         public RenderManager() {
-            window = Launcher.getWindow();
+            window = Engine.getWindow();
         }
     
         public void init() throws Exception {
@@ -60,6 +60,7 @@ public class RenderManager {
         }
     
         public void render(Camera camera, SceneManager scene) {
+            window = Engine.getWindow();
             clear();
     
             if(window.isResize()){

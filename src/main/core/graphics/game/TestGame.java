@@ -2,11 +2,13 @@ package main.core.graphics.game;
 
 import org.lwjgl.glfw.GLFW;
 
+import main.core.Engine;
 import main.core.graphics.Camera;
 import main.core.graphics.ILogic;
 import main.core.graphics.MouseInput;
 import main.core.graphics.ObjectLoader;
-import main.core.graphics.WindowManager;
+import main.core.graphics.Window;
+import main.core.graphics.entity.AnimatedTexture;
 import main.core.graphics.entity.Entity;
 import main.core.graphics.entity.Material;
 import main.core.graphics.entity.Model;
@@ -21,6 +23,9 @@ import main.core.graphics.lighting.DirectionalLight;
 import main.core.graphics.rendering.RenderManager;
 import main.core.graphics.utils.Consts;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -29,7 +34,7 @@ public class TestGame implements ILogic {
 
     private final RenderManager renderer;
     private final ObjectLoader loader;
-    private final WindowManager window;
+    private final Window window;
     private final SceneManager sceneManager;
 
     private Camera camera;
@@ -37,7 +42,7 @@ public class TestGame implements ILogic {
 
     public TestGame() {
         renderer = new RenderManager();
-        window = Launcher.getWindow();
+        window = Engine.getWindow();
         loader = new ObjectLoader();
         sceneManager = new SceneManager(-90);
         camera = new Camera(new Vector3f(0, 100, 300), new Vector3f(0, 0, 0));
@@ -49,6 +54,9 @@ public class TestGame implements ILogic {
         renderer.init();
         ModelManager.loadModelFiles();
         TextureManager.loadTextureFiles();
+
+        // test animated texture
+        TextureManager.addAnimatedTexture("animated", "keep_the_ball_rolling_frames.png", 11, 0.25f);
 
         Material terrainMaterial = new Material(new Vector4f(1.0f, 1.0f, 1.0f, 0.5f), 0.0f);
         TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("textures/grass.png"));
@@ -73,7 +81,9 @@ public class TestGame implements ILogic {
         Model teddyBearModel = ModelManager.getModel("teddyBear");
 
         Texture redTexture = TextureManager.getTexture("red");
-        cubeModel.setTexture(redTexture);
+
+        AnimatedTexture animatedTexture = TextureManager.getAnimatedTexture("animated");
+        cubeModel.setTexture(animatedTexture);
 
         Texture greenTexture = TextureManager.getTexture("green");
         treeModel.setTexture(greenTexture);
@@ -95,21 +105,18 @@ public class TestGame implements ILogic {
         Texture orangeTexture = TextureManager.getTexture("orange");
         teddyBearModel.setTexture(orangeTexture);
 
-        Entity cube = new Entity(cubeModel, new Vector3f(200, 50, 0));
-        Entity tree = new Entity(treeModel, new Vector3f(0, 0, 0));
-        Entity bunny = new Entity(bunnyModel, new Vector3f(400, 0, 0));
-        Entity teapot = new Entity(teapotModel, new Vector3f(600, 0, 0));
-        Entity cow = new Entity(cowModel, new Vector3f(800, 80, 0));
-        Entity pumpkin = new Entity(pumpkinModel, new Vector3f(1000, 150, 0));
-        Entity teddyBear = new Entity(teddyBearModel, new Vector3f(1200, 50, 0));
+        List<Entity> entities = new ArrayList<>();
+        entities.add(new Entity(cubeModel, new Vector3f(200, 50, 0)));
+        entities.add(new Entity(treeModel, new Vector3f(0, 0, 0)));
+        entities.add(new Entity(bunnyModel, new Vector3f(400, 0, 0)));
+        entities.add(new Entity(teapotModel, new Vector3f(600, 0, 0)));
+        entities.add(new Entity(cowModel, new Vector3f(800, 80, 0)));
+        entities.add( new Entity(pumpkinModel, new Vector3f(1000, 150, 0)));
+        entities.add(new Entity(teddyBearModel, new Vector3f(1200, 50, 0)));
 
-        sceneManager.addEntity(cube);
-        sceneManager.addEntity(tree);
-        sceneManager.addEntity(bunny);
-        sceneManager.addEntity(teapot);
-        sceneManager.addEntity(cow);
-        sceneManager.addEntity(pumpkin);
-        sceneManager.addEntity(teddyBear);
+        for (Entity entity : entities) {
+            sceneManager.addEntity(entity);
+        }
 
         float lightIntensity;
         Vector3f lightPosition, lightColor, lightDirection;
@@ -153,7 +160,14 @@ public class TestGame implements ILogic {
             camera.moveRotation(rotVec.x * Consts.MOUSE_SENSITIVITY, rotVec.y * Consts.MOUSE_SENSITIVITY, 0);
         }
 
-        sceneManager.getEntities().get(0).incRotation(0, 0.5f, 0);
+        for (Entity entity : sceneManager.getEntities()) {
+            Texture texture = entity.getModel().getTexture();
+            if (texture instanceof AnimatedTexture animatedTexture) {
+                animatedTexture.update(interval);
+            }
+        }
+
+        // sceneManager.getEntities().get(0).incRotation(0, 0.5f, 0);
         sceneManager.getEntities().get(1).incRotation(0, 0, 0.5f);
         sceneManager.getEntities().get(2).incRotation(0, 0.5f, 0);
         sceneManager.getEntities().get(3).incRotation(0, 0.5f, 0);

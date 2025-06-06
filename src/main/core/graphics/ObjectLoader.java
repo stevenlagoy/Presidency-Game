@@ -18,6 +18,7 @@ import org.lwjgl.opengl.GL30;
 import org.lwjgl.stb.STBImage;
 import org.lwjgl.system.MemoryStack;
 
+import main.core.graphics.entity.AnimatedTexture;
 import main.core.graphics.entity.Model;
 import main.core.graphics.utils.Utils;
 
@@ -173,6 +174,34 @@ public class ObjectLoader {
         GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
         STBImage.stbi_image_free(buffer);
         return id;
+    }
+
+    public AnimatedTexture loadAnimatedTexture(String filename, int frameCount, float frameTime) throws Exception {
+        int width, height;
+        ByteBuffer buffer;
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            IntBuffer w = stack.mallocInt(1);
+            IntBuffer h = stack.mallocInt(1);
+            IntBuffer c = stack.mallocInt(1);
+
+            buffer = STBImage.stbi_load(filename, w, h, c, 4);
+            if (buffer == null)
+                throw new Exception("Image File " + filename + " unable to be loaded: " + STBImage.stbi_failure_reason());
+
+            width = w.get();
+            height = h.get();
+        }
+
+        int id = GL11.glGenTextures();
+        textures.add(id);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, id);
+        GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
+        GL11.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        GL11.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, width, height, 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buffer);
+        STBImage.stbi_image_free(buffer);
+
+        return new AnimatedTexture(id, frameCount, frameTime, height);
     }
 
     private int createVAO() {

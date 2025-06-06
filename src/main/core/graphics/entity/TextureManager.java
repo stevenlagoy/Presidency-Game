@@ -26,7 +26,8 @@ public class TextureManager {
         put("stone", "stone");
         put("grass", "terrain");
     }};
-    private static Map<String, Texture> textures = new HashMap<String, Texture>();
+    private static Map<String, Texture> textures = new HashMap<>();
+    private static Map<String, AnimatedTexture> animatedTextures = new HashMap<>();
 
     public static void loadTextureFiles() throws Exception {
         for (Map.Entry<String, String> entry : modelFilesList.entrySet()) {
@@ -42,8 +43,15 @@ public class TextureManager {
         modelFilesList.put(textureName, textureFile);
         loadTextureFiles();
     }
+    public static void addAnimatedTexture(String textureName, String textureFile, int frameCount, float frameTime) throws Exception {
+        AnimatedTexture texture = loader.loadAnimatedTexture(texturesLoc + textureFile, frameCount, frameTime);
+        animatedTextures.put(textureName, texture);
+    }
 
     public static Texture getTexture(String textureName) {
         return textures.get(textureName);
+    }
+    public static AnimatedTexture getAnimatedTexture(String textureName) {
+        return animatedTextures.get(textureName);
     }
 }
