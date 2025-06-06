@@ -1,0 +1,1686 @@
+Naknek
+Alaska
+02-52060
+Bristol Bay Borough
+Census-Designated Place
+544
+470
+81.54
+
+Healy
+Alaska
+02-32150
+Denali Borough
+Census-Designated Place
+1021
+966
+686.96
+
+King Salmon
+Alaska
+02-39630
+Bristol Bay Borough
+Census-Designated Place
+374
+307
+168.20
+
+Petersburg
+Alaska
+02-60310
+Petersburg Borough
+Census-Designated Place
+2948
+3043
+44.17
+
+Skagway
+Alaska
+02-70760
+Borough of Skagway
+968
+1240
+9.45
+
+Yakutat
+Alaska
+02-86490
+Borough of Yakutat
+662
+657
+100.5
+
+Stuttgart
+Arkansas
+
+Hamburg
+Arkansas
+
+Mountain Home
+Arkansas
+
+Bentonville
+Arkansas
+
+Harrison
+Arkansas
+
+Hampton
+Arkansas
+
+Berryville
+Arkansas
+
+Lake Village
+Arkansas
+
+Arkadelphia
+Arkansas
+
+Piggott
+Arkansas
+
+Heber Springs
+Arkansas
+
+Rison
+Arkansas
+
+Magnolia
+Arkansas
+
+Morrilton
+Arkansas
+
+Jonesboro
+Arkansas
+
+Marion
+Arkansas
+
+Fordyce
+Arkansas
+
+Arkansas City
+Arkansas
+
+Monticello
+Arkansas
+
+Conway
+Arkansas
+
+Ozark
+Arkansas
+
+Salem
+Arkansas
+
+Hot Springs
+Arkansas
+
+Sheridan
+Arkansas
+
+Paragould
+Arkansas
+
+Hope
+Arkansas
+
+Malvern
+Arkansas
+
+Nashville
+Arkansas
+
+Batesville
+Arkansas
+
+Melbourne
+Arkansas
+
+Newport
+Arkansas
+
+Pine Bluff
+Arkansas
+
+Clarksville
+Arkansas
+
+Lewisville
+Arkansas
+
+Marianna
+Arkansas
+
+Star City
+Arkansas
+
+Ashdown
+Arkansas
+
+Booneville
+Arkansas
+
+Lonoke
+Arkansas
+
+Huntsville
+Arkansas
+
+Texarkana
+Arkansas
+
+Blytheville
+Arkansas
+
+Clarendon
+Arkansas
+
+Mount Ida
+Arkansas
+
+Prescott
+Arkansas
+
+Jasper
+Arkansas
+
+Camden
+Arkansas
+
+Perryville
+Arkansas
+
+Helena
+Arkansas
+
+Murfreesboro
+Arkansas
+
+Harrisburg
+Arkansas
+
+Mena
+Arkansas
+
+Russellville
+Arkansas
+
+Des Arc
+Arkansas
+
+Little Rock
+Arkansas
+
+Pocahontas
+Arkansas
+
+Benton
+Arkansas
+
+Marshall
+Arkansas
+
+Fort Smith
+Arkansas
+
+De Queen
+Arkansas
+
+Ash Flat
+Arkansas
+
+Forrest City
+Arkansas
+
+Mountain View
+Arkansas
+
+El Dorado
+Arkansas
+
+Clinton
+Arkansas
+
+Fayetteville
+Arkansas
+
+Searcy
+Arkansas
+
+Augusta
+Arkansas
+
+Dardanelle
+Arkansas
+
+Markleeville
+California
+
+San Andreas
+California
+
+Independence
+California
+
+Mariposa
+California
+
+Bridgeport
+California
+
+Quincy
+California
+
+Downieville
+California
+
+Weaverville
+California
+
+Conejos
+Colorado
+
+Rockville
+Connecticut
+
+Willimantic
+Connecticut
+
+East Naples
+Florida
+
+Crawfordville
+Florida
+
+Appling
+Georgia
+
+Knoxville
+Georgia
+
+Statenville
+Georgia
+
+McRae-Helena
+Georgia
+
+Preston
+Georgia
+
+Hawaii Department of Health
+Hawaii
+
+Saint Anthony
+Idaho
+
+Coeur d&#39;Alene
+or the
+
+Murphy
+Idaho
+
+LaPorte
+Indiana
+
+Iola
+Kansas
+
+Garnett
+Kansas
+
+Atchison
+Kansas
+
+Medicine Lodge
+Kansas
+
+Great Bend
+Kansas
+
+Fort Scott
+Kansas
+
+Hiawatha
+Kansas
+
+El Dorado
+Kansas
+
+Cottonwood Falls
+Kansas
+
+Sedan
+Kansas
+
+Columbus
+Kansas
+
+Saint Francis
+Kansas
+
+Ashland
+Kansas
+
+Clay Center
+Kansas
+
+Concordia
+Kansas
+
+Burlington
+Kansas
+
+Coldwater
+Kansas
+
+Winfield
+Kansas
+
+Girard
+Kansas
+
+Oberlin
+Kansas
+
+Abilene
+Kansas
+
+Troy
+Kansas
+
+Lawrence
+Kansas
+
+Kinsley
+Kansas
+
+Howard
+Kansas
+
+Hays
+Kansas
+
+Ellsworth
+Kansas
+
+Garden City
+Kansas
+
+Dodge City
+Kansas
+
+Ottawa
+Kansas
+
+Junction City
+Kansas
+
+Gove City
+Kansas
+
+Hill City
+Kansas
+
+Ulysses
+Kansas
+
+Cimarron
+Kansas
+
+Tribune
+Kansas
+
+Eureka
+Kansas
+
+Syracuse
+Kansas
+
+Anthony
+Kansas
+
+Newton
+Kansas
+
+Sublette
+Kansas
+
+Jetmore
+Kansas
+
+Holton
+Kansas
+
+Oskaloosa
+Kansas
+
+Mankato
+Kansas
+
+Olathe
+Kansas
+
+Lakin
+Kansas
+
+Kingman
+Kansas
+
+Greensburg
+Kansas
+
+Oswego
+Kansas
+
+Dighton
+Kansas
+
+Leavenworth
+Kansas
+
+Lincoln
+Kansas
+
+Mound City
+Kansas
+
+Oakley
+Kansas
+
+Emporia
+Kansas
+
+Marion
+Kansas
+
+Marysville
+Kansas
+
+McPherson
+Kansas
+
+Meade
+Kansas
+
+Paola
+Kansas
+
+Beloit
+Kansas
+
+Independence
+Kansas
+
+Council Grove
+Kansas
+
+Elkhart
+Kansas
+
+Seneca
+Kansas
+
+Erie
+Kansas
+
+Ness City
+Kansas
+
+Norton
+Kansas
+
+Lyndon
+Kansas
+
+Osborne
+Kansas
+
+Minneapolis
+Kansas
+
+Larned
+Kansas
+
+Phillipsburg
+Kansas
+
+Westmoreland
+Kansas
+
+Pratt
+Kansas
+
+Atwood
+Kansas
+
+Hutchinson
+Kansas
+
+Belleville
+Kansas
+
+Lyons
+Kansas
+
+Manhattan
+Kansas
+
+Stockton
+Kansas
+
+La Crosse
+Kansas
+
+Russell
+Kansas
+
+Salina
+Kansas
+
+Scott City
+Kansas
+
+Wichita
+Kansas
+
+Liberal
+Kansas
+
+Topeka
+Kansas
+
+Hoxie
+Kansas
+
+Goodland
+Kansas
+
+Smith Center
+Kansas
+
+Saint John
+Kansas
+
+Johnson City
+Kansas
+
+Hugoton
+Kansas
+
+Wellington
+Kansas
+
+Colby
+Kansas
+
+WaKeeney
+Kansas
+
+Alma
+Kansas
+
+Sharon Springs
+Kansas
+
+Washington
+Kansas
+
+Leoti
+Kansas
+
+Fredonia
+Kansas
+
+Yates Center
+Kansas
+
+Kansas City
+Kansas
+
+Burlington
+Kentucky
+
+Whitley City
+Kentucky
+
+Cameron
+Louisiana
+
+Pointe à la Hache
+Louisiana
+
+Chalmette
+Louisiana
+
+Hahnville
+Louisiana
+
+Convent
+Louisiana
+
+Edgard
+Louisiana
+
+Towson
+Maryland
+
+Prince Frederick
+Maryland
+
+Ellicott City
+Maryland
+
+L&#39;Anse
+or the state
+
+Mt. Pleasant
+or the state
+
+Eagle River
+Michigan
+
+Mt. Clemens
+or the state
+
+Atlanta
+Michigan
+
+Mio
+Michigan
+
+Saint Joseph
+Missouri
+
+Harrisburg
+Nebraska
+
+Greeley
+Nebraska
+
+O&#39;Neill
+or the state
+
+Saint Paul
+Nebraska
+
+Tryon
+Nebraska
+
+Minden
+Nevada
+
+Goldfield
+Nevada
+
+Eureka
+Nevada
+
+Battle Mountain
+Nevada
+
+Pioche
+Nevada
+
+Hawthorne
+Nevada
+
+Tonopah
+Nevada
+
+Virginia City
+Nevada
+
+Mays Landing
+New Jersey
+
+Cape May Court House
+New Jersey
+
+Los Alamos
+New 
+
+Mora
+New Mexico
+
+Tierra Amarilla
+New 
+
+The Bronx
+New
+
+Norwich (city)
+New
+
+Plattsburgh
+New York
+
+Poughkeepsie (city)
+New
+
+Elizabethtown (CDP)
+New
+
+Lake Pleasant
+New
+
+Herkimer
+New York
+
+Watertown
+New York
+
+Brooklyn</td
+or the state
+
+Manhattan</td
+or the state
+
+Carmel Hamlet
+New
+
+Queens</td
+or the state
+
+Staten Island</td
+or the state
+
+New City
+New
+
+Riverhead (CDP)
+New
+
+Queensbury
+New York
+
+Fort Edward
+New
+
+Lyons (town)
+New
+
+Graham
+North Carolina
+
+Taylorsville
+North Carolina
+
+Sparta
+North Carolina
+
+Wadesboro
+North Carolina
+
+Jefferson
+North Carolina
+
+Newland
+North Carolina
+
+Washington
+North Carolina
+
+Windsor
+North Carolina
+
+Elizabethtown
+North Carolina
+
+Bolivia
+North Carolina
+
+Asheville
+North Carolina
+
+Morganton
+North Carolina
+
+Concord
+North Carolina
+
+Lenoir
+North Carolina
+
+Camden
+North Carolina
+
+Beaufort
+North Carolina
+
+Yanceyville
+North Carolina
+
+Newton
+North Carolina
+
+Pittsboro
+North Carolina
+
+Murphy
+North Carolina
+
+Edenton
+North Carolina
+
+Hayesville
+North Carolina
+
+Shelby
+North Carolina
+
+Whiteville
+North Carolina
+
+New Bern
+North
+
+Fayetteville
+North Carolina
+
+Currituck
+North Carolina
+
+Manteo
+North Carolina
+
+Lexington
+North Carolina
+
+Mocksville
+North Carolina
+
+Kenansville
+North Carolina
+
+Durham
+North Carolina
+
+Tarboro
+North Carolina
+
+Winston-Salem
+North
+
+Louisburg
+North Carolina
+
+Gastonia
+North Carolina
+
+Gatesville
+North Carolina
+
+Robbinsville
+North Carolina
+
+Oxford
+North Carolina
+
+Snow Hill
+North
+
+Greensboro
+North Carolina
+
+Halifax
+North Carolina
+
+Lillington
+North Carolina
+
+Waynesville
+North Carolina
+
+Hendersonville
+North Carolina
+
+Winton
+North Carolina
+
+Raeford
+North Carolina
+
+Swan Quarter
+North
+
+Statesville
+North Carolina
+
+Sylva
+North Carolina
+
+Smithfield
+North Carolina
+
+Trenton
+North Carolina
+
+Sanford
+North Carolina
+
+Kinston
+North Carolina
+
+Lincolnton
+North Carolina
+
+Franklin
+North Carolina
+
+Marshall
+North Carolina
+
+Williamston
+North Carolina
+
+Marion
+North Carolina
+
+Charlotte
+North Carolina
+
+Bakersville
+North Carolina
+
+Troy
+North Carolina
+
+Carthage
+North Carolina
+
+Nashville
+North Carolina
+
+Wilmington
+North Carolina
+
+Jackson
+North Carolina
+
+Jacksonville
+North Carolina
+
+Hillsborough
+North Carolina
+
+Bayboro
+North Carolina
+
+Elizabeth City
+North
+
+Burgaw
+North Carolina
+
+Hertford
+North Carolina
+
+Roxboro
+North Carolina
+
+Greenville
+North Carolina
+
+Columbus
+North Carolina
+
+Asheboro
+North Carolina
+
+Rockingham
+North Carolina
+
+Lumberton
+North Carolina
+
+Wentworth
+North Carolina
+
+Salisbury
+North Carolina
+
+Rutherfordton
+North Carolina
+
+Clinton
+North Carolina
+
+Laurinburg
+North Carolina
+
+Albemarle
+North Carolina
+
+Danbury
+North Carolina
+
+Dobson
+North Carolina
+
+Bryson City
+North
+
+Brevard
+North Carolina
+
+Columbia
+North Carolina
+
+Monroe
+North Carolina
+
+Henderson
+North Carolina
+
+Raleigh
+North Carolina
+
+Warrenton
+North Carolina
+
+Plymouth
+North Carolina
+
+Boone
+North Carolina
+
+Goldsboro
+North Carolina
+
+Wilkesboro
+North Carolina
+
+Wilson
+North Carolina
+
+Yadkinville
+North Carolina
+
+Burnsville
+North Carolina
+
+Manning
+North Dakota
+
+Pryor
+Oklahoma
+
+Baker City
+Oregon
+
+Corvallis
+Oregon
+
+Oregon City
+Oregon
+
+Astoria
+Oregon
+
+Saint Helens
+Oregon
+
+Coquille
+Oregon
+
+Prineville
+Oregon
+
+Gold Beach
+Oregon
+
+Bend
+Oregon
+
+Roseburg
+Oregon
+
+Condon
+Oregon
+
+Canyon City
+Oregon
+
+Burns
+Oregon
+
+Hood River
+Oregon
+
+Medford
+Oregon
+
+Madras
+Oregon
+
+Grants Pass
+Oregon
+
+Klamath Falls
+Oregon
+
+Lakeview
+Oregon
+
+Eugene
+Oregon
+
+Newport
+Oregon
+
+Albany
+Oregon
+
+Vale
+Oregon
+
+Salem
+Oregon
+
+Heppner
+Oregon
+
+Portland
+Oregon
+
+Dallas
+Oregon
+
+Moro
+Oregon
+
+Tillamook
+Oregon
+
+Pendleton
+Oregon
+
+La Grande
+Oregon
+
+Enterprise
+Oregon
+
+The Dalles
+Oregon
+
+Hillsboro
+Oregon
+
+Fossil
+Oregon
+
+McMinnville
+Oregon
+
+Gettysburg
+Pennsylvania
+
+Kittanning
+Pennsylvania
+
+Beaver
+Pennsylvania
+
+Bedford
+Pennsylvania
+
+Hollidaysburg
+Pennsylvania
+
+Towanda
+Pennsylvania
+
+Doylestown
+Pennsylvania
+
+Ebensburg
+Pennsylvania
+
+Emporium
+Pennsylvania
+
+Jim Thorpe
+Pennsylvania
+
+Bellefonte
+Pennsylvania
+
+West Chester
+Pennsylvania
+
+Clarion
+Pennsylvania
+
+Clearfield
+Pennsylvania
+
+Bloomsburg
+Pennsylvania
+
+Carlisle
+Pennsylvania
+
+Media
+Pennsylvania
+
+Ridgway
+Pennsylvania
+
+Tionesta
+Pennsylvania
+
+Chambersburg
+Pennsylvania
+
+McConnellsburg
+Pennsylvania
+
+Waynesburg
+Pennsylvania
+
+Huntingdon
+Pennsylvania
+
+Indiana
+Pennsylvania
+
+Brookville
+Pennsylvania
+
+Mifflintown
+Pennsylvania
+
+Smethport
+Pennsylvania
+
+Mercer
+Pennsylvania
+
+Lewistown
+Pennsylvania
+
+Stroudsburg
+Pennsylvania
+
+Norristown
+Pennsylvania
+
+Danville
+Pennsylvania
+
+New Bloomfield
+Pennsylvania
+
+Milford
+Pennsylvania
+
+Coudersport
+Pennsylvania
+
+Middleburg
+Pennsylvania
+
+Somerset
+Pennsylvania
+
+Laporte
+Pennsylvania
+
+Montrose
+Pennsylvania
+
+Wellsboro
+Pennsylvania
+
+Lewisburg
+Pennsylvania
+
+Honesdale
+Pennsylvania
+
+Tunkhannock
+Pennsylvania
+
+Gann Valley
+South
+
+Hot Springs (de facto)
+or the state
+
+Winner (de facto)</td
+or the
+
+Blountville
+Tennessee
+
+Gail
+Texas
+
+Ozona
+Texas
+
+Garden City
+Texas
+
+Sierra Blanca
+Texas
+
+Fort Davis
+Texas
+
+Hebbronville
+Texas
+
+Sarita
+Texas
+
+Guthrie
+Texas
+
+Lipscomb
+Texas
+
+Mentone
+Texas
+
+Tilden
+Texas
+
+Montague
+Texas
+
+Palo Pinto
+Texas
+
+Sanderson
+Texas
+
+Zapata
+Texas
+
+North Hero
+Vermont
+
+Hyde Park (town)
+or the state
+
+Newport (city)
+Vermont
+
+Newfane
+Vermont
+
+Woodstock
+Vermont
+
+Accomac
+Virginia
+
+Amelia
+Virginia
+
+Amherst
+Virginia
+
+Appomattox
+Virginia
+
+Arlington
+Virginia
+
+Warm Springs
+Virginia
+
+Bedford
+Virginia
+
+Bland
+Virginia
+
+Fincastle
+Virginia
+
+Lawrenceville
+Virginia
+
+Grundy
+Virginia
+
+Buckingham
+Virginia
+
+Rustburg
+Virginia
+
+Bowling Green
+Virginia
+
+Hillsville
+Virginia
+
+Charles City
+Virginia
+
+Charlotte Court House
+or the state
+
+Chesterfield
+Virginia
+
+Berryville
+Virginia
+
+New Castle
+Virginia
+
+Culpeper
+Virginia
+
+Cumberland
+Virginia
+
+Clintwood
+Virginia
+
+Dinwiddie
+Virginia
+
+Tappahannock
+Virginia
+
+Warrenton
+Virginia
+
+Floyd
+Virginia
+
+Palmyra
+Virginia
+
+Rocky Mount
+Virginia
+
+Pearisburg
+Virginia
+
+Gloucester
+Virginia
+
+Goochland
+Virginia
+
+Independence
+Virginia
+
+Stanardsville
+Virginia
+
+Halifax
+Virginia
+
+Hanover
+Virginia
+
+Laurel
+Virginia
+
+Monterey
+Virginia
+
+Isle of Wight
+or the state
+
+King and Queen
+or the state
+
+King George
+Virginia
+
+King William
+Virginia
+
+Lancaster
+Virginia
+
+Jonesville
+Virginia
+
+Leesburg
+Virginia
+
+Louisa
+Virginia
+
+Lunenburg
+Virginia
+
+Madison
+Virginia
+
+Mathews
+Virginia
+
+Boydton
+Virginia
+
+Saluda
+Virginia
+
+Christiansburg
+Virginia
+
+Lovingston
+Virginia
+
+New Kent
+Virginia
+
+Eastville
+Virginia
+
+Heathsville
+Virginia
+
+Nottoway
+Virginia
+
+Orange
+Virginia
+
+Luray
+Virginia
+
+Stuart
+Virginia
+
+Chatham
+Virginia
+
+Powhatan
+Virginia
+
+Farmville
+Virginia
+
+Prince George
+Virginia
+
+Pulaski
+Virginia
+
+Washington
+Virginia
+
+Warsaw
+Virginia
+
+Lebanon
+Virginia
+
+Gate City
+Virginia
+
+Woodstock
+Virginia
+
+Marion
+Virginia
+
+Courtland
+Virginia
+
+Spotsylvania Courthouse
+Virginia
+
+Stafford
+Virginia
+
+Surry
+Virginia
+
+Sussex
+Virginia
+
+Tazewell
+Virginia
+
+Front Royal
+Virginia
+
+Abingdon
+Virginia
+
+Montross
+Virginia
+
+Wise
+Virginia
+
+Wytheville
+Virginia
+
+Yorktown
+Virginia
+
+Saint Marys
+West
+
+Friendship (village)
+Wisconsin
+
+Siren
+Wisconsin
+
+Florence (CDP)
+Wisconsin
+
+Keshena
+Wisconsin
+
+Ellsworth
+Wisconsin

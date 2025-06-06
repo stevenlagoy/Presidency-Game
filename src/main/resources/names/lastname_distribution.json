@@ -4052,16 +4052,13 @@
         "Thunderhawk" : 1,
         "Welch" : 1
     },
-    "Chinese" : {
+    "Asian" : {
         "Li" : 1,
         "Wang" : 1,
         "Zhang" : 1,
         "Liu" : 1,
         "Chen" : 1
     },
-    "Asian" : {
-            "PLACEHOLDER" : 1
-        },
     "Middle Eastern / North African" : {
         "Habib" : 1,
         "Osman" : 1,

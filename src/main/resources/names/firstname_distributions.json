@@ -2331,7 +2331,7 @@
 			"Yutu" : 1,
 			"Zitkaduta" : 1
         },
-        "Chinese" : {
+        "Asian" : {
             "Bo" : 1,
             "Wei" : 1,
             "Hao" : 1,
@@ -2539,9 +2539,6 @@
             "Vivek": 1,
             "Yash": 1,
             "Yogesh": 1
-        },
-        "Asian" : {
-            "PLACEHOLDER" : 1
         },
         "Hispanic / Latino" : {
             "Adrián": 1,
@@ -3171,7 +3168,7 @@
             "Zihna": 1,
             "Zitkala": 1
         },
-        "Chinese" : {
+        "Asian" : {
             "Mei" : 1,
             "Meng" : 1,
             "Yao" : 1,
@@ -3211,9 +3208,6 @@
             "Ying" : 1,
             "Xi" : 1,
             "Chang" : 1
-        },
-        "Asian" : {
-            "PLACEHOLDER" : 1
         },
         "Indian" : {
             "Aadhya": 1,
@@ -3992,13 +3986,9 @@
             
         },
         "Native / Indian" : {
-            "Akando" : 1,
-            "PLACEHOLDER1" : 1,
-            "PLACEHOLDER2" : 1,
-            "PLACEHOLDER3" : 1,
-            "PLACEHOLDER4" : 1
+            "Akando" : 1
         },
-        "Chinese" : {
+        "Asian" : {
             "Mei" : 1,
             "Meng" : 1,
             "Yao" : 1,
@@ -4009,13 +3999,6 @@
             "Jun" : 268268,
             "Chen" : 246737,
             "Yun" : 244223
-        },
-        "Asian" : {
-            "PLACEHOLDER1" : 1,
-            "PLACEHOLDER2" : 2,
-            "PLACEHOLDER3" : 3,
-            "PLACEHOLDER4" : 4,
-            "PLACEHOLDER5" : 5
         },
         "Hispanic / Latino" : {
             "Sofia" : 1,

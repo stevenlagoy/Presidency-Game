@@ -77,15 +77,16 @@ class City:
 
     def to_json(self) -> List[str]:
         return [
-            f"\"{self.name}, {name_to_abbreviation[self.state]}\" : {{",
+            f"\"{self.name}, {self.counties[0]}, {name_to_abbreviation[self.state]}\" : {{",
             f"\t\"name\" : \"{self.name}\",",
             f"\t\"state\" : \"{self.state}\",",
             f"\t\"FIPS\" : \"{self.fips()}\",",
             f"\t\"counties\" : {str(self.counties).replace("'","\"")},",
             f"\t\"type_class\" : \"{self.type_class}\",",
-            f"\t\"population2010\" : {str(self.population2010)},", 
-            f"\t\"population2020\" : {str(self.population2020)},",
-            f"\t\"land_area\" : {str(self.land_area)}",
+            f"\t\"population_2010\" : {str(self.population2010)},", 
+            f"\t\"population_2020\" : {str(self.population2020)},",
+            f"\t\"population_2027\" : {str(self.estimate_pop(2027))},",
+            f"\t\"land_area_2020\" : {str(self.land_area)}",
             "}"
         ]
     
@@ -188,7 +189,7 @@ def read_FIPS():
 
 def read_cities_data() -> List[str]:
     """Read and clean city data from input file, removing HTML tags"""
-    with open("src\\main\\resources\\cities_data.in", "r", encoding="utf-8") as data:
+    with open("src\\main\\resources\\tools\\cities_data.in", "r", encoding="utf-8") as data:
         contents = data.readlines()
     
     return [
@@ -220,11 +221,11 @@ def extract_city_data(data: List[str], i: int) -> Tuple[str, str, str, str, int,
         state = title_parts[-1].replace("\"","").strip()
         
 
-        if name == 'Kenosha':
-            if state == 'Wisconsin':
+        if name == 'Poland':
+            if state == 'Maine':
                 pass
 
-        if state == "Hawaii":
+        if state == "Texas":
             pass
 
         try:
@@ -298,7 +299,7 @@ def read_counties(line: str) -> List[str]:
                 county = segment.split(">")[-1].strip()
             
             if county:
-                counties.append(county.title().replace("Of","of").replace("The","the").replace("And","and"))
+                counties.append(county)
                 
         return counties if counties else [line.strip()]
     except (IndexError, AttributeError):
@@ -550,7 +551,7 @@ def generate_json(cities: List[City]) -> List[str]:
     ]
 
 def write_output(lines: List[str]) -> None:
-    with open("src\\main\\resources\\cities_data.out", "w", encoding="utf-8") as file:
+    with open("src\\main\\resources\\tools\\cities_data.out", "w", encoding="utf-8") as file:
         file.write("{\n")
         number_lines = len(lines)
         count = 0
@@ -577,21 +578,6 @@ def main() -> int:
     write_output(lines)
 
     print("File generated successfully.")
-
-    total_2020 = 0
-    total_2027 = 0
-    for city in City.instances:
-        pop2020 = city.population2020
-        pop2027 = city.estimate_pop(2030)
-        if pop2020 < 0 or pop2027 < 0:
-            pass
-            # city.estimate_pop(2027)
-        else:
-            total_2020 += pop2020
-            total_2027 += pop2027
-    
-    print(f"Total city population 2020: {total_2020}")
-    print(f"Total city population 2027: {total_2027}")
 
     return 0
 

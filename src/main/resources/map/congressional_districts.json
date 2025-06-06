@@ -1,0 +1,3089 @@
+{
+	"AL01" : {
+		"hexID" : "#1B9CC0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Alabama",
+		"districtNum" : "01",
+		"officeID" : "0101"
+	},
+	"AL02" : {
+		"hexID" : "#373980",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Alabama",
+		"districtNum" : "02",
+		"officeID" : "0102"
+	},
+	"AL03" : {
+		"hexID" : "#52D640",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Alabama",
+		"districtNum" : "03",
+		"officeID" : "0103"
+	},
+	"AL04" : {
+		"hexID" : "#6E7300",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Alabama",
+		"districtNum" : "04",
+		"officeID" : "0104"
+	},
+	"AL05" : {
+		"hexID" : "#8A0FC0",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Alabama",
+		"districtNum" : "05",
+		"officeID" : "0105"
+	},
+	"AL06" : {
+		"hexID" : "#A5AC80",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Alabama",
+		"districtNum" : "06",
+		"officeID" : "0106"
+	},
+	"AL07" : {
+		"hexID" : "#C14940",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Alabama",
+		"districtNum" : "07",
+		"officeID" : "0107"
+	},
+	"AK00" : {
+		"hexID" : "#DCE600",
+		"nameLSAD" : "Congressional District (at Large)",
+		"state" : "Alaska",
+		"districtNum" : "00",
+		"officeID" : "0200"
+	},
+	"AZ01" : {
+		"hexID" : "#F882C0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Arizona",
+		"districtNum" : "01",
+		"officeID" : "0401"
+	},
+	"AZ02" : {
+		"hexID" : "#1141F80",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Arizona",
+		"districtNum" : "02",
+		"officeID" : "0402"
+	},
+	"AZ03" : {
+		"hexID" : "#2FBC40",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Arizona",
+		"districtNum" : "03",
+		"officeID" : "0403"
+	},
+	"AZ04" : {
+		"hexID" : "#4B5900",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Arizona",
+		"districtNum" : "04",
+		"officeID" : "0404"
+	},
+	"AZ05" : {
+		"hexID" : "#66F5C0",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Arizona",
+		"districtNum" : "05",
+		"officeID" : "0405"
+	},
+	"AZ06" : {
+		"hexID" : "#829280",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Arizona",
+		"districtNum" : "06",
+		"officeID" : "0406"
+	},
+	"AZ07" : {
+		"hexID" : "#9E2F40",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Arizona",
+		"districtNum" : "07",
+		"officeID" : "0407"
+	},
+	"AZ08" : {
+		"hexID" : "#B9CC00",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Arizona",
+		"districtNum" : "08",
+		"officeID" : "0408"
+	},
+	"AZ09" : {
+		"hexID" : "#D568C0",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "Arizona",
+		"districtNum" : "09",
+		"officeID" : "0409"
+	},
+	"AR01" : {
+		"hexID" : "#F10580",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Arkansas",
+		"districtNum" : "01",
+		"officeID" : "0501"
+	},
+	"AR02" : {
+		"hexID" : "#10CA240",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Arkansas",
+		"districtNum" : "02",
+		"officeID" : "0502"
+	},
+	"AR03" : {
+		"hexID" : "#283F00",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Arkansas",
+		"districtNum" : "03",
+		"officeID" : "0503"
+	},
+	"AR04" : {
+		"hexID" : "#43DBC0",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Arkansas",
+		"districtNum" : "04",
+		"officeID" : "0504"
+	},
+	"CA50" : {
+		"hexID" : "#5F7880",
+		"nameLSAD" : "Congressional District 50",
+		"state" : "California",
+		"districtNum" : "50",
+		"officeID" : "0650"
+	},
+	"CA52" : {
+		"hexID" : "#7B1540",
+		"nameLSAD" : "Congressional District 52",
+		"state" : "California",
+		"districtNum" : "52",
+		"officeID" : "0652"
+	},
+	"CA10" : {
+		"hexID" : "#96B200",
+		"nameLSAD" : "Congressional District 10",
+		"state" : "California",
+		"districtNum" : "10",
+		"officeID" : "0610"
+	},
+	"CA11" : {
+		"hexID" : "#B24EC0",
+		"nameLSAD" : "Congressional District 11",
+		"state" : "California",
+		"districtNum" : "11",
+		"officeID" : "0611"
+	},
+	"CA12" : {
+		"hexID" : "#CDEB80",
+		"nameLSAD" : "Congressional District 12",
+		"state" : "California",
+		"districtNum" : "12",
+		"officeID" : "0612"
+	},
+	"CA15" : {
+		"hexID" : "#E98840",
+		"nameLSAD" : "Congressional District 15",
+		"state" : "California",
+		"districtNum" : "15",
+		"officeID" : "0615"
+	},
+	"CA14" : {
+		"hexID" : "#1052500",
+		"nameLSAD" : "Congressional District 14",
+		"state" : "California",
+		"districtNum" : "14",
+		"officeID" : "0614"
+	},
+	"CA16" : {
+		"hexID" : "#20C1C0",
+		"nameLSAD" : "Congressional District 16",
+		"state" : "California",
+		"districtNum" : "16",
+		"officeID" : "0616"
+	},
+	"CA19" : {
+		"hexID" : "#3C5E80",
+		"nameLSAD" : "Congressional District 19",
+		"state" : "California",
+		"districtNum" : "19",
+		"officeID" : "0619"
+	},
+	"CA20" : {
+		"hexID" : "#57FB40",
+		"nameLSAD" : "Congressional District 20",
+		"state" : "California",
+		"districtNum" : "20",
+		"officeID" : "0620"
+	},
+	"CA18" : {
+		"hexID" : "#739800",
+		"nameLSAD" : "Congressional District 18",
+		"state" : "California",
+		"districtNum" : "18",
+		"officeID" : "0618"
+	},
+	"CA23" : {
+		"hexID" : "#8F34C0",
+		"nameLSAD" : "Congressional District 23",
+		"state" : "California",
+		"districtNum" : "23",
+		"officeID" : "0623"
+	},
+	"CA25" : {
+		"hexID" : "#AAD180",
+		"nameLSAD" : "Congressional District 25",
+		"state" : "California",
+		"districtNum" : "25",
+		"officeID" : "0625"
+	},
+	"CA26" : {
+		"hexID" : "#C66E40",
+		"nameLSAD" : "Congressional District 26",
+		"state" : "California",
+		"districtNum" : "26",
+		"officeID" : "0626"
+	},
+	"CA22" : {
+		"hexID" : "#E20B00",
+		"nameLSAD" : "Congressional District 22",
+		"state" : "California",
+		"districtNum" : "22",
+		"officeID" : "0622"
+	},
+	"CA29" : {
+		"hexID" : "#FDA7C0",
+		"nameLSAD" : "Congressional District 29",
+		"state" : "California",
+		"districtNum" : "29",
+		"officeID" : "0629"
+	},
+	"CA31" : {
+		"hexID" : "#1194480",
+		"nameLSAD" : "Congressional District 31",
+		"state" : "California",
+		"districtNum" : "31",
+		"officeID" : "0631"
+	},
+	"CA27" : {
+		"hexID" : "#34E140",
+		"nameLSAD" : "Congressional District 27",
+		"state" : "California",
+		"districtNum" : "27",
+		"officeID" : "0627"
+	},
+	"CA30" : {
+		"hexID" : "#507E00",
+		"nameLSAD" : "Congressional District 30",
+		"state" : "California",
+		"districtNum" : "30",
+		"officeID" : "0630"
+	},
+	"CA35" : {
+		"hexID" : "#6C1AC0",
+		"nameLSAD" : "Congressional District 35",
+		"state" : "California",
+		"districtNum" : "35",
+		"officeID" : "0635"
+	},
+	"CA32" : {
+		"hexID" : "#87B780",
+		"nameLSAD" : "Congressional District 32",
+		"state" : "California",
+		"districtNum" : "32",
+		"officeID" : "0632"
+	},
+	"CA33" : {
+		"hexID" : "#A35440",
+		"nameLSAD" : "Congressional District 33",
+		"state" : "California",
+		"districtNum" : "33",
+		"officeID" : "0633"
+	},
+	"CA36" : {
+		"hexID" : "#BEF100",
+		"nameLSAD" : "Congressional District 36",
+		"state" : "California",
+		"districtNum" : "36",
+		"officeID" : "0636"
+	},
+	"CA41" : {
+		"hexID" : "#DA8DC0",
+		"nameLSAD" : "Congressional District 41",
+		"state" : "California",
+		"districtNum" : "41",
+		"officeID" : "0641"
+	},
+	"CA39" : {
+		"hexID" : "#F62A80",
+		"nameLSAD" : "Congressional District 39",
+		"state" : "California",
+		"districtNum" : "39",
+		"officeID" : "0639"
+	},
+	"CA37" : {
+		"hexID" : "#111C740",
+		"nameLSAD" : "Congressional District 37",
+		"state" : "California",
+		"districtNum" : "37",
+		"officeID" : "0637"
+	},
+	"CA42" : {
+		"hexID" : "#2D6400",
+		"nameLSAD" : "Congressional District 42",
+		"state" : "California",
+		"districtNum" : "42",
+		"officeID" : "0642"
+	},
+	"CA43" : {
+		"hexID" : "#4900C0",
+		"nameLSAD" : "Congressional District 43",
+		"state" : "California",
+		"districtNum" : "43",
+		"officeID" : "0643"
+	},
+	"CA44" : {
+		"hexID" : "#649D80",
+		"nameLSAD" : "Congressional District 44",
+		"state" : "California",
+		"districtNum" : "44",
+		"officeID" : "0644"
+	},
+	"CA01" : {
+		"hexID" : "#803A40",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "California",
+		"districtNum" : "01",
+		"officeID" : "0601"
+	},
+	"CA02" : {
+		"hexID" : "#9BD700",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "California",
+		"districtNum" : "02",
+		"officeID" : "0602"
+	},
+	"CA03" : {
+		"hexID" : "#B773C0",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "California",
+		"districtNum" : "03",
+		"officeID" : "0603"
+	},
+	"CA04" : {
+		"hexID" : "#D31080",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "California",
+		"districtNum" : "04",
+		"officeID" : "0604"
+	},
+	"CA05" : {
+		"hexID" : "#EEAD40",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "California",
+		"districtNum" : "05",
+		"officeID" : "0605"
+	},
+	"CA06" : {
+		"hexID" : "#10A4A00",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "California",
+		"districtNum" : "06",
+		"officeID" : "0606"
+	},
+	"CA07" : {
+		"hexID" : "#25E6C0",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "California",
+		"districtNum" : "07",
+		"officeID" : "0607"
+	},
+	"CA08" : {
+		"hexID" : "#418380",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "California",
+		"districtNum" : "08",
+		"officeID" : "0608"
+	},
+	"CA09" : {
+		"hexID" : "#5D2040",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "California",
+		"districtNum" : "09",
+		"officeID" : "0609"
+	},
+	"CA13" : {
+		"hexID" : "#78BD00",
+		"nameLSAD" : "Congressional District 13",
+		"state" : "California",
+		"districtNum" : "13",
+		"officeID" : "0613"
+	},
+	"CA17" : {
+		"hexID" : "#9459C0",
+		"nameLSAD" : "Congressional District 17",
+		"state" : "California",
+		"districtNum" : "17",
+		"officeID" : "0617"
+	},
+	"CA21" : {
+		"hexID" : "#AFF680",
+		"nameLSAD" : "Congressional District 21",
+		"state" : "California",
+		"districtNum" : "21",
+		"officeID" : "0621"
+	},
+	"CA24" : {
+		"hexID" : "#CB9340",
+		"nameLSAD" : "Congressional District 24",
+		"state" : "California",
+		"districtNum" : "24",
+		"officeID" : "0624"
+	},
+	"CA28" : {
+		"hexID" : "#E73000",
+		"nameLSAD" : "Congressional District 28",
+		"state" : "California",
+		"districtNum" : "28",
+		"officeID" : "0628"
+	},
+	"CA34" : {
+		"hexID" : "#102CCC0",
+		"nameLSAD" : "Congressional District 34",
+		"state" : "California",
+		"districtNum" : "34",
+		"officeID" : "0634"
+	},
+	"CA38" : {
+		"hexID" : "#1E6980",
+		"nameLSAD" : "Congressional District 38",
+		"state" : "California",
+		"districtNum" : "38",
+		"officeID" : "0638"
+	},
+	"CA40" : {
+		"hexID" : "#3A0640",
+		"nameLSAD" : "Congressional District 40",
+		"state" : "California",
+		"districtNum" : "40",
+		"officeID" : "0640"
+	},
+	"CA45" : {
+		"hexID" : "#55A300",
+		"nameLSAD" : "Congressional District 45",
+		"state" : "California",
+		"districtNum" : "45",
+		"officeID" : "0645"
+	},
+	"CA46" : {
+		"hexID" : "#713FC0",
+		"nameLSAD" : "Congressional District 46",
+		"state" : "California",
+		"districtNum" : "46",
+		"officeID" : "0646"
+	},
+	"CA47" : {
+		"hexID" : "#8CDC80",
+		"nameLSAD" : "Congressional District 47",
+		"state" : "California",
+		"districtNum" : "47",
+		"officeID" : "0647"
+	},
+	"CA48" : {
+		"hexID" : "#A87940",
+		"nameLSAD" : "Congressional District 48",
+		"state" : "California",
+		"districtNum" : "48",
+		"officeID" : "0648"
+	},
+	"CA49" : {
+		"hexID" : "#C41600",
+		"nameLSAD" : "Congressional District 49",
+		"state" : "California",
+		"districtNum" : "49",
+		"officeID" : "0649"
+	},
+	"CA51" : {
+		"hexID" : "#DFB2C0",
+		"nameLSAD" : "Congressional District 51",
+		"state" : "California",
+		"districtNum" : "51",
+		"officeID" : "0651"
+	},
+	"CO01" : {
+		"hexID" : "#FB4F80",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Colorado",
+		"districtNum" : "01",
+		"officeID" : "0801"
+	},
+	"CO02" : {
+		"hexID" : "#116EC40",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Colorado",
+		"districtNum" : "02",
+		"officeID" : "0802"
+	},
+	"CO03" : {
+		"hexID" : "#328900",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Colorado",
+		"districtNum" : "03",
+		"officeID" : "0803"
+	},
+	"CO04" : {
+		"hexID" : "#4E25C0",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Colorado",
+		"districtNum" : "04",
+		"officeID" : "0804"
+	},
+	"CO05" : {
+		"hexID" : "#69C280",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Colorado",
+		"districtNum" : "05",
+		"officeID" : "0805"
+	},
+	"CO06" : {
+		"hexID" : "#855F40",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Colorado",
+		"districtNum" : "06",
+		"officeID" : "0806"
+	},
+	"CO07" : {
+		"hexID" : "#A0FC00",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Colorado",
+		"districtNum" : "07",
+		"officeID" : "0807"
+	},
+	"CO08" : {
+		"hexID" : "#BC98C0",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Colorado",
+		"districtNum" : "08",
+		"officeID" : "0808"
+	},
+	"CT01" : {
+		"hexID" : "#D83580",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Connecticut",
+		"districtNum" : "01",
+		"officeID" : "0901"
+	},
+	"CT02" : {
+		"hexID" : "#F3D240",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Connecticut",
+		"districtNum" : "02",
+		"officeID" : "0902"
+	},
+	"CT03" : {
+		"hexID" : "#10F6F00",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Connecticut",
+		"districtNum" : "03",
+		"officeID" : "0903"
+	},
+	"CT04" : {
+		"hexID" : "#2B0BC0",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Connecticut",
+		"districtNum" : "04",
+		"officeID" : "0904"
+	},
+	"CT05" : {
+		"hexID" : "#46A880",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Connecticut",
+		"districtNum" : "05",
+		"officeID" : "0905"
+	},
+	"DE00" : {
+		"hexID" : "#624540",
+		"nameLSAD" : "Congressional District (at Large)",
+		"state" : "Delaware",
+		"districtNum" : "00",
+		"officeID" : "1000"
+	},
+	"DC00" : {
+		"hexID" : "#7DE200",
+		"nameLSAD" : "Delegate District (at Large)",
+		"state" : "District of Columbia",
+		"districtNum" : "98",
+		"officeID" : "1198"
+	},
+	"FL01" : {
+		"hexID" : "#997EC0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Florida",
+		"districtNum" : "01",
+		"officeID" : "1201"
+	},
+	"FL02" : {
+		"hexID" : "#B51B80",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Florida",
+		"districtNum" : "02",
+		"officeID" : "1202"
+	},
+	"FL03" : {
+		"hexID" : "#D0B840",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Florida",
+		"districtNum" : "03",
+		"officeID" : "1203"
+	},
+	"FL04" : {
+		"hexID" : "#EC5500",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Florida",
+		"districtNum" : "04",
+		"officeID" : "1204"
+	},
+	"FL05" : {
+		"hexID" : "#107F1C0",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Florida",
+		"districtNum" : "05",
+		"officeID" : "1205"
+	},
+	"FL06" : {
+		"hexID" : "#238E80",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Florida",
+		"districtNum" : "06",
+		"officeID" : "1206"
+	},
+	"FL07" : {
+		"hexID" : "#3F2B40",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Florida",
+		"districtNum" : "07",
+		"officeID" : "1207"
+	},
+	"FL08" : {
+		"hexID" : "#5AC800",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Florida",
+		"districtNum" : "08",
+		"officeID" : "1208"
+	},
+	"FL09" : {
+		"hexID" : "#7664C0",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "Florida",
+		"districtNum" : "09",
+		"officeID" : "1209"
+	},
+	"FL10" : {
+		"hexID" : "#920180",
+		"nameLSAD" : "Congressional District 10",
+		"state" : "Florida",
+		"districtNum" : "10",
+		"officeID" : "1210"
+	},
+	"FL11" : {
+		"hexID" : "#AD9E40",
+		"nameLSAD" : "Congressional District 11",
+		"state" : "Florida",
+		"districtNum" : "11",
+		"officeID" : "1211"
+	},
+	"FL12" : {
+		"hexID" : "#C93B00",
+		"nameLSAD" : "Congressional District 12",
+		"state" : "Florida",
+		"districtNum" : "12",
+		"officeID" : "1212"
+	},
+	"FL13" : {
+		"hexID" : "#E4D7C0",
+		"nameLSAD" : "Congressional District 13",
+		"state" : "Florida",
+		"districtNum" : "13",
+		"officeID" : "1213"
+	},
+	"FL14" : {
+		"hexID" : "#1007480",
+		"nameLSAD" : "Congressional District 14",
+		"state" : "Florida",
+		"districtNum" : "14",
+		"officeID" : "1214"
+	},
+	"FL15" : {
+		"hexID" : "#1C1140",
+		"nameLSAD" : "Congressional District 15",
+		"state" : "Florida",
+		"districtNum" : "15",
+		"officeID" : "1215"
+	},
+	"FL16" : {
+		"hexID" : "#37AE00",
+		"nameLSAD" : "Congressional District 16",
+		"state" : "Florida",
+		"districtNum" : "16",
+		"officeID" : "1216"
+	},
+	"FL20" : {
+		"hexID" : "#534AC0",
+		"nameLSAD" : "Congressional District 20",
+		"state" : "Florida",
+		"districtNum" : "20",
+		"officeID" : "1220"
+	},
+	"FL22" : {
+		"hexID" : "#6EE780",
+		"nameLSAD" : "Congressional District 22",
+		"state" : "Florida",
+		"districtNum" : "22",
+		"officeID" : "1222"
+	},
+	"FL23" : {
+		"hexID" : "#8A8440",
+		"nameLSAD" : "Congressional District 23",
+		"state" : "Florida",
+		"districtNum" : "23",
+		"officeID" : "1223"
+	},
+	"FL24" : {
+		"hexID" : "#A62100",
+		"nameLSAD" : "Congressional District 24",
+		"state" : "Florida",
+		"districtNum" : "24",
+		"officeID" : "1224"
+	},
+	"FL25" : {
+		"hexID" : "#C1BDC0",
+		"nameLSAD" : "Congressional District 25",
+		"state" : "Florida",
+		"districtNum" : "25",
+		"officeID" : "1225"
+	},
+	"FL26" : {
+		"hexID" : "#DD5A80",
+		"nameLSAD" : "Congressional District 26",
+		"state" : "Florida",
+		"districtNum" : "26",
+		"officeID" : "1226"
+	},
+	"FL27" : {
+		"hexID" : "#F8F740",
+		"nameLSAD" : "Congressional District 27",
+		"state" : "Florida",
+		"districtNum" : "27",
+		"officeID" : "1227"
+	},
+	"FL28" : {
+		"hexID" : "#1149400",
+		"nameLSAD" : "Congressional District 28",
+		"state" : "Florida",
+		"districtNum" : "28",
+		"officeID" : "1228"
+	},
+	"FL17" : {
+		"hexID" : "#3030C0",
+		"nameLSAD" : "Congressional District 17",
+		"state" : "Florida",
+		"districtNum" : "17",
+		"officeID" : "1217"
+	},
+	"FL19" : {
+		"hexID" : "#4BCD80",
+		"nameLSAD" : "Congressional District 19",
+		"state" : "Florida",
+		"districtNum" : "19",
+		"officeID" : "1219"
+	},
+	"FL21" : {
+		"hexID" : "#676A40",
+		"nameLSAD" : "Congressional District 21",
+		"state" : "Florida",
+		"districtNum" : "21",
+		"officeID" : "1221"
+	},
+	"FL18" : {
+		"hexID" : "#830700",
+		"nameLSAD" : "Congressional District 18",
+		"state" : "Florida",
+		"districtNum" : "18",
+		"officeID" : "1218"
+	},
+	"GA01" : {
+		"hexID" : "#9EA3C0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Georgia",
+		"districtNum" : "01",
+		"officeID" : "1301"
+	},
+	"GA02" : {
+		"hexID" : "#BA4080",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Georgia",
+		"districtNum" : "02",
+		"officeID" : "1302"
+	},
+	"GA03" : {
+		"hexID" : "#D5DD40",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Georgia",
+		"districtNum" : "03",
+		"officeID" : "1303"
+	},
+	"GA04" : {
+		"hexID" : "#F17A00",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Georgia",
+		"districtNum" : "04",
+		"officeID" : "1304"
+	},
+	"GA05" : {
+		"hexID" : "#10D16C0",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Georgia",
+		"districtNum" : "05",
+		"officeID" : "1305"
+	},
+	"GA06" : {
+		"hexID" : "#28B380",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Georgia",
+		"districtNum" : "06",
+		"officeID" : "1306"
+	},
+	"GA07" : {
+		"hexID" : "#445040",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Georgia",
+		"districtNum" : "07",
+		"officeID" : "1307"
+	},
+	"GA08" : {
+		"hexID" : "#5FED00",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Georgia",
+		"districtNum" : "08",
+		"officeID" : "1308"
+	},
+	"GA09" : {
+		"hexID" : "#7B89C0",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "Georgia",
+		"districtNum" : "09",
+		"officeID" : "1309"
+	},
+	"GA10" : {
+		"hexID" : "#972680",
+		"nameLSAD" : "Congressional District 10",
+		"state" : "Georgia",
+		"districtNum" : "10",
+		"officeID" : "1310"
+	},
+	"GA12" : {
+		"hexID" : "#B2C340",
+		"nameLSAD" : "Congressional District 12",
+		"state" : "Georgia",
+		"districtNum" : "12",
+		"officeID" : "1312"
+	},
+	"GA13" : {
+		"hexID" : "#CE6000",
+		"nameLSAD" : "Congressional District 13",
+		"state" : "Georgia",
+		"districtNum" : "13",
+		"officeID" : "1313"
+	},
+	"GA14" : {
+		"hexID" : "#E9FCC0",
+		"nameLSAD" : "Congressional District 14",
+		"state" : "Georgia",
+		"districtNum" : "14",
+		"officeID" : "1314"
+	},
+	"GA11" : {
+		"hexID" : "#1059980",
+		"nameLSAD" : "Congressional District 11",
+		"state" : "Georgia",
+		"districtNum" : "11",
+		"officeID" : "1311"
+	},
+	"HI01" : {
+		"hexID" : "#213640",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Hawaii",
+		"districtNum" : "01",
+		"officeID" : "1501"
+	},
+	"HI02" : {
+		"hexID" : "#3CD300",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Hawaii",
+		"districtNum" : "02",
+		"officeID" : "1502"
+	},
+	"ID01" : {
+		"hexID" : "#586FC0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Idaho",
+		"districtNum" : "01",
+		"officeID" : "1601"
+	},
+	"ID02" : {
+		"hexID" : "#740C80",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Idaho",
+		"districtNum" : "02",
+		"officeID" : "1602"
+	},
+	"IL01" : {
+		"hexID" : "#8FA940",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Illinois",
+		"districtNum" : "01",
+		"officeID" : "1701"
+	},
+	"IL02" : {
+		"hexID" : "#AB4600",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Illinois",
+		"districtNum" : "02",
+		"officeID" : "1702"
+	},
+	"IL03" : {
+		"hexID" : "#C6E2C0",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Illinois",
+		"districtNum" : "03",
+		"officeID" : "1703"
+	},
+	"IL04" : {
+		"hexID" : "#E27F80",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Illinois",
+		"districtNum" : "04",
+		"officeID" : "1704"
+	},
+	"IL05" : {
+		"hexID" : "#FE1C40",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Illinois",
+		"districtNum" : "05",
+		"officeID" : "1705"
+	},
+	"IL06" : {
+		"hexID" : "#119B900",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Illinois",
+		"districtNum" : "06",
+		"officeID" : "1706"
+	},
+	"IL07" : {
+		"hexID" : "#3555C0",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Illinois",
+		"districtNum" : "07",
+		"officeID" : "1707"
+	},
+	"IL08" : {
+		"hexID" : "#50F280",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Illinois",
+		"districtNum" : "08",
+		"officeID" : "1708"
+	},
+	"IL09" : {
+		"hexID" : "#6C8F40",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "Illinois",
+		"districtNum" : "09",
+		"officeID" : "1709"
+	},
+	"IL10" : {
+		"hexID" : "#882C00",
+		"nameLSAD" : "Congressional District 10",
+		"state" : "Illinois",
+		"districtNum" : "10",
+		"officeID" : "1710"
+	},
+	"IL11" : {
+		"hexID" : "#A3C8C0",
+		"nameLSAD" : "Congressional District 11",
+		"state" : "Illinois",
+		"districtNum" : "11",
+		"officeID" : "1711"
+	},
+	"IL12" : {
+		"hexID" : "#BF6580",
+		"nameLSAD" : "Congressional District 12",
+		"state" : "Illinois",
+		"districtNum" : "12",
+		"officeID" : "1712"
+	},
+	"IL13" : {
+		"hexID" : "#DB0240",
+		"nameLSAD" : "Congressional District 13",
+		"state" : "Illinois",
+		"districtNum" : "13",
+		"officeID" : "1713"
+	},
+	"IL14" : {
+		"hexID" : "#F69F00",
+		"nameLSAD" : "Congressional District 14",
+		"state" : "Illinois",
+		"districtNum" : "14",
+		"officeID" : "1714"
+	},
+	"IL15" : {
+		"hexID" : "#1123BC0",
+		"nameLSAD" : "Congressional District 15",
+		"state" : "Illinois",
+		"districtNum" : "15",
+		"officeID" : "1715"
+	},
+	"IL16" : {
+		"hexID" : "#2DD880",
+		"nameLSAD" : "Congressional District 16",
+		"state" : "Illinois",
+		"districtNum" : "16",
+		"officeID" : "1716"
+	},
+	"IL17" : {
+		"hexID" : "#497540",
+		"nameLSAD" : "Congressional District 17",
+		"state" : "Illinois",
+		"districtNum" : "17",
+		"officeID" : "1717"
+	},
+	"IN01" : {
+		"hexID" : "#651200",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Indiana",
+		"districtNum" : "01",
+		"officeID" : "1801"
+	},
+	"IN02" : {
+		"hexID" : "#80AEC0",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Indiana",
+		"districtNum" : "02",
+		"officeID" : "1802"
+	},
+	"IN03" : {
+		"hexID" : "#9C4B80",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Indiana",
+		"districtNum" : "03",
+		"officeID" : "1803"
+	},
+	"IN04" : {
+		"hexID" : "#B7E840",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Indiana",
+		"districtNum" : "04",
+		"officeID" : "1804"
+	},
+	"IN05" : {
+		"hexID" : "#D38500",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Indiana",
+		"districtNum" : "05",
+		"officeID" : "1805"
+	},
+	"IN06" : {
+		"hexID" : "#EF21C0",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Indiana",
+		"districtNum" : "06",
+		"officeID" : "1806"
+	},
+	"IN07" : {
+		"hexID" : "#10ABE80",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Indiana",
+		"districtNum" : "07",
+		"officeID" : "1807"
+	},
+	"IN08" : {
+		"hexID" : "#265B40",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Indiana",
+		"districtNum" : "08",
+		"officeID" : "1808"
+	},
+	"IN09" : {
+		"hexID" : "#41F800",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "Indiana",
+		"districtNum" : "09",
+		"officeID" : "1809"
+	},
+	"IA01" : {
+		"hexID" : "#5D94C0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Iowa",
+		"districtNum" : "01",
+		"officeID" : "1901"
+	},
+	"IA02" : {
+		"hexID" : "#793180",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Iowa",
+		"districtNum" : "02",
+		"officeID" : "1902"
+	},
+	"IA03" : {
+		"hexID" : "#94CE40",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Iowa",
+		"districtNum" : "03",
+		"officeID" : "1903"
+	},
+	"IA04" : {
+		"hexID" : "#B06B00",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Iowa",
+		"districtNum" : "04",
+		"officeID" : "1904"
+	},
+	"KS01" : {
+		"hexID" : "#CC07C0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Kansas",
+		"districtNum" : "01",
+		"officeID" : "2001"
+	},
+	"KS02" : {
+		"hexID" : "#E7A480",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Kansas",
+		"districtNum" : "02",
+		"officeID" : "2002"
+	},
+	"KS03" : {
+		"hexID" : "#1034140",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Kansas",
+		"districtNum" : "03",
+		"officeID" : "2003"
+	},
+	"KS04" : {
+		"hexID" : "#1EDE00",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Kansas",
+		"districtNum" : "04",
+		"officeID" : "2004"
+	},
+	"KY01" : {
+		"hexID" : "#3A7AC0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Kentucky",
+		"districtNum" : "01",
+		"officeID" : "2101"
+	},
+	"KY02" : {
+		"hexID" : "#561780",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Kentucky",
+		"districtNum" : "02",
+		"officeID" : "2102"
+	},
+	"KY03" : {
+		"hexID" : "#71B440",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Kentucky",
+		"districtNum" : "03",
+		"officeID" : "2103"
+	},
+	"KY04" : {
+		"hexID" : "#8D5100",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Kentucky",
+		"districtNum" : "04",
+		"officeID" : "2104"
+	},
+	"KY05" : {
+		"hexID" : "#A8EDC0",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Kentucky",
+		"districtNum" : "05",
+		"officeID" : "2105"
+	},
+	"KY06" : {
+		"hexID" : "#C48A80",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Kentucky",
+		"districtNum" : "06",
+		"officeID" : "2106"
+	},
+	"LA01" : {
+		"hexID" : "#E02740",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Louisiana",
+		"districtNum" : "01",
+		"officeID" : "2201"
+	},
+	"LA02" : {
+		"hexID" : "#FBC400",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Louisiana",
+		"districtNum" : "02",
+		"officeID" : "2202"
+	},
+	"LA03" : {
+		"hexID" : "#11760C0",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Louisiana",
+		"districtNum" : "03",
+		"officeID" : "2203"
+	},
+	"LA04" : {
+		"hexID" : "#32FD80",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Louisiana",
+		"districtNum" : "04",
+		"officeID" : "2204"
+	},
+	"LA05" : {
+		"hexID" : "#4E9A40",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Louisiana",
+		"districtNum" : "05",
+		"officeID" : "2205"
+	},
+	"LA06" : {
+		"hexID" : "#6A3700",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Louisiana",
+		"districtNum" : "06",
+		"officeID" : "2206"
+	},
+	"ME01" : {
+		"hexID" : "#85D3C0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Maine",
+		"districtNum" : "01",
+		"officeID" : "2301"
+	},
+	"ME02" : {
+		"hexID" : "#A17080",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Maine",
+		"districtNum" : "02",
+		"officeID" : "2302"
+	},
+	"MD01" : {
+		"hexID" : "#BD0D40",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Maryland",
+		"districtNum" : "01",
+		"officeID" : "2401"
+	},
+	"MD02" : {
+		"hexID" : "#D8AA00",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Maryland",
+		"districtNum" : "02",
+		"officeID" : "2402"
+	},
+	"MD03" : {
+		"hexID" : "#F446C0",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Maryland",
+		"districtNum" : "03",
+		"officeID" : "2403"
+	},
+	"MD04" : {
+		"hexID" : "#10FE380",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Maryland",
+		"districtNum" : "04",
+		"officeID" : "2404"
+	},
+	"MD05" : {
+		"hexID" : "#2B8040",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Maryland",
+		"districtNum" : "05",
+		"officeID" : "2405"
+	},
+	"MD06" : {
+		"hexID" : "#471D00",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Maryland",
+		"districtNum" : "06",
+		"officeID" : "2406"
+	},
+	"MD07" : {
+		"hexID" : "#62B9C0",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Maryland",
+		"districtNum" : "07",
+		"officeID" : "2407"
+	},
+	"MD08" : {
+		"hexID" : "#7E5680",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Maryland",
+		"districtNum" : "08",
+		"officeID" : "2408"
+	},
+	"MA01" : {
+		"hexID" : "#99F340",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Massachusetts",
+		"districtNum" : "01",
+		"officeID" : "2501"
+	},
+	"MA02" : {
+		"hexID" : "#B59000",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Massachusetts",
+		"districtNum" : "02",
+		"officeID" : "2502"
+	},
+	"MA03" : {
+		"hexID" : "#D12CC0",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Massachusetts",
+		"districtNum" : "03",
+		"officeID" : "2503"
+	},
+	"MA04" : {
+		"hexID" : "#ECC980",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Massachusetts",
+		"districtNum" : "04",
+		"officeID" : "2504"
+	},
+	"MA05" : {
+		"hexID" : "#1086640",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Massachusetts",
+		"districtNum" : "05",
+		"officeID" : "2505"
+	},
+	"MA06" : {
+		"hexID" : "#240300",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Massachusetts",
+		"districtNum" : "06",
+		"officeID" : "2506"
+	},
+	"MA07" : {
+		"hexID" : "#3F9FC0",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Massachusetts",
+		"districtNum" : "07",
+		"officeID" : "2507"
+	},
+	"MA08" : {
+		"hexID" : "#5B3C80",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Massachusetts",
+		"districtNum" : "08",
+		"officeID" : "2508"
+	},
+	"MA09" : {
+		"hexID" : "#76D940",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "Massachusetts",
+		"districtNum" : "09",
+		"officeID" : "2509"
+	},
+	"MI01" : {
+		"hexID" : "#927600",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Michigan",
+		"districtNum" : "01",
+		"officeID" : "2601"
+	},
+	"MI02" : {
+		"hexID" : "#AE12C0",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Michigan",
+		"districtNum" : "02",
+		"officeID" : "2602"
+	},
+	"MI03" : {
+		"hexID" : "#C9AF80",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Michigan",
+		"districtNum" : "03",
+		"officeID" : "2603"
+	},
+	"MI04" : {
+		"hexID" : "#E54C40",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Michigan",
+		"districtNum" : "04",
+		"officeID" : "2604"
+	},
+	"MI05" : {
+		"hexID" : "#100E900",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Michigan",
+		"districtNum" : "05",
+		"officeID" : "2605"
+	},
+	"MI06" : {
+		"hexID" : "#1C85C0",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Michigan",
+		"districtNum" : "06",
+		"officeID" : "2606"
+	},
+	"MI07" : {
+		"hexID" : "#382280",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Michigan",
+		"districtNum" : "07",
+		"officeID" : "2607"
+	},
+	"MI08" : {
+		"hexID" : "#53BF40",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Michigan",
+		"districtNum" : "08",
+		"officeID" : "2608"
+	},
+	"MI09" : {
+		"hexID" : "#6F5C00",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "Michigan",
+		"districtNum" : "09",
+		"officeID" : "2609"
+	},
+	"MI10" : {
+		"hexID" : "#8AF8C0",
+		"nameLSAD" : "Congressional District 10",
+		"state" : "Michigan",
+		"districtNum" : "10",
+		"officeID" : "2610"
+	},
+	"MI11" : {
+		"hexID" : "#A69580",
+		"nameLSAD" : "Congressional District 11",
+		"state" : "Michigan",
+		"districtNum" : "11",
+		"officeID" : "2611"
+	},
+	"MI12" : {
+		"hexID" : "#C23240",
+		"nameLSAD" : "Congressional District 12",
+		"state" : "Michigan",
+		"districtNum" : "12",
+		"officeID" : "2612"
+	},
+	"MI13" : {
+		"hexID" : "#DDCF00",
+		"nameLSAD" : "Congressional District 13",
+		"state" : "Michigan",
+		"districtNum" : "13",
+		"officeID" : "2613"
+	},
+	"MN01" : {
+		"hexID" : "#F96BC0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Minnesota",
+		"districtNum" : "01",
+		"officeID" : "2701"
+	},
+	"MN02" : {
+		"hexID" : "#1150880",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Minnesota",
+		"districtNum" : "02",
+		"officeID" : "2702"
+	},
+	"MN03" : {
+		"hexID" : "#30A540",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Minnesota",
+		"districtNum" : "03",
+		"officeID" : "2703"
+	},
+	"MN04" : {
+		"hexID" : "#4C4200",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Minnesota",
+		"districtNum" : "04",
+		"officeID" : "2704"
+	},
+	"MN05" : {
+		"hexID" : "#67DEC0",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Minnesota",
+		"districtNum" : "05",
+		"officeID" : "2705"
+	},
+	"MN06" : {
+		"hexID" : "#837B80",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Minnesota",
+		"districtNum" : "06",
+		"officeID" : "2706"
+	},
+	"MN07" : {
+		"hexID" : "#9F1840",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Minnesota",
+		"districtNum" : "07",
+		"officeID" : "2707"
+	},
+	"MN08" : {
+		"hexID" : "#BAB500",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Minnesota",
+		"districtNum" : "08",
+		"officeID" : "2708"
+	},
+	"MS01" : {
+		"hexID" : "#D651C0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Mississippi",
+		"districtNum" : "01",
+		"officeID" : "2801"
+	},
+	"MS02" : {
+		"hexID" : "#F1EE80",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Mississippi",
+		"districtNum" : "02",
+		"officeID" : "2802"
+	},
+	"MS03" : {
+		"hexID" : "#10D8B40",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Mississippi",
+		"districtNum" : "03",
+		"officeID" : "2803"
+	},
+	"MS04" : {
+		"hexID" : "#292800",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Mississippi",
+		"districtNum" : "04",
+		"officeID" : "2804"
+	},
+	"MO01" : {
+		"hexID" : "#44C4C0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Missouri",
+		"districtNum" : "01",
+		"officeID" : "2901"
+	},
+	"MO02" : {
+		"hexID" : "#606180",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Missouri",
+		"districtNum" : "02",
+		"officeID" : "2902"
+	},
+	"MO03" : {
+		"hexID" : "#7BFE40",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Missouri",
+		"districtNum" : "03",
+		"officeID" : "2903"
+	},
+	"MO04" : {
+		"hexID" : "#979B00",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Missouri",
+		"districtNum" : "04",
+		"officeID" : "2904"
+	},
+	"MO05" : {
+		"hexID" : "#B337C0",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Missouri",
+		"districtNum" : "05",
+		"officeID" : "2905"
+	},
+	"MO06" : {
+		"hexID" : "#CED480",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Missouri",
+		"districtNum" : "06",
+		"officeID" : "2906"
+	},
+	"MO07" : {
+		"hexID" : "#EA7140",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Missouri",
+		"districtNum" : "07",
+		"officeID" : "2907"
+	},
+	"MO08" : {
+		"hexID" : "#1060E00",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Missouri",
+		"districtNum" : "08",
+		"officeID" : "2908"
+	},
+	"MT01" : {
+		"hexID" : "#21AAC0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Montana",
+		"districtNum" : "01",
+		"officeID" : "3001"
+	},
+	"MT02" : {
+		"hexID" : "#3D4780",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Montana",
+		"districtNum" : "02",
+		"officeID" : "3002"
+	},
+	"NE01" : {
+		"hexID" : "#58E440",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Nebraska",
+		"districtNum" : "01",
+		"officeID" : "3101"
+	},
+	"NE02" : {
+		"hexID" : "#748100",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Nebraska",
+		"districtNum" : "02",
+		"officeID" : "3102"
+	},
+	"NE03" : {
+		"hexID" : "#901DC0",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Nebraska",
+		"districtNum" : "03",
+		"officeID" : "3103"
+	},
+	"NV01" : {
+		"hexID" : "#ABBA80",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Nevada",
+		"districtNum" : "01",
+		"officeID" : "3201"
+	},
+	"NV02" : {
+		"hexID" : "#C75740",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Nevada",
+		"districtNum" : "02",
+		"officeID" : "3202"
+	},
+	"NV03" : {
+		"hexID" : "#E2F400",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Nevada",
+		"districtNum" : "03",
+		"officeID" : "3203"
+	},
+	"NV04" : {
+		"hexID" : "#FE90C0",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Nevada",
+		"districtNum" : "04",
+		"officeID" : "3204"
+	},
+	"NH01" : {
+		"hexID" : "#11A2D80",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "New Hampshire",
+		"districtNum" : "01",
+		"officeID" : "3301"
+	},
+	"NH02" : {
+		"hexID" : "#35CA40",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "New Hampshire",
+		"districtNum" : "02",
+		"officeID" : "3302"
+	},
+	"NJ01" : {
+		"hexID" : "#516700",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "New Jersey",
+		"districtNum" : "01",
+		"officeID" : "3401"
+	},
+	"NJ02" : {
+		"hexID" : "#6D03C0",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "New Jersey",
+		"districtNum" : "02",
+		"officeID" : "3402"
+	},
+	"NJ03" : {
+		"hexID" : "#88A080",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "New Jersey",
+		"districtNum" : "03",
+		"officeID" : "3403"
+	},
+	"NJ04" : {
+		"hexID" : "#A43D40",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "New Jersey",
+		"districtNum" : "04",
+		"officeID" : "3404"
+	},
+	"NJ05" : {
+		"hexID" : "#BFDA00",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "New Jersey",
+		"districtNum" : "05",
+		"officeID" : "3405"
+	},
+	"NJ06" : {
+		"hexID" : "#DB76C0",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "New Jersey",
+		"districtNum" : "06",
+		"officeID" : "3406"
+	},
+	"NJ07" : {
+		"hexID" : "#F71380",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "New Jersey",
+		"districtNum" : "07",
+		"officeID" : "3407"
+	},
+	"NJ08" : {
+		"hexID" : "#112B040",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "New Jersey",
+		"districtNum" : "08",
+		"officeID" : "3408"
+	},
+	"NJ09" : {
+		"hexID" : "#2E4D00",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "New Jersey",
+		"districtNum" : "09",
+		"officeID" : "3409"
+	},
+	"NJ10" : {
+		"hexID" : "#49E9C0",
+		"nameLSAD" : "Congressional District 10",
+		"state" : "New Jersey",
+		"districtNum" : "10",
+		"officeID" : "3410"
+	},
+	"NJ11" : {
+		"hexID" : "#658680",
+		"nameLSAD" : "Congressional District 11",
+		"state" : "New Jersey",
+		"districtNum" : "11",
+		"officeID" : "3411"
+	},
+	"NJ12" : {
+		"hexID" : "#812340",
+		"nameLSAD" : "Congressional District 12",
+		"state" : "New Jersey",
+		"districtNum" : "12",
+		"officeID" : "3412"
+	},
+	"NM01" : {
+		"hexID" : "#9CC000",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "New Mexico",
+		"districtNum" : "01",
+		"officeID" : "3501"
+	},
+	"NM02" : {
+		"hexID" : "#B85CC0",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "New Mexico",
+		"districtNum" : "02",
+		"officeID" : "3502"
+	},
+	"NM03" : {
+		"hexID" : "#D3F980",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "New Mexico",
+		"districtNum" : "03",
+		"officeID" : "3503"
+	},
+	"NY21" : {
+		"hexID" : "#EF9640",
+		"nameLSAD" : "Congressional District 21",
+		"state" : "New York",
+		"districtNum" : "21",
+		"officeID" : "3621"
+	},
+	"NY01" : {
+		"hexID" : "#10B3300",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "New York",
+		"districtNum" : "01",
+		"officeID" : "3601"
+	},
+	"NY02" : {
+		"hexID" : "#26CFC0",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "New York",
+		"districtNum" : "02",
+		"officeID" : "3602"
+	},
+	"NY03" : {
+		"hexID" : "#426C80",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "New York",
+		"districtNum" : "03",
+		"officeID" : "3603"
+	},
+	"NY04" : {
+		"hexID" : "#5E0940",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "New York",
+		"districtNum" : "04",
+		"officeID" : "3604"
+	},
+	"NY05" : {
+		"hexID" : "#79A600",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "New York",
+		"districtNum" : "05",
+		"officeID" : "3605"
+	},
+	"NY06" : {
+		"hexID" : "#9542C0",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "New York",
+		"districtNum" : "06",
+		"officeID" : "3606"
+	},
+	"NY07" : {
+		"hexID" : "#B0DF80",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "New York",
+		"districtNum" : "07",
+		"officeID" : "3607"
+	},
+	"NY08" : {
+		"hexID" : "#CC7C40",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "New York",
+		"districtNum" : "08",
+		"officeID" : "3608"
+	},
+	"NY09" : {
+		"hexID" : "#E81900",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "New York",
+		"districtNum" : "09",
+		"officeID" : "3609"
+	},
+	"NY10" : {
+		"hexID" : "#103B5C0",
+		"nameLSAD" : "Congressional District 10",
+		"state" : "New York",
+		"districtNum" : "10",
+		"officeID" : "3610"
+	},
+	"NY11" : {
+		"hexID" : "#1F5280",
+		"nameLSAD" : "Congressional District 11",
+		"state" : "New York",
+		"districtNum" : "11",
+		"officeID" : "3611"
+	},
+	"NY12" : {
+		"hexID" : "#3AEF40",
+		"nameLSAD" : "Congressional District 12",
+		"state" : "New York",
+		"districtNum" : "12",
+		"officeID" : "3612"
+	},
+	"NY13" : {
+		"hexID" : "#568C00",
+		"nameLSAD" : "Congressional District 13",
+		"state" : "New York",
+		"districtNum" : "13",
+		"officeID" : "3613"
+	},
+	"NY14" : {
+		"hexID" : "#7228C0",
+		"nameLSAD" : "Congressional District 14",
+		"state" : "New York",
+		"districtNum" : "14",
+		"officeID" : "3614"
+	},
+	"NY15" : {
+		"hexID" : "#8DC580",
+		"nameLSAD" : "Congressional District 15",
+		"state" : "New York",
+		"districtNum" : "15",
+		"officeID" : "3615"
+	},
+	"NY16" : {
+		"hexID" : "#A96240",
+		"nameLSAD" : "Congressional District 16",
+		"state" : "New York",
+		"districtNum" : "16",
+		"officeID" : "3616"
+	},
+	"NY17" : {
+		"hexID" : "#C4FF00",
+		"nameLSAD" : "Congressional District 17",
+		"state" : "New York",
+		"districtNum" : "17",
+		"officeID" : "3617"
+	},
+	"NY18" : {
+		"hexID" : "#E09BC0",
+		"nameLSAD" : "Congressional District 18",
+		"state" : "New York",
+		"districtNum" : "18",
+		"officeID" : "3618"
+	},
+	"NY19" : {
+		"hexID" : "#FC3880",
+		"nameLSAD" : "Congressional District 19",
+		"state" : "New York",
+		"districtNum" : "19",
+		"officeID" : "3619"
+	},
+	"NY20" : {
+		"hexID" : "#117D540",
+		"nameLSAD" : "Congressional District 20",
+		"state" : "New York",
+		"districtNum" : "20",
+		"officeID" : "3620"
+	},
+	"NY22" : {
+		"hexID" : "#337200",
+		"nameLSAD" : "Congressional District 22",
+		"state" : "New York",
+		"districtNum" : "22",
+		"officeID" : "3622"
+	},
+	"NY23" : {
+		"hexID" : "#4F0EC0",
+		"nameLSAD" : "Congressional District 23",
+		"state" : "New York",
+		"districtNum" : "23",
+		"officeID" : "3623"
+	},
+	"NY24" : {
+		"hexID" : "#6AAB80",
+		"nameLSAD" : "Congressional District 24",
+		"state" : "New York",
+		"districtNum" : "24",
+		"officeID" : "3624"
+	},
+	"NY25" : {
+		"hexID" : "#864840",
+		"nameLSAD" : "Congressional District 25",
+		"state" : "New York",
+		"districtNum" : "25",
+		"officeID" : "3625"
+	},
+	"NY26" : {
+		"hexID" : "#A1E500",
+		"nameLSAD" : "Congressional District 26",
+		"state" : "New York",
+		"districtNum" : "26",
+		"officeID" : "3626"
+	},
+	"NC01" : {
+		"hexID" : "#BD81C0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "North Carolina",
+		"districtNum" : "01",
+		"officeID" : "3701"
+	},
+	"NC02" : {
+		"hexID" : "#D91E80",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "North Carolina",
+		"districtNum" : "02",
+		"officeID" : "3702"
+	},
+	"NC03" : {
+		"hexID" : "#F4BB40",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "North Carolina",
+		"districtNum" : "03",
+		"officeID" : "3703"
+	},
+	"NC04" : {
+		"hexID" : "#1105800",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "North Carolina",
+		"districtNum" : "04",
+		"officeID" : "3704"
+	},
+	"NC05" : {
+		"hexID" : "#2BF4C0",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "North Carolina",
+		"districtNum" : "05",
+		"officeID" : "3705"
+	},
+	"NC06" : {
+		"hexID" : "#479180",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "North Carolina",
+		"districtNum" : "06",
+		"officeID" : "3706"
+	},
+	"NC07" : {
+		"hexID" : "#632E40",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "North Carolina",
+		"districtNum" : "07",
+		"officeID" : "3707"
+	},
+	"NC08" : {
+		"hexID" : "#7ECB00",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "North Carolina",
+		"districtNum" : "08",
+		"officeID" : "3708"
+	},
+	"NC09" : {
+		"hexID" : "#9A67C0",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "North Carolina",
+		"districtNum" : "09",
+		"officeID" : "3709"
+	},
+	"NC10" : {
+		"hexID" : "#B60480",
+		"nameLSAD" : "Congressional District 10",
+		"state" : "North Carolina",
+		"districtNum" : "10",
+		"officeID" : "3710"
+	},
+	"NC11" : {
+		"hexID" : "#D1A140",
+		"nameLSAD" : "Congressional District 11",
+		"state" : "North Carolina",
+		"districtNum" : "11",
+		"officeID" : "3711"
+	},
+	"NC12" : {
+		"hexID" : "#ED3E00",
+		"nameLSAD" : "Congressional District 12",
+		"state" : "North Carolina",
+		"districtNum" : "12",
+		"officeID" : "3712"
+	},
+	"NC13" : {
+		"hexID" : "#108DAC0",
+		"nameLSAD" : "Congressional District 13",
+		"state" : "North Carolina",
+		"districtNum" : "13",
+		"officeID" : "3713"
+	},
+	"NC14" : {
+		"hexID" : "#247780",
+		"nameLSAD" : "Congressional District 14",
+		"state" : "North Carolina",
+		"districtNum" : "14",
+		"officeID" : "3714"
+	},
+	"ND00" : {
+		"hexID" : "#401440",
+		"nameLSAD" : "Congressional District (at Large)",
+		"state" : "North Dakota",
+		"districtNum" : "00",
+		"officeID" : "3800"
+	},
+	"OH01" : {
+		"hexID" : "#5BB100",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Ohio",
+		"districtNum" : "01",
+		"officeID" : "3901"
+	},
+	"OH02" : {
+		"hexID" : "#774DC0",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Ohio",
+		"districtNum" : "02",
+		"officeID" : "3902"
+	},
+	"OH03" : {
+		"hexID" : "#92EA80",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Ohio",
+		"districtNum" : "03",
+		"officeID" : "3903"
+	},
+	"OH04" : {
+		"hexID" : "#AE8740",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Ohio",
+		"districtNum" : "04",
+		"officeID" : "3904"
+	},
+	"OH05" : {
+		"hexID" : "#CA2400",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Ohio",
+		"districtNum" : "05",
+		"officeID" : "3905"
+	},
+	"OH06" : {
+		"hexID" : "#E5C0C0",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Ohio",
+		"districtNum" : "06",
+		"officeID" : "3906"
+	},
+	"OH07" : {
+		"hexID" : "#1015D80",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Ohio",
+		"districtNum" : "07",
+		"officeID" : "3907"
+	},
+	"OH08" : {
+		"hexID" : "#1CFA40",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Ohio",
+		"districtNum" : "08",
+		"officeID" : "3908"
+	},
+	"OH09" : {
+		"hexID" : "#389700",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "Ohio",
+		"districtNum" : "09",
+		"officeID" : "3909"
+	},
+	"OH10" : {
+		"hexID" : "#5433C0",
+		"nameLSAD" : "Congressional District 10",
+		"state" : "Ohio",
+		"districtNum" : "10",
+		"officeID" : "3910"
+	},
+	"OH11" : {
+		"hexID" : "#6FD080",
+		"nameLSAD" : "Congressional District 11",
+		"state" : "Ohio",
+		"districtNum" : "11",
+		"officeID" : "3911"
+	},
+	"OH12" : {
+		"hexID" : "#8B6D40",
+		"nameLSAD" : "Congressional District 12",
+		"state" : "Ohio",
+		"districtNum" : "12",
+		"officeID" : "3912"
+	},
+	"OH13" : {
+		"hexID" : "#A70A00",
+		"nameLSAD" : "Congressional District 13",
+		"state" : "Ohio",
+		"districtNum" : "13",
+		"officeID" : "3913"
+	},
+	"OH14" : {
+		"hexID" : "#C2A6C0",
+		"nameLSAD" : "Congressional District 14",
+		"state" : "Ohio",
+		"districtNum" : "14",
+		"officeID" : "3914"
+	},
+	"OH15" : {
+		"hexID" : "#DE4380",
+		"nameLSAD" : "Congressional District 15",
+		"state" : "Ohio",
+		"districtNum" : "15",
+		"officeID" : "3915"
+	},
+	"OK01" : {
+		"hexID" : "#F9E040",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Oklahoma",
+		"districtNum" : "01",
+		"officeID" : "4001"
+	},
+	"OK02" : {
+		"hexID" : "#1157D00",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Oklahoma",
+		"districtNum" : "02",
+		"officeID" : "4002"
+	},
+	"OK03" : {
+		"hexID" : "#3119C0",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Oklahoma",
+		"districtNum" : "03",
+		"officeID" : "4003"
+	},
+	"OK04" : {
+		"hexID" : "#4CB680",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Oklahoma",
+		"districtNum" : "04",
+		"officeID" : "4004"
+	},
+	"OK05" : {
+		"hexID" : "#685340",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Oklahoma",
+		"districtNum" : "05",
+		"officeID" : "4005"
+	},
+	"OR01" : {
+		"hexID" : "#83F000",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Oregon",
+		"districtNum" : "01",
+		"officeID" : "4101"
+	},
+	"OR02" : {
+		"hexID" : "#9F8CC0",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Oregon",
+		"districtNum" : "02",
+		"officeID" : "4102"
+	},
+	"OR03" : {
+		"hexID" : "#BB2980",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Oregon",
+		"districtNum" : "03",
+		"officeID" : "4103"
+	},
+	"OR04" : {
+		"hexID" : "#D6C640",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Oregon",
+		"districtNum" : "04",
+		"officeID" : "4104"
+	},
+	"OR05" : {
+		"hexID" : "#F26300",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Oregon",
+		"districtNum" : "05",
+		"officeID" : "4105"
+	},
+	"OR06" : {
+		"hexID" : "#10DFFC0",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Oregon",
+		"districtNum" : "06",
+		"officeID" : "4106"
+	},
+	"PA01" : {
+		"hexID" : "#299C80",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Pennsylvania",
+		"districtNum" : "01",
+		"officeID" : "4201"
+	},
+	"PA02" : {
+		"hexID" : "#453940",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Pennsylvania",
+		"districtNum" : "02",
+		"officeID" : "4202"
+	},
+	"PA03" : {
+		"hexID" : "#60D600",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Pennsylvania",
+		"districtNum" : "03",
+		"officeID" : "4203"
+	},
+	"PA04" : {
+		"hexID" : "#7C72C0",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Pennsylvania",
+		"districtNum" : "04",
+		"officeID" : "4204"
+	},
+	"PA05" : {
+		"hexID" : "#980F80",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Pennsylvania",
+		"districtNum" : "05",
+		"officeID" : "4205"
+	},
+	"PA06" : {
+		"hexID" : "#B3AC40",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Pennsylvania",
+		"districtNum" : "06",
+		"officeID" : "4206"
+	},
+	"PA07" : {
+		"hexID" : "#CF4900",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Pennsylvania",
+		"districtNum" : "07",
+		"officeID" : "4207"
+	},
+	"PA08" : {
+		"hexID" : "#EAE5C0",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Pennsylvania",
+		"districtNum" : "08",
+		"officeID" : "4208"
+	},
+	"PA09" : {
+		"hexID" : "#1068280",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "Pennsylvania",
+		"districtNum" : "09",
+		"officeID" : "4209"
+	},
+	"PA10" : {
+		"hexID" : "#221F40",
+		"nameLSAD" : "Congressional District 10",
+		"state" : "Pennsylvania",
+		"districtNum" : "10",
+		"officeID" : "4210"
+	},
+	"PA11" : {
+		"hexID" : "#3DBC00",
+		"nameLSAD" : "Congressional District 11",
+		"state" : "Pennsylvania",
+		"districtNum" : "11",
+		"officeID" : "4211"
+	},
+	"PA12" : {
+		"hexID" : "#5958C0",
+		"nameLSAD" : "Congressional District 12",
+		"state" : "Pennsylvania",
+		"districtNum" : "12",
+		"officeID" : "4212"
+	},
+	"PA13" : {
+		"hexID" : "#74F580",
+		"nameLSAD" : "Congressional District 13",
+		"state" : "Pennsylvania",
+		"districtNum" : "13",
+		"officeID" : "4213"
+	},
+	"PA14" : {
+		"hexID" : "#909240",
+		"nameLSAD" : "Congressional District 14",
+		"state" : "Pennsylvania",
+		"districtNum" : "14",
+		"officeID" : "4214"
+	},
+	"PA15" : {
+		"hexID" : "#AC2F00",
+		"nameLSAD" : "Congressional District 15",
+		"state" : "Pennsylvania",
+		"districtNum" : "15",
+		"officeID" : "4215"
+	},
+	"PA16" : {
+		"hexID" : "#C7CBC0",
+		"nameLSAD" : "Congressional District 16",
+		"state" : "Pennsylvania",
+		"districtNum" : "16",
+		"officeID" : "4216"
+	},
+	"PA17" : {
+		"hexID" : "#E36880",
+		"nameLSAD" : "Congressional District 17",
+		"state" : "Pennsylvania",
+		"districtNum" : "17",
+		"officeID" : "4217"
+	},
+	"RI01" : {
+		"hexID" : "#FF0540",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Rhode Island",
+		"districtNum" : "01",
+		"officeID" : "4401"
+	},
+	"RI02" : {
+		"hexID" : "#11AA200",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Rhode Island",
+		"districtNum" : "02",
+		"officeID" : "4402"
+	},
+	"SC01" : {
+		"hexID" : "#363EC0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "South Carolina",
+		"districtNum" : "01",
+		"officeID" : "4501"
+	},
+	"SC02" : {
+		"hexID" : "#51DB80",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "South Carolina",
+		"districtNum" : "02",
+		"officeID" : "4502"
+	},
+	"SC03" : {
+		"hexID" : "#6D7840",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "South Carolina",
+		"districtNum" : "03",
+		"officeID" : "4503"
+	},
+	"SC04" : {
+		"hexID" : "#891500",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "South Carolina",
+		"districtNum" : "04",
+		"officeID" : "4504"
+	},
+	"SC05" : {
+		"hexID" : "#A4B1C0",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "South Carolina",
+		"districtNum" : "05",
+		"officeID" : "4505"
+	},
+	"SC06" : {
+		"hexID" : "#C04E80",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "South Carolina",
+		"districtNum" : "06",
+		"officeID" : "4506"
+	},
+	"SC07" : {
+		"hexID" : "#DBEB40",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "South Carolina",
+		"districtNum" : "07",
+		"officeID" : "4507"
+	},
+	"SD00" : {
+		"hexID" : "#F78800",
+		"nameLSAD" : "Congressional District (at Large)",
+		"state" : "South Dakota",
+		"districtNum" : "00",
+		"officeID" : "4600"
+	},
+	"TN01" : {
+		"hexID" : "#11324C0",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Tennessee",
+		"districtNum" : "01",
+		"officeID" : "4701"
+	},
+	"TN02" : {
+		"hexID" : "#2EC180",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Tennessee",
+		"districtNum" : "02",
+		"officeID" : "4702"
+	},
+	"TN03" : {
+		"hexID" : "#4A5E40",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Tennessee",
+		"districtNum" : "03",
+		"officeID" : "4703"
+	},
+	"TN04" : {
+		"hexID" : "#65FB00",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Tennessee",
+		"districtNum" : "04",
+		"officeID" : "4704"
+	},
+	"TN05" : {
+		"hexID" : "#8197C0",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Tennessee",
+		"districtNum" : "05",
+		"officeID" : "4705"
+	},
+	"TN06" : {
+		"hexID" : "#9D3480",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Tennessee",
+		"districtNum" : "06",
+		"officeID" : "4706"
+	},
+	"TN07" : {
+		"hexID" : "#B8D140",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Tennessee",
+		"districtNum" : "07",
+		"officeID" : "4707"
+	},
+	"TN08" : {
+		"hexID" : "#D46E00",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Tennessee",
+		"districtNum" : "08",
+		"officeID" : "4708"
+	},
+	"TN09" : {
+		"hexID" : "#F00AC0",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "Tennessee",
+		"districtNum" : "09",
+		"officeID" : "4709"
+	},
+	"TX01" : {
+		"hexID" : "#10BA780",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Texas",
+		"districtNum" : "01",
+		"officeID" : "4801"
+	},
+	"TX03" : {
+		"hexID" : "#274440",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Texas",
+		"districtNum" : "03",
+		"officeID" : "4803"
+	},
+	"TX04" : {
+		"hexID" : "#42E100",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Texas",
+		"districtNum" : "04",
+		"officeID" : "4804"
+	},
+	"TX05" : {
+		"hexID" : "#5E7DC0",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Texas",
+		"districtNum" : "05",
+		"officeID" : "4805"
+	},
+	"TX06" : {
+		"hexID" : "#7A1A80",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Texas",
+		"districtNum" : "06",
+		"officeID" : "4806"
+	},
+	"TX07" : {
+		"hexID" : "#95B740",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Texas",
+		"districtNum" : "07",
+		"officeID" : "4807"
+	},
+	"TX08" : {
+		"hexID" : "#B15400",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Texas",
+		"districtNum" : "08",
+		"officeID" : "4808"
+	},
+	"TX09" : {
+		"hexID" : "#CCF0C0",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "Texas",
+		"districtNum" : "09",
+		"officeID" : "4809"
+	},
+	"TX10" : {
+		"hexID" : "#E88D80",
+		"nameLSAD" : "Congressional District 10",
+		"state" : "Texas",
+		"districtNum" : "10",
+		"officeID" : "4810"
+	},
+	"TX11" : {
+		"hexID" : "#1042A40",
+		"nameLSAD" : "Congressional District 11",
+		"state" : "Texas",
+		"districtNum" : "11",
+		"officeID" : "4811"
+	},
+	"TX14" : {
+		"hexID" : "#1FC700",
+		"nameLSAD" : "Congressional District 14",
+		"state" : "Texas",
+		"districtNum" : "14",
+		"officeID" : "4814"
+	},
+	"TX15" : {
+		"hexID" : "#3B63C0",
+		"nameLSAD" : "Congressional District 15",
+		"state" : "Texas",
+		"districtNum" : "15",
+		"officeID" : "4815"
+	},
+	"TX18" : {
+		"hexID" : "#570080",
+		"nameLSAD" : "Congressional District 18",
+		"state" : "Texas",
+		"districtNum" : "18",
+		"officeID" : "4818"
+	},
+	"TX19" : {
+		"hexID" : "#729D40",
+		"nameLSAD" : "Congressional District 19",
+		"state" : "Texas",
+		"districtNum" : "19",
+		"officeID" : "4819"
+	},
+	"TX22" : {
+		"hexID" : "#8E3A00",
+		"nameLSAD" : "Congressional District 22",
+		"state" : "Texas",
+		"districtNum" : "22",
+		"officeID" : "4822"
+	},
+	"TX23" : {
+		"hexID" : "#A9D6C0",
+		"nameLSAD" : "Congressional District 23",
+		"state" : "Texas",
+		"districtNum" : "23",
+		"officeID" : "4823"
+	},
+	"TX24" : {
+		"hexID" : "#C57380",
+		"nameLSAD" : "Congressional District 24",
+		"state" : "Texas",
+		"districtNum" : "24",
+		"officeID" : "4824"
+	},
+	"TX25" : {
+		"hexID" : "#E11040",
+		"nameLSAD" : "Congressional District 25",
+		"state" : "Texas",
+		"districtNum" : "25",
+		"officeID" : "4825"
+	},
+	"TX26" : {
+		"hexID" : "#FCAD00",
+		"nameLSAD" : "Congressional District 26",
+		"state" : "Texas",
+		"districtNum" : "26",
+		"officeID" : "4826"
+	},
+	"TX27" : {
+		"hexID" : "#11849C0",
+		"nameLSAD" : "Congressional District 27",
+		"state" : "Texas",
+		"districtNum" : "27",
+		"officeID" : "4827"
+	},
+	"TX28" : {
+		"hexID" : "#33E680",
+		"nameLSAD" : "Congressional District 28",
+		"state" : "Texas",
+		"districtNum" : "28",
+		"officeID" : "4828"
+	},
+	"TX29" : {
+		"hexID" : "#4F8340",
+		"nameLSAD" : "Congressional District 29",
+		"state" : "Texas",
+		"districtNum" : "29",
+		"officeID" : "4829"
+	},
+	"TX30" : {
+		"hexID" : "#6B2000",
+		"nameLSAD" : "Congressional District 30",
+		"state" : "Texas",
+		"districtNum" : "30",
+		"officeID" : "4830"
+	},
+	"TX31" : {
+		"hexID" : "#86BCC0",
+		"nameLSAD" : "Congressional District 31",
+		"state" : "Texas",
+		"districtNum" : "31",
+		"officeID" : "4831"
+	},
+	"TX12" : {
+		"hexID" : "#A25980",
+		"nameLSAD" : "Congressional District 12",
+		"state" : "Texas",
+		"districtNum" : "12",
+		"officeID" : "4812"
+	},
+	"TX33" : {
+		"hexID" : "#BDF640",
+		"nameLSAD" : "Congressional District 33",
+		"state" : "Texas",
+		"districtNum" : "33",
+		"officeID" : "4833"
+	},
+	"TX32" : {
+		"hexID" : "#D99300",
+		"nameLSAD" : "Congressional District 32",
+		"state" : "Texas",
+		"districtNum" : "32",
+		"officeID" : "4832"
+	},
+	"TX34" : {
+		"hexID" : "#F52FC0",
+		"nameLSAD" : "Congressional District 34",
+		"state" : "Texas",
+		"districtNum" : "34",
+		"officeID" : "4834"
+	},
+	"TX13" : {
+		"hexID" : "#110CC80",
+		"nameLSAD" : "Congressional District 13",
+		"state" : "Texas",
+		"districtNum" : "13",
+		"officeID" : "4813"
+	},
+	"TX35" : {
+		"hexID" : "#2C6940",
+		"nameLSAD" : "Congressional District 35",
+		"state" : "Texas",
+		"districtNum" : "35",
+		"officeID" : "4835"
+	},
+	"TX36" : {
+		"hexID" : "#480600",
+		"nameLSAD" : "Congressional District 36",
+		"state" : "Texas",
+		"districtNum" : "36",
+		"officeID" : "4836"
+	},
+	"TX37" : {
+		"hexID" : "#63A2C0",
+		"nameLSAD" : "Congressional District 37",
+		"state" : "Texas",
+		"districtNum" : "37",
+		"officeID" : "4837"
+	},
+	"TX38" : {
+		"hexID" : "#7F3F80",
+		"nameLSAD" : "Congressional District 38",
+		"state" : "Texas",
+		"districtNum" : "38",
+		"officeID" : "4838"
+	},
+	"TX17" : {
+		"hexID" : "#9ADC40",
+		"nameLSAD" : "Congressional District 17",
+		"state" : "Texas",
+		"districtNum" : "17",
+		"officeID" : "4817"
+	},
+	"TX16" : {
+		"hexID" : "#B67900",
+		"nameLSAD" : "Congressional District 16",
+		"state" : "Texas",
+		"districtNum" : "16",
+		"officeID" : "4816"
+	},
+	"TX20" : {
+		"hexID" : "#D215C0",
+		"nameLSAD" : "Congressional District 20",
+		"state" : "Texas",
+		"districtNum" : "20",
+		"officeID" : "4820"
+	},
+	"TX21" : {
+		"hexID" : "#EDB280",
+		"nameLSAD" : "Congressional District 21",
+		"state" : "Texas",
+		"districtNum" : "21",
+		"officeID" : "4821"
+	},
+	"TX02" : {
+		"hexID" : "#1094F40",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Texas",
+		"districtNum" : "02",
+		"officeID" : "4802"
+	},
+	"UT01" : {
+		"hexID" : "#24EC00",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Utah",
+		"districtNum" : "01",
+		"officeID" : "4901"
+	},
+	"UT02" : {
+		"hexID" : "#4088C0",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Utah",
+		"districtNum" : "02",
+		"officeID" : "4902"
+	},
+	"UT03" : {
+		"hexID" : "#5C2580",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Utah",
+		"districtNum" : "03",
+		"officeID" : "4903"
+	},
+	"UT04" : {
+		"hexID" : "#77C240",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Utah",
+		"districtNum" : "04",
+		"officeID" : "4904"
+	},
+	"VT00" : {
+		"hexID" : "#935F00",
+		"nameLSAD" : "Congressional District (at Large)",
+		"state" : "Vermont",
+		"districtNum" : "00",
+		"officeID" : "5000"
+	},
+	"VA07" : {
+		"hexID" : "#AEFBC0",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Virginia",
+		"districtNum" : "07",
+		"officeID" : "5107"
+	},
+	"VA09" : {
+		"hexID" : "#CA9880",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "Virginia",
+		"districtNum" : "09",
+		"officeID" : "5109"
+	},
+	"VA10" : {
+		"hexID" : "#E63540",
+		"nameLSAD" : "Congressional District 10",
+		"state" : "Virginia",
+		"districtNum" : "10",
+		"officeID" : "5110"
+	},
+	"VA01" : {
+		"hexID" : "#101D200",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Virginia",
+		"districtNum" : "01",
+		"officeID" : "5101"
+	},
+	"VA02" : {
+		"hexID" : "#1D6EC0",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Virginia",
+		"districtNum" : "02",
+		"officeID" : "5102"
+	},
+	"VA03" : {
+		"hexID" : "#390B80",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Virginia",
+		"districtNum" : "03",
+		"officeID" : "5103"
+	},
+	"VA05" : {
+		"hexID" : "#54A840",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Virginia",
+		"districtNum" : "05",
+		"officeID" : "5105"
+	},
+	"VA06" : {
+		"hexID" : "#704500",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Virginia",
+		"districtNum" : "06",
+		"officeID" : "5106"
+	},
+	"VA08" : {
+		"hexID" : "#8BE1C0",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Virginia",
+		"districtNum" : "08",
+		"officeID" : "5108"
+	},
+	"VA11" : {
+		"hexID" : "#A77E80",
+		"nameLSAD" : "Congressional District 11",
+		"state" : "Virginia",
+		"districtNum" : "11",
+		"officeID" : "5111"
+	},
+	"VA04" : {
+		"hexID" : "#C31B40",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Virginia",
+		"districtNum" : "04",
+		"officeID" : "5104"
+	},
+	"WA07" : {
+		"hexID" : "#DEB800",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Washington",
+		"districtNum" : "07",
+		"officeID" : "5307"
+	},
+	"WA10" : {
+		"hexID" : "#FA54C0",
+		"nameLSAD" : "Congressional District 10",
+		"state" : "Washington",
+		"districtNum" : "10",
+		"officeID" : "5310"
+	},
+	"WA01" : {
+		"hexID" : "#115F180",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Washington",
+		"districtNum" : "01",
+		"officeID" : "5301"
+	},
+	"WA02" : {
+		"hexID" : "#318E40",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Washington",
+		"districtNum" : "02",
+		"officeID" : "5302"
+	},
+	"WA03" : {
+		"hexID" : "#4D2B00",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Washington",
+		"districtNum" : "03",
+		"officeID" : "5303"
+	},
+	"WA05" : {
+		"hexID" : "#68C7C0",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Washington",
+		"districtNum" : "05",
+		"officeID" : "5305"
+	},
+	"WA06" : {
+		"hexID" : "#846480",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Washington",
+		"districtNum" : "06",
+		"officeID" : "5306"
+	},
+	"WA08" : {
+		"hexID" : "#A00140",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Washington",
+		"districtNum" : "08",
+		"officeID" : "5308"
+	},
+	"WA09" : {
+		"hexID" : "#BB9E00",
+		"nameLSAD" : "Congressional District 9",
+		"state" : "Washington",
+		"districtNum" : "09",
+		"officeID" : "5309"
+	},
+	"WA04" : {
+		"hexID" : "#D73AC0",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Washington",
+		"districtNum" : "04",
+		"officeID" : "5304"
+	},
+	"WV01" : {
+		"hexID" : "#F2D780",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "West Virginia",
+		"districtNum" : "01",
+		"officeID" : "5401"
+	},
+	"WV02" : {
+		"hexID" : "#10E7440",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "West Virginia",
+		"districtNum" : "02",
+		"officeID" : "5402"
+	},
+	"WI01" : {
+		"hexID" : "#2A1100",
+		"nameLSAD" : "Congressional District 1",
+		"state" : "Wisconsin",
+		"districtNum" : "01",
+		"officeID" : "5501"
+	},
+	"WI02" : {
+		"hexID" : "#45ADC0",
+		"nameLSAD" : "Congressional District 2",
+		"state" : "Wisconsin",
+		"districtNum" : "02",
+		"officeID" : "5502"
+	},
+	"WI03" : {
+		"hexID" : "#614A80",
+		"nameLSAD" : "Congressional District 3",
+		"state" : "Wisconsin",
+		"districtNum" : "03",
+		"officeID" : "5503"
+	},
+	"WI04" : {
+		"hexID" : "#7CE740",
+		"nameLSAD" : "Congressional District 4",
+		"state" : "Wisconsin",
+		"districtNum" : "04",
+		"officeID" : "5504"
+	},
+	"WI05" : {
+		"hexID" : "#988400",
+		"nameLSAD" : "Congressional District 5",
+		"state" : "Wisconsin",
+		"districtNum" : "05",
+		"officeID" : "5505"
+	},
+	"WI06" : {
+		"hexID" : "#B420C0",
+		"nameLSAD" : "Congressional District 6",
+		"state" : "Wisconsin",
+		"districtNum" : "06",
+		"officeID" : "5506"
+	},
+	"WI07" : {
+		"hexID" : "#CFBD80",
+		"nameLSAD" : "Congressional District 7",
+		"state" : "Wisconsin",
+		"districtNum" : "07",
+		"officeID" : "5507"
+	},
+	"WI08" : {
+		"hexID" : "#EB5A40",
+		"nameLSAD" : "Congressional District 8",
+		"state" : "Wisconsin",
+		"districtNum" : "08",
+		"officeID" : "5508"
+	},
+	"WY00" : {
+		"hexID" : "#106F700",
+		"nameLSAD" : "Congressional District (at Large)",
+		"state" : "Wyoming",
+		"districtNum" : "00",
+		"officeID" : "5600"
+	},
+	"AQ00" : {
+		"hexID" : "#2293C0",
+		"nameLSAD" : "Delegate District (at Large)",
+		"state" : "American Samoa",
+		"districtNum" : "98",
+		"officeID" : "6098"
+	},
+	"GU00" : {
+		"hexID" : "#3E3080",
+		"nameLSAD" : "Delegate District (at Large)",
+		"state" : "Guam",
+		"districtNum" : "98",
+		"officeID" : "6698"
+	},
+	"MP00" : {
+		"hexID" : "#59CD40",
+		"nameLSAD" : "Delegate District (at Large)",
+		"state" : "Northern Mariana Islands",
+		"districtNum" : "98",
+		"officeID" : "6998"
+	},
+	"PR00" : {
+		"hexID" : "#756A00",
+		"nameLSAD" : "Resident Commissioner District (at Large)",
+		"state" : "Puerto Rico",
+		"districtNum" : "98",
+		"officeID" : "7298"
+	},
+	"VI00" : {
+		"hexID" : "#9106C0",
+		"nameLSAD" : "Delegate District (at Large)",
+		"state" : "U.S. Virgin Islands",
+		"districtNum" : "98",
+		"officeID" : "7898"
+	}
+}
