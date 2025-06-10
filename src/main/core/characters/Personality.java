@@ -9,4 +9,9 @@ public class Personality {
         return repr;
     }
 
+    @Override
+    public Personality clone() {
+        return new Personality();
+    }
+
 }

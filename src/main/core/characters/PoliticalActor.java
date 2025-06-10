@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 // Internal Imports
 import core.JSONObject;
@@ -35,6 +37,22 @@ import main.core.politics.Position;
  */
 public class PoliticalActor extends Character implements HasPersonality {
     
+    /** Roles which a PoliticalActor may hold. */
+    public static enum Role {
+        PRESIDENT,
+        VICE_PRESIDENT,
+        HOUSE_SPEAKER,
+        GOVERNOR,
+        SENATOR,
+        REPRESENTATIVE,
+        ELECTOR,
+        MAYOR,
+        PARTY_LEADER,
+        LOBBYIST,
+        CANDIDATE,
+        NONE
+    }
+
     // STATIC VARIABLES ---------------------------------------------------------------------------
 
     /** Minimum age of a Political Actor */
@@ -95,13 +113,15 @@ public class PoliticalActor extends Character implements HasPersonality {
     /** A List of Experiences representing the experiences of this PoliticalActor. */
     private List<Experience> experiences;
     /** A Skills object representing the legislative, executive, and judicial skills (and aptitude) of this PoliticalActor. */
-    private Skills skills;
+    protected Skills skills;
     /** A List of Positions on Issues held by this PoliticalActor. */
     private List<Position> positions;
     /** The overall conviction of this PoliticalActor. */
     private int conviction;
     /** The Personality object for this PoliticalActor's personality. */
     private Personality personality;
+    /** The role of this PoliticalActor. */
+    private Set<Role> roles;
 
     // CONSTRUCTORS -------------------------------------------------------------------------------
 
@@ -129,16 +149,17 @@ public class PoliticalActor extends Character implements HasPersonality {
      */
     public PoliticalActor(PoliticalActor other, boolean addToCharacterList) {
         super(other, false);
-        this.cash = other.cash;
-        this.education = other.education;
-        this.alignments = Arrays.copyOf(other.alignments, 2);
+        this.cash        = other.cash;
+        this.education   = other.education;
+        this.alignments  = Arrays.copyOf(other.alignments, 2);
         this.experiences = new ArrayList<Experience>();
         addAllExperiences(other.experiences);
-        this.skills = (Skills) other.skills.clone();
-        this.positions = new ArrayList<Position>();
+        this.skills      = (Skills) other.skills.clone();
+        this.positions   = new ArrayList<Position>();
         addAllPositions(other.positions);
-        this.conviction = other.conviction;
+        this.conviction  = other.conviction;
         this.personality = (Personality) other.personality.clone();
+        this.roles       = new HashSet<Role>() {{ add(Role.NONE); }};
 
         if (addToCharacterList) CharacterManager.addCharacter(this);
     }
@@ -159,6 +180,7 @@ public class PoliticalActor extends Character implements HasPersonality {
         this.positions   = new ArrayList<Position>();
         this.conviction  = 100;
         this.personality = new Personality();
+        this.roles       = new HashSet<Role>() {{ add(Role.NONE); }};
 
         CharacterManager.addCharacter(this);
     }
@@ -190,13 +212,14 @@ public class PoliticalActor extends Character implements HasPersonality {
      * @param character Character to copy fields from.
      * @param cash Funds currently usable by this PoliticalActor.
      * @param education Highest education level attained by this PoliticalActor.
-     * @param alignments Int array of two values between -100 and +100, which represents the PoliticalActor's Auth/Lib and Right/Left alignments.
+     * @param alignments Int array of two values between {@code -100} and {@code +100}, which represents the PoliticalActor's Auth/Lib and Right/Left alignments.
      * @param experiences List of Experiences representing the experiences of this PoliticalActor.
      * @param skills Skills object representing the skills and aptitude of this PoliticalActor.
      * @param positions List of the positions on issues held by this PoliticalActor.
      * @param personality Personality object for this PoliticalActor's personality.
+     * @param roles Set of Roles for this PoliticalActor's roles. If empty or null, {@code Role.NONE} will be added.
      */
-    public PoliticalActor(Character character, int cash, Education education, int[] alignments, List<Experience> experiences, Skills skills, List<Position> positions, Personality personality) {
+    public PoliticalActor(Character character, int cash, Education education, int[] alignments, List<Experience> experiences, Skills skills, List<Position> positions, Personality personality, Set<Role> roles) {
         super(character);
         if (alignments.length != 2)
             throw new IllegalArgumentException("The alignments int array must have a length of 2, not " + String.valueOf(alignments.length));
@@ -208,6 +231,7 @@ public class PoliticalActor extends Character implements HasPersonality {
         this.skills      = skills      != null ? skills      : new Skills();
         this.positions   = positions   != null ? positions   : new ArrayList<Position>();
         this.personality = personality != null ? personality : new Personality();
+        this.roles       = roles       != null ? roles       : new HashSet<Role>() {{ add(Role.NONE); }};
     }
 
     /**
@@ -227,13 +251,14 @@ public class PoliticalActor extends Character implements HasPersonality {
      * @param skills Skills object representing the skills and aptitude of this PoliticalActor.
      * @param positions List of the positions on issues held by this PoliticalActor.
      * @param personality Personality object for this PoliticalActor's personality.
+     * @param roles Set of roles for this PoliticalActor's roles. If empty or null, {@code Role.NONE} will be added.
      * @see Character#Character(Demographics, Name, Municipality, Municipality, Municipality, Date, CharacterModel)
-     * @see #PoliticalActor(Character, int, Education, int[], List, Skills, List, Personality)
+     * @see #PoliticalActor(Character, int, Education, int[], List, Skills, List, Personality, Role)
      */
-    public PoliticalActor(Demographics demographics, Name name, Municipality birthplaceMunicipality, Municipality currentLocationMunicipality, Municipality residenceMunicipality, Date birthday, CharacterModel appearance, int cash, Education education, int[] alignments, List<Experience> experiences, Skills skills, List<Position> positions, Personality personality) {
+    public PoliticalActor(Demographics demographics, Name name, Municipality birthplaceMunicipality, Municipality currentLocationMunicipality, Municipality residenceMunicipality, Date birthday, CharacterModel appearance, int cash, Education education, int[] alignments, List<Experience> experiences, Skills skills, List<Position> positions, Personality personality, Set<Role> roles) {
         this(
             new Character(demographics, name, birthplaceMunicipality, currentLocationMunicipality, residenceMunicipality, birthday, appearance),
-            cash, education, alignments, experiences, skills, positions, personality
+            cash, education, alignments, experiences, skills, positions, personality, roles
         );
     }
 
@@ -348,6 +373,24 @@ public class PoliticalActor extends Character implements HasPersonality {
     public float evaluateAction() {
         // TODO Complete this function
         return 0.5f;
+    }
+
+    // Role
+    public Set<Role> getRoles() {
+        return roles;
+    }
+    public void setRoles(Set<Role> roles) {
+        this.roles = new HashSet<>(roles);
+        if (this.roles.size() == 0)
+            addRole(Role.NONE);
+    }
+    public boolean addRole(Role role) {
+        if (this.roles.contains(Role.NONE))
+            removeRole(Role.NONE);
+        return this.roles.add(role);
+    }
+    public boolean removeRole(Role role) {
+        return this.roles.remove(role);
     }
 
     protected float getAgeMod() {

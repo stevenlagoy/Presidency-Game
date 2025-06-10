@@ -153,10 +153,9 @@ public class Candidate extends PoliticalActor {
 
         for(int i = 0; i < 3; i++) pointsAllotments[i] += evenApportionment;
 
-        this.setLegislativeBaseSkill(pointsAllotments[0] / POINTS_PER_SKILL);
-        this.setExecutiveBaseSkill(pointsAllotments[1] / POINTS_PER_SKILL);
-        this.setJudicialBaseSkill(pointsAllotments[2] / POINTS_PER_SKILL);
-        this.evalAptitude();
+        this.skills.setBaseLegislativeSkill(pointsAllotments[0] / POINTS_PER_SKILL);
+        this.skills.setBaseExecutiveSkill(pointsAllotments[1] / POINTS_PER_SKILL);
+        this.skills.setBaseJudicialSkill(pointsAllotments[2] / POINTS_PER_SKILL);
 
         refund = totalPoints - points;
         return refund;

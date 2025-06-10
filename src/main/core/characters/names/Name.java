@@ -157,6 +157,7 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
         this.maternalName = "";
         this.nickname = "";
         this.religiousName = "";
+        this.westernName = "";
         this.legalName = "";
         this.informalName = "";
         this.honorific = "";
@@ -190,6 +191,7 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
         this.maternalName = other.getMaternalName();
         this.nickname = other.getNickname();
         this.religiousName = other.religiousName;
+        this.westernName = other.getWesternName();
         this.legalName = other.legalName;
         this.informalName = other.informalName;
         this.honorific = other.honorific;
@@ -213,25 +215,25 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
         this.nameForm = nameform;
         switch (nameform) {
             case WESTERN :
-                this.givenName = givenName;
-                this.middleName = middleName;
-                this.familyName = familyName;
-                this.birthSurname = familyName;
+                this.givenName = givenName != null ? givenName : "";
+                this.middleName = middleName != null ? middleName : "";
+                this.familyName = familyName != null ? familyName : "";
+                this.birthSurname = familyName != null ? familyName : "";
                 break;
             case EASTERN :
-                this.familyName = familyName;
-                this.middleName = middleName;
-                this.givenName = givenName;
+                this.familyName = familyName != null ? familyName : "";
+                this.middleName = middleName != null ? middleName : "";
+                this.givenName = givenName != null ? givenName : "";
                 break;
             case HISPANIC :
-                this.givenName = givenName;
-                this.middleName = middleName;
+                this.givenName = givenName != null ? givenName : "";
+                this.middleName = middleName != null ? middleName : "";
                 this.paternalName = familyName.split("\s+")[0];
                 this.maternalName = familyName.split("\s+")[1];
                 break;
             case NATIVE_AMERICAN :
-                this.givenName = givenName;
-                this.familyName = familyName;
+                this.givenName = givenName != null ? givenName : "";
+                this.familyName = familyName != null ? familyName : "";
                 break;
         }
         this.suffixes = new ArrayList<>();
@@ -255,16 +257,14 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
         Set<DisplayOption> displayOptions
     ) {
         this.nameForm  = nameForm;
-        this.givenName = givenName;
-        this.middleName = middleName;
-        this.familyName = familyName;
-        this.birthSurname = birthSurname;
-        this.paternalName = paternalName;
-        this.maternalName = maternalName;
-        this.nickname = nickname;
-        this.religiousName = religiousName;
-        this.legalName = legalName;
-        this.informalName = informalName;
+        this.givenName = givenName != null ? givenName : "";
+        this.middleName = middleName != null ? middleName : "";
+        this.familyName = familyName != null ? familyName : "";
+        this.birthSurname = birthSurname != null ? birthSurname : "";
+        this.paternalName = paternalName != null ? paternalName : "";
+        this.maternalName = maternalName != null ? maternalName : "";
+        this.nickname = nickname != null ? nickname : "";
+        this.religiousName = religiousName != null ? religiousName : "";
         this.honorific = honorific;
         this.ordinal = ordinal;
         this.suffixes = suffixes;
@@ -279,6 +279,7 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
     }
 
     public String getGivenName() {
+        if (nameForm.equals(NameForm.EASTERN) && !middleName.isEmpty()) return givenName.toLowerCase();
         return givenName;
     }
     public void setGivenName(String name) {

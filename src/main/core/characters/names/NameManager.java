@@ -8,6 +8,7 @@
 package main.core.characters.names;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,11 +16,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.lwjgl.system.linux.liburing.IOURing;
+
 import core.JSONObject;
 import core.JSONProcessor;
 import main.core.Engine;
 import main.core.FilePaths;
-import main.core.Jsonic;
+import main.core.IOUtil;
 import main.core.characters.names.Name.NameForm;
 import main.core.characters.names.Name.DisplayOption;
 import main.core.demographics.Bloc;
@@ -35,49 +38,51 @@ public final class NameManager {
     private NameManager() {} // Non-Instantiable
 
     /** Percentage of Asian people who should have an Eastern nameform. */
-    private static final float asianEasternNamePercent      = 0.50f;
+    private static final float asianEasternNamePercent = 0.50f;
     /** Percentage of Hispanic/Latino people who should have a Hispanic name. */
-    private static final float hispanicHispanicNamePercent  = 0.80f;
+    private static final float hispanicHispanicNamePercent = 0.80f;
     /** Percentage of Native American people who should have a Native American name. */
-    private static final float nativeNativeNamePercent      = 0.25f;
+    private static final float nativeNativeNamePercent = 0.25f;
     /** Percentage of people with a middle name. */
-    private static final float hasMiddleNamePercent         = 0.80f;
+    private static final float hasMiddleNamePercent = 0.80f;
     /** Percentage of people with a generational name given they have an Eastern-style name. */
-    private static final float hasGenerationNamePercent     = 0.60f;
+    private static final float hasGenerationNamePercent = 0.60f;
     /** Percentage of people who have a Generation name but choose not to use it. */
-    private static final float latentGenerationNamePercent  = 0.30f;
+    private static final float latentGenerationNamePercent = 0.30f;
     /** Percentage of people with mupltiple first names. */
-    private static final float multipleFirstNamesPercent    = 0.10f;
+    private static final float multipleFirstNamesPercent = 0.10f;
     /** Percentage of people with two forenames (nombres) given they have a Hispanic-style name. */
     private static final float hispanicMultipleForenamesPercent = 0.35f;
+    /** Liklihood that a person with a Hispanic-style name has multuple surnames in either the maternal or paternal apellido. */
+    private static final float hispanicCompositeSurnamePercent = 0.30f;
     /** Percentage of people with more middle names. 11% of people have 2, 0.121% have 3 etc. */
-    private static final float multipleMiddleNamesPercent   = 0.11f;
+    private static final float multipleMiddleNamesPercent = 0.11f;
     /** Percentage of people who commonly use a nickname. */
-    private static final float hasNicknamePercent           = 0.23f;
+    private static final float hasNicknamePercent = 0.23f;
     /** Percentage of people with a nickname which does not resemble any of their given names. */
-    private static final float nicknameNotFromNamesPercent  = 0.05f;
+    private static final float nicknameNotFromNamesPercent = 0.05f;
     /** Percentage of people with a double-barreled or multiple last/family names. */
-    private static final float doubleBarrelledNamePercent   = 0.11f;
+    private static final float doubleBarrelledNamePercent = 0.11f;
     /** Percentage of people whose first family name is their maternal family name. */
-    private static final float maternalNameFirstPercent     = 0.05f;
+    private static final float maternalNameFirstPercent = 0.05f;
     /** Percentage of people with a non-Western-style name who also use a Western name. */
-    private static final float hasWesternNamePercent        = 0.20f;
+    private static final float hasWesternNamePercent = 0.20f;
     /** Percentage of people who hyphenate their last names. */
-    private static final float hyphenatedNamePercent        = 0.06f;
+    private static final float hyphenatedNamePercent = 0.06f;
     /** Percentage of people who abbreviate only their First Name(s) in their Common Name. */
-    private static final float abbreviateFirstNamesPercent  = 0.04f;
+    private static final float abbreviateFirstNamesPercent = 0.04f;
     /** Percentage of people who abbreviate only their Middle Name(s) in their Common Name. */
     private static final float abbreviateMiddleNamesPercent = 0.38f;
     /** Percentage of people who abbreviate their First and Middle Names in their Common Name. */
-    private static final float abbreviateBothNamesPercent   = 0.08f;
+    private static final float abbreviateBothNamesPercent = 0.08f;
     /** Percentage of people who include their Middle Name in their Common Name. */
-    private static final float useMiddleNicknamePercent     = 0.04f;
+    private static final float useMiddleNicknamePercent = 0.04f;
     /** Percentage of people with the I or Senior ordination. */
-    private static final float srOrdinationPercent          = 0.04f;
+    private static final float srOrdinationPercent = 0.04f;
     /** Percentage of people with the II or Junior ordination. */
-    private static final float jrOrdinationPercent          = 0.08f;
+    private static final float jrOrdinationPercent = 0.08f;
     /** Percentage of people with the II or Second ordination (applied repeatedly to choose higher ordinations). */
-    private static final float iiOrdinationPercent          = 0.06f;
+    private static final float iiOrdinationPercent = 0.06f;
 
     /** Map of first / given names and frequency weights, keyed with the blocs those names are associated with. Names can be accessed through a set containing the applicable blocs. */
     private static Map<Set<Bloc>, Map<String, Double>> firstNamesDistribution;
@@ -556,6 +561,9 @@ public final class NameManager {
             }
         }
         else if (demographics.getRaceEthnicity().getNestedNames().contains("Hispanic / Latino")) {
+            if (demographics.getRaceEthnicity().getNestedNames().contains("Argentinian")) {
+                return NameForm.WESTERN; // Only the paternal apellido is inherited in the Argentinian custom
+            }
             if (Engine.randPercent() <= hispanicHispanicNamePercent) {
                 return NameForm.HISPANIC;
             }
@@ -637,7 +645,7 @@ public final class NameManager {
                 break;
             case HISPANIC :
                 counts[0] = Engine.probabilisticCount(hispanicMultipleForenamesPercent) + 1;
-                counts[2] = 2;
+                counts[2] = Engine.probabilisticCount(hispanicCompositeSurnamePercent) + 2;
                 break;
             case NATIVE_AMERICAN :
                 counts[0] = 1;
@@ -668,14 +676,40 @@ public final class NameManager {
                 break;
         }
     }
-    public static void assignFamilyName(Name name, String[] familyNames) {
+    public static void assignFamilyName(Name name, String[] familyNames, Demographics demographics) {
         switch (name.getNameForm()) {
             case EASTERN:
                 name.setFamilyName(familyNames[0]);
                 break;
             case HISPANIC:
-                name.setPaternalName(familyNames[0]);
-                name.setMaternalName(familyNames[1]);
+                String[] conjoiners = {" y ", " de ", "-"};
+                int divide = Engine.randInt(1, familyNames.length - 1);
+                String[] paternalNames = Arrays.copyOfRange(familyNames, 0, divide);
+                String[] maternalNames = Arrays.copyOfRange(familyNames, divide, familyNames.length);
+                String paternalName = "";
+                for (String n : paternalNames) {
+                    if (paternalName.isEmpty()) {
+                        paternalName = n;
+                        continue;
+                    }
+                    paternalName = paternalName + Engine.randSelect(conjoiners) + n;
+                }
+                String maternalName = "";
+                for (String n : maternalNames) {
+                    if (maternalName.isEmpty()) {
+                        maternalName = n;
+                        continue;
+                    }
+                    maternalName = maternalName + Engine.randSelect(conjoiners) + n;
+                }
+                if (demographics.getRaceEthnicity().getNestedNames().contains("Brazilian")) {
+                    // Brazilian names list the Maternal surname first
+                    name.setMaternalName(maternalName.replace(" y ", " e "));
+                    name.setPaternalName(paternalName.replace(" y ", " e "));
+                    name.addDisplayOption(DisplayOption.MATERNAL_FIRST);
+                }
+                name.setPaternalName(paternalName);
+                name.setMaternalName(maternalName);
                 if (Engine.randPercent() <= maternalNameFirstPercent)
                     name.addDisplayOption(DisplayOption.MATERNAL_FIRST);
                 else
@@ -700,7 +734,7 @@ public final class NameManager {
         Name name = new Name();
         NameForm form = selectNameForm(demographics);
         name.setNameForm(form);
-        
+
         // Basic name parts
         int[] partsCounts = selectPartsCounts(form);
         String[] givenNames = new String[partsCounts[0]];
@@ -717,7 +751,7 @@ public final class NameManager {
         }
         assignGivenName(name, givenNames);
         assignMiddleName(name, middleNames);
-        assignFamilyName(name, familyNames);
+        assignFamilyName(name, familyNames, demographics);
         
         // Extra name parts
         
@@ -748,16 +782,20 @@ public final class NameManager {
 
         // Suffixes
 
-        // Display Options
-        if (Engine.randPercent() <= abbreviateBothNamesPercent) {
-            name.addDisplayOption(DisplayOption.ABBREVIATE_FIRST);
-            name.addDisplayOption(DisplayOption.ABBREVIATE_MIDDLE);
-        }
-        else if (Engine.randPercent() <= abbreviateFirstNamesPercent) {
-            name.addDisplayOption(DisplayOption.ABBREVIATE_FIRST);
-        }
-        else if (Engine.randPercent() <= abbreviateMiddleNamesPercent) {
-            name.addDisplayOption(DisplayOption.ABBREVIATE_MIDDLE);
+        // DISPLAY OPTIONS
+
+        // Abbreviation
+        if (form.equals(NameForm.WESTERN)) {
+            if (Engine.randPercent() <= abbreviateBothNamesPercent) {
+                name.addDisplayOption(DisplayOption.ABBREVIATE_FIRST);
+                name.addDisplayOption(DisplayOption.ABBREVIATE_MIDDLE);
+            }
+            else if (Engine.randPercent() <= abbreviateFirstNamesPercent) {
+                name.addDisplayOption(DisplayOption.ABBREVIATE_FIRST);
+            }
+            else if (Engine.randPercent() <= abbreviateMiddleNamesPercent) {
+                name.addDisplayOption(DisplayOption.ABBREVIATE_MIDDLE);
+            }
         }
 
         return name;

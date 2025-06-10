@@ -1,11 +1,10 @@
 package main.core.characters;
 
-import main.core.characters.GovernmentOfficial;
 import main.core.map.State;
 
-public class StateOfficial extends GovernmentOfficial
-{
-    private State stateSeat;
+public class StateOfficial extends PoliticalActor {
+
+    private State state;
 
     public StateOfficial(){
 
@@ -13,18 +12,18 @@ public class StateOfficial extends GovernmentOfficial
     public StateOfficial(String buildstring){
         super(buildstring);
     }
-    public StateOfficial(String position, State stateSeat){
-        super(position);
+    public StateOfficial(Role role, State state){
+        super();
     }
     public StateOfficial(State state){
         super();
-        this.stateSeat = state;
+        this.state = state;
     }
 
     public State getState(){
-        return stateSeat;
+        return state;
     }
     public void setState(State state){
-        this.stateSeat = state;
+        this.state = state;
     }
 }

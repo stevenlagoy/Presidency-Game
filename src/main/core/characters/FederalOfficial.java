@@ -1,9 +1,11 @@
 package main.core.characters;
 
-public class FederalOfficial extends GovernmentOfficial {
+public class FederalOfficial extends PoliticalActor {
+    
     public FederalOfficial(){
-        super("Federal Official");
+        super();
     }
+    
     public FederalOfficial(String buildstring){
         super(buildstring);
     }
