@@ -1,862 +1,348 @@
 {
-	"aging_population" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"agricultural_heartland" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"alabama" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"alaska" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"appalachia" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"arid" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"arizona" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"arizona_sun_corridor_metro" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"ark_la_tex" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"arkansas" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"atlantic_south" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"bayou" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"bible_belt" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"black_belt" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"black_dirt_region" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"border" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"cajun" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"california" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"calumet_basin" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"carolinas" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"cascadia" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"cascadia_metro" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"central" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"central_florida" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"chesapeake" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"coal_belt" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"coastal" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"cold_winters" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"colorado" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"colorado_plateau" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"columbia_basin" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"columbia_plateau" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"connecticut" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"contiguous" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"corn_belt" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"cotton_belt" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"dakotas" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"deep_north" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"deep_south" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"delaware" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"delmarva" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"deseret" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"desert" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"dixie" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"driftless_area" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"east_coast" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"east_north_central" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"east_south_central" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"eastern" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"far_west" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"florida" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"florida_metro" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"four_corners" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"front_range_metro" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"frontier" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"fruit_belt" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"georgia" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"great_ales_metro" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"great_appalachian_valley" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"great_basin" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"great_desert" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"great_lakes" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"great_plains" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"guam" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"gulf_coast" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"gulf_coast_metro" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"hawaii" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"heartland" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"high_plains" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"hurricane_prone" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"idaho" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"illinois" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"indiana" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"indigenous_presence" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"industrial_legacy" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"inland_northwest" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"interior_plains" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"intermountain" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"iowa" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"kansas" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"kentuckiana" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"kentucky" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"landlocked" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"llano_estacado" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"louisiana" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"lower_midwest" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"maine" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"mariana_islands" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"maryland" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"massachusetts" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"michiana" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"michigan" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"mid_atlantic" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"mid_south" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"middle_atlantic" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"mideast" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"midland_valley" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"midwest" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"midwest_plains" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"midwestern" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"minnesota" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"mississippi" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"mississippi_delta" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"missouri" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"mojave_desert" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"montana" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"mormon_corridor" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"mountain" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"mountainous" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"nebraska" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"nevada" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"new_england" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"new_hampshire" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"new_jersey" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"new_mexico" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"new_york" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"newyork_metro" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"norcal" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"north_appalachia" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"north_carolina" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"north_dakota" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"north_great_plains" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"north_woods" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"northeast" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"northeast_metro" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"northeastern" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"northern" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"northern_california_metro" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"northern_highlands" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"northern_marianas" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"northern_new_england" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"northwestern" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"ohio" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"ohio_valley" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"oklahoma" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"old_south" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"old_southwest" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"oregon" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"ozarks" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"pacific" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"pacific_northwest" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"palouse" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"pennsylvania" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"piedmont" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"piedmont_atlantic_metro" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"pine_belt" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"piney_woods" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"plains" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"politically_conservative" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"politically_liberal" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"predominantly_white" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"puerto_rico" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"rainy" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"religious" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"resource_rich" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"rhode_island" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"rice_belt" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"rio_grande" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"rocky_mountain" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"rocky_mountains" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"rural_majority" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"rust_belt" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"samoa" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"samoan_islands" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"seaboard_atlantic" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"secular" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"siouxland" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"snow_belt" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"socal" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"south" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"south_appalachia" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"south_atlantic" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"south_carolina" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"south_dakota" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"south_florida" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"south_great_plains" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"southeast" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"southeastern" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"southern" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"southern_california_metro" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"southern_new_england" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"southern_rocky_mountain_metro" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"southern_rocky_mountains" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"southwest" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"southwestern" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"sun_belt" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"swing_state" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"tennessee" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"texas" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"texas_triangle_metro" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"tidewater" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"tornado_alley" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"tourist_driven" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"trans_mississippi" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"tropical" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"twin_tiers" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"upland_south" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"upper_midwest" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"upper_south" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"urbanized" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"utah" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"vermont" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"virgin_islands" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"virginia" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"washington" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"waxhaws" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"west" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"west_coast" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"west_north_central" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"west_south_central" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"west_virginia" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"western" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"wisconsin" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"wyoming" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	},
-	"young_population" : {
-		"FIPS" : [],
-		"demographic_modifiers" : []
-	}
+	"NORTHEAST" : {},
+	"SOUTH" : {},
+	"MIDWEST" : {},
+	"WEST" : {},
+
+	"NEW_ENGLAND" : {},
+	"MID-ATLANTIC" : {},
+	"SOUTH_ATLANTIC" : {},
+	"EAST_NORTH_CENTRAL" : {},
+	"EAST_SOUTH_CENTRAL" : {},
+	"WEST_NORTH_CENTRAL" : {},
+	"WEST_SOUTH_CENTRAL" : {},
+	"MOUNTAIN" : {},
+	"PACIFIC" : {},
+
+	"ALABAMA" : {},
+	"ALASKA" : {},
+	"ARIZONA" : {},
+	"ARKANSAS" : {},
+	"CALIFORNIA" : {},
+	"COLORADO" : {},
+	"CONNECTICUT" : {},
+	"DELAWARE" : {},
+	"FLORIDA" : {},
+	"GEORGIA" : {},
+	"GUAM" : {},
+	"HAWAII" : {},
+	"IDAHO" : {},
+	"ILLINOIS" : {},
+	"INDIANA" : {},
+	"IOWA" : {},
+	"KANSAS" : {},
+	"KENTUCKY" : {},
+	"LOUISIANA" : {},
+	"MAINE" : {},
+	"MARIANA_ISLANDS" : {},
+	"MARYLAND" : {},
+	"MASSACHUSETTS" : {},
+	"MICHIGAN" : {},
+	"MINNESOTA" : {},
+	"MISSISSIPPI" : {},
+	"MISSOURI" : {},
+	"MONTANA" : {},
+	"NEBRASKA" : {},
+	"NEVADA" : {},
+	"NEW_HAMPSHIRE" : {},
+	"NEW_JERSEY" : {},
+	"NEW_MEXICO" : {},
+	"NEW_YORK" : {},
+	"NORTH_CAROLINA" : {},
+	"NORTH_DAKOTA" : {},
+	"OHIO" : {},
+	"OKLAHOMA" : {},
+	"OREGON" : {},
+	"PENNSYLVANIA" : {},
+	"PUERTO_RICO" : {},
+	"RHODE_ISLAND" : {},
+	"SAMOA" : {},
+	"SOUTH_CAROLINA" : {},
+	"SOUTH_DAKOTA" : {},
+	"TENNESSEE" : {},
+	"TEXAS" : {},
+	"UTAH" : {},
+	"VERMONT" : {},
+	"VIRGIN_ISLANDS" : {},
+	"VIRGINIA" : {},
+	"WASHINGTON" : {},
+	"WEST_VIRGINIA" : {},
+	"WISCONSIN" : {},
+	"WYOMING" : {},
+
+	"APPALACHIAN_MOUNTAINS" : {},
+	"ROCKY_MOUNTAINS" : {},
+	"SIERRA_NEVADA_MOUNTAINS" : {},
+	"CASCADE_RANGE" : {},
+	"BROOKS_RANGE" : {},
+	"ALAKSA_RANGE" : {},
+	"COAST_RANGES" : {},
+	"ADIRONDACK_MOUNTAINS" : {},
+	"OUACHITA_MOUNTAINS" : {},
+	"KLAMATH_MOUNTAINS" : {},
+	"OLYMPIC_MOUNTAINS" : {},
+	"WASATCH_RANGE" : {},
+	"CHUGACH_MOUNTAINS" : {},
+	"SAN_JUAN_MOUNTAINS" : {},
+	"GREEN_MOUNTAINS" : {},
+	"TETON_RANGE" : {},
+
+	"MISSISSIPPI_RIVER" : {},
+	"COLORADO_RIVER" : {},
+	"OHIO_RIVER" : {},
+	"COLUMBIA_RIVER" : {},
+	"ST_LAWRENCE_RIVER" : {},
+	"HUDSON_RIVER" : {},
+	"MISSOURI_RIVER" : {},
+	"RED_RIVER_OF_THE_SOUTH" : {},
+	"MACKENZIE_RIVER" : {},
+	"SNAKE_RIVER" : {},
+	"DELAWARE_RIVER" : {},
+	"POTOMAC_RIVER" : {},
+	"RIO_GRANDE" : {},
+
+	"LAKE_SUPERIOR" : {},
+	"LAKE_HURON" : {},
+	"LAKE_MICHIGAN" : {},
+	"LAKE_ERIE" : {},
+	"LAKE_ONTARIO" : {},
+	"LAKE_OF_THE_WOODS" : {},
+	"ILIAMNA_LAKE" : {},
+	"GREAT_SALT_LAKE" : {},
+	"LAKE_OAHE" : {},
+	"LAKE_OKEECHOBEE" : {},
+	"LAKE_PONTCHARTRAIN" : {},
+	"LAKE_SAKAKAWEA" : {},
+	"LAKE_CHAMPLAIN" : {},
+	"BECHAROF_LAKE" : {},
+	"LAKE_ST_CLAIR" : {},
+	"RED_LAKE" : {},
+
+	"URBAN" : {},
+	"SUBURBAN" : {},
+	"RURAL" : {},
+
+	"EVANGELICAL" : {},
+	"MAINLINE_PROTESTANT" : {},
+	"BLACK_PROTESTANT" : {},
+	"OTHER_PROTESTANT" : {},
+	"CATHOLIC" : {},
+	"MORMON" : {},
+	"ORTHODOX_CHRISTIAN" : {},
+	"IRRELIGIOUS" : {},
+	"JEWISH" : {},
+	"MUSLIM" : {},
+	"BUDDHIST" : {},
+	"HINDU" : {},
+
+	"HIGHLY_EDUCATED" : {
+		"Education" : {
+			"Primary Education" :   0.070,
+			"Secondary Education" : 0.120,
+			"Tertiary Education" :  0.190,
+			"College Degree" :      0.410,
+			"Higher Degree" :       0.210
+		}
+	},
+	"EDUCATED" : {},
+	"UNEDUCATED" : {},
+
+	"WHITE" : {},
+	"NORTHERN_EUROPEAN" : {},
+	"SOUTHERN_EUROPEAN" : {},
+	"WESTERN_EUROPEAN" : {},
+	"EASTERN_EUROPEAN" : {},
+	"BLACK" : {},
+	"NATIVE_INDIAN" : {},
+	"CHEROKEE" : {},
+	"NAVAJO" : {},
+	"CHOCTAW" : {},
+	"SIOUX" : {},
+	"APACHE" : {},
+	"BLACKFOOT" : {},
+	"CREEK" : {},
+	"IROQUOIS" : {},
+	"LUMBEE" : {},
+	"PUEBLO" : {},
+	"CHICKASAW" : {},
+	"POTAWATOMI" : {},
+	"SEMINOLE" : {},
+	"ALASKA_NATIVE" : {},
+	"CANADIAN_INDIAN" : {},
+	"MEXICAN_INDIAN" : {},
+	"ASIAN" : {},
+	"CHINESE" : {},
+	"INDIAN" : {},
+	"FILIPINO" : {},
+	"VIETNAMESE" : {},
+	"KOREAN" : {},
+	"JAPANESE" : {},
+	"PAKISTANI" : {},
+	"CAMBODIAN" : {},
+	"HISPANIC" : {},
+	"MEXICAN" : {},
+	"PUERTO_RICAN" : {},
+	"CUBAN" : {},
+	"SALVADORAN" : {},
+	"DOMINICAN" : {},
+	"BRAZILIAN" : {},
+	"GUATEMALAN" : {},
+	"MENA" : {},
+	"LEBANESE" : {},
+	"IRANIAN" : {},
+	"ARMENIAN" : {},
+	"EGYPTIAN" : {},
+	"TURKISH" : {},
+	"SYRIAN" : {},
+	"IRAQI" : {},
+	"PALESTINIAN" : {},
+	"MOROCCAN" : {},
+	"ISRAELI" : {},
+	"JORDANIAN" : {},
+
+	"MINING_INDUSTRY" : {},
+	"UTILITIES_INDUSTRY" : {},
+	"CONSTRUCTION_INDUSTRY" : {},
+	"MANUFACTURING_INDUSTRY" : {},
+	"ARTS_ENTERTAINMENT_RECREATION" : {},
+	"PUBLIC_ADMINISTRATION" : {},
+	"HIGH_UNEMPLOYMENT" : {},
+
+	"AGING_POPULATION" : {},
+	"YOUNG_POPULATION" : {},
+
+
+	"AGRICULTURAL_HEARTLAND" : {},
+	"APPALACHIA" : {},
+	"ARID" : {},
+	"ARIZONA_SUN_CORRIDOR_METRO" : {},
+	"ARK_LA_TEX" : {},
+	"ATLANTIC_SOUTH" : {},
+	"BAYOU" : {},
+	"BIBLE_BELT" : {},
+	"BLACK_BELT" : {},
+	"BLACK_DIRT_REGION" : {},
+	"BORDER" : {},
+	"CAJUN" : {},
+	"CALUMET_BASIN" : {},
+	"CASCADIA" : {},
+	"CASCADIA_METRO" : {},
+	"CENTRAL" : {},
+	"CENTRAL_FLORIDA" : {},
+	"CHESAPEAKE" : {},
+	"COAL_BELT" : {},
+	"COASTAL" : {},
+	"COLD_WINTERS" : {},
+	"COLORADO_PLATEAU" : {},
+	"COLUMBIA_BASIN" : {},
+	"COLUMBIA_PLATEAU" : {},
+	"CONTIGUOUS" : {},
+	"CORN_BELT" : {},
+	"COTTON_BELT" : {},
+	"DEEP_NORTH" : {},
+	"DEEP_SOUTH" : {},
+	"DELMARVA" : {},
+	"DESERET" : {},
+	"DESERT" : {},
+	"DIXIE" : {},
+	"DRIFTLESS_AREA" : {},
+	"EAST_COAST" : {},
+	"FLORIDA_METRO" : {},
+	"FOUR_CORNERS" : {},
+	"FRONT_RANGE_METRO" : {},
+	"FRONTIER" : {},
+	"FRUIT_BELT" : {},
+	"GREAT_ALES_METRO" : {},
+	"GREAT_APPALACHIAN_VALLEY" : {},
+	"GREAT_BASIN" : {},
+	"GREAT_DESERT" : {},
+	"GREAT_LAKES" : {},
+	"GREAT_PLAINS" : {},
+	"GULF_COAST" : {},
+	"GULF_COAST_METRO" : {},
+	"HEARTLAND" : {},
+	"HIGH_PLAINS" : {},
+	"HURRICANE_PRONE" : {},
+	"INDIGENOUS_PRESENCE" : {},
+	"INDUSTRIAL_LEGACY" : {},
+	"INLAND_NORTHWEST" : {},
+	"INTERIOR_PLAINS" : {},
+	"INTERMOUNTAIN" : {},
+	"KENTUCKIANA" : {},
+	"LANDLOCKED" : {},
+	"LLANO_ESTACADO" : {},
+	"LOWER_MIDWEST" : {},
+	"MICHIANA" : {},
+	"MID_SOUTH" : {},
+	"MIDDLE_ATLANTIC" : {},
+	"MIDEAST" : {},
+	"MIDLAND_VALLEY" : {},
+	"MIDWEST_PLAINS" : {},
+	"MISSISSIPPI_DELTA" : {},
+	"MOJAVE_DESERT" : {},
+	"MORMON_CORRIDOR" : {},
+	"RUGGED" : {},
+	"NEWYORK_METRO" : {},
+	"NORCAL" : {},
+	"NORTH_APPALACHIA" : {},
+	"NORTH_GREAT_PLAINS" : {},
+	"NORTH_WOODS" : {},
+	"NORTHEAST_METRO" : {},
+	"NORTHEASTERN" : {},
+	"NORTHERN" : {},
+	"NORTHERN_CALIFORNIA_METRO" : {},
+	"NORTHERN_HIGHLANDS" : {},
+	"NORTHERN_MARIANAS" : {},
+	"NORTHERN_NEW_ENGLAND" : {},
+	"NORTHWESTERN" : {},
+	"OHIO_VALLEY" : {},
+	"OLD_SOUTH" : {},
+	"OLD_SOUTHWEST" : {},
+	"OZARKS" : {},
+	"PACIFIC_NORTHWEST" : {},
+	"PALOUSE" : {},
+	"PIEDMONT" : {},
+	"PIEDMONT_ATLANTIC_METRO" : {},
+	"PINE_BELT" : {},
+	"PINEY_WOODS" : {},
+	"PLAINS" : {},
+	"POLITICALLY_CONSERVATIVE" : {},
+	"POLITICALLY_LIBERAL" : {},
+	"PREDOMINANTLY_WHITE" : {},
+	"RAINY" : {},
+	"RELIGIOUS" : {},
+	"RESOURCE_RICH" : {},
+	"RICE_BELT" : {},
+	"RURAL_MAJORITY" : {},
+	"RUST_BELT" : {},
+	"SEABOARD_ATLANTIC" : {},
+	"SECULAR" : {},
+	"SIOUXLAND" : {},
+	"SNOW_BELT" : {},
+	"SOCAL" : {},
+	"SOUTH_APPALACHIA" : {},
+	"SOUTH_FLORIDA" : {},
+	"SOUTH_GREAT_PLAINS" : {},
+	"SOUTHEAST" : {},
+	"SOUTHEASTERN" : {},
+	"SOUTHERN_CALIFORNIA_METRO" : {},
+	"SOUTHERN_NEW_ENGLAND" : {},
+	"SOUTHERN_ROCKY_MOUNTAIN_METRO" : {},
+	"SOUTHERN_ROCKY_MOUNTAINS" : {},
+	"SOUTHWEST" : {},
+	"SOUTHWESTERN" : {},
+	"SUN_BELT" : {},
+	"SWING_STATE" : {},
+	"TEXAS_TRIANGLE_METRO" : {},
+	"TIDEWATER" : {},
+	"TORNADO_ALLEY" : {},
+	"TOURIST_DRIVEN" : {},
+	"TRANS_MISSISSIPPI" : {},
+	"TROPICAL" : {},
+	"TWIN_TIERS" : {},
+	"UPLAND_SOUTH" : {},
+	"UPPER_MIDWEST" : {},
+	"UPPER_SOUTH" : {},
+	"URBANIZED" : {},
+	"WAXHAWS" : {}
 }

@@ -9,7 +9,8 @@
         "abbreviation" : "AL",
         "motto" : "Audemus jura nostra defendere",
         "nickname" : "Yellowhammer State",
-        "universities" : ["University of Alabama", "Auburn University", "University of Alabama at Birmingham", "Columbia Southern University"]
+        "universities" : ["University of Alabama", "Auburn University", "University of Alabama at Birmingham", "Columbia Southern University"],
+        "descriptors" : ["ALABAMA", "SOUTH", "EAST_SOUTH_CENTRAL"]
     },
     "Alaska" : {
         "FIPS" : "02",
@@ -21,7 +22,8 @@
         "abbreviation" : "AL",
         "motto" : "North to the Future",
         "nickname" : "The Last Frontier",
-        "universities" : ["University of Alaska"]
+        "universities" : ["University of Alaska"],
+        "descriptors" : ["ALASKA", "WEST", "PACIFIC"]
     },
     "Arizona" : {
         "FIPS" : "04",
@@ -33,7 +35,8 @@
         "abbreviation": "AZ",
         "motto" : "Ditat Deus",
         "nickname" : "Grand Canyon State",
-        "universities": ["University of Arizona", "Arizona State University", "University of Phoenix"]
+        "universities": ["University of Arizona", "Arizona State University", "University of Phoenix"],
+        "descriptors" : ["ARIZONA", "WEST", "MOUNTAIN"]
     },
     "American Samoa" : {
         "FIPS" : "60",
@@ -45,7 +48,8 @@
         "abbreviation": "AS",
         "motto" : "Samoa, Muamua Le Atua",
         "nickname" : "",
-        "universities": ["American Samoa Community College"]
+        "universities": ["American Samoa Community College"],
+        "descriptors" : ["SAMOA"]
     },
     "Arkansas" : {
         "FIPS" : "05",
@@ -57,7 +61,8 @@
         "abbreviation": "AR",
         "motto" : "Regnat populus",
         "nickname" : "Natural State",
-        "universities": ["University of Arkansas", "Arkansas State University"]
+        "universities": ["University of Arkansas", "Arkansas State University"],
+        "descriptors" : ["ARKANSAS", "SOUTH", "WEST_SOUTH_CENTRAL"]
     },
     "California" : {
         "FIPS" : "06",
@@ -69,7 +74,8 @@
         "abbreviation": "CA",
         "motto" : "Eureka",
         "nickname" : "Golden State",
-        "universities": ["University of California, Berkeley", "Stanford University", "University of Southern California"]
+        "universities": ["University of California, Berkeley", "Stanford University", "University of Southern California"],
+        "descriptors" : ["CALIFORNIA", "WEST", "PACIFIC"]
     },
     "Colorado" : {
         "FIPS" : "08",
@@ -81,7 +87,8 @@
         "abbreviation": "CO",
         "motto" : "Nil sine numine",
         "nickname" : "Centennial State",
-        "universities": ["University of Colorado Boulder", "Colorado State University", "University of Denver"]
+        "universities": ["University of Colorado Boulder", "Colorado State University", "University of Denver"],
+        "descriptors" : ["COLORADO", "WEST", "MOUNTAIN"]
     },
     "Connecticut" : {
         "FIPS" : "09",
@@ -93,7 +100,8 @@
         "abbreviation": "CT",
         "motto" : "Qui transtulit sustinet",
         "nickname" : "Constitution State",
-        "universities": ["Yale University", "University of Connecticut", "Quinnipiac University"]
+        "universities": ["Yale University", "University of Connecticut", "Quinnipiac University"],
+        "descriptors" : ["CONNECTICUT", "NORTHEAST", "NEW_ENGLAND"]
     },
     "Delaware" : {
         "FIPS" : "10",
@@ -105,7 +113,8 @@
         "abbreviation": "DE",
         "motto" : "Liberty and independence",
         "nickname" : "First State",
-        "universities": ["University of Delaware", "Delaware State University"]
+        "universities": ["University of Delaware", "Delaware State University"],
+        "descriptors" : ["DELAWARE", "SOUTH", "SOUTH_ATLANTIC"]
     },
     "District of Columbia" : {
         "FIPS" : "11",
@@ -117,7 +126,8 @@
         "abbreviation": "DC",
         "motto" : "Justitia Omnibus",
         "nickname" : "",
-        "universities": ["Georgetown University", "George Washington University", "Howard University"]
+        "universities": ["Georgetown University", "George Washington University", "Howard University"],
+        "descriptors" : ["DISTRICT_OF_COLUMBIA", "SOTUH", "SOUTH_ATLANTIC"]
     },
     "Florida" : {
         "FIPS" : "12",
@@ -129,7 +139,8 @@
         "abbreviation": "FL",
         "motto" : "In God we trust",
         "nickname" : "Sunshine State",
-        "universities": ["University of Florida", "University of Central Florida", "Florida State University", "University of Miami", "Florida International University"]
+        "universities": ["University of Florida", "University of Central Florida", "Florida State University", "University of Miami", "Florida International University"],
+        "descriptors" : ["FLORIDA", "SOUTH", "SOUTH_ATLANTIC"]
     },
     "Georgia" : {
         "FIPS" : "13",
@@ -141,7 +152,8 @@
         "abbreviation": "GA",
         "motto" : "Wistom, Justice, Moderation",
         "nickname" : "Peach State",
-        "universities": ["University of Georgia", "Georgia Institute of Technology", "Emory University"]
+        "universities": ["University of Georgia", "Georgia Institute of Technology", "Emory University"],
+        "descriptors" : ["GEORGIA", "SOUTH", "SOUTH_ATLANTIC"]
     },
     "Guam" : {
         "FIPS" : "66",
@@ -153,7 +165,8 @@
         "abbreviation": "GU",
         "motto" : "Where America's Day Begins",
         "nickname" : "Tånó y Chamoru",
-        "universities": ["University of Guam"]
+        "universities": ["University of Guam"],
+        "descriptors" : ["GUAM"]
     },
     "Hawaii" : {
         "FIPS" : "15",
@@ -165,7 +178,8 @@
         "abbreviation": "HI",
         "motto" : "Ua Mau ke Ea o ka ‘Āina i ka Pono",
         "nickname" : "Aloha State",
-        "universities": ["University of Hawaii at Manoa", "Brigham Young University–Hawaii"]
+        "universities": ["University of Hawaii at Manoa", "Brigham Young University–Hawaii"],
+        "descriptors" : ["HAWAII", "WEST", "PACIFIC"]
     },
     "Idaho" : {
         "FIPS" : "16",
@@ -177,7 +191,8 @@
         "abbreviation": "ID",
         "motto" : "Esto perpetua",
         "nickname" : "Gem State",
-        "universities": ["Boise State University", "University of Idaho", "Idaho State University"]
+        "universities": ["Boise State University", "University of Idaho", "Idaho State University"],
+        "descriptors" : ["IDAHO", "WEST", "MOUNTAIN"]
     },
     "Illinois" : {
         "FIPS" : "17",
@@ -189,7 +204,8 @@
         "abbreviation": "IL",
         "motto" : "State soverignty, national union",
         "nickname" : "Prairie State",
-        "universities": ["University of Illinois Urbana-Champaign", "Northwestern University", "University of Chicago"]
+        "universities": ["University of Illinois Urbana-Champaign", "Northwestern University", "University of Chicago"],
+        "descriptors" : ["ILLIONIS", "MIDWEST", "EAST_NORTH_CENTRAL"]
     },
     "Indiana" : {
         "FIPS" : "18",
@@ -201,7 +217,8 @@
         "abbreviation": "IN",
         "motto" : "The crossroads of America",
         "nickname" : "Hoosier State",
-        "universities": ["Indiana University Bloomington", "Purdue University", "University of Notre Dame"]
+        "universities": ["Indiana University Bloomington", "Purdue University", "University of Notre Dame"],
+        "descriptors" : ["INDIANA", "MIDWEST", "EAST_NORTH_CENTRAL"]
     },
     "Iowa" : {
         "FIPS" : "19",
@@ -213,7 +230,8 @@
         "abbreviation": "IA",
         "motto" : "Our liberties we prize and our rights we will maintain",
         "nickname" : "Hawkeye State",
-        "universities": ["University of Iowa", "Iowa State University", "University of Northern Iowa", "Ashford University", "Kaplan University"]
+        "universities": ["University of Iowa", "Iowa State University", "University of Northern Iowa", "Ashford University", "Kaplan University"],
+        "descriptors" : ["IOWA", "MIDWEST", "WEST_NORTH_CENTRAL"]
     },
     "Kansas" : {
         "FIPS" : "20",
@@ -225,7 +243,8 @@
         "abbreviation": "KS",
         "motto" : "Ad astra per aspera",
         "nickname" : "Sunflower State",
-        "universities": ["University of Kansas", "Kansas State University", "Wichita State University"]
+        "universities": ["University of Kansas", "Kansas State University", "Wichita State University"],
+        "descriptors" : ["KANSAS", "MIDWEST", "WEST_NORTH_CENTRAL"]
     },
     "Kentucky" : {
         "FIPS" : "21",
@@ -237,7 +256,8 @@
         "abbreviation": "KY",
         "motto" : "United we stand, divided we fall / Deo gratiam habeamus",
         "nickname" : "Bluegrass State",
-        "universities": ["University of Kentucky", "University of Louisville", "Western Kentucky University"]
+        "universities": ["University of Kentucky", "University of Louisville", "Western Kentucky University"],
+        "descriptors" : ["KENTUCKY", "SOUTH", "EAST_SOUTH_CENTRAL"]
     },
     "Louisiana" : {
         "FIPS" : "22",
@@ -249,7 +269,8 @@
         "abbreviation": "LA",
         "motto" : "Union, justice, and confidence",
         "nickname" : "Pelican State",
-        "universities": ["Louisiana State University", "Tulane University", "University of Louisiana at Lafayette"]
+        "universities": ["Louisiana State University", "Tulane University", "University of Louisiana at Lafayette"],
+        "descriptors" : ["LOUISIANA", "SOUTH", "WEST_SOUTH_CENTRAL"]
     },
     "Maine" : {
         "FIPS" : "23",
@@ -261,7 +282,8 @@
         "abbreviation": "ME",
         "motto" : "Dirigo",
         "nickname" : "Pine Tree State",
-        "universities": ["University of Maine", "Bates College", "Bowdoin College"]
+        "universities": ["University of Maine", "Bates College", "Bowdoin College"],
+        "descriptors" : ["MAINE", "NORTHEAST", "NEW_ENGLAND"]
     },
     "Maryland" : {
         "FIPS" : "24",
@@ -273,7 +295,8 @@
         "abbreviation": "MD",
         "motto" : "Fatti maschi, parole femmine",
         "nickname" : "Old Line State",
-        "universities": ["University of Maryland, College Park", "Johns Hopkins University", "University of Maryland, Baltimore County"]
+        "universities": ["University of Maryland, College Park", "Johns Hopkins University", "University of Maryland, Baltimore County"],
+        "descriptors" : ["MARYLAND", "SOUTH", "SOUTH_ATLANTIC"]
     },
     "Massachusetts" : {
         "FIPS" : "25",
@@ -285,7 +308,8 @@
         "abbreviation": "MA",
         "motto" : "Ense petit placidam sub libertate quietem",
         "nickname" : "Bay State",
-        "universities": ["Harvard University", "Massachusetts Institute of Technology (MIT)", "Boston University"]
+        "universities": ["Harvard University", "Massachusetts Institute of Technology (MIT)", "Boston University"],
+        "descriptors" : ["MASSACHUSETTS", "NORTHEAST", "NEW_ENGLAND"]
     },
     "Michigan" : {
         "FIPS" : "26",
@@ -297,7 +321,8 @@
         "abbreviation": "MI",
         "motto" : "Si quaeris peninsulam amoenam circimpsice",
         "nickname" : "Great Lakes State",
-        "universities": ["University of Michigan, Ann Arbor", "Michigan State University", "Wayne State University"]
+        "universities": ["University of Michigan, Ann Arbor", "Michigan State University", "Wayne State University"],
+        "descriptors" : ["MICHIGAN", "MIDWEST", "EAST_NORTH_CENTRAL"]
     },
     "Minnesota" : {
         "FIPS" : "27",
@@ -309,7 +334,8 @@
         "abbreviation": "MN",
         "motto" : "L'Étoile du Nord",
         "nickname" : "North Star State",
-        "universities": ["University of Minnesota, Twin Cities", "Minnesota State University, Mankato", "St. Olaf College"]
+        "universities": ["University of Minnesota, Twin Cities", "Minnesota State University, Mankato", "St. Olaf College"],
+        "descriptors" : ["MINNESOTA", "MIDWEST", "WEST_NORTH_CENTRAL"]
     },
     "Mississippi" : {
         "FIPS" : "28",
@@ -321,7 +347,8 @@
         "abbreviation": "MS",
         "motto" : "Virtute et armis",
         "nickname" : "Magnolia State",
-        "universities": ["University of Mississippi (Ole Miss)", "Mississippi State University", "Jackson State University"]
+        "universities": ["University of Mississippi (Ole Miss)", "Mississippi State University", "Jackson State University"],
+        "descriptors" : ["MISSISSIPPI", "SOUTH", "EAST_SOUTH_CENTRAL"]
     },
     "Missouri" : {
         "FIPS" : "29",
@@ -333,7 +360,8 @@
         "abbreviation": "MO",
         "motto" : "Salus populi suprema lex esto",
         "nickname" : "Show Me State",
-        "universities": ["University of Missouri, Columbia", "Washington University in St. Louis", "Missouri State University"]
+        "universities": ["University of Missouri, Columbia", "Washington University in St. Louis", "Missouri State University"],
+        "descriptors" : ["MISSOURI", "MIDWEST", "WEST_NORTH_CENTRAL"]
     },
     "Montana" : {
         "FIPS" : "30",
@@ -345,7 +373,8 @@
         "abbreviation": "MT",
         "motto" : "Oro y plata",
         "nickname" : "Treasure State",
-        "universities": ["University of Montana", "Montana State University", "Montana Tech"]
+        "universities": ["University of Montana", "Montana State University", "Montana Tech"],
+        "descriptors" : ["MONTANA", "WEST", "MOUNTAIN"]
     },
     "Nebraska" : {
         "FIPS" : "31",
@@ -357,7 +386,8 @@
         "abbreviation": "NE",
         "motto" : "Equality before the law",
         "nickname" : "Cornhusker State",
-        "universities": ["University of Nebraska-Lincoln", "Creighton University", "University of Nebraska Omaha"]
+        "universities": ["University of Nebraska-Lincoln", "Creighton University", "University of Nebraska Omaha"],
+        "descriptors" : ["NEBRASKA", "MIDWEST", "WEST_NORTH_CENTRAL"]
     },
     "Nevada" : {
         "FIPS" : "32",
@@ -369,7 +399,8 @@
         "abbreviation": "NV",
         "motto" : "All for our country",
         "nickname" : "Silver State",
-        "universities": ["University of Nevada, Las Vegas (UNLV)", "University of Nevada, Reno", "Nevada State College"]
+        "universities": ["University of Nevada, Las Vegas (UNLV)", "University of Nevada, Reno", "Nevada State College"],
+        "descriptors" : ["NEVADA", "WEST", "MOUNTAIN"]
     },
     "New Hampshire" : {
         "FIPS" : "33",
@@ -381,7 +412,8 @@
         "abbreviation": "NH",
         "motto" : "Live free or die",
         "nickname" : "Granite State",
-        "universities": ["Dartmouth College", "University of New Hampshire", "Southern New Hampshire University"]
+        "universities": ["Dartmouth College", "University of New Hampshire", "Southern New Hampshire University"],
+        "descriptors" : ["NEW_HAMPSHIRE", "NORTHEAST", "NEW_ENGLAND"]
     },
     "New Jersey" : {
         "FIPS" : "34",
@@ -393,7 +425,8 @@
         "abbreviation": "NJ",
         "motto" : "Liberty and Prosperity",
         "nickname" : "Garden State",
-        "universities": ["Princeton University", "Rutgers University", "Stevens Institute of Technology"]
+        "universities": ["Princeton University", "Rutgers University", "Stevens Institute of Technology"],
+        "descriptors" : ["NEW_JERSEY", "NORTHEAST", "MID-ATLANTIC"]
     },
     "New Mexico" : {
         "FIPS" : "35",
@@ -405,7 +438,8 @@
         "abbreviation": "NM",
         "motto" : "Cescit enudo",
         "nickname" : "The Land of Enchantment",
-        "universities": ["University of New Mexico", "New Mexico State University", "New Mexico Institute of Mining and Technology"]
+        "universities": ["University of New Mexico", "New Mexico State University", "New Mexico Institute of Mining and Technology"],
+        "descriptors" : ["NEW_MEXICO", "WEST", "MOUNTAIN"]
     },
     "New York" : {
         "FIPS" : "36",
@@ -417,7 +451,8 @@
         "abbreviation": "NY",
         "motto" : "Excelsior!",
         "nickname" : "Empire State",
-        "universities": ["Columbia University", "New York University (NYU)", "Cornell University"]
+        "universities": ["Columbia University", "New York University (NYU)", "Cornell University"],
+        "descriptors" : ["NEW_YORK", "NORTHEAST", "MID-ATLANTIC"]
     },
     "North Carolina" : {
         "FIPS" : "37",
@@ -429,7 +464,8 @@
         "abbreviation": "NC",
         "motto" : "Esse quam videri",
         "nickname" : "Tar Heel State",
-        "universities": ["University of North Carolina at Chapel Hill", "Duke University", "North Carolina State University"]
+        "universities": ["University of North Carolina at Chapel Hill", "Duke University", "North Carolina State University"],
+        "descriptors" : ["NORTH_CAROLINA", "SOUTH", "SOUTH_ATLANTIC"]
     },
     "North Dakota" : {
         "FIPS" : "38",
@@ -441,7 +477,8 @@
         "abbreviation": "ND",
         "motto" : "Liberty and Union, Now and Forever, One and Inseparable",
         "nickname" : "Peace Garden State",
-        "universities": ["University of North Dakota", "North Dakota State University", "Minot State University"]
+        "universities": ["University of North Dakota", "North Dakota State University", "Minot State University"],
+        "descriptors" : ["NORTH_DAKOTA", "MIDWEST", "WEST_NORTH_CENTRAL"]
     },
     "Northern Mariana Islands" : {
         "FIPS" : "69",
@@ -453,7 +490,8 @@
         "abbreviation": "MP",
         "motto" : "Satil Matawal Pacifiko",
         "nickname" : "",
-        "universities": ["Northern Marianas College"]
+        "universities": ["Northern Marianas College"],
+        "descriptors" : ["MARIANA_ISLANDS"]
     },
     "Ohio" : {
         "FIPS" : "39",
@@ -465,7 +503,8 @@
         "abbreviation": "OH",
         "motto" : "With God, all things are possible",
         "nickname" : "Buckeye State",
-        "universities": ["Ohio State University", "University of Cincinnati", "Case Western Reserve University"]
+        "universities": ["Ohio State University", "University of Cincinnati", "Case Western Reserve University"],
+        "descriptors" : ["OHIO", "MIDWEST", "EAST_NORTH_CENTRAL"]
     },
     "Oklahoma" : {
         "FIPS" : "40",
@@ -477,7 +516,8 @@
         "abbreviation": "OK",
         "motto" : "Labor omnia vincit",
         "nickname" : "Sooner State",
-        "universities": ["University of Oklahoma", "Oklahoma State University", "University of Tulsa"]
+        "universities": ["University of Oklahoma", "Oklahoma State University", "University of Tulsa"],
+        "descriptors" : ["OKLAHOMA", "SOUTH", "WEST_SOUTH_CENTRAL"]
     },
     "Oregon" : {
         "FIPS" : "41",
@@ -489,7 +529,8 @@
         "abbreviation": "OR",
         "motto" : "Alis volat propriis",
         "nickname" : "Beaver State",
-        "universities": ["University of Oregon", "Oregon State University", "Portland State University"]
+        "universities": ["University of Oregon", "Oregon State University", "Portland State University"],
+        "descriptors" : ["OREGON", "WEST", "PACIFIC"]
     },
     "Pennsylvania" : {
         "FIPS" : "42",
@@ -501,7 +542,8 @@
         "abbreviation": "PA",
         "motto" : "Virtue, Liberty and Independence",
         "nickname" : "Keystone State",
-        "universities": ["University of Pennsylvania", "Penn State University", "Carnegie Mellon University"]
+        "universities": ["University of Pennsylvania", "Penn State University", "Carnegie Mellon University"],
+        "descriptors" : ["PENNSYLVANIA", "NORTHEAST", "MID-ATLANTIC"]
     },
     "Puerto Rico" : {
         "FIPS" : "72",
@@ -513,7 +555,8 @@
         "abbreviation": "PR",
         "motto" : "Joannes Est Nomen Eius",
         "nickname" : "La Isla del Encanto",
-        "universities": ["Universidad de Puerto Rico", "Sistema Universitario Ana G. Mendez", "Universidad Interamericana de Puerto Rico"]
+        "universities": ["Universidad de Puerto Rico", "Sistema Universitario Ana G. Mendez", "Universidad Interamericana de Puerto Rico"],
+        "descriptors" : ["PUERTO_RICO"]
     },
     "Rhode Island" : {
         "FIPS" : "44",
@@ -525,7 +568,8 @@
         "abbreviation": "RI",
         "motto" : "Hope",
         "nickname" : "Ocean State",
-        "universities": ["Brown University", "University of Rhode Island", "Providence College"]
+        "universities": ["Brown University", "University of Rhode Island", "Providence College"],
+        "descriptors" : ["RHODE_ISLAND", "NORTHEAST", "NEW_ENGLAND"]
     },
     "South Carolina" : {
         "FIPS" : "45",
@@ -537,7 +581,8 @@
         "abbreviation": "SC",
         "motto" : "Dum spiro spero / animis opibusque parati",
         "nickname" : "Palmetto State",
-        "universities": ["University of South Carolina", "Clemson University", "College of Charleston"]
+        "universities": ["University of South Carolina", "Clemson University", "College of Charleston"],
+        "descriptors" : ["SOUTH_CAROLINA", "SOUTH", "SOUTH_ATLANTIC"]
     },
     "South Dakota" : {
         "FIPS" : "46",
@@ -549,7 +594,8 @@
         "abbreviation": "SD",
         "motto" : "Under God the people rule",
         "nickname" : "Mount Rushmore State",
-        "universities": ["University of South Dakota", "South Dakota State University", "Dakota State University"]
+        "universities": ["University of South Dakota", "South Dakota State University", "Dakota State University"],
+        "descriptors" : ["SOUTH_DAKOTA", "MIDWEST", "WEST_NORTH_CENTRAL"]
     },
     "Tennessee" : {
         "FIPS" : "47",
@@ -561,7 +607,8 @@
         "abbreviation": "TN",
         "motto" : "Agriculture and Commerce",
         "nickname" : "Volunteer State",
-        "universities": ["Vanderbilt University", "University of Tennessee, Knoxville", "Belmont University"]
+        "universities": ["Vanderbilt University", "University of Tennessee, Knoxville", "Belmont University"],
+        "descriptors" : ["TENNESSEE", "SOUTH", "EAST_SOUTH_CENTRAL"]
     },
     "Texas" : {
         "FIPS" : "48",
@@ -573,7 +620,8 @@
         "abbreviation": "TX",
         "motto" : "Friendship",
         "nickname" : "Lone Star State",
-        "universities": ["University of Texas at Austin", "Texas A&M University", "Rice University", "Dallas College"]
+        "universities": ["University of Texas at Austin", "Texas A&M University", "Rice University", "Dallas College"],
+        "descriptors" : ["TEXAS", "SOUTH", "WEST_SOUTH_CENTRAL"]
     },
     "Utah" : {
         "FIPS" : "49",
@@ -585,7 +633,8 @@
         "abbreviation": "UT",
         "motto" : "Industry",
         "nickname" : "Beehive State",
-        "universities": ["University of Utah", "Brigham Young University", "Utah State University"]
+        "universities": ["University of Utah", "Brigham Young University", "Utah State University"],
+        "descriptors" : ["UTAH", "WEST", "MOUNTAIN"]
     },
     "Vermont" : {
         "FIPS" : "50",
@@ -597,7 +646,8 @@
         "abbreviation": "VT",
         "motto" : "Freedom and Unity / Stella quarta decima fulgeat",
         "nickname" : "Green Mountain State",
-        "universities": ["University of Vermont", "Middlebury College", "Norwich University"]
+        "universities": ["University of Vermont", "Middlebury College", "Norwich University"],
+        "descriptors" : ["VERMONT", "NORTHEAST", "NEW_ENGLAND"]
     },
     "Virginia" : {
         "FIPS" : "51",
@@ -609,7 +659,8 @@
         "abbreviation": "VA",
         "motto" : "Sic semper tyrannis",
         "nickname" : "Old Dominion State",
-        "universities": ["University of Virginia", "Virginia Tech", "George Mason University", "Liberty University"]
+        "universities": ["University of Virginia", "Virginia Tech", "George Mason University", "Liberty University"],
+        "descriptors" : ["VIRGINIA", "SOUTH", "SOUTH_ATLANTIC"]
     },
     "U.S. Virgin Islands" : {
         "FIPS" : "78",
@@ -621,7 +672,8 @@
         "abbreviation": "VI",
         "motto" : "United in Pride and Hope",
         "nickname" : "",
-        "universities": ["University of the Virgin Islands"]
+        "universities": ["University of the Virgin Islands"],
+        "descriptors" : ["VIRGIN_ISLANDS"]
     },
     "Washington" : {
         "FIPS" : "53",
@@ -633,7 +685,8 @@
         "abbreviation": "WA",
         "motto" : "Al-ki",
         "nickname" : "Evergreen State",
-        "universities": ["University of Washington", "Washington State University", "Seattle University"]
+        "universities": ["University of Washington", "Washington State University", "Seattle University"],
+        "descriptors" : ["WASHINGTON", "WEST", "PACIFIC"]
     },
     "West Virginia" : {
         "FIPS" : "54",
@@ -645,7 +698,8 @@
         "abbreviation": "WV",
         "motto" : "Montani semper liberi",
         "nickname" : "Mountain State",
-        "universities": ["West Virginia University", "Marshall University", "West Liberty University"]
+        "universities": ["West Virginia University", "Marshall University", "West Liberty University"],
+        "descriptors" : ["WEST_VIRGINIA", "SOUTH", "SOUTH_ATLANTIC"]
     },
     "Wisconsin" : {
         "FIPS" : "55",
@@ -657,7 +711,8 @@
         "abbreviation": "WI",
         "motto" : "Forward",
         "nickname" : "Badger State",
-        "universities": ["University of Wisconsin-Madison", "Marquette University", "University of Wisconsin-Milwaukee"]
+        "universities": ["University of Wisconsin-Madison", "Marquette University", "University of Wisconsin-Milwaukee"],
+        "descriptors" : ["WISCONSIN", "MIDWEST", "WEST_NORTH_CENTRAL"]
     },
     "Wyoming" : {
         "FIPS" : "56",
@@ -669,6 +724,7 @@
         "abbreviation": "WY",
         "motto" : "Equal Rights",
         "nickname" : "Equality State",
-        "universities": ["University of Wyoming", "Casper College", "Wyoming Technical Institute"]
+        "universities": ["University of Wyoming", "Casper College", "Wyoming Technical Institute"],
+        "descriptors" : ["WYOMING", "WEST", "MOUNTAIN"]
     }
 }
