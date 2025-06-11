@@ -71,10 +71,10 @@ public final class CharacterManager {
     }
 
     // Individual Characters
-    private static PoliticalActor president;
-    public static PoliticalActor getPresident() { return president; }
-    private static PoliticalActor vicePresident;
-    public static PoliticalActor getVicePresident() { return vicePresident; }
+    private static FederalOfficial president;
+    public static FederalOfficial getPresident() { return president; }
+    private static FederalOfficial vicePresident;
+    public static FederalOfficial getVicePresident() { return vicePresident; }
     private static Character firstLady;
     public static Character getFirstLady() { return firstLady; }
     private static PoliticalActor houseSpeaker;

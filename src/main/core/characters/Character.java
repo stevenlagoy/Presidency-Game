@@ -78,7 +78,7 @@ public class Character implements Repr<Character>, Jsonic<Character> {
      * Deep-copies the existing fields of another Character object.
      * Optionally adds to CharacterManager's list of Characters.
      * @param other Character to copy fields from.
-     * @param addToCharacterList Boolean indicating whether to add the created object to the list.
+     * @param addToCharacterList Boolean indicating whether to add the created object to the CharacterManager's list.
      */
     public Character(Character other, boolean addToCharacterList) {
         this.demographics                = new Demographics(other.demographics);
@@ -95,13 +95,23 @@ public class Character implements Repr<Character>, Jsonic<Character> {
     /**
      * Creates a Character parsed from the Repr buildstring.
      * @param buildstring Valid Repr-format buildstring.
+     * @see #Character(String, boolean)
      */
     public Character(String buildstring) {
+        this(buildstring, true);
+    }
+
+    /**
+     * Creates a Character parsed from the Repr buildstring.
+     * @param buildstring Valid Repr-format buildstring.
+     * @param addToCharacterList Boolean indicating whether to add the created object to the CharacterManager's list.
+     */
+    public Character(String buildstring, boolean addToCharacterList) {
         if (buildstring == null || buildstring.isBlank()) {
             throw new IllegalArgumentException("The given buildstring was null, and a " + getClass().getSimpleName() + " object could not be created.");
         }
         fromRepr(buildstring);
-        CharacterManager.addCharacter(this);
+        if (addToCharacterList) CharacterManager.addCharacter(this);
     }
 
     /**

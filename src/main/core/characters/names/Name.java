@@ -526,4 +526,9 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
         }
         return sb.toString();
     }
+
+    @Override
+    public String toString() {
+        return getBiographicalName();
+    }
 }

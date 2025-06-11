@@ -1,10 +1,24 @@
 package main.core.characters;
 
+import main.core.Engine;
+import main.core.map.MapEntity;
 import main.core.map.Municipality;
 
 public class LocalOfficial extends PoliticalActor {
 
-    private Municipality municipality;
+    public static enum LocalRole implements Role {
+        MAYOR,
+        CITY_COUNCILOR,
+        COUNTY_COMMISSIONER,
+        MUNICIPAL_JUDGE;
+
+        @Override
+        public String getTitle() {
+            return Engine.getLocalization(this.name());
+        }
+    }
+
+    private MapEntity jurisdiction;
 
     public LocalOfficial(){
         super();
@@ -16,10 +30,10 @@ public class LocalOfficial extends PoliticalActor {
         super();
     }
 
-    public Municipality getMunicipality() {
-        return municipality;
+    public MapEntity getJurisdiction() {
+        return jurisdiction;
     }
-    public void setMunicipality(Municipality municipality) {
-        this.municipality = municipality;
+    public void setJurisdiction(MapEntity jurisdiction) {
+        this.jurisdiction = jurisdiction;
     }
 }
