@@ -47,6 +47,13 @@ public abstract class FilePaths {
     // DEMOGRAPHICS MANAGER FILES
     public static final Path BLOCS                      = DEMOGRAPHICS_RESOURCES.resolve("blocs.json");
 
+    // GFX AND UI FILES
+    public static final Path FLAGS_GFX_LOC              = GFX_RESOURCES.resolve("flags");
+    public static final Path ICONS_GFX_LOC              = GFX_RESOURCES.resolve("icons");
+    public static final Path MODELS_GFX_LOC             = GFX_RESOURCES.resolve("models");
+    public static final Path SHADERS_GFX_LOC            = GFX_RESOURCES.resolve("shaders");
+    public static final Path TEXTURES_GFX_LOC           = GFX_RESOURCES.resolve("textures");
+
     // Ignored files
     public static final List<Path> IGNORED_PATHS = List.of(
 

@@ -55,7 +55,9 @@ public class IOUtil {
         JAVA (".java"),
         OUT (".out"),
         IN (".in"),
-        TEXT (".txt");
+        TEXT (".txt"),
+        PNG (".png"),
+        OBJ (".obj");
 
         public final String extension;
 
@@ -248,5 +250,14 @@ public class IOUtil {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static List<String> readAllLines(File file) throws FileNotFoundException {
+        List<String> contents = new ArrayList<>();
+        try (Scanner scanner = createScanner(file)) {
+            while(scanner.hasNext()) {
+                contents.add(scanner.nextLine());
+            }   
+        }
+        return contents;
     }
 }
