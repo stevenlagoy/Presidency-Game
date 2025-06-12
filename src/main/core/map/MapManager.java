@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 // Internal Imports
 import core.JSONObject;
@@ -22,18 +23,26 @@ import main.core.demographics.DemographicsManager;
 public final class MapManager {
     private MapManager() {} // Non-Instantiable
 
-    public static String[] mapModeNames = {"Default", "States", "Polling", "Population", "Conventions", "Districts", "Counties", "Travel"};
-    /*
-     * Default view - Switch between States, Districts, and Counties depending on zoom level.
-     * States view - See states in different colors.
-     * Districts view - See congressional districts in different colors.
-     * Counties view - See counties and equivalents in different colors.
-     * Polling view - Shade areas between Blue, White, and Red according to poll results.
-     * Population view - Shade areas between Black and White depending on membership of selected bloc.
-     * Conventions view - Shade states between Black and White depending on how soon their Convention is.
-     * Travel view - Show roadways, airports, and other Routes between municipalities.
-     */
-    public static int mapMode; // Currently selected map mode / view. 0 is Default.
+    public static enum MapMode {
+        /** Default view - Switch between States, Districts, and Counties depending on zoom level. */
+        DEFAULT,
+        /** States view - See states in different colors. */
+        STATES,
+        /** Polling view - Shade areas between Blue, White, and Red according to poll results. */
+        POLLING,
+        /** Population view - Shade areas between Black and White depending on membership of selected bloc. */
+        POPULATION,
+        /** Conventions view - Shade states between Black and White depending on how soon their Convention is. */
+        CONVENTIONS,
+        /** Districts view - See congressional districts in different colors. */
+        DISTRICTS,
+        /** Counties view - See counties and equivalents in different colors. */
+        COUNTIES,
+        /** Travel view - Show roadways, airports, and other Routes between municipalities. */
+        TRAVEL;
+    }
+
+    private static MapMode mapMode; // Currently selected map mode / view.
     public static double zoomLevel; // Number of horizontal pixels of the map currently on screen.
     public static double mapCameraX; // X-coordinate on the map which the camera is currently centered on. 0.0 is center of map.
     public static double mapCameraY; // Y-coordinate on the map which the camera is currently centered on. 0.0 is center of map.
@@ -44,7 +53,7 @@ public final class MapManager {
     public static List<Municipality>            municipalities          = new ArrayList<>();
 
     public static void init(){
-        setMapMode(0);
+        setMapMode(MapMode.DEFAULT);
         centerCamera();
         resetZoom();
     }
@@ -59,7 +68,10 @@ public final class MapManager {
     public static void resetZoom(){
         zoomLevel = 2560.0;
     }
-    public static void setMapMode(int mode){
+    public static MapMode getMapMode() {
+        return mapMode;
+    }
+    public static void setMapMode(MapMode mode){
         mapMode = mode;
     }
 
@@ -68,27 +80,33 @@ public final class MapManager {
         // 1) Construct skeleton objects top-down
         // 2) Resolve references bottom-up
         boolean successFlag = true;
-        successFlag = successFlag && createStates();
+        successFlag = successFlag && createStates(false);
         successFlag = successFlag && createCongressionalDistricts();
         successFlag = successFlag && createCounties(false);
-        successFlag = successFlag && createCities();
+        successFlag = successFlag && createMunicipalities();
         successFlag = successFlag && resolveLocationFields();
         return successFlag;
     }
-    public static boolean createStates() {
+
+    public static boolean createStates() { return createStates(true); }
+    public static boolean createStates(boolean citiesLoaded) {
         JSONObject json = JSONProcessor.processJson(FilePaths.STATES);
 
         for (Object stateObj : json.getAsList()) {
             if (stateObj instanceof JSONObject stateJson) {
                 try {
-                    int FIPS = Integer.parseInt(stateJson.get("FIPS").toString());
-                    String name = stateJson.get("name").toString();
+                    String FIPS = stateJson.get("FIPS").toString();
                     int population = Integer.parseInt(stateJson.get("population").toString());
+                    double landArea = Double.parseDouble(stateJson.get("land_area").toString());
+                    String fullName = stateJson.get("full_name").toString();
+                    String commonName = stateJson.get("common_name").toString();
                     String abbreviation = stateJson.get("abbreviation").toString();
-                    String motto = stateJson.get("motto").toString();
                     String nickname = stateJson.get("nickname").toString();
+                    String motto = stateJson.get("motto").toString();
+                    String capital = stateJson.get("capital").toString();
+                    Set<String> descriptors = Set.copyOf((ArrayList<String>) stateJson.get("descriptors"));
                     MapManager.states.add(new State(
-                        FIPS, name, population, abbreviation, motto, nickname
+                        FIPS, population, landArea, fullName, commonName, abbreviation, nickname, motto, citiesLoaded ? capital : "", descriptors
                     ));
                 }
                 catch (NumberFormatException e) {
@@ -104,13 +122,15 @@ public final class MapManager {
         for (Object districtObj : json.getAsList()) {
             if (districtObj instanceof JSONObject districtJson) {
                 try {
-                    String hexID = districtJson.get("hexID").toString();
-                    String nameLSAD = districtJson.get("nameLSAD").toString();
-                    String state = districtJson.get("state").toString();
-                    String districtNum = districtJson.get("districtNum").toString();
-                    String officeID = districtJson.get("officeID").toString();
+                    String officeID = districtJson.get("office_ID").toString();
+                    int population = Integer.parseInt(districtJson.get("population").toString());
+                    double landArea = Double.parseDouble(districtJson.get("land_area").toString());
+                    String name = districtJson.get("name").toString();
+                    String stateName = districtJson.get("state").toString();
+                    int districtNum = Integer.parseInt(districtJson.get("district_num").toString());
+                    Set<String> descriptors = Set.copyOf((ArrayList<String>) districtJson.get("descriptors"));
                     MapManager.congressionalDistricts.add(new CongressionalDistrict(
-                        hexID, nameLSAD, state, districtNum, officeID
+                        officeID, population, landArea, name, stateName, districtNum, descriptors
                     ));
                 }
                 catch (NumberFormatException e) {
@@ -121,25 +141,42 @@ public final class MapManager {
         return true;
     }
 
-    public static boolean createCounties() { return createCounties(); }
+    public static boolean createCounties() { return createCounties(true); }
     public static boolean createCounties(boolean citiesLoaded) {
         JSONObject json = JSONProcessor.processJson(FilePaths.COUNTIES);
 
         for (Object countyObj : json.getAsList()) {
             if (countyObj instanceof JSONObject countyJson) {
+                String stateName = countyJson.get("state").toString();
                 String FIPS = countyJson.get("FIPS").toString();
-                String name = countyJson.get("name").toString();
-                String state = countyJson.get("state").toString();
-                String countySeat = countyJson.get("county_seat").toString();
                 int population = Integer.parseInt(countyJson.get("population").toString());
-                double area = Double.parseDouble(countyJson.get("square_mileage").toString());
+                double landArea = Double.parseDouble(countyJson.get("land_area").toString());
+                String fullName = countyJson.get("full_name").toString();
+                String commonName = countyJson.get("common_name").toString();
+                String countySeatName = countyJson.get("county_seat").toString();
+                Set<String> descriptors = Set.copyOf((ArrayList<String>) countyJson.get("descriptors"));
                 MapManager.counties.add(new County(
-                    FIPS, name, state, citiesLoaded ? countySeat : null, population, area
+                    FIPS, population, landArea, fullName, commonName, stateName, citiesLoaded ? countySeatName : "", descriptors
                 ));
             }
         }
         return true;
     }
+
+    private static boolean resolveCapitals() {
+        JSONObject json = JSONProcessor.processJson(FilePaths.STATES);
+
+        for (Object stateObj : json.getAsList()) {
+            if (stateObj instanceof JSONObject stateJson) {
+                String FIPS = stateJson.get("FIPS").toString();
+                String stateAbbr = stateJson.get("abbreviation").toString();
+                String capital = stateJson.get("capital").toString();
+                MapManager.matchState(stateAbbr).setCapital(MapManager.matchMunicipality(capital, stateAbbr));
+            }
+        }
+        return true;
+    }
+
     private static boolean resolveCountySeats() {
         JSONObject json = JSONProcessor.processJson(FilePaths.COUNTIES);
 
@@ -154,25 +191,30 @@ public final class MapManager {
         return true;
     }
 
-    public static boolean createCities() { return createCities(true); }
-    public static boolean createCities(boolean countiesLoaded) {
-        JSONObject json = JSONProcessor.processJson(FilePaths.CITIES);
+    public static boolean createMunicipalities() { return createMunicipalities(true); }
+    public static boolean createMunicipalities(boolean countiesLoaded) {
+        JSONObject json = JSONProcessor.processJson(FilePaths.MUNICIPALITIES);
 
         for (Object municipalityObj : json.getAsList()) {
-            if (municipalityObj instanceof JSONObject municipalityJson) {
-                String name = municipalityJson.get("name").toString();
-                String state = municipalityJson.get("state").toString();
-                String FIPS = municipalityJson.get("FIPS").toString();
-                List<String> counties = new ArrayList<>();
-                for (String county : (ArrayList<String>) municipalityJson.get("counties")) {
-                    counties.add(county);
+            try {
+                if (municipalityObj instanceof JSONObject municipalityJson) {
+                    String FIPS = municipalityJson.get("FIPS").toString();
+                    int population = Integer.parseInt(municipalityJson.get("population_2027").toString());
+                    double landArea = Double.parseDouble(municipalityJson.get("land_area_2020").toString());
+                    String name = municipalityJson.get("name").toString();
+                    String typeClass = municipalityJson.get("type_class").toString();
+                    String timeZone = municipalityJson.get("time_zone").toString();
+                    String stateName = municipalityJson.get("state").toString();
+                    List<String> countiesNames = (ArrayList<String>) municipalityJson.get("counties");
+                    Set<String> descriptors = Set.copyOf((ArrayList<String>) municipalityJson.get("descriptors"));
+                    MapManager.municipalities.add(new Municipality(
+                        FIPS, population, landArea, name, typeClass, timeZone, stateName, countiesNames, descriptors
+                    ));
                 }
-                String typeClass = municipalityJson.get("type_class").toString();
-                int population = Integer.parseInt(municipalityJson.get("population_2027").toString());
-                double area = Double.parseDouble(municipalityJson.get("land_area_2020").toString());
-                MapManager.municipalities.add(new Municipality(
-                    FIPS, name, state, counties, typeClass, population, area, null, null
-                ));
+            }
+            catch (NullPointerException e) {
+                System.out.println(municipalityObj.toString());
+                throw e;
             }
         }
         return true;
@@ -180,6 +222,7 @@ public final class MapManager {
 
     private static boolean resolveLocationFields() {
         boolean successFlag = true;
+        successFlag = successFlag && resolveCapitals();
         successFlag = successFlag && resolveCountySeats();
         return successFlag;
     }
@@ -191,7 +234,7 @@ public final class MapManager {
      */
     public static State matchState(String stateName) {
         for (State state : states) {
-            if (state.getName().equals(stateName) || state.getAbbreviation().equals(stateName)) return state;
+            if (state.getCommonName().equals(stateName) || state.getAbbreviation().equals(stateName)) return state;
         }
         Engine.log("INVALID STATE", String.format("The state, %s, could not be matched.", stateName), new Exception());
         return null;
@@ -204,14 +247,14 @@ public final class MapManager {
         Engine.log("INVALID OFFICE ID", String.format("The office ID, %s, could not be matched.", officeID), new Exception());
         return null;
     }
-    public static CongressionalDistrict matchCongressionalDistrict(State state, String districtNum) {
+    public static CongressionalDistrict matchCongressionalDistrict(State state, int districtNum) {
         for (CongressionalDistrict district : congressionalDistricts) {
-            if (district.getState().equals(state) && district.getDistrictNum().equals(districtNum)) return district;
+            if (district.getState().equals(state) && district.getDistrictNum() == districtNum) return district;
         }
-        Engine.log("INVALID STATE OR DISTRICT", String.format("The state, %s, or the district number, %s, could not be matched.", state.getName(), districtNum), new Exception());
+        Engine.log("INVALID STATE OR DISTRICT", String.format("The state, %s, or the district number, %s, could not be matched.", state.getCommonName(), districtNum), new Exception());
         return null;
     }
-    public static CongressionalDistrict matchCongressionalDistrict(String stateName, String districtNum) {
+    public static CongressionalDistrict matchCongressionalDistrict(String stateName, int districtNum) {
         return matchCongressionalDistrict(matchState(stateName), districtNum);
     }
 
@@ -222,13 +265,19 @@ public final class MapManager {
         Engine.log("INVALID COUNTY", String.format("The county FIPS, %s, could not be matched.", FIPS), new Exception());
         return null;
     }
+    public static County matchCounty(String countyName, String stateName) {
+        return matchCounty(countyName, matchState(stateName));
+    }
     public static County matchCounty(String name, State state) {
         for (County county : counties) {
-            if (county.getName().equals(name) && county.getState().equals(state)) return county;
-            if (county.getName().replace("County", "").trim().equals(name.replace("County", "").trim()) && county.getState().equals(state)) return county;
+            if (county.getCommonName().equals(name) && county.getState().equals(state)) return county;
+            if (county.getFullName().equals(name) && county.getState().equals(state)) return county;
         }
-        Engine.log("INVALID COUNTY", String.format("The county name, %s, could not be matched to a county in %s.", name, state.getName()), new Exception());
+        Engine.log("INVALID COUNTY", String.format("The county name, %s, could not be matched to a county in %s.", name, state.getCommonName()), new Exception());
         return null;
+    }
+    public static List<County> matchCounties(Collection<String> countiesNames, String stateName) {
+        return matchCounties(countiesNames, matchState(stateName));
     }
     public static List<County> matchCounties(Collection<String> names, State state) {
         List<County> result = new ArrayList<>();
@@ -263,7 +312,7 @@ public final class MapManager {
         for (Municipality municipality : municipalities) {
             if (municipality.getName().equals(municipalityName) && municipality.getState().equals(state)) return municipality;
         }
-        Engine.log("INVALID MUNICIPALITY", String.format("The municipality name, %s, or the state, %s, could not be matched.", municipalityName, state.getName()), new Exception());
+        Engine.log("INVALID MUNICIPALITY", String.format("The municipality name, %s, or the state, %s, could not be matched.", municipalityName, state.getCommonName()), new Exception());
         return null;
     }
 
@@ -279,7 +328,7 @@ public final class MapManager {
     /** This method to be used before cities have assigned states. Assumes all cities are unique by (name, population, area) */
     public static Municipality matchMunicipality(String municipalityName, int population, double area) {
         for (Municipality municipality : municipalities) {
-            if (municipality.getName().equals(municipalityName) && municipality.getPopulation() == population && municipality.getArea() == area) return municipality;
+            if (municipality.getName().equals(municipalityName) && municipality.getPopulation() == population && municipality.getLandArea() == area) return municipality;
         }
         Engine.log("INVALID MUNICIPALITY", String.format("No municipality exists with the name %s, a population of %d, and an area of %f.", municipalityName, population, area), new Exception());
         return null;
@@ -322,7 +371,7 @@ public final class MapManager {
         for (Municipality municipality : municipalities) {
             int blocsPop = 0;
             for (Bloc bloc : demographics.toBlocsArray()) {
-                blocsPop += (int) (municipality.getPopulation() * municipality.getDemographicPercentage(bloc));
+                blocsPop += (int) (municipality.getDemographicPopulation(bloc));
             }
             populations.put(municipality, blocsPop);
         }

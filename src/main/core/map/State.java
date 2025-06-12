@@ -1,82 +1,157 @@
+/*
+ * State.java
+ * Steven LaGoy
+ * Created: 28 August 2024 at 11:25 PM
+ * Modified: 11 June 2025
+ */
+
 package main.core.map;
+
+// IMPORTS ----------------------------------------------------------------------------------------
+
+// Standard Library Imports
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+// Internal Imports
 import core.JSONObject;
 import main.core.Engine;
 import main.core.Jsonic;
 import main.core.Repr;
+import main.core.characters.FederalOfficial;
 import main.core.characters.PoliticalActor;
-import main.core.demographics.Demographics;
+import main.core.characters.StateOfficial;
+import main.core.characters.FederalOfficial.FederalRole;
+import main.core.demographics.Bloc;
+import main.core.demographics.DemographicsManager;
 
-public class State implements Repr<State>, Jsonic<State> {
-    static
-    {
-        Map<String, String> states = new HashMap<>();
-        states.put("name", "Alabama");
-        // this is where states.json will be read and the states objects created
-    }
-
-    private static List<State> instances = new ArrayList<>();
-
-    private int FIPS;
-    private String name;
+/**
+ * Map entity for the second-largest geographical division, including States, Commonwealths, District, and Territories.
+ * <p>
+ * Holds values describing information about the state, its demographics and voting patterns, and leadership.
+ */
+public class State implements MapEntity, Repr<State>, Jsonic<State> {
+    
+    private Nation nation;
+    /** Unique state FIPS code between 01 and 56. */
+    private String FIPS;
+    /** Total population of the State. */
     private int population;
+    /** Land area of the State. */
+    private double landArea;
+    /** Full name of the State, IE: State of Alabama, Commonwealth of Virginia. */
+    private String fullName;
+    /** Common name of the State, IE: Louisiana, Utah. */
+    private String commonName;
+    /** Two-letter postal abbreviation of the State, IE: NM, CO. */
     private String abbreviation;
-    private String motto;
+    /** Nickname of the state. */
     private String nickname;
-    private List<CongressionalDistrict> congressionalDistricts = new ArrayList<>();
-    private List<County> counties = new ArrayList<>();
-    private List<Municipality> municipalities = new ArrayList<>();
-    private List<University> universities = new ArrayList<>();
-    private Map<Demographics, Float> demographics = new HashMap<>();
-    private List<PoliticalActor> senators;
-    private PoliticalActor governor;
+    /** Motto of the state. */
+    private String motto;
+    /** Capital municipality of the state. */
+    private Municipality capital;
+    private Set<String> descriptors;
+    private Map<Bloc, Float> demographics;
+    private List<FederalOfficial> senators;
+    private StateOfficial governor;
+    private StateOfficial lieutenantGovernor;
 
-    public State(int FIPS, String name, int population, String abbreviation, String motto, String nickname) {
-        this.FIPS = FIPS;
-        this.name = name;
-        this.population = population;
+    // CONSTRUCTORS -------------------------------------------------------------------------------
+
+    /** To be used before Characters are ready to be generated. */
+    public State(String FIPS, int population, double landArea, String fullName, String commonName, String abbreviation, String nickname, String motto, String capitalName, Set<String> descriptors) {
+        nation = Nation.getInstance();
+        setFIPS(FIPS);
+        setPopulation(population);
+        setLandArea(landArea);
+        this.fullName = fullName;
+        this.commonName = commonName;
         this.abbreviation = abbreviation;
-        this.motto = motto;
         this.nickname = nickname;
+        this.motto = motto;
+        this.capital = capitalName.isEmpty() ? null : MapManager.matchMunicipality(capitalName, abbreviation);
+        setDescriptors(descriptors);
     }
 
-    public State(String name, int population, String abbreviation, Map<Demographics, Float> demographics) {
-        this.name = name;
-        this.population = population;
+    public State(String FIPS, int population, double landArea, String fullName, String commonName, String abbreviation, String nickname, String motto, String capitalName, Set<String> descriptors, List<FederalOfficial> senators, StateOfficial governor, StateOfficial lieutenantGovernor) {
+        this(FIPS, population, landArea, fullName, commonName, abbreviation, nickname, motto, capitalName.isEmpty() ? null : MapManager.matchMunicipality(capitalName, abbreviation), descriptors, senators, governor, lieutenantGovernor);
+    }
+
+    public State(String FIPS, int population, double landArea, String fullName, String commonName, String abbreviation, String nickname, String motto, Municipality capital, Set<String> descriptors, List<FederalOfficial> senators, StateOfficial governor, StateOfficial lieutenantGovernor) {
+        nation = Nation.getInstance();
+        setFIPS(FIPS);
+        setPopulation(population);
+        setLandArea(landArea);
+        this.fullName = fullName;
+        this.commonName = commonName;
         this.abbreviation = abbreviation;
-        this.demographics = demographics;
-
-        instances.add(this);
+        this.nickname = nickname;
+        this.motto = motto;
+        this.capital = capital;
+        setDescriptors(descriptors);
+        setSenators(senators);
+        this.governor = governor != null ? governor : new StateOfficial(this);
+        this.lieutenantGovernor = lieutenantGovernor != null ? lieutenantGovernor : new StateOfficial(this);
     }
 
-    public int getFIPS() {
+    // GETTERS AND SETTERS ------------------------------------------------------------------------
+
+    // FIPS Code String
+    public String getFIPS() {
         return FIPS;
     }
-    public void setFIPS(int FIPS) {
+    public void setFIPS(String FIPS) {
+        for (char c : FIPS.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                Engine.log("INVALID FIPS", String.format("Attempted to assign FIPS code %s, which is not numeric.", FIPS), new Exception());
+                return;
+            }
+        }
         this.FIPS = FIPS;
     }
 
-    public String getName(){
-        return this.name;
-    }
-    public void setName(String name){
-        this.name = name;
-    }
-
+    // Population : int
     public int getPopulation() {
         return population;
     }
     public void setPopulation(int population) {
-        this.population = population;
+        this.population = Math.max(0, population);
     }
     public void addPopulation(int population) {
-        this.population += population;
+        this.population = Math.max(0, this.population + population);
     }
 
+    // Land Area : double
+    public double getLandArea() {
+        return landArea;
+    }
+    public void setLandArea(double area) {
+        this.landArea = Math.max(0, area);
+    }
+
+    // Full Name : String
+    public String getFullName(){
+        return Engine.getLocalization(fullName);
+    }
+    public void setFullName(String name){
+        this.fullName = name;
+    }
+
+    // Common Name : String
+    public String getCommonName() {
+        return commonName;
+    }
+    public void setCommonName(String name) {
+        this.commonName = name;
+    }
+
+    // Abbreviation : String
     public String getAbbreviation() {
         return abbreviation;
     }
@@ -84,13 +159,7 @@ public class State implements Repr<State>, Jsonic<State> {
         this.abbreviation = abbreviation;
     }
 
-    public String getMotto() {
-        return motto;
-    }
-    public void setMotto(String motto) {
-        this.motto = motto;
-    }
-
+    // Nickname : String
     public String getNickname() {
         return nickname;
     }
@@ -98,77 +167,147 @@ public class State implements Repr<State>, Jsonic<State> {
         this.nickname = nickname;
     }
 
-    public List<CongressionalDistrict> getCongressionalDistricts() {
-        return congressionalDistricts;
+    // Motto : String
+    public String getMotto() {
+        return Engine.getLocalization(motto);
     }
-    public void addCongressionalDistrict(CongressionalDistrict district) {
-        congressionalDistricts.add(district);
-    }
-    public void removeCongressionalDistrict(CongressionalDistrict district) {
-        congressionalDistricts.remove(district);
+    public void setMotto(String motto) {
+        this.motto = motto;
     }
 
-    public List<County> getCounties() {
-        return counties;
+    // Capital : Municipality
+    public Municipality getCapital() {
+        return capital;
     }
-    public void addCongressionalDistrict(County county) {
-        counties.add(county);
-    }
-    public void removeCounty(County county) {
-        counties.remove(county);
+    public void setCapital(Municipality capital) {
+        this.capital = capital;
     }
 
-    public List<Municipality> getMunicipalities() {
-        return municipalities;
+    // Descriptors : List of String
+    @Override
+    public Set<String> getDescriptors() {
+        return descriptors;
     }
-    public void addMunicipality(Municipality municipality) {
-        municipalities.add(municipality);
+    @Override
+    public void setDescriptors(Set<String> descriptors) {
+        this.descriptors = new HashSet<>(descriptors);
+        evaluateDemographics();
     }
-    public void removeMunicipality(Municipality municipality) {
-        municipalities.remove(municipality);
+    @Override
+    public boolean hasDescriptor(String descriptor) {
+        return this.descriptors.contains(descriptor);
+    }
+    @Override
+    public boolean addDescriptor(String descriptor) {
+        boolean modified = this.descriptors.add(descriptor);
+        if (modified) evaluateDemographics();
+        return modified;
+    }
+    @Override
+    public boolean addAllDescriptors(Collection<String> descriptors) {
+        boolean modified = this.descriptors.addAll(descriptors);
+        if (modified) evaluateDemographics();
+        return modified;
+    }
+    @Override
+    public boolean removeDescriptor(String descriptor) {
+        boolean modified = this.descriptors.remove(descriptor);
+        if (modified) evaluateDemographics();
+        return modified;
+    }
+    @Override
+    public boolean removeAllDescriptors(Collection<String> descriptors) {
+        boolean modified = this.descriptors.removeAll(descriptors);
+        if (modified) evaluateDemographics();
+        return modified;
     }
 
-    public boolean hasSenator(PoliticalActor senator){
+    // Demographics : Map of Bloc to Float
+    
+    @Override
+    public Map<Bloc, Float> getDemographics() {
+        return demographics;
+    }
+    @Override
+    public float getDemographicPercentage(Bloc bloc) {
+        return this.demographics.get(bloc) != null ? this.demographics.get(bloc) : 0.0f;
+    }
+    @Override
+    public int getDemographicPopulation(Bloc bloc) {
+        return Math.round(getDemographicPercentage(bloc) * population);
+    }
+    @Override
+    public void evaluateDemographics() {
+        this.descriptors.addAll(nation.getDescriptors());
+        this.demographics = DemographicsManager.demographicsFromDescriptors(descriptors);
+    }
+
+    // Senators List of Federal Official
+    public List<FederalOfficial> getSenators() {
+        return senators;
+    }
+    /**
+     * Sets the senators list to the first two FederalOfficials in the passed List, and generates any necessary.
+     * Pass with an empty list or {@code null} to have both senators generated.
+     */
+    public void setSenators(List<FederalOfficial> senators) {
+        this.senators = new ArrayList<>();
+        if (senators == null || senators.isEmpty()) {
+            addSenator(new FederalOfficial());
+            addSenator(new FederalOfficial());
+        }
+        else if (senators.size() == 1) {
+            addSenator(senators.get(0));
+            addSenator(new FederalOfficial());
+        }
+        else {
+            addSenator(senators.get(0));
+            addSenator(senators.get(1));
+        }
+    }
+    public boolean hasSenator(PoliticalActor senator) {
         return senators.contains(senator);
     }
-    public void createSenators(){
-        this.createSenators(2);
+    public boolean addSenator(FederalOfficial senator) {
+        senator.addRole(FederalRole.SENATOR);
+        return this.senators.add(senator);
+    }
+    public boolean removeSenator(FederalOfficial senator) {
+        senator.removeRole(FederalRole.SENATOR);
+        return senators.remove(senator);
     }
 
-    public void createSenators(int numberOfSenators){
-
+    // Governor State Official
+    public StateOfficial getGovernor() {
+        return governor;
     }
-    public void removeSenator(PoliticalActor senator){
-        senators.remove(senator);
+    public void setGovernor(StateOfficial governor) {
+        this.governor = governor;
+    }
+    
+    // Lieutenant Governor State Official
+    public StateOfficial getLieutenantGovernor() {
+        return lieutenantGovernor;
+    }
+    public void setLieutenantGovernor(StateOfficial lieutenantGovernor) {
+        this.lieutenantGovernor = lieutenantGovernor;
     }
 
-    public Map<Demographics, Float> getDemographics(){
-        return this.demographics;
+    // REPRESENTATION METHODS ---------------------------------------------------------------------
+
+    /**
+     * {@inheritDoc}
+     */
+    public State fromRepr(String repr) {
+        return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String toRepr() {
-        String [] congressionalDistrictsStrings = new String[congressionalDistricts.size()];
-        for (int i = 0; i < congressionalDistricts.size(); i++) {
-            congressionalDistrictsStrings[i] = congressionalDistricts.get(i).getOfficeID();
-        }
-        String congressionalDistrictsRepr = Repr.arrayToReprList(congressionalDistrictsStrings);
-        String [] countiesStrings = new String[counties.size()];
-        for (int i = 0; i < counties.size(); i++) {
-            countiesStrings[i] = counties.get(i).getName() + ", " + counties.get(i).getState().getAbbreviation();
-        }
-        String countiesRepr = Repr.arrayToReprList(countiesStrings);
-        String [] citiesStrings = new String[municipalities.size()];
-        for (int i = 0; i < municipalities.size(); i++) {
-            citiesStrings[i] = municipalities.get(i).getName() + ", " + municipalities.get(i).getState().getAbbreviation();
-        }
-        String citiesRepr = Repr.arrayToReprList(citiesStrings);
-        String [] universitiesStrings = new String[universities.size()];
-        for (int i = 0; i < universities.size(); i++) {
-            universitiesStrings[i] = universities.get(i).getName();
-        }
-        String universitiesRepr = Repr.arrayToReprList(universitiesStrings);
         String [] demographicsStrings = new String[demographics.size()];
-        for (int i = 0; i < universities.size(); i++) {
+        for (int i = 0; i < demographics.size(); i++) {
             demographicsStrings[i] = "PLACEHOLDER : 0.0";
         }
         String demographicsRepr = Repr.arrayToReprList(demographicsStrings);
@@ -181,15 +320,11 @@ public class State implements Repr<State>, Jsonic<State> {
             "%s:[FIPS:%s;name=%s;population=%d;abbreviation=%s;motto=%s;nickname=%s;congressionalDistricts=[%s];counties=[%s];cities=[%s];universities=[%s];demographics=[%s];senators=[%s];governor=%s;];",
             this.getClass().getName().split("\\.")[this.getClass().getName().split("\\.").length - 1],
             this.FIPS,
-            this.name,
+            this.fullName,
             this.population,
             this.abbreviation,
             this.motto,
             this.nickname,
-            congressionalDistrictsRepr,
-            countiesRepr,
-            citiesRepr,
-            universitiesRepr,
             demographicsRepr,
             senatorsRepr,
             this.governor.getName().getLegalName()
@@ -197,19 +332,44 @@ public class State implements Repr<State>, Jsonic<State> {
         return repr;
     }
 
-    public State fromRepr(String repr) {
-        return this;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public State fromJson(JSONObject json) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromJson'");
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JSONObject toJson() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'toJson'");
     }
 
+    // OBJECT METHODS -----------------------------------------------------------------------------
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public State fromJson(JSONObject json) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'fromJson'");
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || this.getClass() != obj.getClass())
+            return false;
+        State other = (State) obj;
+        return this.toString().equals(other.toString());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return 0;
     }
 }

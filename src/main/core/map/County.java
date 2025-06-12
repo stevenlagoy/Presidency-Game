@@ -1,80 +1,65 @@
+/*
+ * County.java
+ * Steven LaGoy
+ * Created: 11 December 2024 at 5:18 PM
+ * Modified: 11 June 2025
+ */
+
 package main.core.map;
 
-import java.lang.reflect.Field;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-public class County {
+import core.JSONObject;
+import main.core.Jsonic;
+import main.core.Repr;
+import main.core.demographics.Bloc;
+import main.core.demographics.DemographicsManager;
 
-    // // basic info
-    // public int FID;
-    // public String name;
-    // public String state;
-    // public String FIPS;
-    // public int pop20;
-    // public float popDens20;
-    // public int pop10;
-    // public float popDens10;
-    // public float squareMilage;
-    // public double shapeLength, shapeArea;
-    // public double shapeLength2, shapeArea2;
+public class County implements MapEntity, Repr<County>, Jsonic<County> {
 
-    // // demographic info
-    // public int popWhite, popBlack, popNativeIndian, popAsian, popHawaiianPacific, popHispanic, popOther, popMultiRace;
-    
-    // // gender and age info
-    // public int popMale, popFemale;
-    // public int pop0005, pop0509, pop1014, pop1519, pop2024, pop2534, pop3544, pop4554, pop5564, pop6574, pop7584, pop8500;
-    // public float medAge, medAgeM, medAgeF;
-    
-    // // household info
-    // public int households;
-    // public float avgHHSize;
-    // public int HH_1M, HH_1F;
-    // public int MarriedHH_Child, MarriedHH_NoChild;
-    // public int MaleHeadH_child, FemaleHeadH_child;
-    // public int families;
-    // public float avgFamSize;
+    // INSTANCE VARIABLES
 
-    // // housing info
-    // public int housingUnits, vacant, ownerOccupied, renterOccupied;
-    // public int numFarms;
-    // public int aveFarmAcreage, cropAcreage, avgFarmSales;
-
-    private String FIPS;
-    private String name;
+    /** State the County is within. */
     private State state;
-    private CongressionalDistrict congressionalDistrict;
-    private Municipality countySeat;
+    /** Unique 5-digit FIPS code, including the State FIPS. */
+    private String FIPS;
+    /** Population of the County. */
     private int population;
-    private double area;
+    /** Land area of the County. */
+    private double landArea;
+    /** Full name of the County, including "County of ..." or "... Borough" &c. */
+    private String fullName;
+    /** Common name of the County, without prefix. */
+    private String commonName;
+    /** Municipality serving as the County Seat. Does not have to be within the County itself, but must be in the same State. */
+    private Municipality countySeat;
 
-    public County(String FIPS, String name, int population, double area) {
+    private Set<String> descriptors;
+    private Map<Bloc, Float> demographics;
+
+    // CONSTRUCTORS -------------------------------------------------------------------------------
+
+    public County(String FIPS, int population, double landArea, String fullName, String commonName, String stateName, String countySeatName, Set<String> descriptors) {
+        this(FIPS, population, landArea, fullName, commonName, MapManager.matchState(stateName), countySeatName.isEmpty() ? null : MapManager.matchMunicipality(countySeatName, stateName), descriptors);
+    }
+
+    public County(String FIPS, int population, double landArea, String fullName, String commonName, State state, Municipality countySeat, Set<String> descriptors) {
         this.FIPS = FIPS;
-        this.name = name;
-        this.population = population;
-        this.area = area;
-    }
-
-    public County(String FIPS, String name, String state, String countySeat, int population, double area) {
-        this(FIPS, name, state != null ? MapManager.matchState(state) : null, countySeat != null ? MapManager.matchMunicipality(countySeat, state) : null, population, area);
-    }
-
-    public County(String FIPS, String name, State state, String countySeat, int population, double area) {
-        this(FIPS, name, state, countySeat != null ? MapManager.matchMunicipality(countySeat, state) : null, population, area);
-    }
-
-    public County(String FIPS, String name, String state, Municipality countySeat, int population, double area) {
-        this(FIPS, name, MapManager.matchState(state), countySeat, population, area);
-    }
-
-    public County(String FIPS, String name, State state, Municipality countySeat, int population, double area) {
-        this.FIPS = FIPS;
-        this.name = name;
+        setPopulation(population);
+        setLandArea(landArea);
+        this.fullName = fullName;
+        this.commonName = commonName;
         this.state = state;
         this.countySeat = countySeat;
-        this.population = population;
-        this.area = area;
+        setDescriptors(descriptors);
     }
 
+    // GETTERS AND SETTERS ------------------------------------------------------------------------
+
+    // FIPS Code : String
     public String getFIPS() {
         return FIPS;
     }
@@ -82,13 +67,45 @@ public class County {
         this.FIPS = FIPS;
     }
 
-    public String getName() {
-        return name;
+    // Population : int
+    public int getPopulation() {
+        return population;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setPopulation(int population) {
+        this.population = population;
+        if (this.population < 0) this.population = 0;
+    }
+    public void addPopulation(int population) {
+        this.population += population;
+        if (this.population < 0) this.population = 0;
     }
 
+    // Land Area : double
+    public double getLandArea() {
+        return this.landArea;
+    }
+    public void setLandArea(double area) {
+        this.landArea = area;
+        if (this.landArea < 0) this.landArea = 0;
+    }
+
+    // Full Name : String
+    public String getFullName() {
+        return fullName;
+    }
+    public void setFullName(String name) {
+        this.fullName = name;
+    }
+
+    // Common Name : String
+    public String getCommonName() {
+        return commonName;
+    }
+    public void setCommonName(String name) {
+        this.commonName = name;
+    }
+
+    // State : State
     public State getState() {
         return state;
     }
@@ -99,16 +116,7 @@ public class County {
         this.state = MapManager.matchState(stateName);
     }
 
-    public CongressionalDistrict getCongressionalDistrict() {
-        return congressionalDistrict;
-    }
-    public void setCongressionalDistrict(CongressionalDistrict congressionalDistrict) {
-        this.congressionalDistrict = congressionalDistrict;
-    }
-    public void setCongressionalDistrict(String districtOfficeID) {
-        this.congressionalDistrict = MapManager.matchCongressionalDistrict(districtOfficeID);
-    }
-
+    // County Seat : Municipality
     public Municipality getCountySeat() {
         return countySeat;
     }
@@ -119,138 +127,109 @@ public class County {
         this.countySeat = MapManager.matchMunicipality(countySeat, this.state);
     }
 
-    public int getPopulation() {
-        return population;
+    // Descriptors : List of Strings
+    @Override
+    public Set<String> getDescriptors() {
+        return descriptors;
     }
-    public void setPopulation(int population) {
-        this.population = population;
+    @Override
+    public void setDescriptors(Set<String> descriptors) {
+        this.descriptors = new HashSet<>(descriptors);
+        evaluateDemographics();
     }
-    public void addPopulation(int population) {
-        this.population += population;
+    @Override
+    public boolean hasDescriptor(String descriptor) {
+        return this.descriptors.contains(descriptor);
+    }
+    @Override
+    public boolean addDescriptor(String descriptor) {
+        boolean modified = this.descriptors.add(descriptor);
+        if (modified) evaluateDemographics();
+        return modified;
+    }
+    @Override
+    public boolean addAllDescriptors(Collection<String> descriptors) {
+        boolean modified = this.descriptors.addAll(descriptors);
+        if (modified) evaluateDemographics();
+        return modified;
+    }
+    @Override
+    public boolean removeDescriptor(String descriptor) {
+        boolean modified = this.descriptors.remove(descriptor);
+        if (modified) evaluateDemographics();
+        return modified;
+    }
+    @Override
+    public boolean removeAllDescriptors(Collection<String> descriptors) {
+        boolean modified = this.descriptors.removeAll(descriptors);
+        if (modified) evaluateDemographics();
+        return modified;
     }
 
-    public double getArea() {
-        return area;
+    // Demographics : Map of Bloc to Float
+
+    @Override
+    public Map<Bloc, Float> getDemographics() {
+        return demographics;
     }
-    public void setArea(double area) {
-        this.area = area;
+    @Override
+    public float getDemographicPercentage(Bloc bloc) {
+        return this.demographics.get(bloc) != null ? this.demographics.get(bloc) : 0.0f;
+    }
+    @Override
+    public int getDemographicPopulation(Bloc bloc) {
+        return Math.round(getDemographicPercentage(bloc) * population);
+    }
+    @Override
+    public void evaluateDemographics() {
+        this.descriptors.addAll(state.getDescriptors());
+        this.demographics = DemographicsManager.demographicsFromDescriptors(descriptors);
     }
 
-    // public County(
-    //     int FID, String name, String state,
-    //     String FIPS,
-    //     int pop20,
-    //     float popDens20,
-    //     int pop10,
-    //     float popDens10,
-    //     float squareMilage,
-    //     double shapeLength, double shapeArea,
-    //     double shapeLength2, double shapeArea2,
-    //     int popWhite, int popBlack, int popNativeIndian, int popAsian, int popHawaiianPacific, int popHispanic, int popOther, int popMultiRace,
-    //     int popMale, int popFemale,
-    //     int pop0005, int pop0509, int pop1014, int pop1519, int pop2024, int pop2534, int pop3544, int pop4554, int pop5564, int pop6574, int pop7584, int pop8500,
-    //     float medAge, float medAgeM, float medAgeF,
-    //     int households,
-    //     float avgHHSize,
-    //     int HH_1M, int HH_1F,
-    //     int MarriedHH_Child, int MarriedHH_NoChild,
-    //     int MaleHeadH_child, int FemaleHeadH_child,
-    //     int families,
-    //     float avgFamSize,
 
-    //     int housingUnits, int vacant, int ownerOccupied, int renterOccupied,
-    //     int numFarms,
-    //     int aveFarmAcreage, int cropAcreage, int avgFarmSales
-    // ){
-    //     this.FID = FID; this.name = name; this.state = state;
-    //     this.FIPS = FIPS;
-    //     this.pop20 = pop20;
-    //     this.popDens20 = popDens20;
-    //     this.pop10 = pop10;
-    //     this.popDens10 = popDens10;
-    //     this.squareMilage = squareMilage;
-    //     this.shapeLength = shapeLength; this.shapeArea = shapeArea;
-    //     this.shapeLength2 = shapeLength2; this.shapeArea2 = shapeArea2;
-    //     this.popWhite = popWhite; this.popBlack = popBlack; this.popNativeIndian = popNativeIndian; this.popAsian = popAsian; this.popHawaiianPacific = popHawaiianPacific; this.popHispanic = popHispanic; this.popOther = popOther; this.popMultiRace = popMultiRace;
-    //     this.popMale = popMale; this.popFemale = popFemale;
-    //     this.pop0005 = pop0005; this.pop0509 = pop0509; this.pop1014 = pop1014; this.pop1519 = pop1519; this.pop2024 = pop2024; this.pop2534 = pop2534; this.pop3544 = pop3544; this.pop4554 = pop4554; this.pop5564 = pop5564; this.pop6574 = pop6574; this.pop7584 = pop7584; this.pop8500 = pop8500;
-    //     this.medAge = medAge; this.medAgeM = medAgeM; this.medAgeF = medAgeF;
-    //     this.households = households;
-    //     this.avgHHSize = avgHHSize;
-    //     this.HH_1M = HH_1M; this.HH_1F = HH_1F;
-    //     this.MarriedHH_Child = MarriedHH_Child; this.MarriedHH_NoChild = MarriedHH_NoChild;
-    //     this.MaleHeadH_child = MaleHeadH_child; this.FemaleHeadH_child = FemaleHeadH_child;
-    //     this.families = families;
-    //     this.avgFamSize = avgFamSize;
+    // REPRESENTATION METHODS ---------------------------------------------------------------------
 
-    //     this.housingUnits = housingUnits; this.vacant = vacant; this.ownerOccupied = ownerOccupied; this.renterOccupied = renterOccupied;
-    //     this.numFarms = numFarms;
-    //     this.aveFarmAcreage = aveFarmAcreage; this.cropAcreage = cropAcreage; this.avgFarmSales = avgFarmSales;
-    // }
+    @Override
+    public JSONObject toJson() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+    }
 
-    // public static County parseCounty(String csvLine) {
-    //     // Split the line by comma
-    //     String[] fields = csvLine.split(",");
+    @Override
+    public County fromJson(JSONObject json) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromJson'");
+    }
+
+    @Override
+    public String toRepr() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toRepr'");
+    }
+
+    @Override
+    public County fromRepr(String repr) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromRepr'");
+    }
+
+    @Override
+    public String toString() {
+        return "";
+        // TODO
+    }
     
-    //     // Parse and return a County object
-    //     return new County(
-    //         Integer.parseInt(fields[0].trim()), // FID
-    //         fields[1].trim(),                   // name
-    //         fields[2].trim(),                   // state
-    //         fields[5].trim(),                   // FIPS (combined state and county FIPS code)
-    //         Integer.parseInt(fields[6].trim()), // pop20 (population)
-    //         Float.parseFloat(fields[7].trim()), // popDens20 (population density 2020)
-    //         Integer.parseInt(fields[8].trim()), // pop10 (population 2010)
-    //         Float.parseFloat(fields[9].trim()), // popDens10 (population density 2010)
-    //         Float.parseFloat(fields[53].trim()),// squareMilage (total square mileage)
-    //         Double.parseDouble(fields[58].trim()), // shapeLength (first shape length)
-    //         Double.parseDouble(fields[59].trim()), // shapeArea (first shape area)
-    //         Double.parseDouble(fields[60].trim()), // shapeLength2 (second shape length)
-    //         Double.parseDouble(fields[61].trim()), // shapeArea2 (second shape area)
-    //         Integer.parseInt(fields[10].trim()), // popWhite
-    //         Integer.parseInt(fields[11].trim()), // popBlack
-    //         Integer.parseInt(fields[12].trim()), // popNativeIndian (American Indian and Alaskan Native population)
-    //         Integer.parseInt(fields[13].trim()), // popAsian
-    //         Integer.parseInt(fields[14].trim()), // popHawaiianPacific (Native Hawaiian and Pacific Islander)
-    //         Integer.parseInt(fields[15].trim()), // popHispanic
-    //         Integer.parseInt(fields[16].trim()), // popOther
-    //         Integer.parseInt(fields[17].trim()), // popMultiRace
-    //         Integer.parseInt(fields[18].trim()), // popMale
-    //         Integer.parseInt(fields[19].trim()), // popFemale
-    //         Integer.parseInt(fields[20].trim()), // pop0005 (under age 5)
-    //         Integer.parseInt(fields[21].trim()), // pop0509 (age 5-9)
-    //         Integer.parseInt(fields[22].trim()), // pop1014 (age 10-14)
-    //         Integer.parseInt(fields[23].trim()), // pop1519 (age 15-19)
-    //         Integer.parseInt(fields[24].trim()), // pop2024 (age 20-24)
-    //         Integer.parseInt(fields[25].trim()), // pop2534 (age 25-34)
-    //         Integer.parseInt(fields[26].trim()), // pop3544 (age 35-44)
-    //         Integer.parseInt(fields[27].trim()), // pop4554 (age 45-54)
-    //         Integer.parseInt(fields[28].trim()), // pop5564 (age 55-64)
-    //         Integer.parseInt(fields[29].trim()), // pop6574 (age 65-74)
-    //         Integer.parseInt(fields[30].trim()), // pop7584 (age 75-84)
-    //         Integer.parseInt(fields[31].trim()), // pop8500 (age 85+)
-    //         Float.parseFloat(fields[32].trim()), // medAge (median age)
-    //         Float.parseFloat(fields[33].trim()), // medAgeM (median age males)
-    //         Float.parseFloat(fields[34].trim()), // medAgeF (median age females)
-    //         Integer.parseInt(fields[35].trim()), // households
-    //         Float.parseFloat(fields[36].trim()), // avgHHSize (average household size)
-    //         Integer.parseInt(fields[37].trim()), // HH_1M (households with 1 male)
-    //         Integer.parseInt(fields[38].trim()), // HH_1F (households with 1 female)
-    //         Integer.parseInt(fields[39].trim()), // MarriedHH_Child (married households with children)
-    //         Integer.parseInt(fields[40].trim()), // MarriedHH_NoChild (married households with no children)
-    //         Integer.parseInt(fields[41].trim()), // MaleHeadH_child (male-headed households with children)
-    //         Integer.parseInt(fields[42].trim()), // FemaleHeadH_child (female-headed households with children)
-    //         Integer.parseInt(fields[43].trim()), // families
-    //         Float.parseFloat(fields[44].trim()), // avgFamSize (average family size)
-    //         Integer.parseInt(fields[45].trim()), // housingUnits
-    //         Integer.parseInt(fields[46].trim()), // vacant (vacant housing units)
-    //         Integer.parseInt(fields[47].trim()), // ownerOccupied
-    //         Integer.parseInt(fields[48].trim()), // renterOccupied
-    //         Integer.parseInt(fields[49].trim()), // numFarms (number of farms in 2012)
-    //         Integer.parseInt(fields[50].trim()), // aveFarmAcreage (average farm acreage in 2012)
-    //         Integer.parseInt(fields[51].trim()), // cropAcreage (crop acreage in 2012)
-    //         Integer.parseInt(fields[52].trim())  // avgFarmSales (average farm sales in 2012)
-    //     );
-    // }
-    
+    // OBJECT METHODS -----------------------------------------------------------------------------
+
+    @Override
+    public boolean equals(Object obj) {
+        // TODO Auto-generated method stub
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        // TODO Auto-generated method stub
+        return super.hashCode();
+    }
 }
