@@ -7,6 +7,7 @@
 
 package main.core.characters;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import core.JSONObject;
@@ -101,8 +102,10 @@ public class StateOfficial extends PoliticalActor {
         this.state = state;
     }
     
+    // Roles : List of StateRole
 
     public boolean addRole(StateRole role) {
+        if (this.roles == null) this.roles = new HashSet<>();
         return this.roles.add(role);
     }
 

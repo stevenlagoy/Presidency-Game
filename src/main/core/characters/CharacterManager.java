@@ -12,6 +12,7 @@ package main.core.characters;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import core.JSONObject;
@@ -19,6 +20,9 @@ import core.JSONProcessor;
 import main.core.DateManager;
 import main.core.Engine;
 import main.core.FilePaths;
+import main.core.characters.FederalOfficial.FederalRole;
+import main.core.characters.names.Name;
+import main.core.characters.names.NameManager;
 import main.core.demographics.Bloc;
 import main.core.demographics.Demographics;
 import main.core.demographics.DemographicsManager;
@@ -72,13 +76,31 @@ public final class CharacterManager {
 
     // Individual Characters
     private static FederalOfficial president;
-    public static FederalOfficial getPresident() { return president; }
+    private static FederalOfficial generatePresident() {
+        Demographics presidentDemographics = new Demographics("White", "Baby Boomer", "Christian", "Man"); // Change later to select Demographics from a special weighted map
+        president = new FederalOfficial(new Character(presidentDemographics, null, null, null, null, null));
+        president.addRole(FederalRole.PRESIDENT);
+        return president;
+    }
+    public static FederalOfficial getPresident() { return president != null ? president : generatePresident(); }
     private static FederalOfficial vicePresident;
-    public static FederalOfficial getVicePresident() { return vicePresident; }
+    private static FederalOfficial generateVicePresident() {
+        Demographics vicePresidentDemographics = new Demographics("White", "Baby Boomer", "Christian", "Man"); // Change later to select Demographics from a special weighted map
+        vicePresident = new FederalOfficial(new Character(vicePresidentDemographics, null, null, null, null, null));
+        vicePresident.addRole(FederalRole.VICE_PRESIDENT);
+        return vicePresident;
+    }
+    public static FederalOfficial getVicePresident() { return vicePresident != null ? vicePresident : generateVicePresident(); }
     private static Character firstLady;
     public static Character getFirstLady() { return firstLady; }
-    private static PoliticalActor houseSpeaker;
-    public static PoliticalActor getHouseSpeaker() { return houseSpeaker; }
+    private static FederalOfficial houseSpeaker;
+    private static FederalOfficial generateHouseSpeaker() {
+        Demographics speakerDemographics = new Demographics("White", "Baby Boomer", "Christian", "Man"); // Change later to select Demographics from a special weighted map
+        houseSpeaker = new FederalOfficial(new Character(speakerDemographics, null, null, null, null, null));
+        houseSpeaker.addRole(FederalRole.HOUSE_SPEAKER);
+        return houseSpeaker;
+    }
+    public static FederalOfficial getHouseSpeaker() { return houseSpeaker != null ? houseSpeaker : generateHouseSpeaker(); }
 
     public static boolean init(){
         boolean successFlag = true;
@@ -105,6 +127,10 @@ public final class CharacterManager {
 
         playerCandidate = createPlayerCharacter();
         createPlayerFamily();
+
+        generatePresident();
+        generateVicePresident();
+        generateHouseSpeaker();
 
         return true;
 
@@ -180,7 +206,10 @@ public final class CharacterManager {
         }
         // normalize the values
         for(int i = 0; i < result.size(); i++){
-            result.put(i + startYear, result.get(i + startYear) / totalPercentages);
+            if (totalPercentages == 0) {
+                result.put(i + startYear, 0.0);
+            }
+            else result.put(i + startYear, result.get(i + startYear) / totalPercentages);
         }
         return result;
     }
@@ -250,16 +279,18 @@ public final class CharacterManager {
     public static void generateBlocsReport() {
         int differenceValue = 5;
         System.out.println("TOTAL # CHARACTERS : " + getNumCharacters());
-        for (Bloc bloc : Bloc.getInstances()) {
-            if (bloc.getSubBlocs().isEmpty()) {
-                if (!DemographicsManager.isCharacterBlocCategory(bloc.getDemographicGroup())) continue;
-                float expectedRepresentation = bloc.getPercentageVoters();
-                float actualRepresentation = bloc.getMembers().size() * 1.0f / CharacterManager.getNumCharacters();
-                float representationRatio = actualRepresentation / expectedRepresentation;
-                System.out.printf("Bloc Name : %70s,\tMember Count : %8d,\tExpected Count : %8d,\tExpected %% : %f,\tActual %% : %f,\tRatio : %f\t%s%n",
-                    bloc.getName(), bloc.getMembers().size(), (int) (CharacterManager.getNumCharacters() * expectedRepresentation), expectedRepresentation, actualRepresentation, representationRatio, 
-                    (bloc.getMembers().size() > (int) (CharacterManager.getNumCharacters() * expectedRepresentation) + differenceValue ? "EXCESS" : (bloc.getMembers().size() < (int) (CharacterManager.getNumCharacters() * expectedRepresentation) - differenceValue ? "LACK" : ""))
-                );
+        for (List<Bloc> category : DemographicsManager.getDemographicBlocs().values()) {
+            for (Bloc bloc : category) {
+                if (bloc.getSubBlocs().isEmpty()) {
+                    if (!DemographicsManager.isCharacterBlocCategory(bloc.getDemographicGroup())) continue;
+                    float expectedRepresentation = bloc.getPercentageVoters();
+                    float actualRepresentation = bloc.getMembers().size() * 1.0f / CharacterManager.getNumCharacters();
+                    float representationRatio = actualRepresentation / expectedRepresentation;
+                    System.out.printf("Bloc Name : %70s,\tMember Count : %8d,\tExpected Count : %8d,\tExpected %% : %f,\tActual %% : %f,\tRatio : %f\t%s%n",
+                        bloc.getName(), bloc.getMembers().size(), (int) (CharacterManager.getNumCharacters() * expectedRepresentation), expectedRepresentation, actualRepresentation, representationRatio, 
+                        (bloc.getMembers().size() > (int) (CharacterManager.getNumCharacters() * expectedRepresentation) + differenceValue ? "EXCESS" : (bloc.getMembers().size() < (int) (CharacterManager.getNumCharacters() * expectedRepresentation) - differenceValue ? "LACK" : ""))
+                    );
+                }
             }
         }
         System.out.println("TOTAL # CHARACTERS : " + getNumCharacters());

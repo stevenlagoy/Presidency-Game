@@ -131,7 +131,7 @@ public final class NameManager {
         for (Bloc bloc : blocs) {
             boolean avoid = false;
             for (String category : avoidCategories) {
-                if (bloc.getNestedNames().contains(category) || bloc.getDemographicGroup().equals(category))
+                if (bloc.getNestedSuperBlocNames().contains(category) || bloc.getDemographicGroup().equals(category))
                     avoid = true;
             }
             if (!avoid) candidate.add(bloc);
@@ -555,20 +555,20 @@ public final class NameManager {
     }
 
     public static NameForm selectNameForm(Demographics demographics) {
-        if (demographics.getRaceEthnicity().getNestedNames().contains("Asian")) {
+        if (demographics.getRaceEthnicity().getNestedSuperBlocNames().contains("Asian")) {
             if (Engine.randPercent() <= asianEasternNamePercent) {
                 return NameForm.EASTERN;
             }
         }
-        else if (demographics.getRaceEthnicity().getNestedNames().contains("Hispanic / Latino")) {
-            if (demographics.getRaceEthnicity().getNestedNames().contains("Argentinian")) {
+        else if (demographics.getRaceEthnicity().getNestedSuperBlocNames().contains("Hispanic / Latino")) {
+            if (demographics.getRaceEthnicity().getNestedSuperBlocNames().contains("Argentinian")) {
                 return NameForm.WESTERN; // Only the paternal apellido is inherited in the Argentinian custom
             }
             if (Engine.randPercent() <= hispanicHispanicNamePercent) {
                 return NameForm.HISPANIC;
             }
         }
-        else if (demographics.getRaceEthnicity().getNestedNames().contains("Native / Indian")) {
+        else if (demographics.getRaceEthnicity().getNestedSuperBlocNames().contains("Native / Indian")) {
             if (Engine.randPercent() <= nativeNativeNamePercent) {
                 return NameForm.NATIVE_AMERICAN;
             }
@@ -702,7 +702,7 @@ public final class NameManager {
                     }
                     maternalName = maternalName + Engine.randSelect(conjoiners) + n;
                 }
-                if (demographics.getRaceEthnicity().getNestedNames().contains("Brazilian")) {
+                if (demographics.getRaceEthnicity().getNestedSuperBlocNames().contains("Brazilian")) {
                     // Brazilian names list the Maternal surname first
                     name.setMaternalName(maternalName.replace(" y ", " e "));
                     name.setPaternalName(paternalName.replace(" y ", " e "));

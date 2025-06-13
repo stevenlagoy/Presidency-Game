@@ -47,10 +47,11 @@ public final class MapManager {
     public static double mapCameraX; // X-coordinate on the map which the camera is currently centered on. 0.0 is center of map.
     public static double mapCameraY; // Y-coordinate on the map which the camera is currently centered on. 0.0 is center of map.
 
-    public static List<State>                   states                  = new ArrayList<>();
-    public static List<CongressionalDistrict>   congressionalDistricts  = new ArrayList<>();
-    public static List<County>                  counties                = new ArrayList<>();
-    public static List<Municipality>            municipalities          = new ArrayList<>();
+    public static final Nation                        nation                  = Nation.getInstance();
+    public static final List<State>                   states                  = new ArrayList<>();
+    public static final List<CongressionalDistrict>   congressionalDistricts  = new ArrayList<>();
+    public static final List<County>                  counties                = new ArrayList<>();
+    public static final List<Municipality>            municipalities          = new ArrayList<>();
 
     public static void init(){
         setMapMode(MapMode.DEFAULT);
@@ -191,6 +192,25 @@ public final class MapManager {
         return true;
     }
 
+    private static boolean resolveGovernmentOfficials() {
+        boolean successFlag = true;
+        successFlag = successFlag && nation.getPresident() != null;
+        successFlag = successFlag && nation.getVicePresident() != null;
+        for (State state : states) {
+            state.setSenators(state.getSenators());
+            state.setGovernor(state.getGovernor());
+            state.setLieutenantGovernor(state.getLieutenantGovernor());
+        }
+        for (CongressionalDistrict district : congressionalDistricts) {
+            district.setRepresentative(district.getRepresentative());
+        }
+        for (Municipality municipality : municipalities) {
+            // municipality.setMayor(municipality.getMayor()); // not all municipalities in the United States have a mayor, this varies by state. Also generating a character for EVERY municipality introduces massiave bloat
+            if (municipality.getPopulation() >= 100000) municipality.setMayor(municipality.getMayor());
+        }
+        return successFlag;
+    }
+
     public static boolean createMunicipalities() { return createMunicipalities(true); }
     public static boolean createMunicipalities(boolean countiesLoaded) {
         JSONObject json = JSONProcessor.processJson(FilePaths.MUNICIPALITIES);
@@ -224,6 +244,7 @@ public final class MapManager {
         boolean successFlag = true;
         successFlag = successFlag && resolveCapitals();
         successFlag = successFlag && resolveCountySeats();
+        successFlag = successFlag && resolveGovernmentOfficials();
         return successFlag;
     }
 

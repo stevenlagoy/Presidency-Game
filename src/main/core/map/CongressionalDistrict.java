@@ -16,6 +16,7 @@ import core.JSONObject;
 import main.core.Jsonic;
 import main.core.Repr;
 import main.core.characters.FederalOfficial;
+import main.core.characters.FederalOfficial.FederalRole;
 import main.core.demographics.Bloc;
 import main.core.demographics.DemographicsManager;
 
@@ -180,6 +181,19 @@ public class CongressionalDistrict implements MapEntity, Repr<State>, Jsonic<Sta
     public void evaluateDemographics() {
         this.descriptors.addAll(state.getDescriptors());
         this.demographics = DemographicsManager.demographicsFromDescriptors(descriptors);
+    }
+
+    // Representative : FederalOfficial
+
+    public FederalOfficial getRepresentative() {
+        return representative;
+    }
+    public void setRepresentative(FederalOfficial representative) {
+        if (representative == null) {
+            this.representative = new FederalOfficial();
+            this.representative.addRole(FederalRole.REPRESENTATIVE);
+        }
+        else this.representative = representative;
     }
     
     // REPRESENTATION METHODS ---------------------------------------------------------------------

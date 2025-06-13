@@ -12,7 +12,6 @@ package main.core.map;
 // Standard Library Imports
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +26,7 @@ import main.core.characters.FederalOfficial;
 import main.core.characters.PoliticalActor;
 import main.core.characters.StateOfficial;
 import main.core.characters.FederalOfficial.FederalRole;
+import main.core.characters.StateOfficial.StateRole;
 import main.core.demographics.Bloc;
 import main.core.demographics.DemographicsManager;
 
@@ -282,7 +282,11 @@ public class State implements MapEntity, Repr<State>, Jsonic<State> {
         return governor;
     }
     public void setGovernor(StateOfficial governor) {
-        this.governor = governor;
+        if (governor == null) {
+            this.governor = new StateOfficial(this);
+            this.governor.addRole(StateRole.GOVERNOR);
+        }
+        else this.governor = governor;
     }
     
     // Lieutenant Governor State Official
@@ -290,7 +294,11 @@ public class State implements MapEntity, Repr<State>, Jsonic<State> {
         return lieutenantGovernor;
     }
     public void setLieutenantGovernor(StateOfficial lieutenantGovernor) {
-        this.lieutenantGovernor = lieutenantGovernor;
+        if (lieutenantGovernor == null) {
+            this.lieutenantGovernor = new StateOfficial(this);
+            this.lieutenantGovernor.addRole(StateRole.LIEUTENANT_GOVERNOR);
+        }
+        else this.lieutenantGovernor = lieutenantGovernor;
     }
 
     // REPRESENTATION METHODS ---------------------------------------------------------------------

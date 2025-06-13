@@ -24,6 +24,7 @@ import main.core.Engine;
 import main.core.Jsonic;
 import main.core.Repr;
 import main.core.characters.LocalOfficial;
+import main.core.characters.LocalOfficial.LocalRole;
 import main.core.demographics.DemographicsManager;
 import main.core.demographics.Bloc;
 
@@ -287,6 +288,19 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
     @Override
     public void evaluateDemographics() {
         this.demographics = DemographicsManager.demographicsFromDescriptors(descriptors);
+    }
+
+    // Mayor : LocalOfficial
+
+    public LocalOfficial getMayor() {
+        return mayor;
+    }
+    public void setMayor(LocalOfficial mayor) {
+        if (mayor == null) {
+            this.mayor = new LocalOfficial();
+            this.mayor.addRole(LocalRole.MAYOR);
+        }
+        else this.mayor = mayor;
     }
 
     // REPRESENATION METHODS ----------------------------------------------------------------------

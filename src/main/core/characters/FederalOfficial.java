@@ -7,6 +7,7 @@
 
 package main.core.characters;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import core.JSONObject;
@@ -59,6 +60,7 @@ public class FederalOfficial extends PoliticalActor {
 
     public FederalOfficial(PoliticalActor politicalActor) {
         super(politicalActor, false);
+        this.roles = new HashSet<>();
         CharacterManager.addCharacter(this);
     } 
 
@@ -81,6 +83,7 @@ public class FederalOfficial extends PoliticalActor {
     }
 
     public boolean addRole(FederalRole role) {
+        if (this.roles == null) this.roles = new HashSet<>();
         return this.roles.add(role);
     }
     public boolean removeRole(FederalRole role) {
