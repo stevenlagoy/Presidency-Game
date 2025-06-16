@@ -185,7 +185,12 @@ public final class MapManager {
             if (countyObj instanceof JSONObject countyJson) {
                 String FIPS = countyJson.get("FIPS").toString();
                 String state = countyJson.get("state").toString();
-                String countySeat = countyJson.get("county_seat").toString();
+                String countySeat;
+                // Handle null county seats
+                if (countyJson.get("county_seat").getClass() == Object.class) {
+                    countySeat = null;
+                }
+                else countySeat = countyJson.get("county_seat").toString();
                 MapManager.matchCounty(FIPS).setCountySeat(MapManager.matchMunicipality(countySeat, state));
             }
         }
@@ -223,12 +228,13 @@ public final class MapManager {
                     double landArea = Double.parseDouble(municipalityJson.get("land_area_2020").toString());
                     String name = municipalityJson.get("name").toString();
                     String typeClass = municipalityJson.get("type_class").toString();
-                    String timeZone = municipalityJson.get("time_zone").toString();
+                    String standardTimeZone = municipalityJson.get("standard_timezone").toString();
+                    String daylightTimeZone = municipalityJson.get("daylight_timezone").toString();
                     String stateName = municipalityJson.get("state").toString();
                     List<String> countiesNames = (ArrayList<String>) municipalityJson.get("counties");
                     Set<String> descriptors = Set.copyOf((ArrayList<String>) municipalityJson.get("descriptors"));
                     MapManager.municipalities.add(new Municipality(
-                        FIPS, population, landArea, name, typeClass, timeZone, stateName, countiesNames, descriptors
+                        FIPS, population, landArea, name, typeClass, standardTimeZone, daylightTimeZone, stateName, countiesNames, descriptors
                     ));
                 }
             }
@@ -330,6 +336,7 @@ public final class MapManager {
     }
 
     public static Municipality matchMunicipality(String municipalityName, State state) {
+        if (municipalityName == null) return null;
         for (Municipality municipality : municipalities) {
             if (municipality.getName().equals(municipalityName) && municipality.getState().equals(state)) return municipality;
         }

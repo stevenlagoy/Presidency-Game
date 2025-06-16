@@ -69,7 +69,8 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
     private String name;
     /** TypeClass of the Municipality, like City, Town, Village, &c. */
     private TypeClass typeClass;
-    private TimeZone timeZone;
+    private TimeZone standardTimeZone;
+    private TimeZone daylightTimeZone;
     private List<County> counties;
     private State state;
 
@@ -82,26 +83,28 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
 
     // CONSTRUCTORS -------------------------------------------------------------------------------
 
-    public Municipality(String FIPS, int population, double landArea, String name, String typeClass, String timeZone, String stateName, List<String> countiesNames, Set<String> descriptors) {
+    public Municipality(String FIPS, int population, double landArea, String name, String typeClass, String standardTimeZone, String daylightTimeZone, String stateName, List<String> countiesNames, Set<String> descriptors) {
         this.FIPS = FIPS;
         setPopulation(population);
         setLandArea(landArea);
         this.name = name;
         this.typeClass = TypeClass.matchTypeClass(typeClass);
-        this.timeZone = TimeZone.getTimeZone(timeZone);
+        this.standardTimeZone = TimeZone.getTimeZone(standardTimeZone);
+        this.daylightTimeZone = TimeZone.getTimeZone(daylightTimeZone);
         this.counties = new ArrayList<>();
         setState(MapManager.matchState(stateName));
         setCountiesByNames(countiesNames);
         setDescriptors(descriptors);
     }
 
-    public Municipality(String FIPS, int population, double landArea, String name, TypeClass typeClass, TimeZone timeZone, List<County> counties, Set<String> descriptors) {
+    public Municipality(String FIPS, int population, double landArea, String name, TypeClass typeClass, TimeZone standardTimeZone, TimeZone daylightTimeZone, List<County> counties, Set<String> descriptors) {
         this.FIPS = FIPS;
         this.population = population;
         this.landArea = landArea;
         this.name = name;
         this.typeClass = typeClass;
-        this.timeZone = timeZone;
+        this.standardTimeZone = standardTimeZone;
+        this.daylightTimeZone = daylightTimeZone;
         this.counties = counties != null ? counties : new ArrayList<>();
         try {
             this.state = this.counties.get(0).getState();
@@ -115,13 +118,14 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
         MapManager.municipalities.add(this);
     }
 
-    public Municipality(String FIPS, int population, double landArea, String name, String nickname, TypeClass typeClass, TimeZone timeZone, State state, Set<String> descriptors) {
+    public Municipality(String FIPS, int population, double landArea, String name, String nickname, TypeClass typeClass, TimeZone standardTimeZone, TimeZone daylightTimeZone, State state, Set<String> descriptors) {
         this.FIPS = FIPS;
         this.population = population;
         this.landArea = landArea;
         this.name = name;
         this.typeClass = typeClass;
-        this.timeZone = timeZone;
+        this.standardTimeZone = standardTimeZone;
+        this.daylightTimeZone = daylightTimeZone;
         this.state = state;
         setDescriptors(getDescriptors());
         evaluateDemographics();
@@ -185,13 +189,22 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
         this.typeClass = typeClass;
     }
 
-    // Time Zone : TimeZone
+    // Standard Time Zone : TimeZone
 
-    public TimeZone getTimeZone() {
-        return timeZone;
+    public TimeZone getStandardTimeZone() {
+        return standardTimeZone;
     }
-    public void setTimeZone(TimeZone timeZone) {
-        this.timeZone = timeZone;
+    public void setStandardTimeZone(TimeZone timeZone) {
+        this.standardTimeZone = timeZone;
+    }
+
+    // Daylight Time Zone : TimeZone
+
+    public TimeZone getDaylightTimeZone() {
+        return daylightTimeZone;
+    }
+    public void setDaylightTimeZone(TimeZone timeZone) {
+        this.daylightTimeZone = timeZone;
     }
 
     // Counties : List of County

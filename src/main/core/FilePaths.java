@@ -41,7 +41,7 @@ public abstract class FilePaths {
     public static final Path STATES                     = MAP_RESOURCES.resolve("states.json");
     public static final Path CONGRESSIONAL_DISTRICTS    = MAP_RESOURCES.resolve("congressional_districts.json");
     public static final Path COUNTIES                   = MAP_RESOURCES.resolve("counties.json");
-    public static final Path CITIES                     = MAP_RESOURCES.resolve("cities.json");
+    public static final Path MUNICIPALITIES             = MAP_RESOURCES.resolve("municipalities.json");
     public static final Path UNIVERSITIES               = MAP_RESOURCES.resolve("universities.json");
 
     // DEMOGRAPHICS MANAGER FILES
