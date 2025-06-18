@@ -3,6 +3,7 @@ package main.core.graphics.rendering;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joml.Vector3f;
 import org.lwjgl.opengl.GL11;
 
 import main.core.Engine;
@@ -15,8 +16,7 @@ import main.core.graphics.entity.terrain.Terrain;
 import main.core.graphics.lighting.DirectionalLight;
 import main.core.graphics.lighting.PointLight;
 import main.core.graphics.lighting.SpotLight;
-
-import org.joml.Vector3f;
+import main.core.graphics.utils.Consts;
 
 public class RenderManager {
     
@@ -40,27 +40,32 @@ public class RenderManager {
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         }
     
-        public static void renderLights(PointLight[] pointLights, SpotLight[] spotLights, DirectionalLight directionalLight, ShaderManager shader) {
-            shader.setUniform("ambientLight", new Vector3f(0.6f, 0.6f, 0.6f));
-            shader.setUniform("specularPower", 10f);
+        public static void renderLights(PointLight[] pointLights, SpotLight[] spotLights, DirectionalLight directionalLight, ShaderManager shader, Vector3f ambientLight, float specularPower) {
+
+            shader.setUniform("ambientLight", ambientLight);
+            shader.setUniform("specularPower", specularPower);
         
-            int numLights;
-            // Create Spot Lights
-            numLights = spotLights != null ? spotLights.length : 0;
-            for (int i = 0; i < numLights; i++) {
-                shader.setUniform("spotLights", spotLights[i], i);
+            // Directional Light
+            if (directionalLight != null) {
+                shader.setUniform("directionalLight", directionalLight);
             }
-            // Create Point Lights
-            numLights = pointLights != null ? pointLights.length : 0;
-            for (int i = 0; i < numLights; i++) {
+            
+            // Point Lights
+            int numPointLights = pointLights != null ? pointLights.length : 0;
+            for (int i = 0; i < numPointLights; i++) {
                 shader.setUniform("pointLights", pointLights[i], i);
             }
-    
-            shader.setUniform("directionalLight", directionalLight);
+
+            // Spot Lights
+            int numSpotLights = spotLights != null ? spotLights.length : 0;
+            for (int i = 0; i < numSpotLights; i++) {
+                shader.setUniform("spotLights", spotLights[i], i);
+            }
         }
     
         public void render(Camera camera, SceneManager scene) {
             window = Engine.getWindow();
+            GL11.glClearColor(0, 0, 0.1f, 1);
             clear();
     
             if(window.isResize()){
@@ -71,8 +76,8 @@ public class RenderManager {
             window.getProjectionMatrix().identity();
             window.updateProjectionMatrix();
     
-            entityRenderer.render(camera, scene.getPointLights(), scene.getSpotLights(), scene.getDirectionalLight());
-            terrainRenderer.render(camera, scene.getPointLights(), scene.getSpotLights(), scene.getDirectionalLight());
+            entityRenderer.render(camera, scene.getPointLights(), scene.getSpotLights(), scene.getDirectionalLight(), scene.getAmbientLight(), scene.getSpecularPower());
+            terrainRenderer.render(camera, scene.getPointLights(), scene.getSpotLights(), scene.getDirectionalLight(), scene.getAmbientLight(), scene.getSpecularPower());
         }
     
     public static void enableCulling() {

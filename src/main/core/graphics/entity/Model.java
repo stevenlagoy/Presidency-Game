@@ -4,11 +4,15 @@ public class Model {
     
     private int id;
     private int vertexCount;
+    private int vboId;
+    private int iboId;
     private Material material;
 
     public Model(int id, int vertexCount){
         this.id = id;
         this.vertexCount = vertexCount;
+        this.vboId = -1;
+        this.iboId = -1;
         this.material = new Material();
     }
 
@@ -16,6 +20,8 @@ public class Model {
         this.id = id;
         this.vertexCount = vertexCount;
         this.material = new Material(texture);
+        this.vboId = -1;
+        this.iboId = -1;
     }
 
     public Model(Model model, Texture texture) {
@@ -23,6 +29,8 @@ public class Model {
         this.vertexCount = model.getVertexCount();
         this.material = model.getMaterial();
         this.material.setTexture(texture);
+        this.vboId = -1;
+        this.iboId = -1;
     }
 
     public int getId() {
@@ -49,9 +57,28 @@ public class Model {
         this.material.setTexture(texture);
     }
 
+    public void setTexture(String textureName) {
+        setTexture(TextureManager.getTexture(textureName));
+    }
+
     public void setTexture(Texture texture, float reflectance) {
         this.material.setTexture(texture);
         this.material.setReflectance(reflectance);
     }
 
+    public int getVertexBufferId() {
+        return vboId;
+    }
+
+    public int getIndexBufferId() {
+        return iboId;
+    }
+
+    public void setVertexBufferId(int id) {
+        this.vboId = id;
+    }
+
+    public void setIndexBufferId(int id) {
+        this.iboId = id;
+    }
 }

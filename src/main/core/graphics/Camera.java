@@ -28,10 +28,18 @@ public class Camera {
         position.y += y;
     }
 
+    public void setPosition(float position) {
+        setPosition(position, position, position);
+    }
+
     public void setPosition(float x, float y, float z) {
         this.position.x = x;
         this.position.y = y;
         this.position.z = z;
+    }
+
+    public void setRotation(float rotation) {
+        setRotation(rotation, rotation, rotation);
     }
 
     public void setRotation(float x, float y, float z) {

@@ -3,12 +3,14 @@ package main.core.graphics.rendering;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joml.Vector3f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import main.core.Engine;
+import main.core.FilePaths;
 import main.core.graphics.Camera;
 import main.core.graphics.ShaderManager;
 import main.core.graphics.Transformation;
@@ -33,8 +35,8 @@ public class TerrainRenderer implements IRenderer<Object> {
 
     @Override
     public void init() throws Exception {
-        shader.createVertexShader(Utils.loadResource("/shaders/terrain_vertex.vs"));
-        shader.createFragmentShader(Utils.loadResource("/shaders/terrain_fragment.fs"));
+        shader.createVertexShader(Utils.loadResource(FilePaths.SHADERS_GFX_LOC.resolve("terrain_vertex.vs")));
+        shader.createFragmentShader(Utils.loadResource(FilePaths.SHADERS_GFX_LOC.resolve("terrain_fragment.fs")));
         shader.link();
         shader.createUniform("projectionMatrix");
         shader.createUniform("backgroundTexture");
@@ -53,10 +55,10 @@ public class TerrainRenderer implements IRenderer<Object> {
     }
 
     @Override
-    public void render(Camera camera, PointLight[] pointLights, SpotLight[] spotLights, DirectionalLight directionalLight) {
+    public void render(Camera camera, PointLight[] pointLights, SpotLight[] spotLights, DirectionalLight directionalLight, Vector3f ambientLight, float specularPower) {
         shader.bind();
         shader.setUniform("projectionMatrix", Engine.getWindow().updateProjectionMatrix());
-        RenderManager.renderLights(pointLights, spotLights, directionalLight, shader);
+        RenderManager.renderLights(pointLights, spotLights, directionalLight, shader, ambientLight, specularPower);
 
         terrains.sort((t1, t2) -> {
             float dist1 = camera.getPosition().distance(t1.getPosition());

@@ -5,11 +5,14 @@ import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
@@ -18,6 +21,8 @@ import org.lwjgl.opengl.GL30;
 import org.lwjgl.stb.STBImage;
 import org.lwjgl.system.MemoryStack;
 
+import main.core.FilePaths;
+import main.core.IOUtil;
 import main.core.graphics.entity.AnimatedTexture;
 import main.core.graphics.entity.Model;
 import main.core.graphics.utils.Utils;
@@ -28,12 +33,38 @@ import org.joml.Vector3i;
 
 public class ObjectLoader {
     
-    private List<Integer> vaos = new ArrayList<>();
-    private List<Integer> vbos = new ArrayList<>();
-    private List<Integer> textures = new ArrayList<>();
+    private ObjectLoader() {}
 
-    public Model loadOBJModel(String fileName) {
-        List<String> lines = Utils.readAllLines(fileName);
+    private static List<Integer> vaos = new ArrayList<>();
+    private static List<Integer> vbos = new ArrayList<>();
+    private static List<Integer> textures = new ArrayList<>();
+
+    public static List<Model> loadAllModels() {
+        List<Model> models = new ArrayList<>();
+        try {
+            Set<Path> paths = IOUtil.listFiles(FilePaths.MODELS_GFX_LOC);
+            for (Path path : paths) {
+                models.add(loadOBJModel(path));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return models;
+    }
+
+    public static Model loadOBJModel(String fileName) {
+        if (!fileName.contains(".")) fileName = fileName + IOUtil.Extension.OBJ.extension;
+        return loadOBJModel(FilePaths.MODELS_GFX_LOC.resolve(fileName));
+    }
+
+    public static Model loadOBJModel(Path filePath) {
+        List<String> lines = new ArrayList<>();
+        try {
+            lines = IOUtil.readAllLines(filePath.toFile());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
         List<Vector3f> vertices = new ArrayList<>();
         List<Vector3f> normals = new ArrayList<>();
@@ -136,7 +167,7 @@ public class ObjectLoader {
         faces.add(facesVec);
     }
 
-    public Model loadModel(float[] vertices, float[] textureCoords, float[] normals, int[] indices) {
+    public static Model loadModel(float[] vertices, float[] textureCoords, float[] normals, int[] indices) {
         int id = createVAO();
         storeIndicesBuffer(indices);
         storeDataInAttribList(0, 3, vertices);
@@ -146,7 +177,11 @@ public class ObjectLoader {
         return new Model(id, indices.length);
     }
 
-    public int loadTexture(String filename) throws Exception {
+    public static int loadTexture(Path filepath) throws Exception {
+        return loadTexture(filepath.toString());
+    }
+
+    public static int loadTexture(String filename) throws Exception {
         int width, height;
         ByteBuffer buffer;
         try (MemoryStack stack = MemoryStack.stackPush()) {
@@ -176,7 +211,11 @@ public class ObjectLoader {
         return id;
     }
 
-    public AnimatedTexture loadAnimatedTexture(String filename, int frameCount, float frameTime) throws Exception {
+    public static AnimatedTexture loadAnimatedTexture(Path filepath, int frameCount, float frameTime) throws Exception {
+        return loadAnimatedTexture(filepath.toString(), frameCount, frameTime);
+    }
+
+    public static AnimatedTexture loadAnimatedTexture(String filename, int frameCount, float frameTime) throws Exception {
         int width, height;
         ByteBuffer buffer;
         try (MemoryStack stack = MemoryStack.stackPush()) {
@@ -204,14 +243,14 @@ public class ObjectLoader {
         return new AnimatedTexture(id, frameCount, frameTime, height);
     }
 
-    private int createVAO() {
+    private static int createVAO() {
         int id = GL30.glGenVertexArrays();
         vaos.add(id);
         GL30.glBindVertexArray(id);
         return id;
     }
 
-    private void storeIndicesBuffer(int[] indices) {
+    private static void storeIndicesBuffer(int[] indices) {
         int vbo = GL15.glGenBuffers();
         vbos.add(vbo);
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, vbo);
@@ -219,7 +258,7 @@ public class ObjectLoader {
         GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
     }
 
-    private void storeDataInAttribList(int attribNo, int vertexCount, float[] data){
+    private static void storeDataInAttribList(int attribNo, int vertexCount, float[] data){
         int vbo = GL15.glGenBuffers();
         vbos.add(vbo);
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vbo);
@@ -230,11 +269,11 @@ public class ObjectLoader {
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
     }
 
-    private void unbind() {
+    private static void unbind() {
         GL30.glBindVertexArray(0);
     }
 
-    public void cleanup() {
+    public static void cleanup() {
         for (int vao : vaos)
             GL30.glDeleteVertexArrays(vao);
         for (int vbo : vbos)
@@ -242,5 +281,4 @@ public class ObjectLoader {
         for (int texture : textures)
             GL11.glDeleteTextures(texture);
     }
-
 }

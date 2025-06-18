@@ -17,15 +17,15 @@ public class Terrain {
     private TerrainTexture blendMap;
     private BlendMapTerrain blendMapTerrain;
 
-    public Terrain(Vector3f position, ObjectLoader loader, Material material, BlendMapTerrain blendMapTerrain, TerrainTexture blendMap) {
+    public Terrain(Vector3f position, Material material, BlendMapTerrain blendMapTerrain, TerrainTexture blendMap) {
         this.position = position;
-        this.model = generateTerrain(loader);
+        this.model = generateTerrain();
         this.model.setMaterial(material);
         this.blendMapTerrain = blendMapTerrain;
         this.blendMap = blendMap;
     }
 
-    private Model generateTerrain(ObjectLoader loader) {
+    private Model generateTerrain() {
         int count = VERTEX_COUNT * VERTEX_COUNT;
         float[] vertices = new float[count * 3];
         float[] normals = new float[count * 3];
@@ -65,7 +65,7 @@ public class Terrain {
                 indices[pointer++] = bottomRight;
             }
         }
-        return loader.loadModel(vertices, textureCoords, normals, indices);
+        return ObjectLoader.loadModel(vertices, textureCoords, normals, indices);
     }
 
     public Vector3f getPosition() {

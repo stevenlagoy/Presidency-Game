@@ -1,10 +1,17 @@
 package main.core.graphics.entity;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.joml.Vector3f;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL15;
+import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL30;
 
+import main.core.FilePaths;
+import main.core.IOUtil;
 import main.core.graphics.ObjectLoader;
 
 public class ModelManager {
@@ -41,11 +48,7 @@ public class ModelManager {
         }
     }
 
-    public static final String modelsLoc = "/models/";
-    public static final String objExtension = ".obj";
-    public static ObjectLoader loader = new ObjectLoader();
-
-    private static final List<ModelInfo> models = new ArrayList<ModelInfo>(){{
+    private static final List<ModelInfo> models = new ArrayList<ModelInfo>() {{
         add(new ModelInfo("cube", "cube", 50.0f, new Vector3f(0, 0, 0)));
         add(new ModelInfo("bunny", "bunny", 500.0f, new Vector3f(0, 0, 0)));
         add(new ModelInfo("tree", "tree", 1.0f, new Vector3f(-90, 0, 0)));
@@ -57,7 +60,7 @@ public class ModelManager {
 
     public static void loadModelFiles() {
         for (ModelInfo modelInfo : models) {
-            modelInfo.model = loader.loadOBJModel(modelsLoc + modelInfo.modelFile + objExtension);
+            modelInfo.model = ObjectLoader.loadOBJModel(FilePaths.MODELS_GFX_LOC.resolve(modelInfo.modelFile + IOUtil.Extension.OBJ.extension));
         }
     }
 
@@ -118,5 +121,65 @@ public class ModelManager {
             }
         }
         return new Vector3f(0, 0, 0);
+    }
+
+    public static Model createQuad(float size) {
+        return createQuad(size, size);
+    }
+
+    public static Model createQuad(float[] dimensions) {
+        return createQuad(dimensions[1], dimensions[0]);
+    }
+
+    public static Model createQuad(float width, float height) {
+        float[] positions = new float[] {
+            -width/2,  height/2, 0.0f, // top left
+            -width/2, -height/2, 0.0f, // bottom left
+             width/2, -height/2, 0.0f, // bottom right
+             width/2,  height/2, 0.0f  // top right
+        };
+
+        float[] textureCoords = new float[] {
+            0.0f, 0.0f,
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f
+        };
+
+        int[] indices = new int[] {
+            0, 1, 2,
+            2, 3, 0
+        };
+
+        // Create VAO and get id
+        int vaoId = GL30.glGenVertexArrays();
+        GL30.glBindVertexArray(vaoId);
+
+        // Create VBO for vertices
+        int vboId = GL15.glGenBuffers();
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboId);
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, positions, GL15.GL_STATIC_DRAW);
+        GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
+
+        // Create VBO for texture coordinates
+        int textureVboId = GL15.glGenBuffers();
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, textureVboId);
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, textureCoords, GL15.GL_STATIC_DRAW);
+        GL20.glVertexAttribPointer(1, 2, GL11.GL_FLOAT, false, 0, 0);
+
+        // Create IBO
+        int iboId = GL15.glGenBuffers();
+        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, iboId);
+        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indices, GL15.GL_STATIC_DRAW);
+
+        // Unbind
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+        GL30.glBindVertexArray(0);
+
+        // Create and return model
+        Model model = new Model(vaoId, indices.length);
+        model.setVertexBufferId(vboId);
+        model.setIndexBufferId(iboId);
+        return model;
     }
 }

@@ -4,11 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.joml.Vector3f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
+import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import main.core.FilePaths;
 import main.core.Engine;
 import main.core.graphics.Camera;
 import main.core.graphics.ShaderManager;
@@ -34,8 +37,8 @@ public class EntityRenderer implements IRenderer<Object> {
 
     @Override
     public void init() throws Exception {
-        shader.createVertexShader(Utils.loadResource("/shaders/entity_vertex.vs"));
-        shader.createFragmentShader(Utils.loadResource("/shaders/entity_fragment.fs"));
+        shader.createVertexShader(Utils.loadResource(FilePaths.SHADERS_GFX_LOC.resolve("entity_vertex.vs")));
+        shader.createFragmentShader(Utils.loadResource(FilePaths.SHADERS_GFX_LOC.resolve("entity_fragment.fs")));
         shader.link();
         shader.createUniform("projectionMatrix");
         shader.createUniform("textureSampler");
@@ -50,16 +53,86 @@ public class EntityRenderer implements IRenderer<Object> {
     }
 
     @Override
-    public void render(Camera camera, PointLight[] pointLights, SpotLight[] spotLights, DirectionalLight directionalLight) {
+    public void render(Camera camera, PointLight[] pointLights, SpotLight[] spotLights, DirectionalLight directionalLight, Vector3f ambientLight, float specularPower) {
+
         shader.bind();
         shader.setUniform("projectionMatrix", Engine.getWindow().updateProjectionMatrix());
-        RenderManager.renderLights(pointLights, spotLights, directionalLight, shader);
+        shader.setUniform("viewMatrix", Transformation.getViewMatrix(camera));
+        RenderManager.renderLights(pointLights, spotLights, directionalLight, shader, ambientLight, specularPower);
+
         for (Model model : entities.keySet()) {
             bind(model);
             List<Entity> entityList = entities.get(model);
             for(Entity entity : entityList) {
                 prepare(entity, camera);
-                GL11.glDrawElements(GL11.GL_TRIANGLES, entity.getModel().getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
+
+                // Validate OpenGL state before draw
+                if (!GL30.glIsVertexArray(model.getId())) {
+                    Engine.log("Invalid VAO ID: " + model.getId());
+                    continue;
+                }
+
+                // Check if shader program is valid
+                int program = shader.getProgramId();
+                if (!GL20.glIsProgram(program)) {
+                    Engine.log("Invalid shader program: " + program);
+                    continue;
+                }
+
+                // Verify buffer bindings
+                int vboId = model.getVertexBufferId();
+                int iboId = model.getIndexBufferId();
+                if (!GL15.glIsBuffer(vboId) || !GL15.glIsBuffer(iboId)) {
+                    Engine.log("Invalid buffer objects - VBO: " + vboId + ", IBO: " + iboId);
+                    continue;
+                }
+
+                // Check texture binding
+                if (model.getTexture() != null) {
+                    int texId = model.getTexture().getId();
+                    if (!GL11.glIsTexture(texId)) {
+                        Engine.log("Invalid texture ID: " + texId);
+                        continue;
+                    }
+                }
+
+                // Check texture binding
+                if (model.getTexture() != null) {
+                    int texId = model.getTexture().getId();
+                    if (!GL11.glIsTexture(texId)) {
+                        Engine.log("Invalid texture ID: " + texId);
+                        continue;
+                    }
+                }
+
+                int error = GL11.glGetError();
+                if (error != GL11.GL_NO_ERROR) {
+                    Engine.log("OpenGL Error before draw: " + error);
+                }
+
+                if (entity == null || entity.getModel() == null) {
+                    Engine.log("Null entity or model");
+                    continue;
+                }
+
+                int vertexCount = entity.getModel().getVertexCount();
+                if (vertexCount <= 0) {
+                    Engine.log("Invalid vertex count: " + vertexCount);
+                    continue;
+                }
+                
+                try {
+                    GL11.glDrawElements(GL11.GL_TRIANGLES, vertexCount, GL11.GL_UNSIGNED_INT, 0);
+                }
+                catch (Exception e) {
+                    Engine.log("Draw call failed");
+                    Engine.log(e);
+                }
+
+                error = GL11.glGetError();
+                if (error != GL11.GL_NO_ERROR) {
+                    Engine.log("OpenGL Error after draw: " + error);
+                }
             }
             unbind();
         }
@@ -69,25 +142,44 @@ public class EntityRenderer implements IRenderer<Object> {
 
     @Override
     public void bind(Model model) {
+        shader.bind();
+
+        // Clear existing errors
+        GL11.glGetError();
+
+        // Bind VAO first
         GL30.glBindVertexArray(model.getId());
-        GL20.glEnableVertexAttribArray(0);
-        GL20.glEnableVertexAttribArray(1);
-        GL20.glEnableVertexAttribArray(2);
 
+        // Enable vertex attributes in the correct order
+        GL20.glEnableVertexAttribArray(0);  // positions
+        GL20.glEnableVertexAttribArray(1);  // texture coords
+        
+        // Bind buffers explicitly
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, model.getVertexBufferId());
+        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, model.getIndexBufferId());
+
+        // Set material properties
         Material material = model.getMaterial();
-        if (material.hasTransparency()) {
-            RenderManager.disableCulling();
-        }
-        else if (material.isDisableCulling()) {
-            RenderManager.disableCulling();
-        }
-        else {
-            RenderManager.enableCulling();
+        if (material != null) {
+            shader.setUniform("material", material);
+            if (material.hasTransparency() || material.isDisableCulling()) {
+                RenderManager.disableCulling();
+            }
+            else {
+                RenderManager.enableCulling();
+            }
         }
 
-        shader.setUniform("material", model.getMaterial());
-        GL13.glActiveTexture(GL13.GL_TEXTURE0); // match value set in uniform
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, model.getTexture().getId());
+        // Bind texture if present
+        if (model.getTexture() != null) {
+            GL13.glActiveTexture(GL13.GL_TEXTURE0);
+            GL11.glBindTexture(GL11.GL_TEXTURE_2D, model.getTexture().getId());
+        }
+
+        // Validate shader is bound
+        if (!GL20.glIsProgram(shader.getProgramId())) {
+            shader.bind();
+        }
     }
 
     @Override

@@ -27,7 +27,7 @@ public class ShaderManager {
         if(programID == 0)
             throw new Exception("Could not creat shader");
         
-            uniforms = new HashMap<String, Integer>();
+        uniforms = new HashMap<String, Integer>();
     }
 
     public void createUniform(String uniformName) throws Exception {
@@ -186,11 +186,15 @@ public class ShaderManager {
         if (GL20.glGetProgrami(programID, GL20.GL_LINK_STATUS) == 0)
             throw new Exception("Error linking shader code. Info : " + GL20.glGetProgramInfoLog(programID, 1024));
 
-        if (vertexShaderID != 0)
+        if (vertexShaderID != 0) {
             GL20.glDetachShader(programID, vertexShaderID);
+            GL20.glDeleteShader(vertexShaderID);
+        }
 
-        if (fragmentShaderID != 0)
+        if (fragmentShaderID != 0) {
             GL20.glDetachShader(programID, fragmentShaderID);
+            GL20.glDeleteShader(fragmentShaderID);
+        }
 
         GL20.glValidateProgram(programID);
         if(GL20.glGetProgrami(programID, GL20.GL_VALIDATE_STATUS) == 0)
@@ -216,6 +220,10 @@ public class ShaderManager {
         if (programID != 0) {
             GL20.glDeleteProgram(programID);
         }
+    }
+
+    public int getProgramId() {
+        return programID;
     }
 
 }

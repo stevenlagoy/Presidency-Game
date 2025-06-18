@@ -9,24 +9,33 @@ import main.core.graphics.entity.terrain.Terrain;
 import main.core.graphics.lighting.DirectionalLight;
 import main.core.graphics.lighting.PointLight;
 import main.core.graphics.lighting.SpotLight;
+import main.core.graphics.utils.Consts;
 
 public class SceneManager {
     
     private List<Entity> entities;
     private List<Terrain> terrains;
+    private List<Model> models;
 
     private SpotLight[] spotLights;
     private PointLight[] pointLights;
     private DirectionalLight directionalLight;
     private Vector3f ambientLight;
+    private float specularPower;
     private float lightAngle;
     private float spotAngle = 0;
     private float spotInc = 1;
 
+    public SceneManager() {
+        this(0.0f);
+    }
+
     public SceneManager(float lightAngle) {
         entities = new ArrayList<>();
         terrains = new ArrayList<>();
-        ambientLight = new Vector3f(0.3f, 0.3f, 0.3f); //Consts.AMBIENT_LIGHT;
+        models = new ArrayList<>();
+        ambientLight = Consts.AMBIENT_LIGHT;
+        specularPower = Consts.SPECULAR_POWER;
         this.lightAngle = lightAngle;
     }
 
@@ -62,6 +71,22 @@ public class SceneManager {
         terrains.remove(terrain);
     }
 
+    public List<Model> getModels() {
+        return models;
+    }
+
+    public void setModels(List<Model> models) {
+        this.models = models;
+    }
+
+    public void addModel(Model model) {
+        models.add(model);
+    }
+
+    public void removeModel(Model model) {
+        models.remove(model);
+    }
+
     public Vector3f getAmbientLight() {
         return ambientLight;
     }
@@ -72,6 +97,14 @@ public class SceneManager {
 
     public void setAmbientLight(float x, float y, float z) {
         this.ambientLight = new Vector3f(x, y, z);
+    }
+
+    public float getSpecularPower() {
+        return specularPower;
+    }
+
+    public void setSpecularPower(float specularPower) {
+        this.specularPower = specularPower;
     }
 
     public float getLightAngle() {
