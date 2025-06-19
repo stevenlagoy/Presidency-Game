@@ -1,6 +1,8 @@
 package main.core.graphics;
 
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
@@ -79,8 +81,6 @@ public class Window {
         GL11.glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glEnable(GL11.GL_STENCIL_TEST);
-        GL11.glEnable(GL11.GL_CULL_FACE);
-        GL11.glCullFace(GL11.GL_BACK);
     }
 
     public void update() {
@@ -181,5 +181,33 @@ public class Window {
             Consts.Z_NEAR,
             Consts.Z_FAR
         );
+    }
+
+    public Vector3f calculateRayDirection(float ndcX, float ndcY) {
+        Vector4f clipCoords = new Vector4f(ndcX, ndcY, -1.0f, 1.0f);
+        Matrix4f invProj = new Matrix4f(getProjectionMatrix()).invert();
+        Vector4f eyeCoords = invProj.transform(clipCoords);
+        eyeCoords.z = -1.0f;
+        eyeCoords.w = 0.0f;
+
+        // Camera looks down -Z, so direction is (eyeCoords.x, eyeCoords.y, -1)
+        // If you have a view matrix (for a moving/rotating camera), apply its inverse here:
+        // Matrix4f invView = new Matrix4f(camera.getViewMatrix()).invert();
+        // invView.transformDirection(eyeCoords);
+
+        // Normalize to get direction
+        Vector3f rayDir = new Vector3f(eyeCoords.x, eyeCoords.y, eyeCoords.z).normalize();
+        return rayDir;
+    }
+
+    public Vector3f calculateRayDirection(float ndcX, float ndcY, Matrix4f viewMatrix) {
+        Vector4f clipCoords = new Vector4f(ndcX, ndcY, -1.0f, 1.0f);
+        Matrix4f invProj = new Matrix4f(getProjectionMatrix()).invert();
+        Vector4f eyeCoords = invProj.transform(clipCoords);
+        eyeCoords.z = -1.0f;
+        eyeCoords.w = 0.0f;
+        Matrix4f invView = new Matrix4f(viewMatrix).invert();
+        Vector4f worldCoords = invView.transform(eyeCoords);
+        return new Vector3f(worldCoords.x, worldCoords.y, worldCoords.z).normalize();
     }
 }

@@ -98,7 +98,7 @@ public class ModelManager {
 
     public static ModelInfo getModelInfo(Model model) {
         for (ModelInfo modelInfo : models) {
-            if (modelInfo.model.equals(model)) {
+            if (modelInfo.model != null && modelInfo.model.equals(model)) {
                 return modelInfo;
             }
         }
@@ -133,10 +133,10 @@ public class ModelManager {
 
     public static Model createQuad(float width, float height) {
         float[] positions = new float[] {
-            -width/2,  height/2, 0.0f, // top left
-            -width/2, -height/2, 0.0f, // bottom left
-             width/2, -height/2, 0.0f, // bottom right
-             width/2,  height/2, 0.0f  // top right
+            -height/2,  width/2, 0.0f, // top left
+            -height/2, -width/2, 0.0f, // bottom left
+             height/2, -width/2, 0.0f, // bottom right
+             height/2,  width/2, 0.0f  // top right
         };
 
         float[] textureCoords = new float[] {

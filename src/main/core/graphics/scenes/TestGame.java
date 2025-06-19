@@ -1,4 +1,4 @@
-package main.core.graphics.ui;
+package main.core.graphics.scenes;
 
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -191,5 +191,10 @@ public class TestGame implements ILogic {
     public void cleanup() {
         renderer.cleanup();
         ObjectLoader.cleanup();
+    }
+
+    @Override
+    public Camera getCamera() {
+        return camera;
     }
 }

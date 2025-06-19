@@ -25,9 +25,13 @@ public class TextureManager {
         return modelFilesList;
     }
 
+    public static void addTexture(String textureFile) throws Exception {
+        addTexture(textureFile);
+    }
+
     public static void addTexture(String textureName, String textureFile) throws Exception {
         modelFilesList.put(textureName, textureFile);
-        loadTextureFiles();
+        textures.put(textureName, new Texture(ObjectLoader.loadTexture(FilePaths.TEXTURES_GFX_LOC.resolve(textureFile + IOUtil.Extension.PNG.extension).toString())));
     }
     public static void addAnimatedTexture(String textureName, String textureFile, int frameCount, float frameTime) throws Exception {
         AnimatedTexture texture = ObjectLoader.loadAnimatedTexture(FilePaths.TEXTURES_GFX_LOC.resolve(textureFile), frameCount, frameTime);

@@ -166,7 +166,7 @@ public class EntityRenderer implements IRenderer<Object> {
                 RenderManager.disableCulling();
             }
             else {
-                RenderManager.enableCulling();
+                //RenderManager.enableCulling();
             }
         }
 

@@ -1,4 +1,4 @@
-package main.core.graphics.ui;
+package main.core.graphics.scenes;
 
 import main.core.Engine;
 import main.core.graphics.Camera;
@@ -9,6 +9,7 @@ import main.core.graphics.entity.Entity;
 import main.core.graphics.entity.SceneManager;
 import main.core.graphics.rendering.RenderManager;
 import main.core.graphics.utils.Consts;
+import main.core.graphics.GFX;
 
 public class BlankScene implements ILogic {
 
@@ -30,7 +31,7 @@ public class BlankScene implements ILogic {
     public void init() throws Exception {
         renderer.init();
 
-        // Load Textures
+        // REMEMBER TO PUT TEXTURES IN GFX.java FILE
 
         // Load Models
 
@@ -61,6 +62,11 @@ public class BlankScene implements ILogic {
     @Override
     public void cleanup() {
         renderer.cleanup();
+    }
+
+    @Override
+    public Camera getCamera() {
+        return camera;
     }
     
 }
