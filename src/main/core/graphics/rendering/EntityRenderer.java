@@ -19,9 +19,11 @@ import main.core.graphics.Transformation;
 import main.core.graphics.entity.Entity;
 import main.core.graphics.entity.Material;
 import main.core.graphics.entity.Model;
+import main.core.graphics.entity.TextureRegion;
 import main.core.graphics.lighting.DirectionalLight;
 import main.core.graphics.lighting.PointLight;
 import main.core.graphics.lighting.SpotLight;
+import main.core.graphics.ui.Container;
 import main.core.graphics.utils.Consts;
 import main.core.graphics.utils.Utils;
 
@@ -61,9 +63,20 @@ public class EntityRenderer implements IRenderer<Object> {
         RenderManager.renderLights(pointLights, spotLights, directionalLight, shader, ambientLight, specularPower);
 
         for (Model model : entities.keySet()) {
-            bind(model);
             List<Entity> entityList = entities.get(model);
+            bind(model);
+            
             for(Entity entity : entityList) {
+                if (entity instanceof Container container) {
+                    for (Container.DrawQuad quad : container.getDrawQuads()) {
+                        // Center the quads on the container's position
+                        float drawX = container.getPos().x - container.getWidth()/2f + quad.x + quad.w/2f;
+                        float drawY = container.getPos().y - container.getHeight()/2f + quad.y + quad.h/2f;
+                        renderQuad(drawX, drawY, quad.w, quad.h, quad.region);
+                    }
+                    continue;
+                }
+
                 prepare(entity, camera);
 
                 // Validate OpenGL state before draw
@@ -138,6 +151,58 @@ public class EntityRenderer implements IRenderer<Object> {
         }
         entities.clear();
         shader.unbind();
+    }
+
+    private void renderQuad(float x, float y, float w, float h, TextureRegion region) {
+
+        shader.bind();
+
+        // Prepare vertex data for a quad at (x, y) with size (w, h) and region UVs
+        float u1 = region.getU1(), v1 = region.getV1();
+        float u2 = region.getU2(), v2 = region.getV2();
+
+        float[] vertices = {
+            x,     y,   0f, u1, v1,
+            x,     y+h, 0f, u1, v2,
+            x+w,   y+h, 0f, u2, v2,
+            x+w,   y,   0f, u2, v1
+        };
+        int[] indices = {0, 1, 2, 2, 3, 0};
+
+        // Create and bind VAO/VBO/IBO (or use a static/shared one for all quads)
+        int vao = GL30.glGenVertexArrays();
+        int vbo = GL15.glGenBuffers();
+        int ibo = GL15.glGenBuffers();
+
+        GL30.glBindVertexArray(vao);
+
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vbo);
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vertices, GL15.GL_STATIC_DRAW);
+
+        GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 5 * Float.BYTES, 0); // position (x, y, z)
+        GL20.glEnableVertexAttribArray(0);
+        GL20.glVertexAttribPointer(1, 2, GL11.GL_FLOAT, false, 5 * Float.BYTES, 3 * Float.BYTES); // UV
+        GL20.glEnableVertexAttribArray(1);
+
+        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, ibo);
+        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indices, GL15.GL_STATIC_DRAW);
+
+        // Bind the texture
+        GL13.glActiveTexture(GL13.GL_TEXTURE0);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, region.getBaseTexture().getId());
+
+        // Draw
+        shader.setUniform("textureSampler", 0);
+        shader.setUniform("transformationMatrix", new org.joml.Matrix4f().identity());
+        GL11.glDrawElements(GL11.GL_TRIANGLES, 6, GL11.GL_UNSIGNED_INT, 0);
+
+        // Cleanup
+        GL20.glDisableVertexAttribArray(0);
+        GL20.glDisableVertexAttribArray(1);
+        GL30.glBindVertexArray(0);
+        GL15.glDeleteBuffers(vbo);
+        GL15.glDeleteBuffers(ibo);
+        GL30.glDeleteVertexArrays(vao);
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.core.graphics.entity.Entity;
+import main.core.graphics.entity.QuadModel;
 import main.core.graphics.entity.Texture;
 import main.core.graphics.entity.TextureManager;
 import main.core.graphics.entity.TextureRegion;
@@ -35,6 +36,12 @@ public class Container extends Entity {
 
     public Container(Entity entity, Texture containerTexture) {
         super(entity.getModel(), entity.getPos(), entity.getRotation(), entity.getScale());
+        if (!(entity.getModel() instanceof QuadModel quadModel)) {
+            throw new IllegalArgumentException("Container requires a QuadModel as its model.");
+        }
+        this.containerTexture = containerTexture;
+        this.width = quadModel.getWidth();
+        this.height = quadModel.getHeight();
         makeDrawQuads();
     }
 
@@ -112,5 +119,8 @@ public class Container extends Entity {
         if (drawQuads == null) makeDrawQuads();
         return drawQuads;
     }
+
+    public float getWidth() { return width; }
+    public float getHeight() { return height; }
 
 }

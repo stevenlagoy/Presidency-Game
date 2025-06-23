@@ -18,7 +18,7 @@ public class Consts {
 
     public static final String TITLE = "Engine Test";
 
-    public static final Vector3f AMBIENT_LIGHT = new Vector3f(0.3f, 0.3f, 0.3f);
+    public static final Vector3f AMBIENT_LIGHT = new Vector3f(0.8f, 0.8f, 0.8f);
     public static final Vector4f DEFAULT_COLOR = new Vector4f(1, 1, 1, 1);
 
 }

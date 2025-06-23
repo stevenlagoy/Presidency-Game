@@ -174,7 +174,7 @@ public class ObjectLoader {
         storeDataInAttribList(1, 2, textureCoords);
         storeDataInAttribList(2, 3, normals);
         unbind();
-        return new Model(id, indices.length);
+        return new Model(id, indices.length, null, vertices, indices);
     }
 
     public static int loadTexture(Path filepath) throws Exception {

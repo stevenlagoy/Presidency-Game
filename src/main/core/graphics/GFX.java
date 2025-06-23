@@ -9,6 +9,17 @@ import main.core.graphics.entity.TextureManager;
 public class GFX {
 
     private static final Map<String, String> gfx = new HashMap<>() {{
+        
+        put("black", "black");
+        put("white", "white");
+        put("red", "red");
+        put("orange", "orange");
+        put("yellow", "yellow");
+        put("green", "green");
+        put("cyan", "cyan");
+        put("blue", "blue");
+        put("purple", "purple");
+        
         put("title_bg", "title_background");
         put("title_logo", "title_logo");
         put("container_base", "container_base");
@@ -28,6 +39,9 @@ public class GFX {
         put("title_nudge_button_bg", "title_nudge_button");
         put("title_nudge_button_hover_bg", "title_nudge_button_hover");
         put("title_nudge_button_click_bg", "title_nudge_button_click");
+
+        put("flag_bg", "flag_background");
+        put("transparent_c", "transparent_container");
     }};
 
     static {
@@ -39,6 +53,6 @@ public class GFX {
                 Engine.log(e);
             }
         }
-        System.out.println("Graphics Loaded!");
+        Engine.log("GFX LOAD","Graphics Loaded Successfully");
     }
 }

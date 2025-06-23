@@ -26,59 +26,59 @@ public class RenderManager {
 
     private static boolean isCulling = false;
     
-        public RenderManager() {
-            window = Engine.getWindow();
-        }
-    
-        public void init() throws Exception {
-            entityRenderer = new EntityRenderer();
-            terrainRenderer = new TerrainRenderer();
-            entityRenderer.init();
-            terrainRenderer.init();
+    public RenderManager() {
+        window = Engine.getWindow();
+    }
 
-            GL11.glEnable(GL11.GL_BLEND);
-            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        }
-    
-        public static void renderLights(PointLight[] pointLights, SpotLight[] spotLights, DirectionalLight directionalLight, ShaderManager shader, Vector3f ambientLight, float specularPower) {
+    public void init() throws Exception {
+        entityRenderer = new EntityRenderer();
+        terrainRenderer = new TerrainRenderer();
+        entityRenderer.init();
+        terrainRenderer.init();
 
-            shader.setUniform("ambientLight", ambientLight);
-            shader.setUniform("specularPower", specularPower);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+    }
+
+    public static void renderLights(PointLight[] pointLights, SpotLight[] spotLights, DirectionalLight directionalLight, ShaderManager shader, Vector3f ambientLight, float specularPower) {
+
+        shader.setUniform("ambientLight", ambientLight);
+        shader.setUniform("specularPower", specularPower);
+    
+        // Directional Light
+        if (directionalLight != null) {
+            shader.setUniform("directionalLight", directionalLight);
+        }
         
-            // Directional Light
-            if (directionalLight != null) {
-                shader.setUniform("directionalLight", directionalLight);
-            }
-            
-            // Point Lights
-            int numPointLights = pointLights != null ? pointLights.length : 0;
-            for (int i = 0; i < numPointLights; i++) {
-                shader.setUniform("pointLights", pointLights[i], i);
-            }
-
-            // Spot Lights
-            int numSpotLights = spotLights != null ? spotLights.length : 0;
-            for (int i = 0; i < numSpotLights; i++) {
-                shader.setUniform("spotLights", spotLights[i], i);
-            }
+        // Point Lights
+        int numPointLights = pointLights != null ? pointLights.length : 0;
+        for (int i = 0; i < numPointLights; i++) {
+            shader.setUniform("pointLights", pointLights[i], i);
         }
-    
-        public void render(Camera camera, SceneManager scene) {
-            window = Engine.getWindow();
-            GL11.glClearColor(0, 0, 0.1f, 1);
-            clear();
-    
-            if(window.isResize()){
-                GL11.glViewport(0, 0, window.getWidth(), window.getHeight());
-                window.setResize(false);
-            }
 
-            window.getProjectionMatrix().identity();
-            window.updateProjectionMatrix();
-    
-            entityRenderer.render(camera, scene.getPointLights(), scene.getSpotLights(), scene.getDirectionalLight(), scene.getAmbientLight(), scene.getSpecularPower());
-            terrainRenderer.render(camera, scene.getPointLights(), scene.getSpotLights(), scene.getDirectionalLight(), scene.getAmbientLight(), scene.getSpecularPower());
+        // Spot Lights
+        int numSpotLights = spotLights != null ? spotLights.length : 0;
+        for (int i = 0; i < numSpotLights; i++) {
+            shader.setUniform("spotLights", spotLights[i], i);
         }
+    }
+
+    public void render(Camera camera, SceneManager scene) {
+        window = Engine.getWindow();
+        GL11.glClearColor(0, 0, 0.1f, 1);
+        clear();
+
+        if(window.isResize()){
+            GL11.glViewport(0, 0, window.getWidth(), window.getHeight());
+            window.setResize(false);
+        }
+
+        window.getProjectionMatrix().identity();
+        window.updateProjectionMatrix();
+
+        entityRenderer.render(camera, scene.getPointLights(), scene.getSpotLights(), scene.getDirectionalLight(), scene.getAmbientLight(), scene.getSpecularPower());
+        terrainRenderer.render(camera, scene.getPointLights(), scene.getSpotLights(), scene.getDirectionalLight(), scene.getAmbientLight(), scene.getSpecularPower());
+    }
     
     public static void enableCulling() {
         if(!isCulling) {

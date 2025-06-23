@@ -76,15 +76,15 @@ public class Button extends Entity {
         isRightClick = isHover && mouse.isRightButtonPress();
 
         if (isLeftClick) {
-            // if (onLeftClick != null) onLeftClick.run();
+            if (onLeftClick != null) onLeftClick.run();
             if (leftClickTexture != null) entity.getModel().setTexture(leftClickTexture);
         }
         else if (isRightClick) {
-            // if (onRightClick != null) onRightClick.run();
+            if (onRightClick != null) onRightClick.run();
             if (rightClickTexture != null) entity.getModel().setTexture(rightClickTexture);
         }
         else if (isHover) {
-            // if (onHover != null) onHover.run();
+            if (onHover != null) onHover.run();
             if (hoverTexture != null) entity.getModel().setTexture(hoverTexture);
         }
         else {
@@ -106,6 +106,18 @@ public class Button extends Entity {
 
     public boolean isHover() {
         return isHover;
+    }
+
+    public void runOnHover() {
+        if (onHover != null) onHover.run();
+    }
+
+    public void runOnLeftClick() {
+        if (onLeftClick != null) onLeftClick.run();
+    }
+
+    public void runOnRightClick() {
+        if (onRightClick != null) onRightClick.run();
     }
 
 }

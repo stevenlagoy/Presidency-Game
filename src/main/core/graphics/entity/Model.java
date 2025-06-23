@@ -8,6 +8,9 @@ public class Model {
     private int iboId;
     private Material material;
 
+    private float[] positions;
+    private int[] indices;
+
     public Model(int id, int vertexCount){
         this.id = id;
         this.vertexCount = vertexCount;
@@ -16,12 +19,14 @@ public class Model {
         this.material = new Material();
     }
 
-    public Model(int id, int vertexCount, Texture texture) {
+    public Model(int id, int vertexCount, Texture texture, float[] positions, int[] indices) {
         this.id = id;
         this.vertexCount = vertexCount;
         this.material = new Material(texture);
         this.vboId = -1;
         this.iboId = -1;
+        this.positions = positions;
+        this.indices = indices;
     }
 
     public Model(Model model, Texture texture) {
@@ -81,4 +86,8 @@ public class Model {
     public void setIndexBufferId(int id) {
         this.iboId = id;
     }
+
+    public float[] getPositions() { return positions; }
+
+    public int[] getIndices() { return indices; }
 }

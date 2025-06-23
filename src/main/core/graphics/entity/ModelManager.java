@@ -1,10 +1,10 @@
 package main.core.graphics.entity;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.joml.Vector3f;
+import org.joml.sampling.BestCandidateSampling.Quad;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
@@ -123,20 +123,20 @@ public class ModelManager {
         return new Vector3f(0, 0, 0);
     }
 
-    public static Model createQuad(float size) {
+    public static QuadModel createQuad(float size) {
         return createQuad(size, size);
     }
 
-    public static Model createQuad(float[] dimensions) {
+    public static QuadModel createQuad(float[] dimensions) {
         return createQuad(dimensions[1], dimensions[0]);
     }
 
-    public static Model createQuad(float width, float height) {
+    public static QuadModel createQuad(float width, float height) {
         float[] positions = new float[] {
-            -height/2,  width/2, 0.0f, // top left
-            -height/2, -width/2, 0.0f, // bottom left
-             height/2, -width/2, 0.0f, // bottom right
-             height/2,  width/2, 0.0f  // top right
+            -width/2,  height/2, 0.0f, // top left
+            -width/2, -height/2, 0.0f, // bottom left
+            width/2, -height/2, 0.0f, // bottom right
+            width/2,  height/2, 0.0f  // top right
         };
 
         float[] textureCoords = new float[] {
@@ -176,10 +176,62 @@ public class ModelManager {
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
         GL30.glBindVertexArray(0);
 
-        // Create and return model
-        Model model = new Model(vaoId, indices.length);
-        model.setVertexBufferId(vboId);
-        model.setIndexBufferId(iboId);
-        return model;
+        // Create and return QuadModel
+        QuadModel quad = new QuadModel(vaoId, indices.length, null, positions, indices, width, height);
+        quad.setVertexBufferId(vboId);
+        quad.setIndexBufferId(iboId);
+        return quad;
+    }
+
+    public static QuadModel createTiledQuad(float width, float height, float repeatX, float repeatY) {
+        float[] positions = new float[] {
+            -width/2,  height/2, 0.0f, // top left
+            -width/2, -height/2, 0.0f, // bottom left
+            width/2, -height/2, 0.0f, // bottom right
+            width/2,  height/2, 0.0f  // top right
+        };
+
+        float[] textureCoords = new float[] {
+            0.0f,      0.0f,
+            0.0f,      repeatY,
+            repeatX,   repeatY,
+            repeatX,   0.0f
+        };
+
+        int[] indices = new int[] {
+            0, 1, 2,
+            2, 3, 0
+        };
+
+        // Create VAO and get id
+        int vaoId = GL30.glGenVertexArrays();
+        GL30.glBindVertexArray(vaoId);
+
+        // Create VBO for vertices
+        int vboId = GL15.glGenBuffers();
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboId);
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, positions, GL15.GL_STATIC_DRAW);
+        GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
+
+        // Create VBO for texture coordinates
+        int textureVboId = GL15.glGenBuffers();
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, textureVboId);
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, textureCoords, GL15.GL_STATIC_DRAW);
+        GL20.glVertexAttribPointer(1, 2, GL11.GL_FLOAT, false, 0, 0);
+
+        // Create IBO
+        int iboId = GL15.glGenBuffers();
+        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, iboId);
+        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indices, GL15.GL_STATIC_DRAW);
+
+        // Unbind
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+        GL30.glBindVertexArray(0);
+
+        // Create and return QuadModel
+        QuadModel quad = new QuadModel(vaoId, indices.length, null, positions, indices, width, height);
+        quad.setVertexBufferId(vboId);
+        quad.setIndexBufferId(iboId);
+        return quad;
     }
 }
