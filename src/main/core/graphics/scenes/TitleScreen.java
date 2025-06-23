@@ -1,6 +1,6 @@
 package main.core.graphics.scenes;
 
-import javax.print.attribute.TextSyntax;
+import java.util.Arrays;
 
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -12,62 +12,98 @@ import main.core.graphics.ILogic;
 import main.core.graphics.MouseInput;
 import main.core.graphics.Window;
 import main.core.graphics.entity.Entity;
-import main.core.graphics.entity.Model;
 import main.core.graphics.entity.ModelManager;
+import main.core.graphics.entity.QuadModel;
 import main.core.graphics.entity.SceneManager;
-import main.core.graphics.entity.TextureManager;
 import main.core.graphics.lighting.DirectionalLight;
 import main.core.graphics.rendering.RenderManager;
 import main.core.graphics.ui.Button;
-import main.core.graphics.ui.ClickableArea;
 import main.core.graphics.ui.Container;
+import main.core.graphics.ui.Quad;
 import main.core.graphics.utils.Consts;
-import main.core.graphics.GFX;
+import main.core.graphics.entity.Entity.EntityType;
+import main.core.graphics.entity.Model;
 
 public class TitleScreen implements ILogic {
-
+    
     private final Window window;
-    private boolean startGame;
     private Camera camera;
     private SceneManager scene;
     private RenderManager renderer;
     private DirectionalLight light;
     private Vector3f cameraInc;
+    
+    private final int backgroundLayer = 10;
+    private final int containerLayer = 9;
+    private final int logoLayer = 8;
+    private final int buttonLayer = 7;
+    
+    private Entity titleScreenBackground;
+    private Container titleLogoContainer;
+    private Entity titleLogo;
+    private Container buttonsContainer;
+    private Button newGameButton;
+    private Button loadGameButton;
+    private Button settingsButton;
+    private Button nudgeButton;
 
     private final float screenWidth = 2560f, screenHeight = 1440f; // Not the actual expected values of width and height, just to use for positioning elements
+    
+    // List of entities
+    private Entity[] entities        = {titleScreenBackground,        titleLogoContainer,           titleLogo,                    buttonsContainer,             newGameButton,                loadGameButton,               settingsButton,               nudgeButton};
+    private EntityType[] entityTypes = {EntityType.QUAD,              EntityType.CONTAINER,         EntityType.QUAD,              EntityType.CONTAINER,         EntityType.BUTTON,            EntityType.BUTTON,            EntityType.BUTTON,            EntityType.BUTTON};
+    // Positions of each entity, {Left, Top, Right, Bottom} or {X1, Y1, X2, Y2}
+    private float[][] XYArrays       = {{0000f, 0000f, 2560f, 1440f}, {0137f, 0087f, 0853f, 0355f}, {0167f, 0117f, 0823f, 0325f}, {0137f, 0386f, 0853f, 0987f}, {0197f, 0446f, 0793f, 0543f}, {0197f, 0574f, 0793f, 0671f}, {0197f, 0702f, 0793f, 0799f}, {0197f, 0830f, 0793f, 0927f}};
+    // Layers which the entities belong on
+    private int[] layers             = {backgroundLayer,              containerLayer,               logoLayer,                    containerLayer,               buttonLayer,                  buttonLayer,                  buttonLayer,                  buttonLayer};
+    // Models for each entity
+    private Model[] models           = {null,                         null,                         null,                         null,                         null,                         null,                         null,                         null};
+    // Textures for each entity
+    private String[][] textureNames  = {{"title_bg"},                 {"container_base"},           {"title_logo"},               {"container_base"},           {"new_game_button_bg", "new_game_button_hover_bg", "new_game_button_click_bg", "new_game_button_click_bg"},
+                                                                                                                                                                                             {"load_game_button_bg", "load_game_button_hover_bg", "load_game_button_click_bg", "load_game_button_click_bg"},
+                                                                                                                                                                                                                           {"title_settings_button_bg", "title_settings_button_hover_bg", "title_settings_button_click_bg", "title_settings_button_click_bg"},
+                                                                                                                                                                                                                                                         {"title_nudge_button_bg", "title_nudge_button_hover_bg", "title_nudge_button_click_bg", "title_nudge_button_click_bg"}
+    };
+    
+    private Runnable[][] runnables = new Runnable[entities.length][];
+    private float[][] layersDimensions = new float[layers.length][];
+    private float[][] WHArrays = new float[XYArrays.length][];
 
-    private Entity titleScreenBackground;
-    private float[] titleScreenDimensions           = {0000f/screenWidth, 0000f/screenHeight, 2560f/screenWidth, 1440f/screenHeight};
-    private float[] titleScreenWH = {Math.abs(titleScreenDimensions[0] - titleScreenDimensions[2]), Math.abs(titleScreenDimensions[1] - titleScreenDimensions[3])};
-    private Container titleLogoContainer;
-    private float[] titleLogoContainerDimensions    = {0137f/screenWidth, 0087f/screenHeight, 0853f/screenWidth, 0355f/screenHeight};
-    private float[] titleLogoContainerWH = {Math.abs(titleLogoContainerDimensions[0] - titleLogoContainerDimensions[2]), Math.abs(titleLogoContainerDimensions[1] - titleLogoContainerDimensions[3])};
-    private Entity titleLogo;
-    private float[] titleLogoDimensions             = {0167f/screenWidth, 0117f/screenHeight, 0823f/screenWidth, 0325f/screenHeight};
-    private float[] titleLogoWH = {Math.abs(titleLogoDimensions[0] - titleLogoDimensions[2]), Math.abs(titleLogoDimensions[1] - titleLogoDimensions[3])};
-    private Container buttonsContainer;
-    private float[] buttonsContainerDimensions      = {0137f/screenWidth, 0386f/screenHeight, 0853f/screenWidth, 0987f/screenHeight};
-    private float[] buttonsContainerWH = {Math.abs(buttonsContainerDimensions[0] - buttonsContainerDimensions[2]), Math.abs(buttonsContainerDimensions[1] - buttonsContainerDimensions[3])};
-    private Button newGameButton;
-    private float[] newGameButtonDimensions         = {0197f/screenWidth, 0446f/screenHeight, 0793f/screenWidth, 0543f/screenHeight};
-    private float[] newGameButtonWH = {Math.abs(newGameButtonDimensions[0] - newGameButtonDimensions[2]), Math.abs(newGameButtonDimensions[1] - newGameButtonDimensions[3])};
-    private Button loadGameButton;
-    private float[] loadGameButtonDimensions        = {0197f/screenWidth, 0574f/screenHeight, 0793f/screenWidth, 0671f/screenHeight};
-    private float[] loadGameButtonWH = {Math.abs(loadGameButtonDimensions[0] - loadGameButtonDimensions[2]), Math.abs(loadGameButtonDimensions[1] - loadGameButtonDimensions[3])};
-    private Button settingsButton;
-    private float[] settingsButtonDimensions        = {0197f/screenWidth, 0720f/screenHeight, 0793f/screenWidth, 0799f/screenHeight};
-    private float[] settingsButtonWH = {Math.abs(settingsButtonDimensions[0] - settingsButtonDimensions[2]), Math.abs(settingsButtonDimensions[1] - settingsButtonDimensions[3])};
-    private Button nudgeButton;
-    private float[] nudgeButtonDimensions           = {0197f/screenWidth, 0830f/screenHeight, 0793f/screenWidth, 0927f/screenHeight};
-    private float[] nudgeButtonWH = {Math.abs(nudgeButtonDimensions[0] - nudgeButtonDimensions[2]), Math.abs(nudgeButtonDimensions[1] - nudgeButtonDimensions[3])};
+    private boolean startGame;
 
     public TitleScreen() {
         window = Engine.getWindow();
-        startGame = false;
         camera = new Camera();
         scene = new SceneManager();
         renderer = new RenderManager();
         cameraInc = new Vector3f(0);
+        
+        startGame = false;
+
+        // Button runnables
+        runnables[4] = new Runnable[] {
+            () -> {},
+            () -> {
+                System.out.println("Click!");
+                setStartGame(true);
+            },
+            () -> {}
+        };
+        runnables[5] = new Runnable[] {
+            () -> {},
+            () -> {},
+            () -> {}
+        };
+        runnables[6] = new Runnable[] {
+            () -> {},
+            () -> {},
+            () -> {}
+        };
+        runnables[7] = new Runnable[] {
+            () -> {},
+            () -> {},
+            () -> {}
+        };
 
         try {
             Engine.loadTextures();
@@ -76,7 +112,7 @@ public class TitleScreen implements ILogic {
             e.printStackTrace();
         }
 
-        scene.setAmbientLight(new Vector3f(0.8f));
+        scene.setAmbientLight(Consts.AMBIENT_LIGHT);
         scene.setSpecularPower(Consts.SPECULAR_POWER);
 
         // Initialize directional light
@@ -89,199 +125,83 @@ public class TitleScreen implements ILogic {
 
     @Override
     public void init() throws Exception {
-        
-        int backgroundLayer = 10;
-        float[] backgroundLayerDimensions = Engine.calculateQuadDimensions(backgroundLayer);
-        int containerLayer = 9;
-        float[] containerLayerDimensions = Engine.calculateQuadDimensions(containerLayer);
-        int logoLayer = 8;
-        float[] logoLayerDimensions = Engine.calculateQuadDimensions(logoLayer);
-        int buttonLayer = 2;
-        float[] buttonLayerDimensions = Engine.calculateQuadDimensions(buttonLayer);
-        int textLayer = 1;
-        float[] textLayerDimensions = Engine.calculateQuadDimensions(textLayer);
+
+        if (entities.length != XYArrays.length || entities.length != layers.length || entities.length != models.length) {
+            throw new IndexOutOfBoundsException("The entities array, XY/WH arrays, and layer array must have the same length");
+        }
+
+        int max = -1;
+        for (int i : layers) max = i > max ? i : max;
+        layersDimensions = new float[max+1][];
+        for (int i = 0; i <= max; i++) {
+            layersDimensions[i] = Engine.calculateQuadDimensions(i);
+        }
+
+        for (int i = 0; i < XYArrays.length; i++) {
+            XYArrays[i] = new float[] {XYArrays[i][0] / screenWidth, XYArrays[i][1] / screenHeight, XYArrays[i][2] / screenWidth, XYArrays[i][3] / screenHeight};
+            WHArrays[i] = new float[] {Math.abs(XYArrays[i][0] - XYArrays[i][2]), Math.abs(XYArrays[i][1] - XYArrays[i][3])};
+        }
 
         renderer.init();
 
         // REMEMBER TO PUT TEXTURES IN GFX.java FILE
 
         // Create quads for background and text
-        Model titleScreenBackgroundModel = ModelManager.createQuad(
-            titleScreenWH[0] * backgroundLayerDimensions[0], // Why is this one different?
-            titleScreenWH[1] * backgroundLayerDimensions[1]
-        );
-        titleScreenBackgroundModel.setTexture("title_bg");
-        Model titleLogoContainerModel = ModelManager.createQuad(
-            titleLogoContainerWH[1] * containerLayerDimensions[1],
-            titleLogoContainerWH[0] * containerLayerDimensions[0]
-        );
-        Model titleLogoModel = ModelManager.createQuad(
-            titleLogoWH[1] * logoLayerDimensions[1],
-            titleLogoWH[0] * logoLayerDimensions[0]
-        );
-        titleLogoModel.setTexture("title_logo");
-        Model buttonsContainerModel = ModelManager.createQuad(
-            buttonsContainerWH[1] * containerLayerDimensions[1],
-            buttonsContainerWH[0] * containerLayerDimensions[0]
-        );
-        Model newGameButtonModel = ModelManager.createQuad(
-            newGameButtonWH[1] * buttonLayerDimensions[1],
-            newGameButtonWH[0] * buttonLayerDimensions[0]
-        );
-        Model loadGameButtonModel = ModelManager.createQuad(
-            loadGameButtonWH[1] * buttonLayerDimensions[1],
-            loadGameButtonWH[0] * buttonLayerDimensions[0]
-        );
-        Model settingsButtonModel = ModelManager.createQuad(
-            settingsButtonWH[1] * buttonLayerDimensions[1],
-            settingsButtonWH[0] * buttonLayerDimensions[0]
-        );
-        Model nudgeButtonModel = ModelManager.createQuad(
-            nudgeButtonWH[1] * buttonLayerDimensions[1],
-            nudgeButtonWH[0] * buttonLayerDimensions[0]
-        );
+
+        for (int i = 0; i < WHArrays.length; i++) {
+            if (models[i] == null) {
+                models[i] = ModelManager.createQuad(
+                    WHArrays[i][0] * layersDimensions[layers[i]][0],
+                    WHArrays[i][1] * layersDimensions[layers[i]][1]
+                );
+            }
+        }
 
         // Create entities
-        titleScreenBackground = new Entity(
-            titleScreenBackgroundModel,
-            new Vector3f(
-                (titleScreenDimensions[0] * 0.5f) * backgroundLayerDimensions[0], // why is this one different?
-                -(titleScreenDimensions[1] * 1.0f) * backgroundLayerDimensions[1],
-                -backgroundLayer
-            )
-        );
-        titleLogoContainer = new Container(
-            new Entity(
-                titleLogoContainerModel,
-                new Vector3f(
-                    (titleLogoContainerDimensions[0] - 0.5f) * containerLayerDimensions[1] + (titleLogoContainerDimensions[0] * 0.5f * containerLayerDimensions[1]),
-                    -(titleLogoContainerDimensions[1] * 1.0f) * containerLayerDimensions[0],
-                    -containerLayer
-                )
-            ),
-            "container_base"
-        );
-        titleLogo = new Entity(
-            titleLogoModel,
-            new Vector3f(
-                (titleLogoDimensions[0] - 0.5f) * logoLayerDimensions[1] + (titleLogoDimensions[0] * 0.5f * logoLayerDimensions[1]),
-                -(titleLogoDimensions[1] * 1.0f) * logoLayerDimensions[0],
-                -logoLayer
-            )
-        );
-        buttonsContainer = new Container(
-            new Entity(
-                buttonsContainerModel,
-                new Vector3f(
-                    (buttonsContainerDimensions[0] - 0.5f) * containerLayerDimensions[1] + (buttonsContainerDimensions[0] * 0.5f * containerLayerDimensions[1]),
-                    -(buttonsContainerDimensions[1] * 1.0f) * containerLayerDimensions[0],
-                    -containerLayer
-                )
-            ),
-            "container_base"
-        );
-        newGameButton = new Button(
-            new Entity(
-                newGameButtonModel,
-                new Vector3f(
-                    (newGameButtonDimensions[0] - 0.5f) * buttonLayerDimensions[1] + (newGameButtonDimensions[0] * 0.5f * buttonLayerDimensions[1]),
-                    -(newGameButtonDimensions[1] * 1.0f) * buttonLayerDimensions[0],
-                    -buttonLayer
-                )
-            ),
-            "new_game_button_bg",
-            "new_game_button_hover_bg",
-            () -> {
-                System.out.println("Hover");
-            },
-            "new_game_button_click_bg",
-            () -> {
-                System.out.println("Left Click");
-            },
-            "new_game_button_click_bg",
-            () -> {
-                System.out.println("Right Click");
-            }
-        );
-        loadGameButton = new Button(
-            new Entity(
-                loadGameButtonModel,
-                new Vector3f(
-                    (loadGameButtonDimensions[0] - 0.5f) * buttonLayerDimensions[1] + (loadGameButtonDimensions[0] * 0.5f * buttonLayerDimensions[1]),
-                    -(loadGameButtonDimensions[1] * 1.0f) * buttonLayerDimensions[0],
-                    -buttonLayer
-                )
-            ),
-            "load_game_button_bg",
-            "load_game_button_hover_bg",
-            () -> {
-                System.out.println("Hover");
-            },
-            "load_game_button_click_bg",
-            () -> {
-                System.out.println("Left Click");
-            },
-            "load_game_button_click_bg",
-            () -> {
-                System.out.println("Right Click");
-            }
-        );
-        settingsButton = new Button(
-            new Entity(
-                settingsButtonModel,
-                new Vector3f(
-                    (settingsButtonDimensions[0] - 0.5f) * buttonLayerDimensions[1] + (settingsButtonDimensions[0] * 0.5f * buttonLayerDimensions[1]),
-                    -(settingsButtonDimensions[1] * 1.0f) * buttonLayerDimensions[0],
-                    -buttonLayer
-                )
-            ),
-            "title_settings_button_bg",
-            "title_settings_button_hover_bg",
-            () -> {
-                System.out.println("Hover");
-            },
-            "title_settings_button_click_bg",
-            () -> {
-                System.out.println("Left Click");
-            },
-            "title_settings_button_click_bg",
-            () -> {
-                System.out.println("Right Click");
-            }
-        );
-        nudgeButton = new Button(
-            new Entity(
-                nudgeButtonModel,
-                new Vector3f(
-                    (nudgeButtonDimensions[0] - 0.5f) * buttonLayerDimensions[1] + (nudgeButtonDimensions[0] * 0.5f * buttonLayerDimensions[1]),
-                    -(nudgeButtonDimensions[1] * 1.0f) * buttonLayerDimensions[0],
-                    -buttonLayer
-                )
-            ),
-            "title_nudge_button_bg",
-            "title_nudge_button_hover_bg",
-            () -> {
-                System.out.println("Hover");
-            },
-            "title_nudge_button_click_bg",
-            () -> {
-                System.out.println("Left Click");
-            },
-            "title_nudge_button_click_bg",
-            () -> {
-                System.out.println("Right Click");
-            }
-        );
 
-        // Add models to scene
-        scene.addEntity(titleScreenBackground);
-        scene.addEntity(titleLogoContainer);
-        scene.addEntity(titleLogo);
-        scene.addEntity(buttonsContainer);
-        scene.addEntity(newGameButton);
-        scene.addEntity(loadGameButton);
-        scene.addEntity(settingsButton);
-        scene.addEntity(nudgeButton);
+        for (int i = 0; i < entities.length; i++) {
+
+            float left = Math.min(XYArrays[i][0], XYArrays[i][2]);
+            float right = Math.max(XYArrays[i][0], XYArrays[i][2]);
+            float top = Math.min(XYArrays[i][1], XYArrays[i][3]);
+            float bottom = Math.max(XYArrays[i][1], XYArrays[i][3]);
+
+            float centerX = (left + right) / 2.0f;
+            float centerY = (top + bottom) / 2.0f;
+
+            float glX = (centerX - 0.5f) * layersDimensions[layers[i]][0];
+            float glY = (0.5f - centerY) * layersDimensions[layers[i]][1];
+
+            Vector3f position = new Vector3f(glX, glY, -layers[i]);
+
+            switch (entityTypes[i]) {
+                case QUAD:
+                    entities[i] = new Quad((QuadModel) models[i], position);
+                    entities[i].getModel().setTexture(textureNames[i][0]);
+                    break;
+                case BUTTON:
+                    entities[i] = new Button(
+                        new Entity(models[i], position),
+                        textureNames[i][0], textureNames[i][1], runnables[i][0], textureNames[i][2], runnables[i][1], textureNames[i][3], runnables[i][2]
+                    );
+                    break;
+                case CONTAINER:
+                    entities[i] = new Container( new Entity(models[i], position), textureNames[i][0]);
+                    break;
+                case ENTITY:
+                    entities[i] = new Entity(models[i], position);
+                    entities[i].getModel().setTexture(textureNames[i][0]);
+                    break;
+            }
+        }
+
+        // Change draw order to ensure back-to-front
+        Arrays.sort(entities, (a, b) -> Float.compare(a.getPos().z, b.getPos().z));
+
+        // Add entities to scene
+        for (Entity entity : entities) {
+            scene.addEntity(entity);
+        }
 
         camera.setPosition(0);
         camera.setRotation(0);
@@ -290,26 +210,28 @@ public class TitleScreen implements ILogic {
     @Override
     public void input() {
         cameraInc.set(0, 0, 0);
-        if(window.isKeyPressed(GLFW.GLFW_KEY_W))
-            cameraInc.z = -10;
-        if(window.isKeyPressed(GLFW.GLFW_KEY_S))
-            cameraInc.z = 10;
-            if(window.isKeyPressed(GLFW.GLFW_KEY_A))
-            cameraInc.x = -10;
-        if(window.isKeyPressed(GLFW.GLFW_KEY_D))
-            cameraInc.x = 10;
-        if(window.isKeyPressed(GLFW.GLFW_KEY_LEFT_SHIFT))
-            cameraInc.y = -10;
-        if(window.isKeyPressed(GLFW.GLFW_KEY_SPACE))
-            cameraInc.y = 10;
-        if(window.isKeyPressed(GLFW.GLFW_KEY_Q))
-            camera.moveRotation(0.0f, 0.0f, -0.5f);
-        if(window.isKeyPressed(GLFW.GLFW_KEY_E))
-            camera.moveRotation(0.0f, 0.0f, 0.5f);
-        if(window.isKeyPressed(GLFW.GLFW_KEY_R))
-            camera.setRotation(0);
-        if (window.isKeyPressed(GLFW.GLFW_KEY_T))
-            camera.setPosition(0);
+        if (Engine.DEBUG_MODE) {
+            if(window.isKeyPressed(GLFW.GLFW_KEY_W))
+                cameraInc.z = -10;
+            if(window.isKeyPressed(GLFW.GLFW_KEY_S))
+                cameraInc.z = 10;
+                if(window.isKeyPressed(GLFW.GLFW_KEY_A))
+                cameraInc.x = -10;
+            if(window.isKeyPressed(GLFW.GLFW_KEY_D))
+                cameraInc.x = 10;
+            if(window.isKeyPressed(GLFW.GLFW_KEY_LEFT_SHIFT))
+                cameraInc.y = -10;
+            if(window.isKeyPressed(GLFW.GLFW_KEY_SPACE))
+                cameraInc.y = 10;
+            if(window.isKeyPressed(GLFW.GLFW_KEY_Q))
+                camera.moveRotation(0.0f, 0.0f, -0.5f);
+            if(window.isKeyPressed(GLFW.GLFW_KEY_E))
+                camera.moveRotation(0.0f, 0.0f, 0.5f);
+            if(window.isKeyPressed(GLFW.GLFW_KEY_R))
+                camera.setRotation(0);
+            if (window.isKeyPressed(GLFW.GLFW_KEY_T))
+                camera.setPosition(0);
+        }
         if(window.isKeyPressed(GLFW.GLFW_KEY_TAB))
             startGame = true;
     }
@@ -318,19 +240,20 @@ public class TitleScreen implements ILogic {
     public void update(float interval, MouseInput mouse) {
         camera.movePosition(cameraInc.x * Consts.CAMERA_MOVE_SPEED, cameraInc.y * Consts.CAMERA_MOVE_SPEED, cameraInc.z * Consts.CAMERA_MOVE_SPEED);
 
-        if (mouse.isRightButtonPress()) {
-            Vector2f rotVec = mouse.getDisplVec();
-            camera.moveRotation(rotVec.x * Consts.MOUSE_SENSITIVITY, rotVec.y * Consts.MOUSE_SENSITIVITY, 0);
+        if (Engine.DEBUG_MODE) {
+            if (mouse.isRightButtonPress()) {
+                Vector2f rotVec = mouse.getDisplVec();
+                camera.moveRotation(rotVec.x * Consts.MOUSE_SENSITIVITY, rotVec.y * Consts.MOUSE_SENSITIVITY, 0);
+            }
         }
 
         for (Entity entity : scene.getEntities()) {
             renderer.processEntity(entity);
-        }
 
-        newGameButton.update(mouse, camera);
-        loadGameButton.update(mouse, camera);
-        settingsButton.update(mouse, camera);
-        nudgeButton.update(mouse, camera);
+            if (entity instanceof Button button) {
+                button.update(mouse, camera);
+            }
+        }
     }
 
     @Override
@@ -343,12 +266,16 @@ public class TitleScreen implements ILogic {
         renderer.cleanup();
     }
 
-    public boolean shouldStartGame() {
-        return startGame;
-    }
-
     @Override
     public Camera getCamera() {
         return camera;
+    }
+
+    public void setStartGame(boolean startGame) {
+        this.startGame = startGame;
+    }
+
+    public boolean shouldStartGame() {
+        return startGame;
     }
 }
