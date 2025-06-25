@@ -52,6 +52,8 @@ public final class MapManager {
     public static final List<CongressionalDistrict>   congressionalDistricts  = new ArrayList<>();
     public static final List<County>                  counties                = new ArrayList<>();
     public static final List<Municipality>            municipalities          = new ArrayList<>();
+    public static final List<Airport>                 airports                = new ArrayList<>();
+    public static final List<University>              universities            = new ArrayList<>();
 
     public static void init(){
         setMapMode(MapMode.DEFAULT);
@@ -276,7 +278,8 @@ public final class MapManager {
     }
     public static CongressionalDistrict matchCongressionalDistrict(State state, int districtNum) {
         for (CongressionalDistrict district : congressionalDistricts) {
-            if (district.getState().equals(state) && district.getDistrictNum() == districtNum) return district;
+            if (district.getState().equals(state) && district.getDistrictNum() == districtNum)
+                return district;
         }
         Engine.log("INVALID STATE OR DISTRICT", String.format("The state, %s, or the district number, %s, could not be matched.", state.getCommonName(), districtNum), new Exception());
         return null;
@@ -287,7 +290,8 @@ public final class MapManager {
 
     public static County matchCounty(String FIPS) {
         for (County county : counties) {
-            if (county.getFIPS().equals(FIPS)) return county;
+            if (county.getFIPS().equals(FIPS))
+                return county;
         }
         Engine.log("INVALID COUNTY", String.format("The county FIPS, %s, could not be matched.", FIPS), new Exception());
         return null;
@@ -297,8 +301,8 @@ public final class MapManager {
     }
     public static County matchCounty(String name, State state) {
         for (County county : counties) {
-            if (county.getCommonName().equals(name) && county.getState().equals(state)) return county;
-            if (county.getFullName().equals(name) && county.getState().equals(state)) return county;
+            if (county.getState().equals(state) && county.getFullName().equals(name) || county.getCommonName().equals(name))
+                return county;
         }
         Engine.log("INVALID COUNTY", String.format("The county name, %s, could not be matched to a county in %s.", name, state.getCommonName()), new Exception());
         return null;
@@ -328,7 +332,6 @@ public final class MapManager {
         // Assume the last word in the string is a state name or abbreviation. Will not work for state names with more than one word.
         else {
             nameParts = municipalityAndStateName.split("(?s)\\s(?=[^\\s]*$)", 2);
-
         }
         String municipalityName = nameParts[0];
         String stateNameOrAbbr = nameParts[1];
@@ -338,7 +341,8 @@ public final class MapManager {
     public static Municipality matchMunicipality(String municipalityName, State state) {
         if (municipalityName == null) return null;
         for (Municipality municipality : municipalities) {
-            if (municipality.getName().equals(municipalityName) && municipality.getState().equals(state)) return municipality;
+            if (municipality.getName().equals(municipalityName) && municipality.getState().equals(state))
+                return municipality;
         }
         Engine.log("INVALID MUNICIPALITY", String.format("The municipality name, %s, or the state, %s, could not be matched.", municipalityName, state.getCommonName()), new Exception());
         return null;
@@ -356,9 +360,38 @@ public final class MapManager {
     /** This method to be used before cities have assigned states. Assumes all cities are unique by (name, population, area) */
     public static Municipality matchMunicipality(String municipalityName, int population, double area) {
         for (Municipality municipality : municipalities) {
-            if (municipality.getName().equals(municipalityName) && municipality.getPopulation() == population && municipality.getLandArea() == area) return municipality;
+            if (municipality.getName().equals(municipalityName) && municipality.getPopulation() == population && municipality.getLandArea() == area)
+                return municipality;
         }
         Engine.log("INVALID MUNICIPALITY", String.format("No municipality exists with the name %s, a population of %d, and an area of %f.", municipalityName, population, area), new Exception());
+        return null;
+    }
+
+    /**
+     * Finds and returns the airport with a full name, common name, or IATA code matching the passed string.
+     * @param airportName Full or Common name, or IATA code, of an airport.
+     * @return Matched airport, if found, or {@code null} otherwise.
+     */
+    public static Airport matchAirport(String airportName) {
+        for (Airport airport : airports) {
+            if (airport.getFullName().equals(airportName) || airport.getCommonName().equals(airportName) || airport.getIATA().equals(airportName))
+                return airport;
+        }
+        Engine.log("INVALID AIRPORT", String.format("No airport exists with a name or IATA code matching %s.", airportName));
+        return null;
+    }
+
+    /**
+     * Finds and returns the university with a full name or common name matching the passed string.
+     * @param universityName Full or Common name of a university.
+     * @return Matched university, if found, or {@code null} otherwise.
+     */
+    public static University matchUniversity(String universityName) {
+        for (University university : universities) {
+            if (university.getFullName().equals(universityName) || university.getCommonName().equals(universityName))
+                return university;
+        }
+        Engine.log("INVALID UNIVERSITY", String.format("No university exists with a name matching %s.", universityName));
         return null;
     }
 
@@ -374,7 +407,7 @@ public final class MapManager {
         return counties;
     }
 
-    public static List<Municipality> getCities() {
+    public static List<Municipality> getMunicipalities() {
         return municipalities;
     }
 

@@ -3,39 +3,28 @@ package main.core.map;
 public class University {
     
     private Municipality location;
-    private String name;
+    private String fullName;
+    private String commonName;
     private int graduationSize;
 
-    public University(String locationName, String state, String name, int graduationSize) {
-        this(MapManager.matchMunicipality(locationName, state), name, graduationSize);
+    public University(String locationName, String state, String fullName, String commonName, int graduationSize) {
+        this(MapManager.matchMunicipality(locationName, state), fullName, commonName, graduationSize);
     }
 
-    public University(Municipality location, String name, int graduationSize) {
+    public University(Municipality location, String fullName, String commonName, int graduationSize) {
         this.location = location;
-        this.name = name;
+        this.fullName = fullName;
+        this.commonName = commonName;
         this.graduationSize = graduationSize;
     }
 
-    public Municipality getLocation() {
-        return location;
-    }
-    public void setLocation(Municipality location) {
-        this.location = location;
-    }
+    public Municipality getLocation() { return location; }
 
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getFullName() { return fullName; }
 
-    public int getGraduationSize() {
-        return graduationSize;
-    }
-    public void setGraduationSize(int graduationSize) {
-        this.graduationSize = graduationSize;
-    }
+    public String getCommonName() { return commonName; }
+
+    public int getGraduationSize() { return graduationSize; }
 
 
 

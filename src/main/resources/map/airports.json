@@ -1,0 +1,2986 @@
+{
+	"ATL" : {
+		"full_name" : "Hartsfield–Jackson Atlanta International Airport",
+		"common_name" : "Hartsfield–Jackson Atlanta",
+		"IATA" : "ATL",
+		"location" : "Atlanta, GA",
+		"hub_size" : "large",
+		"enplanement" : 52511402
+	},
+	"DFW" : {
+		"full_name" : "Dallas Fort Worth International Airport",
+		"common_name" : "Dallas Fort Worth",
+		"IATA" : "DFW",
+		"location" : "Dallas, TX",
+		"hub_size" : "large",
+		"enplanement" : 42351316
+	},
+	"DEN" : {
+		"full_name" : "Denver International Airport",
+		"common_name" : "Denver",
+		"IATA" : "DEN",
+		"location" : "Denver, CO",
+		"hub_size" : "large",
+		"enplanement" : 40012895
+	},
+	"ORD" : {
+		"full_name" : "O'Hare International Airport",
+		"common_name" : "O'Hare",
+		"IATA" : "ORD",
+		"location" : "Chicago, IL",
+		"hub_size" : "large",
+		"enplanement" : 38575693
+	},
+	"LAX" : {
+		"full_name" : "Los Angeles International Airport",
+		"common_name" : "Los Angeles",
+		"IATA" : "LAX",
+		"location" : "Los Angeles, CA",
+		"hub_size" : "large",
+		"enplanement" : 37760834
+	},
+	"JFK" : {
+		"full_name" : "John F. Kennedy International Airport",
+		"common_name" : "John F. Kennedy",
+		"IATA" : "JFK",
+		"location" : "New York City, NY",
+		"hub_size" : "large",
+		"enplanement" : 31201170
+	},
+	"CLT" : {
+		"full_name" : "Charlotte Douglas International Airport",
+		"common_name" : "Charlotte Douglas",
+		"IATA" : "CLT",
+		"location" : "Charlotte, NC",
+		"hub_size" : "large",
+		"enplanement" : 28523822
+	},
+	"LAS" : {
+		"full_name" : "Harry Reid International Airport",
+		"common_name" : "Harry Reid",
+		"IATA" : "LAS",
+		"location" : "Las Vegas, NV",
+		"hub_size" : "large",
+		"enplanement" : 28183403
+	},
+	"MCO" : {
+		"full_name" : "Orlando International Airport",
+		"common_name" : "Orlando",
+		"IATA" : "MCO",
+		"location" : "Orlando, FL",
+		"hub_size" : "large",
+		"enplanement" : 27859783
+	},
+	"MIA" : {
+		"full_name" : "Miami International Airport",
+		"common_name" : "Miami",
+		"IATA" : "MIA",
+		"location" : "Miami, FL",
+		"hub_size" : "large",
+		"enplanement" : 26588002
+	},
+	"PHX" : {
+		"full_name" : "Phoenix Sky Harbor International Airport",
+		"common_name" : "Phoenix Sky Harbor",
+		"IATA" : "PHX",
+		"location" : "Phoenix, AZ",
+		"hub_size" : "large",
+		"enplanement" : 25595723
+	},
+	"SEA" : {
+		"full_name" : "Seattle–Tacoma International Airport",
+		"common_name" : "Seattle–Tacoma",
+		"IATA" : "SEA",
+		"location" : "Seattle, WA",
+		"hub_size" : "large",
+		"enplanement" : 25414592
+	},
+	"SFO" : {
+		"full_name" : "San Francisco International Airport",
+		"common_name" : "San Francisco",
+		"IATA" : "SFO",
+		"location" : "San Francisco, CA",
+		"hub_size" : "large",
+		"enplanement" : 25078968
+	},
+	"EWR" : {
+		"full_name" : "Newark Liberty International Airport",
+		"common_name" : "Newark Liberty",
+		"IATA" : "EWR",
+		"location" : "Newark, NJ",
+		"hub_size" : "large",
+		"enplanement" : 24313706
+	},
+	"IAH" : {
+		"full_name" : "George Bush Intercontinental Airport",
+		"common_name" : "George Bush Intercontinental",
+		"IATA" : "IAH",
+		"location" : "Houston, TX",
+		"hub_size" : "large",
+		"enplanement" : 23349157
+	},
+	"BOS" : {
+		"full_name" : "Logan International Airport",
+		"common_name" : "Logan",
+		"IATA" : "BOS",
+		"location" : "Boston, MA",
+		"hub_size" : "large",
+		"enplanement" : 21090721
+	},
+	"MSP" : {
+		"full_name" : "Minneapolis–Saint Paul International Airport",
+		"common_name" : "Minneapolis–Saint Paul",
+		"IATA" : "MSP",
+		"location" : "Minneapolis-St. Paul",
+		"hub_size" : "large",
+		"enplanement" : 18361942
+	},
+	"FLL" : {
+		"full_name" : "Fort Lauderdale–Hollywood International Airport",
+		"common_name" : "Fort Lauderdale–Hollywood",
+		"IATA" : "FLL",
+		"location" : "Fort Lauderdale, FL",
+		"hub_size" : "large",
+		"enplanement" : 17096131
+	},
+	"LGA" : {
+		"full_name" : "LaGuardia Airport",
+		"common_name" : "LaGuardia",
+		"IATA" : "LGA",
+		"location" : "New York City, NY",
+		"hub_size" : "large",
+		"enplanement" : 16715567
+	},
+	"DTW" : {
+		"full_name" : "Detroit Metropolitan Airport",
+		"common_name" : "Detroit Metropolitan",
+		"IATA" : "DTW",
+		"location" : "Detroit, MI",
+		"hub_size" : "large",
+		"enplanement" : 16110696
+	},
+	"PHL" : {
+		"full_name" : "Philadelphia International Airport",
+		"common_name" : "Philadelphia",
+		"IATA" : "PHL",
+		"location" : "Philadelphia",
+		"hub_size" : "large",
+		"enplanement" : 15292670
+	},
+	"SLC" : {
+		"full_name" : "Salt Lake City International Airport",
+		"common_name" : "Salt Lake City",
+		"IATA" : "SLC",
+		"location" : "Salt Lake City, UT",
+		"hub_size" : "large",
+		"enplanement" : 13543570
+	},
+	"BWI" : {
+		"full_name" : "Baltimore/Washington International Airport",
+		"common_name" : "Baltimore/Washington",
+		"IATA" : "BWI",
+		"location" : "Baltimore, MD",
+		"hub_size" : "large",
+		"enplanement" : 13221461
+	},
+	"IAD" : {
+		"full_name" : "Dulles International Airport",
+		"common_name" : "Dulles",
+		"IATA" : "IAD",
+		"location" : "Washington, D.C., VA",
+		"hub_size" : "large",
+		"enplanement" : 13002433
+	},
+	"SAN" : {
+		"full_name" : "San Diego International Airport",
+		"common_name" : "San Diego",
+		"IATA" : "SAN",
+		"location" : "San Diego, CA",
+		"hub_size" : "large",
+		"enplanement" : 12780013
+	},
+	"DCA" : {
+		"full_name" : "Ronald Reagan Washington National Airport",
+		"common_name" : "Ronald Reagan Washington National",
+		"IATA" : "DCA",
+		"location" : "Washington, D.C., VA",
+		"hub_size" : "large",
+		"enplanement" : 12750892
+	},
+	"TPA" : {
+		"full_name" : "Tampa International Airport",
+		"common_name" : "Tampa",
+		"IATA" : "TPA",
+		"location" : "Tampa, FL",
+		"hub_size" : "large",
+		"enplanement" : 12075591
+	},
+	"BNA" : {
+		"full_name" : "Nashville International Airport",
+		"common_name" : "Nashville",
+		"IATA" : "BNA",
+		"location" : "Nashville, TN",
+		"hub_size" : "large",
+		"enplanement" : 12057435
+	},
+	"AUS" : {
+		"full_name" : "Austin–Bergstrom International Airport",
+		"common_name" : "Austin–Bergstrom",
+		"IATA" : "AUS",
+		"location" : "Austin, TX",
+		"hub_size" : "large",
+		"enplanement" : 10676243
+	},
+	"MDW" : {
+		"full_name" : "Chicago Midway International Airport",
+		"common_name" : "Chicago Midway",
+		"IATA" : "MDW",
+		"location" : "Chicago",
+		"hub_size" : "large",
+		"enplanement" : 10659520
+	},
+	"HNL" : {
+		"full_name" : "Daniel K. Inouye International Airport",
+		"common_name" : "Daniel K. Inouye",
+		"IATA" : "HNL",
+		"location" : "Honolulu, HI",
+		"hub_size" : "large",
+		"enplanement" : 10449022
+	},
+	"PDX" : {
+		"full_name" : "Portland International Airport",
+		"common_name" : "Portland",
+		"IATA" : "PDX",
+		"location" : "Portland, Oregon",
+		"hub_size" : "medium",
+		"enplanement" : 9804868
+	},
+	"DAL" : {
+		"full_name" : "Dallas Love Field",
+		"common_name" : "Dallas Love Field",
+		"IATA" : "DAL",
+		"location" : "Dallas, TX",
+		"hub_size" : "medium",
+		"enplanement" : 8652838
+	},
+	"STL" : {
+		"full_name" : "St. Louis Lambert International Airport",
+		"common_name" : "St. Louis Lambert",
+		"IATA" : "STL",
+		"location" : "St. Louis, MO",
+		"hub_size" : "medium",
+		"enplanement" : 7806146
+	},
+	"RDU" : {
+		"full_name" : "Raleigh–Durham International Airport",
+		"common_name" : "Raleigh–Durham",
+		"IATA" : "RDU",
+		"location" : "Raleigh, NC",
+		"hub_size" : "medium",
+		"enplanement" : 7584394
+	},
+	"HOU" : {
+		"full_name" : "William P. Hobby Airport",
+		"common_name" : "William P. Hobby",
+		"IATA" : "HOU",
+		"location" : "Houston, TX",
+		"hub_size" : "medium",
+		"enplanement" : 7116020
+	},
+	"SMF" : {
+		"full_name" : "Sacramento International Airport",
+		"common_name" : "Sacramento",
+		"IATA" : "SMF",
+		"location" : "Sacramento, CA",
+		"hub_size" : "medium",
+		"enplanement" : 6679426
+	},
+	"MSY" : {
+		"full_name" : "Louis Armstrong New Orleans International Airport",
+		"common_name" : "Louis Armstrong New Orleans",
+		"IATA" : "MSY",
+		"location" : "New Orleans",
+		"hub_size" : "medium",
+		"enplanement" : 6582066
+	},
+	"SJU" : {
+		"full_name" : "Luis Muñoz Marín International Airport",
+		"common_name" : "Luis Muñoz Marín",
+		"IATA" : "SJU",
+		"location" : "San Juan, PR",
+		"hub_size" : "medium",
+		"enplanement" : 6453331
+	},
+	"SJC" : {
+		"full_name" : "San Jose International Airport",
+		"common_name" : "San Jose",
+		"IATA" : "SJC",
+		"location" : "San Jose, California",
+		"hub_size" : "medium",
+		"enplanement" : 5958813
+	},
+	"MCI" : {
+		"full_name" : "Kansas City International Airport",
+		"common_name" : "Kansas City",
+		"IATA" : "MCI",
+		"location" : "Kansas City, MO",
+		"hub_size" : "medium",
+		"enplanement" : 5915078
+	},
+	"SNA" : {
+		"full_name" : "John Wayne Airport",
+		"common_name" : "John Wayne",
+		"IATA" : "SNA",
+		"location" : "Santa Ana, California",
+		"hub_size" : "medium",
+		"enplanement" : 5706292
+	},
+	"OAK" : {
+		"full_name" : "Oakland International Airport",
+		"common_name" : "Oakland",
+		"IATA" : "OAK",
+		"location" : "Oakland, California",
+		"hub_size" : "medium",
+		"enplanement" : 5520778
+	},
+	"SAT" : {
+		"full_name" : "San Antonio International Airport",
+		"common_name" : "San Antonio",
+		"IATA" : "SAT",
+		"location" : "San Antonio, TX",
+		"hub_size" : "medium",
+		"enplanement" : 5465994
+	},
+	"RSW" : {
+		"full_name" : "Southwest Florida International Airport",
+		"common_name" : "Southwest Florida",
+		"IATA" : "RSW",
+		"location" : "Fort Myers, FL",
+		"hub_size" : "medium",
+		"enplanement" : 5425293
+	},
+	"IND" : {
+		"full_name" : "Indianapolis International Airport",
+		"common_name" : "Indianapolis",
+		"IATA" : "IND",
+		"location" : "Indianapolis, IN",
+		"hub_size" : "medium",
+		"enplanement" : 5180917
+	},
+	"CLE" : {
+		"full_name" : "Cleveland Hopkins International Airport",
+		"common_name" : "Cleveland Hopkins",
+		"IATA" : "CLE",
+		"location" : "Cleveland, OH",
+		"hub_size" : "medium",
+		"enplanement" : 4950345
+	},
+	"PIT" : {
+		"full_name" : "Pittsburgh International Airport",
+		"common_name" : "Pittsburgh",
+		"IATA" : "PIT",
+		"location" : "Pittsburgh, PA",
+		"hub_size" : "medium",
+		"enplanement" : 4862376
+	},
+	"CVG" : {
+		"full_name" : "Cincinnati/Northern Kentucky International Airport",
+		"common_name" : "Cincinnati/Northern Kentucky",
+		"IATA" : "CVG",
+		"location" : "Cincinnati, KY",
+		"hub_size" : "medium",
+		"enplanement" : 4500414
+	},
+	"CMH" : {
+		"full_name" : "John Glenn Columbus International Airport",
+		"common_name" : "John Glenn Columbus",
+		"IATA" : "CMH",
+		"location" : "Columbus, OH",
+		"hub_size" : "medium",
+		"enplanement" : 4387395
+	},
+	"PBI" : {
+		"full_name" : "Palm Beach International Airport",
+		"common_name" : "Palm Beach",
+		"IATA" : "PBI",
+		"location" : "West Palm Beach, FL",
+		"hub_size" : "medium",
+		"enplanement" : 4127211
+	},
+	"JAX" : {
+		"full_name" : "Jacksonville International Airport",
+		"common_name" : "Jacksonville",
+		"IATA" : "JAX",
+		"location" : "Jacksonville, FL",
+		"hub_size" : "medium",
+		"enplanement" : 3749791
+	},
+	"OGG" : {
+		"full_name" : "Kahului Airport",
+		"common_name" : "Kahului",
+		"IATA" : "OGG",
+		"location" : "Kahului, Hawaii",
+		"hub_size" : "medium",
+		"enplanement" : 3571660
+	},
+	"ONT" : {
+		"full_name" : "Ontario International Airport",
+		"common_name" : "Ontario",
+		"IATA" : "ONT",
+		"location" : "Ontario, CA",
+		"hub_size" : "medium",
+		"enplanement" : 3494554
+	},
+	"BUR" : {
+		"full_name" : "Hollywood Burbank Airport",
+		"common_name" : "Hollywood Burbank",
+		"IATA" : "BUR",
+		"location" : "Burbank, CA",
+		"hub_size" : "medium",
+		"enplanement" : 3383237
+	},
+	"BDL" : {
+		"full_name" : "Bradley International Airport",
+		"common_name" : "Bradley",
+		"IATA" : "BDL",
+		"location" : "Hartford, Connecticut",
+		"hub_size" : "medium",
+		"enplanement" : 3327272
+	},
+	"CHS" : {
+		"full_name" : "Charleston International Airport",
+		"common_name" : "Charleston",
+		"IATA" : "CHS",
+		"location" : "Charleston, SC",
+		"hub_size" : "medium",
+		"enplanement" : 3115194
+	},
+	"MKE" : {
+		"full_name" : "Milwaukee Mitchell International Airport",
+		"common_name" : "Milwaukee Mitchell",
+		"IATA" : "MKE",
+		"location" : "Milwaukee, WI",
+		"hub_size" : "medium",
+		"enplanement" : 3083619
+	},
+	"ANC" : {
+		"full_name" : "Ted Stevens Anchorage International Airport",
+		"common_name" : "Ted Stevens Anchorage",
+		"IATA" : "ANC",
+		"location" : "Anchorage, AK",
+		"hub_size" : "medium",
+		"enplanement" : 2767856
+	},
+	"ABQ" : {
+		"full_name" : "Albuquerque International Sunport",
+		"common_name" : "Albuquerque  Sunport",
+		"IATA" : "ABQ",
+		"location" : "Albuquerque, NM",
+		"hub_size" : "medium",
+		"enplanement" : 2690218
+	},
+	"OMA" : {
+		"full_name" : "Eppley Airfield",
+		"common_name" : "Eppley Airfield",
+		"IATA" : "OMA",
+		"location" : "Omaha, NE",
+		"hub_size" : "medium",
+		"enplanement" : 2580135
+	},
+	"BUF" : {
+		"full_name" : "Buffalo Niagara International Airport",
+		"common_name" : "Buffalo Niagara",
+		"IATA" : "BUF",
+		"location" : "Buffalo, New York",
+		"hub_size" : "medium",
+		"enplanement" : 2523158
+	},
+	"BOI" : {
+		"full_name" : "Boise Airport",
+		"common_name" : "Boise",
+		"IATA" : "BOI",
+		"location" : "Boise, ID",
+		"hub_size" : "medium",
+		"enplanement" : 2475370
+	},
+	"MEM" : {
+		"full_name" : "Memphis International Airport",
+		"common_name" : "Memphis",
+		"IATA" : "MEM",
+		"location" : "Memphis, Tennessee",
+		"hub_size" : "medium",
+		"enplanement" : 2213083
+	},
+	"PVD" : {
+		"full_name" : "Rhode Island T. F. Green International Airport",
+		"common_name" : "Rhode Island T. F. Green",
+		"IATA" : "PVD",
+		"location" : "Providence, Rhode Island",
+		"hub_size" : "medium",
+		"enplanement" : 2117409
+	},
+	"OKC" : {
+		"full_name" : "OKC Will Rogers International Airport",
+		"common_name" : "OKC Will Rogers",
+		"IATA" : "OKC",
+		"location" : "Oklahoma City",
+		"hub_size" : "medium",
+		"enplanement" : 2094708
+	},
+	"RNO" : {
+		"full_name" : "Reno/Tahoe International Airport",
+		"common_name" : "Reno/Tahoe",
+		"IATA" : "RNO",
+		"location" : "Reno, Nevada",
+		"hub_size" : "medium",
+		"enplanement" : 2048916
+	},
+	"RIC" : {
+		"full_name" : "Richmond International Airport",
+		"common_name" : "Richmond",
+		"IATA" : "RIC",
+		"location" : "Richmond, Virginia",
+		"hub_size" : "medium",
+		"enplanement" : 2048691
+	},
+	"GEG" : {
+		"full_name" : "Spokane International Airport",
+		"common_name" : "Spokane",
+		"IATA" : "GEG",
+		"location" : "Spokane, Washington",
+		"hub_size" : "medium",
+		"enplanement" : 2002286
+	},
+	"GRR" : {
+		"full_name" : "Gerald R. Ford International Airport",
+		"common_name" : "Gerald R. Ford",
+		"IATA" : "GRR",
+		"location" : "Grand Rapids, Michigan",
+		"hub_size" : "medium",
+		"enplanement" : 1895000
+	},
+	"SDF" : {
+		"full_name" : "Louisville Muhammad Ali International Airport",
+		"common_name" : "Louisville Muhammad Ali",
+		"IATA" : "SDF",
+		"location" : "Louisville, Kentucky",
+		"hub_size" : "medium",
+		"enplanement" : 1877861
+	},
+	"ORF" : {
+		"full_name" : "Norfolk International Airport",
+		"common_name" : "Norfolk",
+		"IATA" : "ORF",
+		"location" : "Norfolk, Virginia",
+		"hub_size" : "medium",
+		"enplanement" : 1846031
+	},
+	"LGB" : {
+		"full_name" : "Long Beach Airport",
+		"common_name" : "Long Beach",
+		"IATA" : "LGB",
+		"location" : "Long Beach, California",
+		"hub_size" : "medium",
+		"enplanement" : 1837622
+	},
+	"KOA" : {
+		"full_name" : "Ellison Onizuka Kona International Airport at Keahole",
+		"common_name" : "Ellison Onizuka Kona   at Keahole",
+		"IATA" : "KOA",
+		"location" : "Kailua-Kona, Hawaii",
+		"hub_size" : "medium",
+		"enplanement" : 1829020
+	},
+	"GUM" : {
+		"full_name" : "Antonio B. Won Pat International Airport",
+		"common_name" : "Antonio B. Won Pat",
+		"IATA" : "GUM",
+		"location" : "Hagåtña, Guam",
+		"hub_size" : "medium",
+		"enplanement" : 1736131
+	},
+	"LIH" : {
+		"full_name" : "Lihue Airport",
+		"common_name" : "Lihue",
+		"IATA" : "LIH",
+		"location" : "Lihue, Hawaii",
+		"hub_size" : "medium",
+		"enplanement" : 1644590
+	},
+	"PSP" : {
+		"full_name" : "Palm Springs International Airport",
+		"common_name" : "Palm Springs",
+		"IATA" : "PSP",
+		"location" : "Palm Springs, California",
+		"hub_size" : "medium",
+		"enplanement" : 1625320
+	},
+	"SRQ" : {
+		"full_name" : "Sarasota–Bradenton International Airport",
+		"common_name" : "Sarasota–Bradenton",
+		"IATA" : "SRQ",
+		"location" : "Sarasota, Florida",
+		"hub_size" : "medium",
+		"enplanement" : 1574063
+	},
+	"TUL" : {
+		"full_name" : "Tulsa International Airport",
+		"common_name" : "Tulsa",
+		"IATA" : "TUL",
+		"location" : "Tulsa, Oklahoma",
+		"hub_size" : "medium",
+		"enplanement" : 1482908
+	},
+	"ALB" : {
+		"full_name" : "Albany International Airport",
+		"common_name" : "Albany",
+		"IATA" : "ALB",
+		"location" : "Albany, New York",
+		"hub_size" : "medium",
+		"enplanement" : 1440674
+	},
+	"ELP" : {
+		"full_name" : "El Paso International Airport",
+		"common_name" : "El Paso",
+		"IATA" : "ELP",
+		"location" : "El Paso, Texas",
+		"hub_size" : "medium",
+		"enplanement" : 1438321
+	},
+	"SAV" : {
+		"full_name" : "Savannah/Hilton Head International Airport",
+		"common_name" : "Savannah/Hilton Head",
+		"IATA" : "SAV",
+		"location" : "Savannah, Georgia",
+		"hub_size" : "medium",
+		"enplanement" : 1356660
+	},
+	"DSM" : {
+		"full_name" : "Des Moines International Airport",
+		"common_name" : "Des Moines",
+		"IATA" : "DSM",
+		"location" : "Des Moines, Iowa",
+		"hub_size" : "medium",
+		"enplanement" : 1347876
+	},
+	"TUS" : {
+		"full_name" : "Tucson International Airport",
+		"common_name" : "Tucson",
+		"IATA" : "TUS",
+		"location" : "Tucson, Arizona",
+		"hub_size" : "medium",
+		"enplanement" : 1323536
+	},
+	"ROC" : {
+		"full_name" : "Frederick Douglass/Greater Rochester International Airport",
+		"common_name" : "Frederick Douglass/Greater Rochester",
+		"IATA" : "ROC",
+		"location" : "Rochester, New York",
+		"hub_size" : "medium",
+		"enplanement" : 1281908
+	},
+	"MYR" : {
+		"full_name" : "Myrtle Beach International Airport",
+		"common_name" : "Myrtle Beach",
+		"IATA" : "MYR",
+		"location" : "Myrtle Beach, South Carolina",
+		"hub_size" : "medium",
+		"enplanement" : 1254307
+	},
+	"FAT" : {
+		"full_name" : "Fresno Yosemite International Airport",
+		"common_name" : "Fresno Yosemite",
+		"IATA" : "FAT",
+		"location" : "Fresno, California",
+		"hub_size" : "medium",
+		"enplanement" : 1201789
+	},
+	"SFB" : {
+		"full_name" : "Orlando Sanford International Airport",
+		"common_name" : "Orlando Sanford",
+		"IATA" : "SFB",
+		"location" : "Sanford, Florida",
+		"hub_size" : "medium",
+		"enplanement" : 1174471
+	},
+	"PNS" : {
+		"full_name" : "Pensacola International Airport",
+		"common_name" : "Pensacola",
+		"IATA" : "PNS",
+		"location" : "Pensacola, Florida",
+		"hub_size" : "medium",
+		"enplanement" : 1168575
+	},
+	"SYR" : {
+		"full_name" : "Syracuse Hancock International Airport",
+		"common_name" : "Syracuse Hancock",
+		"IATA" : "SYR",
+		"location" : "Syracuse, New York",
+		"hub_size" : "medium",
+		"enplanement" : 1139568
+	},
+	"GSP" : {
+		"full_name" : "Greenville–Spartanburg International Airport",
+		"common_name" : "Greenville–Spartanburg",
+		"IATA" : "GSP",
+		"location" : "Greenville, South Carolina",
+		"hub_size" : "medium",
+		"enplanement" : 1133012
+	},
+	"AVL" : {
+		"full_name" : "Asheville Regional Airport",
+		"common_name" : "Asheville Regional",
+		"IATA" : "AVL",
+		"location" : "Asheville, North Carolina",
+		"hub_size" : "medium",
+		"enplanement" : 1125935
+	},
+	"BHM" : {
+		"full_name" : "Birmingham–Shuttlesworth International Airport",
+		"common_name" : "Birmingham–Shuttlesworth",
+		"IATA" : "BHM",
+		"location" : "Birmingham, Alabama",
+		"hub_size" : "medium",
+		"enplanement" : 1081328
+	},
+	"TYS" : {
+		"full_name" : "McGhee Tyson Airport",
+		"common_name" : "McGhee Tyson",
+		"IATA" : "TYS",
+		"location" : "Knoxville, Tennessee",
+		"hub_size" : "medium",
+		"enplanement" : 1069565
+	},
+	"PWM" : {
+		"full_name" : "Portland International Jetport",
+		"common_name" : "Portland  Jetport",
+		"IATA" : "PWM",
+		"location" : "Portland, Maine",
+		"hub_size" : "medium",
+		"enplanement" : 1062873
+	},
+	"MSN" : {
+		"full_name" : "Dane County Regional Airport",
+		"common_name" : "Dane County Regional",
+		"IATA" : "MSN",
+		"location" : "Madison, Wisconsin",
+		"hub_size" : "medium",
+		"enplanement" : 1037973
+	},
+	"PIE" : {
+		"full_name" : "St. Pete–Clearwater International Airport",
+		"common_name" : "St. Pete–Clearwater",
+		"IATA" : "PIE",
+		"location" : "St. Petersburg, Florida",
+		"hub_size" : "medium",
+		"enplanement" : 1021007
+	},
+	"VPS" : {
+		"full_name" : "Destin–Fort Walton Beach Airport",
+		"common_name" : "Destin–Fort Walton Beach",
+		"IATA" : "VPS",
+		"location" : "Fort Walton Beach, Florida",
+		"hub_size" : "small",
+		"enplanement" : 973477
+	},
+	"COS" : {
+		"full_name" : "City of Colorado Springs Municipal Airport",
+		"common_name" : "City of Colorado Springs Municipal",
+		"IATA" : "COS",
+		"location" : "Colorado Springs, Colorado",
+		"hub_size" : "small",
+		"enplanement" : 941917
+	},
+	"MHT" : {
+		"full_name" : "Manchester–Boston Regional Airport",
+		"common_name" : "Manchester–Boston Regional",
+		"IATA" : "MHT",
+		"location" : "Manchester, New Hampshire",
+		"hub_size" : "small",
+		"enplanement" : 911225
+	},
+	"GSO" : {
+		"full_name" : "Piedmont Triad International Airport",
+		"common_name" : "Piedmont Triad",
+		"IATA" : "GSO",
+		"location" : "Greensboro, North Carolina",
+		"hub_size" : "small",
+		"enplanement" : 903742
+	},
+	"DAY" : {
+		"full_name" : "James M. Cox Dayton International Airport",
+		"common_name" : "James M. Cox Dayton",
+		"IATA" : "DAY",
+		"location" : "Dayton, Ohio",
+		"hub_size" : "small",
+		"enplanement" : 858022
+	},
+	"LIT" : {
+		"full_name" : "Bill and Hillary Clinton National Airport",
+		"common_name" : "Bill and Hillary Clinton National",
+		"IATA" : "LIT",
+		"location" : "Little Rock, Arkansas",
+		"hub_size" : "small",
+		"enplanement" : 827922
+	},
+	"ICT" : {
+		"full_name" : "Wichita Dwight D. Eisenhower National Airport",
+		"common_name" : "Wichita Dwight D. Eisenhower National",
+		"IATA" : "ICT",
+		"location" : "Wichita, Kansas",
+		"hub_size" : "small",
+		"enplanement" : 812252
+	},
+	"ISP" : {
+		"full_name" : "Long Island MacArthur Airport",
+		"common_name" : "Long Island MacArthur",
+		"IATA" : "ISP",
+		"location" : "Islip, New York",
+		"hub_size" : "small",
+		"enplanement" : 811535
+	},
+	"" : {
+		"full_name" : "Mesa Gateway Airport",
+		"common_name" : "Mesa Gateway",
+		"IATA" : "",
+		"location" : "Mesa, Arizona",
+		"hub_size" : "small",
+		"enplanement" : 795407
+	},
+	"ECP" : {
+		"full_name" : "Northwest Florida Beaches International Airport",
+		"common_name" : "Northwest Florida Beaches",
+		"IATA" : "ECP",
+		"location" : "Panama City, Florida",
+		"hub_size" : "small",
+		"enplanement" : 794846
+	},
+	"HPN" : {
+		"full_name" : "Westchester County Airport",
+		"common_name" : "Westchester County",
+		"IATA" : "HPN",
+		"location" : "White Plains, New York",
+		"hub_size" : "small",
+		"enplanement" : 789283
+	},
+	"PGD" : {
+		"full_name" : "Punta Gorda Airport",
+		"common_name" : "Punta Gorda",
+		"IATA" : "PGD",
+		"location" : "Punta Gorda, Florida",
+		"hub_size" : "small",
+		"enplanement" : 783397
+	},
+	"EYW" : {
+		"full_name" : "Key West International Airport",
+		"common_name" : "Key West",
+		"IATA" : "EYW",
+		"location" : "Key West",
+		"hub_size" : "small",
+		"enplanement" : 741130
+	},
+	"BZN" : {
+		"full_name" : "Bozeman Yellowstone International Airport",
+		"common_name" : "Bozeman Yellowstone",
+		"IATA" : "BZN",
+		"location" : "Bozeman, Montana",
+		"hub_size" : "small",
+		"enplanement" : 670295
+	},
+	"BTV" : {
+		"full_name" : "Patrick Leahy Burlington International Airport",
+		"common_name" : "Patrick Leahy Burlington",
+		"IATA" : "BTV",
+		"location" : "Burlington, Vermont",
+		"hub_size" : "small",
+		"enplanement" : 658879
+	},
+	"LEX" : {
+		"full_name" : "Blue Grass Airport",
+		"common_name" : "Blue Grass",
+		"IATA" : "LEX",
+		"location" : "Lexington, Kentucky",
+		"hub_size" : "small",
+		"enplanement" : 657018
+	},
+	"ILM" : {
+		"full_name" : "Wilmington International Airport",
+		"common_name" : "Wilmington",
+		"IATA" : "ILM",
+		"location" : "Wilmington, North Carolina",
+		"hub_size" : "small",
+		"enplanement" : 655857
+	},
+	"SBA" : {
+		"full_name" : "Santa Barbara Municipal Airport",
+		"common_name" : "Santa Barbara Municipal",
+		"IATA" : "SBA",
+		"location" : "Santa Barbara, California",
+		"hub_size" : "small",
+		"enplanement" : 638799
+	},
+	"MDT" : {
+		"full_name" : "Harrisburg International Airport",
+		"common_name" : "Harrisburg",
+		"IATA" : "MDT",
+		"location" : "Harrisburg, Pennsylvania",
+		"hub_size" : "small",
+		"enplanement" : 636756
+	},
+	"CID" : {
+		"full_name" : "Eastern Iowa Airport",
+		"common_name" : "Eastern Iowa",
+		"IATA" : "CID",
+		"location" : "Cedar Rapids, Iowa",
+		"hub_size" : "small",
+		"enplanement" : 602058
+	},
+	"ITO" : {
+		"full_name" : "Hilo International Airport",
+		"common_name" : "Hilo",
+		"IATA" : "ITO",
+		"location" : "Hilo, Hawaii",
+		"hub_size" : "small",
+		"enplanement" : 599148
+	},
+	"XNA" : {
+		"full_name" : "Northwest Arkansas National Airport",
+		"common_name" : "Northwest Arkansas National",
+		"IATA" : "XNA",
+		"location" : "Fayetteville, Arkansas",
+		"hub_size" : "small",
+		"enplanement" : 598787
+	},
+	"HVN" : {
+		"full_name" : "Tweed-New Haven Airport",
+		"common_name" : "Tweed-New Haven",
+		"IATA" : "HVN",
+		"location" : "New Haven, Connecticut",
+		"hub_size" : "small",
+		"enplanement" : 588000
+	},
+	"ACY" : {
+		"full_name" : "Atlantic City International Airport",
+		"common_name" : "Atlantic City",
+		"IATA" : "ACY",
+		"location" : "Atlantic City, New Jersey",
+		"hub_size" : "small",
+		"enplanement" : 568958
+	},
+	"EUG" : {
+		"full_name" : "Mahlon Sweet Field",
+		"common_name" : "Mahlon Sweet Field",
+		"IATA" : "EUG",
+		"location" : "Eugene, Oregon",
+		"hub_size" : "small",
+		"enplanement" : 566832
+	},
+	"CAE" : {
+		"full_name" : "Columbia Metropolitan Airport",
+		"common_name" : "Columbia Metropolitan",
+		"IATA" : "CAE",
+		"location" : "Columbia, South Carolina",
+		"hub_size" : "small",
+		"enplanement" : 566660
+	},
+	"FSD" : {
+		"full_name" : "Sioux Falls Regional Airport",
+		"common_name" : "Sioux Falls Regional",
+		"IATA" : "FSD",
+		"location" : "Sioux Falls, South Dakota",
+		"hub_size" : "small",
+		"enplanement" : 529895
+	},
+	"SGF" : {
+		"full_name" : "Springfield–Branson National Airport",
+		"common_name" : "Springfield–Branson National",
+		"IATA" : "SGF",
+		"location" : "Springfield, Missouri",
+		"hub_size" : "small",
+		"enplanement" : 523108
+	},
+	"FAR" : {
+		"full_name" : "Hector International Airport",
+		"common_name" : "Hector",
+		"IATA" : "FAR",
+		"location" : "Fargo, North Dakota",
+		"hub_size" : "small",
+		"enplanement" : 516000
+	},
+	"CHA" : {
+		"full_name" : "Chattanooga Metropolitan Airport",
+		"common_name" : "Chattanooga Metropolitan",
+		"IATA" : "CHA",
+		"location" : "Chattanooga, Tennessee",
+		"hub_size" : "small",
+		"enplanement" : 504833
+	},
+	"MAF" : {
+		"full_name" : "Midland International Air and Space Port",
+		"common_name" : "Midland  Air and Space Port",
+		"IATA" : "MAF",
+		"location" : "Midland, Texas",
+		"hub_size" : "small",
+		"enplanement" : 504264
+	},
+	"JAC" : {
+		"full_name" : "Jackson Hole Airport",
+		"common_name" : "Jackson Hole",
+		"IATA" : "JAC",
+		"location" : "Jackson, Wyoming",
+		"hub_size" : "small",
+		"enplanement" : 497548
+	},
+	"MFR" : {
+		"full_name" : "Rogue Valley International–Medford Airport",
+		"common_name" : "Rogue Valley –Medford",
+		"IATA" : "MFR",
+		"location" : "Medford, Oregon",
+		"hub_size" : "small",
+		"enplanement" : 492217
+	},
+	"JAN" : {
+		"full_name" : "Jackson–Medgar Wiley Evers International Airport",
+		"common_name" : "Jackson–Medgar Wiley Evers",
+		"IATA" : "JAN",
+		"location" : "Jackson, Mississippi",
+		"hub_size" : "small",
+		"enplanement" : 489454
+	},
+	"MFE" : {
+		"full_name" : "McAllen Miller International Airport",
+		"common_name" : "McAllen Miller",
+		"IATA" : "MFE",
+		"location" : "McAllen, Texas",
+		"hub_size" : "small",
+		"enplanement" : 477636
+	},
+	"ATW" : {
+		"full_name" : "Appleton International Airport",
+		"common_name" : "Appleton",
+		"IATA" : "ATW",
+		"location" : "Appleton, Wisconsin",
+		"hub_size" : "small",
+		"enplanement" : 474885
+	},
+	"HSV" : {
+		"full_name" : "Huntsville International Airport",
+		"common_name" : "Huntsville",
+		"IATA" : "HSV",
+		"location" : "Huntsville, Alabama",
+		"hub_size" : "small",
+		"enplanement" : 459759
+	},
+	"FAI" : {
+		"full_name" : "Fairbanks International Airport",
+		"common_name" : "Fairbanks",
+		"IATA" : "FAI",
+		"location" : "Fairbanks, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 450694
+	},
+	"CAK" : {
+		"full_name" : "Akron–Canton Airport",
+		"common_name" : "Akron–Canton",
+		"IATA" : "CAK",
+		"location" : "Akron, Ohio",
+		"hub_size" : "small",
+		"enplanement" : 449731
+	},
+	"BIL" : {
+		"full_name" : "Billings Logan International Airport",
+		"common_name" : "Billings Logan",
+		"IATA" : "BIL",
+		"location" : "Billings, Montana",
+		"hub_size" : "small",
+		"enplanement" : 440263
+	},
+	"PSC" : {
+		"full_name" : "Tri-Cities Airport",
+		"common_name" : "Tri-Cities",
+		"IATA" : "PSC",
+		"location" : "Pasco, Washington",
+		"hub_size" : "small",
+		"enplanement" : 438076
+	},
+	"BQN" : {
+		"full_name" : "Rafael Hernández Airport",
+		"common_name" : "Rafael Hernández",
+		"IATA" : "BQN",
+		"location" : "Aguadilla, Puerto Rico",
+		"hub_size" : "small",
+		"enplanement" : 432822
+	},
+	"RDM" : {
+		"full_name" : "Roberts Field",
+		"common_name" : "Roberts Field",
+		"IATA" : "RDM",
+		"location" : "Redmond, Oregon",
+		"hub_size" : "small",
+		"enplanement" : 430562
+	},
+	"MSO" : {
+		"full_name" : "Missoula Montana Airport",
+		"common_name" : "Missoula Montana",
+		"IATA" : "MSO",
+		"location" : "Missoula, Montana",
+		"hub_size" : "small",
+		"enplanement" : 425563
+	},
+	"STT" : {
+		"full_name" : "Cyril E. King Airport",
+		"common_name" : "Cyril E. King",
+		"IATA" : "STT",
+		"location" : "Charlotte Amalie, U.S. Virgin Islands",
+		"hub_size" : "small",
+		"enplanement" : 417871
+	},
+	"LBB" : {
+		"full_name" : "Lubbock Preston Smith International Airport",
+		"common_name" : "Lubbock Preston Smith",
+		"IATA" : "LBB",
+		"location" : "Lubbock, Texas",
+		"hub_size" : "small",
+		"enplanement" : 405157
+	},
+	"TTN" : {
+		"full_name" : "Trenton–Mercer Airport",
+		"common_name" : "Trenton–Mercer",
+		"IATA" : "TTN",
+		"location" : "Trenton, New Jersey",
+		"hub_size" : "small",
+		"enplanement" : 404349
+	},
+	"BTR" : {
+		"full_name" : "Baton Rouge Metropolitan Airport",
+		"common_name" : "Baton Rouge Metropolitan",
+		"IATA" : "BTR",
+		"location" : "Baton Rouge, Louisiana",
+		"hub_size" : "small",
+		"enplanement" : 390107
+	},
+	"ABE" : {
+		"full_name" : "Lehigh Valley International Airport",
+		"common_name" : "Lehigh Valley",
+		"IATA" : "ABE",
+		"location" : "Allentown, Pennsylvania",
+		"hub_size" : "small",
+		"enplanement" : 376468
+	},
+	"FWA" : {
+		"full_name" : "Fort Wayne International Airport",
+		"common_name" : "Fort Wayne",
+		"IATA" : "FWA",
+		"location" : "Fort Wayne, Indiana",
+		"hub_size" : "small",
+		"enplanement" : 372030
+	},
+	"SBN" : {
+		"full_name" : "South Bend International Airport",
+		"common_name" : "South Bend",
+		"IATA" : "SBN",
+		"location" : "South Bend, Indiana",
+		"hub_size" : "small",
+		"enplanement" : 366617
+	},
+	"GPT" : {
+		"full_name" : "Gulfport–Biloxi International Airport",
+		"common_name" : "Gulfport–Biloxi",
+		"IATA" : "GPT",
+		"location" : "Gulfport, Mississippi",
+		"hub_size" : "small",
+		"enplanement" : 359055
+	},
+	"HRL" : {
+		"full_name" : "Valley International Airport",
+		"common_name" : "Valley",
+		"IATA" : "HRL",
+		"location" : "Harlingen, Texas",
+		"hub_size" : "small",
+		"enplanement" : 355190
+	},
+	"SWF" : {
+		"full_name" : "New York Stewart International Airport",
+		"common_name" : "New York Stewart",
+		"IATA" : "SWF",
+		"location" : "Newburgh, New York",
+		"hub_size" : "small",
+		"enplanement" : 354869
+	},
+	"CHO" : {
+		"full_name" : "Charlottesville–Albemarle Airport",
+		"common_name" : "Charlottesville–Albemarle",
+		"IATA" : "CHO",
+		"location" : "Charlottesville, Virginia",
+		"hub_size" : "small",
+		"enplanement" : 352816
+	},
+	"TVC" : {
+		"full_name" : "Cherry Capital Airport",
+		"common_name" : "Cherry Capital",
+		"IATA" : "TVC",
+		"location" : "Traverse City, Michigan",
+		"hub_size" : "small",
+		"enplanement" : 347000
+	},
+	"BGR" : {
+		"full_name" : "Bangor International Airport",
+		"common_name" : "Bangor",
+		"IATA" : "BGR",
+		"location" : "Bangor, Maine",
+		"hub_size" : "small",
+		"enplanement" : 336140
+	},
+	"GRB" : {
+		"full_name" : "Green Bay–Austin Straubel International Airport",
+		"common_name" : "Green Bay–Austin Straubel",
+		"IATA" : "GRB",
+		"location" : "Green Bay, Wisconsin",
+		"hub_size" : "small",
+		"enplanement" : 330478
+	},
+	"ROA" : {
+		"full_name" : "Roanoke–Blacksburg Regional Airport",
+		"common_name" : "Roanoke–Blacksburg Regional",
+		"IATA" : "ROA",
+		"location" : "Roanoke, Virginia",
+		"hub_size" : "small",
+		"enplanement" : 330063
+	},
+	"SBP" : {
+		"full_name" : "San Luis Obispo County Regional Airport",
+		"common_name" : "San Luis Obispo County Regional",
+		"IATA" : "SBP",
+		"location" : "San Luis Obispo, California",
+		"hub_size" : "small",
+		"enplanement" : 324925
+	},
+	"TLH" : {
+		"full_name" : "Tallahassee International Airport",
+		"common_name" : "Tallahassee",
+		"IATA" : "TLH",
+		"location" : "Tallahassee, Florida",
+		"hub_size" : "small",
+		"enplanement" : 319886
+	},
+	"STS" : {
+		"full_name" : "Charles M. Schulz–Sonoma County Airport",
+		"common_name" : "Charles M. Schulz–Sonoma County",
+		"IATA" : "STS",
+		"location" : "Santa Rosa, California",
+		"hub_size" : "small",
+		"enplanement" : 318196
+	},
+	"PIA" : {
+		"full_name" : "Peoria International Airport",
+		"common_name" : "Peoria",
+		"IATA" : "PIA",
+		"location" : "Peoria, Illinois",
+		"hub_size" : "small",
+		"enplanement" : 315482
+	},
+	"BLI" : {
+		"full_name" : "Bellingham International Airport",
+		"common_name" : "Bellingham",
+		"IATA" : "BLI",
+		"location" : "Bellingham, Washington",
+		"hub_size" : "small",
+		"enplanement" : 311234
+	},
+	"JNU" : {
+		"full_name" : "Juneau International Airport",
+		"common_name" : "Juneau",
+		"IATA" : "JNU",
+		"location" : "Juneau, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 306512
+	},
+	"PAE" : {
+		"full_name" : "Paine Field",
+		"common_name" : "Paine Field",
+		"IATA" : "PAE",
+		"location" : "Everett, Washington",
+		"hub_size" : "small",
+		"enplanement" : 306499
+	},
+	"AMA" : {
+		"full_name" : "Rick Husband Amarillo International Airport",
+		"common_name" : "Rick Husband Amarillo",
+		"IATA" : "AMA",
+		"location" : "Amarillo, Texas",
+		"hub_size" : "small",
+		"enplanement" : 303904
+	},
+	"RAP" : {
+		"full_name" : "Rapid City Regional Airport",
+		"common_name" : "Rapid City Regional",
+		"IATA" : "RAP",
+		"location" : "Rapid City, South Dakota",
+		"hub_size" : "small",
+		"enplanement" : 303471
+	},
+	"AGS" : {
+		"full_name" : "Augusta Regional Airport",
+		"common_name" : "Augusta Regional",
+		"IATA" : "AGS",
+		"location" : "Augusta, Georgia",
+		"hub_size" : "small",
+		"enplanement" : 300598
+	},
+	"SHV" : {
+		"full_name" : "Shreveport Regional Airport",
+		"common_name" : "Shreveport Regional",
+		"IATA" : "SHV",
+		"location" : "Shreveport, Louisiana",
+		"hub_size" : "small",
+		"enplanement" : 291136
+	},
+	"CRP" : {
+		"full_name" : "Corpus Christi International Airport",
+		"common_name" : "Corpus Christi",
+		"IATA" : "CRP",
+		"location" : "Corpus Christi, Texas",
+		"hub_size" : "small",
+		"enplanement" : 285195
+	},
+	"FNT" : {
+		"full_name" : "Bishop International Airport",
+		"common_name" : "Bishop",
+		"IATA" : "FNT",
+		"location" : "Flint, Michigan",
+		"hub_size" : "small",
+		"enplanement" : 281000
+	},
+	"DAB" : {
+		"full_name" : "Daytona Beach International Airport",
+		"common_name" : "Daytona Beach",
+		"IATA" : "DAB",
+		"location" : "Daytona Beach, Florida",
+		"hub_size" : "small",
+		"enplanement" : 275166
+	},
+	"MLI" : {
+		"full_name" : "Quad Cities International Airport",
+		"common_name" : "Quad Cities",
+		"IATA" : "MLI",
+		"location" : "Moline, Illinois",
+		"hub_size" : "small",
+		"enplanement" : 272481
+	},
+	"MRY" : {
+		"full_name" : "Monterey Regional Airport",
+		"common_name" : "Monterey Regional",
+		"IATA" : "MRY",
+		"location" : "Monterey, California",
+		"hub_size" : "small",
+		"enplanement" : 259762
+	},
+	"AVP" : {
+		"full_name" : "Wilkes-Barre/Scranton International Airport",
+		"common_name" : "Wilkes-Barre/Scranton",
+		"IATA" : "AVP",
+		"location" : "Wilkes-Barre, Pennsylvania",
+		"hub_size" : "small",
+		"enplanement" : 258628
+	},
+	"BIS" : {
+		"full_name" : "Bismarck Municipal Airport",
+		"common_name" : "Bismarck Municipal",
+		"IATA" : "BIS",
+		"location" : "Bismarck, North Dakota",
+		"hub_size" : "small",
+		"enplanement" : 257000
+	},
+	"GJT" : {
+		"full_name" : "Grand Junction Regional Airport",
+		"common_name" : "Grand Junction Regional",
+		"IATA" : "GJT",
+		"location" : "Grand Junction, Colorado",
+		"hub_size" : "small",
+		"enplanement" : 252290
+	},
+	"ASE" : {
+		"full_name" : "Aspen/Pitkin County Airport",
+		"common_name" : "Aspen/Pitkin County",
+		"IATA" : "ASE",
+		"location" : "Aspen, Colorado",
+		"hub_size" : "small",
+		"enplanement" : 248781
+	},
+	"MOB" : {
+		"full_name" : "Mobile Regional Airport",
+		"common_name" : "Mobile Regional",
+		"IATA" : "MOB",
+		"location" : "Mobile, Alabama",
+		"hub_size" : "small",
+		"enplanement" : 236007
+	},
+	"EVV" : {
+		"full_name" : "Evansville Regional Airport",
+		"common_name" : "Evansville Regional",
+		"IATA" : "EVV",
+		"location" : "Evansville, Indiana",
+		"hub_size" : "small",
+		"enplanement" : 228850
+	},
+	"LFT" : {
+		"full_name" : "Lafayette Regional Airport",
+		"common_name" : "Lafayette Regional",
+		"IATA" : "LFT",
+		"location" : "Lafayette, Louisiana",
+		"hub_size" : "small",
+		"enplanement" : 223529
+	},
+	"STX" : {
+		"full_name" : "Henry E. Rohlsen Airport",
+		"common_name" : "Henry E. Rohlsen",
+		"IATA" : "STX",
+		"location" : "Christiansted, U.S. Virgin Islands",
+		"hub_size" : "small",
+		"enplanement" : 212812
+	},
+	"EGE" : {
+		"full_name" : "Eagle County Regional Airport",
+		"common_name" : "Eagle County Regional",
+		"IATA" : "EGE",
+		"location" : "Eagle, Colorado",
+		"hub_size" : "small",
+		"enplanement" : 201752
+	},
+	"GNV" : {
+		"full_name" : "Gainesville Regional Airport",
+		"common_name" : "Gainesville Regional",
+		"IATA" : "GNV",
+		"location" : "Gainesville, Florida",
+		"hub_size" : "small",
+		"enplanement" : 200444
+	},
+	"DRO" : {
+		"full_name" : "Durango–La Plata County Airport",
+		"common_name" : "Durango–La Plata County",
+		"IATA" : "DRO",
+		"location" : "Durango, Colorado",
+		"hub_size" : "small",
+		"enplanement" : 200245
+	},
+	"TRI" : {
+		"full_name" : "Tri-Cities Airport",
+		"common_name" : "Tri-Cities",
+		"IATA" : "TRI",
+		"location" : "Tri-Cities, Tennessee",
+		"hub_size" : "small",
+		"enplanement" : 200086
+	},
+	"PHF" : {
+		"full_name" : "Newport News/Williamsburg International Airport",
+		"common_name" : "Newport News/Williamsburg",
+		"IATA" : "PHF",
+		"location" : "Newport News, Virginia",
+		"hub_size" : "small",
+		"enplanement" : 195573
+	},
+	"MTJ" : {
+		"full_name" : "Montrose Regional Airport",
+		"common_name" : "Montrose Regional",
+		"IATA" : "MTJ",
+		"location" : "Montrose, Colorado",
+		"hub_size" : "small",
+		"enplanement" : 188355
+	},
+	"RST" : {
+		"full_name" : "Rochester International Airport",
+		"common_name" : "Rochester",
+		"IATA" : "RST",
+		"location" : "Rochester, Minnesota",
+		"hub_size" : "small",
+		"enplanement" : 182509
+	},
+	"MLB" : {
+		"full_name" : "Melbourne Orlando International Airport",
+		"common_name" : "Melbourne Orlando",
+		"IATA" : "MLB",
+		"location" : "Melbourne, Florida",
+		"hub_size" : "small",
+		"enplanement" : 176820
+	},
+	"GTF" : {
+		"full_name" : "Great Falls International Airport",
+		"common_name" : "Great Falls",
+		"IATA" : "GTF",
+		"location" : "Great Falls, Montana",
+		"hub_size" : "small",
+		"enplanement" : 176434
+	},
+	"BFL" : {
+		"full_name" : "Meadows Field",
+		"common_name" : "Meadows Field",
+		"IATA" : "BFL",
+		"location" : "Bakersfield, California",
+		"hub_size" : "small",
+		"enplanement" : 174891
+	},
+	"BRO" : {
+		"full_name" : "Brownsville/South Padre Island International Airport",
+		"common_name" : "Brownsville/South Padre Island",
+		"IATA" : "BRO",
+		"location" : "Brownsville, Texas",
+		"hub_size" : "small",
+		"enplanement" : 167957
+	},
+	"FAY" : {
+		"full_name" : "Fayetteville Regional Airport",
+		"common_name" : "Fayetteville Regional",
+		"IATA" : "FAY",
+		"location" : "Fayetteville, North Carolina",
+		"hub_size" : "small",
+		"enplanement" : 167572
+	},
+	"BMI" : {
+		"full_name" : "Central Illinois Regional Airport at Bloomington-Normal",
+		"common_name" : "Central Illinois Regional  at Bloomington-Normal",
+		"IATA" : "BMI",
+		"location" : "Bloomington, Illinois",
+		"hub_size" : "small",
+		"enplanement" : 164672
+	},
+	"CRW" : {
+		"full_name" : "Yeager Airport",
+		"common_name" : "Yeager",
+		"IATA" : "CRW",
+		"location" : "Charleston, West Virginia",
+		"hub_size" : "small",
+		"enplanement" : 164240
+	},
+	"IDA" : {
+		"full_name" : "Idaho Falls Regional Airport",
+		"common_name" : "Idaho Falls Regional",
+		"IATA" : "IDA",
+		"location" : "Idaho Falls, Idaho",
+		"hub_size" : "small",
+		"enplanement" : 161019
+	},
+	"LCK" : {
+		"full_name" : "Rickenbacker International Airport",
+		"common_name" : "Rickenbacker",
+		"IATA" : "LCK",
+		"location" : "Columbus, Ohio",
+		"hub_size" : "small",
+		"enplanement" : 154475
+	},
+	"SGU" : {
+		"full_name" : "St. George Regional Airport",
+		"common_name" : "St. George Regional",
+		"IATA" : "SGU",
+		"location" : "St. George, Utah",
+		"hub_size" : "small",
+		"enplanement" : 153200
+	},
+	"LBE" : {
+		"full_name" : "Arnold Palmer Regional Airport",
+		"common_name" : "Arnold Palmer Regional",
+		"IATA" : "LBE",
+		"location" : "Latrobe, Pennsylvania",
+		"hub_size" : "small",
+		"enplanement" : 151410
+	},
+	"LNK" : {
+		"full_name" : "Lincoln Airport",
+		"common_name" : "Lincoln",
+		"IATA" : "LNK",
+		"location" : "Lincoln, Nebraska",
+		"hub_size" : "small",
+		"enplanement" : 150214
+	},
+	"HDN" : {
+		"full_name" : "Yampa Valley Airport",
+		"common_name" : "Yampa Valley",
+		"IATA" : "HDN",
+		"location" : "Hayden, Colorado",
+		"hub_size" : "small",
+		"enplanement" : 150142
+	},
+	"BLV" : {
+		"full_name" : "MidAmerica St. Louis Airport",
+		"common_name" : "MidAmerica St. Louis",
+		"IATA" : "BLV",
+		"location" : "Belleville, Illinois",
+		"hub_size" : "small",
+		"enplanement" : 147421
+	},
+	"MOT" : {
+		"full_name" : "Minot International Airport",
+		"common_name" : "Minot",
+		"IATA" : "MOT",
+		"location" : "Minot, North Dakota",
+		"hub_size" : "small",
+		"enplanement" : 146000
+	},
+	"GRK" : {
+		"full_name" : "Killeen Regional Airport",
+		"common_name" : "Killeen Regional",
+		"IATA" : "GRK",
+		"location" : "Killeen, Texas",
+		"hub_size" : "small",
+		"enplanement" : 142253
+	},
+	"PSE" : {
+		"full_name" : "Mercedita Airport",
+		"common_name" : "Mercedita",
+		"IATA" : "PSE",
+		"location" : "Ponce, Puerto Rico",
+		"hub_size" : "small",
+		"enplanement" : 142076
+	},
+	"AEX" : {
+		"full_name" : "Alexandria International Airport",
+		"common_name" : "Alexandria",
+		"IATA" : "AEX",
+		"location" : "Alexandria, Louisiana",
+		"hub_size" : "small",
+		"enplanement" : 141173
+	},
+	"ELM" : {
+		"full_name" : "Elmira/Corning Regional Airport",
+		"common_name" : "Elmira/Corning Regional",
+		"IATA" : "ELM",
+		"location" : "Elmira, New York",
+		"hub_size" : "small",
+		"enplanement" : 141075
+	},
+	"DLH" : {
+		"full_name" : "Duluth International Airport",
+		"common_name" : "Duluth",
+		"IATA" : "DLH",
+		"location" : "Duluth, Minnesota",
+		"hub_size" : "small",
+		"enplanement" : 136806
+	},
+	"OAJ" : {
+		"full_name" : "Albert J. Ellis Airport",
+		"common_name" : "Albert J. Ellis",
+		"IATA" : "OAJ",
+		"location" : "Jacksonville, North Carolina",
+		"hub_size" : "small",
+		"enplanement" : 133839
+	},
+	"ILG" : {
+		"full_name" : "Wilmington Airport",
+		"common_name" : "Wilmington",
+		"IATA" : "ILG",
+		"location" : "Wilmington, Delaware",
+		"hub_size" : "small",
+		"enplanement" : 133377
+	},
+	"MGM" : {
+		"full_name" : "Montgomery Regional Airport",
+		"common_name" : "Montgomery Regional",
+		"IATA" : "MGM",
+		"location" : "Montgomery, Alabama",
+		"hub_size" : "small",
+		"enplanement" : 129033
+	},
+	"ACK" : {
+		"full_name" : "Nantucket Memorial Airport",
+		"common_name" : "Nantucket Memorial",
+		"IATA" : "ACK",
+		"location" : "Nantucket",
+		"hub_size" : "small",
+		"enplanement" : 126610
+	},
+	"TOL" : {
+		"full_name" : "Eugene F. Kranz Toledo Express Airport",
+		"common_name" : "Eugene F. Kranz Toledo Express",
+		"IATA" : "TOL",
+		"location" : "Toledo, Ohio",
+		"hub_size" : "small",
+		"enplanement" : 123541
+	},
+	"RFD" : {
+		"full_name" : "Chicago Rockford International Airport",
+		"common_name" : "Chicago Rockford",
+		"IATA" : "RFD",
+		"location" : "Rockford, Illinois",
+		"hub_size" : "small",
+		"enplanement" : 120494
+	},
+	"COU" : {
+		"full_name" : "Columbia Regional Airport",
+		"common_name" : "Columbia Regional",
+		"IATA" : "COU",
+		"location" : "Columbia, Missouri",
+		"hub_size" : "small",
+		"enplanement" : 120235
+	},
+	"PBG" : {
+		"full_name" : "Plattsburgh International Airport",
+		"common_name" : "Plattsburgh",
+		"IATA" : "PBG",
+		"location" : "Plattsburgh (city), New York",
+		"hub_size" : "small",
+		"enplanement" : 119783
+	},
+	"IAG" : {
+		"full_name" : "Niagara Falls International Airport",
+		"common_name" : "Niagara Falls",
+		"IATA" : "IAG",
+		"location" : "Niagara Falls, New York",
+		"hub_size" : "small",
+		"enplanement" : 119182
+	},
+	"USA" : {
+		"full_name" : "Concord–Padgett Regional Airport",
+		"common_name" : "Concord–Padgett Regional",
+		"IATA" : "USA",
+		"location" : "Concord, North Carolina",
+		"hub_size" : "small",
+		"enplanement" : 119069
+	},
+	"PVU" : {
+		"full_name" : "Provo Municipal Airport",
+		"common_name" : "Provo Municipal",
+		"IATA" : "PVU",
+		"location" : "Provo, Utah",
+		"hub_size" : "small",
+		"enplanement" : 118740
+	},
+	"ACV" : {
+		"full_name" : "California Redwood Coast–Humboldt County Airport",
+		"common_name" : "California Redwood Coast–Humboldt County",
+		"IATA" : "ACV",
+		"location" : "Arcata, California",
+		"hub_size" : "small",
+		"enplanement" : 117972
+	},
+	"KTN" : {
+		"full_name" : "Ketchikan International Airport",
+		"common_name" : "Ketchikan",
+		"IATA" : "KTN",
+		"location" : "Ketchikan, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 117728
+	},
+	"SAF" : {
+		"full_name" : "Santa Fe Municipal Airport",
+		"common_name" : "Santa Fe Municipal",
+		"IATA" : "SAF",
+		"location" : "Santa Fe, New Mexico",
+		"hub_size" : "small",
+		"enplanement" : 115787
+	},
+	"FLG" : {
+		"full_name" : "Flagstaff Pulliam Airport",
+		"common_name" : "Flagstaff Pulliam",
+		"IATA" : "FLG",
+		"location" : "Flagstaff, Arizona",
+		"hub_size" : "small",
+		"enplanement" : 115596
+	},
+	"HLN" : {
+		"full_name" : "Helena Regional Airport",
+		"common_name" : "Helena Regional",
+		"IATA" : "HLN",
+		"location" : "Helena, Montana",
+		"hub_size" : "small",
+		"enplanement" : 115438
+	},
+	"LRD" : {
+		"full_name" : "Laredo International Airport",
+		"common_name" : "Laredo",
+		"IATA" : "LRD",
+		"location" : "Laredo, Texas",
+		"hub_size" : "small",
+		"enplanement" : 108992
+	},
+	"MLU" : {
+		"full_name" : "Monroe Regional Airport",
+		"common_name" : "Monroe Regional",
+		"IATA" : "MLU",
+		"location" : "Monroe, Louisiana",
+		"hub_size" : "small",
+		"enplanement" : 107107
+	},
+	"BET" : {
+		"full_name" : "Bethel Airport",
+		"common_name" : "Bethel",
+		"IATA" : "BET",
+		"location" : "Bethel, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 105877
+	},
+	"LAN" : {
+		"full_name" : "Capital Region International Airport",
+		"common_name" : "Capital Region",
+		"IATA" : "LAN",
+		"location" : "Lansing, Michigan",
+		"hub_size" : "small",
+		"enplanement" : 102000
+	},
+	"ITH" : {
+		"full_name" : "Ithaca Tompkins International Airport",
+		"common_name" : "Ithaca Tompkins",
+		"IATA" : "ITH",
+		"location" : "Ithaca, New York",
+		"hub_size" : "small",
+		"enplanement" : 99070
+	},
+	"ERI" : {
+		"full_name" : "Erie International Airport",
+		"common_name" : "Erie",
+		"IATA" : "ERI",
+		"location" : "Erie, Pennsylvania",
+		"hub_size" : "small",
+		"enplanement" : 95342
+	},
+	"SUN" : {
+		"full_name" : "Friedman Memorial Airport",
+		"common_name" : "Friedman Memorial",
+		"IATA" : "SUN",
+		"location" : "Hailey, Idaho",
+		"hub_size" : "small",
+		"enplanement" : 93280
+	},
+	"PSM" : {
+		"full_name" : "Portsmouth International Airport at Pease",
+		"common_name" : "Portsmouth   at Pease",
+		"IATA" : "PSM",
+		"location" : "Portsmouth, New Hampshire",
+		"hub_size" : "small",
+		"enplanement" : 92836
+	},
+	"MBS" : {
+		"full_name" : "MBS International Airport",
+		"common_name" : "MBS",
+		"IATA" : "MBS",
+		"location" : "Saginaw, Michigan",
+		"hub_size" : "small",
+		"enplanement" : 92000
+	},
+	"GFK" : {
+		"full_name" : "Grand Forks International Airport",
+		"common_name" : "Grand Forks",
+		"IATA" : "GFK",
+		"location" : "Grand Forks, North Dakota",
+		"hub_size" : "small",
+		"enplanement" : 92000
+	},
+	"HTS" : {
+		"full_name" : "Tri-State Airport",
+		"common_name" : "Tri-State",
+		"IATA" : "HTS",
+		"location" : "Huntington, West Virginia",
+		"hub_size" : "small",
+		"enplanement" : 91091
+	},
+	"RDD" : {
+		"full_name" : "Redding Regional Airport",
+		"common_name" : "Redding Regional",
+		"IATA" : "RDD",
+		"location" : "Redding, California",
+		"hub_size" : "small",
+		"enplanement" : 87670
+	},
+	"AZO" : {
+		"full_name" : "Kalamazoo/Battle Creek International Airport",
+		"common_name" : "Kalamazoo/Battle Creek",
+		"IATA" : "AZO",
+		"location" : "Kalamazoo, Michigan",
+		"hub_size" : "small",
+		"enplanement" : 87000
+	},
+	"CWA" : {
+		"full_name" : "Central Wisconsin Airport",
+		"common_name" : "Central Wisconsin",
+		"IATA" : "CWA",
+		"location" : "Mosinee, Wisconsin",
+		"hub_size" : "small",
+		"enplanement" : 84775
+	},
+	"LYH" : {
+		"full_name" : "Lynchburg Regional Airport",
+		"common_name" : "Lynchburg Regional",
+		"IATA" : "LYH",
+		"location" : "Lynchburg, Virginia",
+		"hub_size" : "small",
+		"enplanement" : 83392
+	},
+	"XWA" : {
+		"full_name" : "Williston Basin International Airport",
+		"common_name" : "Williston Basin",
+		"IATA" : "XWA",
+		"location" : "Williston, North Dakota",
+		"hub_size" : "small",
+		"enplanement" : 82000
+	},
+	"SIT" : {
+		"full_name" : "Sitka Rocky Gutierrez Airport",
+		"common_name" : "Sitka Rocky Gutierrez",
+		"IATA" : "SIT",
+		"location" : "Sitka, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 80366
+	},
+	"MKK" : {
+		"full_name" : "Molokai Airport",
+		"common_name" : "Molokai",
+		"IATA" : "MKK",
+		"location" : "Kaunakakai, Hawaii",
+		"hub_size" : "small",
+		"enplanement" : 79336
+	},
+	"ABI" : {
+		"full_name" : "Abilene Regional Airport",
+		"common_name" : "Abilene Regional",
+		"IATA" : "ABI",
+		"location" : "Abilene, Texas",
+		"hub_size" : "small",
+		"enplanement" : 75402
+	},
+	"ADQ" : {
+		"full_name" : "Kodiak Airport",
+		"common_name" : "Kodiak",
+		"IATA" : "ADQ",
+		"location" : "Kodiak, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 72905
+	},
+	"MHK" : {
+		"full_name" : "Manhattan Regional Airport",
+		"common_name" : "Manhattan Regional",
+		"IATA" : "MHK",
+		"location" : "Manhattan, Kansas",
+		"hub_size" : "small",
+		"enplanement" : 72883
+	},
+	"ORH" : {
+		"full_name" : "Worcester Regional Airport",
+		"common_name" : "Worcester Regional",
+		"IATA" : "ORH",
+		"location" : "Worcester, Massachusetts",
+		"hub_size" : "small",
+		"enplanement" : 71631
+	},
+	"CMI" : {
+		"full_name" : "University of Illinois - Willard Airport",
+		"common_name" : "University of Illinois - Willard",
+		"IATA" : "CMI",
+		"location" : "Champaign, Illinois",
+		"hub_size" : "small",
+		"enplanement" : 70184
+	},
+	"ENA" : {
+		"full_name" : "Kenai Municipal Airport",
+		"common_name" : "Kenai Municipal",
+		"IATA" : "ENA",
+		"location" : "Kenai, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 68044
+	},
+	"SCK" : {
+		"full_name" : "Stockton Metropolitan Airport",
+		"common_name" : "Stockton Metropolitan",
+		"IATA" : "SCK",
+		"location" : "Stockton, California",
+		"hub_size" : "small",
+		"enplanement" : 67688
+	},
+	"CLL" : {
+		"full_name" : "Easterwood Field",
+		"common_name" : "Easterwood Field",
+		"IATA" : "CLL",
+		"location" : "College Station, Texas",
+		"hub_size" : "small",
+		"enplanement" : 67033
+	},
+	"CPR" : {
+		"full_name" : "Casper–Natrona County International Airport",
+		"common_name" : "Casper–Natrona County",
+		"IATA" : "CPR",
+		"location" : "Casper, Wyoming",
+		"hub_size" : "small",
+		"enplanement" : 66629
+	},
+	"SCC" : {
+		"full_name" : "Deadhorse Airport",
+		"common_name" : "Deadhorse",
+		"IATA" : "SCC",
+		"location" : "Deadhorse, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 64245
+	},
+	"PUW" : {
+		"full_name" : "Pullman–Moscow Regional Airport",
+		"common_name" : "Pullman–Moscow Regional",
+		"IATA" : "PUW",
+		"location" : "Pullman, Washington",
+		"hub_size" : "small",
+		"enplanement" : 63835
+	},
+	"GRI" : {
+		"full_name" : "Central Nebraska Regional Airport",
+		"common_name" : "Central Nebraska Regional",
+		"IATA" : "GRI",
+		"location" : "Grand Island, Nebraska",
+		"hub_size" : "small",
+		"enplanement" : 63298
+	},
+	"SJT" : {
+		"full_name" : "San Angelo Regional Airport",
+		"common_name" : "San Angelo Regional",
+		"IATA" : "SJT",
+		"location" : "San Angelo, Texas",
+		"hub_size" : "small",
+		"enplanement" : 60115
+	},
+	"EWN" : {
+		"full_name" : "Coastal Carolina Regional Airport",
+		"common_name" : "Coastal Carolina Regional",
+		"IATA" : "EWN",
+		"location" : "New Bern, North Carolina",
+		"hub_size" : "small",
+		"enplanement" : 59159
+	},
+	"LCH" : {
+		"full_name" : "Lake Charles Regional Airport",
+		"common_name" : "Lake Charles Regional",
+		"IATA" : "LCH",
+		"location" : "Lake Charles, Louisiana",
+		"hub_size" : "small",
+		"enplanement" : 58122
+	},
+	"LWS" : {
+		"full_name" : "Lewiston–Nez Perce County Airport",
+		"common_name" : "Lewiston–Nez Perce County",
+		"IATA" : "LWS",
+		"location" : "Lewiston, Idaho",
+		"hub_size" : "small",
+		"enplanement" : 57957
+	},
+	"ROW" : {
+		"full_name" : "Roswell Air Center",
+		"common_name" : "Roswell Air Center",
+		"IATA" : "ROW",
+		"location" : "Roswell, New Mexico",
+		"hub_size" : "small",
+		"enplanement" : 56632
+	},
+	"MVY" : {
+		"full_name" : "Martha's Vineyard Airport",
+		"common_name" : "Martha's Vineyard",
+		"IATA" : "MVY",
+		"location" : "Vineyard Haven, Massachusetts",
+		"hub_size" : "small",
+		"enplanement" : 52605
+	},
+	"SPI" : {
+		"full_name" : "Abraham Lincoln Capital Airport",
+		"common_name" : "Abraham Lincoln Capital",
+		"IATA" : "SPI",
+		"location" : "Springfield, Illinois",
+		"hub_size" : "small",
+		"enplanement" : 50513
+	},
+	"CSG" : {
+		"full_name" : "Columbus Airport",
+		"common_name" : "Columbus",
+		"IATA" : "CSG",
+		"location" : "Columbus, Georgia",
+		"hub_size" : "small",
+		"enplanement" : 49354
+	},
+	"LAW" : {
+		"full_name" : "Lawton–Fort Sill Regional Airport",
+		"common_name" : "Lawton–Fort Sill Regional",
+		"IATA" : "LAW",
+		"location" : "Lawton, Oklahoma",
+		"hub_size" : "small",
+		"enplanement" : 48086
+	},
+	"ACT" : {
+		"full_name" : "Waco Regional Airport",
+		"common_name" : "Waco Regional",
+		"IATA" : "ACT",
+		"location" : "Waco, Texas",
+		"hub_size" : "small",
+		"enplanement" : 47541
+	},
+	"SBY" : {
+		"full_name" : "Salisbury Regional Airport",
+		"common_name" : "Salisbury Regional",
+		"IATA" : "SBY",
+		"location" : "Salisbury, Maryland",
+		"hub_size" : "small",
+		"enplanement" : 47275
+	},
+	"TWF" : {
+		"full_name" : "Magic Valley Regional Airport",
+		"common_name" : "Magic Valley Regional",
+		"IATA" : "TWF",
+		"location" : "Twin Falls, Idaho",
+		"hub_size" : "small",
+		"enplanement" : 47084
+	},
+	"OME" : {
+		"full_name" : "Nome Airport",
+		"common_name" : "Nome",
+		"IATA" : "OME",
+		"location" : "Nome, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 46645
+	},
+	"CKB" : {
+		"full_name" : "North Central West Virginia Airport",
+		"common_name" : "North Central West Virginia",
+		"IATA" : "CKB",
+		"location" : "Clarksburg, West Virginia",
+		"hub_size" : "small",
+		"enplanement" : 46508
+	},
+	"OTZ" : {
+		"full_name" : "Ralph Wien Memorial Airport",
+		"common_name" : "Ralph Wien Memorial",
+		"IATA" : "OTZ",
+		"location" : "Kotzebue, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 46305
+	},
+	"PIH" : {
+		"full_name" : "Pocatello Regional Airport",
+		"common_name" : "Pocatello Regional",
+		"IATA" : "PIH",
+		"location" : "Pocatello, Idaho",
+		"hub_size" : "small",
+		"enplanement" : 46303
+	},
+	"GTR" : {
+		"full_name" : "Golden Triangle Regional Airport",
+		"common_name" : "Golden Triangle Regional",
+		"IATA" : "GTR",
+		"location" : "Columbus, Mississippi",
+		"hub_size" : "small",
+		"enplanement" : 46246
+	},
+	"FSM" : {
+		"full_name" : "Fort Smith Regional Airport",
+		"common_name" : "Fort Smith Regional",
+		"IATA" : "FSM",
+		"location" : "Fort Smith, Arkansas",
+		"hub_size" : "small",
+		"enplanement" : 45369
+	},
+	"SUX" : {
+		"full_name" : "Sioux Gateway Airport",
+		"common_name" : "Sioux Gateway",
+		"IATA" : "SUX",
+		"location" : "Sioux City, Iowa",
+		"hub_size" : "small",
+		"enplanement" : 44779
+	},
+	"VLD" : {
+		"full_name" : "Valdosta Regional Airport",
+		"common_name" : "Valdosta Regional",
+		"IATA" : "VLD",
+		"location" : "Valdosta, Georgia",
+		"hub_size" : "small",
+		"enplanement" : 44609
+	},
+	"FLO" : {
+		"full_name" : "Florence Regional Airport",
+		"common_name" : "Florence Regional",
+		"IATA" : "FLO",
+		"location" : "Florence, South Carolina",
+		"hub_size" : "small",
+		"enplanement" : 44333
+	},
+	"LSE" : {
+		"full_name" : "La Crosse Regional Airport",
+		"common_name" : "La Crosse Regional",
+		"IATA" : "LSE",
+		"location" : "La Crosse",
+		"hub_size" : "small",
+		"enplanement" : 43681
+	},
+	"LNY" : {
+		"full_name" : "Lanai Airport",
+		"common_name" : "Lanai",
+		"IATA" : "LNY",
+		"location" : "Lanai City, Hawaii",
+		"hub_size" : "small",
+		"enplanement" : 42061
+	},
+	"BQK" : {
+		"full_name" : "Brunswick Golden Isles Airport",
+		"common_name" : "Brunswick Golden Isles",
+		"IATA" : "BQK",
+		"location" : "Brunswick, Georgia",
+		"hub_size" : "small",
+		"enplanement" : 40443
+	},
+	"JLN" : {
+		"full_name" : "Joplin Regional Airport",
+		"common_name" : "Joplin Regional",
+		"IATA" : "JLN",
+		"location" : "Joplin, Missouri",
+		"hub_size" : "small",
+		"enplanement" : 40013
+	},
+	"TYR" : {
+		"full_name" : "Tyler Pounds Regional Airport",
+		"common_name" : "Tyler Pounds Regional",
+		"IATA" : "TYR",
+		"location" : "Tyler, Texas",
+		"hub_size" : "small",
+		"enplanement" : 39943
+	},
+	"ABY" : {
+		"full_name" : "Southwest Georgia Regional Airport",
+		"common_name" : "Southwest Georgia Regional",
+		"IATA" : "ABY",
+		"location" : "Albany, Georgia",
+		"hub_size" : "small",
+		"enplanement" : 39422
+	},
+	"DBQ" : {
+		"full_name" : "Dubuque Regional Airport",
+		"common_name" : "Dubuque Regional",
+		"IATA" : "DBQ",
+		"location" : "Dubuque, Iowa",
+		"hub_size" : "small",
+		"enplanement" : 38831
+	},
+	"GUC" : {
+		"full_name" : "Gunnison–Crested Butte Regional Airport",
+		"common_name" : "Gunnison–Crested Butte Regional",
+		"IATA" : "GUC",
+		"location" : "Gunnison, Colorado",
+		"hub_size" : "small",
+		"enplanement" : 38783
+	},
+	"COD" : {
+		"full_name" : "Yellowstone Regional Airport",
+		"common_name" : "Yellowstone Regional",
+		"IATA" : "COD",
+		"location" : "Cody, Wyoming",
+		"hub_size" : "small",
+		"enplanement" : 37349
+	},
+	"DHN" : {
+		"full_name" : "Dothan Regional Airport",
+		"common_name" : "Dothan Regional",
+		"IATA" : "DHN",
+		"location" : "Dothan, Alabama",
+		"hub_size" : "small",
+		"enplanement" : 37047
+	},
+	"BGM" : {
+		"full_name" : "Greater Binghamton Airport",
+		"common_name" : "Greater Binghamton",
+		"IATA" : "BGM",
+		"location" : "Binghamton, New York",
+		"hub_size" : "small",
+		"enplanement" : 36382
+	},
+	"HHH" : {
+		"full_name" : "Hilton Head Airport",
+		"common_name" : "Hilton Head",
+		"IATA" : "HHH",
+		"location" : "Hilton Head Island, South Carolina",
+		"hub_size" : "small",
+		"enplanement" : 36308
+	},
+	"PGV" : {
+		"full_name" : "Pitt–Greenville Airport",
+		"common_name" : "Pitt–Greenville",
+		"IATA" : "PGV",
+		"location" : "Greenville, North Carolina",
+		"hub_size" : "small",
+		"enplanement" : 34824
+	},
+	"HGR" : {
+		"full_name" : "Hagerstown Regional Airport",
+		"common_name" : "Hagerstown Regional",
+		"IATA" : "HGR",
+		"location" : "Hagerstown, Maryland",
+		"hub_size" : "small",
+		"enplanement" : 32197
+	},
+	"SPS" : {
+		"full_name" : "Wichita Falls Municipal Airport",
+		"common_name" : "Wichita Falls Municipal",
+		"IATA" : "SPS",
+		"location" : "Wichita Falls, Texas",
+		"hub_size" : "small",
+		"enplanement" : 32038
+	},
+	"BRW" : {
+		"full_name" : "Wiley Post–Will Rogers Memorial Airport",
+		"common_name" : "Wiley Post–Will Rogers Memorial",
+		"IATA" : "BRW",
+		"location" : "Utqiagvik, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 31898
+	},
+	"HOM" : {
+		"full_name" : "Homer Airport",
+		"common_name" : "Homer",
+		"IATA" : "HOM",
+		"location" : "Homer, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 30972
+	},
+	"PIR" : {
+		"full_name" : "Pierre Regional Airport",
+		"common_name" : "Pierre Regional",
+		"IATA" : "PIR",
+		"location" : "Pierre, South Dakota",
+		"hub_size" : "small",
+		"enplanement" : 30124
+	},
+	"BJI" : {
+		"full_name" : "Bemidji Regional Airport",
+		"common_name" : "Bemidji Regional",
+		"IATA" : "BJI",
+		"location" : "Bemidji, Minnesota",
+		"hub_size" : "small",
+		"enplanement" : 30081
+	},
+	"AKN" : {
+		"full_name" : "King Salmon Airport",
+		"common_name" : "King Salmon",
+		"IATA" : "AKN",
+		"location" : "King Salmon, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 29914
+	},
+	"OGD" : {
+		"full_name" : "Ogden–Hinckley Airport",
+		"common_name" : "Ogden–Hinckley",
+		"IATA" : "OGD",
+		"location" : "Ogden, Utah",
+		"hub_size" : "small",
+		"enplanement" : 29857
+	},
+	"VQS" : {
+		"full_name" : "Antonio Rivera Rodríguez Airport",
+		"common_name" : "Antonio Rivera Rodríguez",
+		"IATA" : "VQS",
+		"location" : "Vieques, Puerto Rico",
+		"hub_size" : "small",
+		"enplanement" : 28961
+	},
+	"ABR" : {
+		"full_name" : "Aberdeen Regional Airport",
+		"common_name" : "Aberdeen Regional",
+		"IATA" : "ABR",
+		"location" : "Aberdeen, South Dakota",
+		"hub_size" : "small",
+		"enplanement" : 28404
+	},
+	"HYA" : {
+		"full_name" : "Cape Cod Gateway Airport",
+		"common_name" : "Cape Cod Gateway",
+		"IATA" : "HYA",
+		"location" : "Hyannis, Massachusetts",
+		"hub_size" : "small",
+		"enplanement" : 28341
+	},
+	"EAT" : {
+		"full_name" : "Pangborn Memorial Airport",
+		"common_name" : "Pangborn Memorial",
+		"IATA" : "EAT",
+		"location" : "Wenatchee, Washington",
+		"hub_size" : "small",
+		"enplanement" : 27655
+	},
+	"BFI" : {
+		"full_name" : "King County International Airport",
+		"common_name" : "King County",
+		"IATA" : "BFI",
+		"location" : "Seattle",
+		"hub_size" : "small",
+		"enplanement" : 27446
+	},
+	"SWO" : {
+		"full_name" : "Stillwater Regional Airport",
+		"common_name" : "Stillwater Regional",
+		"IATA" : "SWO",
+		"location" : "Stillwater, Oklahoma",
+		"hub_size" : "small",
+		"enplanement" : 27321
+	},
+	"TXK" : {
+		"full_name" : "Texarkana Regional Airport",
+		"common_name" : "Texarkana Regional",
+		"IATA" : "TXK",
+		"location" : "Texarkana, Arkansas",
+		"hub_size" : "small",
+		"enplanement" : 26888
+	},
+	"ALW" : {
+		"full_name" : "Walla Walla Regional Airport",
+		"common_name" : "Walla Walla Regional",
+		"IATA" : "ALW",
+		"location" : "Walla Walla, Washington",
+		"hub_size" : "small",
+		"enplanement" : 26465
+	},
+	"DLG" : {
+		"full_name" : "Dillingham Airport",
+		"common_name" : "Dillingham",
+		"IATA" : "DLG",
+		"location" : "Dillingham, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 25988
+	},
+	"EAU" : {
+		"full_name" : "Chippewa Valley Regional Airport",
+		"common_name" : "Chippewa Valley Regional",
+		"IATA" : "EAU",
+		"location" : "Eau Claire, Wisconsin",
+		"hub_size" : "small",
+		"enplanement" : 25856
+	},
+	"BTM" : {
+		"full_name" : "Bert Mooney Airport",
+		"common_name" : "Bert Mooney",
+		"IATA" : "BTM",
+		"location" : "Butte, Montana",
+		"hub_size" : "small",
+		"enplanement" : 25803
+	},
+	"GCK" : {
+		"full_name" : "Garden City Regional Airport",
+		"common_name" : "Garden City Regional",
+		"IATA" : "GCK",
+		"location" : "Garden City, Kansas",
+		"hub_size" : "small",
+		"enplanement" : 25243
+	},
+	"YKM" : {
+		"full_name" : "Yakima Air Terminal",
+		"common_name" : "Yakima Air Terminal",
+		"IATA" : "YKM",
+		"location" : "Yakima, Washington",
+		"hub_size" : "small",
+		"enplanement" : 24044
+	},
+	"DIK" : {
+		"full_name" : "Dickinson Theodore Roosevelt Regional Airport",
+		"common_name" : "Dickinson Theodore Roosevelt Regional",
+		"IATA" : "DIK",
+		"location" : "Dickinson, North Dakota",
+		"hub_size" : "small",
+		"enplanement" : 24000
+	},
+	"GGG" : {
+		"full_name" : "East Texas Regional Airport",
+		"common_name" : "East Texas Regional",
+		"IATA" : "GGG",
+		"location" : "Longview, Texas",
+		"hub_size" : "small",
+		"enplanement" : 23942
+	},
+	"SHR" : {
+		"full_name" : "Sheridan County Airport",
+		"common_name" : "Sheridan County",
+		"IATA" : "SHR",
+		"location" : "Sheridan, Wyoming",
+		"hub_size" : "small",
+		"enplanement" : 23920
+	},
+	"ALO" : {
+		"full_name" : "Waterloo Regional Airport",
+		"common_name" : "Waterloo Regional",
+		"IATA" : "ALO",
+		"location" : "Waterloo, Iowa",
+		"hub_size" : "small",
+		"enplanement" : 23892
+	},
+	"GCC" : {
+		"full_name" : "Gillette–Campbell County Airport",
+		"common_name" : "Gillette–Campbell County",
+		"IATA" : "GCC",
+		"location" : "Gillette, Wyoming",
+		"hub_size" : "small",
+		"enplanement" : 23873
+	},
+	"ART" : {
+		"full_name" : "Watertown International Airport",
+		"common_name" : "Watertown",
+		"IATA" : "ART",
+		"location" : "Watertown (city), New York",
+		"hub_size" : "small",
+		"enplanement" : 23844
+	},
+	"PRC" : {
+		"full_name" : "Prescott Municipal Airport",
+		"common_name" : "Prescott Municipal",
+		"IATA" : "PRC",
+		"location" : "Prescott, Arizona",
+		"hub_size" : "small",
+		"enplanement" : 23598
+	},
+	"HOB" : {
+		"full_name" : "Lea County Regional Airport",
+		"common_name" : "Lea County Regional",
+		"IATA" : "HOB",
+		"location" : "Hobbs, New Mexico",
+		"hub_size" : "small",
+		"enplanement" : 23475
+	},
+	"OGS" : {
+		"full_name" : "Ogdensburg International Airport",
+		"common_name" : "Ogdensburg",
+		"IATA" : "OGS",
+		"location" : "Ogdensburg, New York",
+		"hub_size" : "small",
+		"enplanement" : 23448
+	},
+	"CMX" : {
+		"full_name" : "Houghton County Memorial Airport",
+		"common_name" : "Houghton County Memorial",
+		"IATA" : "CMX",
+		"location" : "Hancock, Michigan",
+		"hub_size" : "small",
+		"enplanement" : 23000
+	},
+	"MRI" : {
+		"full_name" : "Merrill Field",
+		"common_name" : "Merrill Field",
+		"IATA" : "MRI",
+		"location" : "Anchorage, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 22907
+	},
+	"STC" : {
+		"full_name" : "St. Cloud Regional Airport",
+		"common_name" : "St. Cloud Regional",
+		"IATA" : "STC",
+		"location" : "St. Cloud, Minnesota",
+		"hub_size" : "small",
+		"enplanement" : 22464
+	},
+	"BRD" : {
+		"full_name" : "Brainerd Lakes Regional Airport",
+		"common_name" : "Brainerd Lakes Regional",
+		"IATA" : "BRD",
+		"location" : "Brainerd, Minnesota",
+		"hub_size" : "small",
+		"enplanement" : 22233
+	},
+	"PLN" : {
+		"full_name" : "Pellston Regional/Emmet County Airport",
+		"common_name" : "Pellston Regional/Emmet County",
+		"IATA" : "PLN",
+		"location" : "Pellston, Michigan",
+		"hub_size" : "small",
+		"enplanement" : 22000
+	},
+	"CIU" : {
+		"full_name" : "Chippewa County International Airport",
+		"common_name" : "Chippewa County",
+		"IATA" : "CIU",
+		"location" : "Sault Ste. Marie, Michigan",
+		"hub_size" : "small",
+		"enplanement" : 22000
+	},
+	"BPT" : {
+		"full_name" : "Jack Brooks Regional Airport",
+		"common_name" : "Jack Brooks Regional",
+		"IATA" : "BPT",
+		"location" : "Beaumont, Texas",
+		"hub_size" : "small",
+		"enplanement" : 21914
+	},
+	"RHI" : {
+		"full_name" : "Rhinelander–Oneida County Airport",
+		"common_name" : "Rhinelander–Oneida County",
+		"IATA" : "RHI",
+		"location" : "Rhinelander, Wisconsin",
+		"hub_size" : "small",
+		"enplanement" : 20986
+	},
+	"PAH" : {
+		"full_name" : "Barkley Regional Airport",
+		"common_name" : "Barkley Regional",
+		"IATA" : "PAH",
+		"location" : "Paducah, Kentucky",
+		"hub_size" : "small",
+		"enplanement" : 20934
+	},
+	"PSG" : {
+		"full_name" : "Petersburg James A. Johnson Airport",
+		"common_name" : "Petersburg James A. Johnson",
+		"IATA" : "PSG",
+		"location" : "Petersburg, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 20690
+	},
+	"CNY" : {
+		"full_name" : "Canyonlands Regional Airport",
+		"common_name" : "Canyonlands Regional",
+		"IATA" : "CNY",
+		"location" : "Moab, Utah",
+		"hub_size" : "small",
+		"enplanement" : 20093
+	},
+	"DRT" : {
+		"full_name" : "Del Rio International Airport",
+		"common_name" : "Del Rio",
+		"IATA" : "DRT",
+		"location" : "Del Rio, Texas",
+		"hub_size" : "small",
+		"enplanement" : 19879
+	},
+	"NRR" : {
+		"full_name" : "José Aponte de la Torre Airport",
+		"common_name" : "José Aponte de la Torre",
+		"IATA" : "NRR",
+		"location" : "Ceiba, Puerto Rico",
+		"hub_size" : "small",
+		"enplanement" : 19786
+	},
+	"OWB" : {
+		"full_name" : "Owensboro–Daviess County Regional Airport",
+		"common_name" : "Owensboro–Daviess County Regional",
+		"IATA" : "OWB",
+		"location" : "Owensboro, Kentucky",
+		"hub_size" : "small",
+		"enplanement" : 19532
+	},
+	"MEI" : {
+		"full_name" : "Key Field",
+		"common_name" : "Key Field",
+		"IATA" : "MEI",
+		"location" : "Meridian, Mississippi",
+		"hub_size" : "small",
+		"enplanement" : 19332
+	},
+	"DUT" : {
+		"full_name" : "Unalaska Airport",
+		"common_name" : "Unalaska",
+		"IATA" : "DUT",
+		"location" : "Unalaska, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 19099
+	},
+	"CPX" : {
+		"full_name" : "Benjamín Rivera Noriega Airport",
+		"common_name" : "Benjamín Rivera Noriega",
+		"IATA" : "CPX",
+		"location" : "Culebra, Puerto Rico",
+		"hub_size" : "small",
+		"enplanement" : 18922
+	},
+	"EKO" : {
+		"full_name" : "Elko Regional Airport",
+		"common_name" : "Elko Regional",
+		"IATA" : "EKO",
+		"location" : "Elko, Nevada",
+		"hub_size" : "small",
+		"enplanement" : 18363
+	},
+	"IMT" : {
+		"full_name" : "Ford Airport",
+		"common_name" : "Ford",
+		"IATA" : "IMT",
+		"location" : "Iron Mountain, Michigan",
+		"hub_size" : "small",
+		"enplanement" : 18000
+	},
+	"WST" : {
+		"full_name" : "Westerly State Airport",
+		"common_name" : "Westerly State",
+		"IATA" : "WST",
+		"location" : "Westerly, Rhode Island",
+		"hub_size" : "small",
+		"enplanement" : 17694
+	},
+	"RKD" : {
+		"full_name" : "Knox County Regional Airport",
+		"common_name" : "Knox County Regional",
+		"IATA" : "RKD",
+		"location" : "Rockland, Maine",
+		"hub_size" : "small",
+		"enplanement" : 17133
+	},
+	"HIB" : {
+		"full_name" : "Range Regional Airport",
+		"common_name" : "Range Regional",
+		"IATA" : "HIB",
+		"location" : "Hibbing, Minnesota",
+		"hub_size" : "small",
+		"enplanement" : 17111
+	},
+	"BID" : {
+		"full_name" : "Block Island State Airport",
+		"common_name" : "Block Island State",
+		"IATA" : "BID",
+		"location" : "Block Island",
+		"hub_size" : "small",
+		"enplanement" : 16809
+	},
+	"LAR" : {
+		"full_name" : "Laramie Regional Airport",
+		"common_name" : "Laramie Regional",
+		"IATA" : "LAR",
+		"location" : "Laramie, Wyoming",
+		"hub_size" : "small",
+		"enplanement" : 16728
+	},
+	"RKS" : {
+		"full_name" : "Southwest Wyoming Regional Airport",
+		"common_name" : "Southwest Wyoming Regional",
+		"IATA" : "RKS",
+		"location" : "Rock Springs, Wyoming",
+		"hub_size" : "small",
+		"enplanement" : 16679
+	},
+	"SLN" : {
+		"full_name" : "Salina Regional Airport",
+		"common_name" : "Salina Regional",
+		"IATA" : "SLN",
+		"location" : "Salina, Kansas",
+		"hub_size" : "small",
+		"enplanement" : 15977
+	},
+	"MCN" : {
+		"full_name" : "Middle Georgia Regional Airport",
+		"common_name" : "Middle Georgia Regional",
+		"IATA" : "MCN",
+		"location" : "Macon, Georgia",
+		"hub_size" : "small",
+		"enplanement" : 15431
+	},
+	"RIW" : {
+		"full_name" : "Central Wyoming Regional Airport",
+		"common_name" : "Central Wyoming Regional",
+		"IATA" : "RIW",
+		"location" : "Riverton, Wyoming",
+		"hub_size" : "small",
+		"enplanement" : 15420
+	},
+	"CDV" : {
+		"full_name" : "Merle K. (Mudhole) Smith Airport",
+		"common_name" : "Merle K. (Mudhole) Smith",
+		"IATA" : "CDV",
+		"location" : "Cordova, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 15058
+	},
+	"ESC" : {
+		"full_name" : "Delta County Airport",
+		"common_name" : "Delta County",
+		"IATA" : "ESC",
+		"location" : "Escanaba, Michigan",
+		"hub_size" : "small",
+		"enplanement" : 15000
+	},
+	"SMX" : {
+		"full_name" : "Santa Maria Public Airport",
+		"common_name" : "Santa Maria Public",
+		"IATA" : "SMX",
+		"location" : "Santa Maria, California",
+		"hub_size" : "small",
+		"enplanement" : 14409
+	},
+	"PGA" : {
+		"full_name" : "Page Municipal Airport",
+		"common_name" : "Page Municipal",
+		"IATA" : "PGA",
+		"location" : "Page, Arizona",
+		"hub_size" : "small",
+		"enplanement" : 14340
+	},
+	"BFF" : {
+		"full_name" : "Western Nebraska Regional Airport",
+		"common_name" : "Western Nebraska Regional",
+		"IATA" : "BFF",
+		"location" : "Scottsbluff, Nebraska",
+		"hub_size" : "small",
+		"enplanement" : 14295
+	},
+	"LBF" : {
+		"full_name" : "North Platte Regional Airport",
+		"common_name" : "North Platte Regional",
+		"IATA" : "LBF",
+		"location" : "North Platte, Nebraska",
+		"hub_size" : "small",
+		"enplanement" : 13798
+	},
+	"TUP" : {
+		"full_name" : "Tupelo Regional Airport",
+		"common_name" : "Tupelo Regional",
+		"IATA" : "TUP",
+		"location" : "Tupelo, Mississippi",
+		"hub_size" : "small",
+		"enplanement" : 13557
+	},
+	"SIG" : {
+		"full_name" : "Fernando Luis Ribas Dominicci Airport",
+		"common_name" : "Fernando Luis Ribas Dominicci",
+		"IATA" : "SIG",
+		"location" : "San Juan, Puerto Rico",
+		"hub_size" : "small",
+		"enplanement" : 13447
+	},
+	"CDC" : {
+		"full_name" : "Cedar City Regional Airport",
+		"common_name" : "Cedar City Regional",
+		"IATA" : "CDC",
+		"location" : "Cedar City, Utah",
+		"hub_size" : "small",
+		"enplanement" : 12807
+	},
+	"OTH" : {
+		"full_name" : "Southwest Oregon Regional Airport",
+		"common_name" : "Southwest Oregon Regional",
+		"IATA" : "OTH",
+		"location" : "North Bend, Oregon",
+		"hub_size" : "small",
+		"enplanement" : 12369
+	},
+	"SHD" : {
+		"full_name" : "Shenandoah Valley Regional Airport",
+		"common_name" : "Shenandoah Valley Regional",
+		"IATA" : "SHD",
+		"location" : "Staunton, Virginia",
+		"hub_size" : "small",
+		"enplanement" : 12179
+	},
+	"WRG" : {
+		"full_name" : "Wrangell Airport",
+		"common_name" : "Wrangell",
+		"IATA" : "WRG",
+		"location" : "Wrangell, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 12100
+	},
+	"ATY" : {
+		"full_name" : "Watertown Regional Airport",
+		"common_name" : "Watertown Regional",
+		"IATA" : "ATY",
+		"location" : "Watertown, South Dakota",
+		"hub_size" : "small",
+		"enplanement" : 12064
+	},
+	"HYS" : {
+		"full_name" : "Hays Regional Airport",
+		"common_name" : "Hays Regional",
+		"IATA" : "HYS",
+		"location" : "Hays, Kansas",
+		"hub_size" : "small",
+		"enplanement" : 11996
+	},
+	"ALS" : {
+		"full_name" : "San Luis Valley Regional Airport",
+		"common_name" : "San Luis Valley Regional",
+		"IATA" : "ALS",
+		"location" : "Alamosa, Colorado",
+		"hub_size" : "small",
+		"enplanement" : 11987
+	},
+	"DEC" : {
+		"full_name" : "Decatur Airport",
+		"common_name" : "Decatur",
+		"IATA" : "DEC",
+		"location" : "Decatur, Illinois",
+		"hub_size" : "small",
+		"enplanement" : 11216
+	},
+	"YAK" : {
+		"full_name" : "Yakutat Airport",
+		"common_name" : "Yakutat",
+		"IATA" : "YAK",
+		"location" : "Yakutat, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 10899
+	},
+	"PQI" : {
+		"full_name" : "Presque Isle International Airport",
+		"common_name" : "Presque Isle",
+		"IATA" : "PQI",
+		"location" : "Presque Isle, Maine",
+		"hub_size" : "small",
+		"enplanement" : 10865
+	},
+	"MWA" : {
+		"full_name" : "Veterans Airport of Southern Illinois",
+		"common_name" : "Veterans  of Southern Illinois",
+		"IATA" : "MWA",
+		"location" : "Marion, Illinois",
+		"hub_size" : "small",
+		"enplanement" : 10558
+	},
+	"GST" : {
+		"full_name" : "Gustavus Airport",
+		"common_name" : "Gustavus",
+		"IATA" : "GST",
+		"location" : "Gustavus, Alaska",
+		"hub_size" : "small",
+		"enplanement" : 10305
+	},
+	"LWB" : {
+		"full_name" : "Greenbrier Valley Airport",
+		"common_name" : "Greenbrier Valley",
+		"IATA" : "LWB",
+		"location" : "Lewisburg, West Virginia",
+		"hub_size" : "small",
+		"enplanement" : 10048
+	},
+	"JMS" : {
+		"full_name" : "Jamestown Regional Airport",
+		"common_name" : "Jamestown Regional",
+		"IATA" : "JMS",
+		"location" : "Jamestown, North Dakota",
+		"hub_size" : "small",
+		"enplanement" : 10000
+	},
+	"PIB" : {
+		"full_name" : "Hattiesburg–Laurel Regional Airport",
+		"common_name" : "Hattiesburg–Laurel Regional",
+		"IATA" : "PIB",
+		"location" : "Hattiesburg, Mississippi",
+		"hub_size" : "small",
+		"enplanement" : 9813
+	},
+	"WYS" : {
+		"full_name" : "Yellowstone Airport",
+		"common_name" : "Yellowstone",
+		"IATA" : "WYS",
+		"location" : "West Yellowstone, Montana",
+		"hub_size" : "small",
+		"enplanement" : 8200
+	},
+	"APN" : {
+		"full_name" : "Alpena County Regional Airport",
+		"common_name" : "Alpena County Regional",
+		"IATA" : "APN",
+		"location" : "Alpena, Michigan",
+		"hub_size" : "small",
+		"enplanement" : 7936
+	},
+	"TBN" : {
+		"full_name" : "Waynesville–St. Robert Regional Airport",
+		"common_name" : "Waynesville–St. Robert Regional",
+		"IATA" : "TBN",
+		"location" : "Fort Leonard Wood",
+		"hub_size" : "small",
+		"enplanement" : 7717
+	},
+	"EAR" : {
+		"full_name" : "Kearney Regional Airport",
+		"common_name" : "Kearney Regional",
+		"IATA" : "EAR",
+		"location" : "Kearney, Nebraska",
+		"hub_size" : "small",
+		"enplanement" : 4568
+	},
+	"MKG" : {
+		"full_name" : "Muskegon County Airport",
+		"common_name" : "Muskegon County",
+		"IATA" : "MKG",
+		"location" : "Muskegon, Michigan",
+		"hub_size" : "small",
+		"enplanement" : 4488
+	}
+}
