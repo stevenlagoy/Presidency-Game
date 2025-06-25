@@ -15,7 +15,7 @@ import core.JSONObject;
  * <p>
  * <b> Example Usage: </b>
  * <p>
- * <code> class MyClass implements Jsonic<MyClass> { ... } </code>
+ * <code> class MyClass implements Jsonic&lt;MyClass&gt; { ... } </code>
  * @param <T> The type of the object implementing this interface (should be the same as the Class Name).
  */
 public interface Jsonic<T extends Jsonic<T>> {
