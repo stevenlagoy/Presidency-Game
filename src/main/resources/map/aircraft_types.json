@@ -1,0 +1,56 @@
+{
+    "commercial_airliner" : {
+        "speed" : 530,
+        "range" : 3600,
+        "capacity" : 189,
+        "size" : "large"
+    },
+    "large_airliner" : {
+        "speed" : 515,
+        "range" : 2200,
+        "capacity" : 88,
+        "size" : "large"
+    },
+    "medium_aircraft" : {
+        "speed" : 320,
+        "range" : 870,
+        "capacity" : 19,
+        "size" : "medium"
+    },
+    "regional_airplane" : {
+        "speed" : 270,
+        "range" : 850,
+        "capacity" : 9,
+        "size" : "small"
+    },
+    "small_airplane" : {
+        "speed" : 190,
+        "range" : 820,
+        "capacity" : 5,
+        "size" : "small"
+    },
+    "light_airplane" : {
+        "speed" : 140,
+        "range" : 800,
+        "capacity" : 3,
+        "size" : "small"
+    },
+    "business_jet" : {
+        "speed" : 500,
+        "range" : 2100,
+        "capacity" : 12,
+        "size" : "small"
+    },
+    "longrange_jet" : {
+        "speed" : 610,
+        "range" : 8000,
+        "capacity" : 19,
+        "size" : "medium"
+    },
+    "luxury_jet" : {
+        "speed" : 717,
+        "range" : 8900,
+        "capacity" : 19,
+        "size" : "medium"
+    }
+}

@@ -1,0 +1,2698 @@
+{
+	"US 10" : {
+		"name" : "U.S. Route 10",
+		"code" : "US 10",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            "West Fargo, ND",
+            "Fargo, ND",
+            "Mounds View, MN",
+            "Saint Paul, MN",
+            "Osseo, WI",
+            "Stevens Point, WI",
+            "Menasha, WI",
+            "Manitowoc, WI",
+            "Ludington, MI",
+            "Reed City, MI",
+            "Clare, MI",
+            "Bay City, MI"
+        ]
+	},
+	"US 11" : {
+		"name" : "U.S. Route 11",
+		"code" : "US 11",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            "New Orleans, LA",
+            "Meridian, MS",
+            "Birmingham, AL",
+            "Chattanooga, TN",
+            "Knoxville, TN",
+            "Wytheville, VA",
+            "Staunton, VA",
+            "Carlisle, PA",
+            "Bloomsburg, PA",
+            "Champlain, NY",
+            "Rouses Point, NY"
+        ]
+	},
+	"US 12" : {
+		"name" : "U.S. Route 12",
+		"code" : "US 12",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            "Aberdeen, WA",
+            "Chehalis, WA",
+            "Helena, MT",
+            "Summit, SD",
+            "Minneapolis, MN",
+            "Saint Paul, MN",
+            "Madison, WI",
+            "Hodgkins, IL",
+            "Gary, IN",
+            "Coldwater, MI",
+            "Detroit, MI"
+        ]
+	},
+	"US 13" : {
+		"name" : "U.S. Route 13",
+		"code" : "US 13",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            "Fayetteville, NC",
+            "Goldsboro, NC",
+            "Bethel, NC",
+            "Williamston, NC",
+            "Norfolk, VA",
+            "Pocomoke City, MD",
+            "Salisbury, MD",
+            "Laurel, DE",
+            "Wilmington, DE",
+            "Philadelphia, PA",
+            "Bristol, PA",
+            "Falls Township, PA"
+        ]
+	},
+	"US 14" : {
+		"name" : "U.S. Route 14",
+		"code" : "US 14",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            "Yellowstone National Park",
+            "Sheridan, WY",
+            "Pierre, SD",
+            "Brookings, SD",
+            "Owatonna, MN",
+            "La Crescent, MN",
+            "Madison, WI",
+            "Janesville, WI",
+            "Darien, WI",
+            "Des Plaines, IL",
+            "Chicago, IL"
+        ]
+	},
+	"US 15" : {
+		"name" : "U.S. Route 15",
+		"code" : "US 15",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            "Walterboro, SC",
+            "Santee, SC",
+            "Bishopville, SC",
+            "Durham, NC",
+            "Zion Crossroads, VA",
+            "Haymarket, VA",
+            "Frederick, MD",
+            "Mechanicsburg, PA",
+            "Harrisburg, PA",
+            "Milton, PA",
+            "Painted Post, NY"
+        ]
+	},
+	"US 16" : {
+		"name" : "U.S. Route 16",
+		"code" : "US 16",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            "Yellowstone National Park",
+            "Greybull, WY",
+            "Buffalo, WY",
+            "Newcastle, WY",
+            "Rapid City, SD"
+        ]
+	},
+	"US 17" : {
+		"name" : "U.S. Route 17",
+		"code" : "US 17",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            "Punta Gorda, FL",
+            "Solana, FL",
+            "Orlando, FL",
+            "Jacksonville, FL",
+            "Savannah, GA",
+            "Charleston, SC",
+            "Newport News, VA",
+            "Warrenton, VA",
+            "Winchester, VA"
+        ]
+	},
+	"US 18" : {
+		"name" : "U.S. Route 18",
+		"code" : "US 18",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            "Orin, WY",
+            "Worthing, SD",
+            "Clear Lake, IA",
+            "Charles City, IA",
+            "Madison, WI",
+            "Waukesha, WI",
+            "Wauwatosa, WI",
+            "Milwaukee, WI"
+        ]
+	},
+	"US 19" : {
+		"name" : "U.S. Route 19",
+		"code" : "US 19",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            "Memphis, FL",
+            "Monticello, FL",
+            "Atlanta, GA",
+            "Asheville, NC",
+            "Bristol, VA",
+            "Beckley, WV",
+            "Washington, PA",
+            "Cranberry Township, PA",
+            "Mercer, PA",
+            "Erie, PA"
+        ]
+	},
+	"US 20" : {
+		"name" : "U.S. Route 20",
+		"code" : "US 20",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            "Newport, OR",
+            "Albany, OR",
+            "Idaho Falls, ID",
+            "Casper, WY",
+            "Williams, IA",
+            "Hodgkins, IL",
+            "Gary, IN",
+            "Perrysburg, OH",
+            "Erie, PA",
+            "Albany, NY",
+            "Waltham, MA",
+            "Boston, MA"
+        ]
+	},
+	"US 21" : {
+		"name" : "U.S. Route 21",
+		"code" : "US 21",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            "Hunting Island State Park, SC",
+            "Yemasseem, SC",
+            "Columbia, SC",
+            "Charlotte, NC",
+            "Statesville, NC",
+            "Wytheville, VA"
+        ]
+	},
+	"US 22" : {
+		"name" : "U.S. Route 22",
+		"code" : "US 22",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            "Cincinnati, OH",
+            "Zanesville, OH",
+            "Cambridge, OH",
+            "Collier Township, PA",
+            "Monroeville, PA",
+            "Hollidaysburg, PA",
+            "Harrisburg, PA",
+            "Union Township, PA",
+            "Fogelsville, PA",
+            "Allentown, PA",
+            "Alpha, NJ",
+            "Clinton, NJ",
+            "Union Township, NJ",
+            "Newark, NJ"
+        ]
+	},
+	"US 23" : {
+		"name" : "U.S. Route 23",
+		"code" : "US 23",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            "Jacksonville, FL",
+            "Macon, GA",
+            "Atlanta, GA",
+            "Asheville, NC",
+            "Kingsport, TN",
+            "Ashland, KY",
+            "Columbus, OH",
+            "Perrysburg, OH",
+            "Ann Arbor, MI",
+            "Brighton, MI",
+            "Mackinaw City, MI"
+        ]
+	},
+	"US 24" : {
+		"name" : "U.S. Route 24",
+		"code" : "US 24",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 25" : {
+		"name" : "U.S. Route 25",
+		"code" : "US 25",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 26" : {
+		"name" : "U.S. Route 26",
+		"code" : "US 26",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 27" : {
+		"name" : "U.S. Route 27",
+		"code" : "US 27",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 29" : {
+		"name" : "U.S. Route 29",
+		"code" : "US 29",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 30" : {
+        "name" : "U.S. Route 30",
+        "code" : "US 30",
+        "shield_location" : "us_route_30_shield",
+        "cardinality" : "east-west",
+        "designation" : "US_highway_major",
+        "connections" : [
+            "Astoria, OR",
+            "Svensen, OR",
+            "Knappa, OR",
+            "Wauna, OR",
+            "Westport, OR",
+            "Woodson, OR",
+            "Clatskanie, OR",
+            "Rainier, OR",
+            "Goble, OR",
+            "Deer Island, OR",
+            "Columbia City, OR",
+            "St. Helens, OR",
+            "Warren, OR",
+            "Scappoose, OR",
+            "Burlington, OR",
+            "Portland, OR",
+            "Fairview, OR",
+            "Wood Village, OR",
+            "Gresham, OR",
+            "Troutdale, OR",
+            "Cascade Locks, OR",
+            "Hood River, OR",
+            "Mosier, OR",
+            "The Dalles, OR",
+            "Pendleton, OR",
+            "La Grande, OR",
+            "North Powder, OR",
+            "Baker City, OR",
+            "Huntington, OR",
+            "Ontario, OR",
+            "Fruitland, ID",
+            "New Plymouth, ID",
+            "Caldwell, ID",
+            "Nampa, ID",
+            "Meridian, ID",
+            "Boise, ID",
+            "Mountain Home, ID",
+            "Hammett, ID",
+            "Glenns Ferry, ID",
+            "Bliss, ID",
+            "Hagerman, ID",
+            "Buhl, ID",
+            "Filer, ID",
+            "Twin Falls, ID",
+            "Kimberly, ID",
+            "Hansen, ID",
+            "Burley, ID",
+            "Heyburn, ID",
+            "American Falls, ID",
+            "Chubbuck, ID",
+            "Pocatello, ID",
+            "Inkom, ID",
+            "McCammon, ID",
+            "Lava Hot Springs, ID",
+            "Soda Springs, ID",
+            "Georgetown, ID",
+            "Bennington, ID",
+            "Montpelier, ID",
+            "Cokeville, WY",
+            "Diamondville, WY",
+            "Oakley, WY",
+            "Opal, WY",
+            "Granger, WY",
+            "Little America, WY",
+            "James Town, WY",
+            "Green River, WY",
+            "Purple Sage, WY",
+            "Clearview Acres, WY",
+            "Rock Springs, WY",
+            "Point of Rocks, WY",
+            "Red Desert, WY",
+            "Wamsutter, WY",
+            "Creston, WY",
+            "Riner, WY",
+            "Rawlins, WY",
+            "Sinclair, WY",
+            "Walcott, WY",
+            "Hanna, WY",
+            "Medicine Bow, WY",
+            "Wilcox, WY",
+            "Rock River, WY",
+            "Harper, WY",
+            "Lookout, WY",
+            "Bosler, WY",
+            "Laramie, WY",
+            "Buford, WY",
+            "Cheyenne, WY",
+            "Egbert, WY",
+            "Pine Bluffs, WY",
+            "Bushnell, NE",
+            "Kimball, NE",
+            "Dix, NE",
+            "Jacinto, NE",
+            "Potter, NE",
+            "Brownson, NE",
+            "Sidney, NE",
+            "Colton, NE",
+            "Sunol, NE",
+            "Lodgepole, NE",
+            "Chappell, NE",
+            "Brule, NE",
+            "Ogallala, NE",
+            "Roscoe, NE",
+            "Paxton, NE",
+            "Sutherland, NE",
+            "Hershey, NE",
+            "North Platte, NE",
+            "Maxwell, NE",
+            "Brady, NE",
+            "Vroman, NE",
+            "Gothenburg, NE",
+            "Willow Island, NE",
+            "Cozad, NE",
+            "Darr, NE",
+            "Lexington, NE",
+            "Josselyn, NE",
+            "Overton, NE",
+            "Elm Creek, NE",
+            "Odessa, NE",
+            "Kearney, NE",
+            "Buda, NE",
+            "Gibbon, NE",
+            "Shelton, NE",
+            "Wood River, NE",
+            "Alda, NE",
+            "Grand Island, NE",
+            "Chapman, NE",
+            "Central City, NE",
+            "Clarks, NE",
+            "Silver Creek, NE",
+            "Gardiner, NE",
+            "Duncan, NE",
+            "Columbus, NE",
+            "Richland, NE",
+            "Schuyler, NE",
+            "Rogers, NE",
+            "North Bend, NE",
+            "Fremont, NE",
+            "Arlington, NE",
+            "Kennard, NE",
+            "Blair, NE",
+            "Missouri Valley, IA",
+            "Logan, IA",
+            "Woodbine, IA",
+            "Dunlap, IA",
+            "Dow City, IA",
+            "Arion, IA",
+            "Denison, IA",
+            "Vail, IA",
+            "Westside, IA",
+            "Arcadia, IA",
+            "Maple River, IA",
+            "Carrol, IA",
+            "Glidden, IA",
+            "Ralston, IA",
+            "Scranton, IA",
+            "Jefferson, IA",
+            "Grand Junction, IA",
+            "Beaver, IA",
+            "Ogden, IA",
+            "Boone, IA",
+            "Ames, IA",
+            "Nevada, IA",
+            "Colo, IA",
+            "State Center, IA",
+            "Marshalltown, IA",
+            "Le Grand, IA",
+            "Toledo, IA",
+            "Tama, IA",
+            "Cedar Rapids, IA",
+            "Fairfax, IA",
+            "Bertram, IA",
+            "Mt Vernon, IA",
+            "Lisbon, IA",
+            "Mechanicsville, IA",
+            "Stanwood, IA",
+            "Clarence, IA",
+            "Lowden, IA",
+            "Wheatland, IA",
+            "Calamus, IA",
+            "Grand Mound, IA",
+            "DeWitt, IA",
+            "Malone, IA",
+            "Low Moor, IA",
+            "Camanche, IA",
+            "Clinton, IA",
+            "Fulton, IL",
+            "Union Grove, IL",
+            "Morrison, IL",
+            "Round Grove, IL",
+            "Agnew, IL",
+            "Como, IL",
+            "Rock Falls, IL",
+            "Amboy, IL",
+            "Lee Center, IL",
+            "Twelvemile Corner, IL",
+            "Shabbona, IL",
+            "Waterman, IL",
+            "Hinckley, IL",
+            "Big Rock, IL",
+            "Sugar Grove, IL",
+            "Montgomery, IL",
+            "Boulder Hill, IL",
+            "Wolfs, IL",
+            "Plainfield, IL",
+            "Crystal Lawns, IL",
+            "Sunnyland, IL",
+            "Joliet, IL",
+            "Ridgewood, IL",
+            "Ingalls Park, IL",
+            "New Lenox, IL",
+            "Giletts, IL",
+            "Frankfort, IL",
+            "Frankfort Square, IL",
+            "Matteson, IL",
+            "Chicago Heights, IL",
+            "Ford Heights, IL",
+            "Dyer, IN",
+            "Schererville, IN",
+            "Merrillville, IN",
+            "Shorewood Forest, IN",
+            "Westhill, IN",
+            "Valparaiso, IN",
+            "Wanatah, IN",
+            "Hanna, IN",
+            "Hamlet, IN",
+            "Grovertown, IN",
+            "Donaldson, IN",
+            "Plymouth, IN",
+            "Inwood, IN",
+            "Bourbon, IN",
+            "Etna Green, IN",
+            "Hoffman Lake, IN",
+            "Atwood, IN",
+            "Monoquet, IN",
+            "Warsaw, IN",
+            "Winona Lake, IN",
+            "Wooster, IN",
+            "Pierceton, IN",
+            "Larwill, IN",
+            "Columbia City, IN",
+            "Coesse, IN",
+            "Fort Wayne, IN",
+            "New Haven, IN",
+            "Zulu, IN",
+            "Townley, IN",
+            "Convoy, OH",
+            "Van Wert, OH",
+            "Middle Point, OH",
+            "Delphos, OH",
+            "Scotts Crossing, OH",
+            "Gomer, OH",
+            "Cairo, OH",
+            "Beaverdam, OH",
+            "Williamstown, OH",
+            "Forest, OH",
+            "Kirby, OH",
+            "Upper Sandusky, OH",
+            "Nevada, OH",
+            "Oceola, OH",
+            "Bucyrus, OH",
+            "Galion, OH",
+            "Crestline, OH",
+            "Ontario, OH",
+            "Roseland, OH",
+            "Mansfield, OH",
+            "Lincoln Heights, OH",
+            "Wooster Heights, OH",
+            "Mifflin, OH",
+            "Hayesville, OH",
+            "Jeromesville, OH",
+            "Westwood, OH",
+            "Wooster, OH",
+            "Honeytown, OH",
+            "East Union, OH",
+            "Riceland, OH",
+            "Dalton, OH",
+            "East Greenville, OH",
+            "Massillon, OH",
+            "Navarre, OH",
+            "Richville, OH",
+            "Westview, OH",
+            "Canton, OH",
+            "Waco, OH",
+            "East Canton, OH",
+            "Robertsville, OH",
+            "Minerva, OH",
+            "Bayard, OH",
+            "East Rochester, OH",
+            "Kensington, OH",
+            "Hanoverton, OH",
+            "Lisbon, OH",
+            "West Point, OH",
+            "Calcutta, OH",
+            "East Liverpool, OH",
+            "Chester, WV",
+            "Lawrencevile, WV",
+            "Hookstown, PA",
+            "Harshaville, PA",
+            "Clinton, PA",
+            "Imperial, PA",
+            "Thornburg, PA",
+            "Crafton, PA",
+            "Pittsburgh, PA",
+            "Swissvale, PA",
+            "Chalfant, PA",
+            "North Braddock, PA",
+            "East Pittsburgh, PA",
+            "East McKeesport, PA",
+            "North Huntingdon, PA",
+            "Irwin, PA",
+            "Adamsburg, PA",
+            "Grapeville, PA",
+            "Greensburg, PA",
+            "Southwest Greensburg, PA",
+            "Lawson Heights, PA",
+            "Latrobe, PA",
+            "Youngstown, PA",
+            "Bradenville, PA",
+            "Ligonier, PA",
+            "Laughlintown, PA",
+            "Laurel Mountain, PA",
+            "Jennerstown, PA",
+            "Jenners, PA",
+            "Boswell, PA",
+            "Randolph, PA",
+            "Storystown, PA",
+            "Kantner, PA",
+            "Indian Lake, PA",
+            "Schellsburg, PA",
+            "Napier, PA",
+            "Bedford, PA",
+            "Everett, PA",
+            "Earlston, PA",
+            "Breezewood, PA",
+            "Harrisonville, PA",
+            "McConnellsburg, PA",
+            "Fort Loudon, PA",
+            "St. Thomas, PA",
+            "Chambersburg, PA",
+            "Guilford, PA",
+            "Fayetteville, PA",
+            "Cashtown, PA",
+            "Mcknightstown, PA",
+            "Gettysburg, PA",
+            "Guldens, PA",
+            "New Oxford, PA",
+            "Abbottstown, PA",
+            "Thomasville, PA",
+            "Botts, PA",
+            "West York, PA",
+            "North York, PA",
+            "York, PA",
+            "East York, PA",
+            "Yorklyn, PA",
+            "Kreutz Creek, PA",
+            "Hallam, PA",
+            "Wrightsville, PA",
+            "Columbia, PA",
+            "Mountville, PA",
+            "Oyster Point, PA",
+            "Rohrerstown, PA",
+            "Roseville, PA",
+            "Lancaster, PA",
+            "Eden, PA",
+            "Conestoga Woods, PA",
+            "Fertility, PA",
+            "Ronks, PA",
+            "Soudersburg, PA",
+            "Paradise, PA",
+            "Bellemont, PA",
+            "Harristown, PA",
+            "Vintage, PA",
+            "Kinzers, PA",
+            "Gap, PA",
+            "Sadsburyville, PA",
+            "Hayti, PA",
+            "Coatesville, PA",
+            "Caln, PA",
+            "Thorndale, PA",
+            "Downingtown, PA",
+            "Exton, PA",
+            "Frazer, PA",
+            "Malvern, PA",
+            "Paoli, PA",
+            "Berwyn, PA",
+            "Devon, PA",
+            "Strafford, PA",
+            "Wayne, PA",
+            "St. Davids, PA",
+            "Villanova, PA",
+            "Bryn Mawr, PA",
+            "Ardmore, PA",
+            "Merion Station, PA",
+            "Penn Wynne, PA",
+            "Philadelphia, PA",
+            "Camden, NJ",
+            "Woodlynne, NJ",
+            "Collingswood, NJ",
+            "Oaklyn, NJ",
+            "Audubon, NJ",
+            "Haddon Heights, NJ",
+            "Lawnside, NJ",
+            "Magnolia, NJ",
+            "Somerdale, NJ",
+            "Stratford, NJ",
+            "Laurel Springs, NJ",
+            "Lindenwold, NJ",
+            "Berlin, NJ",
+            "Waterford, NJ",
+            "Chesilhurst, NJ",
+            "Hammonton, NJ",
+            "Mullica, NJ",
+            "Egg Harbor City, NJ",
+            "Absecon, NJ",
+            "Atlantic City, NJ"
+        ],
+        "intersections" : {
+            "US 1"   : ["Penn Wynne, PA"],
+            "US 6"   : ["Joliet, IL"],
+            "US 9"   : ["Absecon, NJ"],
+            "US 11"  : ["Chambersburg, PA"],
+            "US 15"  : ["Gettysburg, PA"],
+            "US 19"  : ["Pittsburgh, PA"],
+            "US 20"  : ["Caldwell, ID", "Boise, ID", "Mountain Home, ID"],
+            "US 22"  : ["Imperial, PA", "Pittsburgh, PA", "Wilkinsburg, PA"],
+            "US 23"  : ["Upper Sandusky, OH"],
+            "US 24"  : ["New Haven, IN"],
+            "US 26"  : ["Caldwell, ID", "Boise, ID", "Bliss, ID", "Ogallala, NE"],
+            "US 27"  : ["Fort Wayne, IN"],
+            "US 31"  : ["Plymouth, IN"],
+            "US 33"  : ["Fort Wayne, IN"],
+            "US 34"  : ["Oswego, IL", "Montgomery, IL"],
+            "US 35"  : ["Hamlet, IN"],
+            "US 41"  : ["Schererville, IN"],
+            "US 42"  : ["Lincoln Heights, OH"],
+            "US 45"  : ["Frankfort, IL"],
+            "US 51"  : ["Lee, IL"],
+            "US 52"  : ["Amboy, IL"],
+            "US 59"  : ["Denison, IA"],
+            "US 61"  : ["De Witt, IA"],
+            "US 62"  : ["Massillon, OH", "Canton, OH"],
+            "US 63"  : ["Toledo, IA"],
+            "US 65"  : ["Colo, IA"],
+            "US 67"  : ["Clinton, IA"],
+            "US 68"  : ["Williamstown, OH"],
+            "US 69"  : ["Ames, IA"],
+            "US 71"  : ["Carroll, IA"],
+            "US 75"  : ["Blair, NE"],
+            "US 77"  : ["Fremont, NE"],
+            "US 81"  : ["Columbus, NE"],
+            "US 83"  : ["North Platte, NE"],
+            "US 85"  : ["Cheyenne, WY"],
+            "US 87"  : ["Cheyenne, WY"],
+            "US 89"  : ["Montpelier, ID"],
+            "US 91"  : ["Pocatello, ID", "McCammon, ID"],
+            "US 93"  : ["Flier, ID", "Twin Falls, ID"],
+            "US 95"  : ["Fruitland, ID", "Palisades Corner, ID"],
+            "US 97"  : ["The Dalles, OR"],
+            "US 101" : ["Astoria, OR"],
+            "US 119" : ["Greensburg, PA"],
+            "US 127" : ["Van Wert, OH"],
+            "US 130" : ["Woodlynne, NJ"],
+            "US 138" : ["Big Springs, NE"],
+            "US 151" : ["Cedar Rapids, IA"],
+            "US 169" : ["Ogden, IA"],
+            "US 189" : ["Kemmerer, WY"],
+            "US 191" : ["Purple Sage, WY", "Rock Springs, WY"],
+            "US 197" : ["The Dalles, OR"],
+            "US 202" : ["Exton, PA"],
+            "US 206" : ["Hammonton, NJ"],
+            "US 218" : ["Cedar Rapids, IA"],
+            "US 219" : ["Jenners, PA"],
+            "US 220" : ["Bedford, PA"],
+            "US 222" : ["Lancaster, PA"],
+            "US 224" : ["Van Wert, OH"],
+            "US 250" : ["Wooster, OH"],
+            "US 275" : ["Fremont, NE"],
+            "US 281" : ["Grand Island, NE"],
+            "US 283" : ["Lexington, NE"],
+            "US 287" : ["Rawlins, WY", "Laramie, WY"],
+            "US 322" : ["Downington, PA"],
+            "US 385" : ["Sidney, NE", "Chappell, NE"],
+            "US 395" : ["Stanfield, OR", "Pendleton, OR"],
+            "US 421" : ["Wanatah, IN"],
+            "US 522" : ["McConnellsburg, PA"],
+            "US 730" : ["Boardman, OR"],
+            "I-5"    : ["Portland, OR", "Cascade Locks, OR"],
+            "I-205"  : ["Portland, OR"],
+            "I-405"  : ["Portland, OR"],
+            "I-15"   : ["Pocatello, ID", "McCammon, ID"],
+            "I-25"   : ["Cheyenne, WY"],
+            "I-29"   : ["Missouri Valley, IA"],
+            "I-35"   : ["Ames, IA"],
+            "I-39"   : ["Lee, IL"],
+            "I-55"   : ["Joliet, IL"],
+            "I-57"   : ["Matteson, IL"],
+            "I-65"   : ["Merrillville, IN"],
+            "I-69"   : ["Fort Wayne, IN"],
+            "I-469"  : ["Fort Wayne, IN", "New Haven, IN"],
+            "I-70"   : ["Breezewood, PA"],
+            "I-71"   : ["Mifflin, OH"],
+            "I-76"   : ["Philadelphia, PA"],
+            "I-76 Toll" : ["Westmoreland City, PA"],
+            "I-376"  : ["Wilkinsburg, PA"],
+            "I-476"  : ["Villanova, PA"],
+            "I-676"  : ["Philadelphia, PA", "Camden, NJ"],
+            "I-77"   : ["Canton, OH"],
+            "I-79"   : ["Pennsbury Village, PA"],
+            "I-279"  : ["Pittsburgh, PA"],
+            "I-80"   : ["Little America, WY", "Walcott, WY", "Laramie, WY", "Cheyenne, WY", "Pine Bluffs, WY", "New Lenox, IL"],
+            "I-180"  : ["Cheyenne, WY"],
+            "I-380"  : ["Cedar Rapids, IA"],
+            "I-81"   : ["Chambersburg, PA"],
+            "I-82"   : ["Hermiston, OR"],
+            "I-83"   : ["North York, PA"],
+            "I-84"   : ["Portland, OR", "Hood River, OR", "Cascade Locks, OR", "Hood River, OR", "Mosier, OR", "The Dalles, OR", "Pendleton, OR", "Gopher Flats, OR", "La Grande, OR", "North Powder, OR", "Gopher Flats, OR", "Baker City, OR", "Fruitland, ID", "Heyburn, ID", "Chubbuck, ID"],
+            "I-184"  : ["Boise, ID"],
+            "I-86"   : ["Delco, ID", "Chubbuck, ID"],
+            "I-88 Toll" : ["Rock Falls, IL"],
+            "I-95"   : ["Philadelphia, PA"],
+            "I-295"  : ["Barrington, NJ"],
+            "I-99"   : ["Bedford, PA"]
+        }
+    },
+	"US 31" : {
+		"name" : "U.S. Route 31",
+		"code" : "US 31",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 33" : {
+		"name" : "U.S. Route 33",
+		"code" : "US 33",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 34" : {
+		"name" : "U.S. Route 34",
+		"code" : "US 34",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 35" : {
+		"name" : "U.S. Route 35",
+		"code" : "US 35",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 36" : {
+		"name" : "U.S. Route 36",
+		"code" : "US 36",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 40" : {
+		"name" : "U.S. Route 40",
+		"code" : "US 40",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 41" : {
+		"name" : "U.S. Route 41",
+		"code" : "US 41",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 42" : {
+		"name" : "U.S. Route 42",
+		"code" : "US 42",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 43" : {
+		"name" : "U.S. Route 43",
+		"code" : "US 43",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 44" : {
+		"name" : "U.S. Route 44",
+		"code" : "US 44",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 45" : {
+		"name" : "U.S. Route 45",
+		"code" : "US 45",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 46" : {
+		"name" : "U.S. Route 46",
+		"code" : "US 46",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 48" : {
+		"name" : "U.S. Route 48",
+		"code" : "US 48",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 49" : {
+		"name" : "U.S. Route 49",
+		"code" : "US 49",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 50" : {
+		"name" : "U.S. Route 50",
+		"code" : "US 50",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 51" : {
+		"name" : "U.S. Route 51",
+		"code" : "US 51",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 52" : {
+		"name" : "U.S. Route 52",
+		"code" : "US 52",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 53" : {
+		"name" : "U.S. Route 53",
+		"code" : "US 53",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 54" : {
+		"name" : "U.S. Route 54",
+		"code" : "US 54",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 56" : {
+		"name" : "U.S. Route 56",
+		"code" : "US 56",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 57" : {
+		"name" : "U.S. Route 57",
+		"code" : "US 57",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 58" : {
+		"name" : "U.S. Route 58",
+		"code" : "US 58",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 59" : {
+		"name" : "U.S. Route 59",
+		"code" : "US 59",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 60" : {
+		"name" : "U.S. Route 60",
+		"code" : "US 60",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 61" : {
+		"name" : "U.S. Route 61",
+		"code" : "US 61",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 62" : {
+		"name" : "U.S. Route 62",
+		"code" : "US 62",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 63" : {
+		"name" : "U.S. Route 63",
+		"code" : "US 63",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 64" : {
+		"name" : "U.S. Route 64",
+		"code" : "US 64",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 65" : {
+		"name" : "U.S. Route 65",
+		"code" : "US 65",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 67" : {
+		"name" : "U.S. Route 67",
+		"code" : "US 67",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 68" : {
+		"name" : "U.S. Route 68",
+		"code" : "US 68",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 69" : {
+		"name" : "U.S. Route 69",
+		"code" : "US 69",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 70" : {
+		"name" : "U.S. Route 70",
+		"code" : "US 70",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 71" : {
+		"name" : "U.S. Route 71",
+		"code" : "US 71",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 72" : {
+		"name" : "U.S. Route 72",
+		"code" : "US 72",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 73" : {
+		"name" : "U.S. Route 73",
+		"code" : "US 73",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 74" : {
+		"name" : "U.S. Route 74",
+		"code" : "US 74",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 75" : {
+		"name" : "U.S. Route 75",
+		"code" : "US 75",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 76" : {
+		"name" : "U.S. Route 76",
+		"code" : "US 76",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 77" : {
+		"name" : "U.S. Route 77",
+		"code" : "US 77",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 78" : {
+		"name" : "U.S. Route 78",
+		"code" : "US 78",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 79" : {
+		"name" : "U.S. Route 79",
+		"code" : "US 79",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 80" : {
+		"name" : "U.S. Route 80",
+		"code" : "US 80",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 81" : {
+		"name" : "U.S. Route 81",
+		"code" : "US 81",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 82" : {
+		"name" : "U.S. Route 82",
+		"code" : "US 82",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 83" : {
+		"name" : "U.S. Route 83",
+		"code" : "US 83",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 84" : {
+		"name" : "U.S. Route 84",
+		"code" : "US 84",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 85" : {
+		"name" : "U.S. Route 85",
+		"code" : "US 85",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 87" : {
+		"name" : "U.S. Route 87",
+		"code" : "US 87",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 89" : {
+		"name" : "U.S. Route 89",
+		"code" : "US 89",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 90" : {
+		"name" : "U.S. Route 90",
+		"code" : "US 90",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 91" : {
+		"name" : "U.S. Route 91",
+		"code" : "US 91",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 92" : {
+		"name" : "U.S. Route 92",
+		"code" : "US 92",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 93" : {
+		"name" : "U.S. Route 93",
+		"code" : "US 93",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 95" : {
+		"name" : "U.S. Route 95",
+		"code" : "US 95",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 96" : {
+		"name" : "U.S. Route 96",
+		"code" : "US 96",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 97" : {
+		"name" : "U.S. Route 97",
+		"code" : "US 97",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 98" : {
+		"name" : "U.S. Route 98",
+		"code" : "US 98",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 101" : {
+		"name" : "U.S. Route 101",
+		"code" : "US 101",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 113" : {
+		"name" : "U.S. Route 113",
+		"code" : "US 113",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 117" : {
+		"name" : "U.S. Route 117",
+		"code" : "US 117",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 119" : {
+		"name" : "U.S. Route 119",
+		"code" : "US 119",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 123" : {
+		"name" : "U.S. Route 123",
+		"code" : "US 123",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 127" : {
+		"name" : "U.S. Route 127",
+		"code" : "US 127",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 129" : {
+		"name" : "U.S. Route 129",
+		"code" : "US 129",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 130" : {
+		"name" : "U.S. Route 130",
+		"code" : "US 130",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 131" : {
+		"name" : "U.S. Route 131",
+		"code" : "US 131",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 136" : {
+		"name" : "U.S. Route 136",
+		"code" : "US 136",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 138" : {
+		"name" : "U.S. Route 138",
+		"code" : "US 138",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 141" : {
+		"name" : "U.S. Route 141",
+		"code" : "US 141",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 150" : {
+		"name" : "U.S. Route 150",
+		"code" : "US 150",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 151" : {
+		"name" : "U.S. Route 151",
+		"code" : "US 151",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 158" : {
+		"name" : "U.S. Route 158",
+		"code" : "US 158",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 159" : {
+		"name" : "U.S. Route 159",
+		"code" : "US 159",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 160" : {
+		"name" : "U.S. Route 160",
+		"code" : "US 160",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 163" : {
+		"name" : "U.S. Route 163",
+		"code" : "US 163",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 165" : {
+		"name" : "U.S. Route 165",
+		"code" : "US 165",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 166" : {
+		"name" : "U.S. Route 166",
+		"code" : "US 166",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 167" : {
+		"name" : "U.S. Route 167",
+		"code" : "US 167",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 169" : {
+		"name" : "U.S. Route 169",
+		"code" : "US 169",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 171" : {
+		"name" : "U.S. Route 171",
+		"code" : "US 171",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 175" : {
+		"name" : "U.S. Route 175",
+		"code" : "US 175",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 176" : {
+		"name" : "U.S. Route 176",
+		"code" : "US 176",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 177" : {
+		"name" : "U.S. Route 177",
+		"code" : "US 177",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 178" : {
+		"name" : "U.S. Route 178",
+		"code" : "US 178",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 180" : {
+		"name" : "U.S. Route 180",
+		"code" : "US 180",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 181" : {
+		"name" : "U.S. Route 181",
+		"code" : "US 181",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 183" : {
+		"name" : "U.S. Route 183",
+		"code" : "US 183",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 189" : {
+		"name" : "U.S. Route 189",
+		"code" : "US 189",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 190" : {
+		"name" : "U.S. Route 190",
+		"code" : "US 190",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 191" : {
+		"name" : "U.S. Route 191",
+		"code" : "US 191",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 192" : {
+		"name" : "U.S. Route 192",
+		"code" : "US 192",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 195" : {
+		"name" : "U.S. Route 195",
+		"code" : "US 195",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 197" : {
+		"name" : "U.S. Route 197",
+		"code" : "US 197",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 199" : {
+		"name" : "U.S. Route 199",
+		"code" : "US 199",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 201" : {
+		"name" : "U.S. Route 201",
+		"code" : "US 201",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 202" : {
+		"name" : "U.S. Route 202",
+		"code" : "US 202",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 206" : {
+		"name" : "U.S. Route 206",
+		"code" : "US 206",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 209" : {
+		"name" : "U.S. Route 209",
+		"code" : "US 209",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 211" : {
+		"name" : "U.S. Route 211",
+		"code" : "US 211",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 212" : {
+		"name" : "U.S. Route 212",
+		"code" : "US 212",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 218" : {
+		"name" : "U.S. Route 218",
+		"code" : "US 218",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 219" : {
+		"name" : "U.S. Route 219",
+		"code" : "US 219",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 220" : {
+		"name" : "U.S. Route 220",
+		"code" : "US 220",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 221" : {
+		"name" : "U.S. Route 221",
+		"code" : "US 221",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 222" : {
+		"name" : "U.S. Route 222",
+		"code" : "US 222",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 223" : {
+		"name" : "U.S. Route 223",
+		"code" : "US 223",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 224" : {
+		"name" : "U.S. Route 224",
+		"code" : "US 224",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 231" : {
+		"name" : "U.S. Route 231",
+		"code" : "US 231",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 250" : {
+		"name" : "U.S. Route 250",
+		"code" : "US 250",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 258" : {
+		"name" : "U.S. Route 258",
+		"code" : "US 258",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 259" : {
+		"name" : "U.S. Route 259",
+		"code" : "US 259",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 264" : {
+		"name" : "U.S. Route 264",
+		"code" : "US 264",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 266" : {
+		"name" : "U.S. Route 266",
+		"code" : "US 266",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 270" : {
+		"name" : "U.S. Route 270",
+		"code" : "US 270",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 271" : {
+		"name" : "U.S. Route 271",
+		"code" : "US 271",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 275" : {
+		"name" : "U.S. Route 275",
+		"code" : "US 275",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 276" : {
+		"name" : "U.S. Route 276",
+		"code" : "US 276",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 277" : {
+		"name" : "U.S. Route 277",
+		"code" : "US 277",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 278" : {
+		"name" : "U.S. Route 278",
+		"code" : "US 278",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 280" : {
+		"name" : "U.S. Route 280",
+		"code" : "US 280",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 281" : {
+		"name" : "U.S. Route 281",
+		"code" : "US 281",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 283" : {
+		"name" : "U.S. Route 283",
+		"code" : "US 283",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 285" : {
+		"name" : "U.S. Route 285",
+		"code" : "US 285",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 287" : {
+		"name" : "U.S. Route 287",
+		"code" : "US 287",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 290" : {
+		"name" : "U.S. Route 290",
+		"code" : "US 290",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 301" : {
+		"name" : "U.S. Route 301",
+		"code" : "US 301",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 302" : {
+		"name" : "U.S. Route 302",
+		"code" : "US 302",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 310" : {
+		"name" : "U.S. Route 310",
+		"code" : "US 310",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 311" : {
+		"name" : "U.S. Route 311",
+		"code" : "US 311",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 319" : {
+		"name" : "U.S. Route 319",
+		"code" : "US 319",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 321" : {
+		"name" : "U.S. Route 321",
+		"code" : "US 321",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 322" : {
+		"name" : "U.S. Route 322",
+		"code" : "US 322",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 331" : {
+		"name" : "U.S. Route 331",
+		"code" : "US 331",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 340" : {
+		"name" : "U.S. Route 340",
+		"code" : "US 340",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 341" : {
+		"name" : "U.S. Route 341",
+		"code" : "US 341",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 350" : {
+		"name" : "U.S. Route 350",
+		"code" : "US 350",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 360" : {
+		"name" : "U.S. Route 360",
+		"code" : "US 360",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 371" : {
+		"name" : "U.S. Route 371",
+		"code" : "US 371",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 377" : {
+		"name" : "U.S. Route 377",
+		"code" : "US 377",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 378" : {
+		"name" : "U.S. Route 378",
+		"code" : "US 378",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 380" : {
+		"name" : "U.S. Route 380",
+		"code" : "US 380",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 385" : {
+		"name" : "U.S. Route 385",
+		"code" : "US 385",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 395" : {
+		"name" : "U.S. Route 395",
+		"code" : "US 395",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 400" : {
+		"name" : "U.S. Route 400",
+		"code" : "US 400",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 401" : {
+		"name" : "U.S. Route 401",
+		"code" : "US 401",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 411" : {
+		"name" : "U.S. Route 411",
+		"code" : "US 411",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 412" : {
+		"name" : "U.S. Route 412",
+		"code" : "US 412",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 421" : {
+		"name" : "U.S. Route 421",
+		"code" : "US 421",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 422" : {
+		"name" : "U.S. Route 422",
+		"code" : "US 422",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 425" : {
+		"name" : "U.S. Route 425",
+		"code" : "US 425",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 431" : {
+		"name" : "U.S. Route 431",
+		"code" : "US 431",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 441" : {
+		"name" : "U.S. Route 441",
+		"code" : "US 441",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 460" : {
+		"name" : "U.S. Route 460",
+		"code" : "US 460",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 491" : {
+		"name" : "U.S. Route 491",
+		"code" : "US 491",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 501" : {
+		"name" : "U.S. Route 501",
+		"code" : "US 501",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 521" : {
+		"name" : "U.S. Route 521",
+		"code" : "US 521",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 522" : {
+		"name" : "U.S. Route 522",
+		"code" : "US 522",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 550" : {
+		"name" : "U.S. Route 550",
+		"code" : "US 550",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 601" : {
+		"name" : "U.S. Route 601",
+		"code" : "US 601",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 641" : {
+		"name" : "U.S. Route 641",
+		"code" : "US 641",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 701" : {
+		"name" : "U.S. Route 701",
+		"code" : "US 701",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+	"US 730" : {
+		"name" : "U.S. Route 730",
+		"code" : "US 730",
+		"designation" : "US_highway_minor",
+		"connections" : [
+            
+        ]
+	},
+
+    "I-2" : {
+        "name" : "Interstate 2",
+        "code" : "I-2",
+        "shield_location" : "i2_shield",
+        "designation" : "interstate_primary",
+        "connections" : [
+            "Peñitas, Texas",
+            "Harlingen, Texas"
+        ]
+    },
+	"I-4" : {
+		"name" : "Interstate 4",
+		"code" : "I-4",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-5" : {
+		"name" : "Interstate 5",
+		"code" : "I-5",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-8" : {
+		"name" : "Interstate 8",
+		"code" : "I-8",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-10" : {
+		"name" : "Interstate 10",
+		"code" : "I-10",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-11" : {
+		"name" : "Interstate 11",
+		"code" : "I-11",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-12" : {
+		"name" : "Interstate 12",
+		"code" : "I-12",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-14" : {
+		"name" : "Interstate 14",
+		"code" : "I-14",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-15" : {
+		"name" : "Interstate 15",
+		"code" : "I-15",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-16" : {
+		"name" : "Interstate 16",
+		"code" : "I-16",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-17" : {
+		"name" : "Interstate 17",
+		"code" : "I-17",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-19" : {
+		"name" : "Interstate 19",
+		"code" : "I-19",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-20" : {
+		"name" : "Interstate 20",
+		"code" : "I-20",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-22" : {
+		"name" : "Interstate 22",
+		"code" : "I-22",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-24" : {
+		"name" : "Interstate 24",
+		"code" : "I-24",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-25" : {
+		"name" : "Interstate 25",
+		"code" : "I-25",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-26" : {
+		"name" : "Interstate 26",
+		"code" : "I-26",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-27" : {
+		"name" : "Interstate 27",
+		"code" : "I-27",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-29" : {
+		"name" : "Interstate 29",
+		"code" : "I-29",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-30" : {
+		"name" : "Interstate 30",
+		"code" : "I-30",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-31" : {
+		"name" : "Interstate 31",
+		"code" : "I-31",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-35" : {
+		"name" : "Interstate 35",
+		"code" : "I-35",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-37" : {
+		"name" : "Interstate 37",
+		"code" : "I-37",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-39" : {
+		"name" : "Interstate 39",
+		"code" : "I-39",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-40" : {
+		"name" : "Interstate 40",
+		"code" : "I-40",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-41" : {
+		"name" : "Interstate 41",
+		"code" : "I-41",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-42" : {
+		"name" : "Interstate 42",
+		"code" : "I-42",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-43" : {
+		"name" : "Interstate 43",
+		"code" : "I-43",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-44" : {
+		"name" : "Interstate 44",
+		"code" : "I-44",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-45" : {
+		"name" : "Interstate 45",
+		"code" : "I-45",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-49" : {
+		"name" : "Interstate 49",
+		"code" : "I-49",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-55" : {
+		"name" : "Interstate 55",
+		"code" : "I-55",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-57" : {
+		"name" : "Interstate 57",
+		"code" : "I-57",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-59" : {
+		"name" : "Interstate 59",
+		"code" : "I-59",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-64" : {
+		"name" : "Interstate 64",
+		"code" : "I-64",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-65" : {
+		"name" : "Interstate 65",
+		"code" : "I-65",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-66" : {
+		"name" : "Interstate 66",
+		"code" : "I-66",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-68" : {
+		"name" : "Interstate 68",
+		"code" : "I-68",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-69" : {
+		"name" : "Interstate 69",
+		"code" : "I-69",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-70" : {
+		"name" : "Interstate 70",
+		"code" : "I-70",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-71" : {
+		"name" : "Interstate 71",
+		"code" : "I-71",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-72" : {
+		"name" : "Interstate 72",
+		"code" : "I-72",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-73" : {
+		"name" : "Interstate 73",
+		"code" : "I-73",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-74" : {
+		"name" : "Interstate 74",
+		"code" : "I-74",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-75" : {
+		"name" : "Interstate 75",
+		"code" : "I-75",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-76 (Ohio–New Jersey)" : {
+		"name" : "Interstate 76 (Ohio–New Jersey)",
+		"code" : "I-76",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-76 (Colorado–Nebraska)" : {
+		"name" : "Interstate 76 (Colorado–Nebraska)",
+		"code" : "I-76",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-77" : {
+		"name" : "Interstate 77",
+		"code" : "I-77",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-78" : {
+		"name" : "Interstate 78",
+		"code" : "I-78",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-79" : {
+		"name" : "Interstate 79",
+		"code" : "I-79",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-80" : {
+		"name" : "Interstate 80",
+		"code" : "I-80",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-81" : {
+		"name" : "Interstate 81",
+		"code" : "I-81",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-82" : {
+		"name" : "Interstate 82",
+		"code" : "I-82",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-83" : {
+		"name" : "Interstate 83",
+		"code" : "I-83",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-84 (Oregon–Utah)" : {
+		"name" : "Interstate 84 (Oregon–Utah)",
+		"code" : "I-84",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-84 (Pennsylvania–Massachusetts)" : {
+		"name" : "Interstate 84 (Pennsylvania–Massachusetts)",
+		"code" : "I-84",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-85" : {
+		"name" : "Interstate 85",
+		"code" : "I-85",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-86 (Idaho)" : {
+		"name" : "Interstate 86 (Idaho)",
+		"code" : "I-86",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-86 (Pennsylvania–New York)" : {
+		"name" : "Interstate 86 (Pennsylvania–New York)",
+		"code" : "I-86",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-87 (North Carolina)" : {
+		"name" : "Interstate 87 (North Carolina)",
+		"code" : "I-87",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-87 (New York)" : {
+		"name" : "Interstate 87 (New York)",
+		"code" : "I-87",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-88 (Illinois)" : {
+		"name" : "Interstate 88 (Illinois)",
+		"code" : "I-88",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-88 (New York)" : {
+		"name" : "Interstate 88 (New York)",
+		"code" : "I-88",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-89" : {
+		"name" : "Interstate 89",
+		"code" : "I-89",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-90" : {
+		"name" : "Interstate 90",
+		"code" : "I-90",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-91" : {
+		"name" : "Interstate 91",
+		"code" : "I-91",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-93" : {
+		"name" : "Interstate 93",
+		"code" : "I-93",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-94" : {
+		"name" : "Interstate 94",
+		"code" : "I-94",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-95" : {
+		"name" : "Interstate 95",
+		"code" : "I-95",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-96" : {
+		"name" : "Interstate 96",
+		"code" : "I-96",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-97" : {
+		"name" : "Interstate 97",
+		"code" : "I-97",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	},
+	"I-99" : {
+		"name" : "Interstate 99",
+		"code" : "I-99",
+		"designation" : "interstate_primary",
+		"connections" : [
+            
+        ]
+	}
+}

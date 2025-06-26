@@ -1,0 +1,11 @@
+{
+    "US_highway_major" : 65,
+    "US_highway_minor" : 60,
+    "interstate_major" : 75,
+    "interstate_primary" : 70,
+    "interstate_auxiliary" : 65,
+    "state_highway" : 70,
+    "expressway" : 65,
+    "local_roadway" : 55,
+    "street" : 35
+}
