@@ -19,6 +19,7 @@ import main.core.FilePaths;
 import main.core.demographics.Bloc;
 import main.core.demographics.Demographics;
 import main.core.demographics.DemographicsManager;
+import main.core.map.travel.Airport;
 
 public final class MapManager {
     private MapManager() {} // Non-Instantiable
@@ -456,4 +457,23 @@ public final class MapManager {
 
         return getDefaultDemographics();
     }
+
+    public static double getRoadDistance(Municipality start, Municipality destination) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getRoadDistance'");
+    }
+    public static double getTrainDistance(Municipality start, Municipality destination) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTrainDistance'");
+    }
+    public static double getAirDistance(Municipality start, Municipality destination) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAirDistance'");
+    }
+    public static double getWaterDistance(Municipality start, Municipality destination) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getWaterDistance'");
+    }
+
+
 }

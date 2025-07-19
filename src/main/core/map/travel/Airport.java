@@ -1,4 +1,7 @@
-package main.core.map;
+package main.core.map.travel;
+
+import main.core.map.MapManager;
+import main.core.map.Municipality;
 
 public class Airport {
     
