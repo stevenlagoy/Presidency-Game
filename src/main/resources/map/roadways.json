@@ -2,7 +2,7 @@
 	"US 10" : {
 		"name" : "U.S. Route 10",
 		"code" : "US 10",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             "West Fargo, ND",
             "Fargo, ND",
@@ -21,7 +21,7 @@
 	"US 11" : {
 		"name" : "U.S. Route 11",
 		"code" : "US 11",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             "New Orleans, LA",
             "Meridian, MS",
@@ -172,7 +172,7 @@
 	"US 20" : {
 		"name" : "U.S. Route 20",
 		"code" : "US 20",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             "Newport, OR",
             "Albany, OR",
@@ -191,7 +191,7 @@
 	"US 21" : {
 		"name" : "U.S. Route 21",
 		"code" : "US 21",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             "Hunting Island State Park, SC",
             "Yemasseem, SC",
@@ -245,7 +245,18 @@
 		"code" : "US 24",
 		"designation" : "US_highway_minor",
 		"connections" : [
-            
+            "Minturn, CO",
+			"Colorado Springs, CO",
+			"Colby, KS",
+			"Kansas City, MO",
+			"East Pastoria, IL",
+			"Chenoa, IL",
+			"Gilman, IL",
+			"Remington, IN",
+			"Fort Wayne, IN",
+			"Toledo, OH",
+			"Taylor, MI",
+			"Clarkston, MI"
         ]
 	},
 	"US 25" : {
@@ -253,7 +264,18 @@
 		"code" : "US 25",
 		"designation" : "US_highway_minor",
 		"connections" : [
-            
+			"Brunswick, GA",
+			"Dock Junction, GA",
+			"Register, GA",
+			"North Augusta, SC",
+			"Greenville, SC",
+			"Flat Rock, NC",
+			"Asheville, NC",
+			"Newport, TN",
+			"North Corbin, KY",
+			"Lexington, KY",
+			"Covington, KY",
+			"Covington, KY"
         ]
 	},
 	"US 26" : {
@@ -261,7 +283,12 @@
 		"code" : "US 26",
 		"designation" : "US_highway_minor",
 		"connections" : [
-            
+			"Seaside, OR",
+			"Portland, OR",
+			"Boise, ID",
+			"Idaho Falls, ID",
+			"Casper, WY",
+			"Ogallala, NE"
         ]
 	},
 	"US 27" : {
@@ -269,7 +296,18 @@
 		"code" : "US 27",
 		"designation" : "US_highway_minor",
 		"connections" : [
-            
+            "Miami, FL",
+			"Davenport, FL",
+			"Ocala, FL",
+			"Tallahassee, FL",
+			"LaGrange, GA",
+			"Bremen, GA",
+			"Chattanooga, TN",
+			"Harriman, TN",
+			"Lexington, KY",
+			"Cincinnati, OH",
+			"Richmond, IN",
+			"Fort Wayne, IN"
         ]
 	},
 	"US 29" : {
@@ -277,7 +315,14 @@
 		"code" : "US 29",
 		"designation" : "US_highway_minor",
 		"connections" : [
-            
+            	"Pensacola, FL",
+				"Atlanta, GA",
+				"Spartanburg, SC",
+				"Charlotte, NC",
+				"Greensboro, NC",
+				"Charlottesville, VA",
+				"Washington DC",
+				"Ellicott City, MD"
         ]
 	},
 	"US 30" : {
@@ -815,9 +860,19 @@
 	"US 31" : {
 		"name" : "U.S. Route 31",
 		"code" : "US 31",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
-            
+            	"Spanish Fort, AL",
+				"Birmingham, AL",
+				"Fultondale, AL",
+				"Nashville, TN",
+				"Nashville, TN",
+				"Louisville, KY",
+				"Indianapolis, IN",
+				"South Bend, IN",
+				"Benton Harbor, MI",
+				"Norton Shores, MI",
+				"Mackinaw City, MI"
         ]
 	},
 	"US 33" : {
@@ -825,7 +880,18 @@
 		"code" : "US 33",
 		"designation" : "US_highway_minor",
 		"connections" : [
-            
+            "Elkhart, IN",
+			"Ligonier, IN",
+			"Fort Wayne, IN",
+			"Decatur, IN",
+			"Wapakoneta, OH",
+			"Columbus, OH",
+			"Athens, OH",
+			"Ripley, WV",
+			"Weston, WV",
+			"Dumbarton, VA",
+			"Harrisonburg, VA",
+			"Richmond, VA"
         ]
 	},
 	"US 34" : {
@@ -833,7 +899,18 @@
 		"code" : "US 34",
 		"designation" : "US_highway_minor",
 		"connections" : [
-            
+            "Granby, CO",
+			"Loveland, CO",
+			"Wiggins, CO",
+			"Grand Island, NE",
+			"Lincoln, NE",
+			"Glenwood, IA",
+			"Osceola, IA",
+			"Galesburg, IL",
+			"Mendota, IL",
+			"Downers Grove, IL",
+			"Western Springs, IL",
+			"Berwyn, IL"
         ]
 	},
 	"US 35" : {
@@ -855,7 +932,7 @@
 	"US 40" : {
 		"name" : "U.S. Route 40",
 		"code" : "US 40",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             
         ]
@@ -863,7 +940,7 @@
 	"US 41" : {
 		"name" : "U.S. Route 41",
 		"code" : "US 41",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             
         ]
@@ -927,7 +1004,7 @@
 	"US 50" : {
 		"name" : "U.S. Route 50",
 		"code" : "US 50",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             
         ]
@@ -935,7 +1012,7 @@
 	"US 51" : {
 		"name" : "U.S. Route 51",
 		"code" : "US 51",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             
         ]
@@ -999,7 +1076,7 @@
 	"US 60" : {
 		"name" : "U.S. Route 60",
 		"code" : "US 60",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             
         ]
@@ -1007,7 +1084,7 @@
 	"US 61" : {
 		"name" : "U.S. Route 61",
 		"code" : "US 61",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             
         ]
@@ -1071,7 +1148,7 @@
 	"US 70" : {
 		"name" : "U.S. Route 70",
 		"code" : "US 70",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             
         ]
@@ -1079,7 +1156,7 @@
 	"US 71" : {
 		"name" : "U.S. Route 71",
 		"code" : "US 71",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             
         ]
@@ -1151,7 +1228,7 @@
 	"US 80" : {
 		"name" : "U.S. Route 80",
 		"code" : "US 80",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             
         ]
@@ -1159,7 +1236,7 @@
 	"US 81" : {
 		"name" : "U.S. Route 81",
 		"code" : "US 81",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             
         ]
@@ -1215,7 +1292,7 @@
 	"US 90" : {
 		"name" : "U.S. Route 90",
 		"code" : "US 90",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             
         ]
@@ -1223,7 +1300,7 @@
 	"US 91" : {
 		"name" : "U.S. Route 91",
 		"code" : "US 91",
-		"designation" : "US_highway_minor",
+		"designation" : "US_highway_major",
 		"connections" : [
             
         ]
@@ -2089,7 +2166,18 @@
 		"code" : "US 601",
 		"designation" : "US_highway_minor",
 		"connections" : [
-            
+			"Tarboro, SC",
+			"Bamberg, SC",
+			"Orangeburg, SC",
+			"St. Matthews, SC",
+			"Lugoff, SC",
+			"Camden, SC",
+			"Monroe, NC",
+			"Salisbury, NC",
+			"Mocksville, NC",
+			"Yadkinville, NC",
+			"Mount Airy, NC",
+			"Mount Airy, NC"
         ]
 	},
 	"US 641" : {
@@ -2097,7 +2185,17 @@
 		"code" : "US 641",
 		"designation" : "US_highway_minor",
 		"connections" : [
-            
+			"Clifton, TN",
+			"Parsons, TN",
+			"Holladay, TN",
+			"Camden, TN",
+			"Paris, TN",
+			"Murray, KY",
+			"Draffenville, KY",
+			"Calvert City, KY",
+			"Kuttawa, KY",
+			"Eddyville, KY",
+			"Marion, KY"
         ]
 	},
 	"US 701" : {
@@ -2105,7 +2203,15 @@
 		"code" : "US 701",
 		"designation" : "US_highway_minor",
 		"connections" : [
-            
+			"Georgetown, SC",
+			"Conway, SC",
+			"Conway, SC",
+			"Loris, SC",
+			"Whiteville, NC",
+			"Elizabethtown, NC",
+			"Clinton, NC",
+			"Newton Grove, NC",
+			"Four Oaks, NC"
         ]
 	},
 	"US 730" : {
@@ -2113,7 +2219,9 @@
 		"code" : "US 730",
 		"designation" : "US_highway_minor",
 		"connections" : [
-            
+            "Boardman, OR",
+			"Umatilla, OR",
+			"Wallula, WA"
         ]
 	},
 

@@ -1,0 +1,210 @@
+{
+    "Port of Houston" : {
+        "name" : "Port of Houston",
+        "location" : "Houston, TX"
+    },
+    "Port of South Louisiana" : {
+        "name" : "Port of South Louisiana",
+        "location" : "LaPlace, LA"
+    },
+    "Port of Corpus Christi" : {
+        "name" : "Port of Corpus Christi",
+        "location" : "Corpus Christi, TX"
+    },
+    "Port of New York and New Jersey" : {
+        "name" : "Port of New York and New Jersey",
+        "location" : "Manhattan"
+    },
+    "Port Newark" : {
+        "name" : "Port Newark",
+        "location" : "Newark, NJ"
+    },
+    "Port of New Orleans" : {
+        "name" : "Port of New Orleans",
+        "location" : "New Orleans, LA"
+    },
+    "Port of Long Beach" : {
+        "name" : "Port of Long Beach",
+        "location" : "Long Beach, CA"
+    },
+    "Port of Greater Baton Rouge" : {
+        "name" : "Port of Greater Baton Rouge",
+        "location" : "Baton Rouge, LA"
+    },
+    "Port of Beaumont" : {
+        "name" : "Port of Beaumont",
+        "location" : "Beaumont, TX"
+    },
+    "Port of Los Angeles" : {
+        "name" : "Port of Los Angeles",
+        "location" : "Los Angeles, CA"
+    },
+    "Port of Virginia" : {
+        "name" : "Port of Virginia",
+        "location" : "Hampton Roads, VA"
+    },
+    "Port of Mobile" : {
+        "name" : "Port of Mobile",
+        "location" : "Mobile, AL"
+    },
+    "Plaquemines Port" : {
+        "name" : "Plaquemines Port",
+        "location" : "Belle Chasse, LA"
+    },
+    "Port of Savannah" : {
+        "name" : "Port of Savannah",
+        "location" : "Savannah, GA"
+    },
+    "Port of Lake Charles" : {
+        "name" : "Port of Lake Charles",
+        "location" : "Lake Charles, LA"
+    },
+    "Port of Port Arthur" : {
+        "name" : "Port of Port Arthur",
+        "location" : "Port Arthur, TX"
+    },
+    "Port Freeport" : {
+        "name" : "Port Freeport",
+        "location" : "Freeport, TX"
+    },
+    "Mid-Ohio Valley Port" : {
+        "name" : "Mid-Ohio Valley Port",
+        "location" : "Southeast Ohio"
+    },
+    "Port of Baltimore" : {
+        "name" : "Port of Baltimore",
+        "location" : "Baltimore, MD"
+    },
+    "Ports of Cincinnati-Northern KY" : {
+        "name" : "Ports of Cincinnati-Northern KY",
+        "location" : "Cincinnati, OH"
+    },
+    "Port of Texas City" : {
+        "name" : "Port of Texas City",
+        "location" : "Galveston Bay, TX"
+    },
+    "Port of St. Louis" : {
+        "name" : "Port of St. Louis",
+        "location" : "St. Louis, MO"
+    },
+    "East St. Louis" : {
+        "name" : "East St. Louis",
+        "location" : "East St. Louis, IL"
+    },
+    "Port of Huntington Tri-State" : {
+        "name" : "Port of Huntington Tri-State",
+        "location" : "Huntington, WV"
+    },
+    "Port of Philadelphia" : {
+        "name" : "Port of Philadelphia",
+        "location" : "Philadelphia, PA"
+    },
+    "Port Tampa Bay" : {
+        "name" : "Port Tampa Bay",
+        "location" : "Tampa Bay, FL"
+    },
+    "Valdez" : {
+        "name" : "Valdez",
+        "location" : "Valdez, AK"
+    },
+    "Twin Ports of Duluth and Superior" : {
+        "name" : "Twin Ports of Duluth and Superior",
+        "location" : "Duluth, MN"
+    },
+    "Port of Charleston" : {
+        "name" : "Port of Charleston",
+        "location" : "Charleston, SC"
+    },
+    "Northern Indiana Maritime District" : {
+        "name" : "Northern Indiana Maritime District",
+        "location" : "Northern Indiana"
+    },
+    "Pascagoula" : {
+        "name" : "Pascagoula",
+        "location" : "Pascagoula, MS"
+    },
+    "Port of Seattle" : {
+        "name" : "Port of Seattle",
+        "location" : "Seattle, WA"
+    },
+    "Port of Tacoma" : {
+        "name" : "Port of Tacoma",
+        "location" : "Tacoma, WA"
+    },
+    "Port of Richmond" : {
+        "name" : "Port of Richmond",
+        "location" : "Richmond, CA"
+    },
+    "Port of Portland" : {
+        "name" : "Port of Portland",
+        "location" : "Portland, OR"
+    },
+    "Port Everglades" : {
+        "name" : "Port Everglades",
+        "location" : "Fort Lauderdale, FL"
+    },
+    "South Jersey" : {
+        "name" : "South Jersey",
+        "location" : "Camden, NJ"
+    },
+    "Port of Oakland" : {
+        "name" : "Port of Oakland",
+        "location" : "Oakland, CA"
+    },
+    "Kalama" : {
+        "name" : "Kalama",
+        "location" : "Kalema, WA"
+    },
+    "Port of Jacksonville" : {
+        "name" : "Port of Jacksonville",
+        "location" : "Jacksonville, FL"
+    },
+    "Port of Pittsburgh" : {
+        "name" : "Port of Pittsburgh",
+        "location" : "Pittsburgh, PA"
+    },
+    "New Bourbon Port Authority" : {
+        "name" : "New Bourbon Port Authority",
+        "location" : "Perryville, MO"
+    },
+    "Mid-America Port" : {
+        "name" : "Mid-America Port",
+        "location" : "Iowa, Illinois, Missouri"
+    },
+    "Illinois Waterway Ports" : {
+        "name" : "Illinois Waterway Ports",
+        "location" : "Illinois"
+    },
+    "Two Harbors" : {
+        "name" : "Two Harbors",
+        "location" : "Two Harbors, MN"
+    },
+    "Port of Boston" : {
+        "name" : "Port of Boston",
+        "location" : "Boston, MA"
+    },
+    "Port of Honolulu" : {
+        "name" : "Port of Honolulu",
+        "location" : "Honolulu, HI"
+    },
+    "Port of Galveston" : {
+        "name" : "Port of Galveston",
+        "location" : "Galveston, TX"
+    },
+    "Port of Longview" : {
+        "name" : "Port of Longview",
+        "location" : "Longview, WA"
+    },
+    "Port of Vancouver USA" : {
+        "name" : "Port of Vancouver USA",
+        "location" : "Vancouver, WA"
+    },
+    "Port of Cleveland" : {
+        "name" : "Port of Cleveland",
+        "location" : "Cleveland, OH"
+    },
+    "Port of San Juan" : {
+        "name" : "Port of San Juan",
+        "location" : "San Juan, PR"
+    }
+}
