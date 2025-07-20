@@ -1,7 +1,6 @@
 package main.core.graphics.ui;
 
 import org.joml.Vector2d;
-import org.joml.Vector2f;
 
 import main.core.Engine;
 import main.core.graphics.MouseInput;

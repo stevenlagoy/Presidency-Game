@@ -16,7 +16,6 @@ import main.core.graphics.entity.terrain.Terrain;
 import main.core.graphics.lighting.DirectionalLight;
 import main.core.graphics.lighting.PointLight;
 import main.core.graphics.lighting.SpotLight;
-import main.core.graphics.utils.Consts;
 
 public class RenderManager {
     
