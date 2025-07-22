@@ -97,6 +97,13 @@ Developed by Steven LaGoy
 
 For bug reports or feature requests, please open an issue on the GitHub repository, or contact Steven LaGoy at stevenlagoy@gmail.com
 
+## Authors / Contributors
+
+Created primarily by:
+- Steven LaGoy
+
+Other authors/contributors:
+
 ---
 
 *Race for the Presidency is a work of fiction. Any resemblance to real persons or events is for simulation purposes only and is not intended to reflect the real actions or views of any persons involved.*

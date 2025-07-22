@@ -1,0 +1,154 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//                             STYLE GUIDE: Race for the Presidency                              //
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+This file provides the guide for styling code files, comments, documentation, etc for the project,
+Race for the Presidency. The guidelines in this file should be followed whenever possible within
+the project.
+
+CODE FILE HEADERS ---------------------------------------------------------------------------------
+
+Code files should begin with a multi-line comment "File Header" giving the name of the file,
+primary author of the file, other authors/contributors, date of creation, and date of last
+modification.
+
+See here an example of a file header:
+/*
+ * FileName.java
+ * Steven LaGoy
+ * Contributors: John Doe, Jane Smith
+ * Created: 21 July 2025 at 2:22 PM
+ * Modified: 21 July 2025
+ */
+
+The name of the file may contain its package as well, as package/path/FileName.java
+Any time the file is moved or renamed, the header name should be changed to reflect this.
+The author's and contributors' name(s) should be sufficiently identifying. They may contain links
+to Github profiles.
+New authors and contributors should be added to the proper place in the README file.
+The date of creation should include at least the date, month, and year of creation. If possible, it
+should include the time of creation as well.
+
+DATES AND TIMES -----------------------------------------------------------------------------------
+
+All dates in comments should be expressed in the following format:
+DD/MM/YYYY
+Where the date and month are both two digits (with a leading 0 if needed), and the year is four
+digits (as 20XX).
+
+All dates in comments should be expressed in the following format:
+H(H):MM AM/PM (TZ)
+Where the hour may be one or two digits, and the minute is two digits. Hours should be in the
+12-hour format, and AM or PM should be added to the end of the time.
+The Time Zone may be added to the end of the time. If the Time Zone is ommitted, it is assumed to
+be Eastern Standard Time (EST).
+
+To specify a date and a time, the date should be given first, followed by the word "at", and then
+the time.
+
+TITLES --------------------------------------------------------------------------------------------
+
+When a title is needed in a file, use a title-style block. The title block consists of exactly
+three (3) lines. Title blocks should always be justified as far left as possible. In many cases,
+this should be immediately against the left margin of the file. In cases where this breaks other
+styling guidelines (such as titles within an indented class), the length of each line of the title
+should be reduced so that the last character in each line is at column 100.
+Titles might be needed when a set of related functions or data already uses Header sections, but
+would be better grouped together at a higher level.
+
+The first line should consist only of at most one hundred (100) comment characters. In Java code,
+this is the forward slash (/). In Python, this is the hash symbol (#). Always use the appropriate
+comment character for the language of the file. Use existing examples or interpret this rule to
+your best ability if the language uses a different style of comment. For languages or data files
+without comments (like JSON, pure TXT, etc), do not include titles.
+
+After the first line of comment characters, the next line should start with the minumum number of
+comment characters to mark that line as a comment. In Java, this would be two forward slashes (//).
+In Python, this would be a single hash character (#). Again, use the appropriate character(s) for
+the language. After this, place at least four (4) space characters. More spaces are allowed and
+even preferred. Next, enter the text of the title in capital case. If the title contains text which
+is normally formatted in any other case, preserve that case (for example, a title specifically
+referencing a title-case code file, like "INTERACTIONS WITH FileName.java"). The title text may
+never consist only of non-capitalized words. At least one word in all-capitals should be present.
+Titles should not contain only the necessary words (I.E. avoid "THE", "A", etc). Titles should be
+consise but descriptive. They should be effective for searching within and between code files by
+keyword. Titles should never exceed 55 characters in length. The title text should be followed by
+at least four (4) space characters, and then the same character(s) which began the line, or signal
+the end of a comment. The final character in the line should be at column 100, so that the total
+length of the second line is the same as the first. This can be done by padding either side of the
+title text with spaces. Ideally, the text should be centered within the line, but it is acceptable
+to have more spaces on one side than the other. In the case that an unequal number of spaces one
+each side of the text is needed to fill the line, favor more spaces on the right side than on the
+left.
+
+The final line should be identical to the first line, consisting of at most one hundred (100)
+comment characters.
+
+See here an example of a Java title:
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//                                          TITLE BLOCK                                          //
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+And here an example of a Python title:
+###################################################################################################
+#                                           TITLE BLOCK                                           #
+###################################################################################################
+
+And here an example of an HTML title (notice the 40 spaces on the left and 41 on the right):
+<!------------------------------------------------------------------------------------------------>
+<!--                                        TITLE BLOCK                                         -->
+<!------------------------------------------------------------------------------------------------>
+
+The title block must be followed by one blank line. After this, a multi-line comment may be
+included explaining the contents of the title. If the language being used provides syntax for a
+multi-line comment, always use that syntax even if the comment fits on one line. The comment should
+be followed by another blank line. After this is placed the first header or line of code.
+/* This is an example of a single-line comment with multi-line comment formatting in Java. */
+
+HEADERS -------------------------------------------------------------------------------------------
+
+In cases where several functions or pieces of data are related or logically grouped, they may be
+marked by a Header. Headers are always exactly one line in length.
+The Header line should consist of the header text, followed by enough dash characters ("-") to pad
+the line to the 100th column. The header text must be consise but descriptive for the contents
+under the header, and may never exceed 55 characters in length. The title text should be written in
+all-capital case, though the style of other text should be preserved (I.E. METHODS WITH Datatype).
+Header lines should be indented the same as the least-indented code they describe. The line should
+begin with the character(s) for a single-line comment.
+
+See here an example of a Java header:
+// HEADER -----------------------------------------------------------------------------------------
+
+And here an example of a Python header:
+# HEADER ------------------------------------------------------------------------------------------
+
+And here an example of an HTML header:
+<!-- HEADER -------------------------------------------------------------------------------------->
+
+The header must be followed by one blank line. After this, a multi-line comment may be included
+explaining the contents of the section. The comment should be followed by another blank line. After
+this is placed the first line of code.
+
+INLINE DOCUMENTATION ------------------------------------------------------------------------------
+
+For languages which provide methods of inline documentation (like Javadoc, Docstrings, etc), those
+should be used to explain the function of code, when it is not obvious or self-documenting.
+Functions like simple getters and setters are usually obvious, but side effects should still be
+documented.
+
+See here an example of Javadoc:
+/**
+ * Get the distribution of first / given names for a particular demographic.
+ * @param demographics Demographics with which to filter the distributions. Only names matching
+ *        <i>all</i> of the Blocs will be returned.
+ * @return Map of String to Double giving names and the relative frequencies of those names.
+ * @see #getFirstNamesDistribution(Bloc[])
+ * @see #getFirstNamesDistribution(Collection)
+ */
+public Map<String, Double> getFirstNamesDistribution(Demographics demographics) {...}
+
+VARIABLE NAMES ------------------------------------------------------------------------------------
+
+FUNCTION NAMES ------------------------------------------------------------------------------------
+
+CLASS / FILE NAMES --------------------------------------------------------------------------------
