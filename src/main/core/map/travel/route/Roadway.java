@@ -1,5 +1,7 @@
 package main.core.map.travel.route;
 
+import main.core.Jsonic;
+import main.core.Repr;
 import main.core.map.Municipality;
 
 import java.util.ArrayList;
@@ -7,11 +9,15 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class Roadway {
+import core.JSONObject;
+
+public class Roadway implements Repr<Roadway>, Jsonic<Roadway> {
     
+    // STATIC VARIABLES ---------------------------------------------------------------------------
+
     private static Map<String, Designation> designations;
 
-    public class Designation {
+    public static class Designation {
         private String name;
         private double speed;
 
@@ -26,10 +32,21 @@ public class Roadway {
         public double getSpeed() { return speed; }
     }
 
+    // INSTANCE VARIABLES -------------------------------------------------------------------------
+
     private String name;
     private String code;
     private Designation designation;
     private List<Municipality> connections;
+
+    // CONSTRUCTORS -------------------------------------------------------------------------------
+
+    public Roadway() {
+        name = "";
+        code = "";
+        designation = null;
+        connections = new ArrayList<>();
+    }
 
     public Roadway(String name, String code, String designationName, Municipality... connections) {
         this(name, code, designationName, List.of(connections));
@@ -58,5 +75,31 @@ public class Roadway {
     public List<Municipality> getConnection() { return connections; }
 
     public boolean connects(Municipality connection) { return connections.contains(connection); }
+
+    // REPRESENTATION METHODS ---------------------------------------------------------------------
+
+    @Override
+    public JSONObject toJson() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+    }
+
+    @Override
+    public Roadway fromJson(JSONObject json) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromJson'");
+    }
+
+    @Override
+    public String toRepr() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toRepr'");
+    }
+
+    @Override
+    public Roadway fromRepr(String repr) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromRepr'");
+    }
 
 }

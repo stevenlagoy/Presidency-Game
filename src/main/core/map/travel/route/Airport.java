@@ -1,11 +1,16 @@
 package main.core.map.travel.route;
 
+import core.JSONObject;
+import main.core.Jsonic;
 import main.core.Main;
+import main.core.Repr;
 import main.core.map.MapManager;
 import main.core.map.Municipality;
 
-public class Airport {
+public class Airport implements Repr<Airport>, Jsonic<Airport> {
     
+    // STATIC VARIABLES ---------------------------------------------------------------------------
+
     public static enum AirportSize {
         LARGE,
         MEDIUM,
@@ -25,12 +30,25 @@ public class Airport {
         }
     }
 
+    // INSTANCE VARIABLES -------------------------------------------------------------------------
+
     private String fullName;
     private String commonName;
     private String IATA;
     private Municipality location;
     private AirportSize size;
     private int enplanement;
+
+    // CONSTRUCTORS -------------------------------------------------------------------------------
+
+    public Airport() {
+        fullName = "";
+        commonName = "";
+        IATA = "";
+        location = null;
+        size = null;
+        enplanement = 0;
+    }
 
     public Airport(String fullName, String commonName, String IATA, Municipality location, AirportSize size, int enplanement) {
         this.fullName = fullName;
@@ -56,5 +74,31 @@ public class Airport {
     public AirportSize getSize() { return size; }
 
     public int getEnplanement() { return enplanement; }
+
+    // REPRESENTATION METHODS ---------------------------------------------------------------------
+
+    @Override
+    public JSONObject toJson() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+    }
+
+    @Override
+    public Airport fromJson(JSONObject json) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromJson'");
+    }
+
+    @Override
+    public String toRepr() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toRepr'");
+    }
+
+    @Override
+    public Airport fromRepr(String repr) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromRepr'");
+    }
 
 }
