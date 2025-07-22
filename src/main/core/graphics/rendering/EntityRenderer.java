@@ -12,6 +12,7 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import main.core.FilePaths;
+import main.core.Logger;
 import main.core.Engine;
 import main.core.graphics.Camera;
 import main.core.graphics.ShaderManager;
@@ -81,14 +82,14 @@ public class EntityRenderer implements IRenderer<Object> {
 
                 // Validate OpenGL state before draw
                 if (!GL30.glIsVertexArray(model.getId())) {
-                    Engine.log("Invalid VAO ID: " + model.getId());
+                    Logger.log("Invalid VAO ID: " + model.getId());
                     continue;
                 }
 
                 // Check if shader program is valid
                 int program = shader.getProgramId();
                 if (!GL20.glIsProgram(program)) {
-                    Engine.log("Invalid shader program: " + program);
+                    Logger.log("Invalid shader program: " + program);
                     continue;
                 }
 
@@ -96,7 +97,7 @@ public class EntityRenderer implements IRenderer<Object> {
                 int vboId = model.getVertexBufferId();
                 int iboId = model.getIndexBufferId();
                 if (!GL15.glIsBuffer(vboId) || !GL15.glIsBuffer(iboId)) {
-                    Engine.log("Invalid buffer objects - VBO: " + vboId + ", IBO: " + iboId);
+                    Logger.log("Invalid buffer objects - VBO: " + vboId + ", IBO: " + iboId);
                     continue;
                 }
 
@@ -104,7 +105,7 @@ public class EntityRenderer implements IRenderer<Object> {
                 if (model.getTexture() != null) {
                     int texId = model.getTexture().getId();
                     if (!GL11.glIsTexture(texId)) {
-                        Engine.log("Invalid texture ID: " + texId);
+                        Logger.log("Invalid texture ID: " + texId);
                         continue;
                     }
                 }
@@ -113,24 +114,24 @@ public class EntityRenderer implements IRenderer<Object> {
                 if (model.getTexture() != null) {
                     int texId = model.getTexture().getId();
                     if (!GL11.glIsTexture(texId)) {
-                        Engine.log("Invalid texture ID: " + texId);
+                        Logger.log("Invalid texture ID: " + texId);
                         continue;
                     }
                 }
 
                 int error = GL11.glGetError();
                 if (error != GL11.GL_NO_ERROR) {
-                    Engine.log("OpenGL Error before draw: " + error);
+                    Logger.log("OpenGL Error before draw: " + error);
                 }
 
                 if (entity == null || entity.getModel() == null) {
-                    Engine.log("Null entity or model");
+                    Logger.log("Null entity or model");
                     continue;
                 }
 
                 int vertexCount = entity.getModel().getVertexCount();
                 if (vertexCount <= 0) {
-                    Engine.log("Invalid vertex count: " + vertexCount);
+                    Logger.log("Invalid vertex count: " + vertexCount);
                     continue;
                 }
                 
@@ -138,13 +139,13 @@ public class EntityRenderer implements IRenderer<Object> {
                     GL11.glDrawElements(GL11.GL_TRIANGLES, vertexCount, GL11.GL_UNSIGNED_INT, 0);
                 }
                 catch (Exception e) {
-                    Engine.log("Draw call failed");
-                    Engine.log(e);
+                    Logger.log("Draw call failed");
+                    Logger.log(e);
                 }
 
                 error = GL11.glGetError();
                 if (error != GL11.GL_NO_ERROR) {
-                    Engine.log("OpenGL Error after draw: " + error);
+                    Logger.log("OpenGL Error after draw: " + error);
                 }
             }
             unbind();

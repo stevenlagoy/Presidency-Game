@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import main.core.Engine;
+import main.core.Logger;
 import main.core.graphics.entity.TextureManager;
 
 public class GFX {
@@ -50,9 +51,9 @@ public class GFX {
                 TextureManager.addTexture(graphic, gfx.get(graphic));
             }
             catch (Exception e) {
-                Engine.log(e);
+                Logger.log(e);
             }
         }
-        Engine.log("GFX LOAD","Graphics Loaded Successfully");
+        Logger.log("GFX LOAD","Graphics Loaded Successfully");
     }
 }

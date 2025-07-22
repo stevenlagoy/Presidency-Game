@@ -7,6 +7,7 @@ import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
 import main.core.Engine;
+import main.core.Main;
 import main.core.graphics.Camera;
 import main.core.graphics.ILogic;
 import main.core.graphics.MouseInput;
@@ -36,25 +37,29 @@ public class NewGame implements ILogic {
     // Layers
     private final int backgroundLayer = 10;
     private final int containerLayer = 9;
+    private final int buttonLayer = 6;
 
     // Entities
     private Quad background;
     private Quad characterWindow;
     private Container pointsContainer;
     private Container customizationContainer;
+    private Button backButton;
 
     private final float screenWidth = 2560f, screenHeight = 1440f; // Not the actual expected values of width and height, just to use for positioning elements
 
-    private Entity[] entities        = {background,                   characterWindow,              pointsContainer,           customizationContainer};
-    private EntityType[] entityTypes = {EntityType.ENTITY,            EntityType.ENTITY,            EntityType.CONTAINER,      EntityType.CONTAINER};
-    private float[][] XYArrays       = {{0000f, 0000f, 2560f, 1440f}, {0275f, 0000f, 1714f, 1440f}, {1747f, 32f, 2527f, 159f}, {1747f, 0192f, 2527f, 1072f}};
-    private int[] layers             = {backgroundLayer,              containerLayer,               containerLayer,            containerLayer};
-    private Model[] models           = {null,                         null,                         null,                      null};
-    private String[][] textureNames  = {{"flag_bg"},                  {"black"},                    {"transparent_c"},         {"transparent_c"}};
+    private Entity[] entities        = {background,                   characterWindow,              pointsContainer,           customizationContainer,       backButton};
+    private EntityType[] entityTypes = {EntityType.ENTITY,            EntityType.ENTITY,            EntityType.CONTAINER,      EntityType.CONTAINER,         EntityType.BUTTON};
+    private float[][] XYArrays       = {{0000f, 0000f, 2560f, 1440f}, {0275f, 0000f, 1714f, 1440f}, {1747f, 32f, 2527f, 159f}, {1747f, 0192f, 2527f, 1072f}, {0023f, 0015f, 0253f, 0128f}};
+    private int[] layers             = {backgroundLayer,              containerLayer,               containerLayer,            containerLayer,               buttonLayer};
+    private Model[] models           = {null,                         null,                         null,                      null,                         null};
+    private String[][] textureNames  = {{"flag_bg"},                  {"black"},                    {"transparent_c"},         {"transparent_c"},            {"white", "red", "blue", "blue"}};
 
     private Runnable[][] runnables = new Runnable[entities.length][];
     private float[][] layersDimensions = new float[layers.length][];
     private float[][] WHArrays = new float[XYArrays.length][];
+
+    private boolean goBack;
 
     public NewGame() {
         window = Engine.getWindow();
@@ -63,7 +68,18 @@ public class NewGame implements ILogic {
         renderer = new RenderManager();
         cameraInc = new Vector3f(0);
 
+        goBack = false;
+
         // Set runnables
+
+        runnables[4] = new Runnable[] {
+            () -> {},
+            () -> {},
+            () -> {},
+            () -> { setGoBack(true); },
+            () -> {},
+            () -> {}
+        };
 
         try {
             Engine.loadTextures();
@@ -140,7 +156,7 @@ public class NewGame implements ILogic {
                 case BUTTON:
                     entities[i] = new Button(
                         new Entity(models[i], position),
-                        textureNames[i][0], textureNames[i][1], runnables[i][0], textureNames[i][2], runnables[i][1], textureNames[i][3], runnables[i][2]
+                        textureNames[i][0], textureNames[i][1], runnables[i][0], runnables[i][1], textureNames[i][2], runnables[i][2], runnables[i][3], textureNames[i][3], runnables[i][4], runnables[i][5]
                     );
                     break;
                 case CONTAINER:
@@ -168,7 +184,7 @@ public class NewGame implements ILogic {
     @Override
     public void input() {
         cameraInc.set(0, 0, 0);
-        if (Engine.DEBUG_MODE) {
+        if (Main.Engine().DEBUG_MODE) {
             if(window.isKeyPressed(GLFW.GLFW_KEY_W))
                 cameraInc.z = -10;
             if(window.isKeyPressed(GLFW.GLFW_KEY_S))
@@ -196,7 +212,7 @@ public class NewGame implements ILogic {
     public void update(float interval, MouseInput mouse) {
         camera.movePosition(cameraInc.x * Consts.CAMERA_MOVE_SPEED, cameraInc.y * Consts.CAMERA_MOVE_SPEED, cameraInc.z * Consts.CAMERA_MOVE_SPEED);
 
-        if (Engine.DEBUG_MODE) {
+        if (Main.Engine().DEBUG_MODE) {
             if (mouse.isRightButtonPress()) {
                 Vector2f rotVec = mouse.getDisplVec();
                 camera.moveRotation(rotVec.x * Consts.MOUSE_SENSITIVITY, rotVec.y * Consts.MOUSE_SENSITIVITY, 0);
@@ -225,6 +241,13 @@ public class NewGame implements ILogic {
     @Override
     public Camera getCamera() {
         return camera;
+    }
+
+    public boolean shouldGoBack() {
+        return goBack;
+    }
+    public void setGoBack(boolean goBack) {
+        this.goBack = goBack;
     }
     
 }

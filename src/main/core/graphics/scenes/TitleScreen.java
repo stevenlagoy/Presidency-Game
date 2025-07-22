@@ -7,6 +7,7 @@ import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
 import main.core.Engine;
+import main.core.Main;
 import main.core.graphics.Camera;
 import main.core.graphics.ILogic;
 import main.core.graphics.MouseInput;
@@ -83,13 +84,16 @@ public class TitleScreen implements ILogic {
         // Button runnables
         runnables[4] = new Runnable[] {
             () -> {},
-            () -> {
-                System.out.println("Click!");
-                setStartGame(true);
-            },
+            () -> {},
+            () -> {},
+            () -> { setStartGame(true); },
+            () -> {},
             () -> {}
         };
         runnables[5] = new Runnable[] {
+            () -> {},
+            () -> {},
+            () -> {},
             () -> {},
             () -> {},
             () -> {}
@@ -97,9 +101,15 @@ public class TitleScreen implements ILogic {
         runnables[6] = new Runnable[] {
             () -> {},
             () -> {},
+            () -> {},
+            () -> {},
+            () -> {},
             () -> {}
         };
         runnables[7] = new Runnable[] {
+            () -> {},
+            () -> {},
+            () -> {},
             () -> {},
             () -> {},
             () -> {}
@@ -182,7 +192,7 @@ public class TitleScreen implements ILogic {
                 case BUTTON:
                     entities[i] = new Button(
                         new Entity(models[i], position),
-                        textureNames[i][0], textureNames[i][1], runnables[i][0], textureNames[i][2], runnables[i][1], textureNames[i][3], runnables[i][2]
+                        textureNames[i][0], textureNames[i][1], runnables[i][0], runnables[i][1], textureNames[i][2], runnables[i][2], runnables[i][3], textureNames[i][3], runnables[i][4], runnables[i][5]
                     );
                     break;
                 case CONTAINER:
@@ -210,7 +220,7 @@ public class TitleScreen implements ILogic {
     @Override
     public void input() {
         cameraInc.set(0, 0, 0);
-        if (Engine.DEBUG_MODE) {
+        if (Main.Engine().DEBUG_MODE) {
             if(window.isKeyPressed(GLFW.GLFW_KEY_W))
                 cameraInc.z = -10;
             if(window.isKeyPressed(GLFW.GLFW_KEY_S))
@@ -240,7 +250,7 @@ public class TitleScreen implements ILogic {
     public void update(float interval, MouseInput mouse) {
         camera.movePosition(cameraInc.x * Consts.CAMERA_MOVE_SPEED, cameraInc.y * Consts.CAMERA_MOVE_SPEED, cameraInc.z * Consts.CAMERA_MOVE_SPEED);
 
-        if (Engine.DEBUG_MODE) {
+        if (Main.Engine().DEBUG_MODE) {
             if (mouse.isRightButtonPress()) {
                 Vector2f rotVec = mouse.getDisplVec();
                 camera.moveRotation(rotVec.x * Consts.MOUSE_SENSITIVITY, rotVec.y * Consts.MOUSE_SENSITIVITY, 0);

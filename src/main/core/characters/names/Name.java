@@ -18,8 +18,9 @@ import java.util.Set;
 
 // Internal Imports
 import core.JSONObject;
-import main.core.Engine;
+import main.core.IOUtil;
 import main.core.Jsonic;
+import main.core.Logger;
 import main.core.Repr;
 
 /** Models the Personal Name of a Character, with options for several Name Forms, Patterns, and Display Options.
@@ -209,7 +210,7 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
     public Name(NameForm nameform, String givenName, String middleName, String familyName) {
         this();
         if (nameform == null) {
-            Engine.log("INVALID NAMEFORM: ", String.format("Invalid nameform supplied: %s", nameform), new Exception());
+            Logger.log("INVALID NAMEFORM: ", String.format("Invalid nameform supplied: %s", nameform), new Exception());
             throw new IllegalArgumentException(String.format("Invalid nameform supplied: %s", nameform));
         }
         this.nameForm = nameform;
@@ -395,7 +396,7 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
         String name = sb.toString().replaceAll("\\s+", " ").trim();
         if (name.split("\\s+").length < 2) {
             for (NamePart part : style.pattern.get(nameForm)) {
-                System.out.println(getNamePart(part));
+                IOUtil.stdout.println(getNamePart(part));
             }
         }
         return name;
