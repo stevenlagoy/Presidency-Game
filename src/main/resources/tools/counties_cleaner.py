@@ -44,6 +44,8 @@ def generate_output(base_lines: List[str], county_seats: Dict[str, str]) -> List
     i = 0
     while i < len(base_lines):
         line = base_lines[i]
+        county_name = ""
+        state_name = ""
         if line.find("name") != -1:
             county_name = line.split(":")[1].replace("\"","").replace(",","").strip()
         elif line.find("state") != -1:
