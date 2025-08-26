@@ -1,0 +1,117 @@
+{
+    "Arabic" : {
+        "english_name" : "Arabic",
+        "native_name" : "اَلْعَرَبِيَّةُ",
+        "abbreviation" : "AR"
+    },
+    "Bulgarian" : {
+        "english_name" : "Bulgarian",
+        "native_name" : "Български",
+        "abbreviation" : "BG"
+    },
+    "Czech" : {
+        "english_name" : "Czech",
+        "native_name" : "Čeština",
+        "abbreviation" : "CZ"
+    },
+    "Danish" : {
+        "english_name" : "Danish",
+        "native_name" : "Dansk",
+        "abbreviation" : "DA"
+    },
+    "German" : {
+        "english_name" : "German",
+        "native_name" : "Deutsch",
+        "abbreviation" : "DE"
+    },
+    "Greek" : {
+        "english_name" : "Greek",
+        "native_name" : "Ελληνικά",
+        "abbreviation" : "EL"
+    },
+    "English" : {
+        "english_name" : "English",
+        "native_name" : "English",
+        "abbreviation" : "EN"
+    },
+    "Spanish" : {
+        "english_name" : "Spanish",
+        "native_name" : "Español",
+        "abbreviation" : "ES"
+    },
+    "Finnish" : {
+        "english_name" : "Finnish",
+        "native_name" : "Suomi",
+        "abbreviation" : "FI"
+    },
+    "French" : {
+        "english_name" : "French",
+        "native_name" : "Français",
+        "abbreviation" : "FR"
+    },
+    "Hungarian" : {
+        "english_name" : "Hungarian",
+        "native_name" : "Magyar nyelv",
+        "abbreviation" : "HU"
+    },
+    "Indonesian" : {
+        "english_name" : "Indonesian",
+        "native_name" : "Bahasa Indonesia",
+        "abbreviation" : "ID"
+    },
+    "Italian" : {
+        "english_name" : "Italian",
+        "native_name" : "Italiano",
+        "abbreviation" : "IT"
+    },
+    "Japanese" : {
+        "english_name" : "Japanese",
+        "native_name" : "日本語",
+        "abbreviation" : "JA"
+    },
+    "Dutch" : {
+        "english_name" : "Dutch",
+        "native_name" : "Nederlands",
+        "abbreviation" : "NL"
+    },
+    "Norwegian" : {
+        "english_name" : "Norwegian",
+        "native_name" : "Norsk",
+        "abbreviation" : "NO"
+    },
+    "Polish" : {
+        "english_name" : "Polish",
+        "native_name" : "Polski",
+        "abbreviation" : "PL"
+    },
+    "Portuguese" : {
+        "english_name" : "Portuguese",
+        "native_name" : "Português",
+        "abbreviation" : "PT"
+    },
+    "Russian" : {
+        "english_name" : "Russian",
+        "native_name" : "Русский язык",
+        "abbreviation" : "RU"
+    },
+    "Swedish" : {
+        "english_name" : "Swedish",
+        "native_name" : "Svenska",
+        "abbreviation" : "SV"
+    },
+    "Thai" : {
+        "english_name" : "Thai",
+        "native_name" : "ภาษาไทย",
+        "abbreviation" : "TH"
+    },
+    "Turkish" : {
+        "english_name" : "Turkish",
+        "native_name" : "Türkçe",
+        "abbreviation" : "TR"
+    },
+    "Vietnamese" : {
+        "english_name" : "Vietnamese",
+        "native_name" : "Tiếng Việt",
+        "abbreviation" : "VI"
+    }
+}

@@ -11,9 +11,9 @@
     
     "PRIMARY" : "Primary elections are a part of the &candidate-selection system&convention. A popular vote amongst the &voting public&voters determines the preferred candidate through secret ballots. &Delegates&delegate are awarded to favored candidates.",
     
-    "CLOSED primary" : "A closed primary is a &primary&primary in which only voters registered with a particular &party&party may participate. In some cases, &independent voters&independent are allowed to participate.",
+    "CLOSED_PRIMARY" : "A closed primary is a &primary&primary in which only voters registered with a particular &party&party may participate. In some cases, &independent voters&independent are allowed to participate.",
     
-    "SEMI-closed primary" : "A semi-closed or open partisan primary is a &primary&primary in which &unaffiliated&independent voters may vote for either party, but cross-party voting is prohibited.",
+    "SEMI_CLOSED_PRIMARY" : "A semi-closed or open partisan primary is a &primary&primary in which &unaffiliated&independent voters may vote for either party, but cross-party voting is prohibited.",
     
     "OPEN primary" : "An open primary is a &primary&primary in which voters may vote for any one candidate of their choice. In some cases, cross-voters may be required to declare their choice publically.",
     
@@ -21,7 +21,7 @@
     
     "DELEGATE" : "Delegates are people who represent their &state&state at a &party's&party &nomination convention&convention. Delegates are selected by the results of a &primary&primary or &caucus&caucus, or may be given the position in recognition of their party leadership.",
     
-    "FRONT-loading" : "&States&state often attempt to 'front-load' their %primaries%primary or &caucuses&caucus by pushing them as early as possible in the year. This is done to attempt to gain influence in the course of the election and on party decisions. &Parties&party combat this by offering &delegate&delegate-count incentives for later dates.",
+    "FRONT_LOADING" : "&States&state often attempt to 'front-load' their %primaries%primary or &caucuses&caucus by pushing them as early as possible in the year. This is done to attempt to gain influence in the course of the election and on party decisions. &Parties&party combat this by offering &delegate&delegate-count incentives for later dates.",
     
     "BLOC" : "A voting bloc is a group of &voters&voters distinguised by a &demographic trait&demographic or by a preference on a given &political issue&issue. Candidates often focus on gaining support of a bloc rather than focusing on individual voters, simplifying the &campaign process&campaign.",
     
@@ -191,13 +191,13 @@
     
     "HOUSE_OF_REPRESENTATIVES" : "The House of Representatives is the lower chamber of &Congress&congress. It consists of an apportioned number of Representatives (exactly 435 since 1911) according to the populations of the &states&state. The &Speaker of the House&speaker_of_the_house presides over the House.",
     
-    "CONGRESSIONAL_DISTRICT" : "Each Representative member of the House of Representatives is elected by their Congressional District.",
+    "CONGRESSIONAL_DISTRICT" : "Each Representative member of the House of Representatives is elected by their Congressional District. The methods of drawing Districts is chosen and administered by each State, meaning there are many different laws and rules governing the process.",
     
     "SUPREME_COURT" : "The Supreme Court is the highest court in the nation and represents the Judicial Branch at the Federal level. It consists of several Justices of the Supreme Court, one of whom is Chief Justice. The Court determines the constitutionality of laws through Judicial Review, and hears new cases to determine or redefine legal precedent.",
     
     "ELECTORAL_COLLEGE" : "The electoral college is the unique system of American elections by which the President is actually chosen. When voters cast their ballot, they are actually selecting an Elector, who will attend the Electoral College in their state to vote for a presidential and vice presidential candidate. The candidate who recieves more than half of the electors' votes will become the next President.",
     
-    "APPORTIONMENT" : "Apportionment is the process by which the House of Representatives (and therefore the Electoral College) maintains its formal representation of the population of states. More populous states recieve more Representative seats, and less populous states recieve fewer. Reapportionment is determined based on the Census.",
+    "APPORTIONMENT" : "Apportionment is the process by which the House of Representatives (and therefore the Electoral College) maintains its formal representation of the population of states. More populous states recieve more Representative seats, and less populous states recieve fewer. Reapportionment is determined based on the Census, which occurs every decade across the Nation.",
     
     "SEPARATION_OF_POWERS" : "The Separation of Powers is a key goal of the Constitutionally-framed federal government system. This idea requires that no single body holds total power over the nation, leading to the systems of Governmental Branches, Checks and Balances, and Bicamery.",
     
