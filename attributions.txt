@@ -1,0 +1,27 @@
+ATTRIBUTIONS
+
+These persons and organizations are to thank for the use of their public data or services.
+
+Public Demographic Data:
+World Population Review - https://worldpopulationreview.com/
+The Williams Institute (UCLA School of Law) - https://williamsinstitute.law.ucla.edu/
+The Demographic Statistical Atlas of the United States - https://statisticalatlas.com/
+United States Census Bureau - https://www.census.gov/
+CIA World Factbook - https://www.cia.gov/the-world-factbook/
+CDC National Center for Health Statistics - https://www.cdc.gov/nchs/index.html
+
+Public Map and Geographic Data:
+Federal Communications Commission Office of Engineering and Technology - https://www.fcc.gov/engineering-technology
+United States Census Bureau
+National Weather Service - https://www.weather.gov/
+Tennessee Geographic Alliance - https://www.tngeographicalliance.org/
+U.S. Department of Transportation - https://www.transportation.gov/
+
+Public Transportation Data:
+Bureau of Transportation Statistics - https://www.bts.gov/
+Federal Aviation Administration - https://www.faa.gov/
+U.S. Department of Transportation
+
+Public Names Data:
+Social Security Administration - https://www.ssa.gov/
+United States Census Bureau
