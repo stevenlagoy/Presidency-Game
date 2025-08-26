@@ -1,0 +1,46 @@
+01 Jan 2028, 01 Jan 2029 : New Years Day
+07 Jan 2028, 07 Jan 2029 : Orthodox Christmas
+17 Jan 2028, 15 Jan 2029 : Martin Luther King Jr. Day
+02 Feb 2027, 02 Feb 2028 : Groundhogs Day
+06 Feb 2027, 26 Jan 2028 : Chinese New Year
+07 Feb 2027, 27 Jan 2028 : Start of Ramadan
+10 Feb 2027, 01 Mar 2028 : Ash Wednesday
+08 Mar 2027, 25 Feb 2028 : End of Ramadan
+14 Feb 2027, 14 Feb 2028 : Valentine's Day
+15 Feb 2027, 21 Feb 2028 : Presidents' Day
+09 Mar 2027, 26 Feb 2028 : Eid al-Fitr
+26 Mar 2027, 14 Apr 2028 : Good Friday
+28 Mar 2027, 16 Apr 2028 : Easter
+17 Mar 2027, 17 Mar 2028 : St. Patrick's Day
+22 Mar 2027, 11 Mar 2028 : Holi
+01 Apr 2027, 01 Apr 2028 : April Fool's Day
+21 Apr 2027, 10 Apr 2028 : Pesach (Passover)
+22 Apr 2027, 22 Apr 2028 : Earth Day
+30 Apr 2027, 28 Apr 2028 : Arbor Day
+01 May 2027, 01 May 2028 : May Day
+05 May 2027, 05 May 2028 : Cinco de Mayo
+09 May 2027, 14 May 2028 : Mother's Day
+16 May 2027, 04 May 2028 : Eid al-Adha
+31 May 2027, 29 May 2028 : Memorial Day
+14 Jun 2027, 14 Jun 2028 : Flag Day
+20 Jun 2027, 18 Jun 2028 : Father's Day
+19 Jun 2027, 19 Jun 2028 : Juneteenth
+04 Jul 2027, 04 Jul 2028 : Independence Day
+06 Sep 2027, 04 Sep 2028 : Labor Day
+11 Sep 2027, 11 Sep 2028 : Day of Commemoration
+01 Oct 2027, 20 Sep 2028 : Rosh Hashanah
+10 Oct 2027, 29 Sep 2028 : Yom Kuppur
+11 Oct 2027, 09 Oct 2028 : Columbus
+11 Oct 2027, 11 Oct 2028 : Indigenous Peoples' Day
+29 Oct 2027, 17 Oct 2028 : Diwali
+31 Oct 2027, 31 Oct 2028 : Halloween
+11 Nov 2027, 11 Nov 2028 : Veterans Day
+25 Nov 2027, 23 Nov 2028 : Thanksgiving Day
+26 Nov 2027, 24 Nov 2028 : Black Friday
+29 Nov 2027, 27 Nov 2028 : Cyber Monday
+07 Dec 2027, 07 Dec 2028 : Pearl Harbor Rememberence Day
+24 Dec 2027, 12 Dec 2028 : Hanukkah
+24 Dec 2027, 24 Dec 2028 : Christmas Eve
+25 Dec 2027, 25 Dec 2028 : Christmas Day
+26 Dec 2027, 26 Dec 2028 : Kwanzaa
+31 Dec 2027, 31 Dec 2028 : New Years Eve

@@ -1,0 +1,131 @@
+title : "Race for the Presidency",
+new_game_text : "New Game",
+continue_game_text : "Continue Game",
+tutorial_text : "Tutorial",
+about_text : "About",
+settings_text : "Settings",
+open_game_text : "Load Save",
+back_text : "Back ↰",
+close_game_text : "Exit Game",
+close_game_alert_text : "Exit to Desktop?\n(Unsaved data will be lost)",
+return_to_desktop_text : "Return to Desktop",
+return_to_desktop_prompt_text : "Return to Desktop?",
+return_to_menu_text : "Return to Menu",
+return_to_menu_prompt_text : "Return to Menu?",
+save_game_text : "Save Game",
+delete_save_text : "Delete Save",
+delete_save_prompt_text : "Delete this Save?",
+candidate : "Candidate",
+delegate : "Delegate",
+party_member : "Party Member",
+party_leader : "Party Leader",
+president : "President",
+vice_president : "Vice President",
+running_mate : "Running Mate",
+representative : "Representative",
+senator : "Senator",
+congressman : "Congressman",
+congresswoman : "Congresswoman",
+congressperson : "Congressperson",
+speaker_hor : "Speaker of the House",
+president_pro_tempore : "President pro tempore",
+supreme_court : "Supreme Court",
+sc_justice : "Supreme Court Justice",
+sc_cheif_justice : "Cheif Justice",
+governonr : "Governor",
+state_representative : "State Representative",
+united_states : "United States",
+united_states_of_america : "United States of America",
+us_abbreviation : "US",
+usa_abbreviation : "USA",
+january : "January",
+jan_abbreviation : "JAN",
+february : "February",
+feb_abbreviation : "FEB",
+march : "March",
+mar_abbreviation : "MAR",
+april : "April",
+apr_abbreviation : "APR",
+may : "May",
+may_abbreviation : "MAY",
+june : "June",
+jun_abbreviation : "JUN",
+july : "July",
+jul_abbreviation : "JUL",
+august : "August",
+aug_abbreviation : "AUG",
+september : "September",
+sep_abbreviation : "SEP",
+october : "October",
+oct_abbreviation : "OCT",
+november : "November",
+nov_abbreviation : "NOV",
+december : "December",
+dec_abbreviation : "DEC"
+
+
+
+holiday_new_years_day : "New Years Day"
+"New Years Day is a federal holiday celebrated on January 1st each year, the day on which the calendar year begins. The holiday is celebrated with fireworks, parades, and other family or individual traditions like parties."
+holiday_orthodox_christmas : "Epiphany"
+"Orthodox Christians celebrate 12 days of Christmas celebrations between December 25th and January 6th, bridging the time between Jesus' Birth and Baptism. This involves special Vigils, Liturgies, and Services, culminating with a religious feast on the day of Epiphany."
+holiday_martin_luther_king_jr_day : "Martin Luther King Jr. Day"
+"Martin Luther King Jr. Day is a federal holiday on the third Monday of January in honor of Dr. King, a civil rights leader who was born on January 15th. This often involves workplace leave, parades, volunteer service."
+holiday_chinese_new_year : "Chinese New Year"
+"Chinese New Year, also called the Spring Festival, is a celebration of the beginning of the Chinese lunar calendar. From Chinese New Year's Eve until the Lantern Festival 15 days later, cities host parades and other festivities."
+holiday_groundhog_day : "Groundhog Day"
+"Groundhog Day is a regional tradition celebrated on February 2, originating with Pennsylvania Dutch superstition. It is believed that if a groundhog emerges from its burrow and sees its shadow, winter will last another 6 weeks: otherwise, spring will come early. The most famous Groundhog Day celebration occurs in Punxsutawney, Pennsylvania, where the resident groundhog, Punxsutawney Phil, is watched by over 40,000 attendees."
+holiday_ramadan_start : "Start of Ramadan"
+"Ramadan is the ninth month of the Islamic calendar and is observed as a month of religious fasting and prayer in commemoration of the Prophet Mohammad's first revelation. From dawn until sunset, adult Muslims fast and are encouraged to study the Quran, with the promise of spiritual rewards."
+holiday_ash_wednesday : "Ash Wednesday"
+"Ash Wednesday is observed by many Western Christians as the beginning of Lent, a six-week-long period of penitence leading to Easter. Fasting and abstinence from meat are common traditions, while many people offer another Lenten sacrifice from which to abstain for Lent."
+holiday_ramadan_end : "End of Ramadan"
+holiday_valentines_day : "Valentine's Day"
+"Valentine's Day is celebrated on February 14th each year in celebration of love and romance. Cards, candies, and flowers are common gifts for a person to give to their Valentine. This day is accompanied by a great amount of economic activity."
+holiday_presidents_day : "Presidents' Day"
+"Presidents' Day, officially Washington's Birthday, is a federal holiday celebrated on the third Monday of February to honor the past presidents of the United States. Washington and Lincoln in particular are often honored with community celebrations and sporting events."
+holiday_eid_al_fitr : "Eid al-Fitr"
+"Eid al-Fitr is the earler Islamic holiday marking the end of Ramadan on which Muslims perform worship in congregation and later have traditional feast celebrations."
+holiday_good_friday : "Good Friday"
+"Good Friday is a Christian holiday in rememberence of the crucifixion of Jesus. Many Churches have special services and communion on the Friday before Easter Sunday."
+holiday_easter : "Easter"
+"Easter is a Christian holiday commemorating the resurrection of Jesus after his crucifixion. Though the holiday is religious, many non-Christians enjoy traditions like painting eggs and competing in Easter egg hunts, exchanging gifts of candy or chocolate, and leaving baskets for the Easter Bunny to fill with treats."
+holiday_st_patricks_day : "Saint Patrick's Day"
+"Saint Patrick's Day is a holiday held on March 17th, honoring Saint Patrick, patron saint of Ireland, on the traditional date of his death. This is a celebration of the heritage and culture of Ireland. Images like shamrocks, Leprechauns, rainbows, and pots of gold are common. It is traditional to wear green clothes on this day, and failure to do so runs the risk of being punched by one's friends!"
+holiday_holi : "Holi"
+"Holi is a Hindu festival in celebration of the eternal love of Radha and Krishna, and of the triumph of good over evil. The holiday also represents rebirth as spring begins. Colored powder and dancing are common ways to celebrate."
+holiday_april_fools_day : "April Fools' Day"
+"April Fools' Day is an annual custom on April 1st each year. On this day, practical jokes and hoaxes are used to prank friends and family. Mass media is often involed in perpetuating the pranks as they intentionally report sensationalist but harmless hoaxes."
+holiday_pesach : "Pesach (Passover)"
+"Pesach or Passover is a major Jewish holiday celebrating the Exodus of the Israelites from Egyptian slavery. A meal is often prepared without the use of leavening, and observers recite Psalms of praise and thanks to God."
+holiday_earth_day : "Earth Day"
+"Earth Day is an annual event in support of environmental protection, held on April 22nd each year. Many people volunteer to clean their communities, plant trees and flowers, and help to spread education about environmental issues."
+holiday_arbor_day : "Arbor Day"
+"Abor Day is a day of appreciation for the enviroment, especially trees. Conservationists plant and support the health of trees in their communities."
+holiday_may_day : "May Day"
+holiday_cinco_de_mayo : "Cinco de Mayo"
+holiday_mothers_day : "Mother's Day"
+holiday_eid_al_adha : "Eid al-Adha"
+holiday_memorial_day : "Memorial Day"
+holiday_flag_day : "Flag Day"
+holiday_fathers_day : "Father's Day"
+holiday_juneteenth : "Juneteenth"
+holiday_independence_day : "Independence Day"
+holiday_labor_day : "Labor Day"
+holiday_day_of_commemoration : "Day of Commemoration"
+holiday_rosh_hashanah : "Rosh Hashanah"
+holiday_yom_kippur : "Yom Kuppur"
+holiday_columbus_day : "Columbus Day"
+holiday_indigenous_peoples_day : "Indigenous Peoples' Day"
+holiday_diwali : "Diwali"
+holiday_halloween : "Halloween"
+holiday_veterans_day : "Veterans Day"
+holiday_thanksgiving : "Thanksgiving"
+holiday_black_friday : "Black Friday"
+holiday_cyber_monday : "Cyber Monday"
+holiday_pearl_harbor_rememberence_day : "Pearl Harbor Rememberence Day"
+holiday_hanukkah : "Hanukkah"
+holiday_christmas_eve : "Christmas Eve"
+holiday_christmas_day : "Christmas Day"
+holiday_kwanzaa : "Kwanzaa"
+holiday_new_years_eve : "New Years Eve"
