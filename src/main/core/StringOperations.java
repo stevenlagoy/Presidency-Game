@@ -3,7 +3,7 @@ package main.core;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringOperations {
+public final class StringOperations {
 
     /**
      * Determines whether a given position in a line of text is currently inside a string literal, accounting for

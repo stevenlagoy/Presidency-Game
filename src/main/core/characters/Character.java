@@ -14,8 +14,9 @@ import java.util.Date;
 
 // Internal Imports
 import core.JSONObject;
-import main.core.DateManager;
+import main.core.TimeManager;
 import main.core.Jsonic;
+import main.core.Main;
 import main.core.Repr;
 import main.core.characters.names.Name;
 import main.core.characters.names.NameManager;
@@ -152,11 +153,11 @@ public class Character implements Repr<Character>, Jsonic<Character> {
      * @param appearance CharacterModel object to be rendered for this Character.
      */
     public Character(Demographics demographics, Name name, Municipality birthplaceMunicipality, Municipality currentLocationMunicipality, Municipality residenceMunicipality, Date birthday, CharacterModel appearance) {
-        this.demographics                = demographics                != null ? demographics                : DemographicsManager.generateWeightedDemographics();
-        this.name                        = name                        != null ? name                        : NameManager.generateName(this.demographics);
-        this.birthplaceMunicipality      = birthplaceMunicipality      != null ? birthplaceMunicipality      : MapManager.selectMunicipality(this.demographics);
-        this.currentLocationMunicipality = currentLocationMunicipality != null ? currentLocationMunicipality : MapManager.selectMunicipality(this.demographics);
-        this.residenceMunicipality       = residenceMunicipality       != null ? residenceMunicipality       : MapManager.selectMunicipality(this.demographics);
+        this.demographics                = demographics                != null ? demographics                : Main.Engine().DemographicsManager().generateWeightedDemographics();
+        this.name                        = name                        != null ? name                        : Main.Engine().NameManager().generateName(this.demographics);
+        this.birthplaceMunicipality      = birthplaceMunicipality      != null ? birthplaceMunicipality      : Main.Engine().MapManager().selectMunicipality(this.demographics);
+        this.currentLocationMunicipality = currentLocationMunicipality != null ? currentLocationMunicipality : Main.Engine().MapManager().selectMunicipality(this.demographics);
+        this.residenceMunicipality       = residenceMunicipality       != null ? residenceMunicipality       : Main.Engine().MapManager().selectMunicipality(this.demographics);
         this.birthday                    = birthday                    != null ? birthday                    : CharacterManager.generateBirthday(this.demographics);
         this.appearance                  = appearance                  != null ? appearance                  : CharacterManager.generateCharacterModel(this.demographics, this.birthday);
         
@@ -216,7 +217,7 @@ public class Character implements Repr<Character>, Jsonic<Character> {
         this.birthday = new Date(milliseconds);
     }
     public int getAge() {
-        return DateManager.yearsAgo(this.birthday);
+        return Main.Engine().TimeManager().yearsAgo(this.birthday);
     }
 
     // Appearance CharacterModel
@@ -264,34 +265,34 @@ public class Character implements Repr<Character>, Jsonic<Character> {
             return null;
         Object demographicsObj = json.get("demographics");
         if (demographicsObj == null)
-            this.demographics = DemographicsManager.generateWeightedDemographics();
+            this.demographics = Main.Engine().DemographicsManager().generateWeightedDemographics();
         else if (demographicsObj instanceof JSONObject demographicsJson)
             this.demographics = new Demographics(demographicsJson);
         Object nameObj = json.get("name");
         if (nameObj == null)
-            this.name = NameManager.generateName(demographics);
+            this.name = Main.Engine().NameManager().generateName(demographics);
         else if (nameObj instanceof JSONObject nameJson)
             this.name = new Name(nameJson);
         Object birthplaceObj = json.get("birthplace");
         if (birthplaceObj == null)
-            this.birthplaceMunicipality = MapManager.selectMunicipality(demographics);
+            this.birthplaceMunicipality = Main.Engine().MapManager().selectMunicipality(demographics);
         else if (birthplaceObj instanceof JSONObject birthplaceJson)
-            this.birthplaceMunicipality = MapManager.matchMunicipality(birthplaceJson.getAsString());
+            this.birthplaceMunicipality = Main.Engine().MapManager().matchMunicipality(birthplaceJson.getAsString());
         Object currentLocationObj = json.get("current_location");
         if (currentLocationObj == null)
-            this.currentLocationMunicipality = MapManager.selectMunicipality(demographics);
+            this.currentLocationMunicipality = Main.Engine().MapManager().selectMunicipality(demographics);
         else if (currentLocationObj instanceof JSONObject currentLocationJson)
-            this.currentLocationMunicipality = MapManager.matchMunicipality(currentLocationJson.getAsString());
+            this.currentLocationMunicipality = Main.Engine().MapManager().matchMunicipality(currentLocationJson.getAsString());
         Object residenceObj = json.get("residence");
         if (residenceObj == null)
-            this.currentLocationMunicipality = MapManager.selectMunicipality(demographics);
+            this.currentLocationMunicipality = Main.Engine().MapManager().selectMunicipality(demographics);
         else if (residenceObj instanceof JSONObject residenceJson)
-            this.currentLocationMunicipality = MapManager.matchMunicipality(residenceJson.getAsString());
+            this.currentLocationMunicipality = Main.Engine().MapManager().matchMunicipality(residenceJson.getAsString());
         Object birthdayObj = json.get("birthday");
         if (birthdayObj == null)
             this.birthday = CharacterManager.generateBirthday(demographics);
         else if (birthdayObj instanceof JSONObject birthdayJson)
-            this.birthday = DateManager.dateFromString(birthdayJson.getAsString());
+            this.birthday = TimeManager.dateFromString(birthdayJson.getAsString());
         Object appearanceObj = json.get("appearance");
         if (appearanceObj == null)
             this.appearance = CharacterManager.generateAppearance(this);

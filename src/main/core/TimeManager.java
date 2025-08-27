@@ -1,7 +1,20 @@
+/*
+ * TimeManager.java
+ * Steven LaGoy
+ * Created: 10 December 2024 at 8:21 AM
+ * Modified: 26 August 2025
+ */
+
 package main.core;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import core.JSONObject;
 
 public class TimeManager extends Manager {
 
@@ -41,6 +54,19 @@ public class TimeManager extends Manager {
 
         public final long correction;
         private TimeZone(long correction) { this.correction = correction; }
+
+        /**
+         * Matches the given time zone string to a time zone object.
+         * @param timeZoneString The time zone string to match.
+         * @return The time zone object that matches the given string.
+         */
+        public TimeZone fromString(String timeZoneString) {
+            for(TimeZone tz : TimeZone.values()) {
+                if (timeZoneString.equals(tz.toString())) return tz;
+            }
+            Logger.log("INVALID TIMEZONE", String.format("The supplied time zone name, %s, does not match any accepted time zone.", timeZoneString), new Exception());
+            return null;
+        }
     }
 
     /** Duration in milliseconds of one second. */
@@ -89,7 +115,7 @@ public class TimeManager extends Manager {
      */
     public static long yearToMillis(int year) {
         if (year < MIN_SAFE_YEAR || year > MAX_SAFE_YEAR) {
-            Engine.log("DATE OUT OF BOUNDS", String.format("The year requested, %s, is out of the accurate bounds of [1583,292278994].", year), new Exception());
+            Logger.log("DATE OUT OF BOUNDS", String.format("The year requested, %s, is out of the accurate bounds of [1583,292278994].", year), new Exception());
             return -1L;
         }
         long millis = ((long) year) * yearDuration - epochMillis;
@@ -162,7 +188,7 @@ public class TimeManager extends Manager {
      */
     public static String ordinalToDateFormat(int dayOrdinal) {
         if (dayOrdinal < 0 || dayOrdinal > daysInYear-1) {
-            Engine.log("INVALID DAY ORDINAL", String.format("The day ordinal %d is out of bounds. Must be between 0 and %d.", dayOrdinal, daysInYear), new Exception());
+            Logger.log("INVALID DAY ORDINAL", String.format("The day ordinal %d is out of bounds. Must be between 0 and %d.", dayOrdinal, daysInYear), new Exception());
             return null;
         }
         if (dayOrdinal == 59) return "02/29"; // Leap year
@@ -181,7 +207,7 @@ public class TimeManager extends Manager {
         day = monthsDurationsDays[month-1] - (elapsed - dayOrdinal) + 1;
 
         if (month == 0 || day == 0) {
-            Engine.log("DATE CALCULATION ERROR", String.format("The date calculation failed to produce a valid date for day ordinal %d.", dayOrdinal), new Exception());
+            Logger.log("DATE CALCULATION ERROR", String.format("The date calculation failed to produce a valid date for day ordinal %d.", dayOrdinal), new Exception());
             return null;
         }
 
@@ -196,14 +222,14 @@ public class TimeManager extends Manager {
     public static int dateFormatToOrdinal(String dateFormat) {
         String[] parts = dateFormat.split("[-//]");
         if (parts.length != 2) {
-            Engine.log("INVALID DATE FORMAT", String.format("The date format \"%s\" is invalid. Must be in the format MM/DD.", dateFormat), new Exception());
+            Logger.log("INVALID DATE FORMAT", String.format("The date format \"%s\" is invalid. Must be in the format MM/DD.", dateFormat), new Exception());
             return -1;
         }
         int month = Integer.parseInt(parts[0]);
         int day = Integer.parseInt(parts[1]);
 
         if (month < 1 || month > 12 || day < 1 || day > 31) {
-            Engine.log("INVALID DATE FORMAT", String.format("The date \"%s\" is invalid. Months must be between 1 and 12, and days must be between 1 and 31.", dateFormat), new Exception());
+            Logger.log("INVALID DATE FORMAT", String.format("The date \"%s\" is invalid. Months must be between 1 and 12, and days must be between 1 and 31.", dateFormat), new Exception());
             return -1;
         }
         int result = 0;
@@ -217,19 +243,87 @@ public class TimeManager extends Manager {
         return result;
     }
 
-    // INSTANCE VARIABLES -------------------------------------------------------------------------
+    /**
+     * Calculates the month index for the given time. (1-12)
+     * @param time The time to calculate the month index for.
+     * @return The month index for the given time.
+     */
+    public static int calculateMonthIndex(long time) {
+        long elapsed = time - startDate.getTime();
+        long totalMonths = 0;
 
-    /** State of the Manager. */
-    private ManagerState currentState; 
+        for(int i = 0; i < monthsDurationsMillis.length; i++) {
+            if (elapsed < monthsDurationsMillis[i]) {
+                return i;
+            }
+            elapsed -= monthsDurationsMillis[i];
+            totalMonths++;
+        }
+
+        return totalMonths >= monthsDurationsMillis.length ? monthsDurationsMillis.length - 1 : (int) totalMonths;
+    }
+    
+    /**
+     * Calculates the amount of time in between two dates.
+     * @param startDate The start date to calculate the time from.
+     * @param endDate The end date to calculate the time unil.
+     * @return The amount of time in milliseconds between the two dates.
+     */
+    public static long millisecondsBetween(Date startDate, Date endDate) {
+        return Math.abs(endDate.getTime() - startDate.getTime());
+    }
+
+    /**
+     * Calculates the amount of time in between the current game date and the given date.
+     * @param date The date to calculate the time since.
+     * @return The amount of time in milliseconds between the current game date and the given date.
+     */
+    public long millisecondsAgo(Date date) {
+        return millisecondsBetween(currentGameDate, date);
+    }
+
+    /**
+     * Calculates the number of years between the current game date and the given date.
+     * @param date A past date to use in the calculation.
+     * @return The number of years (whole number) ago which the date represents.
+     * @see #millisecondsAgo(Date)
+     */
+    public int yearsAgo(Date date) {
+        return (int) (millisecondsAgo(date) / yearDuration);
+    }
+
+    /**
+     * Calculates the number of full years in between the current game date and the given year.
+     * @param yearsAgo The year to calculate the time since.
+     * @return The number of years between the current game date and the given year.
+     */
+    public int yearYearsAgo(double yearsAgo) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentGameDate);
+
+        // Subtract the number of years (rounded to an integer)
+        int targetYear = calendar.get(Calendar.YEAR) - (int) Math.floor(yearsAgo);
+        if (targetYear < MIN_SAFE_YEAR || targetYear > MAX_SAFE_YEAR) {
+            Logger.log("DATE OUT OF BOUNDS", String.format("The year requested, %s, is out of the accurate bounds of [1583,292278994].", targetYear), new Exception());
+            return -1;
+        }
+        return targetYear;
+    }
+
+    // INSTANCE VARIABLES -------------------------------------------------------------------------
 
     /** Current Date of Gameplay. */
     private Date currentGameDate;
+
+    /** State of the Manager. */
+    private ManagerState currentState;
 
     // CONSTRUCTORS -------------------------------------------------------------------------------
 
     /** Create a new inactive DateManager. */
     public TimeManager() {
         currentState = ManagerState.INACTIVE;
+        currentGameDate = new Date(0);
     }
 
     // MANAGER METHODS ----------------------------------------------------------------------------
@@ -237,9 +331,11 @@ public class TimeManager extends Manager {
     /** Initialize and Activate this DateManager. */
     @Override
     public boolean init() {
-        currentGameDate = new Date(startDate.getTime());
-        currentState = ManagerState.ACTIVE;
-        return true;
+        boolean successFlag = true;
+        if (currentGameDate == null || currentGameDate.getTime() < startDate.getTime())
+            currentGameDate = new Date(startDate.getTime());
+        currentState = successFlag ? ManagerState.ACTIVE : ManagerState.ERROR;
+        return successFlag;
     }
 
     /** Get the current State of this DateManager. */
@@ -251,9 +347,11 @@ public class TimeManager extends Manager {
     /** Deactivate and clean up the data of this DateManager. */
     @Override
     public boolean cleanup() {
-        currentGameDate = null;
+        boolean successFlag = true;
         currentState = ManagerState.INACTIVE;
-        return true;
+        currentGameDate = null;
+        if (!successFlag) currentState = ManagerState.ERROR;
+        return successFlag;
     }
 
     // GETTERS AND SETTERS ------------------------------------------------------------------------
@@ -425,87 +523,6 @@ public class TimeManager extends Manager {
         return true;
     }
 
-    // MATCHING METHODS ---------------------------------------------------------------------------
-
-    /**
-     * Matches the given time zone string to a time zone object.
-     * @param timeZoneString The time zone string to match.
-     * @return The time zone object that matches the given string.
-     */
-    public TimeZone matchTimeZone(String timeZoneString) {
-        for(TimeZone tz : TimeZone.values()) {
-            if (timeZoneString.equals(tz.toString())) return tz;
-        }
-        Engine.log("INVALID TIMEZONE", String.format("The supplied time zone name, %s, does not match any accepted time zone.", timeZoneString), new Exception());
-        return null;
-    }
-
-    /**
-     * Calculates the month index for the given time. (1-12)
-     * @param time The time to calculate the month index for.
-     * @return The month index for the given time.
-     */
-    public static int calculateMonthIndex(long time) {
-        long elapsed = time - startDate.getTime();
-        long totalMonths = 0;
-
-        for(int i = 0; i < monthsDurationsMillis.length; i++) {
-            if (elapsed < monthsDurationsMillis[i]) {
-                return i;
-            }
-            elapsed -= monthsDurationsMillis[i];
-            totalMonths++;
-        }
-
-        return totalMonths >= monthsDurationsMillis.length ? monthsDurationsMillis.length - 1 : (int) totalMonths;
-    }
-    /**
-     * Calculates the amount of time in between two dates.
-     * @param startDate The start date to calculate the time from.
-     * @param endDate The end date to calculate the time unil.
-     * @return The amount of time in milliseconds between the two dates.
-     */
-    public static long millisecondsBetween(Date startDate, Date endDate) {
-        return Math.abs(endDate.getTime() - startDate.getTime());
-    }
-
-    /**
-     * Calculates the amount of time in between the current game date and the given date.
-     * @param date The date to calculate the time since.
-     * @return The amount of time in milliseconds between the current game date and the given date.
-     */
-    public long millisecondsAgo(Date date) {
-        return millisecondsBetween(currentGameDate, date);
-    }
-
-    /**
-     * Calculates the number of years between the current game date and the given date.
-     * @param date A past date to use in the calculation.
-     * @return The number of years (whole number) ago which the date represents.
-     * @see #millisecondsAgo(Date)
-     */
-    public int yearsAgo(Date date) {
-        return (int) (millisecondsAgo(date) / yearDuration);
-    }
-
-    /**
-     * Calculates the number of full years in between the current game date and the given year.
-     * @param yearsAgo The year to calculate the time since.
-     * @return The number of years between the current game date and the given year.
-     */
-    public int yearYearsAgo(double yearsAgo) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(currentGameDate);
-
-        // Subtract the number of years (rounded to an integer)
-        int targetYear = calendar.get(Calendar.YEAR) - (int) Math.floor(yearsAgo);
-        if (targetYear < MIN_SAFE_YEAR || targetYear > MAX_SAFE_YEAR) {
-            Engine.log("DATE OUT OF BOUNDS", String.format("The year requested, %s, is out of the accurate bounds of [1583,292278994].", targetYear), new Exception());
-            return -1;
-        }
-        return targetYear;
-    }
-
     // REPRESENTATION METHODS ---------------------------------------------------------------------
 
     @Override
@@ -518,5 +535,56 @@ public class TimeManager extends Manager {
     public Manager fromRepr(String repr) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'fromRepr'");
+    }
+
+    private static final Map<String, String> fieldsJsons = Map.of(
+        "currentGameDate", "current_game_date"
+    );
+
+    @Override
+    public JSONObject toJson() {
+        try {
+            List<JSONObject> fields = new ArrayList<>();
+            for (String fieldName : fieldsJsons.keySet()) {
+                Field field = getClass().getDeclaredField(fieldName);
+                fields.add(new JSONObject(fieldName, field.get(this)));
+            }
+            return new JSONObject(this.getClass().getSimpleName(), fields);
+        }
+        catch (NoSuchFieldException | IllegalAccessException e) {
+            currentState = ManagerState.ERROR;
+            Logger.log("JSON SERIALIZATION ERROR", "Failed to serialize " + getClass().getSimpleName() + " to JSON.", e);
+            return null;
+        }
+    }
+
+    @Override
+    public Manager fromJson(JSONObject json) {
+        currentState = ManagerState.INACTIVE;
+        for (String fieldName : fieldsJsons.keySet()) {
+            String jsonKey = fieldsJsons.get(fieldName);
+            Object value = json.get(jsonKey);
+            if (value == null) continue;
+            try {
+                Field field = getClass().getDeclaredField(fieldName);
+                field.setAccessible(true);
+                Class<?> type = field.getType();
+                if (type.isEnum()) {
+                    // For enums, convert string to enum constant
+                    @SuppressWarnings({ "unchecked", "rawtypes" })
+                    Object enumValue = Enum.valueOf((Class<Enum>) type, value.toString());
+                    field.set(this, enumValue);
+                }
+                else {
+                    // For other types, set directly (may need conversion for complex types)
+                    field.set(this, value);
+                }
+            }
+            catch (Exception e) {
+                currentState = ManagerState.ERROR;
+                Logger.log("JSON DESERIALIZATION ERROR", "Failed to set field " + fieldName + " in LanguageManager from JSON.", e);
+            }
+        }
+        return this;
     }
 }

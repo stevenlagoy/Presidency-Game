@@ -1,6 +1,70 @@
+/*
+ * EventManager.java
+ * Steven LaGoy
+ * Created: 10 December 2024 at 8:21 AM
+ * Modified: 26 August 2025
+ */
+
 package main.core.politics;
-public class EventManager
-{
+
+import core.JSONObject;
+import main.core.Manager;
+
+public class EventManager extends Manager {
+
+    private ManagerState currentState;
+
+    public EventManager() {
+        currentState = ManagerState.INACTIVE;
+    }
+
+    // MANAGER METHODS ----------------------------------------------------------------------------
+
+    @Override
+    public boolean init() {
+        boolean successFlag = true;
+        currentState = successFlag ? ManagerState.ACTIVE : ManagerState.ERROR;
+        return successFlag;
+    }
+
+    @Override
+    public ManagerState getState() {
+        return currentState;
+    }
+
+    @Override
+    public boolean cleanup() {
+        boolean successFlag = true;
+        currentState = ManagerState.INACTIVE;
+        if (!successFlag) currentState = ManagerState.ERROR;
+        return successFlag;
+    }
+
+    // REPRESENTATION METHODS ---------------------------------------------------------------------
+
+    @Override
+    public String toRepr() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toRepr'");
+    }
+
+    @Override
+    public Manager fromRepr(String repr) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromRepr'");
+    }
+
+    @Override
+    public JSONObject toJson() {
+        return new JSONObject();
+    }
+
+    @Override
+    public Manager fromJson(JSONObject json) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromJson'");
+    }
+
     /*
      * EVENTS
      * Scripted / Scheduled:

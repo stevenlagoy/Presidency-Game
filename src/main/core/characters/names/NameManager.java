@@ -7,6 +7,7 @@
 
 package main.core.characters.names;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,26 +17,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.lwjgl.system.linux.liburing.IOURing;
-
 import core.JSONObject;
 import core.JSONProcessor;
-import main.core.Engine;
 import main.core.FilePaths;
-import main.core.IOUtil;
-import main.core.characters.names.Name.NameForm;
+import main.core.Logger;
+import main.core.Main;
+import main.core.Manager;
+import main.core.NumberOperations;
 import main.core.characters.names.Name.DisplayOption;
+import main.core.characters.names.Name.NameForm;
 import main.core.demographics.Bloc;
 import main.core.demographics.Demographics;
-import main.core.demographics.DemographicsManager;
 
 /**
  * NameManager manages the generation of Name objects.
  * <p>
  * This class is final and has no instance variables, and is not designed to be instantiated. All members and functions should be accessed in a static way.
  */
-public final class NameManager {
-    private NameManager() {} // Non-Instantiable
+public final class NameManager extends Manager {
+
+    // STATIC CLASS VARIABLES ---------------------------------------------------------------------
 
     /** Percentage of Asian people who should have an Eastern nameform. */
     private static final float asianEasternNamePercent = 0.50f;
@@ -84,14 +85,55 @@ public final class NameManager {
     /** Percentage of people with the II or Second ordination (applied repeatedly to choose higher ordinations). */
     private static final float iiOrdinationPercent = 0.06f;
 
+    // INSTANCE VARIABLES -------------------------------------------------------------------------
+
     /** Map of first / given names and frequency weights, keyed with the blocs those names are associated with. Names can be accessed through a set containing the applicable blocs. */
-    private static Map<Set<Bloc>, Map<String, Double>> firstNamesDistribution;
+    private Map<Set<Bloc>, Map<String, Double>> firstNamesDistribution;
     /** Map of middle names and frequency weights, keyed with the blocs those names are associated with. Names can be accessed through a set containing the applicable blocs. */
-    private static Map<Set<Bloc>, Map<String, Double>> middleNamesDistribution;
+    private Map<Set<Bloc>, Map<String, Double>> middleNamesDistribution;
     /** Map of last` / family names and frequency weights, keyed with the blocs those names are associated with. Names can be accessed through a set containing the applicable blocs. */
-    private static Map<Set<Bloc>, HashMap<String, Double>> lastNamesDistribution;
+    private Map<Set<Bloc>, HashMap<String, Double>> lastNamesDistribution;
     /** Map of names and Lists of nicknames associated with their key name. */
-    private static Map<String, List<String>> nicknames;
+    private Map<String, List<String>> nicknames;
+
+    ManagerState currentState;
+
+    // CONSTRUCTORS -------------------------------------------------------------------------------
+    public NameManager() {
+        currentState = ManagerState.INACTIVE;
+        firstNamesDistribution = new HashMap<>();
+        middleNamesDistribution = new HashMap<>();
+        lastNamesDistribution = new HashMap<>();
+        nicknames = new HashMap<>();
+    }
+
+    // MANAGER METHODS ----------------------------------------------------------------------------
+
+    @Override
+    public boolean init() {
+        boolean successFlag = true;
+        successFlag = successFlag && readFirstNamesFile();
+        successFlag = successFlag && readMiddleNamesFile();
+        successFlag = successFlag && readLastNamesFile();
+        successFlag = successFlag && readNicknamesFile();
+        currentState = successFlag ? ManagerState.ACTIVE : ManagerState.ERROR;
+        return successFlag;
+    }
+
+    @Override
+    public ManagerState getState() {
+        return currentState;
+    }
+
+    @Override
+    public boolean cleanup() {
+        boolean successFlag = true;
+
+        if (!successFlag) currentState = ManagerState.ERROR;
+        return successFlag;
+    }
+
+    // INSTANCE METHODS ---------------------------------------------------------------------------
 
     /**
      * Refines a Set of Blocs to be used as a key in name distributions. Determines whether the passed blocs are expected
@@ -99,7 +141,7 @@ public final class NameManager {
      * @param blocs Set of Blocs to refine.
      * @return Set of Blocs relatively close to the original key but which is expected to have a value in the distribution map.
      */
-    private static Set<Bloc> refineBlocsKey(Set<Bloc> blocs) {
+    private Set<Bloc> refineBlocsKey(Set<Bloc> blocs) {
 
         // Base case: check if the set is empty or null
         if (blocs == null || blocs.isEmpty())
@@ -126,12 +168,12 @@ public final class NameManager {
         return bestMatch;
     }
 
-    private static Set<Bloc> refineBlocsKey(Set<Bloc> blocs, String... avoidCategories) {
+    private Set<Bloc> refineBlocsKey(Set<Bloc> blocs, String... avoidCategories) {
         Set<Bloc> candidate = new HashSet<>();
         for (Bloc bloc : blocs) {
             boolean avoid = false;
             for (String category : avoidCategories) {
-                if (bloc.getNestedSuperBlocNames().contains(category) || bloc.getDemographicGroup().equals(category))
+                if (bloc.getNestedNames().contains(category) || bloc.getDemographicGroup().equals(category))
                     avoid = true;
             }
             if (!avoid) candidate.add(bloc);
@@ -139,13 +181,13 @@ public final class NameManager {
         return refineBlocsKey(candidate);
     }
 
-    private static boolean hasMatchingKey(Set<Bloc> blocs) {
+    private boolean hasMatchingKey(Set<Bloc> blocs) {
         return firstNamesDistribution.containsKey(blocs) ||
                middleNamesDistribution.containsKey(blocs) ||
                lastNamesDistribution.containsKey(blocs);
     }
 
-    private static Set<Set<Bloc>> generateKeyCandidates(Set<Bloc> originalBlocs) {
+    private Set<Set<Bloc>> generateKeyCandidates(Set<Bloc> originalBlocs) {
         Set<Set<Bloc>> candidates = new HashSet<>();
         List<Bloc> blocsList = new ArrayList<>(originalBlocs);
         
@@ -172,7 +214,7 @@ public final class NameManager {
         return candidates;
     }
 
-    private static void generateCombinations(List<List<Bloc>> allAlternatives, int index, List<Bloc> currentCombination, Set<Set<Bloc>> candidates, Set<Bloc> originalBlocs) {
+    private void generateCombinations(List<List<Bloc>> allAlternatives, int index, List<Bloc> currentCombination, Set<Set<Bloc>> candidates, Set<Bloc> originalBlocs) {
         if (index == allAlternatives.size()) {
             // Create candidate set from current combination (excluding nulls)
             Set<Bloc> candidate = new HashSet<>();
@@ -198,7 +240,7 @@ public final class NameManager {
         }
     }
 
-    private static int calculateScore(Set<Bloc> original, Set<Bloc> candidate) {
+    private int calculateScore(Set<Bloc> original, Set<Bloc> candidate) {
         int score = 0;
 
         // Count preserved original blocs
@@ -236,7 +278,7 @@ public final class NameManager {
      * Get the distribution of first / given names.
      * @return Map of first / given names and frequency weights, keyed with the blocs those names are associated with. Names can be accessed through a set containing the applicable blocs.
      */
-    public static Map<Set<Bloc>, Map<String, Double>> getFirstNamesDistribution() {
+    public Map<Set<Bloc>, Map<String, Double>> getFirstNamesDistribution() {
         if (firstNamesDistribution == null || firstNamesDistribution.size() == 0) readFirstNamesFile();
         return firstNamesDistribution;
     }
@@ -247,7 +289,7 @@ public final class NameManager {
      * @see #getFirstNamesDistribution(Bloc[])
      * @see #getFirstNamesDistribution(Collection)
     */
-    public static Map<String, Double> getFirstNamesDistribution(Demographics demographics) {
+    public Map<String, Double> getFirstNamesDistribution(Demographics demographics) {
         return getFirstNamesDistribution(demographics.toBlocsArray());
     }
     
@@ -258,7 +300,7 @@ public final class NameManager {
      * @see #getFirstNamesDistribution(Demographics)
      * @see #getFirstNamesDistribution(Collection)
      */
-    public static Map<String, Double> getFirstNamesDistribution(Bloc... blocs) {
+    public Map<String, Double> getFirstNamesDistribution(Bloc... blocs) {
         return getFirstNamesDistribution(Set.of(blocs));
     }
 
@@ -269,9 +311,9 @@ public final class NameManager {
      * @see #getFirstNamesDistribution(Demographics)
      * @see #getFirstNamesDistribution(Bloc[])
      */
-    public static Map<String, Double> getFirstNamesDistribution(Collection<Bloc> blocs) {
+    public Map<String, Double> getFirstNamesDistribution(Collection<Bloc> blocs) {
         if (firstNamesDistribution == null && !readFirstNamesFile()) {
-            Engine.log("FIRST NAMES UNREADABLE", "The first names file was unable to be read properly.", new Exception());
+            Logger.log("FIRST NAMES UNREADABLE", "The first names file was unable to be read properly.", new Exception());
             return null;
         }
         Set<Bloc> key = new HashSet<>(blocs);
@@ -282,7 +324,7 @@ public final class NameManager {
      * Read in the first names file.
      * @return {@code true} if successful, {@code false} otherwise.
     */
-    private static boolean readFirstNamesFile() {
+    private boolean readFirstNamesFile() {
         JSONObject json = JSONProcessor.processJson(FilePaths.FIRSTNAME_DISTR);
         firstNamesDistribution = new HashMap<>();
 
@@ -290,7 +332,7 @@ public final class NameManager {
         return true;
     }
 
-    private static Map<String, Double> processFirstNameStructure(JSONObject json, Set<Bloc> currentBlocs) {
+    private Map<String, Double> processFirstNameStructure(JSONObject json, Set<Bloc> currentBlocs) {
         Map<String, Double> distributions = new HashMap<String,Double>();
 
         for (Object obj : json.getAsList()) {
@@ -313,7 +355,7 @@ public final class NameManager {
                 // This is a nested structure
 
                 // If key is a valid bloc name, add it to the current set of blocs
-                Bloc bloc = DemographicsManager.matchBlocName(key);
+                Bloc bloc = Main.Engine().DemographicsManager().matchBlocName(key);
                 Set<Bloc> updatedBlocs = new HashSet<>(currentBlocs);
                 if (bloc != null) {
                     updatedBlocs.add(bloc);
@@ -331,7 +373,7 @@ public final class NameManager {
      * Get the distribution of middle names.
      * @return Map of middle names and frequency weights, keyed with the blocs those names are associated with. Names can be accessed through a set containing the applicable blocs.
      */
-    public static Map<Set<Bloc>, Map<String, Double>> getMiddleNamesDistribution() {
+    public Map<Set<Bloc>, Map<String, Double>> getMiddleNamesDistribution() {
         if (middleNamesDistribution == null || middleNamesDistribution.size() == 0) readMiddleNamesFile();
         return middleNamesDistribution;
     }
@@ -342,8 +384,8 @@ public final class NameManager {
      * @see #getMiddleNamesDistribution(Bloc[])
      * @see #getMiddleNamesDistribution(Collection)
     */
-    public static Map<String, Double> getMiddleNamesDistribution(Demographics demographics) {
-        return getMiddleNamesDistribution(demographics.toBlocsSet());
+    public Map<String, Double> getMiddleNamesDistribution(Demographics demographics) {
+        return getMiddleNamesDistribution(demographics.toBlocsArray());
     }
     
     /**
@@ -353,7 +395,7 @@ public final class NameManager {
      * @see #getMiddleNamesDistribution(Demographics)
      * @see #getMiddleNamesDistribution(Collection)
      */
-    public static Map<String, Double> getMiddleNamesDistribution(Bloc... blocs) {
+    public Map<String, Double> getMiddleNamesDistribution(Bloc... blocs) {
         return getMiddleNamesDistribution(Set.of(blocs));
     }
 
@@ -364,9 +406,9 @@ public final class NameManager {
      * @see #getMiddleNamesDistribution(Demographics)
      * @see #getMiddleNamesDistribution(Bloc[])
      */
-    public static Map<String, Double> getMiddleNamesDistribution(Collection<Bloc> blocs) {
+    public Map<String, Double> getMiddleNamesDistribution(Collection<Bloc> blocs) {
         if (middleNamesDistribution == null && !readMiddleNamesFile()) {
-            Engine.log("MIDDLE NAMES UNREADABLE", "The middle names file was unable to be read properly.", new Exception());
+            Logger.log("MIDDLE NAMES UNREADABLE", "The middle names file was unable to be read properly.", new Exception());
             return null;
         }
         Set<Bloc> key = new HashSet<>(blocs);
@@ -377,7 +419,7 @@ public final class NameManager {
      * Read in the middle names file.
      * @return {@code true} if successful, {@code false} otherwise.
     */
-    private static boolean readMiddleNamesFile() {
+    private boolean readMiddleNamesFile() {
         JSONObject json = JSONProcessor.processJson(FilePaths.FIRSTNAME_DISTR);
         middleNamesDistribution = new HashMap<>();
 
@@ -385,7 +427,7 @@ public final class NameManager {
         return true;
     }
 
-    private static Map<String, Double> processMiddleNameStructure(JSONObject json, Set<Bloc> currentBlocs) {
+    private Map<String, Double> processMiddleNameStructure(JSONObject json, Set<Bloc> currentBlocs) {
         Map<String, Double> distributions = new HashMap<String,Double>();
 
         for (Object obj : json.getAsList()) {
@@ -408,7 +450,7 @@ public final class NameManager {
                 // This is a nested structure
 
                 // If key is a valid bloc name, add it to the current set of blocs
-                Bloc bloc = DemographicsManager.matchBlocName(key);
+                Bloc bloc = Main.Engine().DemographicsManager().matchBlocName(key);
                 Set<Bloc> updatedBlocs = new HashSet<>(currentBlocs);
                 if (bloc != null) {
                     updatedBlocs.add(bloc);
@@ -426,7 +468,7 @@ public final class NameManager {
      * Get the distribution of last / family names.
      * @return Map of last / family names and frequency weights, keyed with the blocs those names are associated with. Names can be accessed through a set containing the applicable blocs.
      */
-    public static Map<Set<Bloc>, HashMap<String, Double>> getLastNameDistribution() {
+    public Map<Set<Bloc>, HashMap<String, Double>> getLastNameDistribution() {
         if (lastNamesDistribution == null || lastNamesDistribution.size() == 0) readLastNamesFile();
         return lastNamesDistribution;
     }
@@ -437,8 +479,8 @@ public final class NameManager {
      * @see #getLastNamesDistribution(Bloc[])
      * @see #getLastNamesDistribution(Collection)
     */
-    public static Map<String, Double> getLastNameDistribution(Demographics demographics) {
-        return getLastNameDistribution(demographics.toBlocsSet());
+    public Map<String, Double> getLastNameDistribution(Demographics demographics) {
+        return getLastNameDistribution(demographics.toBlocsArray());
     }
 
     /**
@@ -448,7 +490,7 @@ public final class NameManager {
      * @see #getLastNamesDistribution(Demographics)
      * @see #getLastNamesDistribution(Collection)
      */
-    public static Map<String, Double> getLastNameDistribution(Bloc... blocs) {
+    public Map<String, Double> getLastNameDistribution(Bloc... blocs) {
         return getLastNameDistribution(Set.of(blocs));
     }
 
@@ -459,9 +501,9 @@ public final class NameManager {
      * @see #getLastNamesDistribution(Demographics)
      * @see #getLastNamesDistribution(Bloc[])
      */
-    public static Map<String, Double> getLastNameDistribution(Collection<Bloc> blocs) {
+    public Map<String, Double> getLastNameDistribution(Collection<Bloc> blocs) {
         if (lastNamesDistribution == null && !readLastNamesFile()) {
-            Engine.log("LAST NAMES UNREADABLE", "The last names file was unable to be read properly.", new Exception());
+            Logger.log("LAST NAMES UNREADABLE", "The last names file was unable to be read properly.", new Exception());
             return null;
         }
         Set<Bloc> key = new HashSet<>(blocs);
@@ -472,7 +514,7 @@ public final class NameManager {
      * Read in the last names file.
      * @return {@code true} if successful, {@code false} otherwise.
     */
-    private static boolean readLastNamesFile() {
+    private boolean readLastNamesFile() {
         JSONObject json = JSONProcessor.processJson(FilePaths.LASTNAME_DISTR);
         lastNamesDistribution = new HashMap<>();
 
@@ -480,7 +522,7 @@ public final class NameManager {
         return true;
     }
 
-    private static Map<String, Double> processLastNameStructure(JSONObject json, Set<Bloc> currentBlocs) {
+    private Map<String, Double> processLastNameStructure(JSONObject json, Set<Bloc> currentBlocs) {
         Map<String, Double> distributions = new HashMap<>();
 
         for (Object obj : json.getAsList()) {
@@ -502,7 +544,7 @@ public final class NameManager {
             else if (value instanceof ArrayList<?>) {
                 // This is a nested structure
                 // If key is a valid bloc name, add it to the current set of blocs
-                Bloc bloc = DemographicsManager.matchBlocName(key);
+                Bloc bloc = Main.Engine().DemographicsManager().matchBlocName(key);
                 Set<Bloc> updatedBlocs = new HashSet<>(currentBlocs);
                 if (bloc != null) {
                     updatedBlocs.add(bloc);
@@ -523,7 +565,7 @@ public final class NameManager {
      * Read in the nicknames file.
      * @return {@code true} if successful, {@code false} otherwise.
     */
-    private static boolean readNicknamesFile() {
+    private boolean readNicknamesFile() {
         JSONObject json = JSONProcessor.processJson(FilePaths.NICKNAMES);
         nicknames = new HashMap<String, List<String>>();
 
@@ -535,117 +577,104 @@ public final class NameManager {
                 for (Object obj : rawNicks) {
                     if (obj != null) nicks.add(obj.toString());
                 }
-                NameManager.nicknames.put(name, nicks);
+                nicknames.put(name, nicks);
             }
         }
         return true;
     }
 
-    /**
-     * Read in all names files (first, middle, last, nicknames).
-     * @return {@code true} if successful, {@code false} otherwise.
-     */
-    public static boolean readAllNamesFiles() {
-        boolean successFlag = true;
-        successFlag = successFlag && readFirstNamesFile();
-        successFlag = successFlag && readMiddleNamesFile();
-        successFlag = successFlag && readLastNamesFile();
-        successFlag = successFlag && readNicknamesFile();
-        return successFlag;
-    }
-
-    public static NameForm selectNameForm(Demographics demographics) {
-        if (demographics.getRaceEthnicity().getNestedSuperBlocNames().contains("Asian")) {
-            if (Engine.randPercent() <= asianEasternNamePercent) {
+    public NameForm selectNameForm(Demographics demographics) {
+        if (demographics.getRaceEthnicity().getNestedNames().contains("Asian")) {
+            if (NumberOperations.randPercent() <= asianEasternNamePercent) {
                 return NameForm.EASTERN;
             }
         }
-        else if (demographics.getRaceEthnicity().getNestedSuperBlocNames().contains("Hispanic / Latino")) {
-            if (demographics.getRaceEthnicity().getNestedSuperBlocNames().contains("Argentinian")) {
+        else if (demographics.getRaceEthnicity().getNestedNames().contains("Hispanic / Latino")) {
+            if (demographics.getRaceEthnicity().getNestedNames().contains("Argentinian")) {
                 return NameForm.WESTERN; // Only the paternal apellido is inherited in the Argentinian custom
             }
-            if (Engine.randPercent() <= hispanicHispanicNamePercent) {
+            if (NumberOperations.randPercent() <= hispanicHispanicNamePercent) {
                 return NameForm.HISPANIC;
             }
         }
-        else if (demographics.getRaceEthnicity().getNestedSuperBlocNames().contains("Native / Indian")) {
-            if (Engine.randPercent() <= nativeNativeNamePercent) {
+        else if (demographics.getRaceEthnicity().getNestedNames().contains("Native / Indian")) {
+            if (NumberOperations.randPercent() <= nativeNativeNamePercent) {
                 return NameForm.NATIVE_AMERICAN;
             }
         }
         return NameForm.WESTERN;
     }
 
-    public static String selectGivenName(Demographics demographics) {
-        return selectGivenName(demographics.toBlocsSet());
+    public String selectGivenName(Demographics demographics) {
+        return selectGivenName(demographics.toBlocsArray());
     }
 
-    public static String selectGivenName(Bloc... blocs) {
+    public String selectGivenName(Bloc... blocs) {
         return selectGivenName(Set.of(blocs));
     }
 
-    public static String selectGivenName(Collection<Bloc> blocs) {
+    public String selectGivenName(Collection<Bloc> blocs) {
         Set<Bloc> key = Set.of(blocs.toArray(new Bloc[0]));
         key = refineBlocsKey(key);
-        return Engine.weightedRandSelect(getFirstNamesDistribution(key));
+        return NumberOperations.weightedRandSelect(getFirstNamesDistribution(key));
     }
 
-    public static String selectFamilyName(Demographics demographics) {
-        return selectFamilyName(demographics.toBlocsSet());
+    public String selectFamilyName(Demographics demographics) {
+        return selectFamilyName(demographics.toBlocsArray());
     }
 
-    public static String selectFamilyName(Bloc... blocs) {
+    public String selectFamilyName(Bloc... blocs) {
         return selectGivenName(Set.of(blocs));
     }
 
-    public static String selectFamilyName(Collection<Bloc> blocs) {
+    public String selectFamilyName(Collection<Bloc> blocs) {
         Set<Bloc> key = Set.of(blocs.toArray(new Bloc[0]));
         key = refineBlocsKey(key, "Presentation");
-        return Engine.weightedRandSelect(getLastNameDistribution(key));
+        return NumberOperations.weightedRandSelect(getLastNameDistribution(key));
     }
 
     @SuppressWarnings("unused")
-    public static String selectNickName(String... names) {
+    public String selectNickName(String... names) {
         // Nicknames may be based on one of a person's actual names
         // (with their preferred first name being most commonly nicked)
         // or may be completely separate from their actual names.
         List<String> allNicknames;
-        if (Engine.randPercent() <= nicknameNotFromNamesPercent && false) {
+        if (NumberOperations.randPercent() <= nicknameNotFromNamesPercent && false) {
             // Disabled this because names from other blocs were being chosen too frequently: unrealistic numbers of women with masculine nicknames
             // Nickname not based on given names
             allNicknames = new ArrayList<>();
             for (List<String> nicksList : nicknames.values()) {
                     allNicknames.addAll(nicksList);
             }
-            return Engine.randSelect(allNicknames);
+            return NumberOperations.randSelect(allNicknames);
         }
         else {
             // Nickname is based on given names
-            String n = Engine.randSelect(names); // Select a name to nick
+            String n = NumberOperations.randSelect(names); // Select a name to nick
             allNicknames = nicknames.get(n);
             if (allNicknames != null)
-                return Engine.randSelect(allNicknames);
+                return NumberOperations.randSelect(allNicknames);
         }
         return "";
     }
 
-    private static int[] selectPartsCounts(NameForm form) {
+    private int[] selectPartsCounts(NameForm form) {
         int[] counts = {0, 0, 0};
         switch (form) {
             case WESTERN :
-                counts[0] = Engine.probabilisticCount(multipleFirstNamesPercent) + 1;
-                counts[1] = Engine.randPercent() <= hasMiddleNamePercent ? 1 : 0;
-                if (counts[1] == 1) counts[1] += Engine.probabilisticCount(multipleMiddleNamesPercent);
-                counts[2] = Engine.probabilisticCount(doubleBarrelledNamePercent) + 1;
+                counts[0] = NumberOperations.probabilisticCount(multipleFirstNamesPercent) + 1;
+                counts[1] = NumberOperations.randPercent() <= hasMiddleNamePercent ? 1 : 0;
+                if (counts[1] == 1) counts[1] += NumberOperations.probabilisticCount(multipleMiddleNamesPercent);
+                counts[2] = NumberOperations.probabilisticCount(doubleBarrelledNamePercent) + 1;
                 break;
             case EASTERN :
                 counts[0] = 1;
-                counts[1] = Engine.randPercent() <= hasGenerationNamePercent ? 1 : 0;
+                counts[1] = NumberOperations.randPercent() <= hasGenerationNamePercent ? 1 : 0;
                 counts[2] = 1;
                 break;
             case HISPANIC :
-                counts[0] = Engine.probabilisticCount(hispanicMultipleForenamesPercent) + 1;
-                counts[2] = Engine.probabilisticCount(hispanicCompositeSurnamePercent) + 2;
+                counts[0] = NumberOperations.probabilisticCount(hispanicMultipleForenamesPercent) + 1;
+                counts[2] = NumberOperations.probabilisticCount(hispanicCompositeSurnamePercent) + 2;
                 break;
             case NATIVE_AMERICAN :
                 counts[0] = 1;
@@ -656,7 +685,7 @@ public final class NameManager {
         return counts;
     }
 
-    public static void assignGivenName(Name name, String[] givenNames) {
+    public void assignGivenName(Name name, String[] givenNames) {
         switch (name.getNameForm()) {
             case EASTERN:
             case HISPANIC:
@@ -666,7 +695,7 @@ public final class NameManager {
                 break;
         }
     }
-    public static void assignMiddleName(Name name, String[] middleNames) {
+    public void assignMiddleName(Name name, String[] middleNames) {
         switch (name.getNameForm()) {
             case EASTERN:
             case HISPANIC:
@@ -676,14 +705,14 @@ public final class NameManager {
                 break;
         }
     }
-    public static void assignFamilyName(Name name, String[] familyNames, Demographics demographics) {
+    public void assignFamilyName(Name name, String[] familyNames, Demographics demographics) {
         switch (name.getNameForm()) {
             case EASTERN:
                 name.setFamilyName(familyNames[0]);
                 break;
             case HISPANIC:
                 String[] conjoiners = {" y ", " de ", "-"};
-                int divide = Engine.randInt(1, familyNames.length - 1);
+                int divide = NumberOperations.randInt(1, familyNames.length - 1);
                 String[] paternalNames = Arrays.copyOfRange(familyNames, 0, divide);
                 String[] maternalNames = Arrays.copyOfRange(familyNames, divide, familyNames.length);
                 String paternalName = "";
@@ -692,7 +721,7 @@ public final class NameManager {
                         paternalName = n;
                         continue;
                     }
-                    paternalName = paternalName + Engine.randSelect(conjoiners) + n;
+                    paternalName = paternalName + NumberOperations.randSelect(conjoiners) + n;
                 }
                 String maternalName = "";
                 for (String n : maternalNames) {
@@ -700,9 +729,9 @@ public final class NameManager {
                         maternalName = n;
                         continue;
                     }
-                    maternalName = maternalName + Engine.randSelect(conjoiners) + n;
+                    maternalName = maternalName + NumberOperations.randSelect(conjoiners) + n;
                 }
-                if (demographics.getRaceEthnicity().getNestedSuperBlocNames().contains("Brazilian")) {
+                if (demographics.getRaceEthnicity().getNestedNames().contains("Brazilian")) {
                     // Brazilian names list the Maternal surname first
                     name.setMaternalName(maternalName.replace(" y ", " e "));
                     name.setPaternalName(paternalName.replace(" y ", " e "));
@@ -710,21 +739,21 @@ public final class NameManager {
                 }
                 name.setPaternalName(paternalName);
                 name.setMaternalName(maternalName);
-                if (Engine.randPercent() <= maternalNameFirstPercent)
+                if (NumberOperations.randPercent() <= maternalNameFirstPercent)
                     name.addDisplayOption(DisplayOption.MATERNAL_FIRST);
                 else
                     name.addDisplayOption(DisplayOption.PATERNAL_FIRST);
                 break;
             case NATIVE_AMERICAN:
             case WESTERN:
-                if (Engine.randPercent() <= hyphenatedNamePercent)
+                if (NumberOperations.randPercent() <= hyphenatedNamePercent)
                     name.setFamilyName(String.join("-", familyNames));
                 else
                     name.setFamilyName(String.join(" ", familyNames));
         }
     }
 
-    public static Name generateName(Demographics demographics) {
+    public Name generateName(Demographics demographics) {
 
         if (firstNamesDistribution == null || firstNamesDistribution.size() == 0) readFirstNamesFile();
         if (middleNamesDistribution == null || middleNamesDistribution.size() == 0) readMiddleNamesFile();
@@ -767,8 +796,8 @@ public final class NameManager {
         
         // Western Name
         if (form != NameForm.WESTERN && form != NameForm.HISPANIC) {
-            if (Engine.randPercent() <= hasWesternNamePercent) {
-                String westernName = selectGivenName(demographics.getPresentation(), DemographicsManager.matchBlocName("White"));
+            if (NumberOperations.randPercent() <= hasWesternNamePercent) {
+                String westernName = selectGivenName(demographics.getPresentation(), Main.Engine().DemographicsManager().matchBlocName("White"));
                 name.setWesternName(westernName);
                 name.addDisplayOption(DisplayOption.INCLUDE_WESTERN);
             }
@@ -786,18 +815,87 @@ public final class NameManager {
 
         // Abbreviation
         if (form.equals(NameForm.WESTERN)) {
-            if (Engine.randPercent() <= abbreviateBothNamesPercent) {
+            if (NumberOperations.randPercent() <= abbreviateBothNamesPercent) {
                 name.addDisplayOption(DisplayOption.ABBREVIATE_FIRST);
                 name.addDisplayOption(DisplayOption.ABBREVIATE_MIDDLE);
             }
-            else if (Engine.randPercent() <= abbreviateFirstNamesPercent) {
+            else if (NumberOperations.randPercent() <= abbreviateFirstNamesPercent) {
                 name.addDisplayOption(DisplayOption.ABBREVIATE_FIRST);
             }
-            else if (Engine.randPercent() <= abbreviateMiddleNamesPercent) {
+            else if (NumberOperations.randPercent() <= abbreviateMiddleNamesPercent) {
                 name.addDisplayOption(DisplayOption.ABBREVIATE_MIDDLE);
             }
         }
 
         return name;
     }
+
+    // REPRESENTATION METHODS ---------------------------------------------------------------------
+
+    @Override
+    public String toRepr() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toRepr'");
+    }
+
+    @Override
+    public Manager fromRepr(String repr) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromRepr'");
+    }
+
+    private static final Map<String, String> fieldsJsons = Map.of(
+        "firstNamesDistribution", "first_names_distribution",
+        "middleNamesDistribution", "middle_names_distribution",
+        "lastNamesDistribution", "last_names_distribution",
+        "nicknames", "nicknames"
+    );
+
+    @Override
+    public JSONObject toJson() {
+        try {
+            List<JSONObject> fields = new ArrayList<>();
+            for (String fieldName : fieldsJsons.keySet()) {
+                Field field = getClass().getDeclaredField(fieldName);
+                fields.add(new JSONObject(fieldName, field.get(this)));
+            }
+            return new JSONObject(this.getClass().getSimpleName(), fields);
+        }
+        catch (NoSuchFieldException | IllegalAccessException e) {
+            currentState = ManagerState.ERROR;
+            Logger.log("JSON SERIALIZATION ERROR", "Failed to serialize " + getClass().getSimpleName() + " to JSON.", e);
+            return null;
+        }
+    }
+
+    @Override
+    public Manager fromJson(JSONObject json) {
+        currentState = ManagerState.INACTIVE;
+        for (String fieldName : fieldsJsons.keySet()) {
+            String jsonKey = fieldsJsons.get(fieldName);
+            Object value = json.get(jsonKey);
+            if (value == null) continue;
+            try {
+                Field field = getClass().getDeclaredField(fieldName);
+                field.setAccessible(true);
+                Class<?> type = field.getType();
+                if (type.isEnum()) {
+                    // For enums, convert string to enum constant
+                    @SuppressWarnings({ "unchecked", "rawtypes" })
+                    Object enumValue = Enum.valueOf((Class<Enum>) type, value.toString());
+                    field.set(this, enumValue);
+                }
+                else {
+                    // For other types, set directly (may need conversion for complex types)
+                    field.set(this, value);
+                }
+            }
+            catch (Exception e) {
+                currentState = ManagerState.ERROR;
+                Logger.log("JSON DESERIALIZATION ERROR", "Failed to set field " + fieldName + " in LanguageManager from JSON.", e);
+            }
+        }
+        return this;
+    }
+    
 }

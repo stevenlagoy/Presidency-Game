@@ -84,7 +84,7 @@
         <dependency>
             <groupId>com.github.stevenlagoy</groupId>
             <artifactId>json-java-objectifier</artifactId>
-            <version>1.0.4</version>
+            <version>1.0.6a</version>
         </dependency>
     </dependencies>
 

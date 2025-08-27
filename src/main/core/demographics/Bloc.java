@@ -5,8 +5,10 @@ import java.util.List;
 import core.JSONObject;
 import main.core.Engine;
 import main.core.Jsonic;
+import main.core.Main;
 import main.core.Repr;
 import main.core.characters.CharacterManager;
+import main.core.demographics.DemographicsManager.DemographicCategory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,7 +19,7 @@ public class Bloc implements Repr<Bloc>, Jsonic<Bloc> {
 
     private static List<Bloc> instances = new ArrayList<>();
 
-    private static HashMap<String, HashSet<Bloc>> demographics = new HashMap<String, HashSet<Bloc>>();
+    private static HashMap<DemographicCategory, HashSet<Bloc>> demographics = new HashMap<DemographicCategory, HashSet<Bloc>>();
 
     public static List<Bloc> getInstances(){
         return instances;
@@ -33,47 +35,47 @@ public class Bloc implements Repr<Bloc>, Jsonic<Bloc> {
     private int numVoters;
     private List<main.core.characters.Character> members;
     private float percentageVoters;
-    private String demographicGroup;
+    private DemographicCategory category;
     private HashMap<Bloc, Double> overlaps = new HashMap<Bloc, Double>();
     private Bloc superBloc;
     private List<Bloc> subBlocs = new ArrayList<>();
 
-    public Bloc(String name, String demographicGroup){
+    public Bloc(String name, DemographicCategory category){
         this.name = name;
         this.numVoters = 0;
         this.percentageVoters = 0.0f;
-        this.demographicGroup = demographicGroup;
+        this.category = category;
         this.superBloc = null;
         this.members = new ArrayList<>();
 
         Bloc.instances.add(this);
-        if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
-        demographics.get(demographicGroup).add(this);
+        if(!demographics.containsKey(category)) demographics.put(category, new HashSet<Bloc>());
+        demographics.get(category).add(this);
     }
-    public Bloc(String name, String demographicGroup, int numVoters) {
+    public Bloc(String name, DemographicCategory category, int numVoters) {
         this.name = name;
         this.numVoters = numVoters;
-        this.percentageVoters = numVoters * 1.0f / DemographicsManager.totalVoters;
-        this.demographicGroup = demographicGroup;
+        this.percentageVoters = numVoters * 1.0f / Main.Engine().DemographicsManager().getNumberVoters();
+        this.category = category;
         this.superBloc = null;
         this.members = new ArrayList<>();
 
         Bloc.instances.add(this);
-        if(!demographics.containsKey(demographicGroup)) demographics.put(demographicGroup, new HashSet<Bloc>());
-        demographics.get(demographicGroup).add(this);
+        if(!demographics.containsKey(category)) demographics.put(category, new HashSet<Bloc>());
+        demographics.get(category).add(this);
     }
-    public Bloc(String name, String demographicGroup, float percentageVoters) {
+    public Bloc(String name, DemographicCategory category, float percentageVoters) {
         this.name = name;
-        this.numVoters = Math.round(percentageVoters * DemographicsManager.totalVoters);
+        this.numVoters = Math.round(percentageVoters * Main.Engine().DemographicsManager().getNumberVoters());
         this.percentageVoters = percentageVoters;
-        this.demographicGroup = demographicGroup;
+        this.category = category;
         this.superBloc = null;
         this.members = new ArrayList<>();
 
         Bloc.instances.add(this);
-        if(!demographics.containsKey(demographicGroup))
-            demographics.put(demographicGroup, new HashSet<Bloc>());
-        demographics.get(demographicGroup).add(this);
+        if(!demographics.containsKey(category))
+            demographics.put(category, new HashSet<Bloc>());
+        demographics.get(category).add(this);
     }
 
     public int getNumVoters(){
@@ -81,14 +83,14 @@ public class Bloc implements Repr<Bloc>, Jsonic<Bloc> {
     }
     public void setNumVoters(int numVoters){
         this.numVoters = numVoters;
-        this.percentageVoters = numVoters * 1.0f / DemographicsManager.totalVoters;
+        this.percentageVoters = numVoters * 1.0f / Main.Engine().DemographicsManager().getNumberVoters();
     }
     public float getPercentageVoters(){
         return percentageVoters;
     }
     public void setPercentageVoters(float percentageVoters){
         this.percentageVoters = percentageVoters;
-        this.numVoters = Math.round(percentageVoters * DemographicsManager.totalVoters);
+        this.numVoters = Math.round(percentageVoters * Main.Engine().DemographicsManager().getNumberVoters());
     }
     public List<main.core.characters.Character> getMembers(){
         return members;
@@ -96,7 +98,7 @@ public class Bloc implements Repr<Bloc>, Jsonic<Bloc> {
     public void addMember(main.core.characters.Character member){
         this.members.add(member);
     }
-    public void removeMember(Character member) {
+    public void removeMember(main.core.characters.Character member) {
         this.members.remove(member);
     }
     public String getName(){
@@ -124,11 +126,11 @@ public class Bloc implements Repr<Bloc>, Jsonic<Bloc> {
         } while (bloc != null);
         return blocs;
     }
-    public String getDemographicGroup() {
-        return this.demographicGroup;
+    public DemographicCategory getDemographicGroup() {
+        return this.category;
     }
-    public void setDemographicGroup(String group) {
-        this.demographicGroup = group;
+    public void setDemographicGroup(DemographicCategory category) {
+        this.category = category;
     }
     public Bloc getSuperBloc() {
         return superBloc;
@@ -166,18 +168,18 @@ public class Bloc implements Repr<Bloc>, Jsonic<Bloc> {
      * @param bloc The bloc to be evaluated for representation.
      * @return A float value for representation. <1 indicates the bloc is under-represented, while >1 indicates the bloc is over-represented. 
      */
-
-    public void fromRepr(String repr){
-
+    @Override
+    public Bloc fromRepr(String repr){
+        return this;
     }
     public String toRepr(){
         String repr = String.format(
-            "%s:[name:\"%s\";numVoters=%d;percentageVoters=%ff;demographicGroup=\"%s\";];",
+            "%s:[name:\"%s\";numVoters=%d;percentageVoters=%ff;category=\"%s\";];",
             this.getClass().toString().replace("class ", ""),
             this.name,
             this.numVoters,
             this.percentageVoters,
-            this.demographicGroup
+            this.category
         );
         return repr;
     }

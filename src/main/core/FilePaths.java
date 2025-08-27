@@ -26,8 +26,8 @@ public abstract class FilePaths {
     public static final Path LOG_FILE                   = LOGS_DIR.resolve("log.txt");
     public static final Path ERROR_LOG                  = LOGS_DIR.resolve("error.txt");
     public static final Path SAVES_DIR                  = Path.of("saves");
-    public static final String SYSTEM_TEXT_LOC          = "_system_text.txt";
-    public static final String DESCRIPTIONS_LOC         = "_descriptions.txt";
+    public static final String SYSTEM_TEXT_LOC          = "_system_text.json";
+    public static final String DESCRIPTIONS_LOC         = "_descriptions.json";
 
     // CHARACTER MANAGER PATHS
     public static final Path BIRTHDATE_DISTR            = DATES_RESOURCES.resolve("birthdate_popularities.json");

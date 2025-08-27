@@ -17,6 +17,8 @@ import java.util.Set;
 
 // Internal Imports
 import main.core.Engine;
+import main.core.Logger;
+import main.core.Main;
 import main.core.characters.CharacterManager;
 import main.core.characters.FederalOfficial;
 import main.core.demographics.Bloc;
@@ -136,7 +138,7 @@ public class Nation implements MapEntity {
      * @return String name.
      */
     public String getFullName() {
-        return Engine.getLocalization(fullName);
+        return Main.Engine().LanguageManager().getLocalization(fullName);
     }
 
     // Commmon Name : String
@@ -148,7 +150,7 @@ public class Nation implements MapEntity {
      * @return
      */
     public String getCommonName() {
-        return Engine.getLocalization(commonName);
+        return Main.Engine().LanguageManager().getLocalization(commonName);
     }
 
     // Motto : String
@@ -160,7 +162,7 @@ public class Nation implements MapEntity {
      * @return String motto.
      */
     public String getMotto() {
-        return Engine.getLocalization(motto);
+        return Main.Engine().LanguageManager().getLocalization(motto);
     }
 
     // Abbreviation : String
@@ -172,16 +174,16 @@ public class Nation implements MapEntity {
      * @return String abbreviation.
      */
     public String getAbbreviation() {
-        return Engine.getLocalization(abbreviation);
+        return Main.Engine().LanguageManager().getLocalization(abbreviation);
     }
 
     // Capital : Municipality
 
     public Municipality getCapital () {
         if (capital == null) {
-            capital = MapManager.matchMunicipality(capitalString);
+            capital = Main.Engine().MapManager().matchMunicipality(capitalString);
             if (capital == null) {
-                Engine.log("NATIONAL CAPITAL UNFOUND", String.format("The national capital, %s, was unable to be found.", capitalString), new Exception());
+                Logger.log("NATIONAL CAPITAL UNFOUND", String.format("The national capital, %s, was unable to be found.", capitalString), new Exception());
             }
         }
         return capital;
@@ -261,7 +263,7 @@ public class Nation implements MapEntity {
     }
     @Override
     public void evaluateDemographics() {
-        this.demographics = DemographicsManager.demographicsFromDescriptors(descriptors);
+        // TODO this.demographics = Main.Engine().DemographicsManager().demographicsFromDescriptors(descriptors);
     }
 
     // REPRESENTATION METHODS ---------------------------------------------------------------------

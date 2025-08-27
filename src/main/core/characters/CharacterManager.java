@@ -7,6 +7,8 @@
 
 package main.core.characters;
 
+import java.lang.management.ManagementPermission;
+
 // IMPORTS ----------------------------------------------------------------------------------------
 
 import java.util.Date;
@@ -17,9 +19,12 @@ import java.util.Set;
 
 import core.JSONObject;
 import core.JSONProcessor;
-import main.core.DateManager;
 import main.core.Engine;
 import main.core.FilePaths;
+import main.core.Main;
+import main.core.Manager;
+import main.core.NumberOperations;
+import main.core.TimeManager;
 import main.core.characters.FederalOfficial.FederalRole;
 import main.core.characters.names.Name;
 import main.core.characters.names.NameManager;
@@ -32,10 +37,11 @@ import main.core.demographics.DemographicsManager;
  * <p>
  * This class is final and has no instance variables, and is not designed to be instantiated.
  */
-public final class CharacterManager {
+public final class CharacterManager extends Manager {
 
-    /** This class is non-instantiable. All values and functions should be accessed in a static way. */
-    private CharacterManager() {} // Non-Instantiable
+    public CharacterManager() {
+        currentState = ManagerState.INACTIVE;
+    }
     
     /** The Player Character */
     private static Player playerCandidate;
@@ -49,13 +55,13 @@ public final class CharacterManager {
     public static boolean addCharacter(Character character) {
         boolean added = true;
         added = added && characters.add(character);
-        added = added && DemographicsManager.addCharacterToBlocs(character, character.getDemographics());
+        Main.Engine().DemographicsManager().addCharacterToBlocs(character, character.getDemographics());
         return added;
     }
     public static boolean removeCharacter(Character character) {
         boolean removed = true;
         removed = removed && characters.remove(character);
-        removed = removed && DemographicsManager.removeCharacterFromBlocs(character, character.getDemographics());
+        Main.Engine().DemographicsManager().removeCharacterFromBlocs(character, character.getDemographics());
         return removed;
     }
     private static Set<Candidate> candidates = new HashSet<Candidate>();
@@ -102,10 +108,27 @@ public final class CharacterManager {
     }
     public static FederalOfficial getHouseSpeaker() { return houseSpeaker != null ? houseSpeaker : generateHouseSpeaker(); }
 
-    public static boolean init(){
+    private ManagerState currentState;
+
+    // MANAGER METHODS ----------------------------------------------------------------------------
+
+    @Override
+    public boolean init(){
         boolean successFlag = true;
         successFlag = successFlag && characterSetup();
+        currentState = successFlag ? ManagerState.ACTIVE : ManagerState.ERROR;
+        return successFlag;
+    }
 
+    @Override
+    public ManagerState getState() {
+        return currentState;
+    }
+
+    public boolean cleanup() {
+        boolean successFlag = true;
+        currentState = ManagerState.INACTIVE;
+        if (!successFlag) currentState = ManagerState.ERROR;
         return successFlag;
     }
 
@@ -125,12 +148,12 @@ public final class CharacterManager {
          *     Select a relationship type and establish it between two applicable characters
          */
 
-        playerCandidate = createPlayerCharacter();
-        createPlayerFamily();
+        // playerCandidate = createPlayerCharacter();
+        // createPlayerFamily();
 
-        generatePresident();
-        generateVicePresident();
-        generateHouseSpeaker();
+        // generatePresident();
+        // generateVicePresident();
+        // generateHouseSpeaker();
 
         return true;
 
@@ -168,7 +191,7 @@ public final class CharacterManager {
     /** Assume that the first year will be 1900. */
     private static int startYear = 1900;
     public static HashMap<Integer, Double> getAgeDistribution(Demographics demographics){
-        if(demographics == null) demographics = DemographicsManager.getMostCommonDemographics();
+        if(demographics == null) demographics = Main.Engine().DemographicsManager().getMostCommonDemographics();
 
         HashMap<Integer, Double> result = new HashMap<Integer, Double>();
         for(int i = 0; i < numberOfYears; i++){
@@ -273,13 +296,13 @@ public final class CharacterManager {
     public static Bloc generatePresentation(Demographics demographics){
         // Using the other fields of the demographics object, select a presentation.
         
-        return DemographicsManager.matchBlocName("Woman");
+        return Main.Engine().DemographicsManager().matchBlocName("Woman");
     }
 
     public static void generateBlocsReport() {
         int differenceValue = 5;
         System.out.println("TOTAL # CHARACTERS : " + getNumCharacters());
-        for (List<Bloc> category : DemographicsManager.getDemographicBlocs().values()) {
+        for (List<Bloc> category : Main.Engine().DemographicsManager().getDemographicBlocs().values()) {
             for (Bloc bloc : category) {
                 if (bloc.getSubBlocs().isEmpty()) {
                     if (!DemographicsManager.isCharacterBlocCategory(bloc.getDemographicGroup())) continue;
@@ -313,15 +336,15 @@ public final class CharacterManager {
         long birthdate;
         // Select a year
         HashMap<Integer, Double> ageDistribution = CharacterManager.getAgeDistribution(demographics);
-        year = Engine.weightedRandSelect(ageDistribution);
+        year = NumberOperations.weightedRandSelect(ageDistribution);
         // Select a valid day of the year
         do {
-            birthdate = DateManager.dateFormatToOrdinal(Engine.weightedRandSelect(CharacterManager.getBirthdateDistribution())) * DateManager.dayDuration;
+            birthdate = TimeManager.dateFormatToOrdinal(NumberOperations.weightedRandSelect(CharacterManager.getBirthdateDistribution())) * TimeManager.dayDuration;
         }
-        while (DateManager.timeToYears(birthdate) < minAge || DateManager.timeToYears(birthdate) > maxAge ||
-            (birthdate == 60 * DateManager.dayDuration && !DateManager.isLeapYear(year)));
+        while (TimeManager.timeToYears(birthdate) < minAge || TimeManager.timeToYears(birthdate) > maxAge ||
+            (birthdate == 60 * TimeManager.dayDuration && !TimeManager.isLeapYear(year)));
 
-        return new Date(DateManager.yearToMillis(year) + birthdate);
+        return new Date(TimeManager.yearToMillis(year) + birthdate);
     }
 
     /**
@@ -332,7 +355,7 @@ public final class CharacterManager {
      * @see #generateCharacterModel(Demographics, int)
      */
     public static CharacterModel generateCharacterModel(Demographics demographics, Date birthdate) {
-        return generateCharacterModel(demographics, DateManager.yearsAgo(birthdate));
+        return generateCharacterModel(demographics, Main.Engine().TimeManager().yearsAgo(birthdate));
     }
 
     /**
@@ -343,5 +366,27 @@ public final class CharacterManager {
      */
     public static CharacterModel generateCharacterModel(Demographics demographics, int age) {
         return new CharacterModel();
+    }
+
+    // REPRESENTATION METHODS ---------------------------------------------------------------------
+
+    @Override
+    public String toRepr() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toRepr'");
+    }
+    @Override
+    public Manager fromRepr(String repr) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromRepr'");
+    }
+    @Override
+    public JSONObject toJson() {
+        return new JSONObject();
+    }
+    @Override
+    public Manager fromJson(JSONObject json) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromJson'");
     }
 }

@@ -21,6 +21,8 @@ import java.util.Set;
 import core.JSONObject;
 import main.core.Engine;
 import main.core.Jsonic;
+import main.core.Logger;
+import main.core.Main;
 import main.core.Repr;
 import main.core.characters.FederalOfficial;
 import main.core.characters.PoliticalActor;
@@ -75,12 +77,12 @@ public class State implements MapEntity, Repr<State>, Jsonic<State> {
         this.abbreviation = abbreviation;
         this.nickname = nickname;
         this.motto = motto;
-        this.capital = capitalName.isEmpty() ? null : MapManager.matchMunicipality(capitalName, abbreviation);
+        this.capital = capitalName.isEmpty() ? null : Main.Engine().MapManager().matchMunicipality(capitalName, abbreviation);
         setDescriptors(descriptors);
     }
 
     public State(String FIPS, int population, double landArea, String fullName, String commonName, String abbreviation, String nickname, String motto, String capitalName, Set<String> descriptors, List<FederalOfficial> senators, StateOfficial governor, StateOfficial lieutenantGovernor) {
-        this(FIPS, population, landArea, fullName, commonName, abbreviation, nickname, motto, capitalName.isEmpty() ? null : MapManager.matchMunicipality(capitalName, abbreviation), descriptors, senators, governor, lieutenantGovernor);
+        this(FIPS, population, landArea, fullName, commonName, abbreviation, nickname, motto, capitalName.isEmpty() ? null : Main.Engine().MapManager().matchMunicipality(capitalName, abbreviation), descriptors, senators, governor, lieutenantGovernor);
     }
 
     public State(String FIPS, int population, double landArea, String fullName, String commonName, String abbreviation, String nickname, String motto, Municipality capital, Set<String> descriptors, List<FederalOfficial> senators, StateOfficial governor, StateOfficial lieutenantGovernor) {
@@ -109,7 +111,7 @@ public class State implements MapEntity, Repr<State>, Jsonic<State> {
     public void setFIPS(String FIPS) {
         for (char c : FIPS.toCharArray()) {
             if (!Character.isDigit(c)) {
-                Engine.log("INVALID FIPS", String.format("Attempted to assign FIPS code %s, which is not numeric.", FIPS), new Exception());
+                Logger.log("INVALID FIPS", String.format("Attempted to assign FIPS code %s, which is not numeric.", FIPS), new Exception());
                 return;
             }
         }
@@ -137,7 +139,7 @@ public class State implements MapEntity, Repr<State>, Jsonic<State> {
 
     // Full Name : String
     public String getFullName(){
-        return Engine.getLocalization(fullName);
+        return Main.Engine().LanguageManager().getLocalization(fullName);
     }
     public void setFullName(String name){
         this.fullName = name;
@@ -169,7 +171,7 @@ public class State implements MapEntity, Repr<State>, Jsonic<State> {
 
     // Motto : String
     public String getMotto() {
-        return Engine.getLocalization(motto);
+        return Main.Engine().LanguageManager().getLocalization(motto);
     }
     public void setMotto(String motto) {
         this.motto = motto;
@@ -239,7 +241,7 @@ public class State implements MapEntity, Repr<State>, Jsonic<State> {
     @Override
     public void evaluateDemographics() {
         this.descriptors.addAll(nation.getDescriptors());
-        this.demographics = DemographicsManager.demographicsFromDescriptors(descriptors);
+        // TODO this.demographics = Main.Engine().MapManager().demographicsFromDescriptors(descriptors);
     }
 
     // Senators List of Federal Official

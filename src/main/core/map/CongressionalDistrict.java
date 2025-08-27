@@ -14,6 +14,7 @@ import java.util.Set;
 
 import core.JSONObject;
 import main.core.Jsonic;
+import main.core.Main;
 import main.core.Repr;
 import main.core.characters.FederalOfficial;
 import main.core.characters.FederalOfficial.FederalRole;
@@ -45,7 +46,7 @@ public class CongressionalDistrict implements MapEntity, Repr<State>, Jsonic<Sta
     // CONSTRUCTORS -------------------------------------------------------------------------------
 
     public CongressionalDistrict(String officeID, int population, double landArea, String name, String stateName, int districtNum, Set<String> descriptors) {
-        this(officeID, population, landArea, name, MapManager.matchState(stateName), districtNum, descriptors);
+        this(officeID, population, landArea, name, Main.Engine().MapManager().matchState(stateName), districtNum, descriptors);
     }
 
     public CongressionalDistrict(String officeID, int population, double landArea, String name, State state, int districtNum, Set<String> descriptors) {
@@ -103,7 +104,7 @@ public class CongressionalDistrict implements MapEntity, Repr<State>, Jsonic<Sta
         this.state = state;
     }
     public void setState(String stateName) {
-        setState(MapManager.matchState(stateName));
+        setState(Main.Engine().MapManager().matchState(stateName));
     }
 
     // District Num : int
@@ -180,7 +181,7 @@ public class CongressionalDistrict implements MapEntity, Repr<State>, Jsonic<Sta
     @Override
     public void evaluateDemographics() {
         this.descriptors.addAll(state.getDescriptors());
-        this.demographics = DemographicsManager.demographicsFromDescriptors(descriptors);
+        // TODO this.demographics = Main.Engine().DemographicsManager().demographicsFromDescriptors(descriptors);
     }
 
     // Representative : FederalOfficial

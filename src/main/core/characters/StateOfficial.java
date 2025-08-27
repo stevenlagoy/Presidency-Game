@@ -12,6 +12,7 @@ import java.util.Set;
 
 import core.JSONObject;
 import main.core.Engine;
+import main.core.Main;
 import main.core.map.MapEntity;
 import main.core.map.State;
 
@@ -28,7 +29,7 @@ public class StateOfficial extends PoliticalActor {
 
         @Override
         public String getTitle() {
-            return Engine.getLocalization(this.name());
+            return Main.Engine().LanguageManager().getLocalization(this.name());
         }
     }
 

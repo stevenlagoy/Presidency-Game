@@ -14,6 +14,7 @@ import java.util.Set;
 
 import core.JSONObject;
 import main.core.Jsonic;
+import main.core.Main;
 import main.core.Repr;
 import main.core.demographics.Bloc;
 import main.core.demographics.DemographicsManager;
@@ -43,7 +44,7 @@ public class County implements MapEntity, Repr<County>, Jsonic<County> {
     // CONSTRUCTORS -------------------------------------------------------------------------------
 
     public County(String FIPS, int population, double landArea, String fullName, String commonName, String stateName, String countySeatName, Set<String> descriptors) {
-        this(FIPS, population, landArea, fullName, commonName, MapManager.matchState(stateName), countySeatName.isEmpty() ? null : MapManager.matchMunicipality(countySeatName, stateName), descriptors);
+        this(FIPS, population, landArea, fullName, commonName, Main.Engine().MapManager().matchState(stateName), countySeatName.isEmpty() ? null : Main.Engine().MapManager().matchMunicipality(countySeatName, stateName), descriptors);
     }
 
     public County(String FIPS, int population, double landArea, String fullName, String commonName, State state, Municipality countySeat, Set<String> descriptors) {
@@ -113,7 +114,7 @@ public class County implements MapEntity, Repr<County>, Jsonic<County> {
         this.state = state;
     }
     public void setState(String stateName) {
-        this.state = MapManager.matchState(stateName);
+        this.state = Main.Engine().MapManager().matchState(stateName);
     }
 
     // County Seat : Municipality
@@ -124,7 +125,7 @@ public class County implements MapEntity, Repr<County>, Jsonic<County> {
         this.countySeat = countySeat;
     }
     public void setCountySeat(String countySeat) {
-        this.countySeat = MapManager.matchMunicipality(countySeat, this.state);
+        this.countySeat = Main.Engine().MapManager().matchMunicipality(countySeat, this.state);
     }
 
     // Descriptors : List of Strings
@@ -183,7 +184,7 @@ public class County implements MapEntity, Repr<County>, Jsonic<County> {
     @Override
     public void evaluateDemographics() {
         this.descriptors.addAll(state.getDescriptors());
-        this.demographics = DemographicsManager.demographicsFromDescriptors(descriptors);
+        // TODO this.demographics = Main.Engine().DemographicsManager().demographicsFromDescriptors(descriptors);
     }
 
 

@@ -22,6 +22,8 @@ import java.util.TimeZone;
 import core.JSONObject;
 import main.core.Engine;
 import main.core.Jsonic;
+import main.core.Logger;
+import main.core.Main;
 import main.core.Repr;
 import main.core.characters.LocalOfficial;
 import main.core.characters.LocalOfficial.LocalRole;
@@ -81,6 +83,10 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
     /** Percentages of the municipality which belong to each Bloc. */
     private Map<Bloc, Float> demographics;
 
+    // For contract / proxy calculations in Travel
+    private Municipality contractLocation;
+    private double connectivity;
+
     // CONSTRUCTORS -------------------------------------------------------------------------------
 
     public Municipality(String FIPS, int population, double landArea, String name, String typeClass, String standardTimeZone, String daylightTimeZone, String stateName, List<String> countiesNames, Set<String> descriptors) {
@@ -92,7 +98,7 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
         this.standardTimeZone = TimeZone.getTimeZone(standardTimeZone);
         this.daylightTimeZone = TimeZone.getTimeZone(daylightTimeZone);
         this.counties = new ArrayList<>();
-        setState(MapManager.matchState(stateName));
+        setState(Main.Engine().MapManager().matchState(stateName));
         setCountiesByNames(countiesNames);
         setDescriptors(descriptors);
     }
@@ -110,12 +116,12 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
             this.state = this.counties.get(0).getState();
         }
         catch (ArrayIndexOutOfBoundsException e) {
-            Engine.log("NO COUNTIES OR STATE", String.format("A Municipality was created without counties or state. Name: %s", name), e);
+            Logger.log("NO COUNTIES OR STATE", String.format("A Municipality was created without counties or state. Name: %s", name), e);
         }
         setDescriptors(descriptors);
         evaluateDemographics();
 
-        MapManager.municipalities.add(this);
+        Main.Engine().MapManager().addMunicipality(this);
     }
 
     public Municipality(String FIPS, int population, double landArea, String name, String nickname, TypeClass typeClass, TimeZone standardTimeZone, TimeZone daylightTimeZone, State state, Set<String> descriptors) {
@@ -130,7 +136,7 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
         setDescriptors(getDescriptors());
         evaluateDemographics();
 
-        MapManager.municipalities.add(this);
+        Main.Engine().MapManager().addMunicipality(this);
     }
 
     // GETTERS AND SETTERS ------------------------------------------------------------------------
@@ -219,7 +225,7 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
         this.counties = List.of(county);
     }
     public void setCountiesByNames(List<String> countiesNames) {
-        this.counties = MapManager.matchCounties(countiesNames, this.state.getAbbreviation());
+        this.counties = Main.Engine().MapManager().matchCounties(countiesNames, this.state.getAbbreviation());
     }
     public boolean addCounty(County county) {
         return this.counties.add(county);
@@ -283,7 +289,6 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
         return modified;
     }
 
-
     // Demographics : Map of Bloc to Float
 
     @Override
@@ -300,7 +305,7 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
     }
     @Override
     public void evaluateDemographics() {
-        this.demographics = DemographicsManager.demographicsFromDescriptors(descriptors);
+        // TODO this.demographics = Main.Engine().DemographicsManager().demographicsFromDescriptors(descriptors);
     }
 
     // Mayor : LocalOfficial
@@ -314,6 +319,16 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
             this.mayor.addRole(LocalRole.MAYOR);
         }
         else this.mayor = mayor;
+    }
+
+    // Contract Location : Municipality
+    public Municipality getContractLocation() {
+        return contractLocation;
+    }
+
+    // Connectivity : double
+    public double getConnectivity() {
+        return connectivity;
     }
 
     // REPRESENATION METHODS ----------------------------------------------------------------------

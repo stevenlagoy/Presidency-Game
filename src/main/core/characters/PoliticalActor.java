@@ -21,6 +21,8 @@ import java.util.Set;
 // Internal Imports
 import core.JSONObject;
 import main.core.Engine;
+import main.core.Logger;
+import main.core.Main;
 import main.core.Repr;
 import main.core.characters.names.Name;
 import main.core.demographics.Demographics;
@@ -51,7 +53,7 @@ public class PoliticalActor extends Character implements HasPersonality {
 
         @Override
         public String getTitle() {
-            return Engine.getLocalization(this.name());
+            return Main.Engine().LanguageManager().getLocalization(this.name());
         }
     }
 
@@ -358,7 +360,7 @@ public class PoliticalActor extends Character implements HasPersonality {
         for(Position position : positions) {
             if(position.getRootIssue().equals(issue)) return position;
         }
-        Engine.log("INVALID ISSUE NAME", String.format("An invalid issue name, \"%s\", was supplied. Unable to determine position on non-existant issue.", issue), new Exception());
+        Logger.log("INVALID ISSUE NAME", String.format("An invalid issue name, \"%s\", was supplied. Unable to determine position on non-existant issue.", issue), new Exception());
         return null;
     }
     public List<Position> getPositions() {

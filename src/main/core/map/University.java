@@ -1,5 +1,7 @@
 package main.core.map;
 
+import main.core.Main;
+
 public class University {
     
     private Municipality location;
@@ -8,7 +10,7 @@ public class University {
     private int graduationSize;
 
     public University(String locationName, String state, String fullName, String commonName, int graduationSize) {
-        this(MapManager.matchMunicipality(locationName, state), fullName, commonName, graduationSize);
+        this(Main.Engine().MapManager().matchMunicipality(locationName, state), fullName, commonName, graduationSize);
     }
 
     public University(Municipality location, String fullName, String commonName, int graduationSize) {

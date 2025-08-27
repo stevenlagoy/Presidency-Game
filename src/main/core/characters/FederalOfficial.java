@@ -12,6 +12,7 @@ import java.util.Set;
 
 import core.JSONObject;
 import main.core.Engine;
+import main.core.Main;
 import main.core.characters.StateOfficial.StateRole;
 import main.core.map.MapEntity;
 
@@ -29,7 +30,7 @@ public class FederalOfficial extends PoliticalActor {
 
         @Override
         public String getTitle() {
-            return Engine.getLocalization(this.name());
+            return Main.Engine().LanguageManager().getLocalization(this.name());
         }
     }
 

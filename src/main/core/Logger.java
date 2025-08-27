@@ -13,6 +13,9 @@ import java.util.Scanner;
 
 public final class Logger {
     
+    /** This class is uninstantiable. All functions should be called in a static way. */
+    private Logger() {}
+    
     /**
      * Write the passed logline to the standard error file.
      * @param logline String to be written, explaining information about the event logged.
