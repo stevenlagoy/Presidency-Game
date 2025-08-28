@@ -126,7 +126,10 @@ public final class LanguageManager extends Manager {
     }
 
     // Localizations : Map of String to String
-    /** Get the localization for a given tag in the current game language. */
+    /**
+     * Get the localization for a given tag in the current game language.
+     * @see #getLocalization(String, Language)
+    */
     public String getLocalization(String tag) {
         if (gameLanguage == null) {
             Logger.log("UNINITIALIZED GAME LANGUAGE", String.format("The game language was never initialized or was set to null."), new Exception());
@@ -134,13 +137,37 @@ public final class LanguageManager extends Manager {
         }
         return getLocalization(tag, gameLanguage);
     }
-    /** Get the localization for a given tag in the passed language. */
+    /**
+     * Get the localization for a given tag in the passed language. Will attempt to find
+     * localization for the tag as passed, in lower and upper case, with whitespaces changed to
+     * underscores, and with all combinations of the above. If unsuccessful, the original tag will
+     * be returned and the failure will be logged.
+     */
     public String getLocalization(String tag, Language language) {
         if (!loadLocalizations(language)) {
             return "INVALID LANGUAGE";
         }
-        String res = localizations.get(language).get(tag);
-        if (res == null) {
+        Map<String, String> langLocs = localizations.get(language);
+        String res = null;
+        if (res == null) { // Get with tag as passed
+            res = langLocs.get(tag);
+        }
+        if (res == null) { // Get with lowercase tag
+            res = langLocs.get(tag.toLowerCase());
+        }
+        if (res == null) { // Get with uppercase tag
+            res = langLocs.get(tag.toUpperCase());
+        }
+        if (res == null) { // Get with spaces replaced with underscores
+            res = langLocs.get(tag.replace(" ", "_"));
+        }
+        if (res == null) { // Lowercase and Underscores
+            res = langLocs.get(tag.replace(" ", "_").toLowerCase());
+        }
+        if (res == null) { // Uppercase and Underscores
+            res = langLocs.get(tag.replace(" ", "_").toUpperCase());
+        }
+        if (res == null) { // Could not identify tag
             Logger.log("INVALID LOCALIZATION TAG", String.format("Attempted to access localization tag %s for language %s, which is invalid.", tag, language.toString()), new Exception());
             return tag;
         }
