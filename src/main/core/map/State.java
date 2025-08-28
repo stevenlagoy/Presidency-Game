@@ -39,6 +39,8 @@ import main.core.demographics.DemographicsManager;
  */
 public class State implements MapEntity, Repr<State>, Jsonic<State> {
     
+    // INSTANCE VARIABLES -------------------------------------------------------------------------
+
     private Nation nation;
     /** Unique state FIPS code between 01 and 56. */
     private String FIPS;
@@ -104,7 +106,14 @@ public class State implements MapEntity, Repr<State>, Jsonic<State> {
 
     // GETTERS AND SETTERS ------------------------------------------------------------------------
 
-    // FIPS Code String
+    // Name : String
+    
+    @Override
+    public String getName() {
+        return getCommonName();
+    }
+
+    // FIPS Code : String
     public String getFIPS() {
         return FIPS;
     }
@@ -163,7 +172,7 @@ public class State implements MapEntity, Repr<State>, Jsonic<State> {
 
     // Nickname : String
     public String getNickname() {
-        return nickname;
+        return Main.Engine().LanguageManager().getLocalization(nickname);
     }
     public void setNickname(String nickname) {
         this.nickname = nickname;
@@ -244,7 +253,7 @@ public class State implements MapEntity, Repr<State>, Jsonic<State> {
         // TODO this.demographics = Main.Engine().MapManager().demographicsFromDescriptors(descriptors);
     }
 
-    // Senators List of Federal Official
+    // Senators : List of Federal Official
     public List<FederalOfficial> getSenators() {
         return senators;
     }
@@ -272,6 +281,7 @@ public class State implements MapEntity, Repr<State>, Jsonic<State> {
     }
     public boolean addSenator(FederalOfficial senator) {
         senator.addRole(FederalRole.SENATOR);
+        senator.setJurisdiction(this);
         return this.senators.add(senator);
     }
     public boolean removeSenator(FederalOfficial senator) {
@@ -287,6 +297,7 @@ public class State implements MapEntity, Repr<State>, Jsonic<State> {
         if (governor == null) {
             this.governor = new StateOfficial(this);
             this.governor.addRole(StateRole.GOVERNOR);
+            this.governor.setJurisdiction(this);
         }
         else this.governor = governor;
     }
@@ -299,6 +310,7 @@ public class State implements MapEntity, Repr<State>, Jsonic<State> {
         if (lieutenantGovernor == null) {
             this.lieutenantGovernor = new StateOfficial(this);
             this.lieutenantGovernor.addRole(StateRole.LIEUTENANT_GOVERNOR);
+            this.lieutenantGovernor.setJurisdiction(this);
         }
         else this.lieutenantGovernor = lieutenantGovernor;
     }
@@ -356,8 +368,24 @@ public class State implements MapEntity, Repr<State>, Jsonic<State> {
      */
     @Override
     public JSONObject toJson() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+        List<JSONObject> fields = new ArrayList<>();
+        // nation is constant for all states
+        fields.add(new JSONObject("FIPS", FIPS));
+        fields.add(new JSONObject("population", population));
+        fields.add(new JSONObject("land_area", landArea));
+        fields.add(new JSONObject("full_name", fullName));
+        fields.add(new JSONObject("common_name", commonName));
+        fields.add(new JSONObject("abbreviation", abbreviation));
+        fields.add(new JSONObject("nickname", nickname));
+        fields.add(new JSONObject("motto", motto));
+        fields.add(new JSONObject("capital", capital.getNameWithCountyAndState()));
+        fields.add(new JSONObject("descriptors", List.copyOf(descriptors)));
+        // Demographics are derived from descriptors
+        fields.add(new JSONObject("senators", List.of(getSenators().get(0).getName().getBiographicalName(), getSenators().get(1).getName().getBiographicalName())));
+        fields.add(new JSONObject("governor", getGovernor().getName().getBiographicalName()));
+        fields.add(new JSONObject("lieutenant_governor", getLieutenantGovernor().getName().getBiographicalName()));
+        String fullNameJson = this.getFullName().replace(" ", "_").toLowerCase();
+        return new JSONObject(fullNameJson, fields);
     }
 
     // OBJECT METHODS -----------------------------------------------------------------------------

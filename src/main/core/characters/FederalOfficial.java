@@ -7,13 +7,16 @@
 
 package main.core.characters;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import core.JSONObject;
 import main.core.Engine;
 import main.core.Main;
 import main.core.characters.StateOfficial.StateRole;
+import main.core.characters.attributes.Role;
 import main.core.map.MapEntity;
 
 public class FederalOfficial extends PoliticalActor {
@@ -34,11 +37,12 @@ public class FederalOfficial extends PoliticalActor {
         }
     }
 
-
     private Set<FederalRole> roles;
     
     private MapEntity jurisdiction;
     
+    // CONSTRUCTORS -------------------------------------------------------------------------------
+
     public FederalOfficial(){
         this(new PoliticalActor());
         CharacterManager.addCharacter(this);
@@ -83,12 +87,24 @@ public class FederalOfficial extends PoliticalActor {
         CharacterManager.addCharacter(this);
     }
 
+    // GETTERS AND SETTERS ------------------------------------------------------------------------
+
     public boolean addRole(FederalRole role) {
         if (this.roles == null) this.roles = new HashSet<>();
         return this.roles.add(role);
     }
     public boolean removeRole(FederalRole role) {
         return this.roles.remove(role);
+    }
+
+    // Jurisdiction : Map Entity
+
+    public MapEntity getJurisdiction() {
+        return jurisdiction;
+    }
+
+    public void setJurisdiction(MapEntity jurisdiction) {
+        this.jurisdiction = jurisdiction;
     }
 
     // REPRESENTATION METHODS ---------------------------------------------------------------------
@@ -116,8 +132,24 @@ public class FederalOfficial extends PoliticalActor {
 
     @Override
     public JSONObject toJson() {
-        // TODO Auto-generated method stub
-        return super.toJson();
+        List<JSONObject> fields = new ArrayList<>();
+
+        List<String> rolesStrings = new ArrayList<>();
+        for (FederalRole role : roles) {
+            rolesStrings.add(role.getTitle());
+        }
+        fields.add(new JSONObject("federal_roles", rolesStrings));
+        if (jurisdiction != null)
+            fields.add(new JSONObject("jurisdiction", jurisdiction.getName()));
+
+        List<?> superFields = super.toJson().getAsList();
+        for (Object obj : superFields) {
+            if (obj instanceof JSONObject jsonObj) {
+                fields.add(jsonObj);
+            }
+        }
+
+        return new JSONObject(getName().getBiographicalName(), fields);
     }
 
 

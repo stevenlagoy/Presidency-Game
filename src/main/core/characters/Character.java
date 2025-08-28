@@ -7,10 +7,13 @@
 
 package main.core.characters;
 
+import java.util.ArrayList;
+
 // IMPORTS ----------------------------------------------------------------------------------------
 
 // Standard Library Imports
 import java.util.Date;
+import java.util.List;
 
 // Internal Imports
 import core.JSONObject;
@@ -18,8 +21,9 @@ import main.core.TimeManager;
 import main.core.Jsonic;
 import main.core.Main;
 import main.core.Repr;
-import main.core.characters.names.Name;
-import main.core.characters.names.NameManager;
+import main.core.characters.attributes.CharacterModel;
+import main.core.characters.attributes.names.Name;
+import main.core.characters.attributes.names.NameManager;
 import main.core.demographics.Demographics;
 import main.core.demographics.DemographicsManager;
 import main.core.map.Municipality;
@@ -156,8 +160,8 @@ public class Character implements Repr<Character>, Jsonic<Character> {
         this.demographics                = demographics                != null ? demographics                : Main.Engine().DemographicsManager().generateWeightedDemographics();
         this.name                        = name                        != null ? name                        : Main.Engine().NameManager().generateName(this.demographics);
         this.birthplaceMunicipality      = birthplaceMunicipality      != null ? birthplaceMunicipality      : Main.Engine().MapManager().selectMunicipality(this.demographics);
-        this.currentLocationMunicipality = currentLocationMunicipality != null ? currentLocationMunicipality : Main.Engine().MapManager().selectMunicipality(this.demographics);
         this.residenceMunicipality       = residenceMunicipality       != null ? residenceMunicipality       : Main.Engine().MapManager().selectMunicipality(this.demographics);
+        this.currentLocationMunicipality = currentLocationMunicipality != null ? currentLocationMunicipality : residenceMunicipality != null ? residenceMunicipality : Main.Engine().MapManager().selectMunicipality(this.demographics);
         this.birthday                    = birthday                    != null ? birthday                    : CharacterManager.generateBirthday(this.demographics);
         this.appearance                  = appearance                  != null ? appearance                  : CharacterManager.generateCharacterModel(this.demographics, this.birthday);
         
@@ -297,7 +301,7 @@ public class Character implements Repr<Character>, Jsonic<Character> {
         if (appearanceObj == null)
             this.appearance = CharacterManager.generateAppearance(this);
         else if (appearanceObj instanceof JSONObject appearanceJson)
-            this.appearance = CharacterModel.fromJson(appearanceJson);
+            this.appearance = appearance.fromJson(appearanceJson);
 
         return this;
     }
@@ -307,8 +311,15 @@ public class Character implements Repr<Character>, Jsonic<Character> {
      */
     @Override
     public JSONObject toJson() {
-        JSONObject result = new JSONObject();
-        return result;
+        List<JSONObject> fields = new ArrayList<>();
+        fields.add(demographics.toJson());
+        fields.add(name.toJson());
+        fields.add(new JSONObject("birthplace", birthplaceMunicipality.getNameWithCountyAndState()));
+        fields.add(new JSONObject("current_location", currentLocationMunicipality.getNameWithCountyAndState()));
+        fields.add(new JSONObject("residence", residenceMunicipality.getNameWithCountyAndState()));
+        fields.add(new JSONObject("birthday", birthday.toString()));
+        fields.add(appearance.toJson());
+        return new JSONObject(getName().getBiographicalName(), fields);
     }
 
     

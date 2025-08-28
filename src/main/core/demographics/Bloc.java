@@ -8,6 +8,7 @@ import main.core.Jsonic;
 import main.core.Main;
 import main.core.Repr;
 import main.core.characters.CharacterManager;
+import main.core.characters.attributes.Skills;
 import main.core.demographics.DemographicsManager.DemographicCategory;
 
 import java.util.ArrayList;
@@ -31,6 +32,8 @@ public class Bloc implements Repr<Bloc>, Jsonic<Bloc> {
         return demographics.size();
     }
 
+    // INSTANCE VARIABLES -------------------------------------------------------------------------
+
     private String name;
     private int numVoters;
     private List<main.core.characters.Character> members;
@@ -52,6 +55,9 @@ public class Bloc implements Repr<Bloc>, Jsonic<Bloc> {
         if(!demographics.containsKey(category)) demographics.put(category, new HashSet<Bloc>());
         demographics.get(category).add(this);
     }
+
+    // CONSTRUCTORS -------------------------------------------------------------------------------
+
     public Bloc(String name, DemographicCategory category, int numVoters) {
         this.name = name;
         this.numVoters = numVoters;
@@ -77,6 +83,8 @@ public class Bloc implements Repr<Bloc>, Jsonic<Bloc> {
             demographics.put(category, new HashSet<Bloc>());
         demographics.get(category).add(this);
     }
+
+    // INSTANCE METHODS ---------------------------------------------------------------------------
 
     public int getNumVoters(){
         return numVoters;
@@ -185,8 +193,22 @@ public class Bloc implements Repr<Bloc>, Jsonic<Bloc> {
     }
     @Override
     public JSONObject toJson() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+        List<JSONObject> fields = new ArrayList<>();
+        
+        fields.add(new JSONObject("name", name));
+        fields.add(new JSONObject("number_voters", numVoters));
+        fields.add(new JSONObject("percentage_voters", percentageVoters));
+        fields.add(new JSONObject("category", category));
+        fields.add(new JSONObject("super_bloc", superBloc != null ? superBloc.getName() : null));
+        // List<String> subBlocsNames = new ArrayList<>();
+        // for (Bloc subBloc : subBlocs) {
+        //     subBlocsNames.add(subBloc.name);
+        // }
+        // fields.add(new JSONObject("sub_blocs", subBlocsNames));
+        // sub-blocs can be resconstructed from super-bloc relationships
+        
+        String blocJsonName = this.name.replace(" ", "_").toLowerCase().strip();
+        return new JSONObject(blocJsonName, fields);
     }
     @Override
     public Bloc fromJson(JSONObject json) {

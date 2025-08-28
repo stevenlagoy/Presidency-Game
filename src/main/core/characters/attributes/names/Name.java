@@ -5,7 +5,7 @@
  * Modified: 31 May 2025
  */
 
-package main.core.characters.names;
+package main.core.characters.attributes.names;
 
 // IMPORTS ----------------------------------------------------------------------------------------
 
@@ -384,8 +384,43 @@ public final class Name implements Repr<Name>, Jsonic<Name> {
     }
     @Override
     public JSONObject toJson() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+        List<JSONObject> fields = new ArrayList<>();
+        fields.add(new JSONObject("name_form", nameForm.toString()));
+        if (givenName != null && !givenName.isEmpty())
+            fields.add(new JSONObject("given_name", givenName));
+        if (middleName != null && !middleName.isEmpty())
+            fields.add(new JSONObject("middle_name", middleName));
+        if (familyName != null && !familyName.isEmpty())
+            fields.add(new JSONObject("family_name", familyName));
+        if (birthSurname != null && !birthSurname.isEmpty())
+            fields.add(new JSONObject("birth_surname", birthSurname));
+        if (paternalName != null && !paternalName.isEmpty())
+            fields.add(new JSONObject("paternal_name", paternalName));
+        if (maternalName != null && !maternalName.isEmpty())
+            fields.add(new JSONObject("maternal_name", maternalName));
+        if (nickname != null && !nickname.isEmpty())
+            fields.add(new JSONObject("nickname", nickname));
+        if (religiousName != null && !religiousName.isEmpty())
+            fields.add(new JSONObject("religious_name", religiousName));
+        if (westernName != null && !westernName.isEmpty())
+            fields.add(new JSONObject("western_name", westernName));
+        // legal name is derived
+        // informal name is derived
+        if (honorific != null && !honorific.isEmpty())
+            fields.add(new JSONObject("honorific", honorific));
+        if (ordinal != null && !ordinal.isEmpty())
+            fields.add(new JSONObject("ordinal", ordinal));
+        if (suffixes != null && !suffixes.isEmpty())
+            fields.add(new JSONObject("suffixes", List.copyOf(suffixes)));
+        if (displayOptions != null && !displayOptions.isEmpty()) {
+            List<String> displayOptionsWords = new ArrayList<>();
+            for (DisplayOption option : displayOptions) {
+                displayOptionsWords.add(option.toString());
+            }
+            fields.add(new JSONObject("display_options", displayOptionsWords));
+        }
+        return new JSONObject("name", fields);        
+        
     }
 
     public String getNameInStyle(NameStyle style) {

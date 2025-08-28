@@ -403,7 +403,7 @@ public final class MapManager extends Manager {
     public Municipality matchMunicipality(String municipalityName, State state) {
         if (municipalityName == null) return null;
         for (Municipality municipality : municipalities) {
-            if (municipality.getName().equals(municipalityName) && municipality.getState().equals(state))
+            if (municipality.getCommonName().equals(municipalityName) && municipality.getState().equals(state))
                 return municipality;
         }
         Logger.log("INVALID MUNICIPALITY", String.format("The municipality name, %s, or the state, %s, could not be matched.", municipalityName, state.getCommonName()), new Exception());
@@ -422,7 +422,7 @@ public final class MapManager extends Manager {
     /** This method to be used before cities have assigned states. Assumes all cities are unique by (name, population, area) */
     public Municipality matchMunicipality(String municipalityName, int population, double area) {
         for (Municipality municipality : municipalities) {
-            if (municipality.getName().equals(municipalityName) && municipality.getPopulation() == population && municipality.getLandArea() == area)
+            if (municipality.getCommonName().equals(municipalityName) && municipality.getPopulation() == population && municipality.getLandArea() == area)
                 return municipality;
         }
         Logger.log("INVALID MUNICIPALITY", String.format("No municipality exists with the name %s, a population of %d, and an area of %f.", municipalityName, population, area), new Exception());
@@ -544,19 +544,32 @@ public final class MapManager extends Manager {
 
     @Override
     public JSONObject toJson() {
-        try {
-            List<JSONObject> fields = new ArrayList<>();
-            for (String fieldName : fieldsJsons.keySet()) {
-                Field field = getClass().getDeclaredField(fieldName);
-                fields.add(new JSONObject(fieldName, field.get(this)));
-            }
-            return new JSONObject(this.getClass().getSimpleName(), fields);
+        List<JSONObject> fields = new ArrayList<>();
+        fields.add(nation.toJson());
+        List<JSONObject> statesJsons = new ArrayList<>();
+        for (State state : states) {
+            statesJsons.add(state.toJson());
         }
-        catch (NoSuchFieldException | IllegalAccessException e) {
-            currentState = ManagerState.ERROR;
-            Logger.log("JSON SERIALIZATION ERROR", "Failed to serialize " + getClass().getSimpleName() + " to JSON.", e);
-            return null;
-        }
+        fields.add(new JSONObject("states", statesJsons));
+
+
+
+        return new JSONObject("map_manager", fields);
+
+
+        // try {
+        //     List<JSONObject> fields = new ArrayList<>();
+        //     for (String fieldName : fieldsJsons.keySet()) {
+        //         Field field = getClass().getDeclaredField(fieldName);
+        //         fields.add(new JSONObject(fieldName, field.get(this)));
+        //     }
+        //     return new JSONObject(this.getClass().getSimpleName(), fields);
+        // }
+        // catch (NoSuchFieldException | IllegalAccessException e) {
+        //     currentState = ManagerState.ERROR;
+        //     Logger.log("JSON SERIALIZATION ERROR", "Failed to serialize " + getClass().getSimpleName() + " to JSON.", e);
+        //     return null;
+        // }
     }
 
     @Override

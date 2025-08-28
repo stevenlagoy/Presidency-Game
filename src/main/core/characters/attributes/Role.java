@@ -1,4 +1,4 @@
-package main.core.characters;
+package main.core.characters.attributes;
 
 public interface Role {
     public String getTitle();

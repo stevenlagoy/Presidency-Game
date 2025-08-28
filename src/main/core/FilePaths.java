@@ -25,6 +25,7 @@ public abstract class FilePaths {
     public static final Path LOGS_DIR                   = Path.of("logs");
     public static final Path LOG_FILE                   = LOGS_DIR.resolve("log.txt");
     public static final Path ERROR_LOG                  = LOGS_DIR.resolve("error.txt");
+    public static final Path OUTPUT_LOG_PATH            = LOGS_DIR.resolve("output.txt");
     public static final Path SAVES_DIR                  = Path.of("saves");
     public static final String SYSTEM_TEXT_LOC          = "_system_text.json";
     public static final String DESCRIPTIONS_LOC         = "_descriptions.json";

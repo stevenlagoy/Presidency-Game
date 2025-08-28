@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+import core.FileOperations.FileExtension;
+
 /**
  * IOUtil provides methods and constants for Input and Output interactions with Files, Consoles, etc.
  * <p>
@@ -70,6 +72,18 @@ public class IOUtil {
     public static final PrintWriter stdout = IOUtil.createWriter(System.out);
     /** Standard output to System.err. @see IOUtil#createWriter(OutputStream) */
     public static final PrintWriter stderr = IOUtil.createWriter(System.err);
+    /** Output to logs/output.txt */
+    public static final PrintWriter logout;
+    static {
+        PrintWriter tempLogout;
+        try {
+            tempLogout = IOUtil.createWriter(FilePaths.OUTPUT_LOG_PATH.toFile());
+        } catch (IOException e) {
+            e.printStackTrace();
+            tempLogout = new PrintWriter(System.out, true); // fallback to stdout
+        }
+        logout = tempLogout;
+    }
 
     public static Scanner createScanner(InputStream inputStream) {
         return new Scanner(inputStream, StandardCharsets.UTF_8.name());

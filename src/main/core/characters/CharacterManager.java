@@ -8,6 +8,7 @@
 package main.core.characters;
 
 import java.lang.management.ManagementPermission;
+import java.util.ArrayList;
 
 // IMPORTS ----------------------------------------------------------------------------------------
 
@@ -26,11 +27,15 @@ import main.core.Manager;
 import main.core.NumberOperations;
 import main.core.TimeManager;
 import main.core.characters.FederalOfficial.FederalRole;
-import main.core.characters.names.Name;
-import main.core.characters.names.NameManager;
+import main.core.characters.attributes.CharacterModel;
+import main.core.characters.attributes.HasPersonality;
+import main.core.characters.attributes.Personality;
+import main.core.characters.attributes.names.Name;
+import main.core.characters.attributes.names.NameManager;
 import main.core.demographics.Bloc;
 import main.core.demographics.Demographics;
 import main.core.demographics.DemographicsManager;
+import main.core.map.Nation;
 
 /**
  * CharacterManager manages the generation, access, control, and interaction of Character classes (including the Player).
@@ -39,76 +44,29 @@ import main.core.demographics.DemographicsManager;
  */
 public final class CharacterManager extends Manager {
 
-    public CharacterManager() {
-        currentState = ManagerState.INACTIVE;
-    }
+    // INSTANCE VARIABLES -------------------------------------------------------------------------
     
     /** The Player Character */
     private static Player playerCandidate;
-    public static Player getPlayer() { return playerCandidate; }
 
-    // Lists of Characters
     /** A list of all tracked Character objects. Most constructors in Character classes add the created instances to this Set. */
     private static Set<Character> characters = new HashSet<Character>();
-    public static Set<Character> getCharacters() { return characters; }
-    public static int getNumCharacters() { return characters.size(); }
-    public static boolean addCharacter(Character character) {
-        boolean added = true;
-        added = added && characters.add(character);
-        Main.Engine().DemographicsManager().addCharacterToBlocs(character, character.getDemographics());
-        return added;
-    }
-    public static boolean removeCharacter(Character character) {
-        boolean removed = true;
-        removed = removed && characters.remove(character);
-        Main.Engine().DemographicsManager().removeCharacterFromBlocs(character, character.getDemographics());
-        return removed;
-    }
+    
     private static Set<Candidate> candidates = new HashSet<Candidate>();
-    public static Set<Candidate> getCandidates() { return candidates; }
-    public static int getNumCandidates() { return candidates.size(); }
-    public static boolean addCandidate(Candidate candidate) {
-        boolean added = true;
-        added = added && candidates.add(candidate);
-        addCharacter(candidate);
-        return added;
-    }
-    public static boolean removeCandidate(Candidate candidate) {
-        boolean removed = true;
-        removed = removed && candidates.remove(candidate);
-        removeCharacter(candidate);
-        return removed;
-    }
 
-    // Individual Characters
     private static FederalOfficial president;
-    private static FederalOfficial generatePresident() {
-        Demographics presidentDemographics = new Demographics("White", "Baby Boomer", "Christian", "Man"); // Change later to select Demographics from a special weighted map
-        president = new FederalOfficial(new Character(presidentDemographics, null, null, null, null, null));
-        president.addRole(FederalRole.PRESIDENT);
-        return president;
-    }
-    public static FederalOfficial getPresident() { return president != null ? president : generatePresident(); }
+    
     private static FederalOfficial vicePresident;
-    private static FederalOfficial generateVicePresident() {
-        Demographics vicePresidentDemographics = new Demographics("White", "Baby Boomer", "Christian", "Man"); // Change later to select Demographics from a special weighted map
-        vicePresident = new FederalOfficial(new Character(vicePresidentDemographics, null, null, null, null, null));
-        vicePresident.addRole(FederalRole.VICE_PRESIDENT);
-        return vicePresident;
-    }
-    public static FederalOfficial getVicePresident() { return vicePresident != null ? vicePresident : generateVicePresident(); }
-    private static Character firstLady;
-    public static Character getFirstLady() { return firstLady; }
+        
     private static FederalOfficial houseSpeaker;
-    private static FederalOfficial generateHouseSpeaker() {
-        Demographics speakerDemographics = new Demographics("White", "Baby Boomer", "Christian", "Man"); // Change later to select Demographics from a special weighted map
-        houseSpeaker = new FederalOfficial(new Character(speakerDemographics, null, null, null, null, null));
-        houseSpeaker.addRole(FederalRole.HOUSE_SPEAKER);
-        return houseSpeaker;
-    }
-    public static FederalOfficial getHouseSpeaker() { return houseSpeaker != null ? houseSpeaker : generateHouseSpeaker(); }
-
+    
     private ManagerState currentState;
+
+    // CONSTRUCTORS -------------------------------------------------------------------------------
+
+    public CharacterManager() {
+        currentState = ManagerState.INACTIVE;
+    }
 
     // MANAGER METHODS ----------------------------------------------------------------------------
 
@@ -131,6 +89,94 @@ public final class CharacterManager extends Manager {
         if (!successFlag) currentState = ManagerState.ERROR;
         return successFlag;
     }
+
+    // GETTERS AND SETTERS ------------------------------------------------------------------------
+
+    public static Player getPlayer() {
+        return playerCandidate;
+    }
+
+    public static Set<Character> getCharacters() {
+        return characters;
+    }
+
+    public static int getNumCharacters() {
+        return characters.size();
+    }
+
+    public static boolean addCharacter(Character character) {
+        boolean added = true;
+        added = added && characters.add(character);
+        Main.Engine().DemographicsManager().addCharacterToBlocs(character, character.getDemographics());
+        return added;
+    }
+
+    public static boolean removeCharacter(Character character) {
+        boolean removed = true;
+        removed = removed && characters.remove(character);
+        Main.Engine().DemographicsManager().removeCharacterFromBlocs(character, character.getDemographics());
+        return removed;
+    }
+
+    public static Set<Candidate> getCandidates() {
+        return candidates;
+    }
+
+    public static int getNumCandidates() {
+        return candidates.size();
+    }
+
+    public static boolean addCandidate(Candidate candidate) {
+        boolean added = true;
+        added = added && candidates.add(candidate);
+        addCharacter(candidate);
+        return added;
+    }
+
+    public static boolean removeCandidate(Candidate candidate) {
+        boolean removed = true;
+        removed = removed && candidates.remove(candidate);
+        removeCharacter(candidate);
+        return removed;
+    }
+
+    private static FederalOfficial generatePresident() {
+        Demographics presidentDemographics = Main.Engine().DemographicsManager().getMostCommonDemographics(); // Change later to select Demographics from a special weighted map
+        president = new FederalOfficial(new Character(presidentDemographics, null, null, null, null, null));
+        president.addRole(FederalRole.PRESIDENT);
+        president.setJurisdiction(Nation.getInstance());
+        return president;
+    }
+    
+    public static FederalOfficial getPresident() {
+        return president != null ? president : generatePresident();
+    }
+
+    private static FederalOfficial generateVicePresident() {
+        Demographics vicePresidentDemographics = Main.Engine().DemographicsManager().getMostCommonDemographics(); // Change later to select Demographics from a special weighted map
+        vicePresident = new FederalOfficial(new Character(vicePresidentDemographics, null, null, null, null, null));
+        vicePresident.addRole(FederalRole.VICE_PRESIDENT);
+        vicePresident.setJurisdiction(Nation.getInstance());
+        return vicePresident;
+    }
+
+    public static FederalOfficial getVicePresident() {
+        return vicePresident != null ? vicePresident : generateVicePresident();
+    }
+
+    private static FederalOfficial generateHouseSpeaker() {
+        Demographics speakerDemographics = Main.Engine().DemographicsManager().getMostCommonDemographics(); // Change later to select Demographics from a special weighted map
+        houseSpeaker = new FederalOfficial(new Character(speakerDemographics, null, null, null, null, null));
+        houseSpeaker.addRole(FederalRole.HOUSE_SPEAKER);
+        return houseSpeaker;
+    }
+
+    public static FederalOfficial getHouseSpeaker() {
+        return houseSpeaker != null ? houseSpeaker : generateHouseSpeaker();
+    }
+
+
+    // INSTANCE METHODS ---------------------------------------------------------------------------
 
     private static boolean characterSetup(){
 
@@ -375,15 +421,29 @@ public final class CharacterManager extends Manager {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'toRepr'");
     }
+
     @Override
     public Manager fromRepr(String repr) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'fromRepr'");
     }
+
     @Override
     public JSONObject toJson() {
-        return new JSONObject();
+        List<JSONObject> fields = new ArrayList<>();
+
+        if (playerCandidate != null)
+            fields.add(new JSONObject("player", playerCandidate.getName().getBiographicalName()));
+
+        List<JSONObject> charactersJson = new ArrayList<>();
+        for (Character character : characters) {
+            charactersJson.add(character.toJson());
+        }
+        fields.add(new JSONObject("characters", charactersJson));
+
+        return new JSONObject("character_manager", fields);
     }
+
     @Override
     public Manager fromJson(JSONObject json) {
         // TODO Auto-generated method stub

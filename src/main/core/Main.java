@@ -19,7 +19,9 @@ public class Main {
         engine = new Engine();
         if (!engine.init()) return;
 
-        IOUtil.stdout.println(engine.toJson().toString());
+        IOUtil.logout.println("{");
+        IOUtil.logout.println("\t" + engine.toJson().toString().replace("\n","\n\t"));
+        IOUtil.logout.println("}");
 
         engine.cleanup();
         Logger.log("Main Done");

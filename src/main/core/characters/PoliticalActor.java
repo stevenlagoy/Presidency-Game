@@ -24,7 +24,13 @@ import main.core.Engine;
 import main.core.Logger;
 import main.core.Main;
 import main.core.Repr;
-import main.core.characters.names.Name;
+import main.core.characters.attributes.CharacterModel;
+import main.core.characters.attributes.Experience;
+import main.core.characters.attributes.HasPersonality;
+import main.core.characters.attributes.Personality;
+import main.core.characters.attributes.Role;
+import main.core.characters.attributes.Skills;
+import main.core.characters.attributes.names.Name;
 import main.core.demographics.Demographics;
 import main.core.map.Municipality;
 import main.core.politics.Issue;
@@ -486,7 +492,28 @@ public class PoliticalActor extends Character implements HasPersonality {
      */
     @Override
     public JSONObject toJson() {
-        return new JSONObject();
+        List<JSONObject> fields = new ArrayList<>();
+        fields.add(new JSONObject("cash", cash));
+        fields.add(new JSONObject("education", education.value));
+        fields.add(new JSONObject("alignments", List.of(alignments[0], alignments[1])));
+        fields.add(new JSONObject("experiences")); // TODO
+        fields.add(skills.toJson());
+        fields.add(new JSONObject("conviction", conviction));
+        fields.add(personality.toJson());
+        List<String> rolesStrings = new ArrayList<>();
+        for (PoliticalRole role : roles) {
+            rolesStrings.add(role.getTitle());
+        }
+        fields.add(new JSONObject("roles", rolesStrings));
+
+        List<?> superFields = super.toJson().getAsList();
+        for (Object obj : superFields) {
+            if (obj instanceof JSONObject jsonObj) {
+                fields.add(jsonObj);
+            }
+        }
+
+        return new JSONObject(getName().getBiographicalName(), fields);
     }
 
     /**

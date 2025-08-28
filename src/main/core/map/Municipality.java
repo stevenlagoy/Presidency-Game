@@ -173,9 +173,21 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
 
     // Name : String
 
+    /** 
+     * Return identifying name of this Municipality.
+     * <p>
+     * To get the simple name of this Municipality, use {@link #getCommonName()}
+     * @see #getNameWithCountyAndState()
+     */
+    @Override
     public String getName() {
+        return getNameWithCountyAndState();
+    }
+
+    public String getCommonName() {
         return name;
     }
+
     public String getNameWithState() {
         return name + ", " + state.getCommonName();
     }
@@ -305,7 +317,7 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
     }
     @Override
     public void evaluateDemographics() {
-        // TODO this.demographics = Main.Engine().DemographicsManager().demographicsFromDescriptors(descriptors);
+        this.demographics = Main.Engine().DemographicsManager().demographicsFromDescriptors(descriptors);
     }
 
     // Mayor : LocalOfficial
@@ -317,6 +329,7 @@ public class Municipality implements MapEntity, Repr<Municipality>, Jsonic<Munic
         if (mayor == null) {
             this.mayor = new LocalOfficial();
             this.mayor.addRole(LocalRole.MAYOR);
+            this.mayor.setJurisdiction(this);
         }
         else this.mayor = mayor;
     }

@@ -7,12 +7,15 @@
 
 package main.core.characters;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import core.JSONObject;
 import main.core.Engine;
 import main.core.Main;
+import main.core.characters.attributes.Role;
 import main.core.map.MapEntity;
 import main.core.map.State;
 
@@ -35,9 +38,6 @@ public class StateOfficial extends PoliticalActor {
 
     // INSTANCE VARIABLES ------------------------------------------------------------------------- 
 
-    /** The state with which this StateOfficial is associated. */
-    private State state;
-
     private Set<StateRole> roles;
 
     private MapEntity jurisdiction;
@@ -46,7 +46,7 @@ public class StateOfficial extends PoliticalActor {
 
     public StateOfficial(){
         this(new PoliticalActor());
-        this.state = null;
+        this.jurisdiction = null;
         CharacterManager.addCharacter(this);
     }
 
@@ -56,7 +56,7 @@ public class StateOfficial extends PoliticalActor {
 
     public StateOfficial(StateOfficial other, boolean addToCharacterList) {
         super(other, false);
-        this.state = other.state;
+        this.jurisdiction = other.jurisdiction;
         if (addToCharacterList) CharacterManager.addCharacter(this);
     }
 
@@ -90,24 +90,51 @@ public class StateOfficial extends PoliticalActor {
 
     public StateOfficial(State state){
         super();
-        this.state = state;
+        this.jurisdiction = state;
     }
 
 
     // GETTERS AND SETTERS ------------------------------------------------------------------------
-
-    public State getState(){
-        return state;
-    }
-    public void setState(State state){
-        this.state = state;
-    }
     
     // Roles : List of StateRole
 
     public boolean addRole(StateRole role) {
         if (this.roles == null) this.roles = new HashSet<>();
         return this.roles.add(role);
+    }
+
+    // Jurisdiction : Map Entity
+
+    public MapEntity getJurisdiction() {
+        return jurisdiction;
+    }
+
+    public void setJurisdiction(MapEntity jurisdiction) {
+        this.jurisdiction = jurisdiction;
+    }
+
+    // REPRESENTATION METHODS ---------------------------------------------------------------------
+
+    @Override
+    public JSONObject toJson() {
+        List<JSONObject> fields = new ArrayList<>();
+
+        List<String> rolesStrings = new ArrayList<>();
+        for (StateRole role : roles) {
+            rolesStrings.add(role.getTitle());
+        }
+        fields.add(new JSONObject("state_roles", rolesStrings));
+        if (jurisdiction != null)
+            fields.add(new JSONObject("jurisdiction", jurisdiction.getName()));
+
+        List<?> superFields = super.toJson().getAsList();
+        for (Object obj : superFields) {
+            if (obj instanceof JSONObject jsonObj) {
+                fields.add(jsonObj);
+            }
+        }
+
+        return new JSONObject(getName().getBiographicalName(), fields);
     }
 
     // OBJECT METHODS -----------------------------------------------------------------------------

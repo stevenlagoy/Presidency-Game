@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import core.JSONObject;
 import core.JSONProcessor;
@@ -228,19 +229,19 @@ public class DemographicsManager extends Manager {
     public Demographics randomDemographics() {
         Bloc generation, religion, raceEthnicity, presentation;
         try {
-            generation = demographicBlocs.get("Generation").get(NumberOperations.randInt(demographicBlocs.get("Generation").size() - 1));
+            generation = demographicBlocs.get(DemographicCategory.GENERATION).get(NumberOperations.randInt(demographicBlocs.get("Generation").size() - 1));
             while (generation.getSubBlocs().size() != 0) {
                 generation = generation.getSubBlocs().get(NumberOperations.randInt(generation.getSubBlocs().size() - 1));
             }
-            religion = demographicBlocs.get("Religion").get(NumberOperations.randInt(demographicBlocs.get("Religion").size() - 1));
+            religion = demographicBlocs.get(DemographicCategory.RELIGION).get(NumberOperations.randInt(demographicBlocs.get("Religion").size() - 1));
             while (religion.getSubBlocs().size() != 0) {
                 religion = religion.getSubBlocs().get(NumberOperations.randInt(religion.getSubBlocs().size() - 1));
             }
-            raceEthnicity = demographicBlocs.get("Race / Ethnicity").get(NumberOperations.randInt(demographicBlocs.get("Race / Ethnicity").size() - 1));
+            raceEthnicity = demographicBlocs.get(DemographicCategory.RACE_ETHNICITY).get(NumberOperations.randInt(demographicBlocs.get("Race / Ethnicity").size() - 1));
             while (raceEthnicity.getSubBlocs().size() != 0) {
                 raceEthnicity = raceEthnicity.getSubBlocs().get(NumberOperations.randInt(raceEthnicity.getSubBlocs().size() - 1));
             }
-            presentation = demographicBlocs.get("Presentation").get(NumberOperations.randInt(demographicBlocs.get("Presentation").size() - 1));
+            presentation = demographicBlocs.get(DemographicCategory.PRESENTATION).get(NumberOperations.randInt(demographicBlocs.get("Presentation").size() - 1));
             while (presentation.getSubBlocs().size() != 0) {
                 presentation = presentation.getSubBlocs().get(NumberOperations.randInt(presentation.getSubBlocs().size() - 1));
             }
@@ -250,6 +251,14 @@ public class DemographicsManager extends Manager {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public Map<Bloc, Float> demographicsFromDescriptors(Set<String> descriptors) {
+        Map<Bloc, Float> demographics = new HashMap<>();
+        for (Bloc bloc : Bloc.getInstances()) {
+            demographics.put(bloc, 0.5f);
+        }
+        return demographics;
     }
 
     // GETTERS AND SETTERS ------------------------------------------------------------------------
@@ -347,7 +356,6 @@ public class DemographicsManager extends Manager {
     }
 
     public Bloc matchBlocName(String name){
-        List<Bloc> blocs  = Bloc.getInstances();
         for(Bloc bloc : Bloc.getInstances()){
             if(bloc.getName().equals(name))
                 return bloc;
@@ -377,19 +385,35 @@ public class DemographicsManager extends Manager {
 
     @Override
     public JSONObject toJson() {
-        try {
-            List<JSONObject> fields = new ArrayList<>();
-            for (String fieldName : fieldsJsons.keySet()) {
-                Field field = getClass().getDeclaredField(fieldName);
-                fields.add(new JSONObject(fieldName, field.get(this)));
+        List<JSONObject> fields = new ArrayList<>();
+        fields.add(new JSONObject("number_voters", numVoters));
+        // JSONify demographicBlocs
+        List<JSONObject> categories = new ArrayList<>(); 
+        for (DemographicCategory category : demographicBlocs.keySet()) {
+            List<Bloc> blocs = demographicBlocs.get(category);
+            List<JSONObject> blocsJsons = new ArrayList<>();
+            for (Bloc bloc : blocs) {
+                blocsJsons.add(bloc.toJson());
             }
-            return new JSONObject(this.getClass().getSimpleName(), fields);
+            String categoryJsonLabel = category.label.replace(" ","_").toLowerCase();
+            categories.add(new JSONObject(categoryJsonLabel, blocsJsons));
         }
-        catch (NoSuchFieldException | IllegalAccessException e) {
-            currentState = ManagerState.ERROR;
-            Logger.log("JSON SERIALIZATION ERROR", "Failed to serialize " + getClass().getSimpleName() + " to JSON.", e);
-            return null;
-        }
+        fields.add(new JSONObject("demographic_blocs", categories));
+        return new JSONObject("demographics_manager", fields);
+
+        // try {
+        //     List<JSONObject> fields = new ArrayList<>();
+        //     for (String fieldName : fieldsJsons.keySet()) {
+        //         Field field = getClass().getDeclaredField(fieldName);
+        //         fields.add(new JSONObject(fieldName, field.get(this)));
+        //     }
+        //     return new JSONObject(this.getClass().getSimpleName(), fields);
+        // }
+        // catch (NoSuchFieldException | IllegalAccessException e) {
+        //     currentState = ManagerState.ERROR;
+        //     Logger.log("JSON SERIALIZATION ERROR", "Failed to serialize " + getClass().getSimpleName() + " to JSON.", e);
+        //     return null;
+        // }
     }
 
     @Override

@@ -34,7 +34,7 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import core.JSONObject;
 import main.core.Manager.ManagerState;
 import main.core.characters.CharacterManager;
-import main.core.characters.names.NameManager;
+import main.core.characters.attributes.names.NameManager;
 import main.core.demographics.DemographicsManager;
 import main.core.graphics.ILogic;
 import main.core.graphics.MouseInput;
@@ -69,6 +69,7 @@ public final class Engine extends Manager {
     public CharacterManager CharacterManager() { return CHARACTER_MANAGER; }
     private final List<Manager> managers;
 
+    public final boolean DEBUG_MODE = true;
     private ManagerState currentState;
 
     public Engine() {
@@ -98,16 +99,6 @@ public final class Engine extends Manager {
     }
 
     // MANAGER METHODS ----------------------------------------------------------------------------
-
-    private static final Map<String, String> fieldsJsons = Map.of(
-        "LANGUAGE_MANAGER", "language_manager",
-        "TIME_MANAGER", "time_manager",
-        "EVENT_MANAGER", "event_manager",
-        "DEMOGRAPHICS_MANAGER", "demographics_manager",
-        "MAP_MANAGER", "map_manager",
-        "NAME_MANAGER", "name_manager",
-        "CHARACTER_MANAGER", "character_manager"
-    );
 
     /** Initialize and Activate this Engine, and its Managers. */
     @Override
@@ -390,6 +381,16 @@ public final class Engine extends Manager {
             return null;
         }
     }
+
+    private static final Map<String, String> fieldsJsons = Map.of(
+        "LANGUAGE_MANAGER", "language_manager",
+        "TIME_MANAGER", "time_manager",
+        "EVENT_MANAGER", "event_manager",
+        "DEMOGRAPHICS_MANAGER", "demographics_manager",
+        "MAP_MANAGER", "map_manager",
+        "NAME_MANAGER", "name_manager",
+        "CHARACTER_MANAGER", "character_manager"
+    );
 
     @Override
     public Manager fromJson(JSONObject json) {

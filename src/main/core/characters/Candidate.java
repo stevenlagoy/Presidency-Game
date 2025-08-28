@@ -15,6 +15,7 @@ import java.util.List;
 import core.JSONObject;
 import main.core.Engine;
 import main.core.NumberOperations;
+import main.core.characters.attributes.Personality;
 import main.core.demographics.Demographics;
 
 /**
@@ -217,6 +218,7 @@ public class Candidate extends PoliticalActor {
         return null;
     }
 
+    @Override
     public String toRepr(){
         String superRepr = super.toRepr();
         String[] splitSuperRepr = superRepr.split(":\\[");
@@ -233,7 +235,26 @@ public class Candidate extends PoliticalActor {
         );
         return repr;
     }
+
+    @Override
     public Candidate fromRepr(String repr){
         return null;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        List<JSONObject> fields = new ArrayList<>();
+
+        fields.add(new JSONObject("number_delegates", numDelegates));
+        fields.add(new JSONObject("influence", influence));
+
+        List<?> superFields = super.toJson().getAsList();
+        for (Object obj : superFields) {
+            if (obj instanceof JSONObject jsonObj) {
+                fields.add(jsonObj);
+            }
+        }
+
+        return new JSONObject(getName().getBiographicalName(), fields);
     }
 }

@@ -7,11 +7,17 @@
 
 package main.core.map;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import core.JSONObject;
+import core.Jsonic;
 
 // IMPORTS ----------------------------------------------------------------------------------------
 
@@ -19,6 +25,7 @@ import java.util.Set;
 import main.core.Engine;
 import main.core.Logger;
 import main.core.Main;
+import main.core.Repr;
 import main.core.characters.CharacterManager;
 import main.core.characters.FederalOfficial;
 import main.core.demographics.Bloc;
@@ -33,7 +40,7 @@ import main.core.demographics.DemographicsManager;
  * This is a Singleton class. It cannot be instantiated, and access to the single
  * class instance is achieved through the {@link #getInstance()} method.
  */
-public class Nation implements MapEntity {
+public class Nation implements MapEntity, Repr<Nation>, Jsonic<Nation> {
 
     // SINGLETON PATTERN --------------------------------------------------------------------------
 
@@ -82,6 +89,13 @@ public class Nation implements MapEntity {
     private Set<String> descriptors;
 
     // GETTERS AND SETTERS ------------------------------------------------------------------------
+
+    // Name : String
+    
+    @Override
+    public String getName() {
+        return getFullName();
+    }
 
     // Population : int
 
@@ -268,17 +282,38 @@ public class Nation implements MapEntity {
 
     // REPRESENTATION METHODS ---------------------------------------------------------------------
 
+    @Override
     public String toRepr() {
         return "";
     }
 
-    public Nation fromRepr() {
+    @Override
+    public Nation fromRepr(String repr) {
         return this;
     }
 
     @Override
     public String toString() {
         return fullName;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        List<JSONObject> fields = new ArrayList<>();
+        // static finals do not need to be saved
+        // fields.add(new JSONObject("capital", getCapital().getNameWithCountyAndState()));
+        // capital is a derived field from a static final
+        fields.add(new JSONObject("president", president.getName().getBiographicalName()));
+        fields.add(new JSONObject("vice_president", vicePresident.getName().getBiographicalName()));
+        // demographics are a derived field from descriptors
+        fields.add(new JSONObject("descriptors", List.copyOf(descriptors)));
+        return new JSONObject("nation", fields);
+    }
+
+    @Override
+    public Nation fromJson(JSONObject json) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromJson'");
     }
 
     // OBJECT METHODS -----------------------------------------------------------------------------

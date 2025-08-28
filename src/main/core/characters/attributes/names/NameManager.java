@@ -5,7 +5,7 @@
  * Modified: 3 June 2025
  */
 
-package main.core.characters.names;
+package main.core.characters.attributes.names;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -17,15 +17,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.print.attribute.standard.JobName;
+
 import core.JSONObject;
 import core.JSONProcessor;
+import core.Jsonic;
 import main.core.FilePaths;
 import main.core.Logger;
 import main.core.Main;
 import main.core.Manager;
 import main.core.NumberOperations;
-import main.core.characters.names.Name.DisplayOption;
-import main.core.characters.names.Name.NameForm;
+import main.core.characters.attributes.names.Name.DisplayOption;
+import main.core.characters.attributes.names.Name.NameForm;
 import main.core.demographics.Bloc;
 import main.core.demographics.Demographics;
 
@@ -853,19 +856,100 @@ public final class NameManager extends Manager {
 
     @Override
     public JSONObject toJson() {
-        try {
-            List<JSONObject> fields = new ArrayList<>();
-            for (String fieldName : fieldsJsons.keySet()) {
-                Field field = getClass().getDeclaredField(fieldName);
-                fields.add(new JSONObject(fieldName, field.get(this)));
+        List<JSONObject> fields = new ArrayList<>();
+
+        List<JSONObject> firstNamesDistributionJson = new ArrayList<>();
+        for (Set<Bloc> blocSet : firstNamesDistribution.keySet()) {
+            Map<String, Double> namesDistribution = firstNamesDistribution.get(blocSet);
+            
+            // Create the list of blocs as key
+            List<String> keyBlocs = new ArrayList<>();
+            for (Bloc bloc : blocSet) {
+                keyBlocs.add(bloc.getName());
             }
-            return new JSONObject(this.getClass().getSimpleName(), fields);
+            JSONObject blocsKey = new JSONObject("blocs", keyBlocs);
+
+            // Create the list of JSONObject as value
+            List<JSONObject> distribution = new ArrayList<>();
+            for (String name : namesDistribution.keySet()) {
+                distribution.add(new JSONObject(name, namesDistribution.get(name)));
+            }
+            JSONObject namesValue = new JSONObject("names", distribution);
+            
+            // Create a unique key for this pair
+            String distributionJsonName = String.valueOf(blocSet.hashCode());
+            // Add the pair to the first names distribution
+            firstNamesDistributionJson.add(new JSONObject(distributionJsonName, List.of(blocsKey, namesValue)));
         }
-        catch (NoSuchFieldException | IllegalAccessException e) {
-            currentState = ManagerState.ERROR;
-            Logger.log("JSON SERIALIZATION ERROR", "Failed to serialize " + getClass().getSimpleName() + " to JSON.", e);
-            return null;
+        fields.add(new JSONObject("first_names_distribution", firstNamesDistributionJson));
+
+        List<JSONObject> middleNamesDistributionJson = new ArrayList<>();
+        for (Set<Bloc> blocSet : middleNamesDistribution.keySet()) {
+            Map<String, Double> namesDistribution = middleNamesDistribution.get(blocSet);
+
+            // Create the list of blocs as key
+            List<String> keyBlocs = new ArrayList<>();
+            for (Bloc bloc : blocSet) {
+                keyBlocs.add(bloc.getName());
+            }
+            JSONObject blocsKey = new JSONObject("blocs", keyBlocs);
+
+            // Create the list of JSONObject as value
+            List<JSONObject> distribution = new ArrayList<>();
+            for (String name : namesDistribution.keySet()) {
+                distribution.add(new JSONObject(name, namesDistribution.get(name)));
+            }
+            JSONObject namesValue = new JSONObject("names", distribution);
+            
+            // Create a unique key for this pair
+            String distributionJsonName = String.valueOf(blocSet.hashCode());
+            // Add the pair to the middle names distribution
+            middleNamesDistributionJson.add(new JSONObject(distributionJsonName, List.of(blocsKey, namesValue)));
         }
+        fields.add(new JSONObject("middle_names_distribution", middleNamesDistributionJson));
+
+        List<JSONObject> lastNamesDistributionJson = new ArrayList<>();
+        for (Set<Bloc> blocSet : lastNamesDistribution.keySet()) {
+            Map<String, Double> namesDistribution = lastNamesDistribution.get(blocSet);
+
+            // Create the list of blocs as key
+            List<String> keyBlocs = new ArrayList<>();
+            for (Bloc bloc : blocSet) {
+                keyBlocs.add(bloc.getName());
+            }
+            JSONObject blocsKey = new JSONObject("blocs", keyBlocs);
+
+            // Create the list of JSONObject as value
+            List<JSONObject> distribution = new ArrayList<>();
+            for (String name : namesDistribution.keySet()) {
+                distribution.add(new JSONObject(name, namesDistribution.get(name)));
+            }
+            JSONObject namesValue = new JSONObject("names", distribution);
+            
+            // Create a unique key for this pair
+            String distributionJsonName = String.valueOf(blocSet.hashCode());
+            // Add the pair to the last names distribution
+            lastNamesDistributionJson.add(new JSONObject(distributionJsonName, List.of(blocsKey, namesValue)));
+        }
+        fields.add(new JSONObject("last_names_distribution", lastNamesDistributionJson));
+
+        return new JSONObject("name_manager", fields);
+
+
+
+        // try {
+        //     List<JSONObject> fields = new ArrayList<>();
+        //     for (String fieldName : fieldsJsons.keySet()) {
+        //         Field field = getClass().getDeclaredField(fieldName);
+        //         fields.add(new JSONObject(fieldName, field.get(this)));
+        //     }
+        //     return new JSONObject(this.getClass().getSimpleName(), fields);
+        // }
+        // catch (NoSuchFieldException | IllegalAccessException e) {
+        //     currentState = ManagerState.ERROR;
+        //     Logger.log("JSON SERIALIZATION ERROR", "Failed to serialize " + getClass().getSimpleName() + " to JSON.", e);
+        //     return null;
+        // }
     }
 
     @Override

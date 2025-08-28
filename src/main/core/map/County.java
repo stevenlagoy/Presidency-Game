@@ -60,6 +60,13 @@ public class County implements MapEntity, Repr<County>, Jsonic<County> {
 
     // GETTERS AND SETTERS ------------------------------------------------------------------------
 
+    // Name : String
+    
+    @Override
+    public String getName() {
+        return getNameWithState();
+    }
+
     // FIPS Code : String
     public String getFIPS() {
         return FIPS;
@@ -96,6 +103,10 @@ public class County implements MapEntity, Repr<County>, Jsonic<County> {
     }
     public void setFullName(String name) {
         this.fullName = name;
+    }
+
+    public String getNameWithState() {
+        return getFullName() + getState().getName();
     }
 
     // Common Name : String

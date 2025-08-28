@@ -5,13 +5,17 @@
  * Modified: 29 May 2025
  */
 
-package main.core.characters;
+package main.core.characters.attributes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // IMPORTS ----------------------------------------------------------------------------------------
 
 import core.JSONObject;
 import main.core.Jsonic;
 import main.core.Repr;
+import main.core.characters.PoliticalActor;
 
 /**
  * Tracks the base and modified Legislative, Executive, and Judicial skills of a PoliticalActor (or subclass), as well as their Aptitude.
@@ -26,25 +30,25 @@ public class Skills implements Repr<Skills>, Jsonic<Skills> {
     /** Legislative Skill, after modification by additive and multiplicative modifiers. */
     private int legislativeSkill;
     /** Additive modifier to the Legislative Skill. A +1 modifier results in a skill equal to baseSkill + 1. Additive multipliers are not affected by Multiplicative modifiers. */
-    private int legAdditive;
+    private int legAdd;
     /** Multiplicative modifier to the Legislative Skill. A 200% (2.0) modifier results in a skill equal to baseSkill * 2.0. Multiplicative modifiers are not affected by Additive modifiers. */
-    private float legMultiplicative;
+    private float legMult;
     /** Base Judicial Skill, representing ability to make decisions quickly, apply charismatic persuasion, and execute strong or decisive actions. */
     private int baseExecutiveSkill;
     /** Executive Skill, after modification by additive and multiplicative modifiers. */
     private int executiveSkill;
     /** Additive modifier to the Executive Skill. A +1 modifier results in a skill equal to baseSkill + 1. Additive multipliers are not affected by Multiplicative modifiers. */
-    private int execAdditive;
+    private int execAdd;
     /** Multiplicative modifier to the Executive Skill. A 200% (2.0) modifier results in a skill equal to baseSkill * 2.0. Multiplicative modifiers are not affected by Additive modifiers. */
-    private float execMultiplicative;
+    private float execMult;
     /** Base Legislative Skill, representing ability to inspect facts, reason through problems, and make informed decisions. */
     private int baseJudicialSkill;
     /** Judicial Skill, after modification by additive and multiplicative modifiers. */
     private int judicialSkill;
     /** Additive modifier to the Judicial Skill. A +1 modifier results in a skill equal to baseSkill + 1. Additive multipliers are not affected by Multiplicative modifiers. */
-    private int judAdditive;
+    private int judAdd;
     /** Multiplicative modifier to the Judicial Skill. A 200% (2.0) modifier results in a skill equal to baseSkill * 2.0. Multiplicative modifiers are not affected by Additive modifiers. */
-    private float judMultiplicative;
+    private float judMult;
     /** Aptitude, representing the sum of the three base skills. */
     private int aptitude;
 
@@ -126,11 +130,11 @@ public class Skills implements Repr<Skills>, Jsonic<Skills> {
         return legislativeSkill;
     }
     public void addLegislativeSkill(int skill) {
-        this.legAdditive += skill;
+        this.legAdd += skill;
         calculateLegislativeSkill();
     }
     public void multiplyLegislativeSkill(float factor) {
-        this.legMultiplicative += factor;
+        this.legMult += factor;
         calculateLegislativeSkill();
     }
 
@@ -152,11 +156,11 @@ public class Skills implements Repr<Skills>, Jsonic<Skills> {
         return executiveSkill;
     }
     public void addExecutiveSkill(int skill) {
-        this.execAdditive += skill;
+        this.execAdd += skill;
         calculateExecutiveSkill();
     }
     public void multiplyExecutiveSkill(float factor) {
-        this.execMultiplicative += factor;
+        this.execMult += factor;
         calculateExecutiveSkill();
     }
 
@@ -178,11 +182,11 @@ public class Skills implements Repr<Skills>, Jsonic<Skills> {
         return judicialSkill;
     }
     public void addJudicialSkill(int skill) {
-        this.judAdditive += skill;
+        this.judAdd += skill;
         calculateJudicialSkill();
     }
     public void multiplyJudicialSkill(float factor) {
-        this.judMultiplicative += factor;
+        this.judMult += factor;
         calculateJudicialSkill();
     }
 
@@ -243,9 +247,9 @@ public class Skills implements Repr<Skills>, Jsonic<Skills> {
         baseExecutiveSkill = e;
         baseJudicialSkill = j;
 
-        legAdditive = legislativeSkill - baseLegislativeSkill;
-        execAdditive = executiveSkill - baseExecutiveSkill;
-        judAdditive = judAdditive - baseJudicialSkill;
+        legAdd = legislativeSkill - baseLegislativeSkill;
+        execAdd = executiveSkill - baseExecutiveSkill;
+        judAdd = judAdd - baseJudicialSkill;
     }
 
     private void calculateModifiedSkills() {
@@ -254,13 +258,13 @@ public class Skills implements Repr<Skills>, Jsonic<Skills> {
         calculateJudicialSkill();
     }
     private void calculateLegislativeSkill() {
-        this.legislativeSkill = Math.clamp(Math.round(baseLegislativeSkill * legMultiplicative + legAdditive), 0, 100);
+        this.legislativeSkill = Math.clamp(Math.round(baseLegislativeSkill * legMult + legAdd), 0, 100);
     }
     private void calculateExecutiveSkill() {
-        this.executiveSkill = Math.clamp(Math.round(baseExecutiveSkill * execMultiplicative + execAdditive), 0, 100);
+        this.executiveSkill = Math.clamp(Math.round(baseExecutiveSkill * execMult + execAdd), 0, 100);
     }
     private void calculateJudicialSkill() {
-        this.judicialSkill = Math.clamp(Math.round(baseJudicialSkill * judMultiplicative + judAdditive), 0, 100);
+        this.judicialSkill = Math.clamp(Math.round(baseJudicialSkill * judMult + judAdd), 0, 100);
     }
 
     // REPRESENTATION METHODS ---------------------------------------------------------------------
@@ -324,7 +328,20 @@ public class Skills implements Repr<Skills>, Jsonic<Skills> {
      */
     @Override
     public JSONObject toJson() {
-        return new JSONObject();
+        List<JSONObject> fields = new ArrayList<>();
+        fields.add(new JSONObject("base_legislative_skill", baseLegislativeSkill));
+        fields.add(new JSONObject("legislative_additive_modifier", legAdd));
+        fields.add(new JSONObject("legislative_multiplicative_modifier", legMult));
+
+        fields.add(new JSONObject("base_executive_skill", baseExecutiveSkill));
+        fields.add(new JSONObject("executive_additive_modifier", execAdd));
+        fields.add(new JSONObject("executive_multiplicative_modifier", execMult));
+
+        fields.add(new JSONObject("base_judicial_skill", baseJudicialSkill));
+        fields.add(new JSONObject("judicial_additive_modifier", judAdd));
+        fields.add(new JSONObject("judicial_multiplicative_modifier", judMult));
+
+        return new JSONObject("skills", fields);
     }
 
     /**

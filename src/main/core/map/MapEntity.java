@@ -18,6 +18,9 @@ import main.core.demographics.Bloc;
  */
 public interface MapEntity {
 
+    /** Get a descriptive identifying name for the MapEntity. */
+    public String getName();
+
     /** Get the total population. */
     public int getPopulation();
     /**

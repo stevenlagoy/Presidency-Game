@@ -142,7 +142,7 @@ public final class LanguageManager extends Manager {
         String res = localizations.get(language).get(tag);
         if (res == null) {
             Logger.log("INVALID LOCALIZATION TAG", String.format("Attempted to access localization tag %s for language %s, which is invalid.", tag, language.toString()), new Exception());
-            return "INVALID LOCALIZATION TAG";
+            return tag;
         }
         return res;
     }

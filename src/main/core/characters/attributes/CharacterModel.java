@@ -1,9 +1,10 @@
-package main.core.characters;
+package main.core.characters.attributes;
 
 import core.JSONObject;
+import core.Jsonic;
 import main.core.Repr;
 
-public class CharacterModel implements Repr<CharacterModel> {
+public class CharacterModel implements Repr<CharacterModel>, Jsonic<CharacterModel> {
     
     int visualAge;
     
@@ -19,6 +20,9 @@ public class CharacterModel implements Repr<CharacterModel> {
         this.visualAge = visualAge;
     }
 
+    // REPRESENTATION METHODS ---------------------------------------------------------------------
+
+    @Override
     public String toRepr() {
         String repr = String.format("%s:[visualAge:%d;];",
             this.getClass().getName().split("\\.")[this.getClass().getName().split("\\.").length - 1],
@@ -27,11 +31,18 @@ public class CharacterModel implements Repr<CharacterModel> {
         return repr;
     }
 
+    @Override
     public CharacterModel fromRepr(String repr) {
         return this;
     }
 
-    public static CharacterModel fromJson(JSONObject appearanceJson) {
+    @Override
+    public JSONObject toJson() {
+        return new JSONObject("character_model", new Object());
+    }
+
+    @Override
+    public CharacterModel fromJson(JSONObject arg0) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'fromJson'");
     }
