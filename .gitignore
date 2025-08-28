@@ -4,6 +4,7 @@ log.txt
 launch.json
 .vscode/launch.json
 error.txt
+logs/
 
 # FOR PYTHON
 
